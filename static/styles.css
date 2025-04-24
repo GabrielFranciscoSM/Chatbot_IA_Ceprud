@@ -285,6 +285,15 @@ body.dark-mode .message.bot {
   color: #f3f4f6;
 }
 
+/* Estilo para las gráficas */
+.graph-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 10px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 /* Estilos para el indicador de escritura */
 .typing-indicator {
   display: flex;

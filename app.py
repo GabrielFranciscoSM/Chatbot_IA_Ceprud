@@ -1,7 +1,7 @@
 import os
 import csv
 from datetime import datetime
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 from query_logic import query_rag, get_base_model_response
 
@@ -20,6 +20,24 @@ def index():
     Renderiza la página principal del chatbot.
     """
     return render_template('index.html')
+
+# Ruta para listar gráficas generales
+@app.route('/graphs', methods=['GET'])
+def list_graphs():
+    graphs_dir = "graphs"
+    if not os.path.exists(graphs_dir):
+        return jsonify([])
+    
+    # Filtrar solo las gráficas específicas
+    specific_graphs = ["calendar.png", "hours.png", "subjects.png", "users.png"]
+    graphs = [f for f in os.listdir(graphs_dir) if f in specific_graphs]
+    
+    return jsonify(graphs)
+
+# Ruta para servir las imágenes
+@app.route('/graphs/<filename>', methods=['GET'])
+def serve_graph(filename):
+    return send_from_directory("graphs", filename)
 
 # Función para guardar logs de mensajes del usuario en un archivo CSV
 def log_user_message(email, message, subject, response, sources):
