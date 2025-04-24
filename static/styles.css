@@ -8,6 +8,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw; /* Añadir ancho completo */
+  overflow: hidden; /* Evitar barras de desplazamiento */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -19,14 +21,14 @@ body.dark-mode {
 /* Contenedor principal del chat */
 .chat-container {
   display: flex;
-  width: 90%;
-  max-width: 1200px;
-  height: 85vh;
-  border-radius: 16px;
+  width: 100%; /* Cambiar de 90% a 100% */
+  max-width: none; /* Eliminar el límite máximo de ancho */
+  height: 100vh; /* Cambiar de 85vh a 100vh para ocupar toda la altura */
+  border-radius: 0; /* Eliminar bordes redondeados */
   overflow: hidden;
   background: #fff;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: none; /* Eliminar sombra */
 }
 
 body.dark-mode .chat-container {
@@ -881,6 +883,7 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover {
     height: 100vh;
     border-radius: 0;
     flex-direction: column;
+    margin: 0; /* Asegurar que no haya márgenes */
   }
 
   /* Ajustar la barra lateral para que sea un menú desplegable */
