@@ -31,20 +31,10 @@ def load_finetuned_model(base_model, subject):
     print(f"⚠️ Modelo fine-tuneado no encontrado para {subject}. Usando modelo base")
     return base_model
 
-def generate_response(model, tokenizer, query_text, max_new_tokens=2048):
-    """
-    Generar respuesta limpia del modelo sin incluir el prompt.
-    
-    Args:
-        model: Modelo de lenguaje cargado.
-        tokenizer: Tokenizer asociado al modelo.
-        query_text (str): Texto de entrada (incluyendo contexto y pregunta).
-        max_new_tokens (int): Máximo número de tokens a generar.
-    
-    Returns:
-        str: Respuesta limpia del modelo.
-    """
-    inputs = tokenizer(query_text, return_tensors="pt", truncation=True, max_length=4096).to(DEVICE)
+import re
+
+def generate_response(model, tokenizer, prompt, max_new_tokens=2048):
+    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=4096).to(DEVICE)
     with torch.no_grad():
         outputs = model.generate(
             **inputs,
@@ -56,17 +46,15 @@ def generate_response(model, tokenizer, query_text, max_new_tokens=2048):
             early_stopping=True
         )
     
-    # Decodificar respuesta completa
+    # Decodificar respuesta
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     
-    # Eliminar el prompt de la respuesta
-    if response.startswith(query_text):
-        response = response[len(query_text):].strip()
-    if response.endswith(query_text):
-        response = response[:-len(query_text)].strip()
-
-    # Si no encuentra el delimitador, eliminar el prompt manualmente
-    response = response.replace(query_text, "").strip()
+    # Extraer la respuesta después del delimitador
+    match = re.search(r"### RESPUESTA:\s*(.*)", response, re.DOTALL)
+    if match:
+        response = match.group(1).strip()
+    else:
+        response = response.replace(prompt, "").strip()  # Fallback si no hay delimitador
     
     return response.encode("utf-8", errors="ignore").decode("utf-8")
 
@@ -110,6 +98,7 @@ def query_rag(query_text, chroma_path, subject=None, use_finetuned=False):
     {context_text}
     LA PREGUNTA A RESPONDER ES:
     {query_text}
+    ### RESPUESTA:
     """
 
     # 6. Generar respuesta limpia
