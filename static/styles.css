@@ -751,6 +751,102 @@ body.dark-mode .selected-file-display {
   transform: scale(1.2);
 }
 
+/* Estilos para el botón de fuentes */
+.sources-button {
+  background: none;
+  border: none;
+  color: #A6192E;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-top: 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.sources-button:hover {
+  background-color: rgba(166, 25, 46, 0.1);
+  text-decoration: underline;
+}
+
+body.dark-mode .sources-button {
+  color: #f87171;
+}
+
+body.dark-mode .sources-button:hover {
+  background-color: rgba(248, 113, 113, 0.1);
+}
+
+/* Estilos para el contenedor de fuentes */
+.sources-container {
+  margin-top: 8px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  color: #6b7280;
+  width: 100%;
+  overflow-x: auto;
+  animation: fadeIn 0.3s ease;
+}
+
+body.dark-mode .sources-container {
+  background: rgba(255, 255, 255, 0.05);
+  color: #9ca3af;
+}
+
+.sources-list {
+  margin: 0;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.sources-list li {
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+
+/* Estilos para la etiqueta de modo */
+.mode-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 4px;
+  font-style: italic;
+  text-align: right;
+}
+
+body.dark-mode .mode-label {
+  color: #9ca3af;
+}
+
+/* Ajustes en la estructura de mensajes */
+.message {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-content {
+  word-break: break-word;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sources-container {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+  
+  .sources-button {
+    font-size: 0.75rem;
+  }
+  
+  .mode-label {
+    font-size: 0.7rem;
+  }
+}
+
 /* Estilos para la barra de desplazamiento */
 ::-webkit-scrollbar {
   width: 6px;

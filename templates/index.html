@@ -114,11 +114,75 @@
     let userEmail = null; // Correo del usuario
     let isDarkMode = false; // Estado del modo oscuro
 
-    // Función para agregar un mensaje al chat con animación
-    function addMessage(sender, message) {
+    // Primero modificamos la función addMessage para que acepte información adicional
+    function addMessage(sender, message, additionalInfo = null) {
       const messageElement = document.createElement('div');
       messageElement.classList.add('message', sender);
-      messageElement.textContent = message;
+      
+      // Contenido principal del mensaje
+      const messageContent = document.createElement('div');
+      messageContent.classList.add('message-content');
+      messageContent.textContent = message;
+      messageElement.appendChild(messageContent);
+      
+      // Si es un mensaje del bot, añadir botón para ver fuentes
+      if (sender === 'bot' && additionalInfo && additionalInfo.sources && additionalInfo.sources.length > 0) {
+        const sourcesButton = document.createElement('button');
+        sourcesButton.classList.add('sources-button');
+        sourcesButton.textContent = 'Ver fuentes';
+        messageElement.appendChild(sourcesButton);
+        
+        const sourcesContainer = document.createElement('div');
+        sourcesContainer.classList.add('sources-container');
+        sourcesContainer.style.display = 'none';
+        
+        // Crear lista de fuentes
+        const sourcesList = document.createElement('ul');
+        sourcesList.classList.add('sources-list');
+        additionalInfo.sources.forEach(source => {
+          const sourceItem = document.createElement('li');
+          sourceItem.textContent = source;
+          sourcesList.appendChild(sourceItem);
+        });
+        
+        sourcesContainer.appendChild(sourcesList);
+        messageElement.appendChild(sourcesContainer);
+        
+        // Evento para mostrar/ocultar fuentes
+        sourcesButton.addEventListener('click', () => {
+          if (sourcesContainer.style.display === 'none') {
+            sourcesContainer.style.display = 'block';
+            sourcesButton.textContent = 'Ocultar fuentes';
+          } else {
+            sourcesContainer.style.display = 'none';
+            sourcesButton.textContent = 'Ver fuentes';
+          }
+        });
+      }
+      
+      // Si es un mensaje del usuario, mostrar el modo utilizado
+      if (sender === 'user' && additionalInfo && additionalInfo.mode) {
+        const modeLabel = document.createElement('div');
+        modeLabel.classList.add('mode-label');
+        
+        // Mapear el modo a un texto más descriptivo
+        let modeText = 'Desconocido';
+        switch (additionalInfo.mode) {
+          case 'rag':
+            modeText = 'RAG';
+            break;
+          case 'rag_lora':
+            modeText = 'RAG + Finetune';
+            break;
+          case 'base':
+            modeText = 'Modelo Base';
+            break;
+        }
+        
+        modeLabel.textContent = `Modo: ${modeText}`;
+        messageElement.appendChild(modeLabel);
+      }
+      
       chatMessages.appendChild(messageElement);
       chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll automático
     }
@@ -129,19 +193,42 @@
       if (savedMessages) {
         const messages = JSON.parse(savedMessages);
         chatMessages.innerHTML = ''; // Limpiar mensajes actuales
-        messages.forEach(({ sender, text }) => addMessage(sender, text));
+        messages.forEach(({ sender, text, additionalInfo }) => addMessage(sender, text, additionalInfo));
       } else {
         chatMessages.innerHTML = ''; // Limpiar mensajes si no hay nada guardado
       }
     }
 
-    // Función para guardar mensajes en el localStorage
     function saveMessages(subject) {
       const messages = [];
       chatMessages.querySelectorAll('.message').forEach(messageElement => {
         const sender = messageElement.classList.contains('user') ? 'user' : 'bot';
-        const text = messageElement.textContent;
-        messages.push({ sender, text });
+        const text = messageElement.querySelector('.message-content')?.textContent || messageElement.textContent;
+        
+        // Extraer información adicional
+        let additionalInfo = {};
+        
+        // Para mensajes de usuario, guardar el modo
+        if (sender === 'user') {
+          const modeLabel = messageElement.querySelector('.mode-label');
+          if (modeLabel) {
+            const modeText = modeLabel.textContent.replace('Modo: ', '');
+            if (modeText === 'RAG') additionalInfo.mode = 'rag';
+            else if (modeText === 'RAG + Finetune') additionalInfo.mode = 'rag_lora';
+            else if (modeText === 'Modelo Base') additionalInfo.mode = 'base';
+          }
+        }
+        
+        // Para mensajes del bot, guardar las fuentes
+        if (sender === 'bot') {
+          const sourcesList = messageElement.querySelector('.sources-list');
+          if (sourcesList) {
+            const sources = Array.from(sourcesList.querySelectorAll('li')).map(li => li.textContent);
+            additionalInfo.sources = sources;
+          }
+        }
+        
+        messages.push({ sender, text, additionalInfo });
       });
       localStorage.setItem(subject, JSON.stringify(messages));
     }
@@ -162,15 +249,14 @@
       if (indicator) indicator.remove();
     }
 
-    // Función para enviar un mensaje al servidor
     async function sendMessage() {
       const userMessage = userInput.value.trim();
       const selectedMode = document.getElementById('response-mode').value; // Obtener el modo seleccionado
       if (!userMessage && !pdfInput.files.length) return;
 
-      // Si hay un mensaje de texto, mostrarlo con el emoji de persona
+      // Si hay un mensaje de texto, mostrarlo con el emoji de persona y el modo
       if (userMessage) {
-        addMessage('user', `👤 ${userMessage}`);
+        addMessage('user', `👤 ${userMessage}`, { mode: selectedMode });
         userInput.value = '';
       }
 
@@ -186,7 +272,7 @@
         const pdfFile = pdfInput.files[0];
         formData.append('pdf', pdfFile);
         // Mostrar mensaje del usuario indicando que el archivo ha sido enviado
-        addMessage('user', `👤 Archivo (${pdfFile.name})`);
+        addMessage('user', `👤 Archivo (${pdfFile.name})`, { mode: selectedMode });
         // Limpiar la visualización del archivo seleccionado
         document.getElementById('selectedFileDisplay').style.display = 'none';
       } else {
@@ -205,8 +291,11 @@
         const data = await response.json();
         // Quitar indicador de escritura
         removeTypingIndicator();
-        // Mostrar respuesta del bot
-        addMessage('bot', data.response);
+        // Mostrar respuesta del bot con fuentes
+        addMessage('bot', data.response, { 
+          sources: data.sources,
+          model_used: data.model_used
+        });
         // Guardar mensajes en el localStorage nuevamente
         saveMessages(selectedSubject);
       } catch (error) {
