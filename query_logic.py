@@ -57,12 +57,18 @@ def generate_response(model, tokenizer, query_text, max_new_tokens=2048):
         )
     
     # Decodificar respuesta completa
-    full_response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     
+    # Eliminar el prompt de la respuesta
+    if response.startswith(query_text):
+        response = response[len(query_text):].strip()
+    if response.endswith(query_text):
+        response = response[:-len(query_text)].strip()
+
     # Si no encuentra el delimitador, eliminar el prompt manualmente
-    clean_answer = full_response.replace(query_text, "").strip()
+    response = response.replace(query_text, "").strip()
     
-    return clean_answer.encode("utf-8", errors="ignore").decode("utf-8")
+    return response.encode("utf-8", errors="ignore").decode("utf-8")
 
 def query_rag(query_text, chroma_path, subject=None, use_finetuned=False):
     """

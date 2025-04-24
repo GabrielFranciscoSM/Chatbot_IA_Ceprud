@@ -1,3 +1,0 @@
-Hola, soy el bot oficial de la UGR. 
-Estoy para ayudarte en tus dudas en las diferentes asignaturas. Ahora en Modelos Avanzados de Computación.
-Hazme preguntas tanto del contenido como de los criterios de evaluación, horarios, fechas de entregas, todo lo que esté en prado.
