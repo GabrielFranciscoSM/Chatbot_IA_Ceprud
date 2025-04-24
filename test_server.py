@@ -18,7 +18,7 @@ def display_menu():
     print("\n=== MENÚ PRINCIPAL ===")
     print("1. Modo RAG (Recuperación + Generación)")
     print("2. Modo RAG + LoRA (Recuperación + Fine-Tuning)")
-    print("3. Modo Fine-Tuning (Solo Fine-Tuning)")
+    print("3. Modo Modelos Base")
     print("4. Salir")
     choice = input("Selecciona una opción (1/2/3/4): ").strip()
     return choice
@@ -75,7 +75,7 @@ def main():
                     print(f"📚 Fuentes: {', '.join(result['sources'])}")
 
         elif choice == "3":  # Modo Fine-Tuning
-            print("\n=== MODO FINE-TUNING ACTIVADO ===")
+            print("\n=== MODELOS BASE ACTIVADO ===")
             subject = select_subject()
             while True:
                 query_text = input("\nPregunta (o escribe 'salir' para volver al menú): ").strip()

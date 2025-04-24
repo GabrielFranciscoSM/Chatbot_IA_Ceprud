@@ -44,7 +44,7 @@ def generate_response(model, tokenizer, query_text, max_new_tokens=2048):
     Returns:
         str: Respuesta limpia del modelo.
     """
-    inputs = tokenizer(query_text, return_tensors="pt", truncation=True, max_length=2048).to(DEVICE)
+    inputs = tokenizer(query_text, return_tensors="pt", truncation=True, max_length=4096).to(DEVICE)
     with torch.no_grad():
         outputs = model.generate(
             **inputs,
