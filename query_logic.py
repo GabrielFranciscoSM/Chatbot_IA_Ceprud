@@ -59,13 +59,8 @@ def generate_response(model, tokenizer, query_text, max_new_tokens=2048):
     # Decodificar respuesta completa
     full_response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     
-    # Extraer solo la parte después de [ANSWER]
-    answer_match = re.search(r"\[ANSWER\](.*)", full_response, re.DOTALL)
-    if answer_match:
-        clean_answer = answer_match.group(1).strip()
-    else:
-        # Si no encuentra el delimitador, eliminar el prompt manualmente
-        clean_answer = full_response.replace(query_text, "").strip()
+    # Si no encuentra el delimitador, eliminar el prompt manualmente
+    clean_answer = full_response.replace(query_text, "").strip()
     
     return clean_answer.encode("utf-8", errors="ignore").decode("utf-8")
 
@@ -105,12 +100,10 @@ def query_rag(query_text, chroma_path, subject=None, use_finetuned=False):
     # 5. Construir prompt con delimitadores claros
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
     prompt = f"""
-    [CONTEXT]
+    RESPONDE A LAS SIGUIENTES PREGUNTAS CON EL CONTEXTO PROPORCIONADO, ERES UN  BOT DE LA UGR EXPERTO EN LA MATERIA:
     {context_text}
-    [/CONTEXT]
-    [QUESTION]
+    LA PREGUNTA A RESPONDER ES:
     {query_text}
-    [/QUESTION]
     """
 
     # 6. Generar respuesta limpia
@@ -131,7 +124,10 @@ def get_base_model_response(query_text):
     query_text = query_text.encode("utf-8", errors="ignore").decode("utf-8")
     
     # Prompt simple para el modelo base
-    prompt = f"[QUESTION]\n{query_text}\n[/QUESTION]\n[ANSWER]"
+    prompt = f"""
+    ERES UN  BOT DE LA UGR EXPERTO EN LA MATERIA, LA PREGUNTA A RESPONDER ES:
+    {query_text}
+    """
     return generate_response(model, tokenizer, prompt)
 
 # =====================================

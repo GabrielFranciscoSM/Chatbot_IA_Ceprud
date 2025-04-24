@@ -18,6 +18,7 @@ def main():
 
     # Listar todas las carpetas de asignaturas en el directorio de datos
     subjects = [folder for folder in os.listdir(DATA_PATH) if os.path.isdir(os.path.join(DATA_PATH, folder))]
+    print(f"📁 Asignaturas encontradas: {', '.join(subjects)}")
 
     for subject in subjects:
         chroma_path = os.path.join(BASE_CHROMA_PATH, subject)
