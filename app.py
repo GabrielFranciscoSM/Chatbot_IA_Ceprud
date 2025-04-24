@@ -81,17 +81,18 @@ def chat():
         elif selected_mode == "rag_lora":
             result = query_rag(user_message, chroma_path, subject=selected_subject, use_finetuned=True)
         elif selected_mode == "base":
-            # Llamar a una función específica para solo fine-tuning
+            print(f"DEBUG: Usando modelo base para {selected_subject}")
             result = get_base_model_response(user_message)
-            
-            sources = result.get("sources", [])
-            result = result.get("response", "Error al generar respuesta")
         else:
             return jsonify({"response": "❌ Modo no válido."})
 
         # Extraer la respuesta y las fuentes
-        response_text = result.get("response", "No se pudo generar una respuesta.")
-        sources = result.get("sources", [])
+        if selected_mode == "base":
+            response_text = result
+            sources = []
+        else:
+            response_text = result.get("response", "No se pudo generar una respuesta.")
+            sources = result.get("sources", [])
 
         # Guardar el mensaje y la respuesta en los logs
         log_user_message(
