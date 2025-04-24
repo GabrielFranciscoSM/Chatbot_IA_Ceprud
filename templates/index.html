@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <button id="graphs" class="graphs-button">📊</button>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chatbot UGR</title>
@@ -297,44 +296,6 @@
         }
       });
     });
-
-
-    document.getElementById('graphsButton').addEventListener('click', async () => {
-      try {
-        const response = await fetch('/graphs');  // Ruta para listar gráficas
-        const graphs = await response.json();
-        
-        if (graphs.length === 0) {
-          addMessage('bot', "🤖 No hay gráficas disponibles.");
-          return;
-        }
-        
-        // Mostrar cada gráfica
-        graphs.forEach(graph => {
-          const imgSrc = `/graphs/${graph}`;  // Ruta para servir cada imagen
-          addMessage('bot', `<img src="${imgSrc}" class="graph-image">`);
-        });
-        
-      } catch (error) {
-        console.error("Error al cargar gráficas:", error);
-        addMessage('bot', "❌ Error al cargar las gráficas.");
-      }
-    });
-
-    function addMessage(sender, content) {
-      const message = document.createElement('div');
-      message.classList.add('message', sender);
-      
-      // Si es una imagen, usar innerHTML
-      if (content.startsWith('<img')) {
-        message.innerHTML = content;
-      } else {
-        message.textContent = content;
-      }
-      
-      chatMessages.appendChild(message);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
 
     // Botón de modo oscuro/claro
     const themeToggle = document.getElementById('themeToggle');
