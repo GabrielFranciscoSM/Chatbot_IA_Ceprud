@@ -50,6 +50,10 @@
           <option value="base">Modelo Base</option>
         </select>
       </div>
+      <!-- Botón para ver gráficas -->
+      <div class="graphs-button-container">
+        <button id="showGraphsButton" class="show-graphs-button">Ver Estadísticas</button>
+      </div>
       <!-- Área de estado del correo electrónico -->
       <div class="email-status">
         <button id="syncEmailButton" class="sync-email-button">Sincronizar correo</button>
@@ -71,6 +75,18 @@
       </div>
       <div class="chat-messages" id="chatMessages">
         <!-- Los mensajes se mostrarán aquí -->
+      </div>
+      <!-- Contenedor para gráficas -->
+      <div id="graphsContainer" class="graphs-container" style="display:none;">
+        <div class="graphs-header">
+          <h3>Estadísticas de Uso</h3>
+          <button id="closeGraphs" class="close-graphs">×</button>
+        </div>
+        <div class="graphs-content">
+          <div class="graphs-grid">
+            <!-- Las gráficas se cargarán aquí dinámicamente -->
+          </div>
+        </div>
       </div>
       <div class="chat-input">
         <input type="text" id="userInput" placeholder="Escribe tu mensaje aquí..." />
@@ -243,9 +259,69 @@
         emailDisplay.style.display = 'block';
         // Cambiar el texto del botón
         document.getElementById('syncEmailButton').textContent = 'Cambiar correo';
+        // Guardar el correo en localStorage
+        localStorage.setItem('userEmail', userEmail);
       } else if (email !== null) { // Solo mostrar error si no canceló
         alert("Por favor, introduce un correo válido.");
       }
+    });
+
+    // Función para cargar gráficas desde el servidor
+    async function loadGraphs() {
+      try {
+        const response = await fetch('http://172.18.246.73:5001/graphs');
+        const data = await response.json();
+        
+        const graphsGrid = document.querySelector('.graphs-grid');
+        graphsGrid.innerHTML = ''; // Limpiar gráficas existentes
+        
+        if (data.length === 0) {
+          graphsGrid.innerHTML = '<p class="no-graphs">No hay gráficos disponibles.</p>';
+          return;
+        }
+        
+        // Crear elementos para cada gráfica
+        data.forEach(graphName => {
+          const graphCard = document.createElement('div');
+          graphCard.className = 'graph-card';
+          
+          const titleMap = {
+            'calendar.png': 'Uso por Calendario',
+            'hours.png': 'Uso por Hora',
+            'subjects.png': 'Uso por Asignatura',
+            'users.png': 'Usuarios Activos'
+          };
+          
+          const title = titleMap[graphName] || graphName.replace('.png', '');
+          
+          graphCard.innerHTML = `
+            <h4>${title}</h4>
+            <img src="http://172.18.246.73:5001/graphs/${graphName}" alt="${title}" class="graph-image">
+          `;
+          
+          graphsGrid.appendChild(graphCard);
+        });
+      } catch (error) {
+        console.error("Error al cargar las gráficas:", error);
+      }
+    }
+    
+    // Mostrar y ocultar gráficas
+    document.getElementById('showGraphsButton').addEventListener('click', () => {
+      const graphsContainer = document.getElementById('graphsContainer');
+      if (graphsContainer.style.display === 'none') {
+        loadGraphs(); // Cargar gráficas si no están cargadas
+        graphsContainer.style.display = 'block';
+        chatMessages.style.display = 'none';
+      } else {
+        graphsContainer.style.display = 'none';
+        chatMessages.style.display = 'flex';
+      }
+    });
+    
+    document.getElementById('closeGraphs').addEventListener('click', () => {
+      document.getElementById('graphsContainer').style.display = 'none';
+      chatMessages.style.display = 'flex';
     });
 
     // Recuperar el correo sincronizado al cargar la página
@@ -263,14 +339,7 @@
         document.getElementById('syncEmailButton').textContent = 'Cambiar correo';
       }
     });
-
-    // Guardar el correo en localStorage cuando se sincronice
-    function saveEmail() {
-      if (userEmail) {
-        localStorage.setItem('userEmail', userEmail);
-      }
-    }
-
+    
     // Cambiar la asignatura seleccionada
     document.querySelectorAll('.chat-item').forEach(item => {
       item.addEventListener('click', () => {
