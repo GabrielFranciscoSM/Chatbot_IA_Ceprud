@@ -21,31 +21,23 @@ def index():
     """
     return render_template('index.html')
 
-# Ruta para listar gráficas generales y específicas por asignatura
-@app.route('/graphs/<subject>', methods=['GET'])
-def list_graphs(subject):
+# Ruta para listar gráficas generales
+@app.route('/graphs', methods=['GET'])
+def list_graphs():
     graphs_dir = "graphs"
-    general_graphs = ["calendar.png", "hours.png", "subjects.png", "users.png"]
+    if not os.path.exists(graphs_dir):
+        return jsonify([])
     
-    # Filtrar gráficas generales
-    general_graphs_paths = [f for f in os.listdir(graphs_dir) if f in general_graphs]
+    # Filtrar solo las gráficas específicas
+    specific_graphs = ["calendar.png", "hours.png", "subjects.png", "users.png"]
+    graphs = [f for f in os.listdir(graphs_dir) if f in specific_graphs]
     
-    # Filtrar gráficas específicas de la asignatura
-    subject_graphs_dir = os.path.join(graphs_dir, subject)
-    subject_graphs = []
-    if os.path.exists(subject_graphs_dir):
-        subject_graphs = [f"{subject}/{f}" for f in os.listdir(subject_graphs_dir)]
-    
-    # Combinar gráficas generales y específicas
-    all_graphs = general_graphs_paths + subject_graphs
-    
-    return jsonify(all_graphs)
+    return jsonify(graphs)
 
 # Ruta para servir las imágenes
-@app.route('/graphs/<path:filename>', methods=['GET'])
+@app.route('/graphs/<filename>', methods=['GET'])
 def serve_graph(filename):
-    graphs_dir = "graphs"
-    return send_from_directory(graphs_dir, filename)
+    return send_from_directory("graphs", filename)
 
 # Función para guardar logs de mensajes del usuario en un archivo CSV
 def log_user_message(email, message, subject, response, sources):
