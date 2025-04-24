@@ -1,0 +1,8 @@
+*.pyc
+.DS_Store
+backup
+chroma
+Python-3.12.9
+__pycache__
+env
+chatbot

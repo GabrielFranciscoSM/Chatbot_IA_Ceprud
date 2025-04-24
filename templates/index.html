@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot UGR</title>
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Vincular el archivo CSS externo -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://www.ugr.es/assets/img/favicon.png">
+</head>
+<body>
+  <div class="chat-container">
+    <!-- Columna izquierda: Lista de chats disponibles -->
+    <div class="chat-sidebar">
+      <h3>Asignaturas</h3>
+      <ul class="chat-list">
+        <li class="chat-item" data-subject="ingenieria_servidores">
+          <span class="subject-icon">💻</span> Ingeniería de Servidores
+        </li>
+        <li class="chat-item" data-subject="calculo">
+          <span class="subject-icon">📊</span> Cálculo
+        </li>
+        <li class="chat-item" data-subject="algoritmica">
+          <span class="subject-icon">🧩</span> Algorítmica
+        </li>
+        <li class="chat-item" data-subject="sistemas_operativos">
+          <span class="subject-icon">⚙️</span> Sistemas Operativos
+        </li>
+        <li class="chat-item" data-subject="modelos_avanzados_computacion">
+          <span class="subject-icon">🧠</span> Modelos Avanzados de Computación
+        </li>
+        <li class="chat-item" data-subject="metaheuristicas">
+          <span class="subject-icon">🔍</span> Metaheurísticas
+        </li>
+        <li class="chat-item" data-subject="ingenieria del conocimiento">
+          <span class="subject-icon">📄</span> Ingenieria del Conocimiento
+        </li>
+      </ul>
+      <!-- Selector de modo -->
+      <div class="mode-selector">
+        <label for="response-mode">Responde con:</label>
+        <select id="response-mode">
+          <option value="rag">RAG Base</option>
+          <option value="rag_lora">RAG + Fine-tuning</option>
+          <option value="finetuning">Solo Fine-tuning</option>
+        </select>
+      </div>
+      <!-- Área de estado del correo electrónico -->
+      <div class="email-status">
+        <button id="syncEmailButton" class="sync-email-button">Sincronizar correo</button>
+        <div id="syncedEmailDisplay" class="synced-email-display" style="display:none;">
+          <span id="userEmailText"></span>
+        </div>
+      </div>
+    </div>
+    <!-- Columna derecha: Chat principal -->
+    <div class="chat-main">
+      <div class="chat-header">
+        <span class="chat-title">Chatbot UGR</span>
+        <div class="header-controls">
+          <!-- En móvil, botón de menú -->
+          <button id="menuToggle" class="menu-toggle">☰</button>
+          <!-- Botón de modo oscuro/claro -->
+          <button id="themeToggle" class="theme-toggle">☀️</button>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <!-- Los mensajes se mostrarán aquí -->
+      </div>
+      <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Escribe tu mensaje aquí..." />
+        <!-- Contenedor para la selección de archivos -->
+        <div class="file-upload-container">
+          <label for="pdfInput" class="custom-file-upload" title="Adjuntar archivo"></label>
+          <input type="file" id="pdfInput" accept="application/pdf" style="display: none;" />
+          <div id="selectedFileDisplay" class="selected-file-display" style="display:none;">
+            <span id="fileName"></span>
+            <button id="removeFileButton" class="remove-file-button">×</button>
+          </div>
+        </div>
+        <button id="sendButton">Enviar</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const chatMessages = document.getElementById('chatMessages');
+    const userInput = document.getElementById('userInput');
+    const pdfInput = document.getElementById('pdfInput');
+    const sendButton = document.getElementById('sendButton');
+    const menuToggle = document.getElementById('menuToggle');
+    const chatSidebar = document.querySelector('.chat-sidebar');
+    let selectedSubject = "default"; // Asignatura seleccionada por defecto
+    let userEmail = null; // Correo del usuario
+    let isDarkMode = false; // Estado del modo oscuro
+
+    // Función para agregar un mensaje al chat con animación
+    function addMessage(sender, message) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message', sender);
+      messageElement.textContent = message;
+      chatMessages.appendChild(messageElement);
+      chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll automático
+    }
+
+    // Función para cargar mensajes desde el localStorage
+    function loadMessages(subject) {
+      const savedMessages = localStorage.getItem(subject);
+      if (savedMessages) {
+        const messages = JSON.parse(savedMessages);
+        chatMessages.innerHTML = ''; // Limpiar mensajes actuales
+        messages.forEach(({ sender, text }) => addMessage(sender, text));
+      } else {
+        chatMessages.innerHTML = ''; // Limpiar mensajes si no hay nada guardado
+      }
+    }
+
+    // Función para guardar mensajes en el localStorage
+    function saveMessages(subject) {
+      const messages = [];
+      chatMessages.querySelectorAll('.message').forEach(messageElement => {
+        const sender = messageElement.classList.contains('user') ? 'user' : 'bot';
+        const text = messageElement.textContent;
+        messages.push({ sender, text });
+      });
+      localStorage.setItem(subject, JSON.stringify(messages));
+    }
+
+    // Función para mostrar indicador de escritura
+    function showTypingIndicator() {
+      const indicator = document.createElement('div');
+      indicator.classList.add('message', 'bot', 'typing-indicator');
+      indicator.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+      indicator.id = 'typingIndicator';
+      chatMessages.appendChild(indicator);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Función para quitar indicador de escritura
+    function removeTypingIndicator() {
+      const indicator = document.getElementById('typingIndicator');
+      if (indicator) indicator.remove();
+    }
+
+    // Función para enviar un mensaje al servidor
+    async function sendMessage() {
+      const userMessage = userInput.value.trim();
+      const selectedMode = document.getElementById('response-mode').value; // Obtener el modo seleccionado
+      if (!userMessage && !pdfInput.files.length) return;
+
+      // Si hay un mensaje de texto, mostrarlo con el emoji de persona
+      if (userMessage) {
+        addMessage('user', `👤 ${userMessage}`);
+        userInput.value = '';
+      }
+
+      // Mostrar indicador de escritura
+      showTypingIndicator();
+
+      // Crear FormData para enviar al servidor
+      const formData = new FormData();
+      formData.append('subject', selectedSubject); // Añadir la asignatura al FormData
+      formData.append('email', userEmail); // Añadir el correo del usuario
+      formData.append('mode', selectedMode); // Añadir el modo seleccionado
+      if (pdfInput.files.length > 0) {
+        const pdfFile = pdfInput.files[0];
+        formData.append('pdf', pdfFile);
+        // Mostrar mensaje del usuario indicando que el archivo ha sido enviado
+        addMessage('user', `👤 Archivo (${pdfFile.name})`);
+        // Limpiar la visualización del archivo seleccionado
+        document.getElementById('selectedFileDisplay').style.display = 'none';
+      } else {
+        formData.append('message', userMessage);
+      }
+
+      // Guardar mensajes en el localStorage
+      saveMessages(selectedSubject);
+
+      // Enviar solicitud al servidor
+      try {
+        const response = await fetch('http://172.18.246.73:5001/chat', {
+          method: 'POST',
+          body: formData,
+        });
+        const data = await response.json();
+        // Quitar indicador de escritura
+        removeTypingIndicator();
+        // Mostrar respuesta del bot
+        addMessage('bot', data.response);
+        // Guardar mensajes en el localStorage nuevamente
+        saveMessages(selectedSubject);
+      } catch (error) {
+        console.error("Error al enviar el mensaje:", error);
+        removeTypingIndicator();
+        addMessage('bot', "🤖 Lo siento, ocurrió un error al procesar tu solicitud.");
+      }
+
+      // Limpiar input de archivo
+      pdfInput.value = '';
+    }
+
+    // Manejar el cambio de archivo seleccionado
+    pdfInput.addEventListener('change', () => {
+      const fileDisplay = document.getElementById('selectedFileDisplay');
+      const fileNameSpan = document.getElementById('fileName');
+      if (pdfInput.files.length > 0) {
+        const fileName = pdfInput.files[0].name;
+        fileNameSpan.textContent = fileName;
+        fileDisplay.style.display = 'flex';
+      } else {
+        fileDisplay.style.display = 'none';
+      }
+    });
+
+    // Para eliminar el archivo seleccionado
+    document.getElementById('removeFileButton').addEventListener('click', (e) => {
+      e.preventDefault();
+      pdfInput.value = '';
+      document.getElementById('selectedFileDisplay').style.display = 'none';
+    });
+
+    // Manejar tecla Enter para enviar mensaje
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // Botón de enviar
+    sendButton.addEventListener('click', sendMessage);
+
+    // Sincronizar correo del usuario
+    document.getElementById('syncEmailButton').addEventListener('click', () => {
+      const email = prompt("Por favor, introduce tu correo electrónico:");
+      if (email && email.includes('@')) {
+        userEmail = email;
+        // Mostrar el correo sincronizado en la interfaz
+        const emailDisplay = document.getElementById('syncedEmailDisplay');
+        const emailText = document.getElementById('userEmailText');
+        emailText.textContent = userEmail;
+        emailDisplay.style.display = 'block';
+        // Cambiar el texto del botón
+        document.getElementById('syncEmailButton').textContent = 'Cambiar correo';
+      } else if (email !== null) { // Solo mostrar error si no canceló
+        alert("Por favor, introduce un correo válido.");
+      }
+    });
+
+    // Recuperar el correo sincronizado al cargar la página
+    window.addEventListener('DOMContentLoaded', () => {
+      // Verificar si hay un correo guardado en localStorage
+      const savedEmail = localStorage.getItem('userEmail');
+      if (savedEmail) {
+        userEmail = savedEmail;
+        // Mostrar el correo sincronizado en la interfaz
+        const emailDisplay = document.getElementById('syncedEmailDisplay');
+        const emailText = document.getElementById('userEmailText');
+        emailText.textContent = userEmail;
+        emailDisplay.style.display = 'block';
+        // Cambiar el texto del botón
+        document.getElementById('syncEmailButton').textContent = 'Cambiar correo';
+      }
+    });
+
+    // Guardar el correo en localStorage cuando se sincronice
+    function saveEmail() {
+      if (userEmail) {
+        localStorage.setItem('userEmail', userEmail);
+      }
+    }
+
+    // Cambiar la asignatura seleccionada
+    document.querySelectorAll('.chat-item').forEach(item => {
+      item.addEventListener('click', () => {
+        // Desactivar todos los elementos
+        document.querySelectorAll('.chat-item').forEach(el => el.classList.remove('active'));
+        // Activar el elemento seleccionado
+        item.classList.add('active');
+        // Actualizar la asignatura seleccionada
+        const subject = item.getAttribute('data-subject');
+        selectedSubject = subject;
+        // Cargar los mensajes guardados para esta asignatura
+        loadMessages(subject);
+        // Agregar un mensaje de bienvenida si no hay mensajes guardados
+        if (!localStorage.getItem(subject)) {
+          const subjectName = item.textContent.trim();
+          addMessage('bot', `🤖 Bienvenido al chat de ${subjectName}. ¿En qué puedo ayudarte?`);
+          saveMessages(subject);
+        }
+        
+        // En móvil, cerrar el menú después de seleccionar
+        if (window.innerWidth <= 768) {
+          chatSidebar.classList.remove('open');
+        }
+      });
+    });
+
+    // Botón de modo oscuro/claro
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      isDarkMode = !isDarkMode; // Alternar el estado del modo oscuro
+      document.body.classList.toggle('dark-mode', isDarkMode);
+      themeToggle.textContent = isDarkMode ? '🌙' : '☀️'; // Cambiar el ícono
+      
+      // Guardar preferencia en localStorage
+      localStorage.setItem('darkMode', isDarkMode);
+    });
+    
+    // Cargar preferencia de tema al iniciar
+    if (localStorage.getItem('darkMode') === 'true') {
+      isDarkMode = true;
+      document.body.classList.add('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    // Toggle menú en móvil
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        chatSidebar.classList.toggle('open');
+      });
+    }
+
+    // Agregar mensaje de bienvenida inicial
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!localStorage.getItem('default')) {
+        addMessage('bot', '🤖 ¡Hola! Soy el Chatbot de la UGR. Selecciona una asignatura para comenzar.');
+        saveMessages('default');
+      } else {
+        loadMessages('default');
+      }
+    });
+
+    // Detectar si es móvil y ajustar la interfaz
+    function checkMobile() {
+      if (window.innerWidth <= 768) {
+        if (!document.querySelector('.menu-toggle')) {
+          const menuButton = document.createElement('button');
+          menuButton.id = 'menuToggle';
+          menuButton.className = 'menu-toggle';
+          menuButton.textContent = '☰';
+          document.querySelector('.header-controls').prepend(menuButton);
+          
+          menuButton.addEventListener('click', () => {
+            chatSidebar.classList.toggle('open');
+          });
+        }
+      } else {
+        const menuButton = document.getElementById('menuToggle');
+        if (menuButton) menuButton.style.display = 'none';
+        chatSidebar.classList.remove('open');
+      }
+    }
+
+    // Verificar tamaño de pantalla al cargar y al redimensionar
+    window.addEventListener('load', checkMobile);
+    window.addEventListener('resize', checkMobile);
+  </script>
+</body>
+</html>
