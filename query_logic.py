@@ -102,7 +102,16 @@ def query_rag(query_text, chroma_path, subject=None, use_finetuned=False):
     """
 
     # 6. Generar respuesta limpia
-    return generate_response(base_model, tokenizer, prompt)
+    response_text = generate_response(base_model, tokenizer, prompt)
+    
+    # 7. Extraer fuentes
+    sources = [doc.metadata.get("id", "N/A") for doc, _score in results]
+    
+    return {
+        "response": response_text,
+        "sources": sources,
+        "model_used": f"{'RAG+LoRA' if use_finetuned else 'RAG base'}"
+    }
 
 def get_base_model_response(query_text):
     """Generar respuesta directa del modelo base sin RAG."""
