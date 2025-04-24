@@ -122,8 +122,15 @@ def get_base_model_response(query_text):
     prompt = f"""
     ERES UN  BOT DE LA UGR EXPERTO EN LA MATERIA, LA PREGUNTA A RESPONDER ES:
     {query_text}
+    ### RESPUESTA:
     """
-    return generate_response(model, tokenizer, prompt)
+    response_text = generate_response(model, tokenizer, prompt)
+
+    return {
+        "response": response_text,  # Texto de la respuesta
+        "sources": [],              # Modo base no usa ChromaDB
+        "model_used": "base"        # Indicar el modelo usado
+    }
 
 # =====================================
 # =========== EJEMPLO DE USO ==========

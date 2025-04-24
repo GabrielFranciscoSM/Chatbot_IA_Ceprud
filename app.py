@@ -72,7 +72,7 @@ def chat():
 
         # Determinar la ruta de la base de datos Chroma para la asignatura
         chroma_path = os.path.join(BASE_CHROMA_PATH, selected_subject)
-        if not os.path.exists(chroma_path) and selected_mode != "finetuning":
+        if not os.path.exists(chroma_path) and selected_mode != "base":
             return jsonify({"response": f"❌ No hay datos disponibles para la asignatura '{selected_subject}'."})
 
         # Llamar al modelo según el modo seleccionado
@@ -80,9 +80,12 @@ def chat():
             result = query_rag(user_message, chroma_path, use_finetuned=False)
         elif selected_mode == "rag_lora":
             result = query_rag(user_message, chroma_path, subject=selected_subject, use_finetuned=True)
-        elif selected_mode == "finetuning":
+        elif selected_mode == "base":
             # Llamar a una función específica para solo fine-tuning
             result = get_base_model_response(user_message)
+            
+            sources = result.get("sources", [])
+            result = result.get("response", "Error al generar respuesta")
         else:
             return jsonify({"response": "❌ Modo no válido."})
 
