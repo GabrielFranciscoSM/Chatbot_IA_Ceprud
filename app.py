@@ -3,7 +3,7 @@ import csv
 from datetime import datetime
 from flask import Flask, request, jsonify, render_template, send_from_directory, session
 from flask_cors import CORS
-from query_logic import query_rag, get_base_model_response, get_embedding_function
+from query_logic import query_rag, get_base_model_response, get_embedding_function, load_base_model, load_finetuned_model, generate_response
 from langchain_chroma import Chroma 
 
 # Configuración de Flask
@@ -180,7 +180,6 @@ def chat():
             context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
             
             # Construimos el prompt con historial
-            from query_logic import load_base_model, generate_response
             tokenizer, base_model = load_base_model()
             prompt = build_prompt_with_history(user_message, user_history, context_text)
             response_text = generate_response(base_model, tokenizer, prompt)
@@ -197,7 +196,6 @@ def chat():
             results = db.similarity_search_with_score(user_message, k=5)
             context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
             
-            from query_logic import load_base_model, load_finetuned_model, generate_response
             tokenizer, base_model = load_base_model()
             model = load_finetuned_model(base_model, selected_subject)
             prompt = build_prompt_with_history(user_message, user_history, context_text)
@@ -211,7 +209,6 @@ def chat():
             
         elif selected_mode == "base":
             # Modelo base con historial pero sin contexto RAG
-            from query_logic import load_base_model, generate_response
             tokenizer, model = load_base_model()
             prompt = build_prompt_with_history(user_message, user_history)
             response_text = generate_response(model, tokenizer, prompt)
