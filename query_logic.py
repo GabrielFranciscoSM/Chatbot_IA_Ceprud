@@ -31,8 +31,6 @@ def load_finetuned_model(base_model, subject):
     print(f"⚠️ Modelo fine-tuneado no encontrado para {subject}. Usando modelo base")
     return base_model
 
-import re
-
 def generate_response(model, tokenizer, prompt, max_new_tokens=2048):
     inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=4096).to(DEVICE)
     with torch.no_grad():
@@ -58,7 +56,38 @@ def generate_response(model, tokenizer, prompt, max_new_tokens=2048):
     
     return response.encode("utf-8", errors="ignore").decode("utf-8")
 
-def query_rag(query_text, chroma_path, subject=None, use_finetuned=False):
+# Función para construir el prompt con historial
+def build_prompt_with_history(user_message, history=None, context_text=None):
+    """
+    Construye un prompt que incluye el historial de conversaciones recientes.
+    
+    Args:
+        user_message (str): Mensaje actual del usuario.
+        history (list, optional): Historial de conversaciones [(pregunta1, respuesta1), ...].
+        context_text (str, optional): Contexto RAG si está disponible.
+        
+    Returns:
+        str: Prompt completo con historial
+    """
+    prompt = "RESPONDE A LAS SIGUIENTES PREGUNTAS CON EL CONTEXTO PROPORCIONADO, ERES UN BOT DE LA UGR EXPERTO EN LA MATERIA:\n\n"
+    
+    # Añadir contexto RAG si está disponible
+    if context_text:
+        prompt += f"{context_text}\n\n"
+    
+    # Añadir historial de conversaciones
+    if history:
+        prompt += "HISTORIAL DE CONVERSACIÓN RECIENTE:\n"
+        for i, (q, a) in enumerate(history):
+            prompt += f"Usuario: {q}\n"
+            prompt += f"Bot: {a}\n\n"
+    
+    # Añadir la pregunta actual
+    prompt += f"LA PREGUNTA ACTUAL A RESPONDER ES:\n{user_message}\n\n### RESPUESTA:"
+    
+    return prompt
+
+def query_rag(query_text, chroma_path, subject=None, use_finetuned=False, history=None):
     """
     Consultar el sistema RAG con respuesta limpia.
     
@@ -67,6 +96,7 @@ def query_rag(query_text, chroma_path, subject=None, use_finetuned=False):
         chroma_path (str): Ruta al directorio de Chroma.
         subject (str): Asignatura específica.
         use_finetuned (bool): Indica si se usa fine-tuning.
+        history (list, optional): Historial de conversaciones [(pregunta1, respuesta1), ...].
     
     Returns:
         dict: Respuesta generada y fuentes.
@@ -91,15 +121,9 @@ def query_rag(query_text, chroma_path, subject=None, use_finetuned=False):
     if not results:
         return {"response": "No hay documentos relevantes", "sources": []}
 
-    # 5. Construir prompt con delimitadores claros
+    # 5. Construir prompt con delimitadores claros e historial
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
-    prompt = f"""
-    RESPONDE A LAS SIGUIENTES PREGUNTAS CON EL CONTEXTO PROPORCIONADO, ERES UN  BOT DE LA UGR EXPERTO EN LA MATERIA:
-    {context_text}
-    LA PREGUNTA A RESPONDER ES:
-    {query_text}
-    ### RESPUESTA:
-    """
+    prompt = build_prompt_with_history(query_text, history, context_text)
 
     # 6. Generar respuesta limpia
     response_text = generate_response(base_model, tokenizer, prompt)
@@ -113,17 +137,22 @@ def query_rag(query_text, chroma_path, subject=None, use_finetuned=False):
         "model_used": f"{'RAG+LoRA' if use_finetuned else 'RAG base'}"
     }
 
-def get_base_model_response(query_text):
-    """Generar respuesta directa del modelo base sin RAG."""
+def get_base_model_response(query_text, history=None):
+    """
+    Generar respuesta directa del modelo base sin RAG.
+    
+    Args:
+        query_text (str): La pregunta del usuario.
+        history (list, optional): Historial de conversaciones [(pregunta1, respuesta1), ...].
+    
+    Returns:
+        dict: Respuesta generada y fuentes vacías.
+    """
     tokenizer, model = load_base_model()
     query_text = query_text.encode("utf-8", errors="ignore").decode("utf-8")
     
-    # Prompt simple para el modelo base
-    prompt = f"""
-    ERES UN  BOT DE LA UGR EXPERTO EN LA MATERIA, LA PREGUNTA A RESPONDER ES:
-    {query_text}
-    ### RESPUESTA:
-    """
+    # Prompt con historial para el modelo base
+    prompt = build_prompt_with_history(query_text, history)
     response_text = generate_response(model, tokenizer, prompt)
 
     return {
@@ -136,23 +165,31 @@ def get_base_model_response(query_text):
 # =========== EJEMPLO DE USO ==========
 # =====================================
 if __name__ == "__main__":
-    # Prueba RAG base
-    print("=== RAG BASE ===")
+    # Ejemplo de historial de chat
+    ejemplo_historial = [
+        ("¿Cuál es el horario de las tutorías?", "Las tutorías son los lunes y miércoles de 10:00 a 12:00 en el despacho 3.14"),
+        ("¿Qué temas se verán en el examen?", "El examen abarcará todos los temas vistos en clase hasta la fecha, con especial énfasis en algoritmos genéticos y búsqueda tabú.")
+    ]
+    
+    # Prueba RAG base con historial
+    print("=== RAG BASE CON HISTORIAL ===")
     respuesta_base = query_rag(
         "¿En qué aula se dan las clases de teoría?",
         chroma_path="./chroma/metaheuristicas",
         subject="metaheuristicas",
-        use_finetuned=False
+        use_finetuned=False,
+        history=ejemplo_historial
     )
     print("Respuesta (base):", respuesta_base["response"])
 
-    # Prueba RAG + LoRA
-    print("\n=== RAG + LoRA ===")
+    # Prueba RAG + LoRA con historial
+    print("\n=== RAG + LoRA CON HISTORIAL ===")
     respuesta_lora = query_rag(
         "¿En qué aula se dan las clases de teoría?",
         chroma_path="./chroma/metaheuristicas",
         subject="metaheuristicas",
-        use_finetuned=True
+        use_finetuned=True,
+        history=ejemplo_historial
     )
 
     print("Respuesta (LoRA):", respuesta_lora["response"])

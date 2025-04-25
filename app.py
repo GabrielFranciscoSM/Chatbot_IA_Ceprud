@@ -1,7 +1,7 @@
 import os
 import csv
 from datetime import datetime
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, jsonify, render_template, send_from_directory, session
 from flask_cors import CORS
 from query_logic import query_rag, get_base_model_response
 
@@ -12,6 +12,13 @@ app.secret_key = 'clave_secreta_para_sesion'
 
 # Configuración de Chroma
 BASE_CHROMA_PATH = "chroma"
+
+# Diccionario para almacenar historiales de chat por usuario
+# La estructura será: {email: [(pregunta1, respuesta1), (pregunta2, respuesta2), ...]}
+chat_histories = {}
+
+# Máximo número de mensajes a guardar en el historial
+MAX_HISTORY_LENGTH = 5
 
 # Ruta principal para servir la interfaz web
 @app.route('/')
@@ -69,6 +76,74 @@ def log_user_message(email, message, subject, response, sources):
             writer.writerow(["user", "message", "time", "date", "subject", "sources"])
         writer.writerow([email, message, time, date, subject, sources_str])
 
+# Función para obtener el historial de chat del usuario
+def get_user_history(email):
+    """
+    Obtiene el historial de chat para un usuario específico.
+    Si no existe, crea un historial vacío.
+    
+    Args:
+        email (str): Correo electrónico del usuario.
+        
+    Returns:
+        list: Lista de tuplas (pregunta, respuesta)
+    """
+    if email not in chat_histories:
+        chat_histories[email] = []
+    return chat_histories[email]
+
+# Función para actualizar el historial de chat del usuario
+def update_user_history(email, question, answer):
+    """
+    Actualiza el historial de chat del usuario con una nueva pregunta y respuesta.
+    Mantiene solo las MAX_HISTORY_LENGTH más recientes.
+    
+    Args:
+        email (str): Correo electrónico del usuario.
+        question (str): Pregunta del usuario.
+        answer (str): Respuesta generada.
+    """
+    if email not in chat_histories:
+        chat_histories[email] = []
+    
+    # Añadir nueva conversación
+    chat_histories[email].append((question, answer))
+    
+    # Limitar el tamaño del historial (FIFO)
+    if len(chat_histories[email]) > MAX_HISTORY_LENGTH:
+        chat_histories[email].pop(0)  # Eliminar el elemento más antiguo
+
+# Función para construir el prompt con historial
+def build_prompt_with_history(user_message, history, context_text=None):
+    """
+    Construye un prompt que incluye el historial de conversaciones recientes.
+    
+    Args:
+        user_message (str): Mensaje actual del usuario.
+        history (list): Historial de conversaciones [(pregunta1, respuesta1), ...].
+        context_text (str, optional): Contexto RAG si está disponible.
+        
+    Returns:
+        str: Prompt completo con historial
+    """
+    prompt = "RESPONDE A LAS SIGUIENTES PREGUNTAS CON EL CONTEXTO PROPORCIONADO, ERES UN BOT DE LA UGR EXPERTO EN LA MATERIA:\n\n"
+    
+    # Añadir contexto RAG si está disponible
+    if context_text:
+        prompt += f"{context_text}\n\n"
+    
+    # Añadir historial de conversaciones
+    if history:
+        prompt += "HISTORIAL DE CONVERSACIÓN RECIENTE:\n"
+        for i, (q, a) in enumerate(history):
+            prompt += f"Usuario: {q}\n"
+            prompt += f"Bot: {a}\n\n"
+    
+    # Añadir la pregunta actual
+    prompt += f"LA PREGUNTA ACTUAL A RESPONDER ES:\n{user_message}\n\n### RESPUESTA:"
+    
+    return prompt
+
 # Ruta para manejar mensajes de texto
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -88,24 +163,71 @@ def chat():
         if not user_message:
             return jsonify({"response": "❌ Por favor, escribe una pregunta."})
 
+        # Obtener el historial de chat del usuario
+        user_history = get_user_history(user_email)
+
         # Determinar la ruta de la base de datos Chroma para la asignatura
         chroma_path = os.path.join(BASE_CHROMA_PATH, selected_subject)
         if not os.path.exists(chroma_path) and selected_mode != "base":
             return jsonify({"response": f"❌ No hay datos disponibles para la asignatura '{selected_subject}'."})
 
-        # Llamar al modelo según el modo seleccionado
+        # Llamar al modelo según el modo seleccionado, incluyendo el historial
         if selected_mode == "rag":
-            result = query_rag(user_message, chroma_path, use_finetuned=False)
+            # Primero recuperamos el contexto
+            db = Chroma(persist_directory=chroma_path, embedding_function=get_embedding_function())
+            results = db.similarity_search_with_score(user_message, k=5)
+            context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+            
+            # Construimos el prompt con historial
+            from query_logic import load_base_model, generate_response
+            tokenizer, base_model = load_base_model()
+            prompt = build_prompt_with_history(user_message, user_history, context_text)
+            response_text = generate_response(base_model, tokenizer, prompt)
+            sources = [doc.metadata.get("id", "N/A") for doc, _score in results]
+            result = {
+                "response": response_text,
+                "sources": sources,
+                "model_used": "RAG base"
+            }
+            
         elif selected_mode == "rag_lora":
-            result = query_rag(user_message, chroma_path, subject=selected_subject, use_finetuned=True)
+            # Similar al anterior pero usando el modelo fine-tuned
+            db = Chroma(persist_directory=chroma_path, embedding_function=get_embedding_function())
+            results = db.similarity_search_with_score(user_message, k=5)
+            context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+            
+            from query_logic import load_base_model, load_finetuned_model, generate_response
+            tokenizer, base_model = load_base_model()
+            model = load_finetuned_model(base_model, selected_subject)
+            prompt = build_prompt_with_history(user_message, user_history, context_text)
+            response_text = generate_response(model, tokenizer, prompt)
+            sources = [doc.metadata.get("id", "N/A") for doc, _score in results]
+            result = {
+                "response": response_text,
+                "sources": sources,
+                "model_used": "RAG+LoRA"
+            }
+            
         elif selected_mode == "base":
-            result = get_base_model_response(user_message)
+            # Modelo base con historial pero sin contexto RAG
+            from query_logic import load_base_model, generate_response
+            tokenizer, model = load_base_model()
+            prompt = build_prompt_with_history(user_message, user_history)
+            response_text = generate_response(model, tokenizer, prompt)
+            result = {
+                "response": response_text,
+                "sources": [],
+                "model_used": "Base"
+            }
         else:
             return jsonify({"response": "❌ Modo no válido."})
 
-
         response_text = result.get("response", "No se pudo generar una respuesta.")
         sources = result.get("sources", [])
+
+        # Actualizar el historial del usuario
+        clean_response = response_text.replace('🤖: ', '')  # Quitar el prefijo si existe
+        update_user_history(user_email, user_message, clean_response)
 
         # Guardar el mensaje y la respuesta en los logs
         log_user_message(
