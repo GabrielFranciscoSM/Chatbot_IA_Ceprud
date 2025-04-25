@@ -13,10 +13,8 @@ WORKDIR /app
 # Copiar archivos necesarios
 COPY app.py /app/app.py
 COPY requirements.txt /app/requirements.txt
-COPY cockpit-336-py3-none-any.whl /app/
 
 # Instalar dependencias de Python
-RUN pip install --no-cache-dir /app/cockpit-336-py3-none-any.whl
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
 # Comando por defecto
