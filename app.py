@@ -3,7 +3,7 @@ import csv
 from datetime import datetime
 from flask import Flask, request, jsonify, render_template, send_from_directory, session
 from flask_cors import CORS
-from query_logic import query_rag, get_base_model_response
+from query_logic import query_rag, get_base_model_response, get_embedding_function
 from langchain_chroma import Chroma 
 
 # Configuración de Flask
