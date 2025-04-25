@@ -72,7 +72,7 @@ def add_new_subject(subject_name, folder_path=None, pdf_files=None):
 
     # Paso 3: Poblar la base de datos Chroma
     try:
-        subprocess.run(["python", "populate_database.py"], check=True)
+        subprocess.run(["python3", "populate_database.py"], check=True)
         print("Base de datos Chroma poblada correctamente.")
     except subprocess.CalledProcessError as e:
         print(f"Error al ejecutar populate_database.py: {e}")
