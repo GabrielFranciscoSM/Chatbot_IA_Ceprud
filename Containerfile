@@ -10,6 +10,12 @@ ENV HF_HUB_DISABLE_SYMLINKS_WARNING=1
 # Directorio de trabajo
 WORKDIR /app
 
+# Instalar dependencias del sistema para sentencepiece
+RUN apt-get update && apt-get install -y \
+    pkg-config \
+    cmake \
+    build-essential
+
 # Copiar archivos necesarios
 COPY app.py /app/app.py
 COPY requirements.txt /app/requirements.txt
