@@ -37,6 +37,7 @@ flatbuffers==25.2.10
 fonttools==4.56.0
 frozenlist==1.5.0
 fsspec==2024.12.0
+guvicorn
 gedit==0.0.2
 google-auth==2.38.0
 googleapis-common-protos==1.69.2
