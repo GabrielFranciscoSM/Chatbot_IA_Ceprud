@@ -19,6 +19,8 @@ RUN apt-get update && apt-get install -y \
 # Copiar archivos necesarios
 COPY app.py /app/app.py
 COPY query_logic.py /app/query_logic.py
+COPY get_embedding_function.py /app/get_embedding_function.py 
+COPY populate_database.py /app/populate_database.py
 COPY templates/index.html /app/templates/index.html
 COPY requirements.txt /app/requirements.txt
 
