@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Vincular el archivo CSS externo -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ request.url_for('static', path='styles.css') }}">
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://www.ugr.es/assets/img/favicon.png">
 </head>
@@ -104,6 +104,7 @@
     </div>
   </div>
   <script>
+    const apiBase = `${window.location.protocol}//${window.location.host}`;
     const chatMessages = document.getElementById('chatMessages');
     const userInput = document.getElementById('userInput');
     const pdfInput = document.getElementById('pdfInput');
@@ -284,7 +285,7 @@
 
       // Enviar solicitud al servidor
       try {
-        const response = await fetch('http://172.18.246.73:5001/chat', {
+        const response = await fetch(`${apiBase}/chat`, {
           method: 'POST',
           body: formData,
         });
@@ -358,7 +359,7 @@
     // Función para cargar gráficas desde el servidor
     async function loadGraphs() {
       try {
-        const response = await fetch('http://172.18.246.73:5001/graphs');
+        const response = await fetch(`${apiBase}/graphs`);
         const data = await response.json();
         
         const graphsGrid = document.querySelector('.graphs-grid');
@@ -385,7 +386,7 @@
           
           graphCard.innerHTML = `
             <h4>${title}</h4>
-            <img src="http://172.18.246.73:5001/graphs/${graphName}" alt="${title}" class="graph-image">
+            <img src="${apiBase}/graphs/${graphName}" alt="${title}" class="graph-image">
           `;
           
           graphsGrid.appendChild(graphCard);
