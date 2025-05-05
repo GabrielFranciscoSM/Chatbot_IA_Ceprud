@@ -29,4 +29,4 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
 # Comando por defecto
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5001"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5001", "--workers", "4"]
