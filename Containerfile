@@ -23,7 +23,6 @@ COPY get_embedding_function.py /app/get_embedding_function.py
 COPY populate_database.py /app/populate_database.py
 COPY templates/index.html /app/templates/index.html
 COPY static/styles.css /app/static/styles.css
-COPY data /app/data/
 COPY requirements.txt /app/requirements.txt
 
 # Instalar dependencias de Python
