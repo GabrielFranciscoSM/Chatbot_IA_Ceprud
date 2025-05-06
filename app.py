@@ -41,16 +41,13 @@ templates = Jinja2Templates(directory="templates")
 BASE_CHROMA_PATH = "/app/chroma"
 
 # Historial de chat por usuario
-echo_histories = {}
+chat_histories = {}
 MAX_HISTORY_LENGTH = 5
 
 # Inicializar modelos y embeddings
-def startup_event():
-    initialize_models()
-
 @app.on_event("startup")
 async def on_startup():
-    startup_event()
+    initialize_models()
 
 
 def log_user_message(email: str, message: str, subject: str, response: str, sources: list):
