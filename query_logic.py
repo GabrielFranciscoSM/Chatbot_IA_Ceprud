@@ -25,14 +25,18 @@ def initialize_models():
     global BASE_MODEL, TOKENIZER, EMBEDDING_FUNCTION
     if BASE_MODEL is None or TOKENIZER is None:
         print("🌟 Cargando modelo base desde /app/models...")
-        model_path = "/app/models/models--deepseek-ai--deepseek-llm-7b-chat"
+        repo_id = "deepseek-ai/deepseek-llm-7b-chat"  # Nombre del repositorio correcto
+        cache_dir = "/app/models"  # Ruta donde se almacenan los archivos del modelo
+        
         TOKENIZER = AutoTokenizer.from_pretrained(
-            model_path,
-            local_files_only=True,  # Forzar carga local
-            trust_remote_code=True  # Si el modelo usa código personalizado
+            repo_id,
+            cache_dir=cache_dir,
+            local_files_only=True,
+            trust_remote_code=True
         )
         BASE_MODEL = AutoModelForCausalLM.from_pretrained(
-            model_path,
+            repo_id,
+            cache_dir=cache_dir,
             local_files_only=True,
             torch_dtype=torch.float16,
             trust_remote_code=True
