@@ -38,7 +38,7 @@ app.mount("/graphs", StaticFiles(directory="graphs"), name="graphs")
 templates = Jinja2Templates(directory="templates")
 
 # Configuración de Chroma
-BASE_CHROMA_PATH = "/app/chroma"
+BASE_CHROMA_PATH = "./chroma"
 
 # Historial de chat por usuario
 chat_histories = {}
