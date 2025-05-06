@@ -12,12 +12,9 @@ from query_logic import (
     BASE_MODEL,
     TOKENIZER,
     EMBEDDING_FUNCTION,
-    load_finetuned_model,
-    generate_response,
     query_rag,
     get_base_model_response,
 )
-from langchain_chroma import Chroma
 
 # Configuración de FastAPI
 app = FastAPI()
@@ -30,86 +27,56 @@ app.add_middleware(
     allow_credentials=True,
 )
 
-# Montar directorios estáticos
+# Estáticos y templates
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/graphs", StaticFiles(directory="graphs"), name="graphs")
-
-# Configuración de plantillas
 templates = Jinja2Templates(directory="templates")
 
-# Configuración de Chroma
+# Rutas y configuración
 BASE_CHROMA_PATH = "./chroma"
+MAX_HISTORY_LENGTH = 7
 
-# Historial de chat por usuario
-chat_histories = {}
-MAX_HISTORY_LENGTH = 5
+# Historial y asignatura actual por usuario
+type UserData = dict[str, dict]
+user_data: dict[str, dict] = {}
 
-# Inicializar modelos y embeddings
+# Inicialización de modelos
 @app.on_event("startup")
 async def on_startup():
     initialize_models()
 
 
-def log_user_message(email: str, message: str, subject: str, response: str, sources: list):
-    log_dir = "logs"
-    os.makedirs(log_dir, exist_ok=True)
-    log_file = os.path.join(log_dir, "chat_logs.csv")
+def log_user_message(email: str, message: str, subject: str, response: str, sources: list[str]):
+    os.makedirs("logs", exist_ok=True)
+    path = os.path.join("logs", "chat_logs.csv")
     now = datetime.now()
-    date = now.strftime("%Y-%m-%d")
-    time = now.strftime("%H:%M:%S")
-    file_exists = os.path.isfile(log_file)
-    sources_str = ",".join(sources) if sources else "N/A"
-
-    with open(log_file, mode="a", newline="", encoding="utf-8") as f:
+    row = [email, message, now.strftime("%H:%M:%S"), now.strftime("%Y-%m-%d"), subject, ",".join(sources) or "N/A"]
+    header = []
+    if not os.path.exists(path):
+        header = [["user","message","time","date","subject","sources"]]
+    with open(path, "a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        if not file_exists:
-            writer.writerow(["user", "message", "time", "date", "subject", "sources"])
-        writer.writerow([email, message, time, date, subject, sources_str])
+        for h in header: writer.writerow(h)
+        writer.writerow(row)
 
 
-def get_user_history(email: str):
-    return chat_histories.setdefault(email, [])
+def get_user_session(email: str, subject: str) -> list[tuple[str,str]]:
+    """
+    Devuelve el historial de usuario. Si cambia la asignatura, se reinicia el historial.
+    """
+    data = user_data.get(email)
+    if not data or data.get("subject") != subject:
+        # nueva sesión o asignatura diferente: reiniciar
+        user_data[email] = {"subject": subject, "history": []}
+    return user_data[email]["history"]
 
 
 def update_user_history(email: str, question: str, answer: str):
-    history = chat_histories.setdefault(email, [])
-    history.append((question, answer))
-    if len(history) > MAX_HISTORY_LENGTH:
-        history.pop(0)
+    hist = user_data[email]["history"]
+    hist.append((question, answer))
+    if len(hist) > MAX_HISTORY_LENGTH:
+        hist.pop(0)
 
-
-def build_prompt_with_history(user_message: str, history: list, context_text: str = None) -> str:
-    prompt = (
-        "RESPONDE A LAS SIGUIENTES PREGUNTAS CON EL CONTEXTO PROPORCIONADO, "
-        "ERES UN BOT DE LA UGR EXPERTO EN LA MATERIA:\n\n"
-    )
-    if context_text:
-        prompt += f"{context_text}\n\n"
-    if history:
-        prompt += "HISTORIAL DE CONVERSACIÓN RECIENTE:\n"
-        for q, a in history:
-            prompt += f"Usuario: {q}\nBot: {a}\n\n"
-    prompt += f"LA PREGUNTA ACTUAL A RESPONDER ES:\n{user_message}\n\n### RESPUESTA:"
-    return prompt
-
-@app.get("/", response_class=HTMLResponse)
-async def index(request: Request):
-    return templates.TemplateResponse('index.html', {"request": request})
-
-@app.get("/graphs", response_class=JSONResponse)
-async def list_graphs():
-    graphs_dir = "graphs"
-    if not os.path.exists(graphs_dir):
-        return []
-    specific_graphs = ["calendar.png", "hours.png", "subjects.png", "users.png"]
-    return [f for f in os.listdir(graphs_dir) if f in specific_graphs]
-
-@app.get("/graphs/{filename}")
-async def serve_graph(filename: str):
-    file_path = os.path.join("graphs", filename)
-    if not os.path.exists(file_path):
-        raise HTTPException(status_code=404, detail="File not found")
-    return FileResponse(file_path)
 
 @app.post("/chat", response_class=JSONResponse)
 async def chat(
@@ -119,52 +86,45 @@ async def chat(
     mode: str = Form('rag')
 ):
     user_message = message.strip()
-    selected_subject = subject.lower()
-    user_email = email
-    selected_mode = mode.lower()
-
+    sub = subject.lower()
+    mode = mode.lower()
     if not user_message:
-        return {"response": "❌ Por favor, escribe una pregunta."}
+        return {"response":"❌ Por favor, escribe una pregunta."}
 
-    user_history = get_user_history(user_email)
-    chroma_path = os.path.join(BASE_CHROMA_PATH, selected_subject)
+    history = get_user_session(email, sub)
+    chroma_path = os.path.join(BASE_CHROMA_PATH, sub)
+    if mode != 'base' and not os.path.isdir(chroma_path):
+        return {"response":f"❌ No hay datos para '{sub}'. Dir disponibles: {os.listdir(BASE_CHROMA_PATH)}"}
 
-    if selected_mode != 'base' and not os.path.exists(chroma_path):
-        return {"response": f"❌ No hay datos disponibles para la asignatura '{selected_subject}'."}
+    if mode in ['rag','rag_lora']:
+        result = query_rag(user_message, chroma_path, subject=sub, use_finetuned=(mode=='rag_lora'), history=history)
+    elif mode=='base':
+        result = get_base_model_response(user_message, history=history)
+    else:
+        return {"response":"❌ Modo no válido."}
 
-    try:
-        if selected_mode in ['rag', 'rag_lora']:
-            result = query_rag(
-                user_message,
-                chroma_path,
-                subject=selected_subject,
-                use_finetuned=(selected_mode=='rag_lora'),
-                history=user_history
-            )
-            response_text = result['response']
-            sources = result['sources']
-            used = result['model_used']
-        elif selected_mode == 'base':
-            result = get_base_model_response(user_message, history=user_history)
-            response_text = result['response']
-            sources = []
-            used = result['model_used']
-        else:
-            return {"response": "❌ Modo no válido."}
+    resp = result['response']
+    sources = result.get('sources', [])
+    used = result.get('model_used','')
+    clean = resp.replace('🤖: ','')
+    update_user_history(email, user_message, clean)
+    log_user_message(email, user_message, sub, resp, sources)
+    return {"response":f"🤖: {resp}","sources":sources,"model_used":used}
 
-        clean_response = response_text.replace('🤖: ', '')
-        update_user_history(user_email, user_message, clean_response)
-        log_user_message(user_email, user_message, selected_subject, response_text, sources)
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse('index.html', {"request":request})
 
-        return {
-            "response": f"🤖: {response_text}",
-            "sources": sources,
-            "model_used": used
-        }
-    except Exception as e:
-        print(f"Error durante el procesamiento: {e}")
-        return {"response": "❌ Ocurrió un error al procesar tu solicitud."}
+@app.get("/graphs", response_class=JSONResponse)
+async def list_graphs():
+    d = os.path.join(os.path.dirname(__file__),"graphs")
+    return [f for f in os.listdir(d) if f in ["calendar.png","hours.png","subjects.png","users.png"]]
 
-if __name__ == '__main__':
-    import uvicorn
-    uvicorn.run(app, host='0.0.0.0', port=5001)
+@app.get("/graphs/{fname}")
+async def serve_graph(fname:str):
+    p = os.path.join(os.path.dirname(__file__),"graphs",fname)
+    if not os.path.exists(p): raise HTTPException(404)
+    return FileResponse(p)
+
+if __name__=='__main__':
+    import uvicorn; uvicorn.run(app,host='0.0.0.0',port=5001)
