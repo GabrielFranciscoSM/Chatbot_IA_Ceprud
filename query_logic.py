@@ -58,27 +58,33 @@ def load_finetuned_model(subject: str) -> AutoModelForCausalLM:
     return BASE_MODEL
 
 
-def generate_response(prompt: str, max_new_tokens: int = 2048) -> str:
+def generate_response(
+    prompt: str,
+    model: AutoModelForCausalLM = None,
+    tokenizer: AutoTokenizer = None,
+    max_new_tokens: int = 2048
+) -> str:
     """
-    Genera una respuesta con el modelo base.
+    Genera una respuesta usando el modelo y tokenizer indicados (o los globales).
     """
-    inputs = TOKENIZER(prompt, return_tensors="pt", truncation=True, max_length=4096).to(DEVICE)
+    model = model or BASE_MODEL
+    tokenizer = tokenizer or TOKENIZER
+    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=4096).to(DEVICE)
     with torch.no_grad():
-        outputs = BASE_MODEL.generate(
+        outputs = model.generate(
             **inputs,
             max_new_tokens=max_new_tokens,
             temperature=0.6,
             top_p=0.95,
-            pad_token_id=TOKENIZER.eos_token_id,
+            pad_token_id=tokenizer.eos_token_id,
             num_beams=5,
             early_stopping=True
         )
-    text = TOKENIZER.decode(outputs[0], skip_special_tokens=True)
-    # Extraer después de delimitador
+    text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    # Extraer texto después de ### RESPUESTA:
     match = re.search(r"### RESPUESTA:\s*(.*)", text, re.DOTALL)
     if match:
         return match.group(1).strip()
-    # En caso contrario, devolver todo menos el prompt
     return text.replace(prompt, "").strip()
 
 
