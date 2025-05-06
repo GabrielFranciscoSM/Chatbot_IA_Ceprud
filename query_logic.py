@@ -25,7 +25,7 @@ def initialize_models():
     global BASE_MODEL, TOKENIZER, EMBEDDING_FUNCTION
     if BASE_MODEL is None or TOKENIZER is None:
         print("🌟 Cargando modelo base desde /app/models...")
-        repo_id = "deepseek-ai/deepseek-llm-7b-chat"  # Nombre del repositorio correcto
+        repo_id = "models--deepseek-ai--deepseek-llm-7b-chat"  
         cache_dir = "/app/models"  # Ruta donde se almacenan los archivos del modelo
         
         TOKENIZER = AutoTokenizer.from_pretrained(
