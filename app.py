@@ -6,11 +6,16 @@ from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+
 from query_logic import (
-    get_embedding_function,
-    load_base_model,
+    initialize_models,
+    BASE_MODEL,
+    TOKENIZER,
+    EMBEDDING_FUNCTION,
     load_finetuned_model,
     generate_response,
+    query_rag,
+    get_base_model_response,
 )
 from langchain_chroma import Chroma
 
@@ -36,12 +41,17 @@ templates = Jinja2Templates(directory="templates")
 BASE_CHROMA_PATH = "/app/chroma"
 
 # Historial de chat por usuario
-chat_histories = {}
+echo_histories = {}
 MAX_HISTORY_LENGTH = 5
 
-# Cargar modelos UNA VEZ al iniciar la aplicación
-BASE_MODEL, TOKENIZER = load_base_model()
-EMBEDDING_FUNCTION = get_embedding_function()
+# Inicializar modelos y embeddings
+def startup_event():
+    initialize_models()
+
+@app.on_event("startup")
+async def on_startup():
+    startup_event()
+
 
 def log_user_message(email: str, message: str, subject: str, response: str, sources: list):
     log_dir = "logs"
@@ -85,11 +95,9 @@ def build_prompt_with_history(user_message: str, history: list, context_text: st
     prompt += f"LA PREGUNTA ACTUAL A RESPONDER ES:\n{user_message}\n\n### RESPUESTA:"
     return prompt
 
-
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse('index.html', {"request": request})
-
 
 @app.get("/graphs", response_class=JSONResponse)
 async def list_graphs():
@@ -97,9 +105,7 @@ async def list_graphs():
     if not os.path.exists(graphs_dir):
         return []
     specific_graphs = ["calendar.png", "hours.png", "subjects.png", "users.png"]
-    files = [f for f in os.listdir(graphs_dir) if f in specific_graphs]
-    return files
-
+    return [f for f in os.listdir(graphs_dir) if f in specific_graphs]
 
 @app.get("/graphs/{filename}")
 async def serve_graph(filename: str):
@@ -107,7 +113,6 @@ async def serve_graph(filename: str):
     if not os.path.exists(file_path):
         raise HTTPException(status_code=404, detail="File not found")
     return FileResponse(file_path)
-
 
 @app.post("/chat", response_class=JSONResponse)
 async def chat(
@@ -132,21 +137,21 @@ async def chat(
 
     try:
         if selected_mode in ['rag', 'rag_lora']:
-            db = Chroma(persist_directory=chroma_path, embedding_function=EMBEDDING_FUNCTION)
-            results = db.similarity_search_with_score(user_message, k=5)
-            context_text = "\n\n---\n\n".join([doc.page_content for doc, _ in results])
-            model = BASE_MODEL
-            if selected_mode == 'rag_lora':
-                model = load_finetuned_model(BASE_MODEL, selected_subject)
-            prompt = build_prompt_with_history(user_message, user_history, context_text)
-            response_text = generate_response(model, TOKENIZER, prompt)
-            sources = [doc.metadata.get('id', 'N/A') for doc, _ in results]
-            used = 'RAG+LoRA' if selected_mode == 'rag_lora' else 'RAG base'
+            result = query_rag(
+                user_message,
+                chroma_path,
+                subject=selected_subject,
+                use_finetuned=(selected_mode=='rag_lora'),
+                history=user_history
+            )
+            response_text = result['response']
+            sources = result['sources']
+            used = result['model_used']
         elif selected_mode == 'base':
-            prompt = build_prompt_with_history(user_message, user_history)
-            response_text = generate_response(BASE_MODEL, TOKENIZER, prompt)
+            result = get_base_model_response(user_message, history=user_history)
+            response_text = result['response']
             sources = []
-            used = 'Base'
+            used = result['model_used']
         else:
             return {"response": "❌ Modo no válido."}
 
@@ -160,9 +165,8 @@ async def chat(
             "model_used": used
         }
     except Exception as e:
-        print(f"Error durante el procesamiento: {str(e)}")
+        print(f"Error durante el procesamiento: {e}")
         return {"response": "❌ Ocurrió un error al procesar tu solicitud."}
-
 
 if __name__ == '__main__':
     import uvicorn
