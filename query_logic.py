@@ -25,9 +25,10 @@ def initialize_models():
     global BASE_MODEL, TOKENIZER, EMBEDDING_FUNCTION
     if BASE_MODEL is None or TOKENIZER is None:
         print("🌟 Cargando modelo base...")
-        TOKENIZER = AutoTokenizer.from_pretrained(MODEL_NAME)
+        model_path = "/app/models/models--deepseek-ai--deepseek-llm-7b-chat"
+        TOKENIZER = AutoTokenizer.from_pretrained(model_path)
         BASE_MODEL = AutoModelForCausalLM.from_pretrained(
-            MODEL_NAME,
+            model_path,
             torch_dtype=torch.float16,
             trust_remote_code=True
         ).to(DEVICE)
