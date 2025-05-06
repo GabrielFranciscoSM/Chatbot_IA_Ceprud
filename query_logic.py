@@ -18,30 +18,23 @@ EMBEDDING_FUNCTION = None
 
 
 def initialize_models():
-    """
-    Inicializa los modelos y funciones necesarias.
-    Esto debe llamarse una sola vez al iniciar la aplicación.
-    """
     global BASE_MODEL, TOKENIZER, EMBEDDING_FUNCTION
     if BASE_MODEL is None or TOKENIZER is None:
-        print("🌟 Cargando modelo base desde /app/models...")
-        repo_id = "models--deepseek-ai--deepseek-llm-7b-chat"  
-        cache_dir = "/app/models"  # Ruta donde se almacenan los archivos del modelo
+        print("🌟 Cargando modelo base desde disco…")
+        MODEL_PATH = os.path.join(os.path.dirname(__file__), "models", "models--deepseek-ai--deepseek-llm-7b-chat")
         
         TOKENIZER = AutoTokenizer.from_pretrained(
-            repo_id,
-            cache_dir=cache_dir,
+            MODEL_PATH,
             local_files_only=True,
             trust_remote_code=True
         )
         BASE_MODEL = AutoModelForCausalLM.from_pretrained(
-            repo_id,
-            cache_dir=cache_dir,
+            MODEL_PATH,
             local_files_only=True,
             torch_dtype=torch.float16,
             trust_remote_code=True
         ).to(DEVICE)
-    
+
     if EMBEDDING_FUNCTION is None:
         print("🌟 Cargando función de embeddings...")
         EMBEDDING_FUNCTION = get_embedding_function()
