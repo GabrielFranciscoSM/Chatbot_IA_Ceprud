@@ -9,61 +9,58 @@ from peft import PeftModel
 # =====================================
 # ============ CONFIGURACIÓN ==========
 # =====================================
+MODEL_DIR = os.path.join(os.path.dirname(__file__), "models", "deepseek-ai", "deepseek-llm-7b-chat")
 MODEL_NAME = "deepseek-ai/deepseek-llm-7b-chat"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Cargar modelos UNA VEZ al iniciar la aplicación
-BASE_MODEL, TOKENIZER = None, None
+BASE_MODEL: AutoModelForCausalLM = None
+TOKENIZER: AutoTokenizer = None
 EMBEDDING_FUNCTION = None
 
 
 def initialize_models():
+    """
+    Inicializa el tokenizer, el modelo base y la función de embeddings.
+    """
     global BASE_MODEL, TOKENIZER, EMBEDDING_FUNCTION
-    if BASE_MODEL is None or TOKENIZER is None:
+
+    if TOKENIZER is None or BASE_MODEL is None:
         print("🌟 Cargando modelo base desde disco…")
-        MODEL_PATH = os.path.join(os.path.dirname(__file__), "models", "models--deepseek-ai--deepseek-llm-7b-chat")
-        
+        # Cargar tokenizer y modelo en modo offline
         TOKENIZER = AutoTokenizer.from_pretrained(
-            MODEL_PATH,
+            MODEL_DIR,
             local_files_only=True,
             trust_remote_code=True
         )
         BASE_MODEL = AutoModelForCausalLM.from_pretrained(
-            MODEL_PATH,
+            MODEL_DIR,
             local_files_only=True,
             torch_dtype=torch.float16,
             trust_remote_code=True
         ).to(DEVICE)
 
     if EMBEDDING_FUNCTION is None:
-        print("🌟 Cargando función de embeddings...")
+        print("🌟 Cargando función de embeddings…")
         EMBEDDING_FUNCTION = get_embedding_function()
 
 
-def load_finetuned_model(subject):
+def load_finetuned_model(subject: str) -> AutoModelForCausalLM:
     """
-    Aplica fine-tuning si existe un adaptador para la asignatura.
-    Args:
-        subject (str): Nombre de la asignatura.
-    Returns:
-        model: Modelo ajustado o base.
+    Carga y aplica un adaptador LoRA si existe, o retorna el modelo base.
     """
-    adapter_path = f"/app/models/{subject}-deepseek-qlora"
-    if os.path.exists(adapter_path):
-        print(f"🌟 Usando modelo fine-tuneado para {subject}")
-        return PeftModel.from_pretrained(BASE_MODEL, adapter_path).merge_and_unload().eval()
-    print(f"⚠️ Modelo fine-tuneado no encontrado para {subject}. Usando modelo base")
+    adapter_dir = os.path.join(os.path.dirname(__file__), "models", f"{subject}-deepseek-qlora")
+    if os.path.isdir(adapter_dir):
+        print(f"🌟 Usando modelo fine-tuneado para '{subject}'")
+        model = PeftModel.from_pretrained(BASE_MODEL, adapter_dir)
+        return model.merge_and_unload().eval()
+    print(f"⚠️ No se encontró adaptador para '{subject}', usando modelo base")
     return BASE_MODEL
 
 
-def generate_response(prompt, max_new_tokens=2048):
+def generate_response(prompt: str, max_new_tokens: int = 2048) -> str:
     """
-    Genera una respuesta a partir de un prompt.
-    Args:
-        prompt (str): Prompt para el modelo.
-        max_new_tokens (int): Número máximo de tokens en la respuesta.
-    Returns:
-        str: Respuesta generada.
+    Genera una respuesta con el modelo base.
     """
     inputs = TOKENIZER(prompt, return_tensors="pt", truncation=True, max_length=4096).to(DEVICE)
     with torch.no_grad():
@@ -76,145 +73,90 @@ def generate_response(prompt, max_new_tokens=2048):
             num_beams=5,
             early_stopping=True
         )
-    
-    # Decodificar respuesta
-    response = TOKENIZER.decode(outputs[0], skip_special_tokens=True)
-    
-    # Extraer la respuesta después del delimitador
-    match = re.search(r"### RESPUESTA:\s*(.*)", response, re.DOTALL)
+    text = TOKENIZER.decode(outputs[0], skip_special_tokens=True)
+    # Extraer después de delimitador
+    match = re.search(r"### RESPUESTA:\s*(.*)", text, re.DOTALL)
     if match:
         return match.group(1).strip()
-    return response.replace(prompt, "").strip()
+    # En caso contrario, devolver todo menos el prompt
+    return text.replace(prompt, "").strip()
 
 
-def build_prompt_with_history(user_message, history=None, context_text=None):
+def build_prompt_with_history(user_message: str,
+                              history: list[tuple[str, str]] = None,
+                              context_text: str = None) -> str:
     """
-    Construye un prompt que incluye el historial de conversaciones recientes.
-    Args:
-        user_message (str): Mensaje actual del usuario.
-        history (list, optional): Historial de conversaciones [(pregunta1, respuesta1), ...].
-        context_text (str, optional): Contexto RAG si está disponible.
-    Returns:
-        str: Prompt completo con historial.
+    Construye el prompt que incluye contexto y/o historial.
     """
-    prompt = (
-        "RESPONDE A LAS SIGUIENTES PREGUNTAS CON EL CONTEXTO PROPORCIONADO, "
-        "ERES UN BOT DE LA UGR EXPERTO EN LA MATERIA:\n\n"
-    )
-    
-    # Añadir contexto RAG si está disponible
+    parts = [
+        "RESPONDE A LAS SIGUIENTES PREGUNTAS CON EL CONTEXTO PROPORCIONADO, ER﻿ES UN BOT DE LA UGR EXPERTO EN LA MATERIA:\n"
+    ]
     if context_text:
-        prompt += f"{context_text}\n\n"
-    
-    # Añadir historial de conversaciones
+        parts.append(context_text + "\n\n")
     if history:
-        prompt += "HISTORIAL DE CONVERSACIÓN RECIENTE:\n"
+        parts.append("HISTORIAL DE CONVERSACIÓN RECIENTE:\n")
         for q, a in history:
-            prompt += f"Usuario: {q}\nBot: {a}\n\n"
-    
-    # Añadir la pregunta actual
-    prompt += f"LA PREGUNTA ACTUAL A RESPONDER ES:\n{user_message}\n\n### RESPUESTA:"
-    
-    return prompt
+            parts.append(f"Usuario: {q}\nBot: {a}\n\n")
+    parts.append(f"LA PREGUNTA ACTUAL A RESPONDER ES:\n{user_message}\n\n### RESPUESTA:")
+    return "".join(parts)
 
 
-def query_rag(query_text, chroma_path, subject=None, use_finetuned=False, history=None):
+def query_rag(query_text: str,
+              chroma_path: str,
+              subject: str = None,
+              use_finetuned: bool = False,
+              history: list[tuple[str, str]] = None) -> dict:
     """
-    Consultar el sistema RAG con respuesta limpia.
-    Args:
-        query_text (str): La pregunta del usuario.
-        chroma_path (str): Ruta al directorio de Chroma.
-        subject (str): Asignatura específica.
-        use_finetuned (bool): Indica si se usa fine-tuning.
-        history (list, optional): Historial de conversaciones [(pregunta1, respuesta1), ...].
-    Returns:
-        dict: Respuesta generada y fuentes.
+    Realiza búsqueda RAG y genera la respuesta con o sin LoRA.
     """
-    # 1. Codificación UTF-8
+    # Normalizar texto
     query_text = query_text.encode("utf-8", errors="ignore").decode("utf-8")
-
-    # 2. Recuperar contexto relevante
+    # Recuperar documentos
     try:
         db = Chroma(persist_directory=chroma_path, embedding_function=EMBEDDING_FUNCTION)
-        results = db.similarity_search_with_score(query_text, k=5)
+        docs_and_scores = db.similarity_search_with_score(query_text, k=5)
     except Exception as e:
-        return {"response": f"❌ Error en RAG: {str(e)}", "sources": []}
+        return {"response": f"❌ Error RAG: {e}", "sources": []}
 
-    if not results:
-        return {"response": "No hay documentos relevantes", "sources": []}
+    if not docs_and_scores:
+        return {"response": "No hay documentos relevantes.", "sources": []}
 
-    # 3. Construir prompt con delimitadores claros e historial
-    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
-    prompt = build_prompt_with_history(query_text, history, context_text)
+    docs, _ = zip(*docs_and_scores)
+    context = "\n\n---\n\n".join(d.page_content for d in docs)
+    prompt = build_prompt_with_history(query_text, history, context)
 
-    # 4. Generar respuesta limpia
-    response_text = generate_response(prompt)
-    
-    # 5. Extraer fuentes
-    sources = [doc.metadata.get("id", "N/A") for doc, _score in results]
-    
-    return {
-        "response": response_text,
-        "sources": sources,
-        "model_used": f"{'RAG+LoRA' if use_finetuned else 'RAG base'}"
-    }
+    # Seleccionar modelo
+    model_desc = "RAG base"
+    if use_finetuned and subject:
+        BASE = load_finetuned_model(subject)
+        model_desc = "RAG+LoRA"
+    else:
+        BASE = BASE_MODEL
+
+    # Generar respuesta
+    response = generate_response(prompt)
+    sources = [d.metadata.get("id", "N/A") for d in docs]
+
+    return {"response": response, "sources": sources, "model_used": model_desc}
 
 
-def get_base_model_response(query_text, history=None):
+def get_base_model_response(query_text: str,
+                            history: list[tuple[str, str]] = None) -> dict:
     """
-    Generar respuesta directa del modelo base sin RAG.
-    Args:
-        query_text (str): La pregunta del usuario.
-        history (list, optional): Historial de conversaciones [(pregunta1, respuesta1), ...].
-    Returns:
-        dict: Respuesta generada y fuentes vacías.
+    Genera respuesta directa sin RAG.
     """
-    query_text = query_text.encode("utf-8", errors="ignore").decode("utf-8")
-    
-    # Prompt con historial para el modelo base
-    prompt = build_prompt_with_history(query_text, history)
-    response_text = generate_response(prompt)
+    normalized = query_text.encode("utf-8", errors="ignore").decode("utf-8")
+    prompt = build_prompt_with_history(normalized, history)
+    resp = generate_response(prompt)
+    return {"response": resp, "sources": [], "model_used": "base"}
 
-    return {
-        "response": response_text,
-        "sources": [],
-        "model_used": "base"
-    }
-
-
-# =====================================
-# =========== INICIALIZACIÓN ==========
-# =====================================
+# Inicializar todo al importar
 initialize_models()
 
-# =====================================
-# =========== EJEMPLO DE USO ==========
-# =====================================
+# Ejemplo de uso
 if __name__ == "__main__":
-    # Ejemplo de historial de chat
-    ejemplo_historial = [
-        ("¿Cuál es el horario de las tutorías?", "Las tutorías son los lunes y miércoles de 10:00 a 12:00 en el despacho 3.14"),
-        ("¿Qué temas se verán en el examen?", "El examen abarcará todos los temas vistos en clase hasta la fecha, con especial énfasis en algoritmos genéticos y búsqueda tabú.")
+    hist = [
+        ("¿Cuál es el horario de las tutorías?", "Lunes y miércoles de 10:00 a 12:00."),
+        ("¿Qué temas en el examen?", "Algoritmos genéticos y búsqueda tabú.")
     ]
-    
-    # Prueba RAG base con historial
-    print("=== RAG BASE CON HISTORIAL ===")
-    respuesta_base = query_rag(
-        "¿En qué aula se dan las clases de teoría?",
-        chroma_path="/app/chroma/metaheuristicas",
-        subject="metaheuristicas",
-        use_finetuned=False,
-        history=ejemplo_historial
-    )
-    print("Respuesta (base):", respuesta_base["response"])
-
-    # Prueba RAG + LoRA con historial
-    print("\n=== RAG + LoRA CON HISTORIAL ===")
-    respuesta_lora = query_rag(
-        "¿En qué aula se dan las clases de teoría?",
-        chroma_path="/app/chroma/metaheuristicas",
-        subject="metaheuristicas",
-        use_finetuned=True,
-        history=ejemplo_historial
-    )
-    print("Respuesta (LoRA):", respuesta_lora["response"])
+    print(query_rag("¿Dónde se dan las clases de teoría?", "/app/chroma/metaheuristicas", "metaheuristicas", use_finetuned=False, history=hist))
