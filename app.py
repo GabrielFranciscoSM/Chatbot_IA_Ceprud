@@ -7,8 +7,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from query_logic import (
-    query_rag,
-    get_base_model_response,
     get_embedding_function,
     load_base_model,
     load_finetuned_model,
@@ -35,12 +33,15 @@ app.mount("/graphs", StaticFiles(directory="graphs"), name="graphs")
 templates = Jinja2Templates(directory="templates")
 
 # Configuración de Chroma
-BASE_CHROMA_PATH = "chroma"
+BASE_CHROMA_PATH = "/app/chroma"
 
 # Historial de chat por usuario
 chat_histories = {}
 MAX_HISTORY_LENGTH = 5
 
+# Cargar modelos UNA VEZ al iniciar la aplicación
+BASE_MODEL, TOKENIZER = load_base_model()
+EMBEDDING_FUNCTION = get_embedding_function()
 
 def log_user_message(email: str, message: str, subject: str, response: str, sources: list):
     log_dir = "logs"
@@ -131,22 +132,19 @@ async def chat(
 
     try:
         if selected_mode in ['rag', 'rag_lora']:
-            db = Chroma(persist_directory=chroma_path, embedding_function=get_embedding_function())
+            db = Chroma(persist_directory=chroma_path, embedding_function=EMBEDDING_FUNCTION)
             results = db.similarity_search_with_score(user_message, k=5)
             context_text = "\n\n---\n\n".join([doc.page_content for doc, _ in results])
-            tokenizer, base_model = load_base_model()
+            model = BASE_MODEL
             if selected_mode == 'rag_lora':
-                model = load_finetuned_model(base_model, selected_subject)
-            else:
-                model = base_model
+                model = load_finetuned_model(BASE_MODEL, selected_subject)
             prompt = build_prompt_with_history(user_message, user_history, context_text)
-            response_text = generate_response(model, tokenizer, prompt)
+            response_text = generate_response(model, TOKENIZER, prompt)
             sources = [doc.metadata.get('id', 'N/A') for doc, _ in results]
             used = 'RAG+LoRA' if selected_mode == 'rag_lora' else 'RAG base'
         elif selected_mode == 'base':
-            tokenizer, model = load_base_model()
             prompt = build_prompt_with_history(user_message, user_history)
-            response_text = generate_response(model, tokenizer, prompt)
+            response_text = generate_response(BASE_MODEL, TOKENIZER, prompt)
             sources = []
             used = 'Base'
         else:
@@ -162,6 +160,7 @@ async def chat(
             "model_used": used
         }
     except Exception as e:
+        print(f"Error durante el procesamiento: {str(e)}")
         return {"response": "❌ Ocurrió un error al procesar tu solicitud."}
 
 
