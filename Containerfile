@@ -10,17 +10,13 @@ ENV HF_HUB_DISABLE_SYMLINKS_WARNING=1
 # Directorio de trabajo
 WORKDIR /app
 
-# Instalar Python 3.12 y pip
-RUN apt-get update && apt-get install -y \
-    python3.12 \
-    python3-pip
-
-# Instalar dependencias del sistema para sentencepiece
-RUN apt-get update && apt-get install -y \
-    pkg-config \
-    cmake \
-    build-essential\
-    libgl1
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      python3 \
+      python3-pip \
+      pkg-config \
+      cmake \
+      build-essential \
+      libgl1
 
 # Copiar archivos necesarios
 COPY app.py /app/app.py
@@ -31,11 +27,11 @@ COPY templates/index.html /app/templates/index.html
 COPY static/styles.css /app/static/styles.css
 COPY requirements.txt /app/requirements.txt
 
-# Instalar PyTorch con soporte CUDA 12.4
-RUN pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+RUN pip3 install --no-cache-dir \
+      torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
 # Instalar dependencias de Python
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+RUN pip3 install --no-cache-dir --upgrade -r /app/requirements.txt
 
 # Comando por defecto
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5001"]
