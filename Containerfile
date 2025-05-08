@@ -11,7 +11,7 @@ ENV HF_HUB_DISABLE_SYMLINKS_WARNING=1
 WORKDIR /app
 
 # Instalar Python 3.12 y pip
-RUN apt update && apt install -y \
+RUN apt-get update && apt-get install -y \
     python3.12 \
     python3-pip
 
