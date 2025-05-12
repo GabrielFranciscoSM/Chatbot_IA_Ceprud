@@ -113,16 +113,16 @@ def query_rag(query_text: str,
               use_finetuned: bool = False,
               history: list[tuple[str, str]] = None) -> dict:
     """
-    Realiza búsqueda RAG y genera la respuesta con o sin LoRA.
+    Realiza búsqueda RAG y genera una respuesta.
     """
-    # Normalizar texto
+    # Normalizar texto UTF-8
     query_text = query_text.encode("utf-8", errors="ignore").decode("utf-8")
-    # Recuperar documentos
+
     try:
         db = Chroma(persist_directory=chroma_path, embedding_function=EMBEDDING_FUNCTION)
         docs_and_scores = db.similarity_search_with_score(query_text, k=5)
     except Exception as e:
-        return {"response": f"❌ Error RAG: {e}", "sources": []}
+        return {"response": f"❌ Error al acceder a ChromaDB: {str(e)}", "sources": []}
 
     if not docs_and_scores:
         return {"response": "No hay documentos relevantes.", "sources": []}
@@ -134,13 +134,12 @@ def query_rag(query_text: str,
     # Seleccionar modelo
     model_desc = "RAG base"
     if use_finetuned and subject:
-        BASE = load_finetuned_model(subject)
-        model_desc = "RAG+LoRA"
+        model = load_finetuned_model(subject)
+        model_desc = "RAG + LoRA"
     else:
-        BASE = BASE_MODEL
+        model = BASE_MODEL
 
-    # Generar respuesta
-    response = generate_response(prompt)
+    response = generate_response(prompt, model=model, tokenizer=TOKENIZER)
     sources = [d.metadata.get("id", "N/A") for d in docs]
 
     return {"response": response, "sources": sources, "model_used": model_desc}

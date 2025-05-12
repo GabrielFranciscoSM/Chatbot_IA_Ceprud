@@ -1,5 +1,6 @@
 # api.py (servIA)
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, HTTPException
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from query_logic import (
     initialize_models,
@@ -14,7 +15,7 @@ from typing import Dict, List, Tuple
 app = FastAPI()
 
 # Configuración CORS para permitir llamadas desde servWEB
-origins = ["http://<IP_servWEB>:puerto"]
+origins = ["http://<IP_servWEB>:8080"]  # Asegúrate de cambiar <IP_servWEB> por la IP real
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -23,92 +24,142 @@ app.add_middleware(
 )
 
 # Estructura para almacenar el historial de usuarios
-user_data: Dict[str, Dict[str, object]] = {}
-
-# Inicialización de modelos
-@app.on_event("startup")
-async def on_startup():
-    initialize_models()
+user_data: Dict[str, Dict] = {}
 
 def log_user_message(email: str, message: str, subject: str, response: str, sources: List[str]):
     """
-    Guarda los mensajes del usuario y las respuestas en un archivo CSV para auditoría.
+    Guarda cada interacción del usuario en un archivo CSV para auditoría.
     """
-    os.makedirs("logs", exist_ok=True)
-    path = os.path.join("logs", "chat_logs.csv")
+    log_dir = "logs"
+    os.makedirs(log_dir, exist_ok=True)
+    log_path = os.path.join(log_dir, "chat_logs.csv")
+    
     now = datetime.now()
-    row = [email, message, now.strftime("%H:%M:%S"), now.strftime("%Y-%m-%d"), subject, ",".join(sources) or "N/A"]
-    header = []
-    if not os.path.exists(path):
-        header = [["user", "message", "time", "date", "subject", "sources"]]
-    with open(path, "a", newline="", encoding="utf-8") as f:
+    row = [
+        email,
+        message,
+        now.strftime("%H:%M:%S"),
+        now.strftime("%Y-%m-%d"),
+        subject,
+        ",".join(sources) if sources else "N/A"
+    ]
+    
+    file_exists = os.path.isfile(log_path)
+    
+    with open(log_path, mode="a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        for h in header:
-            writer.writerow(h)
+        if not file_exists:
+            writer.writerow(["user", "message", "time", "date", "subject", "sources"])
         writer.writerow(row)
 
 def get_user_session(email: str, subject: str) -> List[Tuple[str, str]]:
     """
-    Devuelve el historial de usuario. Si cambia la asignatura, se reinicia el historial.
+    Devuelve el historial del usuario para una asignatura específica.
+    Si cambia de asignatura, reinicia el historial.
     """
-    data = user_data.get(email)
-    if not data or data.get("subject") != subject:
-        # Nueva sesión o asignatura diferente: reiniciar
+    if email not in user_data:
         user_data[email] = {"subject": subject, "history": []}
+    elif user_data[email]["subject"].lower() != subject.lower():
+        # Reiniciar historial si cambia la asignatura
+        user_data[email] = {"subject": subject, "history": []}
+    
     return user_data[email]["history"]
 
 def update_user_history(email: str, question: str, answer: str):
     """
-    Actualiza el historial del usuario.
+    Agrega una nueva entrada al historial del usuario.
+    Límite de historial: 5 interacciones máximas.
     """
     hist: List[Tuple[str, str]] = user_data[email]["history"]
     hist.append((question, answer))
-    if len(hist) > 7:  # Mantener un máximo de 7 interacciones
+    if len(hist) > 5:
         hist.pop(0)
 
-@app.post("/chat", response_model=dict)
-async def chat(
+@app.on_event("startup")
+async def on_startup():
+    """
+    Carga modelos y funciones al iniciar el servidor.
+    """
+    print("🚀 Iniciando servidor de IA...")
+    try:
+        initialize_models()
+        print("✅ Modelos cargados correctamente.")
+    except Exception as e:
+        print(f"❌ Error al cargar los modelos: {str(e)}")
+        raise RuntimeError("No se pudieron cargar los modelos.")
+
+@app.post("/chat", response_class=JSONResponse)
+async def chat_endpoint(
     message: str = Form(...),
     subject: str = Form("default"),
     email: str = Form("anonimo"),
-    mode: str = Form("rag"),
+    mode: str = Form("rag")
 ):
     """
-    Endpoint para procesar consultas del chatbot.
+    Endpoint principal del chatbot.
+    Recibe consultas y devuelve respuesta usando RAG, base model o fine-tuned.
     """
-    if not message.strip():
-        return {"response": "❌ Por favor, escribe una pregunta."}
+    # Normalizar mensaje
+    user_message = message.strip()
+    selected_subject = subject.lower()
+    selected_mode = mode.lower()
 
-    # Obtener el historial del usuario
-    history = get_user_session(email, subject.lower())
+    if not user_message:
+        return JSONResponse(content={"response": "❌ Por favor, escribe una pregunta."}, status_code=400)
 
-    # Determinar el modo de respuesta
-    if mode in ["rag", "rag_lora"]:
-        result = query_rag(
-            message,
-            chroma_path=f"./chroma/{subject.lower()}",
-            use_finetuned=(mode == "rag_lora"),
-            history=history,
+    # Obtener historial del usuario
+    history = get_user_session(email, selected_subject)
+
+    # Determinar qué función usar según el modo
+    try:
+        if selected_mode == "base":
+            result = get_base_model_response(user_message, history=history)
+        elif selected_mode in ["rag", "rag_lora"]:
+            chroma_path = os.path.join(".", "chroma", selected_subject)
+            if not os.path.exists(chroma_path):
+                return JSONResponse(
+                    content={"response": f"❌ No hay datos disponibles para '{selected_subject}'."},
+                    status_code=404
+                )
+            result = query_rag(
+                user_message,
+                chroma_path=chroma_path,
+                use_finetuned=(selected_mode == "rag_lora"),
+                history=history
+            )
+        else:
+            return JSONResponse(
+                content={"response": f"❌ Modo no válido: '{mode}'"},
+                status_code=400
+            )
+
+        # Procesar resultado
+        clean_response = result["response"].replace("🤖: ", "")
+        update_user_history(email, user_message, clean_response)
+        log_user_message(email, user_message, selected_subject, result["response"], result.get("sources", []))
+
+        return JSONResponse(content={
+            "response": f"🤖: {clean_response}",
+            "sources": result.get("sources", []),
+            "model_used": result.get("model_used", selected_mode)
+        })
+
+    except Exception as e:
+        print(f"⚠️ Error al procesar la solicitud: {str(e)}")
+        return JSONResponse(
+            content={"response": "❌ Ocurrió un error al procesar tu solicitud."},
+            status_code=500
         )
-    elif mode == "base":
-        result = get_base_model_response(message, history=history)
-    else:
-        return {"response": "❌ Modo no válido."}
 
-    # Procesar la respuesta
-    resp: str = result['response']
-    sources: List[str] = result.get('sources', [])
-    used: str = result.get('model_used', '')
-
-    clean = resp.replace('🤖: ', '')
-    update_user_history(email, message, clean)
-    log_user_message(email, message, subject.lower(), resp, sources)
-
-    return {
-        "response": f"🤖: {resp}",
-        "sources": sources,
-        "model_used": used,
-    }
+@app.get("/graphs/{filename}")
+async def serve_graph(filename: str):
+    """
+    Sirve gráficas generadas desde el directorio local.
+    """
+    graph_path = os.path.join(".", "graphs", filename)
+    if not os.path.exists(graph_path):
+        raise HTTPException(status_code=404, detail="Archivo no encontrado.")
+    return FileResponse(graph_path)
 
 if __name__ == "__main__":
     import uvicorn
