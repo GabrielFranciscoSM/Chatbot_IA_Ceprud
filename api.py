@@ -138,7 +138,7 @@ async def chat_endpoint(
         update_user_history(email, user_message, clean_response)
         log_user_message(email, user_message, selected_subject, result["response"], result.get("sources", []))
 
-        print(f"💬 Mensaje: {user_message}", "Source:", result.get("sources", []), "Modelo:", result.get("model_used", selected_mode))
+        print(f"💬 Respuesta: {clean_response}", "Modelo:", result.get("model_used", selected_mode))
         if not clean_response:
             return JSONResponse(content={"response": "❌ No se encontró respuesta."}, status_code=404)
 
