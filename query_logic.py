@@ -9,8 +9,9 @@ from peft import PeftModel
 # =====================================
 # ============ CONFIGURACIÓN ==========
 # =====================================
-MODEL_DIR = "/home/iacepruduser/models/deepseek-ai/deepseek-llm-7b-chat"
-MODEL_NAME = "deepseek-llm-7b-chat"
+# Ruta al modelo base
+MODEL_DIR = "/home/iacepruduser/models/deepseek-llm-7b-chat"
+MODEL_NAME = "deepseek-ai/deepseek-llm-7b-chat"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Cargar modelos UNA VEZ al iniciar la aplicación
@@ -29,12 +30,14 @@ def initialize_models():
         print("🌟 Cargando modelo base desde disco…")
         # Cargar tokenizer y modelo en modo offline
         TOKENIZER = AutoTokenizer.from_pretrained(
-            MODEL_DIR,
+            MODEL_NAME,
+            cache_dir=MODEL_DIR,
             local_files_only=True,
             trust_remote_code=True
         )
         BASE_MODEL = AutoModelForCausalLM.from_pretrained(
-            MODEL_DIR,
+            MODEL_NAME,
+            cache_dir=MODEL_DIR,
             local_files_only=True,
             torch_dtype=torch.float16,
             trust_remote_code=True
