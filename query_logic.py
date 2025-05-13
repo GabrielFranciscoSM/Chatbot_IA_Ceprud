@@ -30,18 +30,17 @@ def initialize_models():
         print("🌟 Cargando modelo base desde disco…")
         # Cargar tokenizer y modelo en modo offline
         TOKENIZER = AutoTokenizer.from_pretrained(
-            MODEL_NAME,
-            cache_dir=MODEL_DIR,
+            MODEL_DIR,
             local_files_only=True,
             trust_remote_code=True
         )
         BASE_MODEL = AutoModelForCausalLM.from_pretrained(
-            MODEL_NAME,
-            cache_dir=MODEL_DIR,
+            MODEL_DIR,
             local_files_only=True,
             torch_dtype=torch.float16,
             trust_remote_code=True
         ).to(DEVICE)
+
 
     if EMBEDDING_FUNCTION is None:
         print("🌟 Cargando función de embeddings…")
