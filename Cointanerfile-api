@@ -1,0 +1,40 @@
+# Usar imagen con soporte CUDA y Python
+FROM nvidia/cuda:12.4.0-runtime-ubuntu22.04
+
+# Exponer puerto de la API
+EXPOSE 5001
+
+# Evitar warnings de HF
+ENV HF_HUB_DISABLE_SYMLINKS_WARNING=1
+
+# Directorio de trabajo
+WORKDIR /app
+
+# Instalar dependencias del SO
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      python3 python3-pip pkg-config cmake build-essential libgl1 \
+ && rm -rf /var/lib/apt/lists/*
+
+# Copiar requirements
+COPY requirements.txt .
+
+# Instalar PyTorch con CUDA
+RUN pip3 install --no-cache-dir \
+      torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+# Instalar resto de dependencias Python
+RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
+
+# Copiar código de la API
+COPY api.py query_logic.py get_embedding_function.py populate_database.py /app/
+COPY chroma/       /app/chroma/
+COPY models/       /app/models/
+COPY graphs/       /app/graphs/
+COPY data/         /app/data/
+COPY logs/         /app/logs/
+COPY templates/    /app/templates/
+COPY static/       /app/static/
+
+# Comando por defecto (arranca uvicorn apuntando a api.py)
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "5001"]
