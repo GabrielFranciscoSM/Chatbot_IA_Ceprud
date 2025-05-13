@@ -28,13 +28,6 @@ RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
 
 # Copiar código de la API
 COPY api.py query_logic.py get_embedding_function.py populate_database.py /app/
-COPY chroma/       /app/chroma/
-COPY models/       /app/models/
-COPY graphs/       /app/graphs/
-COPY data/         /app/data/
-COPY logs/         /app/logs/
-COPY templates/    /app/templates/
-COPY static/       /app/static/
 
 # Comando por defecto (arranca uvicorn apuntando a api.py)
 CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "5001"]
