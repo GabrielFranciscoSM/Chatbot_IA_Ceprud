@@ -9,8 +9,8 @@ from peft import PeftModel
 # =====================================
 # ============ CONFIGURACIÓN ==========
 # =====================================
-MODEL_DIR = os.path.join(os.path.dirname(__file__), "models", "deepseek-ai", "deepseek-llm-7b-chat")
-MODEL_NAME = "deepseek-ai/deepseek-llm-7b-chat"
+MODEL_DIR = "/home/iacepruduser/models/deepseek-ai/deepseek-llm-7b-chat"
+MODEL_NAME = "deepseek-llm-7b-chat"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Cargar modelos UNA VEZ al iniciar la aplicación
