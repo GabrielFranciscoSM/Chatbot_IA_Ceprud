@@ -97,7 +97,7 @@ def build_prompt_with_history(user_message: str,
     Construye el prompt que incluye contexto y/o historial.
     """
     parts = [
-        "RESPONDE A LAS SIGUIENTES PREGUNTAS CON EL CONTEXTO PROPORCIONADO, ER﻿ES UN BOT DE LA UGR EXPERTO EN LA MATERIA:\n"
+        "RESPONDE A LAS SIGUIENTES PREGUNTAS CON EL CONTEXTO PROPORCIONADO, ERES UN BOT DE LA UGR EXPERTO EN LA MATERIA:\n"
     ]
     if context_text:
         parts.append(context_text + "\n\n")

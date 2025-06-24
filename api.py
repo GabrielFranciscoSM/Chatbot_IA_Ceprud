@@ -15,7 +15,7 @@ from typing import Dict, List, Tuple
 app = FastAPI()
 
 # Configuración CORS para permitir llamadas desde servWEB
-origins = ["http://<IP_servWEB>:8080"]  # Asegúrate de cambiar <IP_servWEB> por la IP real
+origins = ["http://<IP_servWEB>:8080"]  
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
