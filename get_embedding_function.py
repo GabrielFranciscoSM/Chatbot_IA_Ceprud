@@ -1,10 +1,10 @@
 # get_embedding_function.py
-from langchain_huggingface import HuggingFaceEmbeddings
+# from langchain_huggingface import HuggingFaceEmbeddings
 import os
-import torch
+# import torch
 
 # Dispositivo: 'cuda' si hay GPU, sino 'cpu'
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+# DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 def get_embedding_function():
     """
@@ -15,9 +15,9 @@ def get_embedding_function():
     # Asumimos que los modelos están en la carpeta "models/BAAI/bge-m3"
     cache_dir = os.path.join(os.path.dirname(__file__), "models")
 
-    return HuggingFaceEmbeddings(
-        model_name=repo_id,
-        cache_folder=cache_dir,
-        model_kwargs={"device": DEVICE},
-        encode_kwargs={"normalize_embeddings": True}
-    )
+    # return HuggingFaceEmbeddings(
+    #     model_name=repo_id,
+    #     cache_folder=cache_dir,
+    #     model_kwargs={"device": DEVICE},
+    #     encode_kwargs={"normalize_embeddings": True}
+    # )

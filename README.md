@@ -40,6 +40,22 @@ Un chatbot basado en Inteligencia Artificial diseñado para CEPRUD (Centro de Pr
 
 ---
 
+## Uso con Docker
+
+1. Descarga el modelo (1):
+   ```
+    python3 download_model.py
+
+   ```
+2. Ejecuta el docker compose
+  ```
+  
+  docker-compose -f docker-compose.yml up --build
+  
+  ```
+
+---
+
 ## 🚀 Uso
 - **Fine-tuning con QLoRA**:  
   Ejemplo:

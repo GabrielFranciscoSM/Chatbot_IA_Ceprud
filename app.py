@@ -9,9 +9,8 @@ from fastapi.templating import Jinja2Templates
 from typing import Dict, List, Tuple
 
 from query_logic import (
-    initialize_models,
-    BASE_MODEL,
-    TOKENIZER,
+    # BASE_MODEL,
+    # TOKENIZER,
     EMBEDDING_FUNCTION,
     query_rag,
     get_base_model_response,
@@ -44,9 +43,6 @@ user_data: Dict[str, Dict[str, object]] = {}
 
 # Inicialización de modelos en arranque
 declare_user_data = None
-@app.on_event("startup")
-async def on_startup():
-    initialize_models()
 
 
 def log_user_message(email: str, message: str, subject: str, response: str, sources: List[str]):

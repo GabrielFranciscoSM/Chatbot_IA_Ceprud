@@ -1,93 +1,77 @@
 import os
 import re
-import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
+# import torch
+# from transformers import AutoTokenizer, AutoModelForCausalLM
 from langchain_chroma import Chroma
 from get_embedding_function import get_embedding_function
 from peft import PeftModel
+import requests
 
 # =====================================
 # ============ CONFIGURACIÓN ==========
 # =====================================
 # Ruta al modelo base
-MODEL_DIR = "/home/iacepruduser/models/deepseek-llm-7b-chat"
-MODEL_NAME = "deepseek-ai/deepseek-llm-7b-chat"
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+VLLM_URL = "http://vllm-openai:8000/v1/chat/completions" 
+VLLM_MODEL_NAME = "/models/TinyLlama--TinyLlama-1.1B-Chat-v1.0"  # O el nombre servido
+
+# MODEL_DIR = "/home/iacepruduser/models/deepseek-llm-7b-chat"
+# MODEL_NAME = "deepseek-ai/deepseek-llm-7b-chat"
+# DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Cargar modelos UNA VEZ al iniciar la aplicación
-BASE_MODEL: AutoModelForCausalLM = None
-TOKENIZER: AutoTokenizer = None
+# BASE_MODEL: AutoModelForCausalLM = None
+# TOKENIZER: AutoTokenizer = None
 EMBEDDING_FUNCTION = None
 
-
-def initialize_models():
-    """
-    Inicializa el tokenizer, el modelo base y la función de embeddings.
-    """
-    global BASE_MODEL, TOKENIZER, EMBEDDING_FUNCTION
-
-    if TOKENIZER is None or BASE_MODEL is None:
-        print("🌟 Cargando modelo base desde disco…")
-        # Cargar tokenizer y modelo en modo offline
-        TOKENIZER = AutoTokenizer.from_pretrained(
-            MODEL_DIR,
-            local_files_only=True,
-            trust_remote_code=True
-        )
-        BASE_MODEL = AutoModelForCausalLM.from_pretrained(
-            MODEL_DIR,
-            local_files_only=True,
-            torch_dtype=torch.float16,
-            trust_remote_code=True
-        ).to(DEVICE)
-
-
-    if EMBEDDING_FUNCTION is None:
-        print("🌟 Cargando función de embeddings…")
-        EMBEDDING_FUNCTION = get_embedding_function()
-
-
-def load_finetuned_model(subject: str) -> AutoModelForCausalLM:
-    """
-    Carga y aplica un adaptador LoRA si existe, o retorna el modelo base.
-    """
-    adapter_dir = os.path.join(os.path.dirname(__file__), "models", f"{subject}-deepseek-qlora")
-    if os.path.isdir(adapter_dir):
-        print(f"🌟 Usando modelo fine-tuneado para '{subject}'")
-        model = PeftModel.from_pretrained(BASE_MODEL, adapter_dir)
-        return model.merge_and_unload().eval()
-    print(f"⚠️ No se encontró adaptador para '{subject}', usando modelo base")
-    return BASE_MODEL
+# def load_finetuned_model(subject: str) -> AutoModelForCausalLM:
+#     """
+#     Carga y aplica un adaptador LoRA si existe, o retorna el modelo base.
+#     """
+#     adapter_dir = os.path.join(os.path.dirname(__file__), "models", f"{subject}-deepseek-qlora")
+#     if os.path.isdir(adapter_dir):
+#         print(f"🌟 Usando modelo fine-tuneado para '{subject}'")
+#         model = PeftModel.from_pretrained(BASE_MODEL, adapter_dir)
+#         return model.merge_and_unload().eval()
+#     print(f"⚠️ No se encontró adaptador para '{subject}', usando modelo base")
+#     return BASE_MODEL
 
 
 def generate_response(
     prompt: str,
-    model: AutoModelForCausalLM = None,
-    tokenizer: AutoTokenizer = None,
-    max_new_tokens: int = 2048
+    max_new_tokens: int = 1000 #Hay que revisar esto y echarle un ojo
 ) -> str:
     """
     Genera una respuesta usando el modelo y tokenizer indicados (o los globales).
     """
-    model = model or BASE_MODEL
-    tokenizer = tokenizer or TOKENIZER
-    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=4096).to(DEVICE)
-    with torch.no_grad():
-        outputs = model.generate(
-            **inputs,
-            max_new_tokens=max_new_tokens,
-            temperature=0.6,
-            top_p=0.95,
-            pad_token_id=tokenizer.eos_token_id,
-            num_beams=5,
-            early_stopping=True
-        )
-    text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    # Extraer texto después de ### RESPUESTA:
-    match = re.search(r"### RESPUESTA:\s*(.*)", text, re.DOTALL)
-    if match:
-        return match.group(1).strip()
-    return text.replace(prompt, "").strip()
+    
+    payload = {
+        "model": VLLM_MODEL_NAME,
+        "messages": [
+            {"role": "user", "content": prompt}
+        ],
+        "max_tokens": max_new_tokens,
+        "temperature": 0.7
+    }
+
+    try:
+        response = requests.post(VLLM_URL, json=payload)
+        response.raise_for_status()
+
+        data = response.json()
+        text = data["choices"][0]["message"]["content"]
+    
+
+
+        match = re.search(r"### RESPUESTA:\s*(.*)", text, re.DOTALL)
+
+
+        if match:
+            return match.group(1).strip()
+
+        return text.replace(prompt, "").strip()
+    except requests.exceptions.RequestException as e:
+        print(f"❌ Error al generar respuesta: {str(e)}")
+        return
 
 
 def build_prompt_with_history(user_message: str,
@@ -134,17 +118,18 @@ def query_rag(query_text: str,
     prompt = build_prompt_with_history(query_text, history, context)
 
     # Seleccionar modelo
-    model_desc = "RAG base"
-    if use_finetuned and subject:
-        model = load_finetuned_model(subject)
-        model_desc = "RAG + LoRA"
-    else:
-        model = BASE_MODEL
+    # model_desc = "RAG base"
+    # if use_finetuned and subject:
+    #     model = load_finetuned_model(subject)
+    #     model_desc = "RAG + LoRA"
+    # else:
+    #     model = BASE_MODEL
 
-    response = generate_response(prompt, model=model, tokenizer=TOKENIZER)
+    # response = generate_response(prompt, model=model, tokenizer=TOKENIZER)
     sources = [d.metadata.get("id", "N/A") for d in docs]
 
-    return {"response": response, "sources": sources, "model_used": model_desc}
+    # return {"response": response, "sources": sources, "model_used": model_desc}
+    return {"response": generate_response(prompt), "sources": sources, "model_used": "RAG"}
 
 
 def get_base_model_response(query_text: str,
@@ -156,9 +141,6 @@ def get_base_model_response(query_text: str,
     prompt = build_prompt_with_history(normalized, history)
     resp = generate_response(prompt)
     return {"response": resp, "sources": [], "model_used": "base"}
-
-# Inicializar todo al importar
-initialize_models()
 
 # Ejemplo de uso
 if __name__ == "__main__":

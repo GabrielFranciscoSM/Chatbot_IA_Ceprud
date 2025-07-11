@@ -1,0 +1,67 @@
+services:
+    vllm-openai:
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          device_ids: ['0']
+                          capabilities:
+                              - gpu
+        volumes:
+            - ./models:/models
+        environment:
+            HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
+        ports:
+            - 8000:8000
+        ipc: host
+        image: vllm/vllm-openai:latest
+        command: --model /models/TinyLlama--TinyLlama-1.1B-Chat-v1.0 --max-num-seqs 8 --gpu-memory-utilization 0.7
+    vllm-openai-embeddings:
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          device_ids: ['0']
+                          capabilities:
+                              - gpu
+        volumes:
+            - ./models:/models
+        environment:
+            HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
+        ports:
+            - 8001:8001
+        ipc: host
+        image: vllm/vllm-openai:latest
+        command: --model /models/BAAI--bge-m3 --port 8001 --max-num-seqs 8 --gpu-memory-utilization 0.2
+    chatbot:
+        build:
+            context: .
+            dockerfile: Containerfile
+        ports:
+            - 5001:5001
+        environment:
+            HF_HUB_DISABLE_SYMLINKS_WARNING: 1
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          device_ids: ['0']
+                          capabilities:
+                            - gpu
+        volumes:
+        - ./models:/app/models
+        - ./data:/app/data
+        - ./logs:/app/logs
+        - ./graphs:/app/graphs
+        - ./chroma:/app/chroma
+        - ./static:/app/static
+        - ./templates:/app/templates
+
+        restart: unless-stopped
+
+        depends_on:
+            - vllm-openai
+            - vllm-openai-embeddings
