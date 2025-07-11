@@ -43,15 +43,11 @@ services:
             - 5001:5001
         environment:
             HF_HUB_DISABLE_SYMLINKS_WARNING: 1
-        deploy:
-            resources:
-                reservations:
-                    devices:
-                        - driver: nvidia
-                          device_ids: ['0']
-                          capabilities:
-                            - gpu
         volumes:
+        - ./app.py:/app/app.py
+        - ./query_logic.py:/app/query_logic.py
+        - ./get_embedding_function.py:/app/get_embedding_function.py
+        - ./populate_database.py:/app/populate_database.py
         - ./models:/app/models
         - ./data:/app/data
         - ./logs:/app/logs

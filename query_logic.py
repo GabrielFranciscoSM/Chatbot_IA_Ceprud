@@ -1,10 +1,7 @@
 import os
 import re
-# import torch
-# from transformers import AutoTokenizer, AutoModelForCausalLM
 from langchain_chroma import Chroma
 from get_embedding_function import get_embedding_function
-from peft import PeftModel
 import requests
 
 # =====================================
@@ -14,13 +11,6 @@ import requests
 VLLM_URL = "http://vllm-openai:8000/v1/chat/completions" 
 VLLM_MODEL_NAME = "/models/TinyLlama--TinyLlama-1.1B-Chat-v1.0"  # O el nombre servido
 
-# MODEL_DIR = "/home/iacepruduser/models/deepseek-llm-7b-chat"
-# MODEL_NAME = "deepseek-ai/deepseek-llm-7b-chat"
-# DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-
-# Cargar modelos UNA VEZ al iniciar la aplicación
-# BASE_MODEL: AutoModelForCausalLM = None
-# TOKENIZER: AutoTokenizer = None
 EMBEDDING_FUNCTION = None
 
 # def load_finetuned_model(subject: str) -> AutoModelForCausalLM:
