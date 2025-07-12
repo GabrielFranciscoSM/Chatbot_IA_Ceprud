@@ -52,6 +52,9 @@ services:
         - ./data:/app/data
         - ./logs:/app/logs
         - ./graphs:/app/graphs
+        # - type: bind
+        #   source: ./chroma
+        #   target: /app/chroma
         - ./chroma:/app/chroma
         - ./static:/app/static
         - ./templates:/app/templates

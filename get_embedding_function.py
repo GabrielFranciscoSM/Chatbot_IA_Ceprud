@@ -1,23 +1,17 @@
 # get_embedding_function.py
-# from langchain_huggingface import HuggingFaceEmbeddings
 import os
-# import torch
+from langchain_openai import OpenAIEmbeddings
 
-# Dispositivo: 'cuda' si hay GPU, sino 'cpu'
-# DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+VLLM_URL = "http://vllm-openai-embeddings:8001/v1"  # URL del servicio de embeddings
+VLLM_MODEL_NAME = "/models/BAAI--bge-m3"  # Nombre del modelo de embeddings
 
 def get_embedding_function():
     """
     Carga la función de embeddings de Hugging Face en modo offline si los pesos
     ya están presentes en cache_folder.
     """
-    repo_id = "BAAI/bge-m3"
-    # Asumimos que los modelos están en la carpeta "models/BAAI/bge-m3"
-    cache_dir = os.path.join(os.path.dirname(__file__), "models")
-
-    # return HuggingFaceEmbeddings(
-    #     model_name=repo_id,
-    #     cache_folder=cache_dir,
-    #     model_kwargs={"device": DEVICE},
-    #     encode_kwargs={"normalize_embeddings": True}
-    # )
+    return OpenAIEmbeddings(
+        model=VLLM_MODEL_NAME,
+        openai_api_base=VLLM_URL,
+        openai_api_key="NOT_USED"
+    )

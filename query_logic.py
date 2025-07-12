@@ -95,7 +95,7 @@ def query_rag(query_text: str,
     query_text = query_text.encode("utf-8", errors="ignore").decode("utf-8")
 
     try:
-        db = Chroma(persist_directory=chroma_path, embedding_function=EMBEDDING_FUNCTION)
+        db = Chroma(persist_directory=chroma_path, embedding_function=get_embedding_function())
         docs_and_scores = db.similarity_search_with_score(query_text, k=5)
     except Exception as e:
         return {"response": f"❌ Error al acceder a ChromaDB: {str(e)}", "sources": []}
