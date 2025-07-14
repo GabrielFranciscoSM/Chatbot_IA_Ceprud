@@ -18,7 +18,7 @@ Un chatbot basado en Inteligencia Artificial diseñado para CEPRUD (Centro de Pr
 ## 🧰 Requisitos
 
 - Python ≥ 3.10  
-- Podman 
+- Docker y Docker compose
 - Las dependencias están listadas en `requirements.txt`
 
 ---
@@ -30,46 +30,34 @@ Un chatbot basado en Inteligencia Artificial diseñado para CEPRUD (Centro de Pr
    git clone https://github.com/javitrucas/Chatbot_IA_Ceprud.git
    cd Chatbot_IA_Ceprud
    ```
-
-2. Crea entorno virtual e instala dependencias:
-   ```
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
----
-
-## Uso con Docker
-
-1. Descarga el modelo (1):
+2. Descarga el modelo (1) y (4):
    ```
     python3 download_model.py
-
    ```
-2. Ejecuta el docker compose
+3. Ejecuta el docker compose
   ```
-  
-  docker-compose -f docker-compose.yml up --build
-  
+  docker-compose -f docker-compose-vllm.yml up --build
   ```
 
 ---
 
-## 🚀 Uso
+## 🚀 Set Up de Fine-Tuning y QLoRA:
+- **Añadir asignatura** (Evitar carácteres extraños) :
+  ```
+  python add_subject.py
+  ```
 - **Fine-tuning con QLoRA**:  
-  Ejemplo:
-  ```
-  python finetuning_qlora.py \
-    --base_model model-name \
-    --data data/dataset.json \
-    --output_dir models/fine_tuned
-  ```
-
-- **Generación de embeddings**:
-  ```
-  python get_embedding_function.py
-  ```
+  1. Generar datos para una asignatura:
+    ```
+    generate_data.py
+    ```
+  2. Entrenar el modelo:
+    ```
+    python finetuning_qlora.py \
+      --base_model model-name \
+      --data data/dataset.json \
+      --output_dir models/fine_tuned
+    ```
 
 - **Población de base de datos (RAG)**:
   ```
@@ -78,7 +66,22 @@ Un chatbot basado en Inteligencia Artificial diseñado para CEPRUD (Centro de Pr
 
 ---
 
+## Visualización de métricas:
+
+1. **Desplegar contenedores**:
+  ```
+  docker-compose -f docker-compose-prometehus-graphana.yml up -d
+  ```
+2. **Abrir Grafana**:
+  Abrir en el buscador http://localhost:3000/
+3. **Configurar DataSource**:
+  Abrir http://localhost:3000/connections/datasources/new y elegir Prometheus con http://prometheus:9090
+4. **Importar Dashboard**
+  Abrir http://localhost:3000/dashboard/import y copiar el contenido de grafana.json
+---
+
 ## 📫 Contacto
 
 Desarrollado por Javier Trujillo Castro. Si tienes alguna duda o sugerencia contáctame vía GitHub.
+Visualización de métricas e implementación de vLLM por Gabriel Sánchez Muñoz.
 
