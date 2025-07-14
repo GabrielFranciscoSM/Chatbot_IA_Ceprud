@@ -11,6 +11,7 @@ RECOMMENDED_MODELS = [
     "mistralai/Mistral-7B-v0.1",
     "deepseek-ai/deepseek-llm-7b-chat",
     "BAAI/bge-m3",
+    "TheBloke/TinyLlama-1.1B-Chat-v1.0-AWQ",
 ]
 
 def download_model(model_name, target_dir):

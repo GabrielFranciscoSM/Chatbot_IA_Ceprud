@@ -5,9 +5,12 @@ from datasets import load_dataset
 import torch
 from transformers import BitsAndBytesConfig
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Autenticación en Hugging Face
-HF_TOKEN = "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"  # Reemplaza con tu token
+HF_TOKEN = os.getenv("HF_TOKEN")  # Reemplaza con tu token
 login(token=HF_TOKEN)
 
 def fine_tune_deepseek(subject):

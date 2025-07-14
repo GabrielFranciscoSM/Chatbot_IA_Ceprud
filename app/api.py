@@ -2,7 +2,7 @@
 from fastapi import FastAPI, Form, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from query_logic import (
+from app.logic.query_logic import (
     initialize_models,
     query_rag,
     get_base_model_response,

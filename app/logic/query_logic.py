@@ -1,7 +1,7 @@
 import os
 import re
 from langchain_chroma import Chroma
-from get_embedding_function import get_embedding_function
+from app.RAG.get_embedding_function import get_embedding_function
 import requests
 
 # =====================================
@@ -9,7 +9,8 @@ import requests
 # =====================================
 # Ruta al modelo base
 VLLM_URL = "http://vllm-openai:8000/v1/chat/completions" 
-VLLM_MODEL_NAME = "/models/TinyLlama--TinyLlama-1.1B-Chat-v1.0"  # O el nombre servido
+VLLM_MODEL_NAME = "/models/TheBloke--TinyLlama-1.1B-Chat-v1.0-AWQ"  # O el nombre servido
+VLLM_LORA_NAME = "metaheuristicas"  # Nombre del adaptador LoRA
 
 EMBEDDING_FUNCTION = None
 
@@ -28,14 +29,15 @@ EMBEDDING_FUNCTION = None
 
 def generate_response(
     prompt: str,
-    max_new_tokens: int = 1000 #Hay que revisar esto y echarle un ojo
+    max_new_tokens: int = 1000, #Hay que revisar esto y echarle un ojo
+    model_name: str = VLLM_MODEL_NAME,
 ) -> str:
     """
     Genera una respuesta usando el modelo y tokenizer indicados (o los globales).
     """
     
     payload = {
-        "model": VLLM_MODEL_NAME,
+        "model": model_name,
         "messages": [
             {"role": "user", "content": prompt}
         ],
@@ -43,14 +45,13 @@ def generate_response(
         "temperature": 0.7
     }
 
+    
     try:
         response = requests.post(VLLM_URL, json=payload)
         response.raise_for_status()
 
         data = response.json()
         text = data["choices"][0]["message"]["content"]
-    
-
 
         match = re.search(r"### RESPUESTA:\s*(.*)", text, re.DOTALL)
 
@@ -107,19 +108,19 @@ def query_rag(query_text: str,
     context = "\n\n---\n\n".join(d.page_content for d in docs)
     prompt = build_prompt_with_history(query_text, history, context)
 
-    # Seleccionar modelo
-    # model_desc = "RAG base"
-    # if use_finetuned and subject:
-    #     model = load_finetuned_model(subject)
-    #     model_desc = "RAG + LoRA"
-    # else:
-    #     model = BASE_MODEL
+    #Seleccionar modelo
+    model_desc = "RAG base"
+    if use_finetuned and subject:
+        model = VLLM_LORA_NAME
+        model_desc = "RAG + LoRA"
+    else:
+        model = VLLM_MODEL_NAME
 
     # response = generate_response(prompt, model=model, tokenizer=TOKENIZER)
     sources = [d.metadata.get("id", "N/A") for d in docs]
 
     # return {"response": response, "sources": sources, "model_used": model_desc}
-    return {"response": generate_response(prompt), "sources": sources, "model_used": "RAG"}
+    return {"response": generate_response(prompt,model_name=model), "sources": sources, "model_used": "RAG"}
 
 
 def get_base_model_response(query_text: str,

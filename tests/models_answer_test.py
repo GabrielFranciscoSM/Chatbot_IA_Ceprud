@@ -1,6 +1,6 @@
 import csv
 import os
-from query_logic import query_rag, get_base_model_response  # Importar nueva función
+from ..app.logic.query_logic import query_rag, get_base_model_response  # Importar nueva función
 
 # Configuración
 ANSWERS_DIR = "answers"
@@ -8,7 +8,7 @@ os.makedirs(ANSWERS_DIR, exist_ok=True)
 
 def test_all_models(subject, question):
     # Verificar si existe la base de datos Chroma para la asignatura
-    chroma_path = f"./chroma/{subject}"
+    chroma_path = f"../app/RAG/chroma/{subject}"
     if not os.path.exists(chroma_path):
         print(f"⚠️ Chroma no encontrado para {subject}. Saltando...")
         return

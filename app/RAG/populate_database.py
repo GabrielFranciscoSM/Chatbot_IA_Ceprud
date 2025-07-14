@@ -4,7 +4,7 @@ import shutil
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 from langchain_chroma import Chroma
-from get_embedding_function import get_embedding_function
+from app.RAG.get_embedding_function import get_embedding_function
 import pdfplumber
 
 BASE_CHROMA_PATH = "chroma"

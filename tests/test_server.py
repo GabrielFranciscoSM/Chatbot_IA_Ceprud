@@ -1,8 +1,8 @@
 import os
-from query_logic import query_rag, get_base_model_response
+from ..app.logic.query_logic import query_rag, get_base_model_response
 
 # Configuración inicial
-BASE_CHROMA_PATH = "chroma"
+BASE_CHROMA_PATH = "../app/RAG/chroma"
 AVAILABLE_SUBJECTS = [
     "ingenieria_servidores",
     "calculo",
