@@ -4,7 +4,7 @@ import shutil
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 from langchain_chroma import Chroma
-from get_embedding_function import get_embedding_function
+from app.RAG.get_embedding_function import get_embedding_function
 import pdfplumber
 
 BASE_CHROMA_PATH = "chroma"
@@ -34,7 +34,9 @@ def main():
             print(f"⚠️ No hay documentos válidos para {subject}")
             continue
 
+        print(f"\n📚 Creando Chunks de asignatura: {subject}")
         chunks = split_documents(documents)
+        print(f"\n📚 Añadiendo la asignatura a la base de datos: {subject}")
         add_to_chroma(chunks, chroma_path)
 
 import re
@@ -84,7 +86,9 @@ def clean_text(text):
 def load_documents(data_path):
     valid_documents = []
     for filename in os.listdir(data_path):
+        
         if filename.endswith(".pdf"):
+            print(f"🔍 Procesando archivo: {filename}")
             file_path = os.path.join(data_path, filename)
             try:
                 with pdfplumber.open(file_path) as pdf:

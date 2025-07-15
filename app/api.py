@@ -3,7 +3,6 @@ from fastapi import FastAPI, Form, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from query_logic import (
-    initialize_models,
     query_rag,
     get_base_model_response,
 )
@@ -74,19 +73,6 @@ def update_user_history(email: str, question: str, answer: str):
     hist.append((question, answer))
     if len(hist) > 5:
         hist.pop(0)
-
-@app.on_event("startup")
-async def on_startup():
-    """
-    Carga modelos y funciones al iniciar el servidor.
-    """
-    print("🚀 Iniciando servidor de IA...")
-    try:
-        initialize_models()
-        print("✅ Modelos cargados correctamente.")
-    except Exception as e:
-        print(f"❌ Error al cargar los modelos: {str(e)}")
-        raise RuntimeError("No se pudieron cargar los modelos.")
 
 @app.post("/chat", response_class=JSONResponse)
 async def chat_endpoint(

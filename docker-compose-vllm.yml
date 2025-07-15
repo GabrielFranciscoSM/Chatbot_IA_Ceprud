@@ -1,0 +1,75 @@
+services:
+    vllm-openai:
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          device_ids: ['0']
+                          capabilities:
+                              - gpu
+        volumes:
+            - ./models:/models
+        environment:
+            HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
+        ports:
+            - 8000:8000
+        ipc: host
+        image: vllm/vllm-openai:latest
+        command: [
+            "--model", "/models/TheBloke--TinyLlama-1.1B-Chat-v1.0-AWQ",
+            "--max-num-seqs", "8",
+            #"--max-model-len", "2048",
+            #"--max-batch-size", "8",
+            "--quantization", "awq",                 # <-- ADD: Enable 4-bit quantization
+            "--gpu-memory-utilization", "0.4",
+            "--enable-lora",
+            "--max-loras", "1", # Set to the number of adapters you'll use
+            "--lora-modules", "metaheuristicas=/models/metaheuristicas-TinyLlama-qlora",
+            "--port", "8000",
+            #"--served-model-name", "${MODEL_NAME:-Llama-SEA-LION-v3-8B-IT}",
+            ]             
+    vllm-openai-embeddings:
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          device_ids: ['0']
+                          capabilities:
+                              - gpu
+        volumes:
+            - ./models:/models
+        environment:
+            HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
+        ports:
+            - 8001:8001
+        ipc: host
+        image: vllm/vllm-openai:latest
+        command: --model /models/BAAI--bge-m3 --port 8001 --max-num-seqs 8 --gpu-memory-utilization 0.2
+    chatbot:
+        build:
+            context: .
+            dockerfile: Containerfile
+        ports:
+            - 5001:5001
+        environment:
+            HF_HUB_DISABLE_SYMLINKS_WARNING: 1
+        volumes:
+        - ./app/app.py:/app/app.py
+        - ./app/logic/query_logic.py:/app/query_logic.py
+        - ./app/RAG/get_embedding_function.py:/app/get_embedding_function.py
+        - ./app/RAG/populate_database.py:/app/populate_database.py
+        - ./models:/app/models
+        - ./data:/app/data
+        - ./logs:/app/logs
+        - ./graphs:/app/graphs
+        - ./app/RAG/chroma:/app/chroma
+        - ./static:/app/static
+        - ./templates:/app/templates
+
+        restart: unless-stopped
+
+        depends_on:
+            - vllm-openai
+            - vllm-openai-embeddings

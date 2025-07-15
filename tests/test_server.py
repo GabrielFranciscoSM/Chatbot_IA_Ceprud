@@ -1,8 +1,8 @@
 import os
-from query_logic import query_rag, get_base_model_response
+from ..app.logic.query_logic import query_rag, get_base_model_response
 
 # Configuración inicial
-BASE_CHROMA_PATH = "chroma"
+BASE_CHROMA_PATH = "../app/RAG/chroma"
 AVAILABLE_SUBJECTS = [
     "ingenieria_servidores",
     "calculo",
@@ -28,14 +28,14 @@ def select_subject():
     print("\n=== SELECCIÓN DE ASIGNATURA ===")
     for idx, subject in enumerate(AVAILABLE_SUBJECTS, start=1):
         print(f"{idx}. {subject.replace('_', ' ').title()}")
-    choice = int(input("Selecciona una asignatura (1-7): ").strip())
+    choice = int(input(f"Selecciona una asignatura (1-{len(AVAILABLE_SUBJECTS)}): ").strip())
     if 1 <= choice <= len(AVAILABLE_SUBJECTS):
         return AVAILABLE_SUBJECTS[choice - 1]
     else:
         print("Opción inválida. Seleccionando 'metaheuristicas' por defecto.")
         return "metaheuristicas"
 
-def main():
+def Test_server():
     """Función principal del chatbot."""
     print("=== BIENVENIDO AL CHATBOT UGR ===")
     while True:
@@ -74,7 +74,7 @@ def main():
                 if result.get("sources"):
                     print(f"📚 Fuentes: {', '.join(result['sources'])}")
 
-        elif choice == "3":  # Modo Fine-Tuning
+        elif choice == "3":  # Modo BASE
             print("\n=== MODELOS BASE ACTIVADO ===")
             subject = select_subject()
             while True:
@@ -92,4 +92,4 @@ def main():
             print("❌ Opción inválida. Por favor, selecciona una opción válida.")
 
 if __name__ == "__main__":
-    main()
+    Test_server()
