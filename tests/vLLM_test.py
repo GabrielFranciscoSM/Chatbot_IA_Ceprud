@@ -2,13 +2,18 @@
 
 import requests
 import json
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 
 # Define the base endpoints for your vLLM servers
 ENDPOINT_MODEL_BASE = "http://localhost:8000/v1"
 ENDPOINT_MODEL_EMBEDDINGS = "http://localhost:8001/v1"
 
 # Define the model paths
-PATH_MODEL_BASE = "/models/TinyLlama--TinyLlama-1.1B-Chat-v1.0"
+PATH_MODEL_BASE = os.getenv("MODEL_DIR")
 PATH_MODEL_EMBEDDINGS = "/models/BAAI--bge-m3"
 
 def call_completions(prompt: str = "¿Qué es la inteligencia artificial?"):

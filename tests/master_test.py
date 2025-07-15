@@ -1,13 +1,19 @@
 # test_vllm_endpoints.py
 
 import unittest
+import os
 import json
+import time
+import csv
+import requests
 from vLLM_test import (
     call_completions,
     call_chat_completions,
     call_streaming_completions,
     call_embeddings
 )
+
+BASE_URL = "http://localhost:5001"
 
 class TestVllmEndpoints(unittest.TestCase):
 
@@ -115,6 +121,168 @@ class TestVllmEndpoints(unittest.TestCase):
         self.assertIsInstance(embedding_data["embedding"], list, "Embedding should be a list.")
         self.assertGreater(len(embedding_data["embedding"]), 0, "Embedding vector should not be empty.")
         print("✓ Test for /embeddings passed.")
+    
+
+    #API TESTS
+
+    @classmethod
+    def setUpClass(cls):
+        """
+        Set up the environment for the tests.
+        This method is called once before any tests in the class run.
+        """
+        print("--- Setting up test environment ---")
+        # Create mock directories and files ON THE HOST, which will be mounted into the container.
+        os.makedirs("../app/RAG/chroma/test_subject", exist_ok=True)
+        os.makedirs("../graphs", exist_ok=True)
+        os.makedirs("../logs", exist_ok=True)
+        
+        # Create a dummy graph file for the graph endpoint test
+        with open("../graphs/test_graph.png", "w") as f:
+            f.write("dummy graph content")
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        Clean up created files after all tests are complete.
+        """
+        print("\n--- Tearing down test environment ---")
+        if os.path.exists("../graphs/test_graph.png"):
+            os.remove("../graphs/test_graph.png")
+        if os.path.exists("../logs/chat_logs.csv"):
+            os.remove("../logs/chat_logs.csv")
+
+    def test_01_service_is_alive(self):
+        """
+        Test if the service is reachable. This is a basic health check.
+        """
+        print("\n--- Running test: Service health check ---")
+        try:
+            # We test an endpoint that doesn't exist to confirm the server is running
+            response = requests.get(f"{BASE_URL}/")
+            # A 404 is expected and means the server is up and routing requests
+            self.assertEqual(response.status_code, 404)
+            print("✓ Service is running.")
+        except requests.ConnectionError as e:
+            self.fail(f"Service is not running. Could not connect to {BASE_URL}. Error: {e}")
+
+    def test_02_chat_endpoint_base_mode(self):
+        """
+        Test a successful interaction with the /chat endpoint in 'base' mode.
+        This will make a real call to the vLLM container.
+        """
+        print("\n--- Running test: /chat endpoint (base mode) ---")
+        response = requests.post(
+            f"{BASE_URL}/chat",
+            data={
+                "message": "What is 2+2?",
+                "email": "test@example.com",
+                "mode": "base"
+            }
+        )
+        
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn("response", data)
+        print("✓ Test for /chat endpoint (base mode) passed.")
+    
+    def test_03_chat_with_invalid_mode(self):
+        """
+        Test the /chat endpoint with an unsupported mode.
+        """
+        print("\n--- Running test: Invalid mode ---")
+        response = requests.post(
+            f"{BASE_URL}/chat",
+            data={"message": "Hello", "mode": "invalid_mode"}
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("Modo no válido", response.json()["response"])
+        print("✓ Test for invalid mode passed.")
+
+    def test_04_chat_with_empty_message(self):
+        """
+        Test the /chat endpoint with an empty message.
+        """
+        print("\n--- Running test: Empty message ---")
+        response = requests.post(
+            f"{BASE_URL}/chat",
+            data={"message": " ", "mode": "rag"}
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("Por favor, escribe una pregunta", response.json()["response"])
+        print("✓ Test for empty message passed.")
+
+    def test_05_chat_rag_mode_with_nonexistent_subject(self):
+        """
+        Test the /chat endpoint in 'rag' mode with a subject that has no data.
+        """
+        print("\n--- Running test: RAG with nonexistent subject ---")
+        response = requests.post(
+            f"{BASE_URL}/chat",
+            data={
+                "message": "Inquiry",
+                "subject": "nonexistent_subject",
+                "mode": "rag"
+            }
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertIn("No hay datos disponibles", response.json()["response"])
+        print("✓ Test for RAG with nonexistent subject passed.")
+        
+    def test_06_logging_is_created(self):
+        """
+        Test that user messages are correctly logged by checking the log file.
+        """
+        print("\n--- Running test: Message logging ---")
+        log_file = "../logs/chat_logs.csv"
+        
+        # Ensure log file is clean before this test
+        if os.path.exists(log_file):
+            os.remove(log_file)
+
+        # Make a request that should be logged
+        requests.post(
+            f"{BASE_URL}/chat",
+            data={
+                "message": "Log this message",
+                "subject": "logging_test",
+                "email": "log@test.com",
+                "mode": "base"
+            }
+        )
+        
+        # Check that the log file was created and has the correct content
+        self.assertTrue(os.path.exists(log_file), "Log file was not created.")
+        
+        with open(log_file, mode='r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            header = next(reader)
+            self.assertEqual(header, ["user", "message", "time", "date", "subject", "sources"])
+            log_entry = next(reader)
+            self.assertEqual(log_entry[0], "log@test.com")
+            self.assertEqual(log_entry[1], "Log this message")
+            self.assertEqual(log_entry[4], "logging_test")
+
+        print("✓ Test for message logging passed.")
+
+    def test_07_serve_graph_success(self):
+        """
+        Test successfully serving a graph file.
+        """
+        print("\n--- Running test: Serving graphs (success) ---")
+        response = requests.get(f"{BASE_URL}/graphs/test_graph.png")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.text, "dummy graph content")
+        print("✓ Test for serving graphs (success) passed.")
+
+    def test_08_serve_graph_not_found(self):
+        """
+        Test serving a graph file that does not exist.
+        """
+        print("\n--- Running test: Serving graphs (not found) ---")
+        response = requests.get(f"{BASE_URL}/graphs/nonexistent.png")
+        self.assertEqual(response.status_code, 404)
+        print("✓ Test for serving graphs (not found) passed.")
 
 if __name__ == '__main__':
     unittest.main()

@@ -3,13 +3,16 @@ import re
 from langchain_chroma import Chroma
 from get_embedding_function import get_embedding_function
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # =====================================
 # ============ CONFIGURACIÓN ==========
 # =====================================
 # Ruta al modelo base
 VLLM_URL = "http://vllm-openai:8000/v1/chat/completions" 
-VLLM_MODEL_NAME = "/models/TheBloke--TinyLlama-1.1B-Chat-v1.0-AWQ"  # O el nombre servido
+VLLM_MODEL_NAME = os.getenv("MODEL_DIR")  # O el nombre servido
 VLLM_LORA_NAME = "metaheuristicas"  # Nombre del adaptador LoRA
 
 def generate_response(
