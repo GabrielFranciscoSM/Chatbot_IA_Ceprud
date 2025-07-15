@@ -6,12 +6,14 @@ from langchain.schema.document import Document
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 import torch
 import pdfplumber
+from dotenv import load_dotenv
 
 # =====================================
 # ============ CONFIGURACIÓN ==========
 # =====================================
-HF_TOKEN = "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"  
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = HF_TOKEN
+load_dotenv()
+
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.getenv("HF_TOKEN")
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 
 # Modelos
@@ -88,7 +90,7 @@ def generate_training_data(subject):
     # 3. Cargar modelos
     print("🤖 Cargando modelos de Hugging Face...")
     question_tokenizer = AutoTokenizer.from_pretrained(QUESTION_MODEL,
-    token=HF_TOKEN,
+    token=os.getenv("HF_TOKEN"),
     trust_remote_code=True,
     local_files_only=False,  # Forzar descarga remota
     force_download=True       # Ignorar caché existente
