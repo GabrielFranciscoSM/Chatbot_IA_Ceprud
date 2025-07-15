@@ -6,5 +6,4 @@ Python-3.12.9.tgz  # Archivo innecesario si usas la imagen base de Python
 
 # Ignorar archivos de entorno locales
 .env
-chatbot/  # El entorno virtual
 __pycache__/

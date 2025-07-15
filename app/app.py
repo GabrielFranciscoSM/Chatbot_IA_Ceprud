@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from typing import Dict, List, Tuple
 
-from app.logic.query_logic import (
+from query_logic import (
     # BASE_MODEL,
     # TOKENIZER,
     EMBEDDING_FUNCTION,
