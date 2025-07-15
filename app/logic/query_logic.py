@@ -1,7 +1,7 @@
 import os
 import re
 from langchain_chroma import Chroma
-from app.RAG.get_embedding_function import get_embedding_function
+from get_embedding_function import get_embedding_function
 import requests
 
 # =====================================
@@ -11,21 +11,6 @@ import requests
 VLLM_URL = "http://vllm-openai:8000/v1/chat/completions" 
 VLLM_MODEL_NAME = "/models/TheBloke--TinyLlama-1.1B-Chat-v1.0-AWQ"  # O el nombre servido
 VLLM_LORA_NAME = "metaheuristicas"  # Nombre del adaptador LoRA
-
-EMBEDDING_FUNCTION = None
-
-# def load_finetuned_model(subject: str) -> AutoModelForCausalLM:
-#     """
-#     Carga y aplica un adaptador LoRA si existe, o retorna el modelo base.
-#     """
-#     adapter_dir = os.path.join(os.path.dirname(__file__), "models", f"{subject}-deepseek-qlora")
-#     if os.path.isdir(adapter_dir):
-#         print(f"🌟 Usando modelo fine-tuneado para '{subject}'")
-#         model = PeftModel.from_pretrained(BASE_MODEL, adapter_dir)
-#         return model.merge_and_unload().eval()
-#     print(f"⚠️ No se encontró adaptador para '{subject}', usando modelo base")
-#     return BASE_MODEL
-
 
 def generate_response(
     prompt: str,

@@ -9,9 +9,6 @@ from fastapi.templating import Jinja2Templates
 from typing import Dict, List, Tuple
 
 from query_logic import (
-    # BASE_MODEL,
-    # TOKENIZER,
-    EMBEDDING_FUNCTION,
     query_rag,
     get_base_model_response,
 )

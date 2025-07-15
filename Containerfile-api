@@ -1,4 +1,3 @@
-#syntax=docker/dockerfile:1.4
 FROM --platform=$BUILDPLATFORM python:3.12-slim-bookworm
 
 # Exponer puerto de la API
@@ -22,8 +21,7 @@ COPY requirements.txt /app/requirements.txt
 # Instalar resto de dependencias Python
 RUN pip3 install --no-cache-dir --upgrade -r /app/requirements.txt
 
-# Copiar código de la API
-COPY api.py query_logic.py get_embedding_function.py populate_database.py /app/
-
 # Comando por defecto (arranca uvicorn apuntando a api.py)
 CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "5001"]
+
+#syntax=docker/dockerfile:1.4
