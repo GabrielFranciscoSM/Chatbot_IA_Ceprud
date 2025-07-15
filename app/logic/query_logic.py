@@ -11,9 +11,8 @@ load_dotenv()
 # ============ CONFIGURACIÓN ==========
 # =====================================
 # Ruta al modelo base
-VLLM_URL = "http://vllm-openai:8000/v1/chat/completions" 
+VLLM_URL = os.getenv("VLLM_URL").join("/v1/chat/completions")
 VLLM_MODEL_NAME = os.getenv("MODEL_DIR")  # O el nombre servido
-VLLM_LORA_NAME = "metaheuristicas"  # Nombre del adaptador LoRA
 
 def generate_response(
     prompt: str,
@@ -99,7 +98,7 @@ def query_rag(query_text: str,
     #Seleccionar modelo
     model_desc = "RAG base"
     if use_finetuned and subject:
-        model = VLLM_LORA_NAME
+        model = subject
         model_desc = "RAG + LoRA"
     else:
         model = VLLM_MODEL_NAME

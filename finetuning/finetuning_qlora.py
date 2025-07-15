@@ -13,8 +13,13 @@ load_dotenv()
 HF_TOKEN = os.getenv("HF_TOKEN")  # Reemplaza con tu token
 login(token=HF_TOKEN)
 
+MODEL="..".join(os.getenv("MODEL_DIR"))
+SHORT_MODEL_NAME = os.getenv("MODEL_NAME").split("/")[1]
+
+MODELS_DIR_PATH = "../models/"
+
 def fine_tune_deepseek(subject):
-    data_path = f"data/{subject}/train_data.json"
+    data_path = f"../data/{subject}/train_data.json"
     if not os.path.exists(data_path):
         raise ValueError(f"Archivo {data_path} no encontrado. Ejecuta generate_data.py primero")
 
@@ -31,7 +36,7 @@ def fine_tune_deepseek(subject):
 
     # Cargar modelo
     model = AutoModelForCausalLM.from_pretrained(
-        "./models/TinyLlama--TinyLlama-1.1B-Chat-v1.0",
+        MODEL,
         quantization_config=quantization_config,
         device_map="auto",
         token=HF_TOKEN,
@@ -52,7 +57,7 @@ def fine_tune_deepseek(subject):
 
     # Tokenizador
     tokenizer = AutoTokenizer.from_pretrained(
-        "./models/TinyLlama--TinyLlama-1.1B-Chat-v1.0",
+        MODEL,
         token=HF_TOKEN,
         padding_side="right",
         truncation_side="right"
@@ -82,7 +87,7 @@ def fine_tune_deepseek(subject):
 
     # Configuración de entrenamiento
     training_args = TrainingArguments(
-        output_dir=f"models/{subject}-TinyLlama-qlora",
+        output_dir=MODELS_DIR_PATH.join(f"{subject}-".join(SHORT_MODEL_NAME)),
         per_device_train_batch_size=4,
         gradient_accumulation_steps=4,
         num_train_epochs=3,
@@ -108,9 +113,9 @@ def fine_tune_deepseek(subject):
 
     # Entrenar y guardar
     trainer.train()
-    model.save_pretrained(f"models/{subject}-TinyLlama-qlora")
-    tokenizer.save_pretrained(f"models/{subject}-TinyLlama-qlora")
-    print(f"✅ Modelo guardado en: models/{subject}-TinyLlama-qlora")
+    model.save_pretrained(MODELS_DIR_PATH.join(f"{subject}-",SHORT_MODEL_NAME))
+    tokenizer.save_pretrained(MODELS_DIR_PATH.join(f"{subject}-",SHORT_MODEL_NAME))
+    print(f"✅ Modelo guardado en: " + MODELS_DIR_PATH.join(f"{subject}-",SHORT_MODEL_NAME))
 
 if __name__ == "__main__":
     os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
