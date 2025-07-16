@@ -84,11 +84,13 @@ async def chat(
     user_message = message.strip()
     sub = subject.lower()
     mode = mode.lower()
+
     if not user_message:
         return {"response": "❌ Por favor, escribe una pregunta."}
 
     history = get_user_session(email, sub)
     chroma_path = os.path.join(BASE_CHROMA_PATH, sub)
+    
     if mode != 'base' and not os.path.isdir(chroma_path):
         return {"response": f"❌ No hay datos para '{sub}'. Directorios disponibles: {os.listdir(BASE_CHROMA_PATH)}"}
 

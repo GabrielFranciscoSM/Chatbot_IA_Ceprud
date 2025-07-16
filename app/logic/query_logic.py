@@ -4,6 +4,7 @@ from langchain_chroma import Chroma
 from get_embedding_function import get_embedding_function
 import requests
 from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
 
 load_dotenv()
 
@@ -11,7 +12,7 @@ load_dotenv()
 # ============ CONFIGURACIÓN ==========
 # =====================================
 # Ruta al modelo base
-VLLM_URL = os.getenv("VLLM_URL").join("/v1/chat/completions")
+VLLM_URL = os.getenv("VLLM_URL") + "/v1"#.join("/v1/chat/completions")
 VLLM_MODEL_NAME = os.getenv("MODEL_DIR")  # O el nombre servido
 
 def generate_response(
@@ -20,25 +21,28 @@ def generate_response(
     model_name: str = VLLM_MODEL_NAME,
 ) -> str:
     """
-    Genera una respuesta usando el modelo y tokenizer indicados (o los globales).
+    Genera una respuesta.
     """
+    llm = ChatOpenAI(base_url=VLLM_URL,model=VLLM_MODEL_NAME,api_key="LOCAL")
     
-    payload = {
-        "model": model_name,
-        "messages": [
-            {"role": "user", "content": prompt}
-        ],
-        "max_tokens": max_new_tokens,
-        "temperature": 0.7
-    }
+    # payload = {
+    #     "model": model_name,
+    #     "messages": [
+    #         {"role": "user", "content": prompt}
+    #     ],
+    #     "max_tokens": max_new_tokens,
+    #     "temperature": 0.7
+    # }
 
     
     try:
-        response = requests.post(VLLM_URL, json=payload)
-        response.raise_for_status()
+        
+        data = llm.invoke(prompt)
+        print(data)
+        # response.raise_for_status()
 
-        data = response.json()
-        text = data["choices"][0]["message"]["content"]
+        # data = response.json()
+        text = data.content
 
         match = re.search(r"### RESPUESTA:\s*(.*)", text, re.DOTALL)
 
@@ -103,11 +107,9 @@ def query_rag(query_text: str,
     else:
         model = VLLM_MODEL_NAME
 
-    # response = generate_response(prompt, model=model, tokenizer=TOKENIZER)
     sources = [d.metadata.get("id", "N/A") for d in docs]
 
-    # return {"response": response, "sources": sources, "model_used": model_desc}
-    return {"response": generate_response(prompt,model_name=model), "sources": sources, "model_used": "RAG"}
+    return {"response": generate_response(prompt,model_name=model), "sources": sources, "model_used": model_desc}
 
 
 def get_base_model_response(query_text: str,

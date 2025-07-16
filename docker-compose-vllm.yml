@@ -56,6 +56,7 @@ services:
         environment:
             HF_HUB_DISABLE_SYMLINKS_WARNING: 1
         volumes:
+        - ./.env:/app/.env
         - ./app/app.py:/app/app.py
         - ./app/logic/query_logic.py:/app/query_logic.py
         - ./app/RAG/get_embedding_function.py:/app/get_embedding_function.py
