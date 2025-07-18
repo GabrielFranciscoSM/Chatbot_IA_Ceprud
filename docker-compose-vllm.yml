@@ -22,7 +22,7 @@ services:
             #"--max-model-len", "2048",
             #"--max-batch-size", "8",
             "--quantization", "awq",                 # <-- ADD: Enable 4-bit quantization
-            "--gpu-memory-utilization", "0.4",
+            "--gpu-memory-utilization", "0.5",
             "--enable-lora",
             "--max-loras", "1", # Set to the number of adapters you'll use
             "--lora-modules", "metaheuristicas=/models/metaheuristicas-TinyLlama-qlora",

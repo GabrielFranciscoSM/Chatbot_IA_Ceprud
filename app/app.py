@@ -11,7 +11,6 @@ from contextlib import asynccontextmanager
 
 from query_logic import (
     query_rag,
-    get_base_model_response,
 )
 
 # Configuración de FastAPI
@@ -102,10 +101,9 @@ async def chat(
             chroma_path,
             subject=sub,
             use_finetuned=(mode == 'rag_lora'),
-            history=history,
         )
     elif mode == 'base':
-        result = get_base_model_response(user_message, history=history)
+        result = query_rag(user_message,use_RAG=False)
     else:
         return {"response": "❌ Modo no válido."}
 
@@ -113,8 +111,6 @@ async def chat(
     sources: List[str] = result.get('sources', [])
     used: str = result.get('model_used', '')
 
-    clean = resp.replace('🤖: ', '')
-    update_user_history(email, user_message, clean)
     log_user_message(email, user_message, sub, resp, sources)
 
     return {"response": f"🤖: {resp}", "sources": sources, "model_used": used}
