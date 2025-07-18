@@ -61,6 +61,7 @@ services:
         - ./app/logic/query_logic.py:/app/query_logic.py
         - ./app/RAG/get_embedding_function.py:/app/get_embedding_function.py
         - ./app/RAG/populate_database.py:/app/populate_database.py
+        - ./app/logic/graph.py:/app/graph.py
         - ./models:/app/models
         - ./data:/app/data
         - ./logs:/app/logs

@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from typing import Dict, List, Tuple
+from contextlib import asynccontextmanager
 
 from query_logic import (
     query_rag,
@@ -15,6 +16,7 @@ from query_logic import (
 
 # Configuración de FastAPI
 app = FastAPI()
+
 origins = ["http://150.214.205.61:8080"]
 app.add_middleware(
     CORSMiddleware,
