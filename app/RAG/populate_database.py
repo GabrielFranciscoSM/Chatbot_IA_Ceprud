@@ -4,7 +4,7 @@ import shutil
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 from langchain_chroma import Chroma
-from app.RAG.get_embedding_function import get_embedding_function
+from get_embedding_function import get_embedding_function
 import pdfplumber
 
 BASE_CHROMA_PATH = "chroma"
@@ -96,6 +96,7 @@ def load_documents(data_path):
                         text = page.extract_text()
                         if text:
                             cleaned_text = clean_text(text)
+                            print("DOCUMENTO: " + filename + "\n CONTENIDO: \n" + cleaned_text + "\n")
                             valid_documents.append(
                                 Document(
                                     page_content=cleaned_text,
@@ -113,8 +114,8 @@ def load_documents(data_path):
 def split_documents(documents):
     """Dividir texto en fragmentos con parámetros optimizados."""
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,          # Tamaño reducido para mayor precisión
-        chunk_overlap=80,        # Overlap para mantener coherencia
+        chunk_size=3000,          # Tamaño reducido para mayor precisión
+        chunk_overlap=500,        # Overlap para mantener coherencia
         separators=["\n\n", "\n", ". ", " ", ""],  # Jerarquía de separadores
         length_function=len
     )

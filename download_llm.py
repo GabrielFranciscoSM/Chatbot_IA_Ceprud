@@ -12,6 +12,9 @@ RECOMMENDED_MODELS = [
     "deepseek-ai/deepseek-llm-7b-chat",
     "BAAI/bge-m3",
     "TheBloke/TinyLlama-1.1B-Chat-v1.0-AWQ",
+    "jinaai/jina-embeddings-v2-base-es",
+    "jinaai/jina-embeddings-v3",
+    "Qwen/Qwen3-Embedding-0.6B"
 ]
 
 def download_model(model_name, target_dir):

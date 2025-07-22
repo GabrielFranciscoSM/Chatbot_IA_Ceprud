@@ -1,0 +1,25 @@
+services:
+    chatbot:
+        build:
+            context: .
+            dockerfile: Containerfile
+        ports:
+            - 5001:5001
+        environment:
+            HF_HUB_DISABLE_SYMLINKS_WARNING: 1
+        volumes:
+        - ./.env:/app/.env
+        - ./app/app.py:/app/app.py
+        - ./app/logic/query_logic.py:/app/query_logic.py
+        - ./app/RAG/get_embedding_function.py:/app/get_embedding_function.py
+        - ./app/RAG/populate_database.py:/app/populate_database.py
+        - ./app/logic/graph.py:/app/graph.py
+        - ./models:/app/models
+        - ./data:/app/data
+        - ./logs:/app/logs
+        - ./graphs:/app/graphs
+        - ./app/RAG/chroma:/app/chroma
+        - ./static:/app/static
+        - ./templates:/app/templates
+
+        restart: unless-stopped

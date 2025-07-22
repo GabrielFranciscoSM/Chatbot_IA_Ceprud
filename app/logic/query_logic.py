@@ -5,6 +5,8 @@ from get_embedding_function import get_embedding_function
 import requests
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
+
 from langchain_core.messages import HumanMessage, SystemMessage
 
 from graph import buildGraph
@@ -17,6 +19,11 @@ load_dotenv()
 
 VLLM_URL = os.getenv("VLLM_URL") + "/v1"
 VLLM_MODEL_NAME = os.getenv("MODEL_DIR") 
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
+
+# =====================================
+
 rag_graph = buildGraph()
 
 
@@ -34,14 +41,16 @@ def query_rag(query_text: str,
     model_desc = None
 
     if use_finetuned and subject:
-        model = ChatOpenAI(base_url=VLLM_URL,model=subject,api_key="LOCAL")
+        #model = ChatOpenAI(base_url=VLLM_URL,model=subject,api_key="LOCAL")
+        model = ChatGoogleGenerativeAI(model="gemini-2.0-flash-001")
  
         model_desc = "RAG + LoRA"
     else:
-        model = ChatOpenAI(base_url=VLLM_URL,model=VLLM_MODEL_NAME,api_key="LOCAL") 
+        #model = ChatOpenAI(base_url=VLLM_URL,model=VLLM_MODEL_NAME,api_key="LOCAL") 
+        model = ChatGoogleGenerativeAI(model="gemini-2.0-flash-001")
         model_desc = "base"
 
-    conversation_id = "user-123-session-abc"
+    conversation_id =  "-".join(["email",subject]) 
     config = {"configurable": {"thread_id": conversation_id}}
 
     result = rag_graph.invoke(

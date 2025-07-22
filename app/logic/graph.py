@@ -18,6 +18,8 @@ rag_Prompt= """
             Respuesta:
             """
 
+MAX_HISTORY_LENGTH = 7
+
 class State(MessagesState):
     context: List[Document]
     chorma_path: str
@@ -34,13 +36,22 @@ def retrieve(state: State):
     vector_store = Chroma(persist_directory=state["chorma_path"], embedding_function=get_embedding_function())
     
     # Usa la variable 'question' para la búsqueda
-    retrieved_docs = vector_store.similarity_search(question)
+    docs_and_scores = vector_store.similarity_search_with_score(question, k=5)    
+    retrieved_docs, _ = zip(*docs_and_scores)
+
+    #retrieved_docs = vector_store.similarity_search(question)
+    
     print(retrieved_docs)
     return {"context": retrieved_docs}
 
 def preparePrompt(state: State):
     if state["use_RAG"]:
-        docs_content = "\n\n".join(doc.page_content for doc in state["context"])
+        #context = "\n\n---\n\n".join(d.page_content for d in docs)
+
+        docs_content = "\n\n---\n\n".join(doc.page_content for doc in state["context"])
+
+        print("CONTEXT:\n" + docs_content + "\n")
+
         messages = rag_Prompt.format(question= state["messages"][-1].content, context= docs_content)
         return {"prompt": messages}
     else:
@@ -50,7 +61,6 @@ def preparePrompt(state: State):
     
 
 def generate(state: State):    
-    
     response = state["llm"].invoke(state["prompt"])
 
     return {"messages": [AIMessage(content=response.content)]}
@@ -64,6 +74,5 @@ def use_RAG(state: State)->Literal["preparePrompt", "retrieve"]:
 def buildGraph():
     graph_builder = StateGraph(State).add_sequence([retrieve,preparePrompt, generate])
     graph_builder.add_conditional_edges(START,use_RAG)
-    #graph_builder.add_edge(START, )
     memory = InMemorySaver()
     return graph_builder.compile(checkpointer=memory)

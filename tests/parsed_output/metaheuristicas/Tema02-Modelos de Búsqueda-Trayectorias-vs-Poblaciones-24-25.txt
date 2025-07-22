@@ -1,0 +1,150 @@
+--- Página 1 ---
+Tema 2. Modelos de Búsqueda: Entornos y Tema 4: Algoritmos Meméticos
+
+--- Página 2 ---
+
+
+--- Página 3 ---
+TEMA 2. Modelos de Búsqueda: Entornos E.-G. Talbi. Metaheuristics. From design to implementation. Wiley, J. Brownlee. Clever Algorithms (Nature-Inspired Programming Recipes). 2012, Brownlee.
+
+--- Página 4 ---
+1.1. Término LOCAL . Estructura de entorno. Proceso 1.1. Término LOCAL . Estructura de entorno. Proceso El término local se utiliza frecuentemente en los estudios
+
+--- Página 5 ---
+1.1. Término LOCAL
+
+--- Página 6 ---
+N ( σ ) N(σ ) N ( σ ) N ( σ ) N(σ ) Óptimo local/global
+
+--- Página 7 ---
+
+
+--- Página 8 ---
+Operador de vecino: Proceso de selección de solución/generación de una solución vecina: S S, S E(S) (también notado N(S)). N(σ ) N(σ ) N ( σ ) N(σ ) N(σ ) Óptimo local/global
+
+--- Página 9 ---
+GENERA(Solución Inicial) Solución Actual Solución Inicial; Mejor Solución Solución Actual; Solución Vecina GENERA_VECINO(Solución Actual); Si Acepta(Solución Vecina) entonces Solución Actual Solución Vecina; Si Objetivo(Solución Actual) es mejor que Objetivo(Mejor Solución) entonces Mejor Solución Solución Actual; Hasta (Criterio de parada); DEVOLVER (Mejor Solución);
+
+--- Página 10 ---
+
+
+--- Página 11 ---
+
+
+--- Página 12 ---
+población.
+
+--- Página 13 ---
+combinan cromosomas (algoritmos genéticos)
+
+--- Página 14 ---
+genética, cómo se combinan cromosomas (algoritmos genéticos)
+
+--- Página 15 ---
+¿Otras propuestas de obtención de poblaciones? cromosomas (algoritmos genéticos)
+
+--- Página 16 ---
+¿Otras propuestas de obtención de poblaciones?
+
+--- Página 17 ---
+¿Otras Metaheurísticas?
+
+--- Página 18 ---
+
+
+--- Página 19 ---
+búsqueda: E(s) todo el espacio de búsqueda.
+
+--- Página 20 ---
+GENERA(Solución Inicial) Solución Actual Solución Inicial; Mejor Solución Solución Actual; GENERA(Solución Actual); Generación Aleatoria Si Objetivo(Solución Actual) es mejor que Objetivo(Mejor Solución) entonces Mejor Solución Solución Actual; Hasta (Criterio de parada); DEVOLVER (Mejor Solución);
+
+--- Página 21 ---
+EJEMPLO:
+
+--- Página 22 ---
+obtenga la óptima es 1/m. absoluta de obtener el óptimo en la iteración i: P(A ) 1/m i 1, , n.
+
+--- Página 23 ---
+La probabilidad de obtener el óptimo en n iteraciones sería: P(A A A )
+
+--- Página 24 ---
+P(A A A ) Si es tal que 0 (probabilidad a priori de error encuentre el óptimo), entonces: óptimo con probabilidad 1-
+
+--- Página 25 ---
+EJEMPLO: (número de o 1- m n o 1- m n iteraciones necesario) 0.1 0.9 1000 2302 0.1 0.9 3000 6907 de fallo y
+
+--- Página 26 ---
+El entorno de cualquier solución es propio (no consta de todas las soluciones del espacio de búsqueda). N(σ ) N(σ ) N ( σ ) N(σ ) N(σ ) Óptimo local/global
+
+--- Página 27 ---
+3.4. Ejemplo: Viajante de Comercio Hay dos versiones: del Mejor y del Primer Mejor. En ambos casos, el algoritmo devuelve la última solución visitada (no es necesario ir almacenando la mejor solución).
+
+--- Página 28 ---
+GENERA(Solución Inicial); Solución Actual Solución Inicial; GENERA_SOLUCIÓN_ENTORNO(Solución Vecina tal que Objetivo(Solución Vecina) mejor que Objetivo(Solución Actual)); Si Objetivo(Solución Vecina) mejor que Objetivo(Solución Actual) entonces Solución Actual Solución Vecina; Hasta (Objetivo(Solución Vecina) peor o igual que Objetivo(Solución Actual), S E(Solución Actual)); DEVOLVER(Solución Actual);
+
+--- Página 29 ---
+Steepest-Ascent Hill Climbing (best neighbor)
+
+--- Página 30 ---
+GENERA(S ); Mejor Vecino S Repetir para toda S E(S ) S GENERA_VECINO(S ); Si Objetivo(S) mejor que Objetivo(Mejor Vecino) entonces Mejor Vecino S; Si Objetivo(Mejor Vecino) mejor que Objetivo(S ) entonces S Mejor Vecino; Hasta (Objetivo(Mejor Vecino) peor o igual que Objetivo(S )); DEVOLVER(S );
+
+--- Página 31 ---
+EJEMPLO: E(s) {si / si (xi {0,1}, yi {0,1}) si s}
+
+--- Página 32 ---
+Simple Hill Climbing (first-best neighbor)
+
+--- Página 33 ---
+GENERA(S ); S GENERA_VECINO(S ); Hasta (Objetivo(S) mejor que Objetivo(S )) O (se ha generado E(S ) al completo) Si Objetivo(S) mejor que Objetivo(S ) entonces S S; Hasta (Objetivo(S) peor o igual que Objetivo(S )); DEVOLVER(S );
+
+--- Página 34 ---
+EJEMPLO: E(s) {si / si (xi {0,1}, yi {0,1}) si s}
+
+--- Página 35 ---
+3.4. Ejemplo: Viajante de Comercio Ejemplo: Viajante de Comercio Representación de una solución: Camino (1 2 4 3 8 5 7 6)
+
+--- Página 36 ---
+1. Esquema de representación: Permutación de {1, ..., n}. 2. Función objetivo: n Min C(S) ( D S i ,S i 1 ) D S n ,S 1 i 3. Mecanismo de generación de la solución inicial:
+
+--- Página 37 ---
+4. Operador de generación de nuevas soluciones: escoger dos posiciones e intercambiar sus valores (2-opt): 5. Mecanismo de selección: Selección del mejor o el primer mejor. 6. Criterio de parada: Cuando el vecino generado no mejore a la
+
+--- Página 38 ---
+Otro operador: Viajante de Comercio Inversión simple (2-Opt): se escoge una sublista y se invierte (1 2 4 3 8 5 7 6) (1 2 5 8 3 4 7 6)
+
+--- Página 39 ---
+Intercambio: se escogen dos elementos y se intercambian (1 2 4 3 8 5 7 6) (1 2 5 3 8 4 7 6)
+
+--- Página 40 ---
+TSP: Factorización del Movimiento 2-Opt Sea f() el coste de la solución original Para generar , el operador de vecino elimina los arcos: (i)(i1) y (j) (j1), y restablece el circuito con los arcos: (i)(j1) y (j) (i1) Por lo tanto, el coste del movimiento se puede factorizar como: y la variación en el coste de f() es: f() f() f()
+
+--- Página 41 ---
+532! soluciones posibles Coste solución óptima
+
+--- Página 42 ---
+
+
+--- Página 43 ---
+TSP Instancia Berlin52
+
+--- Página 44 ---
+
+
+--- Página 45 ---
+
+
+--- Página 46 ---
+Preguntas: ¿Cómo de diferente puede llegar a ser la solución de vecindario empleado? ¿Cuál es el tamaño del entorno generado por cada operador de vecino? El efecto al aplicar un operador concreto, ¿es el mismo en todos los problemas? Por ejemplo, ¿es lo mismo generar un vecino por problema?
+
+--- Página 47 ---
+
+
+--- Página 48 ---
+SOLUCIONES: 3 opciones para salir de los óptimos locales Ejemplo: Enfriamiento Simulado, Búsqueda Tabú (T5). Ejemplo: Búsqueda Tabú, Búsqueda en Entornos Variables: VNS, (T5) Ejemplo: Búsquedas Multiarranque, ILS, VNS, (T5).
+
+--- Página 49 ---
+[Tal09] E.-G. Talbi. Metaheuristics. From design to [Bro12] J. Brownlee. Clever Algorithms (Nature-Inspired Programming Recipes). 2012, Brownlee.
+
+--- Página 50 ---
+Tema 2. Modelos de Búsqueda: Entornos y Tema 4: Algoritmos Meméticos
+
