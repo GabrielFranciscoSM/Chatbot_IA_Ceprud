@@ -1,0 +1,18 @@
+--- Página 1 ---
+3.2 Python/Julia . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+--- Página 2 ---
+La guía está planteada en C, que es el lenguaje que más se ha usado en las prácticas, aunque si alguien quisiese utilizar otro lenguaje Orientado a Objeto (OO) como Java no habría problema, siempre que aplicase el mismo criterio (con los cambios de sintaxis correspondientes). Para lenguajes no OO daré práctica, P2 para la segunda, ... y quizás alguna clase con utilidades (Utils o similar), pero sin una ¿Eso que problemas presenta? De todo tipo: La metaheurística depende del problema: Lo primero, la metaheurística no se puede probar con un problema de juguete (como optimizar el número total de unos en un vector binario) que Reutilizar código: Elproblemaescomúnparatodoslosalgoritmos. Alnohacerloasí,seproducían
+
+--- Página 3 ---
+Aislar la complejidad del problema: De esta forma la complejidad del problema y la función de Pruebas independientes del problema: Una mayor separación facilita el poder probar por Pruebas automáticas: Las pruebas anteriores pueden automatizarse. Ejemplo para representación binaria: typedef vectorbool tSolution y para una representación de números reales: typedef vectorfloat tSolution sentido (una solución no válida) o bien porque se quiere postergar la evaluación de la solución. El uso de un typedef en vez de un class facilita el procesarlo de forma más clara: acceder a elementos, El interfaz es el mínimo posible: virtual class Problem { public : virtual float fitness (tSolution );
+
+--- Página 4 ---
+virtual tSolution createSolution (); virtual int getSize (); } getSize permite conocer la longitud de cada variable. createSolution permite crear una solución de forma totalmente aleatoria. fitness es para evaluar una solución dada. Siempre ante la misma solución se de deberá de ontener Todo algoritmo implementado deberá de cumplir el siguiente interfaz: class MH { public: virtual pairtSolution , tFitness optimize(Problem problem , int maxevals) 0; };
+
+--- Página 5 ---
+Como se puede observar, lo principal es implementar el método optimize, que: Recibe un objeto de tipo Problem, con el que podrá evaluar las soluciones, entre otras cosas. Recibe el número máximo de evaluaciones de soluciones permitido. La plantilla posee la siguiente estructura: src Implementación de las clases cuyas cabeceras se encuentran en inc/. compilarlo: cmake . make Si se desea mejorar el rendimiento es conveniente compilar en modo "Release" en vez de en modo "Debug" cmake DCMAKE_BUILD_TYPERelease . make Aunque la plantilla está claramente pensada para C, eso es porque es el principal lenguaje usado A continuación presentamos cómo se puede adaptar a distintos lenguajes:
+
+--- Página 6 ---
+Para definir la clase solución se puede aplicar directamente herencia de una collección, como: class tSolution extends ArrayListsFloat {} La clase Problem puede definirse directamente como lo que es, un interfaz: public interface Problem { float fitness (tSolution ); tSolution createSolution (); int getSize (); } public class MH { // ... public PairtSolution , tFitness optimize(Problem problem , int maxevals); }; E implementarlo como: public class Greedy extends MH { // ... overide public PairtSolution , tFitness optimize(Problem problem , int maxevals); } 3.2 Python/Julia
+

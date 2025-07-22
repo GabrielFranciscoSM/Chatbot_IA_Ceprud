@@ -9,12 +9,12 @@ from fastapi.templating import Jinja2Templates
 from typing import Dict, List, Tuple
 
 from query_logic import (
-    query_rag,
-    get_base_model_response,
+    query_rag
 )
 
 # Configuración de FastAPI
 app = FastAPI()
+
 origins = ["http://150.214.205.61:8080"]
 app.add_middleware(
     CORSMiddleware,
@@ -31,10 +31,7 @@ templates = Jinja2Templates(directory="templates")
 
 # Configuración
 BASE_CHROMA_PATH = "chroma"
-MAX_HISTORY_LENGTH = 7
 
-# Definición de tipos para historial de usuario
-UserData = Dict[str, List[Tuple[str, str]]]
 # Estructura: email -> {'subject': str, 'history': List[(pregunta, respuesta)]}
 user_data: Dict[str, Dict[str, object]] = {}
 
@@ -56,6 +53,9 @@ def log_user_message(email: str, message: str, subject: str, response: str, sour
         writer.writerow(row)
 
 
+#############################################################################
+##################--REVISAR ES MÉTODO CON NUEVO HISTORIAL--##################
+#############################################################################
 def get_user_session(email: str, subject: str) -> List[Tuple[str, str]]:
     """
     Devuelve el historial de usuario. Si cambia la asignatura, se reinicia el historial.
@@ -65,13 +65,6 @@ def get_user_session(email: str, subject: str) -> List[Tuple[str, str]]:
         # nueva sesión o asignatura diferente: reiniciar
         user_data[email] = {"subject": subject, "history": []}
     return user_data[email]["history"]  # type: ignore
-
-
-def update_user_history(email: str, question: str, answer: str):
-    hist: List[Tuple[str, str]] = user_data[email]["history"]  # type: ignore
-    hist.append((question, answer))
-    if len(hist) > MAX_HISTORY_LENGTH:
-        hist.pop(0)
 
 
 @app.post("/chat", response_class=JSONResponse)
@@ -84,11 +77,12 @@ async def chat(
     user_message = message.strip()
     sub = subject.lower()
     mode = mode.lower()
+
     if not user_message:
         return {"response": "❌ Por favor, escribe una pregunta."}
 
-    history = get_user_session(email, sub)
     chroma_path = os.path.join(BASE_CHROMA_PATH, sub)
+    
     if mode != 'base' and not os.path.isdir(chroma_path):
         return {"response": f"❌ No hay datos para '{sub}'. Directorios disponibles: {os.listdir(BASE_CHROMA_PATH)}"}
 
@@ -98,10 +92,9 @@ async def chat(
             chroma_path,
             subject=sub,
             use_finetuned=(mode == 'rag_lora'),
-            history=history,
         )
     elif mode == 'base':
-        result = get_base_model_response(user_message, history=history)
+        result = query_rag(user_message,use_RAG=False)
     else:
         return {"response": "❌ Modo no válido."}
 
@@ -109,8 +102,6 @@ async def chat(
     sources: List[str] = result.get('sources', [])
     used: str = result.get('model_used', '')
 
-    clean = resp.replace('🤖: ', '')
-    update_user_history(email, user_message, clean)
     log_user_message(email, user_message, sub, resp, sources)
 
     return {"response": f"🤖: {resp}", "sources": sources, "model_used": used}

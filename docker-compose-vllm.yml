@@ -22,7 +22,7 @@ services:
             #"--max-model-len", "2048",
             #"--max-batch-size", "8",
             "--quantization", "awq",                 # <-- ADD: Enable 4-bit quantization
-            "--gpu-memory-utilization", "0.4",
+            "--gpu-memory-utilization", "0.5",
             "--enable-lora",
             "--max-loras", "1", # Set to the number of adapters you'll use
             "--lora-modules", "metaheuristicas=/models/metaheuristicas-TinyLlama-qlora",
@@ -56,10 +56,12 @@ services:
         environment:
             HF_HUB_DISABLE_SYMLINKS_WARNING: 1
         volumes:
+        - ./.env:/app/.env
         - ./app/app.py:/app/app.py
         - ./app/logic/query_logic.py:/app/query_logic.py
         - ./app/RAG/get_embedding_function.py:/app/get_embedding_function.py
         - ./app/RAG/populate_database.py:/app/populate_database.py
+        - ./app/logic/graph.py:/app/graph.py
         - ./models:/app/models
         - ./data:/app/data
         - ./logs:/app/logs
