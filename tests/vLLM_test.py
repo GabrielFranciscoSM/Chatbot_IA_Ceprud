@@ -9,8 +9,10 @@ load_dotenv()
 
 
 # Define the base endpoints for your vLLM servers
-ENDPOINT_MODEL_BASE = "http://localhost:8000/v1"
-ENDPOINT_MODEL_EMBEDDINGS = "http://localhost:8001/v1"
+ENDPOINT_MODEL_BASE = os.getenv("VLLM_URL") + "/v1"
+#ENDPOINT_MODEL_BASE = " "http://localhost:8000/v1"
+ENDPOINT_MODEL_EMBEDDINGS = os.getenv("VLLM_EMBEDDING_URL") + "/v1"
+#ENDPOINT_MODEL_EMBEDDINGS =) "http://localhost:8001/v1"
 
 # Define the model paths
 PATH_MODEL_BASE = os.getenv("MODEL_DIR")

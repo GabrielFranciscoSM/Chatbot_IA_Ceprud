@@ -1,0 +1,2142 @@
+## Tema 4: NP-completitud
+
+## Serafín Moral
+
+Universidad de Granada
+
+Mayo, 2024
+
+<!-- image -->
+
+## Contenido
+
+- Reducción
+- Completitud
+- El problema de la consistencia en lógica proposicional
+- El teorema de Cook
+- Variantes de SAT
+- Problemas de conjuntos
+- Problemas de grafos
+- Problemas numéricos
+- Otros problemas
+- Caracterización de problemas en NP
+- Técnicas de reducción de problemas
+- Clase CoNP
+- Problemas de funciones FNP
+
+## Recordatorio: Problemas y Lenguajes
+
+- Recordemos que un problema computacional de decisión P ( x ) es equivalente a un lenguaje:
+
+<!-- formula-not-decoded -->
+
+- Y que un lenguaje L sobre A ∗ define un problema:
+
+## Dada x ∈ A ∗ , ¿Pertenece x a L ?
+
+- La teoría se suele explicar en términos de lenguajes y la práctica en términos de problemas, PERTENCEL(x):
+- Toda definición en términos de lenguajes tiene una definición equivalente en términos de problemas de decisión y recíprocamente.
+- Para acortar la distancia entre teoría y la práctica, en la mayoría de los casos vamos a expresar las definiciones sólo en términos de problemas.
+
+Serafín Moral
+
+## Reducción en términos de problemas
+
+Un problema de decisión P 1 ( x ) es reducible a un problema de decisión P 2 ( y ) donde x ∈ X , y ∈ Y ,
+
+## P 1 ( x ) ∝ P 2 ( y )
+
+si y solo si existe un algoritmo determinista que en espacio logarítmico calcula una función REDU : X → Y de tal manera que
+
+## P 1 ( x ) = P 2 ( REDU ( x ))
+
+Problema P 1 ( x ) reducible a P 2 ( y ) : Algoritmo P 2 → Algoritmo P 1
+
+<!-- image -->
+
+## Reducción en términos de problemas
+
+Un problema de decisión P 1 ( x ) es reducible a un problema de decisión P 2 ( y ) donde x ∈ X , y ∈ Y ,
+
+## P 1 ( x ) ∝ P 2 ( y )
+
+si y solo si existe un algoritmo determinista que en espacio logarítmico calcula una función REDU : X → Y de tal manera que
+
+## P 1 ( x ) = P 2 ( REDU ( x ))
+
+Problema P 1 ( x ) reducible a P 2 ( y ) : Algoritmo P 2 → Algoritmo P 1
+
+<!-- image -->
+
+## Reducción en términos de problemas
+
+Un problema de decisión P 1 ( x ) es reducible a un problema de decisión P 2 ( y ) donde x ∈ X , y ∈ Y ,
+
+## P 1 ( x ) ∝ P 2 ( y )
+
+si y solo si existe un algoritmo determinista que en espacio logarítmico calcula una función REDU : X → Y de tal manera que
+
+## P 1 ( x ) = P 2 ( REDU ( x ))
+
+Problema P 1 ( x ) reducible a P 2 ( y ) : Algoritmo P 2 → Algoritmo P 1
+
+<!-- image -->
+
+La reducción de P 1 a P 2 , indica que si obtuviésemos una solución sencilla para P 2 , entonces componiéndola con la reducción, podríamos obtener una solución para P 1 .
+
+Eso significa que si obtuviésemos una solución sencilla para P 2 la tendríamos para P 1 , pero lo contrario no tiene por qué verificarse.
+
+En definitiva, P 2 es al menos tan difícil como P 1 : se resiste más a que se encuentre una solución sencilla .
+
+Es una forma de comparar problemas.
+
+## Reducciones Espacio Logarítmicas
+
+- Nosotros hemos supuesto que las reducciones han de ser espacio logarítmicas.
+- En otros textos se supone que son en tiempo polinómico.
+- La idea es que la reducción (transformación entre problemas) tiene que poder realizarse de forma "eficiente".
+- En realidad las reducciones que aparecen en los textos que suponen que las reducciones se pueden hacer en tiempo polinómico son también espacio logarítmicas.
+- Para nosotros la reducción tiene que poder realizarse de forma "muy rápida", que lo concretamos como espacio logarítmico.
+
+<!-- image -->
+
+Si tenemos dos problemas P 1 ( x ) y P 2 ( y ) para demostrar que P 1 ( x ) ∝ P 2 ( y ) hay que:
+
+- 1 Dar un algoritmo REDU que transforme cada entrada, x , de P 1 en una entrada, y = REDU ( x ) , del problema P 2 .
+- 2 Comprobar que dicho algoritmo es logarítmico en espacio.
+- 3 Comprobar que si P 1 ( x ) tiene solución positiva, entonces P 2 ( y ) también la tiene.
+- 4 Comprobar que si P 2 ( y ) tiene solución positiva, entonces P 1 ( x ) también la tiene.
+
+<!-- image -->
+
+## El Problema del Viajante de Comercio (VC) Versión decisión
+
+## Datos:
+
+- Un conjunto finito de ciudades C = { c 1 , . . . , c m }
+- Una función de distancia d : C × C → N
+- Una cota B ∈ N
+
+Pregunta: ¿Existe un circuito que visite todas las ciudades una sola vez y de coste no superior a B ? Es decir, determinar si existe un orden de las ciudades ( c π ( 1 ) , . . . , c π ( n ) ) tal que
+
+<!-- formula-not-decoded -->
+
+## El Problema del Circuito Hamiltoniano (CH)
+
+<!-- image -->
+
+Datos: Un grafo no dirigido G =( V , E ) . Pregunta: ¿Existe un circuito hamiltoniano?
+
+## El Problema del Circuito Hamiltoniano (CH)
+
+<!-- image -->
+
+Un circuito hamiltoniano es un camino que parte de un nodo para llegar a él mismo, visitando todos los nodos del grafo una y solo
+
+Datos: Un grafo no dirigido G =( V , E ) . Pregunta: ¿Existe un circuito hamiltoniano? una vez.
+
+## Reducción de CH a VC
+
+Reducción del Circuito Hamiltoniano al problema del Viajante de Comercio: CH ∝ VC
+
+Supongamos una ejemplo del Circuito Hamiltoniano G =( V , E ) con | V | = m .
+
+Construimos el siguiente ejemplo del Viajante de Comercio:
+
+- Ciudades C = V
+- Distancia:
+
+<!-- formula-not-decoded -->
+
+- Cota: B = m
+
+Se puede comprobar que la solución del problema del viajante de comercio es siempre mayor o igual a m y que es m si y solo si desde cada ciudad a la siguiente existe un arco en el grafo original.
+
+- La transformación se puede calcular en espacio logarítmico.
+- Si existe un circuito hamiltoniano existe un orden de viaje de valor menor o igual a m (el correspondiente al circuito hamiltoniano).
+- Si existe un orden de viaje de valor menor o igual a m , entonces todos los arcos tienen coste 1, y dicho circuito es hamiltoniano en el grafo original.
+
+<!-- image -->
+
+## Si P 1 ∝ P 2 y P 2 ∝ P 3 , entonces P 1 ∝ P 3 .
+
+La demostración se basa en la composición de las reducciones de P 1 a P 2 ( mediante P 1 calculada por M 1 ) y de P 2 a L 3 (mediante R 2 calculada por M 2 ).
+
+La composición no puede ser poner a trabajar M 2 sobre la salida de M 1 : R 1 ( x ) : Entonces usaríamos un espacio intermedio polinómico para almacenar M 1 ( x ) y la complejidad de la composición en espacio sería polinómica.
+
+La forma de funcionar es que cada vez que M 2 necesita una casilla se la pide a M 1 que la calcula en ese momento, usando un contador binario para determinar la casilla exacta.
+
+P 1 y P 2 se dicen equivalentes si y solo si P 1 ∝ P 2 y P 2 ∝ P 1 .
+
+Serafín Moral
+
+## Composición en Espacio
+
+<!-- image -->
+
+## Composición en Espacio
+
+<!-- image -->
+
+Serafín Moral
+
+Tema 4: NP-completitud
+
+## Problemas NP-completo
+
+Un problema es NP-Completo si y solo si es un problema de NP y cualquier otro problema de NP se reduce a él.
+
+Son dos condiciones la primera es fácil de comprobar, la segunda no.
+
+Los problemas NP-completos son los más difíciles o típicos dentro de la clase NP.
+
+Dada la definición, 'a priori' no tendría porqué existir ningún lenguaje NP-completo.
+
+Esta definición se extiende a otras clases:
+
+## Problemas P-completo
+
+Un problema es P-Completo si y solo si es un problema de P y cualquier otro problema de P se reduce a él.
+
+Serafín Moral
+
+## Equivalencia
+
+Dos problemas P 1 y P 2 son equivalentes si y solo si
+
+## P 1 ∝ P 2 y P 2 ∝ P 1
+
+Esta es una relación de equivalencia que divide el conjunto de los problemas en clases de equivalencia.
+
+En particular esta relación sobre NP queda de la siguiente forma:
+
+<!-- image -->
+
+Serafín Moral
+
+Tema 4: NP-completitud
+
+## Consistencia en Lógica Proposicional (SAT)
+
+Datos: Un conjunto U = { p 1 , . . . , p m } de símbolos proposicionales y una colección C de cláusulas sobre estos símbolos. PREGUNTA: ¿Son consistentes las cláusulas? EJEMPLO:
+
+- U = { p 1 , p 2 } , C = { p 1 ∨¬ p 2 , ¬ p 1 ∨ p 2
+- }
+
+La respuestas es SI, ya que todas las cláusulas se satisfacen haciendo p 1 y p 2 verdaderas. En notación matemática t ( p 1 ) = t ( p 2 ) = V .
+
+<!-- image -->
+
+- U = { p 1 , p 2 } , C = { p 1 ∨ p 2 , p 1 ∨¬ p 2 , ¬ p 1 } En este caso, la respuesta es NO. Para satisfacer la tercera cláusula, ( es falsa). En
+
+t ( p 1 ) = F p 1 estas condiciones, para satisfacer la segunda, tenemos que tener t ( p 2 ) = F . Y ahora con p 1 y p 2 falsas, es imposible satisfacer la primera.
+
+<!-- image -->
+
+## Teorema de Cook
+
+El problema de la consistencia en lógica proposicional (SAT) es NP-completo
+
+## Demostración:
+
+Lo primero es demostrar que es un problema de NP. Esto es sencillo con el siguiente algoritmo no-determinista:
+
+- Para cada símbolo en U seleccionar un valor de verdad ( V ó F ).
+- Para cada cláusula comprobar si se satisface.
+- Si todas se satisfacen responder SI, en caso contrario NO.
+
+<!-- image -->
+
+Ahora hay que demostrar que si un problema, Pr ( x ) , está en NP, entonces dicho lenguaje se reduce a SAT.
+
+Supongamos Pr ( x ) en NP, la reducción consiste en transformar la entrada al problema x (se suponen una palabra) : en un ejemplo de SAT tal que
+
+Pr(x)='Si' si y solo si el ejemplo es consistente.
+
+Esta transformación tiene que hacerse en espacio logarítmico.
+
+<!-- image -->
+
+Como Pr ( x ) está en NP, entonces existe una Máquina de Turing no determinista M que decide Pr ( x ) en tiempo polinómico (con un polinomio p ( n ) ), con un estado de aceptación q a (para las respuestas positivas) y uno de rechazo q r (para las respuestas negativas) y una sola cinta (que supondremos ilimitada solo por la derecha).
+
+Supondremos p ( n ) ≥ n .
+
+Vamos a construir una transformación que depende de esta máquina:
+
+REDU M : A ∗ → SAT
+
+tal que Pr ( x ) = ′ Si ′ ⇔ M acepta x ⇔ REDU M ( x ) es consistente.
+
+Serafín Moral
+
+- Sea Q = { q 0 , . . . , q r } , r = | Q | -1 , q 1 = q a , q 2 = q r .
+- Si A = { s , . . . , s } hagamos s =# y
+- B = { s 0 , s 1 , . . . , s v } = { # }∪ A
+- 1 v 0 .
+- Sea l el número máximo de opciones de M (supondremos que siempre hay l opciones excepto en los estados de aceptación y rechazo que no hay ninguna).
+- Como la máquina da p ( n ) pasos, el número máximo de casillas visitadas es p ( n ) + 1.
+
+<!-- image -->
+
+## Teorema de Cook: Variables Proposicionales
+
+## Hay cuatro tipos de variables:
+
+- Q [ i , k ] , 0 ≤ i ≤ p ( n ) , 0 ≤ k ≤ r En el momento i , la máquina M está en el estado q k .
+- H [ i , j ] , 0 ≤ i ≤ p ( n ) , 0 ≤ j ≤ p ( n ) En el momento i , la cabeza está en la casilla j .
+- S [ i , j , k ] , 0 ≤ i ≤ p ( n ) , 0 ≤ j ≤ p ( n ) , 0 ≤ k ≤ v En el momento i , la casila j contiene el símbolo s k
+- O ( i , k ) , 0 ≤ i ≤ p ( n ) , 1 ≤ k ≤ l En el momento i , la máquina elige la opción k .
+
+Se supone que si la máquina termina en el instante j , todas las variables permanecen inalteradas en los instantes i &gt; j hasta p ( n ) . El número de variables es polinómico y se pueden calcular en espacio logarítmico.
+
+## Q [ i , 0 ] ∨ Q [ i , 1 ] ∨···∨ Q [ i , r ] , 0 ≤ i ≤ p ( n )
+
+En cada momento, la máquina está en un estado
+
+## ¬ Q [ i , j ] ∨¬ Q [ i , j ′ ] , 0 ≤ i ≤ p ( n ) , 0 ≤ j &lt; j ′ ≤ r
+
+En cada momento, la máquina no puede estar a la vez en dos estados distintos
+
+Serafín Moral
+
+## Grupo 2: Cabeza de Lectura
+
+## H [ i , 0 ] ∨ H [ i , 1 ] ∨···∨ H [ i , p ( n )] , 0 ≤ i ≤ p ( n )
+
+En cada momento, la cabeza de lectura está situada en alguna casilla
+
+## ¬ H [ i , j ] ∨¬ H [ i , j ′ ] , 0 ≤ i ≤ p ( n ) , 0 ≤ j &lt; j ′ ≤ p ( n )
+
+En cada momento, la cabeza de lectura no puede estar en dos casillas distintas
+
+Serafín Moral
+
+S [ i , j , 0 ] ∨ S [ i , j , 1 ] ∨···∨ S [ i , j , v ] , 0 ≤ i ≤ p ( n ) , 0 ≤ j ≤ p ( n )
+
+En cada momento i , en la casilla j hay algún símbolo del alfabeto.
+
+¬ S [ i , j , k ] ∨¬ S [ i , j , k ′ ] ,
+
+0 ≤ i ≤ p ( n ) , 0 ≤ j ≤ p ( n ) , 0 ≤ k &lt; k ′ ≤ v
+
+En cada momento i , y en cada casilla j no puede haber dos símbolos distintos.
+
+Serafín Moral
+
+## Grupo 4: Configuración Inicial
+
+- Q [ 0 , 0 ] , en el momento inicial (0), la máquina está en el estado 0.
+- H [ 0 , 0 ] , , en el momento inicial (0), la cabeza está en la casilla 0.
+- Si la palabra de entrada es: x = s k 1 . . . s kn entonces se introducen las cláusulas:
+
+## S [ 0 , 0 , k 1 ] , S [ 0 , 1 , k 2 ] , . . . , S [ 0 , n -1 , k n ]
+
+Inicialmente, los símbolos de la palabra x están en las n primeras casillas de la cinta
+
+Estas son las únicas cláusulas que dependen de la entrada.
+
+- S [ 0 , n , 0 ] , S [ 0 , n + 1 , 0 ] , . . . , S [ 0 , p ( n ) , 0 ] Inicialmente, el resto de las casillas de entrada contienen el síbolo B = s 0 .
+
+Serafín Moral
+
+## O ( i , 1 ) ∨···∨ O ( i , l ) , 0 ≤ i ≤ p ( n ) -1.
+
+En cada momento la máquina toma una opción.
+
+/negationslash
+
+## ¬ O ( i , j ) ∨¬ O ( i , j ′ ) , 0 ≤ i ≤ p ( n ) -1 , 1 ≤ j , j ′ ≤ l , j = j ′ . La máquina no puede tomar dos opciones a la vez en un momento dado.
+
+## Grupo 6: Funcionamiento de la Máquina
+
+Si δ ( q k , s d ) = { ( q k 1 , s d 1 , m 1 ) , . . . , ( q kl , s dl , m l ) } , entonces añadimos todas las cláusulas:
+
+¬ H [ i , j ] ∨¬ Q [ i , k ] ∨¬ S [ i , j , d ] ∨¬ O ( i , e ) ∨ Q [ i + 1 , k e ]
+
+¬ H [ i , j ] ∨¬ Q [ i , k ] ∨¬ S [ i , j , d ] ∨¬ O ( i , e ) ∨ S [ i + 1 , j , d e ]
+
+¬ H [ i , j ] ∨¬ Q [ i , k ] ∨¬ S [ i , j , d ] ∨¬ O ( i , e ) ∨ H [ i + 1 , j + m e ]
+
+## donde
+
+0 ≤ i ≤ p ( n ) -1 , 0 ≤ j ≤ p ( n ) ,
+
+0 ≤ k ≤ r , 0 ≤ d ≤ v , 1 ≤ e ≤ l
+
+Serafín Moral
+
+Tema 4: NP-completitud
+
+donde
+
+¬ H [ i , j ] ∨¬ S [ i , j ′ , d ] ∨ S [ i + 1 , j ′ , d ]
+
+0 ≤ i ≤ p ( n ) -1 , 0 ≤ j , j ′ ≤ p ( n ) , ( j = j ′ )
+
+/negationslash
+
+0 ≤ d ≤ v
+
+Grupo 8: Funcionamiento de la Máquina, después de parar
+
+Si δ ( q k , s d ) = / 0 , entonces añadimos todas las cláusulas:
+
+¬ H [ i , j ] ∨¬ Q [ i , k ] ∨¬ S [ i , j , d ] ∨ Q [ i + 1 , k ]
+
+¬ H [ i , j ] ∨¬ Q [ i , k ] ∨¬ S [ i , j , d ] ∨ S [ i + 1 , j , d ]
+
+¬ H [ i , j ] ∨¬ Q [ i , k ] ∨¬ S [ i , j , d ] ∨ H [ i + 1 , j ]
+
+0 ≤ i ≤ p ( n ) -1 , 0 ≤ j ≤ p ( n ) ,
+
+0 ≤ k ≤ r , 0 ≤ d ≤ v , 1 ≤ e ≤ l
+
+Serafín Moral donde
+
+Q [ p ( n ) , 1 ] : En el último paso, p ( n ) , la máquina se encuentra en un estado de aceptación.
+
+<!-- image -->
+
+Está claro que por la forma de construir la máquina.
+
+Las clásulas reproducen exactamente el funcionamiento de la máquina para la palabra de entrada e incluyen una cláusula que indica que la palabra es aceptada. La libertad está en elegir el valor de verdad de las opciones que puede coger la MT. El resto de las variables tienen un valor de verdad determinado dada la opción elegida. Si al final se puede satisfacer la cláusula Q [ p ( n ) , 1 ] es que se puede llegar a un estado de aceptación.
+
+Entonces la palabra es aceptada si y solo si todas es posible satisfacer todas las cláusulas.
+
+<!-- image -->
+
+La reducción que hemos realizado tiene una complejidad espacio logarítmica en función de la longitud de x : | x | = n .
+
+Primero, n se representa con t =log( n ) bits.
+
+El cálculo de p ( n ) requiere realizar varias operaciones, multiplicaciones y sumas. El número de operaciones es fijo, por lo que el espacio necesario será del orden de t =log( n ) .
+
+p ( n ) se representará también con un número de cifras que será del orden de t =log( n ) .
+
+Finalmente, toda la transformación maneja índices que varían entre 0 y p ( n ) o entre dos valores constantes. En el segundo caso, el espacio no varía en función de la longitud de x , y en el primer caso se necesita un espacio de orden t =log( n ) (el espacio necesario para el índice más grande) para almacenarlos.
+
+Luego, la complejidad en espacio de toda la transformación es de orden O (log( n )) .
+
+## Estrategia para NP-Completitud
+
+Supongamos que queremos demostrar que Pr es NP-completo. Tenemos que hacer:
+
+- Demostrar que Pr está en NP.
+- Determinar un problema NP-completo ya conocido Pr ′ , y demostrar que
+
+## Pr ′ ∝ Pr
+
+Como la reducción es transitiva, esta última condición garantiza que cualquier otro problema de NP se reduce a L .
+
+- Hay dos formas de entender 3-SAT: a lo más 3 literates y exactamente 3 literales.
+- Las dos son NP-completas.
+- Es NP ya que es un caso particular de SAT y éste ya estaba en NP: el mismo algoritmo vale.
+- Para demostrar que es completo para la clase NP, no realizamos una demostración similar a la del teorema de Cook. Simplemente, reducimos SAT a 3-SAT.
+
+Para ello, dado un ejemplo de SAT tenemos que construir un ejemplo de 3-SAT que tenga la misma respuesta: las cláusulas son consistentes o inconsistentes en ambos casos a la vez.
+
+Supongamos un ejemplo de SAT, con símbolos U y un conjunto de cláusulas C .
+
+Construimos un ejemplo de 3-SAT, que tiene como símbolos los de U y algunos adicionales y cuyas cláusulas, C ′ , se obtienen de C de la siguiente forma:
+
+- Las cláusulas de C de longitud menor o igual a 3 se añaden tal cual a C ′ .
+
+<!-- image -->
+
+## SAT ∝ 3-SAT (Cont.)
+
+La reducción se basa en el siguiente hecho:
+
+Si tengo la fórmula P ∨ Q donde P y Q son dos fórmulas, entonces esta formula se puede satisfacer si y solo si se puede satisfacer
+
+<!-- formula-not-decoded -->
+
+donde x es un símbolo proposicional que no aparecía en la fórmula.
+
+## SAT ∝ 3-SAT (Cont.)
+
+La reducción se basa en el siguiente hecho:
+
+Si tengo la fórmula P ∨ Q donde P y Q son dos fórmulas, entonces esta formula se puede satisfacer si y solo si se puede satisfacer
+
+<!-- formula-not-decoded -->
+
+donde x es un símbolo proposicional que no aparecía en la fórmula. Si estas dos fórmulas son ciertas entonces haciendo resolución en x , deduzco que P ∨ Q se puede satisfacer.
+
+Si P ∨ Q se puede satisfacer, entonces existe una asignación con la que P o Q es cierta. Entonces si P es cierta, hago x falso y en caso contrario hago x verdadero: está claro que ambas cláusulas se pueden satisfacer.
+
+## SAT ∝ 3-SAT (Cont.)
+
+- Para cada clásula en C de longitud mayor o igual que 4: l 1 ∨ l 2 ∨···∨ l k , k ≥ 4, donde l 1 , . . . , l k son literales, añado símbolos proposicionales x 2 , . . . , x k -2 y las cláusulas
+
+l 1 ∨ l 2 ∨ x 2 , ¬ x 2 ∨ l 3 ∨ x 3 , · · · , ¬ x k -3 ∨ l k -2 ∨ x k -2 , ¬ x k -2 ∨ l k -1 ∨ l k ,
+
+La demostración de que esta transformación es una verdadera reducción, se basa en comprobar que para cada cláusula l 1 ∨ l 2 ∨···∨ l k , este es el resultado de aplicar la regla básica k -3 veces con las variables x 2 , . . . , x k -2 La primera se aplica, añadiendo x 2 y transformando en l 1 ∨ l 2 ∨ x 2 , ¬ x 2 ∨ l 3 ∨ l 4 ∨···∨ l k
+
+Ahora se aplica recursiva la misma operación a ¬ x 2 ∨ l 3 ∨ l 4 ∨···∨ l k , pero añadiendo cada vez una variable distinta x k , hasta que nos quedemos con una cláusula de longitud 3.
+
+p ∨¬ r ∨¬ s ∨ t ∨ q
+
+Es importante señalar que para que el algoritmo sea espacio logarítmico, no se puede hacer de forma recursiva calculando las cláusulas intermedias (esas cláusulas pueden ser de tamaño del mismo orden que la entrada). Hay que hacerlo de forma iterativa como se explicó al principio.
+
+<!-- image -->
+
+Serafín Moral
+
+<!-- image -->
+
+Es importante señalar que para que el algoritmo sea espacio logarítmico, no se puede hacer de forma recursiva calculando las cláusulas intermedias (esas cláusulas pueden ser de tamaño del mismo orden que la entrada). Hay que hacerlo de forma iterativa como se explicó al principio.
+
+<!-- image -->
+
+Es importante señalar que para que el algoritmo sea espacio logarítmico, no se puede hacer de forma recursiva calculando las cláusulas intermedias (esas cláusulas pueden ser de tamaño del mismo orden que la entrada). Hay que hacerlo de forma iterativa como se explicó al principio.
+
+## Resultado
+
+El problema 3-SAT sigue siendo NP-completo si exigimos que todas las cláusulas tengan exactamente 3 literales distintos.
+
+- 3-SAT podemos reducirlo a este problema, añadiendo x 1 , x 2 y x 3 y añadiendo a toda cláusula de longitud menor que 3, alguna o varias de estas variables.
+
+Por ejemplo ¬ t se transformaría en ¬ t ∨ x 1 ∨ x 2 .
+
+A continuación añadimos cláusulas que fuercen a estas variables a ser falsas: todas las cláusulas de tamaño 3 con estas 3 variables, excepto x 1 ∨ x 2 ∨ x 3 . Estas 7 cláusulas solo se pueden satisfacer si x 1 , x 2 , x 3 son falsas y las nuevas cláusulas son equivalentes a las primeras.
+
+<!-- image -->
+
+Consideremos un problema 2-SAT, entonces construimos el grafo:
+
+- Nodos: Variables y sus negaciones (todos los posibles literales)
+- Arcos: ( α , β ) es un arco si y solo si ( ¬ α ∨ β ) está en el problema.
+
+<!-- image -->
+
+<!-- image -->
+
+## Teorema
+
+El conjunto de cláusulas C es consistente si y solo si no existe un par de nodos x , ¬ x , tal que existe un camino de x a ¬ x y otro camino de ¬ x a x .
+
+<!-- image -->
+
+## Teorema
+
+El conjunto de cláusulas C es consistente si y solo si no existe un par de nodos x , ¬ x , tal que existe un camino de x a ¬ x y otro camino de ¬ x a x .
+
+<!-- image -->
+
+## Teorema
+
+El conjunto de cláusulas C es consistente si y solo si no existe un par de nodos x , ¬ x , tal que existe un camino de x a ¬ x y otro camino de ¬ x a x .
+
+Grafo:
+
+## C = { x 1 ∨ x 2 , x 1 ∨¬ x 3 , ¬ x 1 ∨ x 2 , x 2 ∨ x 3 }
+
+<!-- image -->
+
+Esto demuestra que el complementario de 2-SAT está en NL, pero como NL=CoNL, 2-SAT está en NL
+
+Las deducciones son los caminos.
+
+- Si hay un camino de x a ¬ x , se deduce ¬ x
+- Si hay un camino de ¬ x a x , se deduce x
+
+## Teorema
+
+El conjunto de cláusulas C es consistente si y solo si no existe un par de nodos x , ¬ x , tal que existe un camino de x a ¬ x y otro camino de ¬ x a x .
+
+Son aquellas en las que, a lo más, existe un literal positivo. Idea del algoritmo polinómico: ( V el conjunto de variables proposicionales).
+
+- Se consideran los conjuntos C 1 (todos los literales son negativos) y C 2 (existe un literal positivo).
+- Sea H un conjunto de variables proposicionales que inicialmente es igual a las variables que aparecen en las cláusulas de longitud 1 de C 2 . La idea es que este conjunto contenga las variables tienen que ser necesariamente verdad.
+
+<!-- image -->
+
+## Algoritmo (Cont.)
+
+- Mientras H cambie, examinar las cláusulas de C 2 , si alguna es de la forma ¬ z 1 ∨¬ z 2 ∨···∨¬ z i ∨ y con todas las variables z 1 , . . . , z i en el conjunto H y la variable y no en H , entonces añadir y a H . ( Como ¬ z 1 ∨¬ z 2 ∨···∨¬ z i ∨ y es equivalente a ( z 1 ∧ z 2 ∧···∧ z i ) → y , si todos los antecedentes son verdaderos, entonces el consecuente también lo tiene que ser ).
+- Una vez calculado H se hacen verdad las variables de este conjunto y falsas las de V \ H .
+- La consistencia es equivalente a que para cada cláusula en C 1 exista un literal con su variable en V \ H .
+
+<!-- image -->
+
+## Datos:
+
+Un conjunto de cláusulas con dos literales y un valor K ≥ 0.
+
+Pregunta:
+
+¿Pueden satisfacerse, al menos, K cláusulas?
+
+Es una generalización de 2-SAT y es NP-completo. Que es NP es inmediato. Para demostrar que es completo en esta clase, vamos a reducir 3-SAT.
+
+## Reducción: 3-SAT ∝ MAX2SAT
+
+Para ello cada cláusula de longitud 3, x ∨ y ∨ z se transforma en las siguientes 10 cláusulas ( w es una nueva variable añadida),
+
+<!-- formula-not-decoded -->
+
+Se selecciona K = 7 m , donde m es el número de cláusulas.
+
+Técnica: Construcción de Gadgets
+
+Esto se puede comprobar, viendo que para cada cláusula, si x ∨ y ∨ z es verdadero entonces se puede elegir el valor de verdad de w de manera que se satisfagan 7 cláusulas (pero no más). Si x ∨ y ∨ z es falso, entonces nunca podemos llegar a satisfacer 7 o más de estas 10 cláusulas, elijamos como elijamos el valor de verdad de w .
+
+Muchos problemas, cuando se plantean con suficiente generalidad son NP-completos. Hay restricciones que no llegan a convertirlos en problemas polinómicos, pero siempre, si se restringe el número de casos a resolver lo suficiente se llega un problema polinómico.
+
+<!-- image -->
+
+3-SAT es NP-completo si hacemos que cada literal nunca aparezca más de dos veces y cada variable más de tres veces, pero pueden existir cláusulas de longitud menor que 3.
+
+Hemos de probar que cualquier ejemplo de 3-SAT se puede transformar en un ejemplo equivalente que cumpla esta restricción. Esto se hace con el siguiente procedimiento:
+
+- Si una variable x no cumple las condiciones de la restricción, apareciendo k veces en las cláusulas, se substituye x por k nuevas variables, x 1 , . . . , x k , una por cada aparición.
+- Se añaden las cláusulas: ¬ x 1 ∨ x 2 , ¬ x 2 ∨ x 3 , . . . , ¬ x k ∨ x 1 Estas son equivalentes a: x 1 → x 2 , x 2 → x 3 , . . . , x k → x 1 con lo que todas las versiones x i tienen que tener el mismo valor de verdad.
+
+<!-- image -->
+
+Dado un conjunto de clausulas de longitud 3, determinar si existe una asignación de valores de verdad tal que para cada clausula, alguno, pero no todos los literales sean ciertos.
+
+Es claramente NP ya que si se se pueden asignar de forma no determinista valores de verdad a las variables y después comprobar en tiempo polinómico si se verifican las condiciones especificadas: en cada cláusula hay un literal cierto y otro falso.
+
+<!-- image -->
+
+## Reducción de 3-SAT a NAESAT
+
+Se añade una nueva variable z .
+
+Para cada clausula con menos de 3 literales, añadimos z .
+
+Si los tres literales son distintos p ∨ q ∨ r añadimos una variable s (significado: p ∨ q ↔ s ) y las cláusulas:
+
+## s ∨ r ∨ z , p ∨ q ∨¬ s , ¬ p ∨ s ∨ z , ¬ q ∨ s ∨ z
+
+Si NAESAT tiene solución, entonces cambiando el valor de verdad de todas las variables, sigue teniendo solución. Elegimos la solución en la que z es falso. Esta es una solución del problema original.
+
+Reciprocamente, si se satisface SAT, podemos satisfacer todas las clausulas nuevas de acuerdo con NAESAT con el mismo valor de verdad para las variables que existían y haciendo z falso y s verdadero si p ó q son verdaderos.
+
+## Problema del Isomorfismo de Grafos
+
+Dados dos grafos no dirigidos G 1 =( V 1 , E 1 ) y G 2 =( V 2 , E 2 ) , determinar si existe un isomorfismo entre G 1 y G 2 , esto es una aplicación biyectiva f : V 1 → V 2 , tal que ( u , v ) ∈ E 1 ⇔ ( f ( u ) , f ( v )) ∈ E 2 .
+
+Este es un ejemplo de problema que no se ha demostrado que sea NP -completo y tampoco se conoce ningún algoritmo polinómico para resolverlo. Se supone que ni está en P ni es NP -Completo. De hecho se ha definido una clase GI de todos los problemas que se pueden reducir al problema del isoformismo de grafos, de la que evidentemente el problema del isoformismo de grafos es GI -completo.
+
+## Acoplamiento de Tripletas (ACTRI)
+
+## Datos:
+
+- Tres conjuntos disjuntos W , X , Y del mismo tamaño q
+- Un subconjunto M ⊆ W × X × Y de compatibilidades
+
+## Pregunta:
+
+/negationslash
+
+/negationslash
+
+¿Contiene M un subconjunto M ′ ⊆ M con q elementos, tal que para cada ( w 1 , x 1 , y 1 ) , ( w 2 , x 2 , y 2 ) ∈ M ′ , si ( w 1 , x 1 , y 1 ) =( w 2 , x 2 , y 2 ) , entonces w 1 = w 2 , x 1 = x 2 , y 1 = y 2 ?.
+
+/negationslash
+
+/negationslash
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+<!-- image -->
+
+/Bullet
+
+/Bullet
+
+Serafín Moral
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+## Acoplamiento de Tripletas (ACTRI)
+
+## Datos:
+
+- Tres conjuntos disjuntos W , X , Y del mismo tamaño q
+- Un subconjunto M ⊆ W × X × Y de compatibilidades
+
+## Pregunta:
+
+/negationslash
+
+/negationslash
+
+¿Contiene M un subconjunto M ′ ⊆ M con q elementos, tal que para cada ( w 1 , x 1 , y 1 ) , ( w 2 , x 2 , y 2 ) ∈ M ′ , si ( w 1 , x 1 , y 1 ) =( w 2 , x 2 , y 2 ) , entonces w 1 = w 2 , x 1 = x 2 , y 1 = y 2 ?.
+
+/negationslash
+
+/negationslash
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+<!-- image -->
+
+/Bullet
+
+/Bullet
+
+Serafín Moral
+
+/Bullet
+
+/Bullet
+
+Tema 4: NP-completitud
+
+/Bullet
+
+/Bullet
+
+Es NP, ya que un algoritmo no determinista que elige un subconjunto de M y comprueba que si hay en cada elemento del subconjunto uno y sólo uno de los elementos de cada conjunto tiene tiempo polinómico.
+
+<!-- image -->
+
+Para demostrar que es completo para NP, para a reducir 3-SAT a ACTRI. Vamos a suponer un ejemplo de 3-SAT con los siguientes datos: U = { u 1 , u 2 , . . . , u n } , C = { c 1 , c 2 , . . . , c m } Vamos a construir un ejemplo de ACTRI con la misma solución. Construiremos los conjuntos W , X , Y y el subconjunto de tripletas M ⊆ W × X × Y . Para cada variable u i vamos a introducir en W los elementos u i [ j ] , u i [ j ] , j = 1 , . . . , m , en X los elementos a i [ j ] , j = 1 , . . . , m y en Y los elementos b i [ j ] , j = 1 , . . . , m . En M se introducen las tripletas: T t i = { ( u i [ j ] , a i [ j ] , b i [ j ]) : 1 ≤ j ≤ m } y T f i = { ( u i [ j ] , a i [ j + 1 ] , b i [ j ]) : 1 ≤ j &lt; m }∪{ ( u i [ m ] , a i [ 1 ] , b i [ m ]) } .
+
+## Ejemplo:
+
+U = { u 1 , u 2 , u 3 , u 4 } , C = { u 1 ∨¬ u 3 ∨¬ u 4 , ¬ u 1 ∨ u 2 ∨¬ u 4 }
+
+{ ( u 1 [ 1 ] , a 1 [ 1 ] , b 1 [ 1 ]) , ( u 1 [ 2 ] , a 1 [ 2 ] , b 1 [ 2 ]) , ( u 1 [ 1 ] , a 1 [ 2 ] , b 1 [ 1 ]) , ( u 1 [ 2 ] , a 1 [ 1 ] , b 1 [ 2 ]) , ( u 2 [ 1 ] , a 2 [ 1 ] , b 2 [ 1 ]) , ( u 2 [ 2 ] , a 2 [ 2 ] , b 2 [ 2 ]) , ( u 2 [ 1 ] , a 2 [ 2 ] , b 2 [ 1 ]) , ( u 2 [ 2 ] , a 2 [ 1 ] , b 2 [ 2 ]) , ( u 3 [ 1 ] , a 3 [ 1 ] , b 3 [ 1 ]) , ( u 3 [ 2 ] , a 3 [ 2 ] , b 3 [ 2 ]) , ( u 3 [ 1 ] , a 3 [ 2 ] , b 3 [ 1 ]) , ( u 3 [ 2 ] , a 3 [ 1 ] , b 3 [ 2 ]) , ( u 4 [ 1 ] , a 4 [ 1 ] , b 4 [ 1 ]) , ( u 4 [ 2 ] , a 4 [ 2 ] , b 4 [ 2 ]) , ( u 4 [ 1 ] , a 4 [ 2 ] , b 4 [ 1 ]) , ( u 4 [ 2 ] , a 4 [ 1 ] , b 4 [ 2 ]) , }
+
+## ACTRI es NP-Completo
+
+## Gráfica de tripletas:
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+<!-- image -->
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+Serafín Moral
+
+/Bullet
+
+/Bullet
+
+Tema 4: NP-completitud
+
+## ACTRI es NP-Completo
+
+## Gráfica de tripletas:
+
+ui
+
+[
+
+]
+
+1
+
+/Bullet
+
+1
+
+bi
+
+[
+
+ai
+
+[
+
+]
+
+3
+
+/Bullet
+
+]
+
+ui
+
+[
+
+ui
+
+[
+
+ui
+
+[
+
+]
+
+2
+
+/Bullet
+
+1
+
+]
+
+/Bullet bi
+
+ui
+
+[
+
+[
+
+2
+
+/Bullet ai
+
+]
+
+/Bullet
+
+/Bullet
+
+2
+
+]
+
+[
+
+2
+
+]
+
+/Bullet
+
+/Bullet ai
+
+bi
+
+/Bullet
+
+3
+
+]
+
+[
+
+1
+
+]
+
+[
+
+/Bullet
+
+3
+
+]
+
+ui
+
+/Bullet
+
+/Bullet bi
+
+[
+
+[
+
+]
+
+4
+
+4
+
+]
+
+ai
+
+/Bullet
+
+[
+
+]
+
+4
+
+/Bullet ui
+
+Serafín Moral
+
+[
+
+/Bullet
+
+3
+
+Los no
+
+valores
+
+a
+
+aparecen otras
+
+tripletas.
+
+efecto es
+
+que
+
+i
+
+b
+
+en
+
+El en
+
+deberán todos
+
+los
+
+M
+
+′
+
+de estas
+
+elementos
+
+u
+
+i
+
+[
+
+1
+
+]
+
+,
+
+u
+
+i
+
+[
+
+2
+
+]
+
+,
+
+u
+
+i
+
+[
+
+3
+
+]
+
+,
+
+u
+
+i
+
+[
+
+4
+
+]
+
+o todos los elementos
+
+u
+
+i
+
+[
+
+1
+
+]
+
+,
+
+u
+
+i
+
+[
+
+2
+
+]
+
+,
+
+u
+
+i
+
+[
+
+3
+
+]
+
+,
+
+u
+
+i
+
+[
+
+4
+
+]
+
+.
+
+]
+
+Tema 4: NP-completitud ui
+
+[
+
+4
+
+]
+
+i
+
+,
+
+## ACTRI es NP-Completo
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+Serafín Moral
+
+<!-- image -->
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+/Bullet
+
+Tema 4: NP-completitud
+
+## Tripletas para las cláusulas
+
+## Por cada cláusula c j ∈ C :
+
+- Añadir un elemento s [ j ] a X
+- Añadir un elemento t [ j ] a Y
+- Añadir a M las tripletas
+
+{ ( u i [ j ] , s [ j ] , t [ j ])
+
+: u i está en c j }∪
+
+{ ( u i [ j ] , s [ j ] , t [ j ]) :
+
+¬ u i está en c j }
+
+La idea es que en cada acoplamiento M ′ debe de contener alguna de estas tripletas.
+
+Si, de las tripletas anteriores, quedaban libres (no elegidos) los elementos u i [ 1 ] , u i [ 2 ] , u i [ 3 ] , u i [ 4 ] corresponde al caso en el que u i es cierto. Si quedaban libres u i [ 1 ] , u i [ 2 ] , u i [ 3 ] , u i [ 4 ] , corresponde al caso en el que u i es falso.
+
+En consecuencia, estas tripletas garantizan que todas las clásulas se satisfacen.
+
+## Elementos adicionales
+
+## Se añden los siguientes elementos:
+
+- g [ k ] , 1 ≤ k ≤ m ( n -1 ) al conjunto X
+- h [ k ] , 1 ≤ k ≤ m ( n -1 ) al conjunto Y
+- Al conjunto M las tripletas:
+
+( u i [ j ] , g [ k ] , h [ k ]) , ( u i [ j ] , g [ k ] , h [ k ]) , 1 ≤ k ≤ m ( n -1 ) , 1 ≤ i ≤ n , 1 ≤ j ≤ m
+
+## La idea es la siguiente:
+
+Nos han quedado libres en W después de elegir entre las primeras tripletas: m . n elementos. Después de la segundas tripletas, como hemos elegido uno por cláusula, nos quedan m . n -m = m ( n -1 ) . Ahora añadimos este número de elementos a X y a Y y le permitimos que sean compatibles con todos los de X , para tener libertad para elegir los elementos sobrantes en tripletas como queramos.
+
+El número de tripletas de M es: 2 mn + 3 m + 2 m 2 n ( n -1 )
+
+- U = { u 1 , u 2 , u 3 , u 4 } , C = { u 1 ∨¬ u 3 ∨¬ u 4 , ¬ u 1 ∨ u 2 ∨¬ u 4 }
+- W = { u 1 [ 1 ] , u 1 [ 2 ] , u 1 [ 1 ] , u 1 [ 2 ] , u 2 [ 1 ] , u 2 [ 2 ] , u 2 [ 1 ] , u 2 [ 2 ] , u 3 [ 1 ] , u 3 [ 2 ] , u 3 [ 1 ] , u 3 [ 2 ] , u 4 [ 1 ] , u 4 [ 2 ] , u 4 [ 1 ] , u 4 [ 2 ] }
+- X = { a 1 [ 1 ] , a 1 [ 2 ] , a 2 [ 1 ] , a 2 [ 2 ] , a 3 [ 1 ] , a 3 [ 2 ] , a 4 [ 1 ] , a 4 [ 2 ] , s [ 1 ] , s [ 2 ] , g [ 1 ] , g [ 2 ] , g [ 3 ] , g [ 4 ] , g [ 5 ] , g [ 6 ] }
+- Y = { b 1 [ 1 ] , b 1 [ 2 ] , b 2 [ 1 ] , b 2 [ 2 ] , b 3 [ 1 ] , b 3 [ 2 ] , b 4 [ 1 ] , b 4 [ 2 ] , t [ 1 ] , t [ 2 ] , h [ 1 ] , h [ 2 ] , h [ 3 ] , h [ 4 ] , h [ 5 ] , h [ 6 ] }
+
+U = { u 1 , u 2 , u 3 , u 4 } , C = { u 1 ∨¬ u 3 ∨¬ u 4 , ¬ u 1 ∨ u 2 ∨¬ u 4 } M = { ( u 1 [ 1 ] , a 1 [ 1 ] , b 1 [ 1 ]) , ( u 1 [ 2 ] , a 1 [ 2 ] , b 1 [ 2 ]) , ( u 1 [ 1 ] , a 1 [ 2 ] , b 1 [ 1 ]) , ( u 1 [ 2 ] , a 1 [ 1 ] , b 1 [ 2 ]) , ( u 2 [ 1 ] , a 2 [ 1 ] , b 2 [ 1 ]) , ( u 2 [ 2 ] , a 2 [ 2 ] , b 2 [ 2 ]) , ( u 2 [ 1 ] , a 2 [ 2 ] , b 2 [ 1 ]) , ( u 2 [ 2 ] , a 2 [ 1 ] , b 2 [ 2 ]) , ( u 3 [ 1 ] , a 3 [ 1 ] , b 3 [ 1 ]) , ( u 3 [ 2 ] , a 3 [ 2 ] , b 3 [ 2 ]) , ( u 3 [ 1 ] , a 3 [ 2 ] , b 3 [ 1 ]) , ( u 3 [ 2 ] , a 3 [ 1 ] , b 3 [ 2 ]) , ( u 4 [ 1 ] , a 4 [ 1 ] , b 4 [ 1 ]) , ( u 4 [ 2 ] , a 4 [ 2 ] , b 4 [ 2 ]) , ( u 4 [ 1 ] , a 4 [ 2 ] , b 4 [ 1 ]) , ( u 4 [ 2 ] , a 4 [ 1 ] , b 4 [ 2 ]) , ( u 1 [ 1 ] , s [ 1 ] , t [ 1 ]) , ( u 3 [ 1 ] , s [ 1 ] , t [ 1 ]) , ( u 4 [ 1 ] , s [ 1 ] , t [ 1 ]) , ( u 1 [ 2 ] , s [ 2 ] , t [ 2 ]) , ( u 2 [ 2 ] , s [ 2 ] , t [ 2 ]) , ( u 4 [ 2 ] , s [ 2 ] , t [ 2 ]) , ( u i [ j ] , g [ k ] , h [ k ]) , ( u i [ j ] , g [ k ] , h [ k ])( i = 1 , . . . , 4 , j = 1 , 2 , k = 1 , . . . , 6 ) }
+
+## Solución 3-SAT implica solución ACTRI
+
+Si tenemos una asignación de valores de verdad t ( u i ) ∈ { V , F } que satisface todas las cláusulas, elegimos el subconjunto de tripletas M ′ de la siguiente forma:
+
+- Si u es cierto elegimos las tripletas:
+- i { ( u i [ j ] , a i [ j ] , b i [ j ]) : 1 ≤ j ≤ m }
+- Si u i es falso:
+- { ( u i [ j ] , a i [ j + 1 ] , b i [ j ]) : 1 ≤ j &lt; m }∪{ ( u i [ m ] , a i [ 1 ] , b i [ m ]) } .
+- Para cada cláusula j elegimos de entre las tripletas: { ( u i [ j ] , s [ j ] , t [ j ]) : u i está en c j }∪ { ( u i [ j ] , s [ j ] , t [ j ]) : ¬ u i está en c j } elegimos aquella que corresponde a la variable u i que hacer cierta la cláusula.
+- Nos quedan por elegir exactamente n ( m -1 ) elementos de cada conjunto, que se eligen de las tripletas ( u i [ j ] , g [ k ] , h [ k ]) , ( u i [ j ] , g [ k ] , h [ k ]) . Aquí no hay problema, ya que todos los elementos son compatibles entre sí.
+
+## Solución ACTRI implica solución 3-SAT
+
+Supongamos el problema de ACTRI construido a partir de 3-SAT y supongamos que tenemos un subconjunto M ′ de tripletas solución.
+
+- 1 Vimos que para cada variable u i , sólo hay dos formas de elegir las tripletas en una solución: o se eligen las
+- { ( u i [ j ] , a i [ j ] , b i [ j ]) : 1 ≤ j ≤ m } o se eligen las { ( u i [ j ] , a i [ j + 1 ] , b i [ j ]) : 1 ≤ j &lt; m }∪{ ( u i [ m ] , a i [ 1 ] , b i [ m ]) } .
+- 2 En el primer caso, hacemos u i verdadero y en el segundo u i falso.
+- 3
+- Para cada cláusula alguna de las 3 tripletas:
+- { ( u i [ j ] , s [ j ] , t [ j ]) : u i está en c j }∪{ ( u i [ j ] , s [ j ] , t [ j ]) : ¬ u i está en c j } debe de haberse elegido en M ′ .
+- 4 Si hemos elegido ( u i [ j ] , s [ j ] , t [ j ]) con u i en c j , entonces, u i [ j ] no estaba en las tripletas elegidas consideradas en el paso 1. Por lo tanto, hemos hecho u i verdadero y la cláusula se satisface.
+- 5 Si hemos elegido ( u i [ j ] , s [ j ] , t [ j ]) con ¬ u i en c j , entonces, u i [ j ] no estaba en las tripletas elegidas consideradas en el paso 1. Por lo tanto, hemos hecho u i falso y la cláusula se satisface.
+
+## Cubr. por conj. de tamaño tres (3-SET)
+
+Datos: Un conjunto finito X con | X | = 3 q y un subconjunto C de subconjuntos de X de tres elementos.
+
+¿Existe ′ ⊆ tal que y los elementos
+
+/negationslash
+
+Pregunta: C C X = ⋃ A ∈ C ′ A de C ′ son disjuntos dos a dos ( A , B ∈ C ′ y A = B , entonces A ∩ B = / 0 )?
+
+Es un problema de NP.
+
+Para demostrar que es completo para NP, existe una trasformación muy sencilla: ACTRI ∝ 3-SET.
+
+Supongamos un ejemplo de ACTRI dado por W , Y , Z y el subconjunto de tripletas M , construimos el ejemplo de 3-SET donde X = W ∪ Y ∪ Z y
+
+C = {{ w , y , z } : ( w , y , z ) ∈ M }
+
+.
+
+Clique: Dado un grafo G =( V , E ) , un clique es un subconjunto maximal totalmente conectado. Es decir, un subconjunto V t ⊆ V tal que ∀ v 1 , v 2 ∈ V t , ( v 1 , v 2 ) ∈ E , y que no está estrictamente incluido en otro conjunto que cumpla esta propiedad. El problema del Clique Máximo (Clique): Dado un grafo G =( V , E ) y un número natural J ≤| V | , determinar si existe un clique de tamaño mayor o igual que J .
+
+Este problema es equivalente a la existencia de un conjunto totalmente conectado de tamaño mayor o igual que J .
+
+En el siguiente grafo, tenemos un clique de tamaño 4 (en rojo):
+
+<!-- image -->
+
+<!-- image -->
+
+## Cubrimiento por Vértices (CV)
+
+Dado un grafo G =( V , E ) y un subconjunto V c ⊆ V , se dice que V c es un cubrimiento por vértices de G , si y solo si toda arista del grafo tiene un extremo en V c :
+
+<!-- formula-not-decoded -->
+
+Problema: Dado un grafo G =( V , E ) y un número natural K ≤| V | , determinar si existe un cubrimiento por vértices de tamaño menor o igual que K .
+
+En el siguiente grafo, tenemos un cubrimiento por vértices de tamaño 3 (en rojo):
+
+<!-- image -->
+
+<!-- image -->
+
+## Conjunto Independiente (CI)
+
+Dado un grafo G =( V , E ) y un subconjunto V i ⊆ V , se dice que V i es un conjunto independiente de G , si y solo si no hay ninguna arista que una vértices de V i :
+
+∀ u , v ∈ V i , ( u , v ) /negationslash∈ E
+
+Problema: Dado un grafo G =( V , E ) y un número natural J ≤| V | , determinar si existe un conjunto independiente de tamaño mayor o igual que J .
+
+En el siguiente grafo, tenemos un conjunto independiente de tamaño 4 (en rojo):
+
+<!-- image -->
+
+<!-- image -->
+
+Si G =( V , E ) es un grafo y V ∗ ⊆ V , entonces las siguientes condiciones son equivalentes:
+
+- a) V ∗ es un cubrimiento por vértices de G
+- b) V \ V ∗ es un conjunto independiente de G
+- c) V \ V ∗ es un subgrafo totalmente conectado del grafo complementario G =( V , E ) . Donde E = V × V \ E .
+
+<!-- image -->
+
+Totalmente Conectado
+
+Cubrimiento por Vértices
+
+<!-- image -->
+
+Conjunto Independiente
+
+<!-- image -->
+
+Serafín Moral
+
+Tema 4: NP-completitud
+
+## Equivalencia de Problemas
+
+Los tres problemas (Clique, Cubrimiento por Vértices y Conjunto Independiente) son equivalente y si uno es NP-completo los otros también lo son.
+
+Si n es es número de nodos de G , entonces:
+
+- G tiene un cubrimiento por vértices de tamaño menor o igual que K
+
+G tiene un conjunto independiente de tamaño mayor o igual que n -K
+
+G tiene un clique de tamaño mayor o igual que n -K
+
+Está claro que es NP: se elige de forma no determinista un subconjunto de vértices y se comprueba en tiempo polinómico si es un cubrimiento.
+
+<!-- image -->
+
+Para demostrar que es completo reduciremos 3-SAT: 3-SAT ∝ CV. Sea una ejemplo de 3-SAT con variables U y cláusulas C . Se crea un ejemplo de CV, dado por un grafo G =( V , E ) .
+
+<!-- image -->
+
+- Para cada variables u i ∈ U se añaden dos vértices u i , u i y un arco que los una.
+- Para cada cláusula c j ∈ C , se añaden tres vértices a 1 [ j ] , a 2 [ j ] , a 3 [ j ] y tres aristas que los unan (se forma un triángulo).
+- Para cada clásula c j ∈ C si en el literal número k de esta clásula aparece la variable u i , se añade una arista de u k [ j ] al vértice u i si la variable aparece positiva y al vértice u i si la variable aparece negada.
+- Se pone un límite K = n + 2 m .
+
+<!-- image -->
+
+## Ejemplo
+
+Ejemplo de 3-SAT:
+
+U = { u 1 , u 2 , u 3 , u 4 } , C = { u 1 ∨¬ u 3 ∨¬ u 4 , ¬ u 1 ∨ u 2 ∨¬ u 4 } .
+
+## Ejemplo
+
+Ejemplo de 3-SAT:
+
+U
+
+= { u 1 , u 2 , u 3 , u 4 } , C = { u 1 ∨¬ u 3 ∨¬ u 4 , ¬ u 1 ∨ u 2 ∨¬ u 4 } .
+
+u
+
+1
+
+u
+
+1
+
+u
+
+2
+
+u
+
+2
+
+u
+
+3
+
+u
+
+3
+
+u
+
+4
+
+u
+
+4
+
+## Ejemplo
+
+## Ejemplo de 3-SAT:
+
+U = { u 1 , u 2 , u 3 , u 4 } , C = { u 1 ∨¬ u 3 ∨¬ u 4 , ¬ u 1 ∨ u 2 ∨¬ u 4 } .
+
+u
+
+1
+
+u
+
+1
+
+u
+
+2
+
+u
+
+2
+
+u
+
+3
+
+u
+
+3
+
+u
+
+4
+
+u
+
+4
+
+<!-- image -->
+
+## Ejemplo
+
+<!-- image -->
+
+## Ejemplo
+
+## Ejemplo de 3-SAT:
+
+U = { u 1 , u 2 , u 3 , u 4 } , C = { u 1 ∨¬ u 3 ∨¬ u 4 , ¬ u 1 ∨ u 2 ∨¬ u 4 } .
+
+<!-- image -->
+
+## Ejemplo
+
+## Ejemplo de 3-SAT:
+
+U = { u 1 , u 2 , u 3 , u 4 } , C = { u 1 ∨¬ u 3 ∨¬ u 4 , ¬ u 1 ∨ u 2 ∨¬ u 4 } .
+
+<!-- image -->
+
+## Equivalencia CV ↔ 3-SAT
+
+Ejemplo de 3-SAT:
+
+U = { u 1 , u 2 , u 3 , u 4 } , C = { u 1 ∨¬ u 3 ∨¬ u 4 , ¬ u 1 ∨ u 2 ∨¬ u 4 } .
+
+<!-- image -->
+
+## Si existe un cubrimiento V c , entonces
+
+- Debe de haber, al menos, un vértice de cada pareja, u i , u i
+- Para cada cláusula C j deben de existir, al menos, dos vértice de cada conjunto: { a 1 [ j ] , a 2 [ j ] , a 3 [ j ] } .
+
+Como el cubrimiento tiene, a lo más, n + 2 m vértices, entonces habrá exactamente un vértice por cada pareja u i , u i y dos por cada conjunto { a 1 [ j ] , a 2 [ j ] , a 3 [ j ] } .
+
+<!-- image -->
+
+Las clásulas se pueden satisfacer haciendo para cada variable u i :
+
+- u i cierto si u i ∈ V c
+- u i falso si u i /negationslash∈ V c
+
+Cada cláusula C j tiene tres vértices, y cada vértice está conectado con un vértice de variable.
+
+De estos tres arcos, hay dos que tienen extremos en los dos vértices de { a 1 [ j ] , a 2 [ j ] , a 3 [ j ] } que están en V c
+
+El otro arco, tendrá que tener su extremo del cubrimiento en los vértices correspondientes a las variables: u i o u i . El valor de verdad asignado a dicha variable hace que esa cláusula se satisfaga.
+
+<!-- image -->
+
+Sea una asignación de valores de verdad que haga consistentes las cláusulas, entonces un cubrimiento por vértices del tamaño deseado se consigue de la siguiente forma:
+
+donde a i [ j ] corresponde al literal que hace verdadera la cláusula C j .
+
+V c = { u i : u i es verdadero }∪{ u i : u i es falso }∪ ( ⋃ j ( { a 1 [ j ] , a 2 [ j ] , a 3 [ j ] }-{ a i [ j ] } ) )
+
+## El Problema del Circuito Hamiltoniano (CH)
+
+El problema del Circuito Hamiltoniano es NP-completo.
+
+Es inmediato que es NP. El algoritmo no-determinista polinomico solo tiene que elegir n nodos (número de nodos en el grafo) y después comprobar que hay un arco desde cada nodo al siguiente y del último hasta el primero.
+
+Para demostrar que es completo, vamos a reducir CV a este problema. Sea G =( V , E ) y K ≤| V | un problema de cubrimiento por vértices.
+
+Vamos a construir un grafo G ′ =( V ′ , E ′ ) de tal forma que la existencia de un circuito hamiltoniano para G ′ sea equivalente a la existencia de un recubrimiento de tamaño ≤ K para G .
+
+## Reducción: grafos base
+
+Para cada e =( u , v ) ∈ E se añade el siguiente grafo a G ′ (con 12 vértices).
+
+<!-- image -->
+
+Serafín Moral
+
+Tema 4: NP-completitud
+
+## Reducción: grafos base
+
+Para cada e =( u , v ) ∈ E se añade el siguiente grafo a G ′ (con 12 vértices).
+
+Solo estos nodos de los extremos se conectan con el resto del grafo
+
+<!-- image -->
+
+Serafín Moral
+
+Tema 4: NP-completitud
+
+<!-- image -->
+
+Serafín Moral
+
+Tema 4: NP-completitud
+
+Para cada v ∈ V sea
+
+## e v [ 1 ] , . . . , e v [ r v ]
+
+una ordenación arbitraria de los arcos que contienen v .
+
+Para 1 ≤ i &lt; r v unimos el subgrafo asociado a e v [ i ] y el subgrafo e v [ i + 1 ] mediante un arco que va de ( v , e v [ i ] , 6 ) a ( v , e v [ i + 1 ] , 1 ) .
+
+<!-- image -->
+
+## Reducción: Nodos Adicionales
+
+Finalmente se añaden K vértices, a 1 , a 2 , . . . , a K , que se unen con los subgrafos de la siguiente forma:
+
+- Para cada v ∈ V sea e v [ 1 ] , . . . , e v [ r v ] , la lista de las aristas que lo contienen en el orden que se consideraron anteriormente
+- Se añade una arista de cada uno de los a i a ( v , e v [ 1 ] , 1 ) (vértice extremo de la primera arista correspondiente a v )
+- Se añade una arista de cada uno de los a i a ( v , e v [ r v ] , 6 ) (vértice extremo de la última arista correspondiente a v )
+
+<!-- image -->
+
+<!-- image -->
+
+u
+
+<!-- image -->
+
+v
+
+e
+
+1
+
+u
+
+e
+
+2
+
+e
+
+3
+
+w
+
+K
+
+=
+
+2
+
+Serafín Moral
+
+<!-- image -->
+
+Tema 4: NP-completitud
+
+Nodo u :
+
+aristas
+
+e
+
+1
+
+,
+
+e
+
+3
+
+Nodo v :
+
+aristas e 1 , e 2
+
+Nodo w :
+
+aristas e 2 , e 3
+
+<!-- image -->
+
+Serafín Moral
+
+Tema 4: NP-completitud
+
+<!-- image -->
+
+Serafín Moral
+
+<!-- image -->
+
+Serafín Moral
+
+## Equivalencia de Soluciones
+
+Nodo
+
+u
+
+:
+
+aristas
+
+e
+
+1
+
+,
+
+e
+
+3
+
+Nodo v :
+
+aristas
+
+e
+
+1
+
+,
+
+e
+
+2
+
+Nodo w :
+
+aristas
+
+e
+
+2
+
+,
+
+e
+
+3
+
+<!-- image -->
+
+Serafín Moral
+
+Sean K vértices que forman un cubrimiento por vértices: { v 1 , . . . , v K } . Un circuito hamiltoniano se puede construir de la siguiente forma comenzando en a 1 :
+
+- Si estamos en a i , desde él recorremos todos los grafos asociados a las aristas de v i : para cada arista si tiene sólo a v i en el cubrimiento por vértices, se recorre el subgrafo de esa arista de forma completa; si la arista contiene los dos extremos en el cubrimiento, se recorre sólo la mitad de los vértices del subgrafo correspondientes a v i . Desde el último subgrafo volvemos a a i + 1 , repitiendo el proceso, excepto para a K que volvemos a a 1 y termina el circuito.
+
+## Si tenemos un circuito hamiltoniano, tendrá la forma
+
+<!-- image -->
+
+Desde cada a i al siguiente a i + 1 (y también desde a K a a 1 ) recorremos los subgrafos. En cada uno de esos recorridos entramos y salimos en los subgrafos por un mismo vértice. Sea este vértice v i ( v K si es el recorrido de a K a a 1 ).
+
+El conjunto { v 1 , . . . , v K } es un cubrimiento por vértices, ya que cada arista tiene un subgrafo en el que, al menos, el circuito hamiltoniano entra una vez. El vértice por el que se entra (que ha de coincidir con el de salida) ha de estar en el cubrimiento por vértices.
+
+## El Problema de la SUMA
+
+Datos: Un conjunto A y un tamaño para cada uno de sus elementos:
+
+## s : A → N
+
+y un número entero B Pregunta: Determinar si existe un A ′ ⊆ A tal que se verifique:
+
+<!-- image -->
+
+Este es claramente un problema de NP: se eligen de forma no determinista los elementos de A ′ y en tiempo polinómico se determina si la suma de los tamaños de los conjuntos es igual a B . Para demostrar que es completo para NP, vamos a reducir el cubrimiento por tripletas (ACTRI) a este problema.
+
+Serafín Moral
+
+## Reducción, ACTRI ∝ SUMA
+
+Sea W , X , Y con | W | = | X | = | Y | = q y un subconjunto M ⊆ X × Y × Z un ejemplo del problema ACTRI, vamos a construir una partición equivalente. Consideremos:
+
+<!-- formula-not-decoded -->
+
+El conjunto A va a contener k elementos A = { a 1 , . . . , a k } . Cada elemento a i ∈ A se corresponde con una tripleta m i ∈ M .
+
+## Pregunta
+
+Si sumanos k unos, ¿cuantas cifras como máximo puede tener el número resultante?
+
+<!-- image -->
+
+<!-- image -->
+
+Para cada tripleta m i =( w f ( i ) , x g ( i ) , y h ( i ) ) , se considera el elemento a i con un peso:
+
+<!-- formula-not-decoded -->
+
+donde p =[log 2 ( k )] + 1. En binario podemos ver el número en grupos de p posiciones. Cada grupo corresponde a un elemento de W , X o Y :
+
+<!-- image -->
+
+Cada tripleta m i =( w f ( i ) , x g ( i ) , y h ( i ) ) se corresponde con un número con un 1 a la derecha de las zonas de w f ( i ) , x g ( i ) , y h ( i ) y 0 en el resto.
+
+Para cada tripleta m i =( w f ( i ) , x g ( i ) , y h ( i ) ) , se considera el elemento a i con un peso:
+
+<!-- formula-not-decoded -->
+
+donde p =[log 2 ( k )] + 1. En binario podemos ver el número en grupos de p posiciones. Cada grupo corresponde a un elemento de W , X o Y :
+
+<!-- image -->
+
+Cada tripleta m i =( w f ( i ) , x g ( i ) , y h ( i ) ) se corresponde con un número con un 1 a la derecha de las zonas de w f ( i ) , x g ( i ) , y h ( i ) y 0 en el resto. Ejemplo: Tripleta: ( w 2 , x 1 , y q )
+
+Si p = [log 2 ( k )] + 1, entonces sumando k o menos unos nunca obtenemos un número con un 1 más allá de la posición p + 1
+
+Sumando k o menos números de los asociados a las tripletas, nunca pasa un 1 de la zona de un elemento a la zona de otro.
+
+Finalmente, B = ∑ 3 q -1 j = 0 2 p . j . Este número tiene un 1 a la derecha de cada una de las zonas:
+
+<!-- image -->
+
+## Ejemplo
+
+Supongamos el problema de tripletas con:
+
+W = { w 1 , w 2 , w 3 } , X = { x 1 , x 2 , x 3 } , Y = { y 1 , y 2 , y 3 } y las tripletas ( w 2 , x 1 , y 3 ) , ( w 2 , x 2 , y 2 ) , ( w 3 , x 2 , y 1 ) , ( w 3 , x 3 , y 2 ) , ( w 1 , x 3 , y 2 ) .
+
+Supongamos el problema de tripletas con:
+
+W = { w 1 , w 2 , w 3 } , X = { x 1 , x 2 , x 3 } , Y = { y 1 , y 2 , y 3 } y las tripletas ( w 2 , x 1 , y 3 ) , ( w 2 , x 2 , y 2 ) , ( w 3 , x 2 , y 1 ) , ( w 3 , x 3 , y 2 ) , ( w 1 , x 3 , y 2 ) . Construimos el siguiente problema de la SUMA: el número de tripletas es k = 5, y p =[log( k )] + 1 = 3. Hay un individuo para cada tripleta definido por su peso (se supone un orden w 1 , w 2 , w 3 , x 1 , x 2 , x 3 , y 1 , y 2 , y 3 ):
+
+|    | w 1 w 2 w 3 x 1 x 2 x 3 y 1 y 2 y 3   |                     |
+|----|---------------------------------------|---------------------|
+|  1 | 000 001 000 001 000 000 000 000 001   | ( w 2 , x 1 , y 3 ) |
+|  2 | 000 001 000 000 001 000 000 001 000   | ( w 2 , x 2 , y 2 ) |
+|  3 | 000 000 001 000 001 000 001 000 000   | ( w 3 , x 2 , y 1 ) |
+|  4 | 000 000 001 000 000 001 000 001 000   | ( w 3 , x 3 , y 2 ) |
+|  5 | 001 000 000 000 000 001 000 001 000   | ( w 1 , x 3 , y 2 ) |
+
+y B = 001 001 001 001 001 001 001 001 001.
+
+Serafín Moral
+
+Las tripletas 1, 3, 5: ( w 2 , x 1 , y 3 ) , ( w 3 , x 2 , y 1 ) , ( w 1 , x 3 , y 2 ) son una solución del problema original y los individuos correspondientes a estas tripletas suman B .
+
+- 1 000 001 000 001 000 000 000 000 001
+
+- ( w 2 , x 1 , y 3 )
+
+- 3 000 000 001 000 001 000 001 000 000
+
+- ( w 3 , x 2 , y 1 )
+
+- 5 001 000 000 000 000 001 000 001 000 ( w 1 , x 3 , y 2 )
+
+- B 001 001 001 001 001 001 001 001 001
+
+## Reducción ACTRI ∝ SUMA
+
+Como una consencuencia, para cada A ′ ⊆ { a 1 , . . . , a k } , tenemos que
+
+∑ a ∈ A ′ s ( a ) = B
+
+si y solo si M ′ = { m i : a i ∈ A ′ } es un recubrimiento por tripletas.
+
+Datos: Un conjunto C y un tamaño para cada uno de sus elementos:
+
+<!-- formula-not-decoded -->
+
+′ ⊆ tal que se verifique:
+
+Pregunta: Determinar si existe un C C
+
+<!-- formula-not-decoded -->
+
+Este es claramente un problema de NP: se eligen de forma no determinista los elementos de C ′ y en tiempo polinómico se determina si los tamaños totales de los conjuntos C ′ y C \ C ′ son iguales.
+
+Para demostrar que es NP-completo, vamos a reducir el probmea SUMA a este problema.
+
+## Reducción SUMA a PARTICIÓN
+
+Si tenemos un problema de suma con A , tamaños s y entero B , entonces creamos un problema de la partición en el que C = A ∪{ b 1 , b 2 } (añadimos dos valores nuevos). Los tamaños en el problema de la PARTICIÓN de los elementos de A son los mismos que en el problema de la SUMA. Los tamaños de los nuevos elementos, b 1 y b 2 , son:
+
+<!-- formula-not-decoded -->
+
+Cada uno de estos pesos necesita, a lo más, ( 3 pq ) bits. Se pueden calcular zona a zona de forma consecutiva.
+
+El conjunto C es igual a { a 1 , . . . , a k , b 1 , b 2 } .
+
+La suma de los pesos de sus elementos es
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+Este conjunto se parte en dos mitades cuando cada una pesa:
+
+<!-- formula-not-decoded -->
+
+Si la solución es positiva al problema de la PARTICIóN, entonces es positiva para la SUMA
+
+Supongamos C ′ ⊆ C , tal que
+
+<!-- formula-not-decoded -->
+
+Entonces cada una de estas sumas es ∑ k i = 1 s ( a i ) + B . Uno de los conjuntos (supongamos que es A ′ ) debe de contener b 1 y no b 2 . La suma de los pesos de los elementos de C ′ distintos de b 1 tiene que ser B .
+
+Por tanto, existe una solución positiva al problema de la SUMA.
+
+## Equivalencia de soluciones
+
+Si la solución es positiva a SUMA, entonces es positiva al problema de la PARTICIÓN
+
+Si el problema de la suma tiene solución con A ′ tal que ∑ a ∈ A ′ = B , entonces C ′ = { b 1 }∪ A ′ ya que la suma de los pesos de C ′ es
+
+<!-- formula-not-decoded -->
+
+que es la mitad del total.
+
+## Técnicas de Reducción
+
+## Del libro de Garey-Johnson:
+
+- Restricción. Demostrando que un problema NP-completo es un subproblema del que estamos considerando.
+- Reemplazamiento Local. Haciendo una transformación de un problema NP-completo elemento a elemento.
+- Reemplazamiento Local con Refuerzo. Haciendo una transformación de un problema NP-completo elemento a elemento, pero añadiendo algunos elementos adicionales para forzar la equivalencia de los problemas.
+- Diseño de Componentes. Distintos elementos del problema original se transforman en distintos tipos de estructura que se conectan con otros elementos.
+
+<!-- image -->
+
+## Regla
+
+Si un problema Π 1 es NP y un subproblema suyo, Π 2 , es NP-completo, entonces Π 1 es NP-completo.
+
+'Subproblema' significa que eligiendo unos parámetros concretos de Π 2 , obtenemos Π 1 .
+
+Tenemos un conjunto finito de objetos U . Cada objeto, u , tiene un tamaño, s ( u ) ∈ N , y un valor v ( u ) ∈ N . Tenemos, además, dos números naturales: B (el tamaño máximo) y K (el valor mínimo). La pregunta es si existe un subconjunto de objetos U ′ ⊆ U , tal que
+
+<!-- formula-not-decoded -->
+
+El problema de la partición es un caso particular de este problema, en el que s ( u ) = v ( u ) , ∀ u y B = K =( 1 / 2 ) ∑ u ∈ U s ( u ) .
+
+Tenemos un conjunto finito de objetos U . Cada objeto, u , tiene un tamaño, s ( u ) ∈ N , y un valor v ( u ) ∈ N . Tenemos, además, dos números naturales: B (el tamaño máximo) y K (el valor mínimo). La pregunta es si existe un subconjunto de objetos U ′ ⊆ U , tal que
+
+<!-- formula-not-decoded -->
+
+El problema de la partición es un caso particular de este problema, en el que s ( u ) = v ( u ) , ∀ u y B = K =( 1 / 2 ) ∑ u ∈ U s ( u ) .
+
+REDUCCIÓN de PARTICIÓN(C,s) a MOCHILA(U,s',v',B,K): U = C , s ′ = s , v ′ = s , B = K =( 1 / 2 ) ∑ u ∈ C s ( u )
+
+Serafín Moral
+
+Datos: Un conjunto A de tareas, cada tarea, a ∈ A , tiene una longitud l ( a ) ∈ N . Tenemos, además, un número de procesadores m y un tiempo límite, D ∈ N .
+
+Pregunta: ¿Existe una partición de A : { A 1 , . . . , A m } en m subconjuntos disjuntos, de manera que
+
+<!-- formula-not-decoded -->
+
+Si nos restringimos al caso m = 2 y D = 1 / 2 ∑ a ∈ A l ( a ) obtenemos el problema de la partición.
+
+Cada elemento de un problema NP-completo Π ′ se transforma en una estructura del problema que estamos considerando Π . Ejemplo: Reducción de SAT a 3-SAT
+
+<!-- image -->
+
+## Partición en Triángulos (PARTRI)
+
+Se parte de un grafo G =( V , E ) con un número de vértices | V | = 3 q .
+
+La pregunta es si existe un partición de V en q conjuntos disjuntos de tamaño 3: V 1 , . . . , V q , de tal manera que si V i = { V i [ 1 ] , V i [ 2 ] , V i [ 3 ] } , entonces los arcos ( V i [ 1 ] , V i [ 2 ] ) , ( V i [ 2 ] , V i [ 3 ] ) , ( V i [ 1 ] , V i [ 3 ] ) ∈ E (los subconjuntos de vértices son triángulos).
+
+Este es un problema de NP, y se puede demostrar que es completo reduciento 3-SET (cubrimiento por conjuntos de tamaño 3).
+
+<!-- image -->
+
+Serafín Moral
+
+Tema 4: NP-completitud
+
+La equivalencia de las soluciones en ambos problemas se obtiene de las dos formas que existen de elegir los triángulos en cada uno de los subgrafos de G :
+
+<!-- image -->
+
+La equivalencia de las soluciones en ambos problemas se obtiene de las dos formas que existen de elegir los triángulos en cada uno de los subgrafos de G :
+
+<!-- image -->
+
+La equivalencia de las soluciones en ambos problemas se obtiene de las dos formas que existen de elegir los triángulos en cada uno de los subgrafos de G :
+
+<!-- image -->
+
+La equivalencia de las soluciones en ambos problemas se obtiene de las dos formas que existen de elegir los triángulos en cada uno de los subgrafos de G :
+
+<!-- image -->
+
+La equivalencia de las soluciones en ambos problemas se obtiene de las dos formas que existen de elegir los triángulos en cada uno de los subgrafos de G :
+
+<!-- image -->
+
+Serafín Moral
+
+La equivalencia de las soluciones en ambos problemas se obtiene de las dos formas que existen de elegir los triángulos en cada uno de los subgrafos de G :
+
+<!-- image -->
+
+Serafín Moral
+
+La equivalencia de las soluciones en ambos problemas se obtiene de las dos formas que existen de elegir los triángulos en cada uno de los subgrafos de G :
+
+<!-- image -->
+
+Serafín Moral
+
+La equivalencia de las soluciones en ambos problemas se obtiene de las dos formas que existen de elegir los triángulos en cada uno de los subgrafos de G :
+
+<!-- image -->
+
+Serafín Moral
+
+## Equivalencia de los Problemas
+
+La equivalencia de las soluciones en ambos problemas se obtiene de las dos formas que existen de elegir los triángulos en cada uno de los subgrafos de G :
+
+<!-- image -->
+
+La primera corresponde al caso en que { x i , y i , z i } está en el cubrimiento C ′ , la segunda al caso en el que no está.
+
+Serafín Moral
+
+Corresponde al caso en el que, además de los elementos en que se transforman los elementos de Π ′ , se añaden algunos elementos adicionales para forzar la equivalencia de las soluciones. Ejemplo: La reducción del cubrimiento por tripletas al problema de la partición: ACTRI ∝ PARTICION.
+
+<!-- image -->
+
+Datos: Un conjunto finito A (posibles diagnósticos), una familia C de subconjuntos de A (posibles tests) y un entero J ∈ N que representa el número admisible de tests.
+
+Pregunta: ¿Existe una subfamilia de test C ′ ⊆ C con | C ′ | ≤ J y tal que para cada par de elementos distintos a i , a j ∈ A , existe un test c ∈ C ′ que contiene uno y sólo uno de los elementos del par (un elemento, por ejemplo, a i está en c y el otro fuera)?
+
+Vamos a reducir ACTRI a este problema. Supongamos un ejemplo de ACTRI con M ⊆ W × X × Y y | W | = | X | = | Y | = q . Vamos a crear un ejemplo de este problema equivalente a él. Hacemos A = W ∪ X ∪ Y ∪{ w 0 , x 0 , y 0 } C = {{ w , x , y } : ( w , x , y ) ∈ M }∪{ W ∪{ w 0 } , X ∪{ x 0 }} J = q + 2
+
+<!-- image -->
+
+## Diseño de Componentes
+
+Distintas componentes del problema a reducir Π ′ se transforman en distintas estructuras de Π que se conectan de alguna forma para forzar la equivalencia.
+
+## Ejemplos:
+
+- Cubrimiento por vértices
+- El circuito Hamiltoniano
+- La demostración del teorema de Cook
+
+<!-- image -->
+
+## Reducibilidad Turing
+
+Un problema Π se reduce Turing a Π ′ lo que se representa como
+
+## Π ∝ T Π ′
+
+si y solo si Π se puede resolver en tiempo polinómico mediante un algoritmo que puede llamar a una función que resuelve Π ′ contando cada llamada como un paso de cálculo.
+
+La reducibilidad Turing es un concepto más débil que el que hemos visto de reducibilidad espacio logarítmica: Si Π se reduce a Π ′ , entonces se puede construir una reducibilidad Turing.
+
+## Problemas NP-Difíciles
+
+Un problema Π es NP-difícil si y solo si existe un problema NP-completo Π ′ que se puede reducir (Turing) a Π :
+
+## Π ′ ∝ T Π
+
+## Teorema
+
+Si un problema NP-difícil se resuelve en tiempo polinómico entonces P = NP .
+
+En este tema vamos a considerar problemas NP-difíciles que tienen una dificultad similar a los NP-completos (existe reducción Turing entre ambos):
+
+- Clase Co-NP: Complementarios de los problemas de NP
+- Clase FNP: Problemas que buscan una solución, cuando saber si existe es NP.
+
+<!-- image -->
+
+## CoNP = { L : L ∈ NP }
+
+## Ejemplo
+
+Dado un conjunto φ de fórmulas en lógica proposicional determinar si son válidas (se satisfacen para todas las asignaciones de valores de verdad).
+
+## Ejemplo
+
+Dado un grafo determinar si NO tiene un circuito hamiltoniano.
+
+- Estos problemas no están en NP, lo que tienen es una Máquina polinómica no determinista en la que la respuesta es afirmativa al problema si TODAS las opciones responden SI: Si la respuesta es positiva TODAS las opciones acaba en SI; si la respuesta es negativa AL MENOS UNA opción acaba en NO.
+- Tampoco se reducen a los problemas NP con una transformación espacio logarítmica, ya que estas transformaciones exigen que las respuestas a ambos problemas sean las mismas , pero si existen reducciones Turing entre los problemas de NP y los de CoNP.
+
+## Definición
+
+Un problema es CoNP Completo si y solo si está en la clase CoNP y cualquier otro problema de CoNP se reduce a él.
+
+## Teorema
+
+L es NP Completo ⇔ L es CoNP Completo
+
+## Teorema
+
+Si un problema CoNP completo está en NP, entonces CoNP = NP .
+
+## Teorema
+
+Si P = NP , entonces CoNP = NP
+
+<!-- image -->
+
+## NP
+
+Un problema P ( x ) con entrada x ∈ A ∗ está en NP si y solo si existe una relación R en A ∗ × A ∗ calculable en tiempo polinómico y un polinomio p ( n ) tal que
+
+P ( x ) = ′ Si ′ ⇔ ∃ y ∈ A ∗ con | y | ≤ p ( | x | ) , R ( x , y ) = 1
+
+Se dice que los problemas de NP son los problemas que se pueden verificar en tiempo polinómio ( de forma eficiente ). Al algoritmo que calcula R se le llama un verificador. A y se le llama un certificado.
+
+## CoNP
+
+Un problema P ( x ) está en CoNP si y solo si existe una relación R en A ∗ × A ∗ calculable en tiempo polinómico y un polinomio p ( n ) tal que
+
+P ( x ) = ′ Si ′ ⇔ ∀ y ∈ A ∗ con | y | ≤ p ( | x | ) , R ( x , y ) = 1
+
+## Teorema
+
+/negationslash
+
+Un número p &gt; 1 es primo si y solo si existe un número 1 &lt; r &lt; p tal que r p -1 = 1 mod p y, además, r p -1 q = 1 mod p , para todos los divisores primos q de p -1.
+
+## Teorema: Teorema de Pratt
+
+Primos está en NP.
+
+## Demostración
+
+/negationslash
+
+Si p es primo, esto se puede certificar con la existencia de un número r tal que r p -1 = 1 mod p y que además verificase r p -1 q = 1 mod p , para todos los divisores primos q de p -1.
+
+La comprobación de que r p -1 = 1 mod p se puede hacer en tiempo polinómico en función de la longitud de p , que es de orden l = log( p ) : Para calcular 3 r p -1 , se calculan r 2 , r 4 , . . . , r 2 l . Esto tiene un orden de O ( l 3 ) .
+
+r por sí solo no es un certificado: 20 21 -1 = 1 mod 21 y 21 no es primo
+
+## Demostración
+
+El certificado tiene que adjuntar todos los divisores primos de p -1. Es decir constará, en principio de r y una lista de divisores de p -1 : ( q 1 , . . . , q k ) . El comprobar que la lista es completa se hace por divisiones sucesivas de p -1 entre estos números y comprobando que de uno al final.
+
+Nos queda una cuestión, ¿cómo sabemos que los números ( q 1 , . . . , q k ) son primos? Pues dando certificados para ellos. Excepto para 2 que no necesita certificado.
+
+El certificado sería una estructura recursiva: un certificado del número p sería r y una lista de divisores completa de p -1: ( q 1 , . . . , q k ) , y certificados de primalidad para cada uno de ellos.
+
+## Ejemplo
+
+Cert(67) = ((67: 2 (2, 3, 11)), (3: 2 (2)), (11: 8 (2,5)), (5: 3 (2))) La longitud del certificado es de orden log 2 ( p ) .
+
+- La longitud de un número y su lista es de orden log( p ) .
+- El número de listas es de orden log( p ) .
+
+Sea A un alfabeto y R una relación en A ∗ × A ∗ , el problema de búsqueda P ( x ) asociado a esta relación consiste en dado un ejemplo x ∈ A ∗ , calcular
+
+<!-- formula-not-decoded -->
+
+## Ejemplo
+
+Dado un conjunto de cláusulas calcular una asignación de valores de verdad, si existe, que satisfaga todas las cláusulas.
+
+## Ejemplo
+
+Dado un grafo calcular un circuito hamiltoniano (si este existe)
+
+## NP
+
+Un problema P ( x ) con entrada x ∈ A ∗ está en NP si y solo si existe una relación R en A ∗ × A ∗ calculable en tiempo polinómico y un polinomio p ( n ) tal que
+
+<!-- formula-not-decoded -->
+
+## Caracterización de FNP
+
+Un problema P ( x ) está en FNP si y solo si está asociado a una relación R decidible en tiempo polinómico y tal que si R ( x , y ) = 1, entonces | y | ≤ p ( | x | ) para un polinomio p :
+
+<!-- formula-not-decoded -->
+
+## FP
+
+FP: La clase de problemas de funciones de FNP tales que existe una máquina de Turing determinista que las calcula en tiempo polinómico.
+
+## FNPT
+
+FNPT: La clase de los problema de FNP totales. Si para todo x existe un y con | y | ≤ p ( | x | ) tal que R ( x , y ) = 1
+
+## Ejemplo
+
+Dado un número p enontrar una descomposición en números primos
+
+<!-- image -->
+
+con un certificado de primalidad para cada número primo. Seguro que existe, pero no es fácil encontrarlo.
+
+## Reducciones en FNP
+
+Un problema de funciones Π se reduce a un problema Π ′ si y solo si, existen funciones R y S calculables en espacio logarítmico, tal que para toda cadena x y z ocurre lo siguiente: Si x es un ejemplo de Π entonces R ( x ) es un ejemplo de Π ′ . Además si z es una solución correcta de R ( x ) entonces S ( z ) es una solución correcta de x .
+
+## Problemas FNP -completos
+
+Con esto podemos definir el concepto de completitud. Un problema es FNP -completo si y so si está en FNP y cualquier otro problema de esta clase se puede reducir a este problema.
+
+## Ejemplo
+
+Un problema FNP -completo: FSAT
+
+Dado un conjunto de cláusulas, encontrar, si existe, una asignación de valores de verdad para la que todas las cláusulas sean verdaderas.
+
+<!-- image -->
+
+## Demostración
+
+- Si C 1 y C 2 son inconsistentes, C también lo es y no existe la asignación de valores de verdad.
+- Si C 1 es consistente, entonces si existe la asignación. Hacemos x n verdadero y calculamos el valor de verdad de las otras variables, repitiendo de forma recursiva estos pasos sobre C 1 .
+- Si C 2 es consistente, entonces si existe la asignación. Hacemos x n falso y calculamos el valor de verdad de las otras variables, repitiendo de forma recursiva estos pasos sobre C 2 .
+
+<!-- image -->
+
+Si podiésemos resolver el problema del viajante en versión de decisión en tiempo polinómico, podríamos resolver el problema de encontrar el circuito óptimo en tiempo polinómico.
+
+- Primero se obtendría una cota superior R para el coste del circuito óptimo: el valor de distancia más grande, multiplicado por el número de ciudades.
+- Después realizando una búsqueda binaria en el intervalo [ 0 , R ] mediante sucesivas llamadas al problema de decisión se calcula el valor del circuito óptimo: K .
+
+<!-- image -->
+
+## El Viajante de Comercio (Cont.)
+
+A continuación para cada par de ciudades se hace lo siguiente: si el coste de ir de una a otra es c , se llama al problema de decisión con presupuesto K e incrementando el coste de c a c + 1.
+
+- Si la respuesta es positiva, no es necesario usar este arco en el óptimo. Entonces se deja el coste a c + 1 y se continúa.
+- Si la respuesta es negativa, este arco sí se usa. Dejamos el coste al mismo valor que estaba antes y continuamos.
+
+Al final obtenemos todos los arcos de un circuito óptimo. Si en el primer caso se volviera al coste original, en vez de dejarlo en c + 1, puede que no se obtenga el óptimo, ya que si hay dos circuitos óptimos ninguno de los arcos de ambos circuitos son necesarios.
+
+<!-- image -->
+
+Son los de la clase FNPT
+
+Un problema está en esta clase si para todo x existe un y tal que R ( x , y ) .
+
+Es decir, el problema de decisión no es difícil: siempre tiene una respuesta positiva.
+
+Eso no quiere decir que el problema sea fácil, ya que encontrar la solución no tiene por qué ser inmediato.
+
+Muchos de ellos no se conoce que estén en FP.
+
+<!-- image -->
+
+Datos: Un grafo ( V , E ) y un peso w (que puede ser positivo o negativo para cada arco).
+
+<!-- image -->
+
+Un estado es una aplicación s : V →{-1 , 1 } (-1 , 1 ). El nodo i es feliz si
+
+<!-- formula-not-decoded -->
+
+Solución: Un estado s en el que todos los nodos sean felices.
+
+Serafín Moral
+
+Tema 4: NP-completitud
+
+El problema está en FNP y es total.
+
+Consideremos
+
+<!-- formula-not-decoded -->
+
+Si tenemos un nodo infeliz, i , en s , entonces
+
+<!-- formula-not-decoded -->
+
+Sea el estado s ′ igual que s , excepto que s ′ ( i ) = -s ( i ) . Entonces Φ( s ′ ) = Φ( s ) + 2 δ . Como el valor de Φ no puede crecer indefinidamente, este proceso tiene que terminar con una red feliz. Este algoritmo es pseudo polinómico, pero no polinómico.
+
+Serafín Moral
+
+<!-- image -->
+
+<!-- image -->
+
+Serafín Moral
+
+<!-- image -->

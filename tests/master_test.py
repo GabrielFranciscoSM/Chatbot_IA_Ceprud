@@ -13,6 +13,9 @@ from vLLM_test import (
     call_embeddings
 )
 
+from test_rag_embeddings import similarity_search
+
+
 BASE_URL = "http://localhost:5001"
 
 class TestVllmEndpoints(unittest.TestCase):
@@ -185,6 +188,48 @@ class TestVllmEndpoints(unittest.TestCase):
         data = response.json()
         self.assertIn("response", data)
         print("✓ Test for /chat endpoint (base mode) passed.")
+
+    def test_03_chat_endpoint_rag_mode(self):
+        """
+        Test a successful interaction with the /chat endpoint in 'rag' mode and 'metaheuristicas' subject.
+        This will make a real call to the vLLM container.
+        """
+        print("\n--- Running test: /chat endpoint (rag mode) ---")
+        response = requests.post(
+            f"{BASE_URL}/chat",
+            data={
+                "message": "What is 2+2?",
+                "email": "test@example.com",
+                "mode": "rag",
+                "subject": "metaheuristicas"
+            }
+        )
+        
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn("response", data)
+        print("✓ Test for /chat endpoint (rag mode) passed.")
+
+    def test_04_chat_endpoint_rag_lora_mode(self):
+        """
+        Test a successful interaction with the /chat endpoint in 'rag_lora' mode and 'metaheuristicas' subject.
+        This will make a real call to the vLLM container.
+        """
+        print("\n--- Running test: /chat endpoint (rag_lora mode) ---")
+        response = requests.post(
+            f"{BASE_URL}/chat",
+            data={
+                "message": "What is 2+2?",
+                "email": "test@example.com",
+                "mode": "rag_lora",
+                "subject": "metaheuristicas"
+            }
+        )
+        
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn("response", data)
+        print("✓ Test for /chat endpoint (rag_lora mode) passed.")
     
     def test_03_chat_with_invalid_mode(self):
         """
@@ -283,6 +328,21 @@ class TestVllmEndpoints(unittest.TestCase):
         response = requests.get(f"{BASE_URL}/graphs/nonexistent.png")
         self.assertEqual(response.status_code, 404)
         print("✓ Test for serving graphs (not found) passed.")
+    
+    #RAG RETRIEVE TESTS
+
+    def test_rag_retrieve(self):
+        """
+        Test to ensure correct retrieving from the DB
+        """
+        print("\n--- Running test: Correct chunk retrieving ---")
+        results = similarity_search()
+        for doc, score in results:
+            print(f"Documento ({score:.4f}): {doc.page_content[:200]}...")
+        self.assertEqual(len(results),5)
+        print("✓ Test for chunk retrieving passed.")
+        
+
 
 if __name__ == '__main__':
     unittest.main()

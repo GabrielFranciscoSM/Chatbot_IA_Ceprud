@@ -9,7 +9,12 @@ sys.path.insert(0, project_root)
 
 from populate_database import clean_text
 data_path = "../data"
-output_dir = "parsed_output"
+output_dir = "parsed_outputDoclings"
+
+
+from langchain_community.document_loaders import UnstructuredFileLoader
+from docling.document_converter import DocumentConverter
+
 
 def main():
     """
@@ -53,14 +58,24 @@ def main():
                 full_cleaned_text = ""
 
                 try:
-                    with pdfplumber.open(file_path) as pdf:
-                        for page_num, page in enumerate(pdf.pages):
-                            text = page.extract_text()
-                            if text:
-                                cleaned_text = clean_text(text)
-                                full_cleaned_text += (
-                                    f"--- Página {page_num + 1} ---\n{cleaned_text}\n\n"
-                                )
+
+                    converter = DocumentConverter()
+                    result = converter.convert(file_path)
+                    full_cleaned_text = result.document.export_to_markdown()  # output: "## Docling Technical Report[...]"
+
+                    # loader = UnstructuredFileLoader(file_path)
+                    # documents = loader.load()
+                    # print(len(documents))
+                    # full_cleaned_text = documents[0].page_content
+
+                    # with pdfplumber.open(file_path) as pdf:
+                    #     for page_num, page in enumerate(pdf.pages):
+                    #         text = page.extract_text()
+                    #         if text:
+                    #             cleaned_text = clean_text(text)
+                    #             full_cleaned_text += (
+                    #                 f"--- Página {page_num + 1} ---\n{cleaned_text}\n\n"
+                    #             )
 
                     # Save the full cleaned text to a file
                     with open(output_txt_path, "w", encoding="utf-8") as f:

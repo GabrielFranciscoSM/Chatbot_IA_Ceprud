@@ -5,10 +5,15 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 from langchain_chroma import Chroma
 from get_embedding_function import get_embedding_function
-import pdfplumber
 
-BASE_CHROMA_PATH = "chroma"
-DATA_PATH = "data"
+from docling.document_converter import DocumentConverter
+
+from dotenv import load_dotenv
+
+load_dotenv()
+# --- Configuration and Shared State ---
+BASE_CHROMA_PATH = os.getenv("BASE_CHROMA_PATH", "chroma")
+DATA_PATH = os.getenv("BASE_DATA_PATH","data")
 
 def main():
     # Configurar argumentos
@@ -91,22 +96,38 @@ def load_documents(data_path):
             print(f"🔍 Procesando archivo: {filename}")
             file_path = os.path.join(data_path, filename)
             try:
-                with pdfplumber.open(file_path) as pdf:
-                    for page_num, page in enumerate(pdf.pages):
-                        text = page.extract_text()
-                        if text:
-                            cleaned_text = clean_text(text)
-                            print("DOCUMENTO: " + filename + "\n CONTENIDO: \n" + cleaned_text + "\n")
-                            valid_documents.append(
-                                Document(
-                                    page_content=cleaned_text,
-                                    metadata={
-                                        "source": filename,
-                                        "page": page_num,
-                                        "subject": data_path.split("/")[-1]
-                                    }
-                                )
-                            )
+                print( "\n" + file_path + "\n")
+                print("\n" + __file__ + "\n")
+                
+                converter = DocumentConverter()
+                result = converter.convert(file_path)
+                text = result.document.export_to_markdown()   
+
+                valid_documents.append(
+                    Document(
+                        page_content=text,
+                        metadata={
+                            "source": filename.split(".")[0],
+                            "subject": data_path.split("/")[-1]
+                        }
+                    )
+                )             
+                # with pdfplumber.open(file_path) as pdf:
+                #     for page_num, page in enumerate(pdf.pages):
+                #         text = page.extract_text()
+                #         if text:
+                #             cleaned_text = clean_text(text)
+                #             print("DOCUMENTO: " + filename + "\n CONTENIDO: \n" + cleaned_text + "\n")
+                #             valid_documents.append(
+                #                 Document(
+                #                     page_content=cleaned_text,
+                #                     metadata={
+                #                         "source": filename,
+                #                         "page": page_num,
+                #                         "subject": data_path.split("/")[-1]
+                #                     }
+                #                 )
+                #             )
             except Exception as e:
                 print(f"❌ Error al procesar {filename}: {str(e)}")
     return valid_documents
@@ -136,9 +157,11 @@ def add_to_chroma(chunks, chroma_path):
     print(f"Documentos existentes en la DB: {len(existing_ids)}")
 
     new_chunks = []
+    counter = 0
     for chunk in chunks:
         # Generar ID único basado en página y posición
-        page_id = f"{chunk.metadata['source']}:{chunk.metadata['page']}"
+        page_id = f"{chunk.metadata['source']}:{counter}"
+        counter = counter + 1 #MODIFICAR ESTO PROXIMAMENTE
         chunk_id = f"{page_id}:{len(new_chunks)}"
         chunk.metadata["id"] = chunk_id
 

@@ -1,10 +1,14 @@
 import os
 import shutil
 import subprocess
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Configuración de rutas
-DATA_DIR = "data"
-TEMPLATES_DIR = "templates"
+DATA_DIR = os.getenv("BASE_DATA_PATH","data")
+
+TEMPLATES_DIR = os.getenv("BASE_TEMPLATES_DIR","templates")
 INDEX_HTML_PATH = os.path.join(TEMPLATES_DIR, "index.html")
 
 # Mapeo de íconos por asignatura (puedes personalizarlo)
