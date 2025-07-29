@@ -1,7 +1,7 @@
 import argparse
 import os
 import shutil
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter, MarkdownTextSplitter
 from langchain.schema.document import Document
 from langchain_chroma import Chroma
 from get_embedding_function import get_embedding_function
@@ -28,6 +28,8 @@ def main():
     for subject in subjects:
         chroma_path = os.path.join(BASE_CHROMA_PATH, subject)
         data_subject_path = os.path.join(DATA_PATH, subject)
+
+        clear_database(chroma_path)#COMPROBAR FUNCIONAMIENTO ARGUMENTO
 
         if args.reset:
             print(f"✨ Borrando base de datos para {subject}")
@@ -82,9 +84,10 @@ def clean_text(text):
     # 7. Eliminar URLs y direcciones web
     text = re.sub(r"https?://[^\s]+", "", text)  # URLs
     text = re.sub(r"www\.[^\s]+", "", text)  # Direcciones web
-    
+    print("ESTOY LIMPIANDO")
     # 8. Eliminar marcas de formato HTML/XML
     text = re.sub(r"<[^>]+>", "", text)  # Etiquetas HTML/XML
+
     
     return text.strip()
 
@@ -95,17 +98,15 @@ def load_documents(data_path):
         if filename.endswith(".pdf"):
             print(f"🔍 Procesando archivo: {filename}")
             file_path = os.path.join(data_path, filename)
-            try:
-                print( "\n" + file_path + "\n")
-                print("\n" + __file__ + "\n")
-                
+            try:                
                 converter = DocumentConverter()
                 result = converter.convert(file_path)
-                text = result.document.export_to_markdown()   
+                text = result.document.export_to_markdown()
+                c_text = clean_text(text)
 
                 valid_documents.append(
                     Document(
-                        page_content=text,
+                        page_content=c_text,
                         metadata={
                             "source": filename.split(".")[0],
                             "subject": data_path.split("/")[-1]
@@ -134,13 +135,31 @@ def load_documents(data_path):
 
 def split_documents(documents):
     """Dividir texto en fragmentos con parámetros optimizados."""
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=3000,          # Tamaño reducido para mayor precisión
-        chunk_overlap=500,        # Overlap para mantener coherencia
-        separators=["\n\n", "\n", ". ", " ", ""],  # Jerarquía de separadores
+
+
+    # headers_to_split_on = [
+    #     ("#", "Header 1"),
+    #     ("##", "Header 2"),
+    # ]
+
+    # MD splits
+    markdown_splitter = MarkdownTextSplitter(
+        chunk_size=500,          # Tamaño reducido para mayor precisión
+        chunk_overlap=50,        # Overlap para mantener coherencia
         length_function=len
     )
-    return text_splitter.split_documents(documents)
+    #header_md_split = MarkdownHeaderTextSplitter(headers_to_split_on=headers_to_split_on, strip_headers=False)
+    md_header_splits = markdown_splitter.split_documents(documents)
+
+    # text_splitter = RecursiveCharacterTextSplitter(
+    #     chunk_size=3000,          # Tamaño reducido para mayor precisión
+    #     chunk_overlap=300,        # Overlap para mantener coherencia
+    #     separators=["\n\n", "\n", ". ", " ", ""],  # Jerarquía de separadores
+    #     length_function=len
+    # )
+    # recursive_splits = text_splitter.split_documents(documents)
+
+    return md_header_splits 
 
 def add_to_chroma(chunks, chroma_path):
     """Actualizar base de datos Chroma con chunks."""

@@ -36,18 +36,11 @@ def query_rag(query_text: str,
     """
     Realiza búsqueda RAG y genera una respuesta.
     """
-
-    model = None
     model_desc = None
 
-    if use_finetuned and subject:
-        #model = ChatOpenAI(base_url=VLLM_URL,model=subject,api_key="LOCAL")
-        model = ChatGoogleGenerativeAI(model="gemini-2.0-flash-001")
- 
+    if use_finetuned and subject: 
         model_desc = "RAG + LoRA"
     else:
-        #model = ChatOpenAI(base_url=VLLM_URL,model=VLLM_MODEL_NAME,api_key="LOCAL") 
-        model = ChatGoogleGenerativeAI(model="gemini-2.0-flash-001")
         model_desc = "base"
 
     conversation_id =  "-".join(["email",subject]) 
@@ -58,7 +51,6 @@ def query_rag(query_text: str,
         input={
             "messages": [HumanMessage(content=query_text)], 
             "chorma_path": chroma_path, 
-            "llm": model,
             "use_RAG": use_RAG
             }
         )

@@ -16,23 +16,36 @@ services:
             - 8001:8001
         ipc: host
         image: vllm/vllm-openai:latest
-        command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 8 --gpu-memory-utilization 0.8 --max_model_len=3000
+        command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 8 --gpu-memory-utilization 0.3 --max_model_len=3000
     chatbot:
         build:
             context: .
             dockerfile: Containerfile
         ports:
             - 5001:5001
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          # You can specify a particular GPU or all available GPUs
+                          # For example, to use the first GPU:
+                          device_ids: ['0']
+                          # To use all available GPUs, you can use:
+                          # count: all
+                          capabilities:
+                              - gpu
         environment:
             HF_HUB_DISABLE_SYMLINKS_WARNING: 1
         volumes:
         - ./.env:/app/.env
         - ./app/app.py:/app/app.py
-        - ./app/router_logic.py:/app/router_logic.py
+        - ./app/api_router.py:/app/api_router.py
         - ./app/logic/query_logic.py:/app/query_logic.py
         - ./app/RAG/get_embedding_function.py:/app/get_embedding_function.py
         - ./app/RAG/populate_database.py:/app/populate_database.py
         - ./app/logic/graph.py:/app/graph.py
+        - ./app/RAG/guía_docente_de_modelos_avanzados_de_computación_especialidad_computación_y_sistemas_inteligentes_296113d.json:/app/guia_docente_de_modelos_avanzados.json
         - ./models:/app/models
         - ./data:/app/data
         - ./logs:/app/logs

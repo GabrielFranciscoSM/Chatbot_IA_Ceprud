@@ -1,0 +1,206 @@
+{
+    "asignatura": "Guía docente de Metaheurísticas  (Especialidad Computación y Sistemas Inteligentes) (296113E)",
+    "profesorado_y_tutorias": [
+        {
+            "nombre": "Francisco Herrera Triguero",
+            "rol": "Teórico",
+            "grupos": "A",
+            "tutorias": "No hay tutorías asignadas para el curso académico."
+        },
+        {
+            "nombre": "Daniel Molina Cabrera",
+            "rol": "Práctico",
+            "grupos": "1, 2 y 3",
+            "tutorias": "No hay tutorías asignadas para el curso académico."
+        }
+    ],
+    "grado": "Grado en Ingeniería Informática",
+    "rama": "Ingeniería y Arquitectura",
+    "módulo": "Formación de Especialidad 1: Computación y Sistemas Inteligentes",
+    "materia": "Modelos de Computación",
+    "prerrequisitos_o_recomendaciones": "Prerrequisitos y/o Recomendaciones\nLos alumnos no tendrán que tener asignaturas, materias o módulos aprobados como requisito indispensable para cursar el módulo. No obstante se recomienda la superación de los contenidos y habilidades de programación.\nEn el caso de utilizar herramientas de IA para el desarrollo de la asignatura, el estudiante debe adoptar un uso ético y responsable de las mismas. Se deben seguir las recomendaciones contenidas en el documento de \"Recomendaciones para el uso de la inteligencia artificial en la UGR\" publicado en esta ubicación:\nhttps://ceprud.ugr.es/formacion-tic/inteligencia-artificial/recomendaciones-ia#contenido0",
+    "breve_descripción_de_contenidos": [
+        "Algoritmos avanzados de optimización y búsqueda.",
+        "Técnicas de diseño de algoritmos basados en trayectorias y poblaciones.",
+        "Metaheurísticas paralelas."
+    ],
+    "resultados_del_proceso_de_formación_y_de_aprendizaje": {
+        "conocimientos_o_contenidos": [
+            "C01.\n\t\t\t\t\t\t\t\t\t\tConoce las materias básicas y tecnologías que capacitan para el aprendizaje y desarrollo de nuevos métodos y tecnologías, así como las que dotan de una gran versatilidad para adaptarse a nuevas situaciones."
+        ],
+        "habilidades_o_destrezas": [
+            "HD01.\n\t\t\t\t\t\t\t\t\t\tResuelve problemas con iniciativa, toma de decisiones, autonomía y creatividad, y sabe comunicar y transmitir los conocimientos, habilidades y destrezas de la profesión de Ingeniero Técnico en Informática.",
+            "HD15.\n\t\t\t\t\t\t\t\t\t\tPosee la capacidad de organizar y planificar, así como de gestionar la información.",
+            "HD18.\n\t\t\t\t\t\t\t\t\t\tSe comunica en lengua extranjera, particularmente en inglés.",
+            "HD19.\n\t\t\t\t\t\t\t\t\t\tTrabaja en equipo, usando competencias demostrables mediante la elaboración y defensa de argumentos.",
+            "HD20.\n\t\t\t\t\t\t\t\t\t\tAplica principios de ética profesional para conseguir la mejora continua y la calidad de los productos actuando con rigor y responsabilidad.",
+            "HD22.\n\t\t\t\t\t\t\t\t\t\tProyecta los conocimientos, habilidades y destrezas adquiridos para promover una sociedad basada en los valores de la libertad, la justicia, la igualdad y el pluralismo."
+        ]
+    },
+    "resultados_de_aprendizaje": [
+        "Identificar las distintas clases (en términos de complejidad computacional) de problemas de optimización y búsqueda.",
+        "Comprender la conveniencia de soluciones aproximadas para problemas complejos.",
+        "Comprender el concepto de metaheurística. Identificar las componentes y propiedades más relevantes de una metaheurística.",
+        "Conocer la búsqueda local. Saber cómo aplicarla en la resolución de problemas de optimización y búsqueda. Identificar sus principales inconvenientes.",
+        "Conocer los principales mecanismos para solventar o paliar los inconvenientes de la búsqueda local.",
+        "Conocer las principales formas de representación de soluciones para problemas de búsqueda: binario, permutaciones, real.",
+        "Conocer las principales metaheurísticas basadas en trayectorias. En particular, enfriamiento simulado y búsqueda tabú. Conocer bien sus componentes y cómo aplicarlas a un problema dado.",
+        "Conocer las principales metaheurísticas basadas en poblaciones. En particular Algoritmos Genéticos. Conocer bien sus componentes y cómo aplicarlos a un problema dado.",
+        "Conocer las ventajas que los sistemas paralelos y/o distribuidos ofrecen en la resolución de problemas de optimización y búsqueda. Saber explotar la estructuración espacial frente a la temporal.",
+        "Dado un problema, identificar sus principales características y tener la madurez para decidir qué tipo de metaheurística es la más adecuada para su resolución.",
+        "Conocer las distintas técnicas con la suficiente pericia para encontrar las soluciones de la mejor calidad con restricciones de tiempo.",
+        "Ser capaz de evaluar la complejidad computacional de un problema, conocer estrategias algorítmicas que puedan conducir a su resolución y recomendar, desarrollar e implementar aquella que garantice el mejor rendimiento de acuerdo con los requisitos establecidos."
+    ],
+    "programa_de_contenidos_teóricos_y_prácticos": {
+        "teórico": [
+            {
+                "tema": "Tema 1: Introducción a las metaheurísticas",
+                "puntos": [
+                    "Complejidad de los problemas.",
+                    "Algoritmos aproximados.",
+                    "Concepto de metaheurística."
+                ]
+            },
+            {
+                "tema": "Tema 2: Optimización y Búsqueda en Inteligencia Artificial.",
+                "puntos": [
+                    "Modelos de optimización en Inteligencia artificial",
+                    "Búsqueda por Entornos.",
+                    "Trayectorias versus Poblaciones."
+                ]
+            },
+            {
+                "tema": "Tema 3: Metaheurísticas basadas en poblaciones",
+                "puntos": [
+                    "Concepto y elementos de los algoritmos basados en poblaciones.",
+                    "Algoritmos genéticos y programación genética.",
+                    "Evolución diferencial y otros algoritmos de optimización continua.",
+                    "Aplicación a problemas."
+                ]
+            },
+            {
+                "tema": "Tema 4: Algoritmos Meméticos",
+                "puntos": [
+                    "Hibridación de metaheurísticas.",
+                    "Algoritmos meméticos."
+                ]
+            },
+            {
+                "tema": "Tema 5: Metaheurísticas basadas en trayectorias",
+                "puntos": [
+                    "Búsqueda local. Inconvenientes: Convergencia a óptimos locales.",
+                    "Concepto y elementos de los algoritmos basados en trayectorias simples.",
+                    "Concepto y elementos del enfriamiento simulado. Aplicación a problemas.",
+                    "Concepto y elementos de los algoritmos basados en trayectorias múltiples.",
+                    "Algoritmos basados en trayectorias múltiples: GRASP e ILS."
+                ]
+            },
+            {
+                "tema": "Tema 6: Metaheurísticas basadas en adaptación social",
+                "puntos": [
+                    "Introducción a la adaptación social.",
+                    "Cooperación de agentes en problemas de optimización.",
+                    "Algoritmos basados en colonias de hormigas.",
+                    "Algoritmos basados en nubes de partículas.",
+                    "Aplicación a problemas."
+                ]
+            },
+            {
+                "tema": "Tema 7: Aspectos Avanzados en Metaheurísticas: Diversidad versus convergencia, múltiples soluciones, paralelización.",
+                "puntos": [
+                    "Diversidad versus convergencia.",
+                    "Modelos evolutivos con componentes de equilibrio de diversidad y convergencia",
+                    "Múltiples soluciones: algoritmos basados en nichos.",
+                    "Nuevos algoritmos basados en la naturaleza y bioinspirados.",
+                    "Metaheurísticas paralelas."
+                ]
+            },
+            {
+                "tema": "Tema 8: Aprendizaje Evolutivo: Problemas y modelos",
+                "puntos": [
+                    "Aprendizaje como problema de optimización.",
+                    "Modelos de aprendizaje basado en metaheurísticas.",
+                    "Aprendizaje evolutivo de reglas.",
+                    "Aprendizaje evolutivo de parámetros y modelos"
+                ]
+            }
+        ],
+        "práctico": [
+            {
+                "tema": "Prácticas en laboratorio de ordenadores:",
+                "puntos": [
+                    "P1. Resolución de problemas con técnicas de búsqueda local.",
+                    "P2. Resolución de problemas con metaheurísticas basadas en poblaciones: algoritmos genéticos y algoritmos meméticos.",
+                    "P3. Resolución de problemas con metaheurísticas basadas en trayectorias: enfriamiento simulado, búsqueda multiarranque básica, ILS, GRASP e ILS híbrida."
+                ]
+            },
+            {
+                "tema": "Prácticas en pizarra:",
+                "puntos": [
+                    "Resolución de problemas clásicos de optimización mediante metaheurísticas.",
+                    "Resolución de problemas clásicos de optimización con restricciones mediante metaheurísticas."
+                ]
+            },
+            {
+                "tema": "Seminarios",
+                "puntos": [
+                    "S1. Ejemplos de resolución de problemas con metaheurísticas: problemas clásicos y reales. Software de metaheurísticas.",
+                    "S2. Problemas de optimización con metaheurísticas basadas en búsqueda local.",
+                    "S3. Problemas de optimización con metaheurísticas basadas en poblaciones.",
+                    "S4. Problemas de optimización con técnicas basadas en trayectorias simples y múltiples.",
+                    "S5. Manejo de restricciones en metaheurísticas."
+                ]
+            }
+        ]
+    },
+    "bibliografía": {
+        "bibliografía_fundamental": [
+            "E. Alba (ed.), “Parallel Metaheuristics”, John Wiley & Sons, 2005.",
+            "P.M. Pardalos, M.G.C. Resende, “Handbook of Applied Optimization”, Oxford University Press, 2002.",
+            "M. Dorigo, T. Stützle, “Ant Colony Optimization”. The MIT Press, 2004.",
+            "A.E. Eiben, J.E. Smith, “Introduction to Evolutionary Computing”. Springer, Second edition, 2015.",
+            "K-L Du, M.N.S. Swarry, Search and Optimization by Metaheuristics. Springer, 2016.",
+            "B. Chopard, M. Tomassini, An Introduction to Metaheuristics for Optimization. Springer, 2018."
+        ],
+        "bibliografía_complementaria": [
+            {
+                "text": "El-Ghazali Talbi, “Metaheuristics: From Design to Implementation”, Wiley, 2009.",
+                "url": "https://www.wiley.com/en-sg/search?pq=%7Crelevance%7Cauthor%3AEl-Ghazali+Talbi"
+            }
+        ]
+    },
+    "enlaces_recomendados": [
+        {
+            "text": "Metaheurística. Wikipedia",
+            "url": "https://es.wikipedia.org/wiki/Metaheur%C3%ADstica"
+        },
+        {
+            "text": "Computación evolutiva. Wikipedia",
+            "url": "https://es.wikipedia.org/wiki/Computaci%C3%B3n_evolutiva"
+        },
+        {
+            "text": "Particle Swarm Optimization",
+            "url": "http://www.swarmintelligence.org/"
+        }
+    ],
+    "metodología_docente": [
+        "MD01.\n\t\t\t\t\t\t\tLección magistral.",
+        "MD02.\n\t\t\t\t\t\t\tActividades prácticas.",
+        "MD03.\n\t\t\t\t\t\t\tSeminarios.",
+        "MD04.\n\t\t\t\t\t\t\tActividades no presenciales.",
+        "MD05.\n\t\t\t\t\t\t\tTutorías académicas."
+    ],
+    "evaluación": {
+        "evaluación_ordinaria": [
+            "Pruebas escritas: exámenes de desarrollo, exámenes de tipo test, resolución de problemas, casos o supuestos, pruebas de respuesta breve, informes y diarios de clase, trabajos periódicos escritos.",
+            "Pruebas orales: exposición oral de trabajos en clase, individuales o en grupo, sobre contenidos de la asignatura (seminario) y sobre ejecución de tareas prácticas correspondientes a competencias concretas.",
+            "Pruebas en los laboratorios de prácticas: elaboración y defensa de supuestos prácticos en el laboratorio de informática resolviendo los problemas planteados con implementaciones algorítmicas.",
+            "Técnicas basadas en la asistencia y participación activa del alumno en clase, seminarios, tutorías y en el desarrollo y defensa de los trabajos en grupo.",
+            "Para la parte teórica se realizarán exámenes finales o parciales y/o entregas de ejercicios sobre el desarrollo y los resultados de las actividades propuestas. La ponderación de este bloque será del 50%.",
+            "Para la parte práctica se realizarán prácticas de laboratorio, resolución de problemas y desarrollo de proyectos asociados al uso de los algoritmos para los problemas de prácticas, y se valorarán las entregas de los informes/memorias realizados por los alumnos. La ponderación de este bloque será de 50%."
+        ],
+        "evaluación_extraordinaria": "En el examen extraordinario (evaluado de 0 a 10) tanto la parte teórica como práctica será incluida en un único examen que incluirá cuestiones de índole teóricas y problemas de índole práctica.\nEs un examen de preguntas múltiples para que se garantice que el estudiantado ha adquirido la totalidad de las competencias descritas en la presente guía docente, tanto de la parte teórica como práctica.\nPara aprobar la asignatura es necesario tener una calificación numérica superior o igual a 5 (sobre 10).",
+        "evaluación_única_final": "La evaluación única final se realizará en un solo acto académico el día de la convocatoria oficial de examen para la asignatura.\nEs un examen de preguntas múltiples para que se garantice que el estudiantado ha adquirido la totalidad de las competencias descritas en la presente guía docente, tanto de la parte teórica como práctica.\nLa prueba será evaluada de 0 a 10 e incluirá preguntas tanto de tipo teórico como práctico que garanticen que el alumno ha adquirido la totalidad de las competencias descritas en la presente guía docente, tanto de la parte teórica como práctica.\nPara aprobar la asignatura es necesario tener una calificación numérica superior o igual a 5 (sobre 10)."
+    },
+    "información_adicional": "Información adicional\nInformación de interés para estudiantado con discapacidad y/o Necesidades Específicas de Apoyo Educativo (NEAE):\nGestión de servicios y apoyos (https://ve.ugr.es/servicios/atencion-social/estudiantes-con-discapacidad)\n."
+}
