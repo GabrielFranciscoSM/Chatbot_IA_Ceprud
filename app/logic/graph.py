@@ -1,266 +1,410 @@
-# from langchain_core.documents import Document
-# from typing_extensions import List, TypedDict
-# from langgraph.graph import START, StateGraph, MessagesState
-# from langgraph.graph.message import add_messages
-# from langchain_openai import ChatOpenAI
-# from langchain_chroma import Chroma
-
-# from langchain_core.messages import BaseMessage,HumanMessage,AIMessage
-# from langgraph.checkpoint.memory import InMemorySaver
-
-# from get_embedding_function import get_embedding_function
-# from typing import Literal
-
+# import json
 # import os
 # from dotenv import load_dotenv
-# load_dotenv()
+# from typing import Literal, List, Dict, Any, Tuple
+# from langchain_core.documents import Document
+# from langchain_core.messages import HumanMessage, SystemMessage, ToolMessage, AIMessage
+# from langchain_core.tools import tool
+# from langchain_openai import ChatOpenAI
+# from langchain_chroma import Chroma
+# from langgraph.graph import StateGraph, END, MessagesState
+# from langgraph.checkpoint.memory import InMemorySaver
+# from typing_extensions import TypedDict
+# from langchain_core.runnables import RunnableConfig
 
+# from get_embedding_function import get_embedding_function 
+
+# # --- CONFIGURACIÓN ---
+# load_dotenv()
 # GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 # os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
+# VLLM_URL = os.getenv("VLLM_URL", "http://localhost:8000/v1") + "/v1"
+# VLLM_MODEL_NAME = os.getenv("MODEL_DIR", "default_model_name")
 
-# rag_Prompt= """
-#             Eres un asistente para tareas de preguntas y respuestas. Utiliza los siguientes fragmentos de contexto recuperado para responder a la pregunta. Si no sabes la respuesta, simplemente di que no la sabes.
-#             Pregunta: {question}
-#             Contexto: {context}
-#             Respuesta:
-#             """
+# BASE_CHROMA_PATH = os.getenv("BASE_CHROMA_PATH", "chroma")
 
-# MAX_HISTORY_LENGTH = 7
+# # <--- CAMBIO 1: DEFINIR UN ESTADO EXPLÍCITO Y CAPAZ --->
+# # Este es el plano de nuestro estado. Debe tener un lugar para todo lo que necesitamos.
+# class AgentState(MessagesState):
+#     retrieved_docs: List[Document] # El campo para guardar los documentos consultados
 
-# class State(MessagesState):
-#     context: List[Document]
-#     chorma_path: str
-#     llm: ChatOpenAI
-#     use_RAG: bool
-#     prompt: str
+# # --- HERRAMIENTAS ---
+# @tool
+# def consultar_guia_docente(seccion: str) -> Tuple[str, List[Document]]:
+#     """Consulta la guía docente. Devuelve el texto y una lista vacía de documentos."""
+#     # ... (código sin cambios, solo la firma de retorno)
+#     print(f"--- INFO: Usando herramienta 'Guía Docente' para la sección: {seccion} ---")
+#     try:
+#         with open('guia_docente_de_modelos_avanzados.json', 'r', encoding='utf-8') as f: #AJUSTAR PATH PARA HACERLO GENERAL
+#             guia = json.load(f)
+#     except FileNotFoundError:
+#         return json.dumps({"error": "El archivo de la guía docente no fue encontrado."}), []
+#     seccion_limpia = seccion.lower().strip().replace(' ', '_')
+#     for key in guia.keys():
+#         if seccion_limpia in key:
+#             return json.dumps({key: guia[key]}, ensure_ascii=False, indent=2), []
+#     return json.dumps({"error": f"La sección '{seccion}' no se encontró."}), []
 
+# @tool(response_format="content_and_artifact")
+# def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[Document]]:
+#     """
+#     Busca en ChromaDB. Devuelve el texto del contexto Y la lista de documentos de origen.
+#     Su firma es limpia: solo pide lo que el LLM puede proveer.
+#     """
+#     print(f"--- INFO: Usando 'ChromaDB Retriever' ---")
 
-# def retrieve(state: State):
-#     print("Buscando documentos interesantes")
-#     # Extrae la pregunta del último mensaje en el estado
-#     question = state["messages"][-1].content
-#     print("INFO - SE USA RAG \n")
-#     vector_store = Chroma(persist_directory=state["chorma_path"], embedding_function=get_embedding_function())
+#     subject = config["configurable"]["subject"]
+#     chroma_path = os.path.join(BASE_CHROMA_PATH, subject)
     
-#     # Usa la variable 'question' para la búsqueda
-#     docs_and_scores = vector_store.similarity_search_with_score(question, k=5)    
-#     retrieved_docs, _ = zip(*docs_and_scores)
+#     try:
+#         vector_store = Chroma(persist_directory=chroma_path, embedding_function=get_embedding_function())
+#         retrieved_docs = vector_store.similarity_search(pregunta, k=3)
 
-#     #retrieved_docs = vector_store.similarity_search(question)
+#         if not retrieved_docs:
+#             return "No se encontraron documentos relevantes.", []
+#         context_string = "\n\n---\n\n".join([doc.page_content for doc in retrieved_docs])
+
+#         return f"Información encontrada:\n{context_string}", retrieved_docs
     
-#     print(retrieved_docs)
-#     return {"context": retrieved_docs}
+#     except Exception as e:
+#         return f"Error al acceder a ChromaDB: {e}", []
 
-# def preparePrompt(state: State):
-#     if state["use_RAG"]:
-#         #context = "\n\n---\n\n".join(d.page_content for d in docs)
+# # --- LÓGICA DEL GRAFO ---
 
-#         docs_content = "\n\n---\n\n".join(doc.page_content for doc in state["context"])
+# def call_agent(state: AgentState, llm: ChatOpenAI, tools: list):
+#     """Nodo del Agente. No cambia."""
+#     print("--- INFO: Agente decidiendo... ---")
+#     llm_with_tools = llm.bind_tools(tools)
+#     response = llm_with_tools.invoke(state["messages"])
+#     print(response)
+#     return {"messages": [response]}
 
-#         print("CONTEXT:\n" + docs_content + "\n")
-
-#         messages = rag_Prompt.format(question= state["messages"][-1].content, context= docs_content)
-#         return {"prompt": messages}
-#     else:
-#         messages = state["messages"][-1].content
-#         return {"prompt": messages,"context":[]}
+# # <--- CAMBIO 2: EL NODO "TRABAJADOR CUALIFICADO" QUE REEMPLAZA AL ToolNode --->
+# def execute_tools(state: AgentState) -> Dict[str, Any]:
+#     """
+#     Este nodo es la clave. Ejecuta las herramientas, inyecta dependencias del estado (`chroma_path`)
+#     y actualiza múltiples campos del estado (`messages` y `retrieved_docs`).
+#     """
+#     print("--- INFO: Ejecutando y procesando herramientas... ---")
+#     tool_calls = state['messages'][-1].tool_calls
+#     tool_map = {"consultar_guia_docente": consultar_guia_docente, "chroma_retriever": chroma_retriever}
     
+#     tool_messages = []
+#     all_retrieved_docs = []
+#     for call in tool_calls:
+#         tool_function = tool_map[call['name']]
+        
+#         # 2. PROCESA LA SALIDA DUAL DE LA HERRAMIENTA
+#         response = tool_function.invoke(call)
+
+#         if tool_function == chroma_retriever:
+#             docs = response["artifact"]
+
+#             if docs:
+#                 all_retrieved_docs.extend(docs)
+
+#         tool_messages.append(response)
+
+#     # 3. ACTUALIZA MÚLTIPLES PARTES DEL ESTADO
+#     return {"messages": tool_messages, "retrieved_docs": all_retrieved_docs}
+
+
+# def should_continue(state: AgentState) -> Literal["tools", "__end__"]:
+#     """Router."""
+#     return "tools" if state["messages"][-1].tool_calls else "__end__"
+
+# # --- CONSTRUCCIÓN DEL GRAFO ---
+# def build_graph():
+#     """Construye el grafo usando nuestro nodo personalizado."""
+#     llm = ChatOpenAI(model=VLLM_MODEL_NAME, openai_api_key="EMPTY", openai_api_base=VLLM_URL, temperature=0)
+#     tools = [consultar_guia_docente, chroma_retriever]
     
+#     # <--- CAMBIO 3: USAR AgentState Y EL NODO `execute_tools` --->
+#     graph_builder = StateGraph(AgentState)
+#     agent_node = lambda state: call_agent(state, llm, tools)
+    
+#     graph_builder.add_node("agent", agent_node)
+#     graph_builder.add_node("tools", execute_tools) # Usamos nuestro nodo inteligente
 
-# def generate(state: State):    
-#     response = state["llm"].invoke(state["prompt"])
+#     graph_builder.set_entry_point("agent")
+#     graph_builder.add_conditional_edges("agent", should_continue, {"tools": "tools", "__end__": "__end__"})
+#     graph_builder.add_edge("tools", "agent")
 
-#     return {"messages": [AIMessage(content=response.content)]}
+#     return graph_builder.compile(checkpointer=InMemorySaver())
 
-# def use_RAG(state: State)->Literal["preparePrompt", "retrieve"]:
-#   if state["use_RAG"]:
-#     return "retrieve"
-#   else:
-#     return "preparePrompt"
+# # --- EJECUCIÓN ---
+# if __name__ == '__main__':
+#     graph = build_graph()
+#     thread_config = {"configurable": {"thread_id": "final_run_1"}}
 
-# def buildGraph():
-#     graph_builder = StateGraph(State).add_sequence([retrieve, preparePrompt, generate])
-#     graph_builder.add_conditional_edges(START,use_RAG)
-#     memory = InMemorySaver()
-#     return graph_builder.compile(checkpointer=memory)
+#     system_prompt = SystemMessage(content="Eres un asistente experto...")
+#     pregunta_usuario = "¿Explícame el concepto de 'overfitting'?"
+    
+#     # El estado inicial debe coincidir con la estructura de AgentState
+#     initial_state = {
+#         "messages": [system_prompt, HumanMessage(content=pregunta_usuario)],
+#         "chroma_path": "./chroma_db_path_avanzados",
+#         "retrieved_docs": []
+#     }
+    
+#     final_agent_response = None
+#     events = graph.stream(initial_state, config=thread_config)
+#     for event in events:
+#         if "agent" in event and not event["agent"]["messages"][-1].tool_calls:
+#             final_agent_response = event["agent"]["messages"][-1]
 
+#     # Mostrar la respuesta y los documentos recuperados del estado final
+#     if final_agent_response:
+#         print("\n\n--- Respuesta Final del Agente ---")
+#         final_agent_response.pretty_print()
 
+#     final_state = graph.get_state(thread_config)
+#     final_docs = final_state.values.get('retrieved_docs')
+#     if final_docs:
+#         print("\n--- Fuentes Consultadas ---")
+#         for i, doc in enumerate(final_docs):
+#             print(f"  [{i+1}] {doc.metadata.get('source', 'N/A')}")
 
 import json
-from langchain_core.documents import Document
-from typing_extensions import TypedDict, List
-from langgraph.graph import END, StateGraph, MessagesState
-from langgraph.graph.message import add_messages
-from langchain_openai import ChatOpenAI # Mantenemos la importación por si cambias
-# Cambia esta línea si usas Gemini
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_chroma import Chroma
-from langchain_core.tools import tool, Tool
-from langgraph.prebuilt import ToolNode
-
-from langchain_core.messages import BaseMessage, HumanMessage, AIMessage, ToolMessage
-from langgraph.checkpoint.memory import InMemorySaver
-from get_embedding_function import get_embedding_function # Asegúrate de que esta función exista
-from typing import Literal
-
 import os
 from dotenv import load_dotenv
-load_dotenv()
+from typing import Literal, List, Dict, Any, Tuple
+from langchain_core.documents import Document
+from langchain_core.messages import HumanMessage, SystemMessage, ToolMessage, AIMessage
+from langchain_core.tools import tool
+from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_chroma import Chroma
+from langgraph.graph import StateGraph, END, MessagesState
+from langgraph.checkpoint.memory import InMemorySaver
+from langgraph.checkpoint.sqlite import SqliteSaver
+from typing_extensions import TypedDict
 
+# Asumo que get_embedding_function es una función que tienes en otro archivo
+from get_embedding_function import get_embedding_function
+from langchain_core.runnables import RunnableConfig
+import sqlite3
+
+# --- CONFIGURACIÓN ---
+load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
+VLLM_URL = os.getenv("VLLM_URL", "http://localhost:8000") + "/v1"
+VLLM_MODEL_NAME = os.getenv("MODEL_DIR", "default_model_name")
+BASE_CHROMA_PATH = os.getenv("BASE_CHROMA_PATH", "chroma")
 
+# MODIFICADO 1: El estado ahora contiene el 'subject' que necesitan las herramientas.
+class AgentState(MessagesState):
+    retrieved_docs: List[Document]
+    subject: str # El campo para saber qué base de datos Chroma usar
 
-# --- 2. ESTADO DEL GRAFO (STATE) ---
-class State(MessagesState):
-     chorma_path: str
-     use_RAG:bool
-
-# --- 1. DEFINIR LAS HERRAMIENTAS (TOOLS) ---
+# --- HERRAMIENTAS ---
 
 @tool
-def consultar_guia_docente(seccion: str) -> str:
+def consultar_guia_docente(seccion: str) -> Tuple[str, List[Document]]:
     """
-    Consulta secciones específicas de la guía docente de la asignatura. 
-    Es la mejor opción para preguntas concretas y estructuradas sobre: 'profesorado_y_tutorias', 
-    'prerrequisitos_o_recomendaciones', 'breve_descripción_de_contenidos', 'competencias', 
-    'resultados_de_aprendizaje', 'programa_de_contenidos_teóricos_y_prácticos', 'bibliografía', 
-    'enlaces_recomendados', 'metodología_docente', 'evaluación'.
+    Consulta la guía docente. Devuelve el texto y una lista vacía de documentos.
+    Esta herramienta es para preguntas sobre la estructura del curso, profesores, evaluación, etc.
     """
-    print(f"--- INFO: Usando herramienta Guía Docente para la sección: {seccion} ---")
+    print(f"--- INFO: Usando herramienta 'Guía Docente' para la sección: {seccion} ---")
     try:
-        # Asume que el JSON de la guía anterior está en el mismo directorio
+        # Asume que la guía está en la raíz. Ajusta si es necesario.
         with open('guia_docente_de_modelos_avanzados.json', 'r', encoding='utf-8') as f:
             guia = json.load(f)
     except FileNotFoundError:
-        return json.dumps({"error": "El archivo de la guía docente no se encontró."})
-    
+        return "Error: El archivo de la guía docente no fue encontrado.", []
     seccion_limpia = seccion.lower().strip().replace(' ', '_')
-    
-    # Búsqueda por coincidencia parcial para dar flexibilidad
     for key in guia.keys():
-        if seccion_limpia in key:
-            # --- CORRECCIÓN AQUÍ: Devolver un string JSON, no un diccionario ---
-            return json.dumps({key: guia[key]}, ensure_ascii=False, indent=2)
-            
-    return json.dumps({"error": f"La sección '{seccion}' no se encontró en la guía docente."})
+        if seccion_limpia in key.lower():
+            return json.dumps({key: guia[key]}, ensure_ascii=False, indent=2), []
+    return f"Error: La sección '{seccion}' no se encontró en la guía docente.", []
 
 
+# MODIFICADO 2: La firma de la herramienta es limpia y simple.
+# El LLM solo necesita proporcionar la 'pregunta'.
 @tool
-def chroma_retriever(pregunta: str, state: State) -> str:
+#def chroma_retriever(pregunta: str, subject: str) -> Tuple[str, List[Document]]:
+def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[Document]]:
     """
-    Busca en la base de datos documental (ChromaDB) para encontrar información relevante.
-    Es la mejor opción para preguntas generales, conceptuales, o que requieran buscar 
-    en apuntes, PDFs u otros documentos de la asignatura.
+    Busca en los apuntes de la asignatura usando ChromaDB.
+    Esta herramienta es para preguntas conceptuales, sobre el material de estudio, etc.
+    El 'subject' se inyectará desde la configuración del agente, no lo provee el LLM.
     """
-    print(f"--- INFO: Usando herramienta ChromaDB Retriever para la pregunta: {pregunta} ---")
+    subject = config["configurable"]["subject"]
+
+    print(f"--- INFO: Usando 'ChromaDB Retriever' para la asignatura '{subject}' ---")
+
+    chroma_path = os.path.join(BASE_CHROMA_PATH, subject)
+
+    if not os.path.isdir(chroma_path):
+        return f"Error: No se encontró la base de datos para la asignatura '{subject}'.", []
+
     try:
-        CHROMA_PATH = state["chorma_path"] # Asegúrate de que esta ruta es correcta
-        vector_store = Chroma(persist_directory=CHROMA_PATH, embedding_function=get_embedding_function())
-        
+        vector_store = Chroma(persist_directory=chroma_path, embedding_function=get_embedding_function())
         retrieved_docs = vector_store.similarity_search(pregunta, k=3)
-        
-        # --- CORRECCIÓN AQUÍ: Devolver un string formateado, no una lista de Documentos ---
+
         if not retrieved_docs:
-            return "No se encontraron documentos relevantes en ChromaDB."
-        
+            return "No se encontraron documentos relevantes en los apuntes.", []
+
         context_string = "\n\n---\n\n".join([doc.page_content for doc in retrieved_docs])
-        return context_string
+        return f"Información encontrada en los apuntes:\n{context_string}", retrieved_docs
+
     except Exception as e:
-        return f"Error al acceder a ChromaDB: {e}"
+        return f"Error al acceder a ChromaDB: {e}", []
 
+# --- LÓGICA DEL GRAFO ---
 
-# NODO 1: El agente que decide la herramienta
-def call_agent(state: State, llm: ChatGoogleGenerativeAI, tools: List[Tool]):
-    print("--- INFO: Agente [1]: Decidiendo herramienta... ---")
-    llm_with_tools = llm.bind_tools(tools)
-    response = llm_with_tools.invoke(state["messages"])
-    return {"messages": [response]}
-
-# NODO 2: El generador que sintetiza la respuesta final
-def generate_final_response(state: State, llm: ChatGoogleGenerativeAI):
-    print("--- INFO: Agente [2]: Generando respuesta final... ---")
-    # Extraemos la pregunta original y el resultado de la herramienta
-    human_question = state["messages"][0].content
-    tool_result = state["messages"][-1].content
-    
-    # Creamos un prompt simple y directo
-    prompt = f"""
-    Basándote en la siguiente información recuperada por una herramienta, responde a la pregunta original del usuario.
-    Sé claro y conciso.
-
-    Información Recuperada:
-    {tool_result}
-
-    Pregunta Original del Usuario:
-    {human_question}
-
-    Respuesta:
-    """
-    # Invocamos el LLM de forma simple, sin modo agente
-
-    print("\n" + prompt + "\n")
-
-    response = llm.invoke(prompt)
-    return {"messages": [response]}
-
-
-# ROUTER: Decide el camino a seguir
-def should_use_tool(state: State) -> Literal["tools", "end_without_tools"]:
-    last_message = state["messages"][-1]
-    if last_message.tool_calls:
-        print("--- INFO: Router -> Herramienta necesaria. ---")
-        return "tools"
-    else:
-        print("--- INFO: Router -> No se necesita herramienta. Respondiendo directamente. ---")
-        return "end_without_tools"
-
-# --- 3. CONSTRUCCIÓN DEL GRAFO ---
-def buildGraph():
-    # Usamos Gemini Flash, que es rápido y excelente para estas tareas
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
+def call_agent(state: AgentState):
+    """Nodo del Agente. Decide si responder o usar una herramienta."""
+    print("--- INFO: Agente decidiendo... ---")
+    # MODIFICADO: Definimos el LLM y las herramientas aquí para claridad
+    #llm = ChatOpenAI(model=VLLM_MODEL_NAME, openai_api_key="EMPTY", openai_api_base=VLLM_URL, temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash",temperature=0)
     tools = [consultar_guia_docente, chroma_retriever]
-    tool_node = ToolNode(tools)
-
-    # Nodos del grafo
-    agent_node = lambda state: call_agent(state, llm, tools)
-    final_response_node = lambda state: generate_final_response(state, llm)
     
-    graph_builder = StateGraph(State)
-    graph_builder.add_node("agent", agent_node)
-    graph_builder.add_node("tools", tool_node)
-    graph_builder.add_node("final_answer_generator", final_response_node)
+    llm_with_tools = llm.bind_tools(tools)
+
+    response = llm_with_tools.invoke(state["messages"])
+
+    for message in state["messages"]:
+        message.pretty_print()
+        
+    response.pretty_print()
+    print("\n\n")
+
+    return {"messages": [response]}
+
+
+# MODIFICADO 3: El nodo de ejecución ahora es mucho más robusto.
+def execute_tools(state: AgentState) -> Dict[str, Any]:
+    """
+    Ejecuta las herramientas. Extrae dependencias (como 'subject') del estado
+    y las inyecta en la llamada a la herramienta. Maneja correctamente la salida.
+    """
+    print("--- INFO: Ejecutando herramientas... ---")
+    last_message = state['messages'][-1]
+    tool_calls = last_message.tool_calls
+    
+    # Este mapa es crucial para llamar a la función correcta.
+    tool_map = {"consultar_guia_docente": consultar_guia_docente, "chroma_retriever": chroma_retriever}
+    
+    tool_messages = []
+    all_retrieved_docs = []
+    
+    for call in tool_calls:
+        tool_name = call['name']
+        print(f"--- INFO: Preparando llamada a la herramienta '{tool_name}' ---")
+        
+        tool_function = tool_map.get(tool_name)
+        if not tool_function:
+            # Esto es un fallback por si el LLM alucina un nombre de herramienta
+            error_message = f"Error: La herramienta '{tool_name}' no existe."
+            tool_messages.append(ToolMessage(content=error_message, tool_call_id=call['id']))
+            continue
+
+        # Inyecta dependencias desde el estado si es necesario
+        tool_args = call['args']
+        #if tool_name == "chroma_retriever":
+            # Aquí está la magia: añadimos el 'subject' del estado a los argumentos de la herramienta.
+            #tool_args['subject'] = state['subject']
+            #tool_args['config'] = {"configurable": {"subject": state['subject']}}
+
+
+        # Llama a la herramienta con los argumentos correctos
+        # y desempaqueta la tupla (contenido, documentos)
+        try:
+            content, docs = tool_function.invoke(tool_args)
+            tool_messages.append(ToolMessage(content=content, tool_call_id=call['id']))
+            if docs:
+                all_retrieved_docs.extend(docs)
+        except Exception as e:
+            error_msg = f"Error al ejecutar la herramienta {tool_name}: {e}"
+            print(f"--- ERROR: {error_msg} ---")
+            tool_messages.append(ToolMessage(content=error_msg, tool_call_id=call['id']))
+
+    # Actualiza el estado con los resultados de la herramienta y los documentos recuperados.
+    return {"messages": tool_messages, "retrieved_docs": all_retrieved_docs}
+
+
+def should_continue(state: AgentState) -> Literal["tools", "__end__"]:
+    """Router: Decide si el ciclo continúa o termina."""
+    if not state['messages'] or not isinstance(state['messages'][-1], AIMessage):
+        return "agent" # Fallback por si acaso
+    
+    # Si la última respuesta de la IA tiene llamadas a herramientas, ejecútalas.
+    return "tools" if state["messages"][-1].tool_calls else "__end__"
+
+# --- CONSTRUCCIÓN DEL GRAFO ---
+def build_graph():
+    """Construye y compila el grafo del agente."""
+    graph_builder = StateGraph(AgentState)
+    
+    graph_builder.add_node("agent", call_agent)
+    graph_builder.add_node("tools", execute_tools)
 
     graph_builder.set_entry_point("agent")
-
-    # Conexiones lógicas
     graph_builder.add_conditional_edges(
         "agent",
-        should_use_tool,
-        {
-            "tools": "tools",
-            "end_without_tools": END # Si el agente responde directamente, termina.
-        },
+        should_continue,
+        {"tools": "tools", "__end__": "__end__"}
     )
-    # Después de usar la herramienta, vamos al generador final, no de vuelta al agente
-    graph_builder.add_edge("tools", "final_answer_generator")
-    graph_builder.add_edge("final_answer_generator", END)
+    graph_builder.add_edge("tools", "agent")
 
-    memory = InMemorySaver()
+    # La memoria es útil para depurar y mantener conversaciones
+    conn = sqlite3.connect("checkpoints.sqlite", check_same_thread=False)
+    memory = SqliteSaver(conn)
+
     return graph_builder.compile(checkpointer=memory)
 
-# --- 4. EJEMPLO DE USO ---
+# --- EJECUCIÓN ---
+# Tu script de llamada (query_rag) interactuará con esto.
+# Este bloque es para pruebas directas.
 if __name__ == '__main__':
-    graph = buildGraph()
-    thread_config = {"configurable": {"thread_id": "mi_conversacion_gemini_4"}}
-    pregunta_guia = "que es un algoritmo greedy?"
-    
-    print(f"\n--- Preguntando: {pregunta_guia} ---")
-    events = graph.stream(
-        {"messages": [HumanMessage(content=pregunta_guia)]},
-        config=thread_config,
+    graph = build_graph()
+    thread_config = {"configurable": {"thread_id": "test_run_1"}}
+
+    # Un prompt de sistema más directo puede ayudar al modelo
+    system_prompt = SystemMessage(
+        content="""Eres un asistente experto. Tu trabajo es responder preguntas usando las herramientas proporcionadas.
+Analiza la pregunta del usuario y usa **obligatoriamente** una de estas dos herramientas:
+1. `consultar_guia_docente`: Para preguntas sobre la estructura del curso (profesores, temario, evaluación).
+2. `chroma_retriever`: Para todas las demás preguntas conceptuales sobre el material de la asignatura.
+Nunca respondas desde tu conocimiento previo. Siempre usa una herramienta. Una vez que la herramienta devuelva información, úsala para formular la respuesta final."""
     )
+    
+    # PREGUNTA DE PRUEBA
+    pregunta_usuario = "¿Explícame el concepto de 'overfitting'?"
+    asignatura = "metaheuristicas" # Asignatura para la prueba
+
+    # MODIFICADO 4: El estado inicial debe coincidir con la nueva estructura de AgentState
+    initial_state = {
+        "messages": [system_prompt, HumanMessage(content=pregunta_usuario)],
+        "subject": asignatura,
+        "retrieved_docs": []
+    }
+    
+    final_agent_response = None
+    # Usamos .stream() para ver cada paso del proceso
+    events = graph.stream(initial_state, config=thread_config)
     for event in events:
-        # Imprimimos la respuesta final
-        if "final_answer_generator" in event:
-            event["final_answer_generator"]["messages"][-1].pretty_print()
+        print("\n--- Evento del Grafo ---")
+        print(event)
+        # Busca el evento final del nodo 'agent' que no tiene tool_calls
+        if "agent" in event:
+            last_msg = event["agent"].get("messages", [])[-1]
+            if isinstance(last_msg, AIMessage) and not last_msg.tool_calls:
+                 final_agent_response = last_msg
+
+    # Mostrar la respuesta y los documentos recuperados del estado final
+    if final_agent_response:
+        print("\n\n--- Respuesta Final del Agente ---")
+        final_agent_response.pretty_print()
+
+    # Recupera el estado final completo para verificar los documentos
+    final_state = graph.get_state(thread_config)
+    final_docs = final_state.values.get('retrieved_docs')
+    if final_docs:
+        print("\n--- Fuentes Consultadas ---")
+        for i, doc in enumerate(final_docs):
+            # Asumiendo que tus metadatos tienen 'source'
+            print(f"  [{i+1}] {doc.metadata.get('source', 'N/A')}")

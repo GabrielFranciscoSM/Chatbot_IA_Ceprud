@@ -17,17 +17,20 @@ services:
         ipc: host
         image: vllm/vllm-openai:latest
         command: [
-            "--model", "/models/TheBloke--TinyLlama-1.1B-Chat-v1.0-AWQ",
+            "--model", "/models/Sreenington--Phi-3-mini-4k-instruct-AWQ",
             "--max-num-seqs", "8",
-            #"--max-model-len", "2048",
+            "--max-model-len", "1800",
             #"--max-batch-size", "8",
-            "--quantization", "awq",                 # <-- ADD: Enable 4-bit quantization
-            "--gpu-memory-utilization", "0.5",
-            "--enable-lora",
-            "--max-loras", "1", # Set to the number of adapters you'll use
-            "--lora-modules", "metaheuristicas=/models/metaheuristicas-TinyLlama-qlora",
+            "--quantization", "awq_marlin",       # <-- ADD: Enable 4-bit quantization
+            "--gpu-memory-utilization", "0.65",
+            #"--enable-lora",
+            #"--max-loras", "1", # Set to the number of adapters you'll use
+            #"--lora-modules", "metaheuristicas=/models/metaheuristicas-TinyLlama-qlora",
             "--port", "8000",
-            #"--served-model-name", "${MODEL_NAME:-Llama-SEA-LION-v3-8B-IT}",
+            
+            "--enable-auto-tool-choice",
+            "--tool-call-parser", "phi4_mini_json", 
+            "--chat-template", "{{ bos_token }}{% for message in messages %}{% if (message['role'] in ['user', 'system']) %}{{'<|user|>' + '\n' + message['content'] + '<|end|>' + '\n' + '<|assistant|>' + '\n'}}{% elif message['role'] == 'assistant' %}{{message['content'] + '<|end|>' + '\n'}}{% endif %}{% endfor %}",
             ]             
     vllm-openai-embeddings:
         deploy:
@@ -53,16 +56,30 @@ services:
             dockerfile: Containerfile
         ports:
             - 5001:5001
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          # You can specify a particular GPU or all available GPUs
+                          # For example, to use the first GPU:
+                          device_ids: ['0']
+                          # To use all available GPUs, you can use:
+                          # count: all
+                          capabilities:
+                              - gpu
         environment:
             HF_HUB_DISABLE_SYMLINKS_WARNING: 1
         volumes:
         - ./.env:/app/.env
         - ./app/app.py:/app/app.py
-        - ./app/router_logic.py:/app/router_logic.py
+        - ./app/api_router.py:/app/api_router.py
         - ./app/logic/query_logic.py:/app/query_logic.py
         - ./app/RAG/get_embedding_function.py:/app/get_embedding_function.py
         - ./app/RAG/populate_database.py:/app/populate_database.py
         - ./app/logic/graph.py:/app/graph.py
+        - ./app/logic/test_conversation.py:/app/test_conversation.py
+        - ./app/RAG/guía_docente_de_modelos_avanzados_de_computación_especialidad_computación_y_sistemas_inteligentes_296113d.json:/app/guia_docente_de_modelos_avanzados.json
         - ./models:/app/models
         - ./data:/app/data
         - ./logs:/app/logs

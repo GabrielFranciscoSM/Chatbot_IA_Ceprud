@@ -79,14 +79,8 @@ async def chat_endpoint(
         if selected_mode == 'base':
             result = query_rag(user_message,use_RAG=False)
         elif selected_mode in ['rag', 'rag_lora']:
-            chroma_path = os.path.join(BASE_CHROMA_PATH, selected_subject)
-            if not os.path.isdir(chroma_path):
-                return JSONResponse(
-                    content={"response": f"❌ No hay datos para '{selected_subject}'."}, status_code=404
-                )
             result = query_rag(
                 user_message,
-                chroma_path,
                 subject=selected_subject,
                 use_finetuned=(selected_mode == 'rag_lora')
                 )
