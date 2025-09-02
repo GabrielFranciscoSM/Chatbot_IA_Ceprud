@@ -20,7 +20,6 @@ app.add_middleware(
 # --- Include the Shared API Router ---
 app.include_router(api_router)
 
-
 if __name__ == '__main__':
     import uvicorn
     # This will run ONLY the API endpoints
