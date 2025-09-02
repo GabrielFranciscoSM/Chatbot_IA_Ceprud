@@ -25,6 +25,7 @@ os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 
 # =====================================
 
+#Poner como función para iniciar en la api_router
 rag_graph = build_graph()
 
 system_prompt = SystemMessage(
@@ -34,17 +35,15 @@ Analiza la pregunta del usuario y usa **obligatoriamente** una de estas dos herr
 2. `chroma_retriever`: Para todas las demás preguntas conceptuales sobre el material de la asignatura.
 Nunca respondas desde tu conocimiento previo. Siempre usa una herramienta. Una vez que la herramienta devuelva información, úsala para formular la respuesta final."""
     )
-# En tu script principal donde defines query_rag
 
 def query_rag(query_text: str,
               subject: str = None,
               use_finetuned: bool = False,
-              use_RAG: bool = True,
               ) -> dict:
-    
     """
     Realiza búsqueda RAG y genera una respuesta.
     """
+
     model_desc = None
 
     if use_finetuned and subject: 
@@ -65,7 +64,6 @@ def query_rag(query_text: str,
     input_data = {}
     
     if not existing_state or not existing_state.values.get("messages"):
-        # 2. Si NO existe, creamos el estado inicial completo
         print(f"--- INFO: Creando nueva conversación con ID: {conversation_id} ---")
         input_data = {
             "messages": [system_prompt, HumanMessage(content=query_text)],
@@ -73,13 +71,12 @@ def query_rag(query_text: str,
             "retrieved_docs": []
         }
     else:
-        # 3. Si SÍ existe, solo añadimos el nuevo mensaje
         print(f"--- INFO: Continuando conversación con ID: {conversation_id} ---")
         input_data = {
             "messages": [HumanMessage(content=query_text)]
         }
 
-    # Usamos stream para obtener la respuesta final de forma más fiable
+    #ASYNC PARA STREAMING?
     final_result = None
     for event in rag_graph.stream(input_data, config=config, stream_mode="values"):
         # "values" nos da el estado completo después de cada paso
@@ -95,19 +92,6 @@ def query_rag(query_text: str,
     print(f"Fuentes recuperadas: {sources}")
 
     return {"response": final_response, "sources": sources, "model_used": model_desc}
-
-    # # El resto de la función puede permanecer casi igual
-    # result = rag_graph.invoke(config=config, input=initial_input)
-    
-    # final_response = result['messages'][-1].content
-    
-    # # La recuperación de documentos ahora es directa desde el estado final
-    # final_docs = result.get('retrieved_docs', [])
-    # sources = [d.metadata.get("source", "N/A") for d in final_docs] # Ajusta 'source' si tu metadata key es diferente
-
-    # print(f"Fuentes recuperadas: {sources}")
-
-    # return {"response": final_response, "sources": sources, "model_used": model_desc}
 
 # Ejemplo de uso conversacional
 if __name__ == "__main__":

@@ -77,7 +77,7 @@ async def chat_endpoint(
 
     try:
         if selected_mode == 'base':
-            result = query_rag(user_message,use_RAG=False)
+            result = query_rag(user_message,subject=selected_subject,use_finetuned=False)
         elif selected_mode in ['rag', 'rag_lora']:
             result = query_rag(
                 user_message,

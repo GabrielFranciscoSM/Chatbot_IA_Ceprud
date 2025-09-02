@@ -26,6 +26,8 @@ VLLM_URL = os.getenv("VLLM_URL", "http://localhost:8000") + "/v1"
 VLLM_MODEL_NAME = os.getenv("MODEL_DIR", "default_model_name")
 BASE_CHROMA_PATH = os.getenv("BASE_CHROMA_PATH", "chroma")
 
+LOCAL_INFERENCE=False
+
 # Estado del agente, incluyendo los documentos recuperados y la asignatura
 class AgentState(MessagesState):
     retrieved_docs: List[Document]
@@ -34,14 +36,18 @@ class AgentState(MessagesState):
 # --- HERRAMIENTAS ---
 
 @tool
-def consultar_guia_docente(seccion: str) -> Tuple[str, List[Document]]:
+def consultar_guia_docente(config: RunnableConfig, seccion: str) -> Tuple[str, List[Document]]:
     """
     Consulta la guía docente. Devuelve el texto y una lista vacía de documentos.
     Esta herramienta es para preguntas sobre la estructura del curso, profesores, evaluación, etc.
     """
     print(f"--- INFO: Usando herramienta 'Guía Docente' para la sección: {seccion} ---")
+
+    subject = config["configurable"]["subject"]
+
     try:
         # Asume que la guía está en la raíz. Ajusta si es necesario.
+        # Cambiar la guia docente predeterminada por la de la asignatura pertinente.
         with open('guia_docente_de_modelos_avanzados.json', 'r', encoding='utf-8') as f:
             guia = json.load(f)
     except FileNotFoundError:
@@ -53,10 +59,7 @@ def consultar_guia_docente(seccion: str) -> Tuple[str, List[Document]]:
     return f"Error: La sección '{seccion}' no se encontró en la guía docente.", []
 
 
-# MODIFICADO 2: La firma de la herramienta es limpia y simple.
-# El LLM solo necesita proporcionar la 'pregunta'.
 @tool
-#def chroma_retriever(pregunta: str, subject: str) -> Tuple[str, List[Document]]:
 def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[Document]]:
     """
     Busca en los apuntes de la asignatura usando ChromaDB.
@@ -90,25 +93,27 @@ def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[D
 def call_agent(state: AgentState):
     """Nodo del Agente. Decide si responder o usar una herramienta."""
     print("--- INFO: Agente decidiendo... ---")
-    # MODIFICADO: Definimos el LLM y las herramientas aquí para claridad
-    #llm = ChatOpenAI(model=VLLM_MODEL_NAME, openai_api_key="EMPTY", openai_api_base=VLLM_URL, temperature=0)
-    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash",temperature=0)
+
+    if LOCAL_INFERENCE:
+        llm = ChatOpenAI(model=VLLM_MODEL_NAME, openai_api_key="EMPTY", openai_api_base=VLLM_URL, temperature=0)
+    else:
+        llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash",temperature=0)
+
     tools = [consultar_guia_docente, chroma_retriever]
     
     llm_with_tools = llm.bind_tools(tools)
 
     response = llm_with_tools.invoke(state["messages"])
 
-    for message in state["messages"]:
-        message.pretty_print()
+    # for message in state["messages"]:
+    #     message.pretty_print()
         
-    response.pretty_print()
-    print("\n\n")
+    # response.pretty_print()
+    # print("\n\n")
 
     return {"messages": [response]}
 
 
-# MODIFICADO 3: El nodo de ejecución ahora es mucho más robusto.
 def execute_tools(state: AgentState) -> Dict[str, Any]:
     """
     Ejecuta las herramientas. Extrae dependencias (como 'subject') del estado
@@ -130,21 +135,12 @@ def execute_tools(state: AgentState) -> Dict[str, Any]:
         
         tool_function = tool_map.get(tool_name)
         if not tool_function:
-            # Esto es un fallback por si el LLM alucina un nombre de herramienta
             error_message = f"Error: La herramienta '{tool_name}' no existe."
             tool_messages.append(ToolMessage(content=error_message, tool_call_id=call['id']))
             continue
 
-        # Inyecta dependencias desde el estado si es necesario
         tool_args = call['args']
-        #if tool_name == "chroma_retriever":
-            # Aquí está la magia: añadimos el 'subject' del estado a los argumentos de la herramienta.
-            #tool_args['subject'] = state['subject']
-            #tool_args['config'] = {"configurable": {"subject": state['subject']}}
 
-
-        # Llama a la herramienta con los argumentos correctos
-        # y desempaqueta la tupla (contenido, documentos)
         try:
             content, docs = tool_function.invoke(tool_args)
             tool_messages.append(ToolMessage(content=content, tool_call_id=call['id']))
@@ -155,19 +151,18 @@ def execute_tools(state: AgentState) -> Dict[str, Any]:
             print(f"--- ERROR: {error_msg} ---")
             tool_messages.append(ToolMessage(content=error_msg, tool_call_id=call['id']))
 
-    # Actualiza el estado con los resultados de la herramienta y los documentos recuperados.
     return {"messages": tool_messages, "retrieved_docs": all_retrieved_docs}
 
 
 def should_continue(state: AgentState) -> Literal["tools", "__end__"]:
     """Router: Decide si el ciclo continúa o termina."""
     if not state['messages'] or not isinstance(state['messages'][-1], AIMessage):
-        return "agent" # Fallback por si acaso
+        return "agent" 
     
-    # Si la última respuesta de la IA tiene llamadas a herramientas, ejecútalas.
     return "tools" if state["messages"][-1].tool_calls else "__end__"
 
 # --- CONSTRUCCIÓN DEL GRAFO ---
+
 def build_graph():
     """Construye y compila el grafo del agente."""
     graph_builder = StateGraph(AgentState)
@@ -183,15 +178,13 @@ def build_graph():
     )
     graph_builder.add_edge("tools", "agent")
 
-    # La memoria es útil para depurar y mantener conversaciones
     conn = sqlite3.connect("checkpoints.sqlite", check_same_thread=False)
     memory = SqliteSaver(conn)
 
     return graph_builder.compile(checkpointer=memory)
 
 # --- EJECUCIÓN ---
-# Tu script de llamada (query_rag) interactuará con esto.
-# Este bloque es para pruebas directas.
+
 if __name__ == '__main__':
     graph = build_graph()
     thread_config = {"configurable": {"thread_id": "test_run_1"}}
@@ -207,9 +200,8 @@ Nunca respondas desde tu conocimiento previo. Siempre usa una herramienta. Una v
     
     # PREGUNTA DE PRUEBA
     pregunta_usuario = "¿Explícame el concepto de 'overfitting'?"
-    asignatura = "metaheuristicas" # Asignatura para la prueba
+    asignatura = "metaheuristicas" 
 
-    # MODIFICADO 4: El estado inicial debe coincidir con la nueva estructura de AgentState
     initial_state = {
         "messages": [system_prompt, HumanMessage(content=pregunta_usuario)],
         "subject": asignatura,
