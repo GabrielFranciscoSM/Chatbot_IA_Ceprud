@@ -1,7 +1,7 @@
 import os
 import re
 from langchain_chroma import Chroma
-from get_embedding_function import get_embedding_function
+from RAG.get_embedding_function import get_embedding_function
 import requests
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
@@ -9,7 +9,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 
 from langchain_core.messages import HumanMessage, SystemMessage
 
-from graph import build_graph, AgentState # Importa AgentState también
+from logic.graph import build_graph, AgentState # Importa AgentState también
 
 load_dotenv()
 
@@ -18,7 +18,7 @@ load_dotenv()
 # =====================================
 
 VLLM_URL = os.getenv("VLLM_URL") + "/v1"
-VLLM_MODEL_NAME = os.getenv("MODEL_DIR") 
+VLLM_MODEL_NAME = ".." + os.getenv("MODEL_DIR") 
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY

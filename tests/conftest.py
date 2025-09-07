@@ -1,7 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
-from app.app import app
-from app.RAG.get_embedding_function import get_embedding_function
+from app import app
+from RAG.get_embedding_function import get_embedding_function
 import os
 import docker
 

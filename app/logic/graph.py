@@ -14,7 +14,7 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from typing_extensions import TypedDict
 
 # Asumo que get_embedding_function es una función que tienes en otro archivo
-from get_embedding_function import get_embedding_function
+from RAG.get_embedding_function import get_embedding_function
 from langchain_core.runnables import RunnableConfig
 import sqlite3
 
@@ -23,8 +23,8 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 VLLM_URL = os.getenv("VLLM_URL", "http://localhost:8000") + "/v1"
-VLLM_MODEL_NAME = os.getenv("MODEL_DIR", "default_model_name")
-BASE_CHROMA_PATH = os.getenv("BASE_CHROMA_PATH", "chroma")
+VLLM_MODEL_NAME = ".." + os.getenv("MODEL_DIR", "default_model_name")
+BASE_CHROMA_PATH = "../RAG" + os.getenv("BASE_CHROMA_PATH", "chroma")
 
 LOCAL_INFERENCE=False
 

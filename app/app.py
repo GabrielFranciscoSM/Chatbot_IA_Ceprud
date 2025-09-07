@@ -8,6 +8,12 @@ from fastapi.templating import Jinja2Templates
 # Import the shared router
 from api_router import router as api_router
 
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(APP_ROOT, "static")
+TEMPLATES_DIR = os.path.join(APP_ROOT, "templates")
+GRAPHS_DIR = os.path.join(APP_ROOT, "graphs")
+
 # Create the main FastAPI app
 app = FastAPI()
 
@@ -28,9 +34,13 @@ app.include_router(api_router)
 
 
 # --- Frontend Specific Setup ---
-app.mount("/static", StaticFiles(directory="static"), name="static")
-app.mount("/graphs", StaticFiles(directory="graphs"), name="graphs")
-templates = Jinja2Templates(directory="templates")
+# app.mount("/static", StaticFiles(directory="static"), name="static")
+# app.mount("/graphs", StaticFiles(directory="graphs"), name="graphs")
+# templates = Jinja2Templates(directory="templates")
+
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+app.mount("/graphs", StaticFiles(directory=GRAPHS_DIR), name="graphs")
+templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
@@ -42,7 +52,8 @@ async def index(request: Request):
 async def list_graphs():
     """Lists available graph images for the frontend."""
     graphs_dir = os.path.join(os.path.dirname(__file__), "graphs")
-    if not os.path.isdir(graphs_dir):
+    # if not os.path.isdir(graphs_dir):
+    if not os.path.isdir(GRAPHS_DIR):
         return []
     # This endpoint is specific to the UI, so it stays here
     return [f for f in os.listdir(graphs_dir) if f.endswith((".png", ".jpg", ".jpeg", ".gif"))]

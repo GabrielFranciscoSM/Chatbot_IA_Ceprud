@@ -1,0 +1,1722 @@
+--- [Fuente: EjemploReduccion.pdf, Página: 0] ---
+( ( ) M ) L(M) u la r ( e l
+
+--- [Fuente: EjemploReduccion.pdf, Página: 1] ---
+( ( ) M ) L(M) e r s a l) a ( L ( M R ( M ') ) ( e l
+
+--- [Fuente: EjemploReduccion.pdf, Página: 2] ---
+( ( ) M ) L(M) N IV E R S A L ( M ( M ,u ) ,u ) a e r s a l) a C - R E R E G U L A R ( M U L A R ( M ') ') r ( L ( M ,u ) R ( M ') (
+
+--- [Fuente: EjemploReduccion.pdf, Página: 3] ---
+( ) a R E G U L A R ( M ' ) (M,u) , o n s t r u ím o s u n o s d a t o s M d e la s ig u ie n t e f o r m a : M w 1 S I/ N O { n :m } ( S I) , s e a e l n ú m e ro d e p a s o s q u e d a e n e s te a e p ta ió n . L(M){ k : kn} , q u e o m o e s (cid:28) n ito e s re g u la r ( S I) ( N O ) , e n to n e s L(M){ n :n } e s re g u la r ( N O ) .
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 0] ---
+Manual practico sobre decibilidad y semidecibilidad Es decidible. Disenar un algoritmo que resuelva el problema. Normalmente, esto se demuestra probando que el problema se reduce a realizar un numero finito de comproba- ciones (aunque, a priori, no lo parezca), cada una de ellas en un numero finito de pasos. Entonces, una maquina de Turing que compruebe todas las posibilidades es un algoritmo que resuelve el problema (siempre para, ya que realiza un numero finito de pasos). No es decidible. Para demostrar que un problema no es decidible contamos con el teorema de Rice: Teorema 1.1 (Teorema de Rice) Toda propiedad no trivial de los lenguajes recursi- que solo depende del lenguaje en sı y que es independiente de las diferentes maquinas de Dada un MT M, determinar si M acepta una palabra que empiece por 0, la propiedad aceptar una palabra que empieza por 0 es una propiedad de los lenguajes recursivamente enumerables, porque es una propiedad que solo depende de L(M). Dicho de otra manera, si otra maquina de Turing M(cid:48) acepta el mismo lenguaje, M cumple esa propiedad si, y solo si, lo hace M(cid:48). Dada un MT M, determinar si M acepta una palabra en menos de 5 movimientos, la propiedad acepta una palabra en menos de 5 movimientos no es una propiedad de los lenguajes recursivamente enumerables. Es una propiedad asociada a las maquinas de Turing ya que, para dos maquinas de Turing que acepten el mismo lenguaje, una puede LapropiedadseraceptadoporunamaquinadeTuringestrivial,todosloslengua-
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 1] ---
+La propiedad existe una reduccion de L a L es trivial, ningun lenguaje r.e. L lo cumple (porque si no, no serıa r.e.). La propiedad ser numerable es trivial, todos los lenguajes son numerables. Si la propiedad no es de los lenguajes r.e., entonces necesitamos establecer una reduccion desdeunproblemanodecidible. Algunosproblemasquesepuedenutilizarparaestoson: UNIVERSAL: Dada una MT M y una entrada w, determinar si M acepta w. El PARADA: Dada una MT M y unaentrada w, determinar si M para conentrada w. C-DIAGONAL: Dada una MT M, determinar si M acepta su codificacion (cid:104)M(cid:105). En general, cualquier problema visto en clase que no sea decidible. Es semidecidible. Disenar una maquina de Turing que acepte las palabras del lenguaje requieren comprobar que, en un conjunto infinito A (si es finito, ademas, es decidible) existe un elemento que cumple cierta propiedad. En este caso, la maquina de Turing no determinista sigue el siguiente esquema: Maquina de Turing no determinista generica Entrada: Propiedad P, conjunto de posibilidades A 1: Seleccionamos de forma no determinista aA 2: Si a cumple la propiedad P entonces 3: acepta la entrada 4: Si no 5: rechaza la entrada Obviamente, esto se puede extender a que existan un numero finito n de elementos que cumplan esa propiedad P. Bastarıa seleccionar de forma no determinista n elementos No es semidecidible. Establecerunareducciondesdeunproblemaquesabemosqueno es semidecidible. Algunos problemas que se pueden utilizar para esto son:
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 2] ---
+DIAGONAL: Dada una MT M, determinar si M no acepta su codificacion (cid:104)M(cid:105). El lenguaje asociado es el lenguaje de diagonalizacion L . C-UNIVERSAL: Dada una MT M y una entrada w, determinar si M no acepta w. EMPTY: Dada una MT M, determinar si L(M). El lenguaje asociado es L . En general, el complementario de cualquier problema visto en clase que sea semide- Otra forma de demostrar que un problema/lenguaje no es semidecidible, es demostrar siempre es {0,1}. Ejemplo 2.1 Dadas dos maquinas de Turing M y M , determinar si L(M )L(M ). Solucion. Este problema necesita comprobar si TODA palabra de L(M ) (posiblemente un numero infinito) esta en L(M ), por lo que deberıamos intuir que no es semidecible. Para demostrar esto vamos a realizar una reduccion desde un problema que no es semidecible, por lo que nuestro problema tampoco lo sera. Consideramos los problemas: P1: Dada una maquina de Turing M, determinar si L(M). P2: Dadas dos maquinas de Turing M y M , determinar si L(M )L(M ). Sabemos, por las transparencias de teorıa, que P1 no es semidecidible, ya que es el problema Una reduccion de P1 a P2, P1 P2, consiste en asociar a cada instancia de P1 (una maquina de Turing) una instancia de P2 (dos maquinas de Turing) mediante un algoritmo F, demaneraquesiM esunainstanciapositivadelproblemaP1,entoncesF(M)esunainstancia positivadeP2, y, alcontrario, siM esunainstancianegativadelproblemaP1, entoncesF(M) ConsideramoslamaquinadeTuringR({q },{0,1},{0,1,},δ,q ,,),dondeδ notiene transiciones, por lo que L(R) (se puede considerar cualquier MT que no acepte palabras). Entonces, dada una instancia M de P1, le asociamos el par F(M)(M,R). Obviamente, esto es un proceso algorıtmico. Basta con escribir la codificacion de R despues de la codificacion de cualquier entrada M. Ademas,
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 3] ---
+Si M es un caso positivo de P1, es decir, L(M), entonces F(M)(M,R) es un caso positivo de P2, ya que L(M)L(R). Si M es un caso negativo de P1, es decir, L(M)(cid:54), entonces F(M)(M,R) es un caso negativo de P2, ya que L(M)(cid:54)L(R). Ejemplo 2.2 Dadounautomataconpilanodeterministayunapalabradeentrada,determinar si el automata acepta la palabra. Solucion. Este problema es decidible ya que podemos disenar un algoritmo que lo resuelva. Supongamos que P es un automata con pila y u, una palabra. Como vimos en la asignatura Modelos de Computacion (Tema 5 de teorıa) existe un algoritmo que calcula una gramatica libre de contexto G que genera el mismo lenguaje que acepta P. En el Tema 4 de teorıa de Modelos de Computacion se explica un algoritmo que elimina producciones nulas de una gramatica libre de contexto. Se lo aplicamos a G y obtenemos una gramatica G(cid:48) que genera las mismas palabras que G, salvo la palabra vacıa en caso de que G genere (cid:15). Si la palabra u es la palabra vacıa, basta con comprobar si el sımbolo inicial es anulable. Si lo es, entonces se acepta, y si no, no se acepta. Si la palabra u no es la palabra vacıa, aplicamos el algoritmo de eliminacion de producciones unitarias y obtenemos una gramatica G(cid:48)(cid:48) equivalente a G(cid:48) pero sin producciones unitarias. Entonces G(cid:48)(cid:48) esta en las condiciones para aplicar el algoritmo de calculo de la forma normal de Chomsky (Tema 4 de teorıa de Modelos de Computacion), y obtenemos una gramatica C equivalente a G(cid:48)(cid:48) en la forma normal de Chomsky. A C y a u se le puede aplicar ahora el algoritmo de Cocke-Younger-Kasami (Tema 6 de teorıa de Modelos de Computacion) que nos asegura si C genera u, o no. Por tanto, decide si P acepta u, o no. Ejemplo 2.3 Dada una maquina de Turing, determinar si acepta una palabra de longitud Solucion. Ya que se trata de un problema de comprobar la existencia de algo, deberıamos intuir que este problema no es decidible pero sı semidecidible. recursivamente enumerables. Se puede observar que aceptar una palabra de longitud menor o iguala20esunapropiedaddellenguajeaceptadoporlamaquinadeTuring,nodelamaquina de Turing en sı. Dicho de otra manera, si dos maquinas de Turing acepta el mismo lenguaje, una acepta una palabra de longitud menor o igual a 20 si y solo si lo hace la otra. Por tanto,
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 4] ---
+Para demostrar que es semidecidible, podemos construir una maquina de Turing no de- terminista R que acepte la codificacion de las maquinas de Turing que cumple esa propiedad (se entiende que si la cadena de entrada no es la codificacion de una maquina de Turing, se rechaza). Maquina de Turing no determinista R Entrada: La codificacion (cid:104)M(cid:105) de una maquina de Turing M 1: Anadimos la palabra 111 al final de la entrada 2: De forma no determinista seleccionamos una palabra u de longitud menor que o igual que 20 y la copiamos a continuacion de 3: Ejecutamos la maquina universal sobre la palabra de la cinta, es decir, sobre (cid:104)M(cid:105)111u 4: Si la maquina universal acepta entonces 5: R acepta 6: Si no 7: R no acepta Vemos que basta con que alguna de las ramas de computo (al realizar la eleccion no deter- minista de la lınea 2) se acepte para que la entrada se acepte, que es precisamente lo que nos pide el problema: ¿Existe una palabra...?. Otraformaderesolverloesdescribiendounamaquinadeterminista. Primero,unapropuesta que NO es valida: Maquina de Turing determinista S QUE NO FUNCIONA Entrada: La codificacion (cid:104)M(cid:105) de una maquina de Turing M 1: Anadimos la palabra 111 al final de la entrada 2: Puesto que las palabras de longitud 20 o menos son un conjunto finito, llamemoslo A, las 3: Para cada palabra uA, en el orden establecido, hacer 4: Copio (cid:104)M(cid:105)111u en una segunda cinta 5: Ejecutamos la maquina universal sobre la segunda cinta 6: Si la maquina universal acepta entonces 7: S acepta la entrada 8: S rechaza la entrada (ya que no se ha aceptado ninguna entrada en el bucle) ¿Por que no funciona? Porque es posible que para alguna palabra u de A, al ejecutar la maquinauniversal(lınea5),estaserechacealestarindefinidamenteenmovimiento(lamaquina universalcicleconesaentrada). Portanto,lamaquinadisenadaStambienciclarıaenesapasada
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 5] ---
+del bucle (en la lınea 5), y rechazarıa la entrada (la salida dirıa que M no acepta palabras de longitud menor que 21). Sin embargo podrıa no haber ejecutado todas las pasadas del bucle, es decir, faltarıan algunas palabras de A por comprobar, y es posible que alguna de ellas sı es ¿Como arreglar esto? Ejecutando todas las palabras de A a la vez. Como no podemos realizar una seleccion no determinista, lo que vamos a hacer es ejecutar un numero finito de pasos de calculo con todas las palabras. Si con ninguna se acepta, aumentamos el numero de pasos de calculo y repetimos. Ası de forma indefinida hasta que una palabra se acepte (que se aceptara en un numero finito de pasos de calculo). Si, en realidad, la maquina M no acepta ninguna palabra de A, nuestra nueva maquina ciclara indefinidamente (ya que es un bucle infinito) Maquina de Turing determinista S Entrada: La codificacion (cid:104)M(cid:105) de una maquina de Turing M 1: Anadimos la palabra 111 al final de la entrada 2: Puesto que las palabras de longitud 20 o menos son un conjunto finito, llamemoslo A, las 3: Para i1,2,3,...., hacer 4: Para cada palabra uA, en el orden establecido, hacer 5: Copio (cid:104)M(cid:105)111u en una segunda cinta 6: Ejecutamos la maquina universal i pasos sobre la segunda cinta 7: Si la maquina universal acepta entonces 8: S acepta la entrada Una forma de ver la diferencia entre ambas maquinas es pensar en el arbol de pasos de computo. La primera maquina, que no resuelve correctamente el problema, realiza una busquedaenprofundidadenlospasosdecomputodetodaslaspalabrasdelongitudmenorque 21, ver Figura 1. Como hay una rama infinita, la busqueda en profundidad no es capaz de visitar todos los nodos del arbol. Observese que la maquina M cicla con la palabra 2, por lo que nunca llega a verificar la palabra 3, que es la que sı acepta. Sin embargo, la segunda maquina realiza una busqueda en anchura, ver Figura 2. Puesto que, si alguna palabra se acepta, el nodo de aceptacion debe estar a profundidad finita, esta busqueda nos asegura que llegaremos a dicho nodo. Ejemplo 2.4 Dada un maquina de Turing M, determinar si, para cualquier entrada, M para antes de 10 pasos de calculo.
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 6] ---
+Figure 1: Busqueda en profundidad Figure 2: Busqueda en anchura Solucion. Primero vamos a describir algunos errores muy comunes al resolver este ejercicio. ERROR 1. Este problema no es decidible. Es una propiedad no trivial y entonces, por el maquinasdeTuring. UnmismolenguajepuedeseraceptadopordosmaquinasdeTuring, unaqueloacepteparatodapalabraenmenosde10pasos,yotraenmasde10paraalguna palabra. Ası que no se puede aplicar el teorema de Rice. ERROR 2. Es decidible. Este serıa el algoritmo: simplemente, para cada entrada, se ejecuta la maquina 10 pasos. Si no se para, entonces la respuesta es no. Si para para todas, la respuesta es sı. En este caso, el problema es que hay un numero infinito de palabras a comprobar. Dada una maquina de Turing M, supongamos que comprobamos las palabras en el orden total dadoenclaseteorıa(primerosemiralalongitud,ysitienenlamisma,lexicograficamente).
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 7] ---
+Si existe una palabra que hace que la maquina se ejecute mas de 10 pasos, como tendra una longitud finita, llegara un momento en el que se compruebe que efectivamente, no se paraconsolo10pasos,ylarespuestaparaM esno. Elproblemavienesiesunamaquina querealmenteseparasiempreantesde10pasos. Esteprocedimientoestaracomprobando La respuesta correcta es que es decidible. En 10 pasos, solo se pueden leer 10 casillas de la cinta como maximo. Ası que, para cualquier palabra (da igual la longitud), solo me interesan los 10 primeros sımbolos. Dadas dos palabras u y u con los 10 primeros sımbolos iguales, M deentrada. Portanto, solonecesitamoscomprobarloparalaspalabrasdelongitud10omenos. Este conjunto es finito (tiene 210 elementos), ası que basta ejecutar 10 pasos para cada una de estas palabras. Si con todas para, entonces la respuesta es sı. Si alguna no ha parado, la Ejemplo 2.5 Dada un maquina de Turing M, determinar si para para cualquier entrada. Solucion. El problema no es semidecidible. Construimos una reduccion desde el complemen- universal. Puesto que se ha demostrado en teorıa que L es semidecidible pero no decidible, L no es semidecidible. Consideramos los problemas: C-UNIVERSAL: Dada una MT M y una palabra w, determinar si M no acepta w. ALG: Dada una MT M, determinar si para para cualquier entrada. Vamos a construir un proceso algorıtmico F para pasar de una instancia de C-UNIVERSAL a una instancia de ALG. Sea (M,w) una instancia de C-UNIVERSAL, construimos las siguiente maquina de Turing F(M,w) (que es una instancia de ALG) Maquina de Turing F(M,w) Entrada: Una palabra v {0,1} 1: Calculamos la longitud de v, y se almacena v en una segunda cinta 2: Borramos v de la primera cinta y copiamos en ella (cid:104)M(cid:105)111w 3: Simulamos v pasos de la maquina de Turing M con la entrada w 4: Si M acepta w en v pasos entonces 5: entra en un bucle infinito y se rechaza la entrada, porque cicla 6: Si no 7: se acepta la entrada Es claro que F es un algoritmo. Ademas,
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 8] ---
+Si (M,w) es un caso positivo de C-UNIVERSAL, es decir, M no acepta w, entonces F(M,w)aceptacualquierentradav (yaqueM noaceptaw paracualquiernumerodepa- sos). Entonces L(F(M,w)){0,1} y, como consecuencia, F(M,w) para para cualquier palabra de entrada. Por lo que F(M,w) es un caso positivo de ALG. Si (M,w) es un caso negativo de C-UNIVERSAL, entonces M acepta w. Supongamos dicha entrada, F(M,w) cicla. Por tanto, existe una entrada en la que no para y F(M,w) Ejemplo 2.6 Dada un maquina de Turing M, determinar si no acepta ningun palındromo. Solucion. Este problema no es semidecidible. Para demostrarlo, en vez de utilizar una re- duccion, estudiaremos el problema complementario. Consideramos el problema C-PAL: Dada un maquina de Turing M, determinar si M acepta un palındromo. Aceptarunpalındromoesunapropiedadnotrivialdeloslenguajesrecursivamenteenumerables (por ejemplo, {11} sı la cumple pero {10}, no). Por el teorema de Rice, C-PAL no es decidible. Parademostrarqueessemidecidible,utilizamoslasiguientemaquinadeTuringnodeterminista Maquina de Turing no determinista Entrada: Una maquina de Turing (cid:104)M(cid:105) (su codificacion) 1: Seleccionamos de forma no determinista una palabra w {0,1} 2: Comprobamos si w es un palındromo 3: Si w es un palındromo entonces 4: Simulamos M con entrada w 5: Si M acepta w entonces 6: se acepta la entrada 7: Si no 8: no se acepta la entrada 9: Si no 10: no se acepta la entrada Una maquina de Turing determinista que acepte el mismo lenguaje podrıa ser la siguiente.
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 9] ---
+Maquina de Turing determinista Entrada: Una maquina de Turing (cid:104)M(cid:105) (su codificacion) 1: Para i1,2,3,..., hacer 2: Consideramos el conjunto A i de la palabras de longitud menor que i (finito) 3: Para cada palabra aA i hacer 4: Si a es un palındromo entonces 5: Simulamos i pasos de M con entrada a 6: Si M acepta a entonces 7: se acepta la entrada Ejemplo 2.7 Dada un maquina de Turing M, determinar si termina escribiendo un 1 cuando Solucion. En este caso, no podemos utilizar el teorema de Rice. Esta propiedad no es una propiedad de los lenguajes recursivamente enumerables. Un mismo lenguaje puede tener MTs que lo aceptan que escriban un 1 cuando empiezan con la cinta vacıa, y otras que no. Con- struimos entonces una reduccion desde el problema universal. Consideramos los siguientes problemas: UNIVERSAL: Dada una maquina de Turing M y una palabra w, determinar si M acepta w. ESC-1: Dada una MT M, determinar si escribe un 1 cuando la entrada es (cid:15). Vamos a construir un proceso algorıtmico F para pasar de una instancia de UNIVERSAL a una instancia de ESC-1. Sea (M,w) una instancia de UNIVERSAL, construimos las siguiente maquina de Turing F(M,w) (que es una instancia de ESC-1) Maquina de Turing F(M,w) Entrada: Una palabra v {0,1} 1: Si v no es (cid:15) entonces 2: rechaza la entrada 3: Si no 4: Realizamos una copia M(cid:48) de M donde el sımbolo 1 se ha sustituido por un sımbolo 1 (en el alfabeto de entrada, de la cinta, en las trasiciones, etc) 5: Llamamos w(cid:48) a la palabra w sustituyendo los 1 por 1 6: Escribimos (cid:104)M(cid:48)(cid:105)111w(cid:48) 7: Simulamos M(cid:48) con entrada w(cid:48) 8: Si M(cid:48) acepta w(cid:48) (observad que M(cid:48) acepta w(cid:48) si, y solo si, M acepta w) entonces 9: Escribe un
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 10] ---
+Es claro que F es un algoritmo. Ademas, SiM aceptaw,entoncesF(M,w)escribeun1cuandocomienzaconlacintavacıa,porque M(cid:48) acepta w(cid:48). Si M no acepta w, entonces M(cid:48) no acepta w(cid:48) y nunca escribe 1 (ya que F(M,w) solo puede escribir 1). Entonces UNIVERSAL se reduce a ESC-1, por lo que ESC-1 no es decidible. Sin embargo, sı Maquina de Turing Entrada: Una maquina de Turing M 1: Para i1,2,... hacer 2: Simular M con entrada (cid:15) un numero i de pasos 3: Si M escribe un 1 en esos i pasos entonces 4: acepta la entrada Ejemplo 2.8 Dada un maquina de Turing M, determinar si acepta un numero infinito de Solucion. El problema no es semidecidible. Realizamos una reduccion desde el problema diagonal. Consideramos los problemas: DIAGONAL: Dada una maquina de Turing M, determinar si M no acepta (cid:104)M(cid:105). INFINITY: Dada una MT M, determinar si acepta un numero infinito de palabras. Vamos a construir un proceso algorıtmico F para pasar de una instancia de DIAGONAL a maquina de Turing F(M):
+
+--- [Fuente: Manual_Decibilidad_Semidecibilidad.pdf, Página: 11] ---
+Maquina de Turing F(M) Entrada: Una palabra v {0,1} 1: Si v no es de la forma 0n con n0 entonces 2: rechaza la entrada 3: Si v 0n para cierto n0 entonces 4: Simulamos M con entrada (cid:104)M(cid:105) un numero n de pasos 5: Si M acepta (cid:104)M(cid:105) entonces 6: se rechaza la entrada 7: Si no 8: se acepta la entrada Es claro que F es un algoritmo. Ademas, si M es un caso positivo de DIAGONAL, entonces M no acepta (cid:104)M(cid:105). Calculamos L(F(M)) el lenguaje aceptado por F(M). Dada una palabra v {0,1}: si v (cid:54)0n para algun n0, entonces la rechaza. si v 0n para algun n 0, ejecuta M (con entrada (cid:104)M(cid:105)) n pasos, y no la acepta (ya que M no acepta (cid:104)M(cid:105)), por lo que F(M) sı acepta v. Es decir, L(F(M)) 0, que tiene un numero infinito de palabras. Luego F(M) es un Si M es un caso negativo de DIAGONAL, entonces M acepta (cid:104)M(cid:105). Supongamos que lo acepta en t pasos. Calculamos L(F(M)) el lenguaje aceptado por F(M). Dada una palabra v {0,1}: si v (cid:54)0n para algun n0, entonces la rechaza. si v 0n para algun n t, ejecuta M (con entrada (cid:104)M(cid:105)) n pasos, y no la acepta (ya que M acepta (cid:104)M(cid:105) en t pasos), por lo que F(M) sı acepta v. si v 0n para algun nt, ejecuta M (con entrada (cid:104)M(cid:105)) n pasos, y sı la acepta (ya que M acepta (cid:104)M(cid:105) en t pasos), por lo que F(M) rechaza v. Es decir, L(F(M)) {0,02,...,0t1, que tiene un numero finito de palabras. Luego F(M) es un caso negativo de INFINITY.
+
+--- [Fuente: Presentacion.pdf, Página: 0] ---
+SerafínMoralDepartamentodeCienciasdelaComputaciónDeMspoadcehloos4.A4vanzadosdeComputación
+
+--- [Fuente: Presentacion.pdf, Página: 1] ---
+CLASES (Teoría) Aula 0. Miércoles 17:30-19:30 (Aula 0.6)
+
+--- [Fuente: Presentacion.pdf, Página: 2] ---
+CLASES (Teoría) Aula 0. Miércoles 17:30-19:30 (Aula 0.6) CLASES (Prácticas) Subgrupo 1. Martes 15:30-17:30 Aula, 1.1 (Fernando Berzal) Subgrupo 2. Miércoles 15:30-17:30 Aula 1.4 (José Ramón Trillo) Subgrupo 3. Jueves 15:30-17:30 Aula 1.7 (Fernando Berzal)
+
+--- [Fuente: Presentacion.pdf, Página: 3] ---
+CLASES (Teoría) Aula 0. Miércoles 17:30-19:30 (Aula 0.6) CLASES (Prácticas) Subgrupo 1. Martes 15:30-17:30 Aula, 1.1 (Fernando Berzal) Subgrupo 2. Miércoles 15:30-17:30 Aula 1.4 (José Ramón Trillo) Subgrupo 3. Jueves 15:30-17:30 Aula 1.7 (Fernando Berzal) Serafín Moral: Lunes 11-13, Martes: 11-13, Miércoles: 11- (Despacho 4) smcdecsai.ugr.es
+
+--- [Fuente: Presentacion.pdf, Página: 4] ---
+SerafínMoralDepartamentodeCienciasdelaComputaciónDeMspoadcehloos4.A4vanzadosdeComputación
+
+--- [Fuente: Presentacion.pdf, Página: 5] ---
+Informática Teórica: Dos Asignaturas Primer Cuatrimestre - Obligatoria - Tercer Curso (33) (Autómatas, Lenguajes Formales, Computabilidad) Inteligentes - Tercer Curso (33) (Computatibilidad, Complejidad Algorítmica)
+
+--- [Fuente: Presentacion.pdf, Página: 6] ---
+¿Qué puede ser resuelto en un ordenador? complejidad: determinar qué problemas se pueden resolver en un
+
+--- [Fuente: Presentacion.pdf, Página: 7] ---
+Tema 1: Máquinas de Turing. Funciones y lenguajes calculables. Parte 1: Máquinas de Turing Tema 2: Otros models de cálculo. Tesis de Church-Turing Tema 1: Máquinas de Turing. Funciones y lenguajes calculables. Parte 2: Funciones y lenguajes calculables Tema 3: Clases de Complejidad Tema 4: NP-Completitud Tema 5: Complejidad de problemas de optimización Tema 6: Complejidad en espacio. La jerarquía polinómica Tema 7: Complejidad basada en modelos de computación
+
+--- [Fuente: Presentacion.pdf, Página: 8] ---
+Addison Wesley (2002) S. Arora, B. Barak, Computational complexity: a modern approach, Cambridge University Press (2009). and Languages: Fundamentals of theoretical Computer Science (2nd. Ed.) Academic Press (1994) Press (2018) https://whatcanbecomputed.com/ Programmers Perspective. CRC Press (2019) https://github.com/ganeshutah/Jove C.H. Papadimitriou: Computational Complexity. Addison Wesley (1994) C. Moore, S. Mertens: The Nature of Computation. Oxford University Press (2011)
+
+--- [Fuente: Presentacion.pdf, Página: 9] ---
+Examen Final de la Asignatura (50) Resolución de problemas en clase y entrega (media de 3 notas de clase y entrega de estudio de un problema NP-completo) (20) Pruebas en Clase de Problemas (30) Participación y otros (10 adicional) Importante: Hay que tener un mínimo de 3.5 en cada parte para
+
+--- [Fuente: Presentacion.pdf, Página: 10] ---
+SerafínMoralDepartamentodeCienciasdelaComputaciónDeMspoadcehloos4.A4vanzadosdeComputación
+
+--- [Fuente: tr1a.pdf, Página: 0] ---
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calculables (Parte 1) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 1] ---
+TécnicasdeconstruccióndeMáquinasdeTuring:memoriaadicional,pistas SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 2] ---
+Entrada: un programa y unos datos de entrada Salida: SI (cuando el programa termina para esos datos) y NO (cuando el programa cicla de forma indefinida para esos datos) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 3] ---
+¿Por qué es difícil saber si un programa termina? int exp(int i ,n) / calcula i a la potencia n / { int ans,j; ans 1; for (j1; jn; j) ans i; return(ans); } main() { int n, total , x,y,z; scanf("d",n); total 3; while (1) { for(x1; xtotal 2; x) for(y1; ytotalx1; y) { z totalxy; if (exp(x,n) exp(y,n) exp(z,n)) printf("holamundo"); } total; } } SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 4] ---
+xnyn zn Ahora se sabe que no termina para n2 según el último nos diga si cualquier programa termina!! SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 5] ---
+Una Máquina de Turing (MT) es una séptupla (Q,A,B,δ,q ,,F) δ es la función de transición que asigna a cada estado qQ y símbolo bB, el valor δ(q,b) que puede ser vacío (no definido) o una tripleta (p,c,M) donde pQ,c B,M {I,D} donde I indica izquierda y D indica es un símbolo de BA llamado símbolo blanco SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 6] ---
+M ({q ,q ,q ,q ,q },{0,1},{0,1,X,Y,},δ,q ,,{q }) donde las transiciones no nulas son las siguientes: δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 7] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... 0 0 0 1 1 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 8] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X 0 0 1 1 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 9] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X 0 0 1 1 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 10] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X 0 0 1 1 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 11] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X 0 0 Y 1 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 12] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X 0 0 Y 1 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 13] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X 0 0 Y 1 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 14] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X 0 0 Y 1 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 15] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X 0 Y 1 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 16] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X 0 Y 1 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 17] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X 0 Y 1 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 18] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X 0 Y Y 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 19] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X 0 Y Y 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 20] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X 0 Y Y 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 21] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X 0 Y Y 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 22] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X X Y Y 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 23] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X X Y Y 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 24] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X X Y Y 1 ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 25] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X X Y Y Y ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 26] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X X Y Y Y ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 27] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X X Y Y Y ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 28] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X X Y Y Y ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 29] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X X Y Y Y ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 30] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X X Y Y Y ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 31] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X X Y Y Y ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 32] ---
+δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) ... X X X Y Y Y ... SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 33] ---
+Una configuración de una Máquina de Turing es una tripleta (q,w1,w2) izquierda de la posición del cabezal de lectura (puede ser vacío). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 34] ---
+Si uA, la configuración inicial de la Máquina de Turing (Q,A,C,δ,q ,,F) asociada a esta palabra es (q ,ε,u), siendo (q ,ε,) si uε. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 35] ---
+Paso de Cálculo (movimiento a la izquierda) Si δ(q,a)(p,b,I) entonces decimos que de la configuración (q,c ...c ,ad ...d ) llegamos en un paso de cálculo a la configuración (p,c ...c ,c bd ...d ) lo que se denota como 1 n1 n 2 m (q,c ...c ,ad ...d )(p,c ...c ,c bd ...d ) donde se 1 n 2 m 1 n1 n 3 m supone: Si c ...c ε, entonces c ...c ε y c . 1 n 1 n1 n SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 36] ---
+Paso de Cálculo (movimiento a la derecha) Si δ(q,a)(p,b,D) entonces decimos que de la configuración (q,c ...c ,ad ...d ) llegamos en un paso de cálculo a la configuración (p,c ...c b,d d ...d ) lo que se denota como (q,c ...c ,ad ...d )(p,c ...c b,d d ...d ) donde se considera: Si m1 entonces d d ...d SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 37] ---
+Si R y R son configuraciones de una máquina de Turing M (Q,A,C,δ,q ,,F), se dice que desde R se llega en una suceción de pasos de cálculo a R lo que se denota como R R si que R R ,RR y R R ,i n. 1 n i i SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 38] ---
+el conjunto de palabras L(M) tales que uL(M) si y solo si existen w ,w B y qF tales que (q ,ε,u)(q,w ,w ) (es decir desde en un estado final). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 39] ---
+Definición: Recursivamente Enumerable Un lenguaje LA se dice recursivamente enumerable (e.r.) si y solo si existe una máquina de Turing M (Q,A,C,δ,q ,,F) tal que L(M)L. Cuando se llega a un estado final qF podemos suponer que la Existe otro criterio de aceptación: una palabra es aceptada cuando SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 40] ---
+distintas: SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 41] ---
+siempre termina: todas las palabras son aceptadas o rechazadas. tipos de estados finales: de aceptación y de rechazo. La máquina SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 42] ---
+Dada una MT M (Q,A,B,δ,q ,,F), la función f calculada por f :D B tal que D A es el conjunto de entradas para los que la MT termina y si uD, entonces f(u) es el contenido de la cinta Si una función es parcialmente calculable y D A (la MT termina en todas las entradas) se dice que es calculable total. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 43] ---
+Ejemplo: restar números en unario Para dos números naturales n,mN calcula f(n,m) que es igual a nm si nm y 0 si nm. confiración en la que en la cinta esté 0f(n,m) rodeado de correcta (no corresponde a dos series de ceros separadas por un 1). M ({{q ,q ,q ,q ,q ,q ,q },{0,1},{0,1,},δ,q ,,q ) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 44] ---
+Restar números en unario: función de transición δ viene dada por la siguiente tabla: Estado 0 1 q (q ,,D) (q ,,D) q (q ,0,D) (q ,1,D) q (q ,1,I) (q ,1,D) (q ,,I) q (q ,0,I) (q ,1,I) (q ,,D) q (q ,0,I) (q ,,I) (q ,0,D) q (q ,,D) (q ,,D) (q ,,D) q SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 45] ---
+Restar números en unario: función de transición δ viene dada por la siguiente tabla: Estado 0 1 q (q ,,D) (q ,,D) q (q ,0,D) (q ,1,D) q (q ,1,I) (q ,1,D) (q ,,I) q (q ,0,I) (q ,1,I) (q ,,D) q (q ,0,I) (q ,,I) (q ,0,D) q (q ,,D) (q ,,D) (q ,,D) q En q se mueve a la derecha saltando 1s hasta que encuentra un SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 46] ---
+Restar números en unario: función de transición δ viene dada por la siguiente tabla: Estado 0 1 q (q ,,D) (q ,,D) q (q ,0,D) (q ,1,D) q (q ,1,I) (q ,1,D) (q ,,I) q (q ,0,I) (q ,1,I) (q ,,D) q (q ,0,I) (q ,,I) (q ,0,D) q (q ,,D) (q ,,D) (q ,,D) q El proceso se repite: si al volver a q lo que encuentra es un 1, entonces es que mn y el resultado es la cadena vacía que SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 47] ---
+Restar números en unario: función de transición δ viene dada por la siguiente tabla: Estado 0 1 q (q ,,D) (q ,,D) q (q ,0,D) (q ,1,D) q (q ,1,I) (q ,1,D) (q ,,I) q (q ,0,I) (q ,1,I) (q ,,D) q (q ,0,I) (q ,,I) (q ,0,D) q (q ,,D) (q ,,D) (q ,,D) q Si en q no encuentra 0, es que nm y hemos borrado un 0 de más, se pasa a q en el nos movemos a la izquierda borrando los 1s y añadiendo un 0 (cuando se llega a ) y se pasa al estado final. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 48] ---
+Diseñar máquinas de Turing para los siguientes lenguajes: Palabras sobre el alfabeto {0,1} con el mismo número de ceros L{anbncnn1} {ww1w {0,1}} {wcww {0,1}} SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 49] ---
+Programación de Máquinas de Turing: recordando símbolos alfabeto de trabajo (o del alfabeto de entrada). estado q por las parejas de estados [q,b] donde bB. las parejas QB formadas por un elemento qQ y un símbolo bB. Podemos considerar que un estado es [q,b] donde q es el SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 50] ---
+0110: la Máquina tiene que recordar el primer símbolo leído y La Máquina es M (Q,{0,1},{0,1,},δ,[q ,],{[q ,]}) donde Q {q ,q }{0,1,} Las posibles transiciones de δ son: 1 δ([q0,],a)([q1,a],a,D) para a0 o a1. 2 δ([q1,a],a)([q1,a],a,D), donde a es el complementario de a (esto es, a1 si a0 y a0 si a1). δ([q1,a],)([q1,],,D) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 51] ---
+Programación de Máquinas de Turing: pistas múltiples pistas: en lugar de tener una sola casilla, disponemos de varias formado por los elementos de BB y tener k cintas a suponer que el alfabeto de trabajo es Bk. Se supone que un símbolo aA se identifica con (a,,...,). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 52] ---
+una MT que acepte el lenguaje L{wcww {0,1}}. M (Q,A,B,δ,[q ,],[,],{[q ,]}) donde Q {q ,q ,...,q }{0,1} (podemos recordar 0,1. B {0,1,c,}{,} A{0,1,c}. 0 se identifica con [0,] y 1 se identifica con [1,] SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 53] ---
+Ejemplo: Función de Transición δ([q1,],[a,])([q2,a],[a,],D) δ([q2,a],[b,])([q2,a],[b,],D) δ([q2,a],[c,])([q3,a],[c,],D) δ([q3,a],[b,])([q3,a],[b,],D) δ([q3,a],[a,])([q4,],[a,],I) δ([q4,],[a,])([q4,],[a,],I) δ([q4,],[c,])([q5,],[c,],I) δ([q5,],[a,])([q6,],[a,],I) δ([q6,],[a,])([q6,],[a,],I) δ([q6,],[a,])([q1,],[a,],D) δ([q5,],[a,])([q7,],[a,],D) δ([q7,],[c,])([q8,],[c,],D) δ([q8,],[a,])([q8,],[a,],D) δ([q8,],[,])([q9,],[,],D) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 54] ---
+Ejemplo: Función de Transición δ([q1,],[a,])([q2,a],[a,],D) δ([q2,a],[b,])([q2,a],[b,],D) δ([q2,a],[c,])([q3,a],[c,],D) δ([q3,a],[b,])([q3,a],[b,],D) δ([q3,a],[a,])([q4,],[a,],I) δ([q4,],[a,])([q4,],[a,],I) δ([q4,],[c,])([q5,],[c,],I) δ([q5,],[a,])([q6,],[a,],I) δ([q6,],[a,])([q6,],[a,],I) δ([q6,],[a,])([q1,],[a,],D) δ([q5,],[a,])([q7,],[a,],D) δ([q7,],[c,])([q8,],[c,],D) δ([q8,],[a,])([q8,],[a,],D) δ([q8,],[,])([q9,],[,],D) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 55] ---
+Ejemplo: Función de Transición δ([q1,],[a,])([q2,a],[a,],D) δ([q2,a],[b,])([q2,a],[b,],D) δ([q2,a],[c,])([q3,a],[c,],D) δ([q3,a],[b,])([q3,a],[b,],D) δ([q3,a],[a,])([q4,],[a,],I) δ([q4,],[a,])([q4,],[a,],I) δ([q4,],[c,])([q5,],[c,],I) δ([q5,],[a,])([q6,],[a,],I) δ([q6,],[a,])([q6,],[a,],I) δ([q6,],[a,])([q1,],[a,],D) δ([q5,],[a,])([q7,],[a,],D) δ([q7,],[c,])([q8,],[c,],D) δ([q8,],[a,])([q8,],[a,],D) δ([q8,],[,])([q9,],[,],D) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 56] ---
+Ejemplo: Función de Transición δ([q1,],[a,])([q2,a],[a,],D) δ([q2,a],[b,])([q2,a],[b,],D) δ([q2,a],[c,])([q3,a],[c,],D) δ([q3,a],[b,])([q3,a],[b,],D) δ([q3,a],[a,])([q4,],[a,],I) δ([q4,],[a,])([q4,],[a,],I) δ([q4,],[c,])([q5,],[c,],I) δ([q5,],[a,])([q6,],[a,],I) δ([q6,],[a,])([q6,],[a,],I) δ([q6,],[a,])([q1,],[a,],D) δ([q5,],[a,])([q7,],[a,],D) δ([q7,],[c,])([q8,],[c,],D) δ([q8,],[a,])([q8,],[a,],D) δ([q8,],[,])([q9,],[,],D) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 57] ---
+Ejemplo: Función de Transición δ([q1,],[a,])([q2,a],[a,],D) δ([q2,a],[b,])([q2,a],[b,],D) δ([q2,a],[c,])([q3,a],[c,],D) δ([q3,a],[b,])([q3,a],[b,],D) δ([q3,a],[a,])([q4,],[a,],I) δ([q4,],[a,])([q4,],[a,],I) δ([q4,],[c,])([q5,],[c,],I) δ([q5,],[a,])([q6,],[a,],I) δ([q6,],[a,])([q6,],[a,],I) δ([q6,],[a,])([q1,],[a,],D) δ([q5,],[a,])([q7,],[a,],D) δ([q7,],[c,])([q8,],[c,],D) δ([q8,],[a,])([q8,],[a,],D) δ([q8,],[,])([q9,],[,],D) marcados a la derecha (con estados q7 y q8) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 58] ---
+SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 59] ---
+escritos en base 1: la MT comenzará con una cadena de la forma 0i10n10kn donde ik m para valores de k 1,...,m. por un blanco y se añaden n ceros al último grupo: se pasa de 0i10n10kn a 0i110n10(k1)n. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 60] ---
+Ejemplo: Subrutina Tiene los siguientes estados y estructura: δ(q ,0)(q ,X,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,1,D) δ(q ,)(q ,0,I) δ(q ,0)(q ,0,I) δ(q ,1)(q ,1,I) δ(q ,X)(q ,X,D) δ(q ,1)(q ,1,I) δ(q ,X)(q ,0,I) δ(q ,1)(q ,1,D) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 61] ---
+δ(q ,0)(q ,0,D) δ(q ,1)(q ,1,D) δ(q ,)(q ,1,I) δ(q ,0)(q ,0,I) δ(q ,1)(q ,1,I) δ(q ,)(q ,,D) , y nos ponemos en situación para copiar n ceros al final. δ(q ,0)(q ,,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,1,D) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 62] ---
+Estructura del Programa (II) finalizamos si ya no hay más ceros (q es el estado final de parada): δ(q ,0)(q ,0,I) δ(q ,1)(q ,1,I) δ(q ,0)(q ,0,I) δ(q ,)(q ,,D) δ(q ,0)(q ,0,I) δ(q ,)(q ,,D) δ(q ,1)(q ,,D) δ(q ,0)(q ,,D) δ(q ,1)(q ,,D) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 63] ---
+En el primer caso: las instrucciones por grupos, e indicando que acción realiza transiciones. Por ejemplo: Moverse a la derecha hasta encontrar un blanco SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 64] ---
+Extensiones: MT que se pueden quedar en la misma posición en un paso: no quedarse en el mismo sitio (S). MT con múltiples cintas: hay distintas cintas en las que se MT no deterministas: hay distintas transiciones que puede Limitaciones: MT con cintas semiilimitadas: la cinta de la MT es ilimitada SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 65] ---
+En estas MT se supondrá que δ(q,b) puede ser vacío (no definido) o una tripleta (p,c,M) donde pQ,c B,M {I,D,S}. El símbolo S indica que el cabezal δ(q,b)(p,c,S), esto lo podemos simular con un nuevo haciendo, δ(q,b)(r ,c,D) y desde todos los estados r lo único que se puede hader es movernos a la izquierda: δ(r ,d)(p,d,I) para todo estado r y todo símbolo d de B. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 66] ---
+Las diferencias entre múltiples pistas y múltiples cintas son: BBB, es decir cadasímbolo estáformado por una pareja modificación de la definición. Ahora a cada (q,b1,...,b ), δ le podrá asignar un vector (p,c1,...,c ). puede ser {I,D,S}. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 67] ---
+Será un vector (q,u ,w ,u ,w ,...,u ,w ), donde q es el estado en derecha (incluyendo el símbolo que se lee en ese momento). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 68] ---
+Será un vector (q,u ,w ,u ,w ,...,u ,w ), donde q es el estado en derecha (incluyendo el símbolo que se lee en ese momento). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 69] ---
+todas las entradas en las que la MT termina. Si uA es una entrada para la que la MT termina, entonces lo hace con f(u) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 70] ---
+SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 71] ---
+M.Enunadelaspistassecolocaunsímboloespecialenellugarenelquese SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 72] ---
+Equivalencia (Cont.) hastallegarak (elvalordek esfijoysepuedealmacenar). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 73] ---
+Equivalencia (Cont.) hastallegarak (elvalordek esfijoysepuedealmacenar). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 74] ---
+Simulación: complejidad en tiempo igual a t(n) para una entrada de longitud n, entonces la MT N de una cinta emplean un número de pasos de orden O(t2(n)). Paralademostración,bastatenerencuenta: Despuésdet(n)movimientosdelaMTM ladiferenciaentrelasposicionesde losdistintoscabezalesdelecturaes,alomás,2t(n).Alprincipiopodemos másendosposiciones(sidoscabezalessemuevenendistintasdirecciones). noshacenfalta2t(n)pasoscomomáximo. transición,alomás,necesita2movimientos(parallevarloacaboyvolverala posiciónenlaqueestábamos).Estoimplica2t(n)2k movimientos. Silesumamosalos2t(n)iniciales,hacen4t(n)2k porcadamovimiento,así quelost(n)movimientosimplicaráncomomáximot(n)(4t(n)2k)queesde ordenO(t2(n)),teniendoencuentaquek esconstante. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 75] ---
+Una Máquinas de Turing No Determinista (MTND) tiene la misma definición que una MT con la única diferencia que ahora δ(q,a) puede ser {(q1,b1,M1),...,(q )} cinta puede evolucionar con cualquiera de las tripletas (q ,b ,M ): puede ir a q escribir b y hacer el movimiento M para i 1,...,k. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 76] ---
+SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 77] ---
+Enlaprimeratenemosunasucecióndeconfiguraciones(q,u,v)separadaspor unsímbolo(cid:3),tambiénexisteunamarcaenlaconfiguraciónactiva. Inicialmentehaysólounaconfiguración:laconfiguracióninicial. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 78] ---
+Equivalencia (Cont.) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 79] ---
+compuesto (no es primo) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 80] ---
+SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 81] ---
+Número de Pasos (tiempo) en MT En una MT el número de pasos (tiempo) para una entrada u es el Una MT tiene complejidad t(n) en tiempo si para toda entrada de longitud n la MT termina en t(n) o menos pasos. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 82] ---
+Número de Pasos (tiempo) en MTND En una MTND el número de pasos (tiempo) para una entrada u es Si decimos que una MTND tiene complejidad t(n) en tiempo, en t(n) o menos pasos donde n es la longitud de la entrada. Si una MTND tiene complejidad t(n), veremos (estudio de la complejidad algorítmica) que la MT que la simula tiene complejidad O(dt(n)) donde d es una constante mayor que uno. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 83] ---
+SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 84] ---
+MT M1 con las siguientes restricciones: 1 M1 nunca escribe el espacio en blanco símbolo a M1 que es otro espacio en blanco . Si M2 escribe un espacio en blanco δ 2(q,a)(p,,M), entonces M1 escribe el nuevo blanco: δ 1(q,a)(p,,M). Después, cada transición δ 1(q,) se hace idéntica a δ 2(q,). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 85] ---
+y la siguiente estructura: X X 1 SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 86] ---
+Si M (Q ,A,B ,δ ,q ,,F ) entonces M (Q ,A{},B ,δ ,q ,[,],F ) donde Los estados de M son {q ,q }(Q {S,I}). Los estados q y q sirven para preparan la cinta de entrada (por ejemplo, poner el tope en la pista inferior). En los otros estados tenemos que especificar el valor S (pista superior) o I (pista inferior) además del estado. Los símbolos de trabajo de M son B B , es decir todas las parejas de símbolos de trabajo de M . Cada símbolo aA de M se identifica con el símbolo [a,] de M . Además en B están todas las parejas [b,] donde bB . Este símbolo se SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 87] ---
+δ 1(q0,[a,])(q1,[a,],D) para cualquier aB2 δ 1(q1,[a,])([q2,S],[a,],I) (nos movemos a la izquierda y decimos que estamos arriba) Si δ 2(q,a)(p,b,M), entonces para todo c B2 1 δ 1([q,S],[a,c])([p,S],[b,c],M) 2 δ 1([q,I],[c,a])([p,I],[c,b],M), donde M es el movimiento SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 88] ---
+Si δ 2(q,a)(p,b,D) entonces δ 1([q,I],[a,])δ 1([q,S],[a,])([p,S],[b,],D) Si δ 2(q,a)(p,b,I) entonces δ 1([q,I],[a,])δ 1([q,S],[a,])([p,I],[b,],D) Los estados de aceptación F1 de M1 es el conjunto de estados F2{S,I}. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1a.pdf, Página: 89] ---
+principio que tenemos el símbolo a la izquierda de cada una simular con una con estas restricciones: siempre podemos SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 0] ---
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calculables (Parte 2) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 1] ---
+TécnicasdeconstruccióndeMáquinasdeTuring:memoriaadicional,pistas SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 2] ---
+UnproblemaPROBLEMA(x)óPROBLEMAconstade: UnconjuntoX deentradas.UnelementoxX sellamaunaentrada. UnconjuntoY desolución.UnelementoyY sellamaunasolución. UnaaplicaciónF:X2Y queasignaacadaentradaxX unconjuntoAY SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 3] ---
+UnproblemaPROBLEMA(x)óPROBLEMAconstade: UnconjuntoX deentradas.UnelementoxX sellamaunaentrada. UnconjuntoY desolución.UnelementoyY sellamaunasolución. UnaaplicaciónF:X2Y queasignaacadaentradaxX unconjuntoAY Búsquedadecaminosengrafosdirigidos: EntradasX:conjuntoformadoporlastripletas(G,ns,nl),dondeG esungrafo ConjuntoY:listadenodos(n1,...,nk) F(G,ns,nl)eselconjuntodelaslistasdenodos(n1,...,nk)talesque n1ns,nknl ytodaslasparejas(ni,ni1)seanarcosdeG. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 4] ---
+¿Qué es un algoritmo? En esta asignatura vamos a considerar dos conceptos que son equivalentes: Un programa en Phyton (Ph) bien escrito sintácticamente y la función principal (más adecuados para una resolución efectiva de problemas). Una Máquina de Turing (MT) que definiremos en el siguiente tema (más adecuadas para el razonamientos teórico-matemáticos). Un algoritmo ALG resuelve un problema PROBLEMA(x) cuando el argumento de dicho algoritmo es un elemento x X y ALG(x) es un y F(x) o dice No hay Solución si F(x)0/. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 5] ---
+alfabeto (Problema Computacional), aunque al hablar de un SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 6] ---
+que a esa entrada le corresponde una salida especial: NO. de la codificación elegida (siempre que ésta sea razonable). cada entrada x, la codificación de x, se denotará como x (el elemento entre ángulos). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 7] ---
+Grafo: a,b b,d c,d a,c d,e SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 8] ---
+Grafo: a,b b,d c,d a,c d,e Camino: a,b,d,e SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 9] ---
+Grafo: a,b b,d c,d a,c d,e Ciclo: a,b,d,c SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 10] ---
+Grafo dirigido: a,b b,d c,d a,c d,e SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 11] ---
+Grafo con pesos: a,b,7 b,d,3 c,d,4 a,c,2 d,e, SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 12] ---
+Problemas de Búsqueda: Son los problemas genéricos cuando F(x) puede ser vacío o contener varios elementos: Para una que cumpla una relación con x cuando este exista y decir NO cuando F(x)0/. Ejemplo: dado un grafo no dirigido Problemas de Decisión: Son aquellos en los que las soluciones son Y {SI,NO} y cada entrada x tiene una única solución. Ejemplo: dado un grafo determinar si tiene un circuito Problemas de Optimización: La solución optimiza (minimiza o maximiza) una función definida sobre un conjunto de soluciones factibles asociadas a la entrada. Ejemplo: el Problemas de función: Cada entrada x tiene siembre una y sólo una solución: F(x) tiene un solo elemento. Por ejemplo, SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 13] ---
+problema tiene asociado un problema de decisión: Problemas de umbral para problemas de optimización: Los mínimo. Ejemplo: dado un caso del problema del viajante de Problemas de existencia para problemas de búsqueda: Dado un búsqueda: Dado x y una posible solución y determinar si y es SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 14] ---
+Camino mínimo: Dado un grafo y dos nodos, encontrar un (problema de optimización). Búsqueda de caminos: Dado un grafo y dos nodos, exista, decir NO en caso contrario. Existencia de Caminos: Dado un grafo y dos nodos, determinar si existe un camino entre ellos (problema de existencia). Umbral del camino mínimo: Dado un grafo, dos nodos, y un longitud menor o igual a K (problema de umbral). Problema de comprobación: Dado un grafo, dos nodos, y (problema de comprobación). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 15] ---
+entradas que tienen respuesta SI: L(PROBLEMA(x)){x A : PROBLEMA(x)SI}. problema de decisión: dada x A determinar si x L. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 16] ---
+Palabras de A mismo saco que los casos en los que la respuesta es NO. La identificación de las codificaciones correctas (palabras que corresponden realmente a un ejemplo del problema) se considera SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 17] ---
+UnproblemadedecisiónUnacodificaciónProblemaComputacionalSINO ProblemaComputacionalSINOLenguaje La identificación de las codificaciones correctas (palabras que corresponden realmente a un ejemplo del problema) se computacional (en todos los ejemplos el reconocimiento de una entrada correcta se puede realizar de forma eficiente). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 18] ---
+PROBLEMA, es el problema CPROBLEMA que intercambia las salidas SI y N0 o de forma más precisa PROBLEMA(x)SICPROBLEMA(x)NO. complementario del lenguaje del lenguaje asociado a PROBLEMA: L(CPROBLEMA)L(PROBLEMA) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 19] ---
+PROBLEMA, es el problema CPROBLEMA que intercambia las salidas SI y N0 o de forma más precisa PROBLEMA(x)SICPROBLEMA(x)NO. complementario del lenguaje del lenguaje asociado a PROBLEMA: L(CPROBLEMA)L(PROBLEMA) Nota: Cuando hablamos de problemas genéricos, esto no es del todo exacto: ya que las codificaciones incorrectas estarán englobadas con el SI en el lenguaje complementario o problema contrario, pero nosotros genéricos sin tener esto en cuenta: en realidad no importa como se traten SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 20] ---
+Ejemplo: Isomorfismo de subgrafos X: Datos Dos grafos G (V ,E ) y G (V ,E ) Y: SI,NO (Problema de Decisión) Relación: Respuesta SI corresponde a ¿Contiene G un subgrafo isomorfo a G ? Es decir, existe un subconjunto VV y un subconjunto de aristas EE tal que EVV y existe una aplicación biyectiva f :V V de tal manera que se verifica (u,v)E (f(u),f(v))E SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 21] ---
+SupongamosunalfabetoA{a1,...,an}.Podemosestablecerunacorrespondencia waik ...,ai1 ,entonceselnúmerodew quedenotaremoscomoN(w)esk j1ij.nj1, siendoN(ε)0. SiA{0,1,2},N(ε)0,N(0)1,N(1)2,N(2)3,N(202)3133 DadounalfabetoA{a1,...,an},Simesunnúmeronatural,siempresepuede encontrarunacadena,quedenotaremoscomoC(m)ocomowm cuyacodificaciónsea Sim0,C(m)ε Sim0,sea R(m,n) sinnodivideam i (cid:26) n sindivideam [m/n] sinnodivideam p (cid:26) [m/n]1 sindivideam dondeR(m,n)eselrestodeladivisiónenteradementreny[m/n]esla EntoncesC(m)C(p)ai. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 22] ---
+biyectiva entre las palabras de ambos alfabetos: números naturales: N :AN. palabras sobre B: C :NB. La composición C N es una aplicación biyectiva de A en B (primero se calcula el código numérico de una palabra de B SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 23] ---
+biyectiva entre las palabras de ambos alfabetos: números naturales: N :AN. palabras sobre B: C :NB. La composición C N es una aplicación biyectiva de A en B (primero se calcula el código numérico de una palabra de B haremos sobre el alfabeto {0,1} (para desarrollar la teoría) aunque lo haremos sobre alfabetos más amplios (ASCII) para un caso SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 24] ---
+Si A{a ,...,a } nosotros siempre vamos a considerar el siguiente orden total en sus palabras: u1u2 si y solo si se da una de las siguientes condiciones: u u 2 u 1u 2 3 u 1u 2 y u 1 precede a u 2 en orden alfabético, teniendo en cuenta que a 1a 2a n. Es decir si u 1 a r1 ...a ri a s1 ...a sm y u 2 a r1 ...a ri a l1 ...a lm y s 1l 1 (el Esto es equivalente a u u si y solo si N(u )N(u ) palabras: hay infinitas palabras que empiezan por a antes de SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 25] ---
+SelepuedeasignaracadaMTsobreunalfabeto{0,1}unacadenayunnúmero Losestadosson{q1,...,qk}.Elestadoinicialesq1 yhayunúnicoestadofinal q2 (estosiempresepuedeconseguir). LossímbolosdeB son{a1,a2,...,am}dondea1 es0,a2 es1ya3 eselsímbolo seráu(M). LacodificacióndelaMTserealizadelasiguienteforma: Cadatransiciónδ(qi,aj)(qk,al,M)secodificacomo0i10j10k10l10u(M). UnavezcalculadalacadenawM,podemoscalcularsunúmeroN(w)conel alfabeto{0,1},segúnelprocedimientoquehemosvistoparaasignarnúmerosa palabras.EstenúmerotambiénsedenotarácomoN(M). sentidoalguno.SeaT(n)laMTcorrespondientealnúmeronoNula(querechaza todaslaspalabras)sinohayMTasociadaalnúmeron.Tambiéndenotaremoscomo T(w)laMTcuyocódigoesw:Mw. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 26] ---
+{0,1}, podemos codificar M como hemos visto y después añadir 111 seguido de w, dando lugar a la cadena M,w SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 27] ---
+VamosadefinirunlenguajeLd sobre{0,1}quenoesr.e.Estelenguajeseconoce Seaw{0,1},wLd siysolosilaMTcuyacodificaciónesw (T(w))noaceptaw. estadoyningunatransición(siemprerechaza). Siw0,w1,w2,...sontodaslaspalabrasde{0,1} ordenadas,entonces Ld{MM noacepta M comoentrada} SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 28] ---
+VamosadefinirunlenguajeLd sobre{0,1}quenoesr.e.Estelenguajeseconoce Seaw{0,1},wLd siysolosilaMTcuyacodificaciónesw (T(w))noaceptaw. estadoyningunatransición(siemprerechaza). Siw0,w1,w2,...sontodaslaspalabrasde{0,1} ordenadas,entonces Ld{MM noacepta M comoentrada} SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 29] ---
+sobre el alfabeto {0,1}. Dicha máquina acepta palabras w tales que Sea M la codificación de la MT M . Si M L entonces M acepta M (ya que M acepta L ), como consecuencia y por la definición de L , M 6L . Si M 6L entonces M no acepta M (ya que M acepta L ) y, por la definición de L , M L . SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 30] ---
+DIAGONAL(M). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 31] ---
+Recordatorio: Problemas y Lenguajes Dada u, ¿es uL? Conjunto x, es tal que PROBLEMA(x)SI Aceptar Responder SI Máquina Turing Acept. Algoritmo SI/NO SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 32] ---
+Recordatorio: Problemas y Lenguajes Lenguaje recursivamente enumerable Problema cuya salida es SI, para las entradas de NO el algoritmo puede decir NO o ciclar Lenguaje recursivo Problema decidible las palabras que no son del lenguaje (nunca cicla). cuya salida es SI y aquellas cuya salida es NO (nunca cicla). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 33] ---
+Si LA, el complementario de L respecto a A se denotará como conlassiguientescaracterísticas: cintaaB paraelquenohayadefinidaunatransición,seañade δ(p,a)(r,a,D). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 34] ---
+condoscintas:enunafuncionacomoM1 yenlaotracomoM2. MesunamáquinaquefuncionacomoM1yM2alavez(comoenelautómataproducto). ElconjuntodeestadosdeMeselproductoQ1Q2dondeQ1eselconjuntodeestados EstáclaroqueM aceptaLysiempretermina,yaquetodapalabrauAestáenLoen SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 35] ---
+EllenguajeuniversalLu eselconjuntodetodasv lascadenasdelalfabeto{0,1}que codificanparejas(M,w)(esdecirvM,w)talesquelaMTM aceptalacadena w,dondew{0,1} yelalfabetodeentradadeM es{0,1}. UniversalylonotaremoscomoUNIVERSAL(M.w). SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 36] ---
+M,w simule la MT M sobre la entrada w y termine cuando cuando M acepta w. M contiene varias cintas: entrada w. Un símbolo a B se representa como 0i y los SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 37] ---
+Demostración (cont.) 3 Inicializalaterceracintacon0quecorrespondeconelestadoinicial(suponemos queesq1). movimientocorrespondientes: 3 Hacer el movimiento en la cinta 2, según sea m (m1 a la izquierda, m2 a la derecha). 5 SiM pasaaunestadodeaceptación(elestadoq2),entoncesMu parayacepta. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 38] ---
+SiM esunaMTqueaceptaseLu,construiríamoslasiguienteMT,M: Si M lee w entonces, convierte w en w111w (como la codificación de (w,w)). M acepta w si y solo sí, M acepta w111w. Es decir w111w 6L . Esto es la MT cuya codificación es w no acepta la palabra w. Esto es equivalente a que w L . HemosconstruidounaMTqueaceptaLd,encontradeloquesabemos:Ld no SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 39] ---
+El problema universal UNIVERSAL(M,w) no es decidible. Por reducción al absurdo: Si UNIVERSAL(M,w) fuese decidible, entonces existiría un programa PROGRAMA(M,w) que siempre termina y lo resuelve. Construyamos ahora el siguiente programa: PROGRAMAD(M) SAL PROGRAMA(M,M) Si SALNO Return SI Return NO Pero este programa tiene como entrada una MT M y responde SI SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 40] ---
+Reducción (en términos de lenguajes) Si L1A y L2B son lenguajes, el lenguaje L1 se reduce al lenguaje L2 si existe un algoritmo M (una MT) que siempre para y calcula una función f :AB tal que para toda entrada w A, w L1f(w)L2. SI/NO SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 41] ---
+Reducción (en términos de lenguajes) Si L1A y L2B son lenguajes, el lenguaje L1 se reduce al lenguaje L2 si existe un algoritmo M (una MT) que siempre para y calcula una función f :AB tal que para toda entrada w A, w L1f(w)L2. w f(w) SI/NO SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 42] ---
+Reducción (en términos de lenguajes) Si L1A y L2B son lenguajes, el lenguaje L1 se reduce al lenguaje L2 si existe un algoritmo M (una MT) que siempre para y calcula una función f :AB tal que para toda entrada w A, w L1f(w)L2. ww ff((ww)) SI/NO SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 43] ---
+Reducción (en términos de problemas) algoritmo ALG(w) que siempre para y calcula una función f(w) tal que produce la misma respuesta para la entrada f(w)ALG(w). SI/NO ALG(x) de las entrandas de PROBLEMA1 a las entrandas de PROBLEMA1(x)PROBLEMA2(ALG(x)) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 44] ---
+Reducción (en términos de problemas) algoritmo ALG(w) que siempre para y calcula una función f(w) tal que produce la misma respuesta para la entrada f(w)ALG(w). w f(w) SI/NO ALG(x) de las entrandas de PROBLEMA1 a las entrandas de PROBLEMA1(x)PROBLEMA2(ALG(x)) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 45] ---
+Reducción (en términos de problemas) algoritmo ALG(w) que siempre para y calcula una función f(w) tal que produce la misma respuesta para la entrada f(w)ALG(w). ww ff((ww)) SI/NO ALG(x) de las entrandas de PROBLEMA1 a las entrandas de PROBLEMA1(x)PROBLEMA2(ALG(x)) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 46] ---
+Reducción (en términos de problemas) Sea ALG(w) el algoritmo de la reducción de PROBLEMA a PROBLEMA . Supongamos que ALG2(x) es un algoritmo que hace a PROBLEMA semidecidible (decidible), entonces el algoritmo: ALG1(x) w ALG(x) Return (ALG2(w)) hará al problema PROBLEMA semidecidible (decidible). Por lo tanto si PROBLEMA no es semidecidible (decidible), SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 47] ---
+Definimos los siguientes lenguajes sobre el alfabeto {0,1}: L conjunto de palabras M tales que M es una MT sobre {0,1} que no acepta ninguna palabra (L(M)0/). L conjunto de palabras M tales que M es una MT sobre {0,1} que acepta alguna palabra (L(M)0/)(L(M)60/). VACIO(M) es la versión de problema de L : dada una MT M, C-VACIO(M) es la versión de problema de L : dada una MT M, SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 48] ---
+Semidecidivilidad de C-VACIO(M) HayunaMTnodeterministaM queaceptaLne: C-VACIO(M)essemidecidible. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 49] ---
+Lne noesrecursivo(C-VACIO(M)noesdecidible) SAL(M,w)andC-VACIO(M).Esoconsisteenunalgoritmo ALG(M,w)quecalculauna MTMdetalmaneraqueUNIVERSAL(M,w)tengalamismasoluciónqueC-VACIO(M). Estefuncionadelasiguienteforma: Supongamosunaentrada(M,w)vamosaconstruirunaMTM quefuncionade M ignorasuentradax ycolocaenlacintadeentradaw.Silalongituddew es (M,w)ysemuevealaderecha.Despuéspasaríaaunnuevoestadoenelque M semuevealaizquierdahastaelprimersímbolodew. M pasaalestadoinicialdeM conw yfuncionacomoM paraw. LasalidadeM eslamismaqueladeM paraw. EstáclaroqueM aceptaw siysolosiM aceptaalgunapalabra.DehechoL(M)A siM aceptaw yL(M)0/ siM noaceptaw. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 50] ---
+Dada una entrada (M,w) la reducción construye la siguiente MT: x w SI/NO L no es r.e. (si lo fuese, entonces L sería recursivo) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 51] ---
+Propiedad lenguaje r.e. Propiedad de los lenguajes de las MTs Es una problema de decisión del tipo: Dada una MT M, ¿verifica el lenguaje L(M) la propiedad P? SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 52] ---
+Llamemos NOTRIVIAL(M) a dicha propiedad no trivial y supongamos una propiedad VamosareducirelproblemaUNIVERSAL(M,w)aestapropiedad.Supongamos(M,w) una MT y su entrada construimos M de la siguiente forma (se supone que tiene una entradax enlaprimeracinta): M tienedoscintas.Enlasegundacolocaaw yempiezatrabajandosobreesta cintaconlasmismastransicionesdeM.Siterminaynoacepta,entoncesM no EstáclaroquesiM aceptaw,entoncesellenguajedeM esLyverificalapropiedad. SiM noaceptaw,entoncesellenguajedeM esvacíoynoverificalapropiedad.Con SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 53] ---
+Dada una entrada para el problema universal (M,w) se construye la siguiente MT M M x SI/NO EstáclaroUNIVERSAL(M,w)tienerespuestaSI,entoncesM aceptaw,entoncesM aceptaLylarespuestadeNOTRIVIAL(M)estambiénSI. SiUNIVERSAL(M,w)tienerespuestaNO,entoncesM noaceptaw,yestamáquina M acepta0/ ylarespuestadeNOTRIVIAL(M)estambiénNO. ComoUNIVERSAL(M,w)noesdecidible,NOTRIVIAL(M)tampocoloes. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 54] ---
+ElProblemadelasCorrespondenciasdePost(POST(A1,A2)) B1w1,...,wk,B2u1,...,uk depalabrassobreA.Elproblemaesdeterminarsi existeunasecuencianovacíadeenterosi1,...,im talesquewi1 ...wim ui1 ...uim . Podemospensarencadapareja(wi,ui)comounbloquedeconstrucción: Laespecificacióndelproblemanosdaunconjuntodebloquesdisponibles.Porejemplo: SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 55] ---
+ElProblemadelasCorrespondenciasdePost(POST(A1,A2)) B1w1,...,wk,B2u1,...,uk depalabrassobreA.Elproblemaesdeterminarsi existeunasecuencianovacíadeenterosi1,...,im talesquewi1 ...wim ui1 ...uim . Podemospensarencadapareja(wi,ui)comounbloquedeconstrucción: Laespecificacióndelproblemanosdaunconjuntodebloquesdisponibles.Porejemplo: Enestecaso,larespuestaesafirmativa.Secuencia:1,3,1,1,3,2, Sivisitáislapáginaweb:https://people.ksp.sk/kuko/pcp/podéispracticarcon SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 56] ---
+(POSTM(A1,A2)) longitud B w ,...,w , B u ,...,u de palabras sobre A tales que u ,w 6ε y un entero i. El problema es determinar si existe una secuencia no vacía de enteros i ,...,i tales que i i y w ...w u ...u . es el primero de la lista de los bloques (sólo hay que reordenar los SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 57] ---
+Supongamos el ejemplo: Como problema de las correspondencias de Post, tiene solución: 3,2,3,1 (respuesta afirmativa) Efectivamente sale: Sin embargo, como PCP modificado no tiene solución (respuesta negativa) ya que en ese caso, una solución tiene que empezar por el SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 58] ---
+Un algoritmo no-determinista que acepta los casos positivos es: Secuencia[] FinFalso EligeFinVerdaderooFinFalse SiessoluciónrespondeSI,encasocontrariorespondeNO SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 59] ---
+Por ejemplo, si el alfabeto es A{a,b,c}, podemos codificar a00, b01, c 11. Así una ficha se codificaría símbolo a símbolo: SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 60] ---
+Vamos a reducir el lenguaje universal UNIVERSAL(M,w) a este w L(M). Vamos a construir un problema de correspondencias de estados, más un separador que no esté en los conjuntos anteriores SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 61] ---
+Demostración (Cont.) Si w a1...a q0a1...a Por cadatransiciónδ(q,a)(q,b,D),introducimoselbloque bq Por cada transición δ(q,a)(q,b,I), introducimos el bloque qcb Para cada qF (estado final), añade los bloques , , y el q SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 62] ---
+Demostración (Cont.) Cada configuración (q,u,v) se representa por la cadena uqv y las distintas configuraciones se separan por . hasta que quede abajo ...q y arriba ...qa ó ...aq donde q q SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 63] ---
+M ({q ,q ,q ,q ,q },{0,1},{0,1,X,Y,},δ,q ,,{q }) donde las transiciones no nulas son las siguientes: δ(q ,0)(q ,X,D) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,D) δ(q ,1)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,0)(q ,0,I) δ(q ,X)(q ,X,D) δ(q ,Y)(q ,Y,I) δ(q ,Y)(q ,Y,D) δ(q ,)(q ,,D) Una solución del PCP modificado, tiene que empezar con la ficha: q 000111 SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 64] ---
+Ejemplo (Cont.) q 000111 Cómo δ(q ,0)(q ,X,D), tenemos la ficha 0 la única forma de proceder en una posible solución es: q 0 0 0 1 1 1 q 000111 Xq 0 0 1 1 1 SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 65] ---
+Ejemplo (Cont.) inferior de una solución (representamos como una única ficha la solución parcial): u uXXXYYYq u X X X Y Y Y q uXXXYYYq X X X Y Y Y q SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 66] ---
+Ejemplo (Cont.) lleguemos a una situación en la que tenemos: w wq q por ser q final, obteniendo una solución: w q wq SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 67] ---
+problema de las correspondencias de Post PCPM(A1,A2) PCP(B1,B2) Supongamos que nos dan un conjunto de bloques , ,, y problema PCPM(A1,A2) Construimos el siguiente problema de Post, PCP(B1,B2), con dos símbolos nuevos: (cid:7),(cid:4) y con los bloques: (cid:7)u1 (cid:7)u1 (cid:7)u2 (cid:7)u (cid:7)(cid:4) , , ,, , (cid:7)v1 (cid:7) v1 (cid:7) v2 (cid:7) v (cid:7) (cid:4) Donde, si ua1a2...a (cid:7)u(cid:7)a1 (cid:7)a2...(cid:7)a , u(cid:7)a1 (cid:7)a2...(cid:7)a (cid:7), (cid:7)u(cid:7)(cid:7)a1 (cid:7)a2...(cid:7)a (cid:7) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 68] ---
+PCPM(B1,B2): , ,, PCP(B1,B2): (cid:7)u1 (cid:7)u1 (cid:7)u2 (cid:7)u (cid:7)(cid:4) , , ,, , (cid:7)v1 (cid:7) v1 (cid:7) v2 (cid:7) v (cid:7) (cid:4) (cid:7)(cid:4) (cid:4) (cid:7)u1 (cid:7)v1 (cid:7) (cid:7)(cid:4) mismo símbolo (cid:7) y además terminar por . Si a todos los bloques (cid:4) SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 69] ---
+Saber si L(G )L(G )0/. Determinar si L(G)T, donde T es el conjunto de símbolos Comprobar si L(G )L(G ). Determinar si L(G )L(G ). Determinar si L(G )R. Comprobar si L(G) es regular. Conocer si L(G) es inherentemente ambiguo. Comprobar si L(G) es determinista. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 70] ---
+Reducción: ambigüedad (AMBIGUA(G)) es indecidible. ,, Sea B A{b1,...,b } donde b 6A y construimos la siguiente gramática: S CD C u Cb u b , i 1,...,k Dv Db v b , i 1,...,k SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr1b.pdf, Página: 71] ---
+,, SeaBA{b1,...,bk}dondebi6Ayconstruimoslasiguientegramática: SCD, CuiCbiuibi, i1,...,k, DviDbivibi, i1,...,k, Sebasaenlosiguiente: ij{1,...,k}.Sólohayunaformadegenerarunadeestaspalabrasapartirde ij{1,...,k}.Sólohayunaformadegenerarunadeestaspalabrasapartirde C yapartirdeD,esdecircuandouui1 ...uin bil ...bin v i1 ...v i n b i1 ...b i n . Estosoloocurresinneiji ,j.Esdecircuandoexisten(i1,...,in)talque ui1 ...uin vi1 ...vin ,esdecircuandoelPCPtienesolución. SerafínMoral Tema1: MáquinasdeTuring. FuncionesyLenguajesCalculables
+
+--- [Fuente: tr2.pdf, Página: 0] ---
+Tema 2: Otros Modelos de Cálculo: Tesis de SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 1] ---
+SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 2] ---
+lenguaje de programación convencional: una lista de SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 3] ---
+palabraenunalfabetodeterminado.Lasetiquetaslasescribimoscomo[L]al Haycuatrotipodeinstrucciones: SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 4] ---
+f :D B definida en el conjunto D de las entradas uA tal que el programa Post Turing llega a HALT siendo f(u) la palabra en la cinta excluyendo blancos uD. Si D A se dice que es calculable total Post Turing. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 5] ---
+SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 6] ---
+Alfabeto de entrada A{a,b,c}. El de trabajo tiene además el símbolo . [A] RIGHT [C] LEFT SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 7] ---
+Alfabeto de entrada A{0,1}. [C] RIGHT IF GOTO E [A] PRINT IF GOTO C [E] HALT SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 8] ---
+Alfabeto de entrada A{a}. Alfabeto de trabajo B {a,,c}. [A] IFGOTOE [B] RIGHT [C] RIGHT [D] LEFT IFGOTOD [E] HALT Si empieza con an, acaba con anan. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 9] ---
+[A] RIGHT IFGOTOE SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 10] ---
+f(u)u1 donde u{0,1}. binario calcule u1. donde u,v {0,1} calcule si la cadena u es una subcadena SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 11] ---
+entrada, un alfabeto B de trabajo y los siguientes elementos: la siguiente forma: A aA, añadir el símbolo a al principio de la variable A. A A-, Eliminar el último símbolo de A (si no es vacía). Se supone que empieza con X u donde uA es el valor de la Calcula una función parcial f si llega a HALT con f(u) almacenado SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 12] ---
+Programa que tiene como entrada X u y calcula Y u sobre el alfabeto {0,1} [A] XX- Y0Y [B] XX- Y1Y SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 13] ---
+La macro IF V 6ε GOTO L con expansión: donde {a1,...,a } es el alfabeto de trabajo. La macro V ε tiene la expansión: [L] VV- IFV6εGOTOL La macro GOTO L tiene la expansión: Zε ZaZ SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 14] ---
+IF V ENDS a GOTO L (i1,...,n) SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 15] ---
+La macro U V se expande como: Zε Uε [A] IFVENDSai GOTOBi (i1,...,n) [Bi] VV- Z U a a i i Z U i1,...,n [C] IFZENDSai GOTODi (i1,...,n) [Di] ZZ- VaiV i1,...,n GOTOC E Es la etiqueta de lainstrucción después de la macro. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 16] ---
+Ejemplo: Sumar Vamos a suponer que A{a ,...,a } y que vamos a calcular la función f(n)n1, donde se supone que el número n se codifica como C(n) en dicho alfabeto. [B] IFXENDSai GOTOAi (i1,...,n) Ya1Y [Ai] XX- Yai1Y i1,...,n- GOTOC [An] XX- Ya1Y [C] IFXENDSai GOTODi (i1,...,n) [Di] XX- YaiY i1,...,n GOTOC SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 17] ---
+Ejemplo: Restar Vamos a suponer que A{a ,...,a } y que vamos a calcular la función f(n)n1 (n1 si n1 y 0 si n1), donde se supone que el número n se codifica como C(n) en dicho alfabeto. [B] IFXENDSai GOTOAi (i1,...,n) [Ai] XX- Yai1Y i2,...,n GOTOC [A1] XX- IFX6εGOTOC2 [C2] YanY [C] IFXENDSai GOTODi (i1,...,n) [Di] XX- YaiY i1,...,n GOTOC SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 18] ---
+En muchas ocasiones queremos calcular una función f(u ,...,u ) forma: alfabeto de entrada y calcular f(u c...cu ). Se entiende que el cálculo de f es equivalente al cálculo de f. ellas contiene al principio uno de los argumentos de entrada: X u . SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 19] ---
+Lossiguienteshechossonequivalentes: Lossiguienteshechossonequivalentes: Haremoslassiguientessimulaciones: SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 20] ---
+Programa con Variables - Programa Post-Turing (1) Vamosasuponerlmk1yvamosaescribirlasvariablesenelmismoordencomo formaenlacinta: X1...XmZ1...ZkY V1...Vj...Vl otroseparadorenlugarde. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 21] ---
+Programa con Variables - Programa Post-Turing (2) de macros: La macro GOTO L se expande como: [A] RIGHT IFGOTOE [E] es la etiqueta de la instrucción inmediatamente después de SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 22] ---
+Programa con Variables - Programa Post-Turing (3) [A] LEFT IFGOTOE [E]eslaetiquetadelainstruccióninmediatamentedespuésdelamacro. LamacroMOVEBLOCKRIGHTseexpandecomo: [C] LEFT IFGOTOA0 IFai GOTOAi (i1,...,n) [Ai] RIGHT Tai i1,...,n [A0] RIGHT PRINT ...0011 ...001 SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 23] ---
+Programa con Variables - Programa Post-Turing (3) [A] LEFT IFGOTOE [E]eslaetiquetadelainstruccióninmediatamentedespuésdelamacro. LamacroMOVEBLOCKRIGHTseexpandecomo: [C] LEFT IFGOTOA0 IFai GOTOAi (i1,...,n) [Ai] RIGHT Tai i1,...,n [A0] RIGHT PRINT ...0011 ... ...001 SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 24] ---
+Programa con Variables - Programa Post-Turing (3) [A] LEFT IFGOTOE [E]eslaetiquetadelainstruccióninmediatamentedespuésdelamacro. LamacroMOVEBLOCKRIGHTseexpandecomo: [C] LEFT IFGOTOA0 IFai GOTOAi (i1,...,n) [Ai] RIGHT Tai i1,...,n [A0] RIGHT PRINT ...0011 ... ...001 ... SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 25] ---
+Programa con Variables - Programa Post-Turing (4) [A] RIGHT IFGOTOE PRINT representar con un [i] después de la instrucción donde i es el número de [3] es una forma resumida de poner: SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 26] ---
+Programa con Variables - Programa Post-Turing (5) La instrucción V a V se simula como: RIGHTTONEXTBLANK[l] MOVEBLOCKRIGHT[l-j1] LEFTTONEXTBLANK[j] V ...V ...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 27] ---
+Programa con Variables - Programa Post-Turing (5) La instrucción V a V se simula como: RIGHTTONEXTBLANK[l] MOVEBLOCKRIGHT[l-j1] LEFTTONEXTBLANK[j] V ...V ...V V ...V ...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 28] ---
+Programa con Variables - Programa Post-Turing (5) La instrucción V a V se simula como: RIGHTTONEXTBLANK[l] MOVEBLOCKRIGHT[l-j1] LEFTTONEXTBLANK[j] V ...V ...V V ...V ...V V ...V ...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 29] ---
+Programa con Variables - Programa Post-Turing (5) La instrucción V a V se simula como: RIGHTTONEXTBLANK[l] MOVEBLOCKRIGHT[l-j1] LEFTTONEXTBLANK[j] V ...V ...V V ...V ...V V ...V ...V V ...a V ...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 30] ---
+Programa con Variables - Programa Post-Turing (5) La instrucción V a V se simula como: RIGHTTONEXTBLANK[l] MOVEBLOCKRIGHT[l-j1] LEFTTONEXTBLANK[j] V ...V ...V V ...V ...V V ...V ...V V ...a V ...V V ...a V ...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 31] ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 32] ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V V1...0011...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 33] ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V V1...0011...V V1...011...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 34] ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V V1...0011...V V1...011...V V1......V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 35] ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V V1...0011...V V1...011...V V1......V V1......V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 36] ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V V1...0011...V V1...011...V V1......V V1......V V1......V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 37] ---
+Programa con Variables - Programa Post-Turing (7) La instrucción IF V ENDS a GOTO L se simula como: RIGHTTONEXTBLANK[j] IFai GOTOC V ...0011...V [C] LEFTTONEXTBLANK[j] [D] RIGHT LEFTTONEXTBLANK[j] entrada y las variables intermedias mediante ERASE BLOCK [l-1] y SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 38] ---
+Programa con Variables - Programa Post-Turing (7) La instrucción IF V ENDS a GOTO L se simula como: RIGHTTONEXTBLANK[j] LEFT V ...0011...V IFai GOTOC GOTOD V ...0011...V [C] LEFTTONEXTBLANK[j] 1 l [D] RIGHT LEFTTONEXTBLANK[j] entrada y las variables intermedias mediante ERASE BLOCK [l-1] y SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 39] ---
+Programa con Variables - Programa Post-Turing (7) La instrucción IF V ENDS a GOTO L se simula como: RIGHTTONEXTBLANK[j] V ...0011...V IFai GOTOC GOTOD V 1 ...0011...V l [C] LEFTTONEXTBLANK[j] GOTOL V ...0111...V [D] RIGHT LEFTTONEXTBLANK[j] entrada y las variables intermedias mediante ERASE BLOCK [l-1] y SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 40] ---
+Programa Post Turing - MT (1) q k1 sin transiciones donde k es el número de instrucciones del SilainstrucciónI esPRINTa entoncespondremoslastransiciones: δ(q ,a)(q i1,a ,S), aB Si la instrucción I es RIGHT entonces pondremos las transiciones: δ(q ,a)(q i1,a,D), aB Si la instrucción I es LEFT entonces pondremos las transiciones: δ(q ,a)(q i1,a,I), aB SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 41] ---
+Programa Post Turing - MT (2) transiciones: δ(q )(q ,S) y δ(q ,a)(q i1,a,S), si a6a Si la instrucción I es HALT ponemos las transiciones: δ(q ,a)(q ,a,S), aB SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 42] ---
+MT - Programa con variables (1) B {a ,...,a } incluyendo el blanco. (más otras auxiliares que aparezcan como expansión de macros) Inicialmente X tendrá la palabra de entrada. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 43] ---
+MT - Programa con variables (2) Necesitamos una serie de macros: La macro V -V (eliminar el primer símbolo de V si la variable no es vacía) se expande como (U es una nueva variable auxiliar específica para la macro): Uε [A] IFVENDSai GOTOBi (i1,...,n) [Bi] VV- UaiU i1,...,n GOTOA [C] IFUENDSai GOTODi (i1,...,n) [Di] UU- IFU6εGOTOFi [Fi] C i1,...,n instrucción excepto el último símbolo (que iría al principio de V) SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 44] ---
+MT - Programa con variables (3) La macro V Va (añade a ) al final de V tiene la expansión: Uε UaiU [A] IFVENDSai GOTOBi (i1,...,n) [Bi] VV- UaiU i1,...,n GOTOA [C] IFUENDSai GOTODi (i1,...,n) [Di] UU- VaiV i1,...,n GOTOC [E] es la instrucción después de la macro. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 45] ---
+MT - Programa con variables (4) La IF V STARS a GOTO L (Si V comienza con a seguir por la instruccion [L] tiene la expansión: Uε [A] IFVENDSaj GOTOBj (j1,...,n) [Bj] VV- UajU V6 εGOTOA j1,...,n GOTOE (sii6j) ( j) instrucción SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 46] ---
+MT - Programa con variables (5) Inicialmente se ejecutarán las instrucciones: Yε Zε ZZ [A] IFXENDSai GOTOBi (i1,...,n) [Bi] XX- Zε 6 i1,...,n [D i] está SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 47] ---
+MT - Programa con variables (6) Asociaremosacadaestadoqi unaetiquetaAi yacadapar(qi,aj)otraetiqueta Bij dondesesimularálatransiciónδ(qi,aj).Todaslastransicionesnodefinidas EnlasetiquetasAi haylassiguientesinstruccionesparalosestadosnofinales: instruccionesqueponentodalacintaenY: IFZENDSai GOTOCi (i1,...,n) [Ci] YaiY i1,...,n GOTOB (cid:27) [B] IFXENDSai GOTODi (i1,...,n) [Di] YaiY XX- i1,...,n GOTOB AntesdepararhabríaquequitarlosblancosaladerechayalaizquierdadeY. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 48] ---
+MT - Programa con Variables (7) Sitenemoslatransiciónδ(qi,aj)(qm,ak ,D),entoncesponemoselgrupode instrucciones: [Bij] XXak Zε IFYSTARSal GOTOCml (l1,...,n) ZZ [Cml] Y-Y ZalZ l1,...,n GOTOAm Sitenemoslatransiciónδ(qi,aj)(qm,ak ,I),entoncesponemoselgrupode [Bij] YakY Zε IFXENDSal GOTODml (l1,...,n) ZZ instrucciones: [Dml] XX- ZalZ l1,...,n GOTOAm Elprimerbloquedeinstruccionescorrespondientesalastransicionesseránlasdela SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 49] ---
+palabras, pero ¿es posible considerar modelos que trabajan con números? cualquier alfabeto A y el conjunto de los números naturales N que habíamos llamado N (el número asociado a una palabra), siendo su inversa C (la palabra asociada a un número). numérica f(n) definida sobre los números naturales podemos considerar que se calcula con un modelo de palabras en el que: Ponemos como entrada uC(n), la palabra que codifica el f(n)N(w) (el número representado por w). SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 50] ---
+Si queremos calcular f(n) n2, representamos cada número n en un alfabeto, p.e. {a,b} como la palabra C(n) y hacemos un progra- ma (MT, programa Post-Turing, etc.) que calcule la palabra w que calculable de números: cuando exista una codificación en un calculable y total (está definida en los números naturales). recursivo o recursivamente enumerable: cuando el conjunto de SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 51] ---
+Ejemplo: Sumar Vamos a suponer que A{a ,...,a } y que vamos a calcular la función f(n)n1, donde se supone que el número n se codifica como C(n) en dicho alfabeto. [B] IFXENDSai GOTOAi (i1,...,n) Ya1Y [Ai] XX- Yai1Y i1,...,n- GOTOC [An] XX- Ya1Y [C] IFXENDSai GOTODi (i1,...,n) [Di] XX- YaiY i1,...,n GOTOC SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 52] ---
+SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 53] ---
+Un programa con variables numéricas tiene los siguientes elementos: siguiente forma: A A1, Añade 1 al valor entero almacenado en A. A A-1, Resta 1 del valor almacenado en A (si es 0 sigue siendo 0). IF A 6 0 GOTO L, Si el valor de A no es 0, seguir por la Se supone que empieza con X n donde uN son los valores de HALT con f(n ,...,n ) almacenado en Y cuando f está definida y SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 54] ---
+Programa que tiene como entrada X n y calcula Y n, excepto para X 0 que Y 1. Es decir, calcula la función f(n)n si n60 y f(0)1. [A] XX- YY IFX60GOTOA SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 55] ---
+La macro V 0 con expansión: [A] VV- IFV60GOTOA La macro GOTO L con expansión: [A] ZZ IFZ60GOTOL SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 56] ---
+La macro V U tiene la expansión: V Z [A] IFU60GOTOB IFZ60GOTOC [B] VV ZZ UU- [C] UU ZZ- IFZ60GOTOC SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 57] ---
+Una función f :AN es parcialmente calculable por un programa Se pueden definir conceptos de subconjunto AN r.e. y recursivo (calculable), por ejemplo considerando que un número n es aceptado cuando para X n el programa termina en HALT con Y 1. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr2.pdf, Página: 58] ---
+Toda función efectivamente calculable (calculable mediante un proceso mecánico bien definido) puede ser calculada por una Máquina de Turing. realizados por una MT (aunque quizá en menos tiempo que una MT). SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- [Fuente: tr3.pdf, Página: 0] ---
+Modelos Avanzados de Computación: Tema 3: Clases de Complejidad smcdecsai.ugr.es SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 1] ---
+Un problema sencillo: el flujo máximo. Un problema difícil: mínimo número de colores. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 2] ---
+Nuesto objetivo último: comprender mejor (de manera profunda) la SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 3] ---
+Recursos que consume (espacio, tiempo, etc.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 4] ---
+Recursos que consume (espacio, tiempo, etc.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 5] ---
+Abstracción de ejemplos: complejidad en función del tamaño Abstracción del Modelo: Máquina de Turing. Inicialmente se trabaja con lenguajes (se abstrae la codificación). Recursos: Tiempo, espacio Algoritmos: El mejor algoritmo Clases de complejidad: clases muy amplias. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 6] ---
+n10 n20 n30 n40 n50 n 3n 0.059sg. 58min. 6.5años 3855siglos 2108siglos 1,31013siglos SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 7] ---
+Si tengo un número x, ¿cuantos caracteres necesito para escribir x? SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 8] ---
+Si tengo un número x, ¿cuantos caracteres necesito para escribir x? número es x el número de caracteres que necesito es de orden nlog(x). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 9] ---
+Si tengo un número x, ¿cuantos caracteres necesito para escribir x? número es x el número de caracteres que necesito es de orden nlog(x). caracteres (dígitos). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 10] ---
+Si tengo un número x, ¿cuantos caracteres necesito para escribir x? número es x el número de caracteres que necesito es de orden nlog(x). caracteres (dígitos). hay que medirla en función de su valor (1365), sino en función del número de caracteres necesario para escribirlo (4) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 11] ---
+Si tengo un número x, ¿cuantos caracteres necesito para escribir x? número es x el número de caracteres que necesito es de orden nlog(x). caracteres (dígitos). hay que medirla en función de su valor (1365), sino en función del número de caracteres necesario para escribirlo (4) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 12] ---
+Si tengo un número x, ¿cuantos caracteres necesito para escribir x? número es x el número de caracteres que necesito es de orden nlog(x). caracteres (dígitos). hay que medirla en función de su valor (1365), sino en función del número de caracteres necesario para escribirlo (4) 2n (si es en decimal, entonces cambia la base por 10). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 13] ---
+El número de divisiones es O(x), pero esa no es una medida correcta de SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 14] ---
+El número de divisiones es O(x), pero esa no es una medida correcta de ocupa del orden de nlog(x) caracteres. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 15] ---
+El número de divisiones es O(x), pero esa no es una medida correcta de ocupa del orden de nlog(x) caracteres. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 16] ---
+El número de divisiones es O(x), pero esa no es una medida correcta de ocupa del orden de nlog(x) caracteres. con un orden O(n2). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 17] ---
+El número de divisiones es O(x), pero esa no es una medida correcta de ocupa del orden de nlog(x) caracteres. con un orden O(n2). Como el número nlog(x), entonces x es de orden 2n, y el número de divisiones es de orden O(2n). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 18] ---
+El número de divisiones es O(x), pero esa no es una medida correcta de ocupa del orden de nlog(x) caracteres. con un orden O(n2). Como el número nlog(x), entonces x es de orden 2n, y el número de divisiones es de orden O(2n). Multiplicando una división por el número de divisiones, nos sale O(n22n), SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 19] ---
+G. Lamé (1884).-Número de divisiones para el máximo común Años 50 y 60.- Algoritmos Polinómicos Algoritmos Buenos Hartamis, Stearns (1965).-Análisis sistemático de medidas de M. Blum (1967).-Axiomas para una medida de complejidad. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 20] ---
+Cook (1971) The Complexity of Proving Procedures - Lavine .- Karp (1972).-Dió una amplia lista de problemas NP-completos. Meyer(1970) Stockmeyer (1976).- Definieron la jerarquían SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 21] ---
+Baker, Hill and Solovay (1975).- Resultados sobre complejidad Berman y Hartmanis (1977) propusieron la conjetura del Solovay y Strassen (1977).- Consideraron algoritmos Valiant (1979).- Definió la clase P de las funciones que Yao (1979).- Propuso estudiar la complejidad de la comunicación (problemas distribuidos). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 22] ---
+Babai (1985).- Sistemas interactivos de demostración. Papadimitriou y Yannakakis (1988).- Definieron clases de Bernstein y Vazirani (1997).- Complejidad de la computación Los problemas matemáticos del milenio: P frente a NP http://www.claymath.org/prize_problems/index.html Agrawal, Kayal y Saxena (2002).- Han demostrado que la Reingold (2005).- Ha demostrado que la conectividad en Hartmanis (31 de diciembre de 1962).- Este ha sido un buen año, En realidad están siendo unos buenos casi 60 años de El zoo de la complejidad: https://complexityzoo.net/Complexity_Zoo ¡545 clases en abril de 2022! y subiendo. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 23] ---
+por su capacidad. Hay un origen (s) y un destino (t). El valor de un flujo es la suma de lo que sale del origen (que es igual a la suma de lo que llega al destino). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 24] ---
+SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 25] ---
+Partimos del problema (V,E,s,t,c) donde V es el conjunto de c es una función que asigna a cada pareja de nodos (x,y) su capacidad c(x,y). 1. Se comienza con un flujo cualquiera, por ejemplo el flujo cero: f(x,y) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 26] ---
+2. Se calcula el grafo diferencia (v,E,s,t,c) donde EE{(x,y) : f(x,y)c(x,y)}{(x,y) : f(y,x)0} c(x,y)c(x,y)f(x,y), si (x,y)E c(x,y)f(y,x), si (x,y)6E SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 27] ---
+un flujo al nuevo camino que es valor mínimo de c en todas SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 28] ---
+arista se resta: SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 29] ---
+Ejemplo (cont.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 30] ---
+Ejemplo (cont.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 31] ---
+Ejemplo (cont.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 32] ---
+Ejemplo (cont.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 33] ---
+Ejemplo (cont.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 34] ---
+Ejemplo (cont.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 35] ---
+Ejemplo (cont.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 36] ---
+Ejemplo (cont.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 37] ---
+Ejemplo (cont.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 38] ---
+Ejemplo (cont.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 39] ---
+Ejemplo (cont.) No Existe Nuevo Camino. Solución Óptima: Flujo en la solución óptima: 2 t SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 40] ---
+Flujo Máximo: Un ejemplo con problemas SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 41] ---
+Flujo Máximo: Un ejemplo con problemas SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 42] ---
+Flujo Máximo: Un ejemplo con problemas SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 43] ---
+Flujo Máximo: Un ejemplo con problemas SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 44] ---
+Flujo Máximo: Un ejemplo con problemas lenta: una unidad cada vez. Si el número C es muy grande, esto da a muchas iteraciones: la complejidad es exponencial en función del complejidad es realmente polinómica: basta con elegir en cada caso puede demostrar que el número máximo de iteraciones en O(m3) O(n5) donde n es la longitud de la entrada. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 45] ---
+Problema de colorear un grafo (COLOR) Dado un grafo (G,V) y un número entero K K SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 46] ---
+Problema de colorear un grafo (COLOR) Dado un grafo (G,V) y un número entero K K SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 47] ---
+fuerza bruta: la búsqueda en el espacio de todas las opciones. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 48] ---
+resolución del flujo máximo (FM). Este es el caso del problema de las pareja (PAR). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 49] ---
+El problema de las parejas ( , , ) subconjunto AV V (representa las compatibilidades de decidir si existe un subconjunto AA tal que cada elemento de v V aparece en uno y sólo en uno de los pares (v ,y)A y cada elemento de v V aparece en uno y sólo en uno de los pares (x,v )A. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 50] ---
+Para cada ejemplo de las parejas PAR(V ,V ,A) podemos construir un problema del flujo máximo equivalente FM(G,c,s,t): SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 51] ---
+PAR ¿FM 4? equivalente al problema de las parejas es: ¿Existe un flujo máximo de tamaño mayor o igual a m? SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 52] ---
+Supongamos que FM(G,c,s,t,m) es una función que resuelve responde a la pregunta: ¿Existe un flujo de valor mayor o igual a m? Supongamos que REDUCE(V ,V ,A) es el algoritmo que (G,c,s,t,m)REDUCE(V ,V ,A). problema de las parejas: Calcula (G,c,s,t,m)REDUCE(V1,V2) Return FM(G,c,s,t,m) compara la dificultad de FM y PAR: FM es más difícil o igual SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 53] ---
+Una Máquina de Turing (u otro dispositivo de cálculo) es de complejidad f(n) si y solo si para toda entrada x A de longitud xn, la máquina acepta esta entrada o la rechaza consumiento menos de f(n) unidades. Un lenguaje se dice de complejidad f(n) si existe una Máquina de Turing que acepta el lenguaje y tiene complejidad f(n). Unidades pasos de cálculo complejidad en tiempo Unidades casillas de la cinta complejidad en espacio SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 54] ---
+Se dice que una medida g(n) es de orden O(f(n)) si existe n y c 0 tal que nn , g(n)c.f(n). Si L es aceptado en tiempo t(n) por una Máquina de Turing con k cintas, entonces m0 existe una Máquina de Turing con k t(n)n SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 55] ---
+Vamos a ver cómo se reduce el tiempo a la mitad (aplicándolo máquina de Turing M en la que hay un símbolo nuevo w por cada representar las casillas 2i1,2i,2i1 de la cinta de entrada de M. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 56] ---
+El programa para M se escribe, simulando para w lo que haría M para los símbolos abc hasta que sale de estos símbolos (o cicla en ellos). Esto siempre se puede calcular ya que son sólo 3 casillas. dos celdas consecutivas de M se supone que ese símbolo se guarda en memoria (añadiendo estados). mitad (hace falta n para cambiar la entrada y codificarla en el nuevo alfabeto). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 57] ---
+El programa para M se escribe, simulando para w lo que haría M para los símbolos abc hasta que sale de estos símbolos (o cicla en ellos). Esto siempre se puede calcular ya que son sólo 3 casillas. dos celdas consecutivas de M se supone que ese símbolo se guarda en memoria (añadiendo estados). mitad (hace falta n para cambiar la entrada y codificarla en el nuevo alfabeto). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 58] ---
+Los números se pueden codificar en cualquier base menos unario (es muy poco eficiente y necesita mucha longitud). En teoría supondremos cierto alfabeto, por ejemplo {a,b}. Si tenemos m objetos, ¿cual será lo longitud del nombre de un objeto? Con palabras de longitud k tenemos para darle nombre a m2k objetos (hay 2k palabras distintas de longitud k). Luego, si el número de objetos es m2k, la longitud del nombre k es del orden de log(m) donde m es el número de objetos. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 59] ---
+distintos procedimientos: a) Listas los vértices y las aristas b) Dar una lista de vecinos para cada c) Dar una matriz de adyacencia del a) v[1]v[2]v[3]v[4](v[1]v[2])(v[2]v[3]) 36 4v10a 4v10a(v2a)log 10 v b) (v[2])(v[1]v[3])(v[2])() 24 2v8a 2v8a2alog v c) 0100/1010/0010/0000 19 v2v1 v2v SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 60] ---
+Como la longitud de la entrada n verifica que v nv3, una Si es de orden O(nk), entonces será a lo más O(v3k). Si es de orden O(vk), entonces será a lo más O(nk). es de orden logarítmico O(log(n)): es independiente de la de vértices: el exponente en un logaritmo se transforma en una SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 61] ---
+siguen las siguiente reglas: Se cuentan las casillas que se usan (se escribe o se pasa sobre ellas). Un algoritmo (determinista o no determinista) que tenga una SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 62] ---
+En ese caso podemos seguir las siguientes reglas: de un conjunto con N objetos ocupa log(N). modifica (sólo tiene los datos originales de entrada) entonces nunca leemos tampoco se cuenta (puede ser que la pongamos en una estructura de datos que nunca leemos). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 63] ---
+Reconocer palíndromos en espacio (log( )) cintas: 1 2 3 3 2 1 (cid:3) Entrada 1 0 1 (cid:3) (cid:3) Posiciónqueseestácomprobando(binario)N2 1 1 (cid:3) (cid:3) (cid:3) ContadorenbinarioparaencontrarposicionesN3 -Ponemos1enlasegundacinta(N2),Ponemos1enlaterceracinta(N3) -Repetir: -Repetir:IncrementarN3en1,moveraladerechaenlaprimera,hastaN2N3 -Poner1enlaterceracinta(N31),iralfinaldelaprimeracinta -Repetir:IncrementarN3en1,moverizquierdaenlaprimera,hastaN2N3 LosnúmerosN2yN3necesitanlog(n)casillasdondeneslalongituddelnúmeroen SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 64] ---
+Tenemos un grafo dirigido G y dos nodos v1 y v2. ¿Existe un camino entre estos dos nodos? Problema CAMINO(G,v1,v2) las aristas (v,v) del grafo, y después v1 y v2 con un separados y que funciona de la siguiente forma: -Repetirhastaquelasegundacintaestévacía: -Buscamostodoslospares(v,v)enlaprimeracinta -Sivv2Aceptar -Siv noestáenlaterceracinta,seañadealasegundaylaterceracinta SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 65] ---
+Lascintas2y3siempresonmáscortasquelaentrada,luegoesdeO(n)enespacio. Elnúmerodepasossobrelastrescintases: deordenO(n2). Enlacinta2cadanodoserecorrevariasveces:paraescribirlo,buscarloenla lomásn,luegolacomplejidadtotalesdeordenO(n2). encontramoslaarista(v,v).Comocadanodoseanalizasolounavez,entonces alomásserecorreunavezporarista.ComoelnúmerodearistasesO(n)yel tamañodelacintaesO(n),obtenemosO(n2)entotal. Entotal,lacomplejidadentiempoesO(n2)yenespacioO(n) TambiénsepuedehacerenespacioO(v)yentiempoO(v3),dondev eselnúmerode vértices(porejemplocodificandocomomatriz0-1). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 66] ---
+CAMINO: Espacio Determinista Teorema de Savitch: Existencia de Caminos La complejidad en O(log2(v)), donde v es el número de nodos del grafo y, por tanto, CAMINO(x,y,i): Existencia de un camino de longitud 2i, y la CAMINO(x,y,i)z,CAMINO(x,z,i1)yCAMINO(z,y,i1) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 67] ---
+CAMINO: Espacio Determinista llamar con N log(v): CAMINO(x,y,N) - Si xy Return TRUE - Si N - Para cada nodo z: - Si CAMINO(x,z,N-1) - Si CAMINO(z,y,N-1) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 68] ---
+CAMINO: Espacio Determinista -SiN0compruebaenelgrafosiexisteunenlace CAMINO(x,y,3) -SieselúltimodevuelveFALSE -SirecibeTRUEdelaprimera:realizasegundamismonodo CAMINO(x,v1,2) blemadeformarecursivaenunacintaseparadasporun0óun1 es de longitud O(log(v)) y el número de tripletas es de orden O(log(v)):TOTALO(log2(v))enespacio. CAMINO(x,v1,1) CAMINO(x,v1,0) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 69] ---
+CAMINO: Espacio Determinista -SiN0compruebaenelgrafosiexisteunenlace CAMINO(x,y,3) -SieselúltimodevuelveFALSE -SirecibeTRUEdelaprimera:realizasegundamismonodo CAMINO(x,v1,2) blemadeformarecursivaenunacintaseparadasporun0óun1 es de longitud O(log(v)) y el número de tripletas es de orden O(log(v)):TOTALO(log2(v))enespacio. CAMINO(x,v1,1) CAMINO(x,v2,0) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 70] ---
+CAMINO: Espacio Determinista -SiN0compruebaenelgrafosiexisteunenlace CAMINO(x,y,3) -SieselúltimodevuelveFALSE -SirecibeTRUEdelaprimera:realizasegundamismonodo CAMINO(x,v1,2) blemadeformarecursivaenunacintaseparadasporun0óun1 es de longitud O(log(v)) y el número de tripletas es de orden O(log(v)):TOTALO(log2(v))enespacio. CAMINO(x,v1,1) CAMINO(v2,v1,0) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 71] ---
+Una máquina de Turing no determinista tiene complejidad f(n) en tiempo (espacio) si y solo si para una entrada x de longitud n f(n) pasos (terminan y no usan más de f(n) casillas). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 72] ---
+Ejemplo (en términos de algoritmos) 1. Asignar un color posible a cada nodo: mediante una serie de entonces debe de existir la posibilidad de que acepte; si la respuesta La complejidad en tiempo (no-determinista) sería proporcionar al SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 73] ---
+Búsqueda de Caminos en Grafos: Espacio no-determinista En espacio no-determinista el problema se resuelve en espacio O(log(v)) donde v es el número de vértices, (la misma complejidad en función de la entrada O(log(n))). x y el nodo x : Llamamos a Camino(x ,x ,m) con mv (el número de nodos). Si m0 solo acepta si x x y rechaza si x 6x . Si m0: conectadoconx deformano-determinista(sinoexisteningunorechaza). a) Si x es igual a x , entonces para y acepta. b) Si x es distinto de x , vuelve a ejecutar el algoritmo con x en el lugar m0: a) x i x j SI b) x i x k x j k j Llamada recursiva a Camino(x ,x ,m1) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 74] ---
+TIEMPO(f) Todos los lenguajes aceptados por una máquina de Turing determinista en tiempo O(f(n)). ESPACIO(f) Todos los lenguajes aceptados por una máquina de Turing determinista en espacio O(f(n)). NTIEMPO(f) Todos los lenguajes aceptados por una máquina de Turing no determinista en tiempo O(f(n)). NESPACIO(f) Todos los lenguajes aceptados por una máquina de Turing no determinista en espacio O(f(n)). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 75] ---
+Clase polinómica (tiempo): P S TIEMPO(nj) j Clase polinómica no determinista (tiempo): NP S j NTIEMPO(nj) Clase polinómica (espacio): PESPACIO S ESPACIO(nj) j Clase polinómica no determinista (espacio): NPESPACIO S NESPACIO(nj) j Clase de espacio logarítmico determinista: L ESPACIO(log(n)) Clase de espacio logarítmico no determinista: NL NESPACIO(log(n)) Clase exponencial en tiempo: EXP S (2nj ) j SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 76] ---
+en el número de pasos (si el mecanismo da f(n) pasos, entonces la máquina de Turing puede dar fk(n) pasos). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 77] ---
+Tipos de Instrucciones: Una RAM se controla por un programa Mi1 El estado de la Máquina RAM es el nú- MiMjMk mero de instrucción que se está ejecu- MiMjMk tando. Mi[M 1/2] MiMMj (poner en Mi el valor conte- nidoenlaceldanúmeroMj) MMi Mj (ponerenlaceldanúmeroMi elvalordeMj) GotomifMi SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 78] ---
+Entrada: m enteros en las celdas M ,...,M Tamaño de la Entrada: Suma del tamaño de los enteros de RAM Aceptadoras: Escriben 0 en M si rechazan y 1 si aceptan. RAM calculadoras de f(x): Escriben f(x) en M SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 79] ---
+MáquinaTuring1cinta:1TM O(T(n)) O(T(n)logT(n)) MáquinaTuringkcintas:kTM O(T2(n)) O(T(n)logT(n)) MáquinaRAM:RAM O(T3(n)) O(T2(n)) (Del libro de Garey, Johnson. Distintos autores pueden dar distintas de modelo.) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 80] ---
+SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 81] ---
+entiempof(n),entoncesesdecididoporunamáquinadeTuringdeterminísticacon3 cintasentiempoO(df(n))donded1esunaconstantequedependedelamáquina k1(enotrocasolaMáquinaesdeterministayelresultadoestrivial): ParaL0,1,2,... {1,...,k}. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 82] ---
+La simulación termina seguro cuando Lf(n) o antes. secuencias es menor o igual a : f(n) kf(n)1 kL k L que es de orden kf(n). Cada simulación y cada cambio de secuencia (para pasar a la siguiente) se lleva del orden de Lf(n) pasos. En total tenemos que la simulación es de orden O(f(n)kf(n)) y como f(n) es menor que kf(n), tenemos que la simulación es de orden O(kf(n).kf(n)) y teniendo en cuenta que kf(n).kf(n)k2f(n)(k2)f(n) y el resultado se obtiene para d k2. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 83] ---
+Se verifica que LC LCoC. clase: CoP P. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 84] ---
+SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 85] ---
+Relación binaria en AA Una relación binaria R es una aplicación R :AA{0,1} Algunas veces R(x,y)1 se escribe como R(x,y) y R(x,y)0 como R(x,y) (interpretando 1 como Verdadero y 0 como Falso). R en AA se dice calculable polinómicamente si existe una MT M que SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 86] ---
+Un lenguaje LA está en NP si y solo si existe una relación R en AA calculable en tiempo polinómico y un polinomio p(n) tal que L{x A : y A con yp(x),R(x,y)1} Se dice que los lenguajes (problemas) de NP son los problemas que se pueden verificar en tiempo polinómio (de forma eficiente). Un lenguaje LA está en CoNP si y solo si existe una relación R en AA calculable en tiempo polinómico y un polinomio p(n) tal que L{x A : y A con yp(x),R(x,y)1} SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 87] ---
+expresar como determinar los x (que representan grafos) para los que existe un y (que representa una sucesión de nodos) tal que cada nodo al siguiente y del último al primero (relación R). La condición que se pide para x e y (la relación R(x,y)) se SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 88] ---
+Los que se pueden expresar como: dados unos datos x comprobar si existe un objeto y (con un tamaño limitado a un polinomio del tamaño de x) tal que se cumple una condición R(x,y)1 que es Saber si un número x es compuesto: si existe 1y x tal que la SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 89] ---
+Los que se pueden expresar como: dados unos datos x comprobar si existe un objeto y (con un tamaño limitado a un polinomio del tamaño de x) tal que se cumple una condición R(x,y)1 que es Saber si un número x es compuesto: si existe 1y x tal que la C. Moore, S. Mertens (2011) The Nature of Computation. 193707721761838257287147573952588676412927 Frank Nelson Cole, American Mathematical Society, 1903 (trabajó en ello los domingos de 3 años). El número de la derecha es 2671 y se había conjeturado en el SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 90] ---
+Los que se pueden expresar como: dados unos datos x comprobar si existe un objeto y (con un tamaño limitado a un polinomio del tamaño de x) tal que se cumple una condición R(x,y)1 que es Saber si un número x es compuesto: si existe 1y x tal que la C. Moore, S. Mertens (2011) The Nature of Computation. 193707721761838257287147573952588676412927 Frank Nelson Cole, American Mathematical Society, 1903 (trabajó en ello los domingos de 3 años). El número de la derecha es 2671 y se había conjeturado en el ¿Conocéis una caracterización parecida para saber si un número es primo? Existe, pero no es sencilla. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 91] ---
+SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 92] ---
+(siempre quiere convencer de que la respuesta es positiva) (quiere saber la verdad) error para el verificador (Computational Complexity: A Modern Approach. Sanjeev Arora, Boaz Barak) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 93] ---
+a) ESPACIO(f(n))NESPACIO(f(n)) TIEMPO(f(n))NTIEMPO(f(n)) b) NTIEMPO(f(n))ESPACIO(f(n)) c) NESPACIO(f(n))TIEMPO(kf(n)) para un k a) La demostración de a) es trivial. b) La demostración de b) se basa en la simulación de una MT no poniendo palabras a ...a donde a {1,...,k} y entonces ir escribir las palabras que es menor o igual a f(n) (recordemos que Lf(n)) y el espacio para hacer la simulación de L pasos, que también es de orden f(n). En total, el espacio necesario es de orden f(n). SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 94] ---
+c) NESPACIO( ( )) TIEMPO( kf(n)) El Método de la Alcanzabilidad: Una configuración es una tripleta (q,u,v). Como no se ocupa más de f(n) en espacio, la longitud de u y v es menor o igual a f(n). El número QB 2f(n) donde B es el alfabeto de trabajo. Es decir del orden de tf(n) donde tB2. estado final y eso se puede comprobar en tiempo O(m3) donde m es el número de nodos, en nuestro caso en orden (tf(n)) 3 t2f(n)(t3) f(n) . Lo que demuestra el teorema para k t3. SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 95] ---
+Sonaquellasqueverifican:f(n1)f(n)ytalesquelafuncióng(u)f(u) expresandog(u)comounasecuenciadelongitudg(u)(esdecirusandounario)es calculableenespacioO(f(n))ytiempoO(f(n)n). Sif(n)nespropia,entonces TIEMPO((f(n))TIEMPO(f2(n)) TIEMPO((f(n))6TIEMPO(f2(n)) P6EXP Dem.PTIEMPO(2n) TIEMPO((2n)2)EXP Sif(n)esunafuncióndecomplejidadpropia,entonces ESPACIO(f(n))ESPACIO(f(n)logf(n)) ESPACIO(f(n))6ESPACIO(f(n)logf(n)) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 96] ---
+LNLPNPPESPACIO SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr3.pdf, Página: 97] ---
+Si f(n)log(n) y es propia, entonces NESPACIO(f(n))ESPACIO(f2(n)) PESPACIO NPESPACIO Si f(n)log(n) es propia entonces NESPACIO(f(n))CoNESPACIO(f(n)) SerafínMoral ModelosAvanzadosdeComputación: Tema3: ClasesdeComplejidad
+
+--- [Fuente: tr4.pdf, Página: 0] ---
+Tema 4: NP-completitud SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 1] ---
+SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 2] ---
+Recordatorio: Problemas y Lenguajes Recordemos que un problema computacional de decisión P(x) es equivalente a un lenguaje: {x A : P(x)SI} Y que un lenguaje L sobre A define un problema: Dada x A, ¿Pertenece x a L? práctica en términos de problemas, PERTENCEL(x): SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 3] ---
+Un problema de decisión P (x) es reducible a un problema de decisión P (y) donde x X,y Y, P (x)P (y) logarítmico calcula una función REDU :X Y de tal manera que P (x)P (REDU(x)) Problema P (x) reducible a P (y): Algoritmo P Algoritmo SI/NO SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 4] ---
+Un problema de decisión P (x) es reducible a un problema de decisión P (y) donde x X,y Y, P (x)P (y) logarítmico calcula una función REDU :X Y de tal manera que P (x)P (REDU(x)) Problema P (x) reducible a P (y): Algoritmo P Algoritmo x REDU(x) SI/NO SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 5] ---
+Un problema de decisión P (x) es reducible a un problema de decisión P (y) donde x X,y Y, P (x)P (y) logarítmico calcula una función REDU :X Y de tal manera que P (x)P (REDU(x)) Problema P (x) reducible a P (y): Algoritmo P Algoritmo xx RREEDDUU((xx)) SI/NO SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 6] ---
+En definitiva, P es al menos tan difícil como P : se resiste más a SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 7] ---
+La idea es que la reducción (transformación entre problemas) tiene que poder realizarse de forma "eficiente". "muy rápida", que lo concretamos como espacio logarítmico. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 8] ---
+Si tenemos dos problemas P (x) y P (y) para demostrar que P (x)P (y) hay que: P en una entrada, y REDU(x), del problema P . 3 Comprobar que si P 1 (x) tiene solución positiva, entonces P (y) también la tiene. 4 Comprobar que si P 2 (y) tiene solución positiva, entonces P (x) también la tiene. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 9] ---
+El Problema del Viajante de Comercio (VC) Versión decisión Datos: Un conjunto finito de ciudades C {c ,...,c } Una función de distancia d :CC N Una cota B N Pregunta: ¿Existe un circuito que visite todas las ciudades una sola vez y de coste no superior a B? (c ,...,c ) tal que π(1) π(n) m d(c ,c ) d(c ,c )B π(i) π(i1) π(m) π(1) i1 ! SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 10] ---
+El Problema del Circuito Hamiltoniano (CH) Datos: Un grafo no dirigido G (V,E). Pregunta: ¿Existe un circuito hamiltoniano? SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 11] ---
+El Problema del Circuito Hamiltoniano (CH) Datos: Un grafo no dirigido G (V,E). Pregunta: ¿Existe un circuito hamiltoniano? SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 12] ---
+Viajante de Comercio: CH VC Supongamos una ejemplo del Circuito Hamiltoniano G (V,E) con Vm. Construimos el siguiente ejemplo del Viajante de Comercio: Ciudades C V Distancia: 1 si (v ,v )E d(v ,v ) i j i j 2 si (v ,v )6E (cid:26) Cota: B m SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 13] ---
+valor menor o igual a m (el correspondiente al circuito hamiltoniano). SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 14] ---
+Si P P y P P , entonces P P . P a P ( mediante P calculada por M ) y de P a L (mediante R calculada por M ). M : R (x): Entonces usaríamos un espacio intermedio polinómico para almacenar M (x) y la complejidad de la composición en P y P se dicen equivalentes si y solo si P P y P P . SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 15] ---
+x R (x) R (R (x)) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 16] ---
+x R (x) R (R (x)) x entrada-salida R 2 (R 1 (x)) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 17] ---
+Dada la definición, a priori no tendría porqué existir ningún Esta definición se extiende a otras clases: SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 18] ---
+P P y P P En particular esta relación sobre NP queda de la siguiente forma: (SiempreSI-SiempreNO) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 19] ---
+Consistencia en Lógica Proposicional (SAT) Datos: Un conjunto U {p ,...,p } de símbolos proposicionales PREGUNTA: ¿Son consistentes las cláusulas? EJEMPLO: U {p ,p }, C {p p ,p p } t(p )t(p )V. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 20] ---
+U {p ,p }, C {p p ,p p ,p } Para satisfacer la tercera cláusula, t(p )F (p es falsa). En tener t(p )F. Y ahora con p y p falsas, es imposible SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 21] ---
+El problema de la consistencia en lógica proposicional (SAT) es Demostración: con el siguiente algoritmo no-determinista: Para cada símbolo en U seleccionar un valor de verdad (V ó F). SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 22] ---
+Teorema de Cook: Reducción Ahora hay que demostrar que si un problema, Pr(x), está en NP, Supongamos Pr(x) en NP, la reducción consiste en transformar la entrada al problema x (se suponen una palabra) : Pr(x)Si si y solo si el ejemplo es consistente. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 23] ---
+Como Pr(x) está en NP, entonces existe una Máquina de Turing no determinista M que decide Pr(x) en tiempo polinómico (con un polinomio p(n)), con un estado de aceptación q (para las respuestas positivas) y uno de rechazo q (para las respuestas negativas) y una sola cinta (que supondremos ilimitada solo por la derecha). Supondremos p(n)n. máquina: REDU :ASAT tal que Pr(x)SiM acepta x REDU (x) es consistente. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 24] ---
+Teorema de Cook: Notación Sea Q {q ,...,q }, r Q1, q q , q q . Si A{s ,...,s } hagamos s y B {s ,s ,...,s }{}A. Sea l el número máximo de opciones de M (supondremos que rechazo que no hay ninguna). Como la máquina da p(n) pasos, el número máximo de casillas visitadas es p(n)1. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 25] ---
+Teorema de Cook: Variables Proposicionales Hay cuatro tipos de variables: Q[i,k], 0i p(n), 0k r H[i,j], 0i p(n), 0j p(n) S[i,j,k], 0i p(n), 0j p(n), 0k v O(i,k), 0i p(n), 1k l variables permanecen inalteradas en los instantes i j hasta p(n). SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 26] ---
+Grupo 1: Estado de la Máquina Q[i,0]Q[i,1]Q[i,r], 0i p(n) Q[i,j]Q[i,j], 0i p(n), 0j jr SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 27] ---
+Grupo 2: Cabeza de Lectura H[i,0]H[i,1]H[i,p(n)], 0i p(n) H[i,j]H[i,j], 0i p(n), 0j jp(n) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 28] ---
+Grupo 3: Casillas S[i,j,0]S[i,j,1]S[i,j,v], 0i p(n), 0j p(n) S[i,j,k]S[i,j,k], 0i p(n), 0j p(n), 0k kv SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 29] ---
+Grupo 4: Configuración Inicial Q[0,0], en el momento inicial (0), la máquina está en el H[0,0], , en el momento inicial (0), la cabeza está en la Si la palabra de entrada es: x s ...s entonces se introducen las cláusulas: S[0,0,k ],S[0,1,k ],...,S[0,n1,k ] S[0,n,0],S[0,n1,0],...,S[0,p(n),0] síbolo B s . SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 30] ---
+Grupo 5: No-Determinismo O(i,1)O(i,l), 0i p(n)1. O(i,j)O(i,j), 0i p(n)1, 1j,j l, j 6j. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 31] ---
+Grupo 6: Funcionamiento de la Máquina Si δ(q ,s ){(q ,s ,m ),...,(q ,s ,m )}, entonces añadimos todas las cláusulas: H[i,j]Q[i,k]S[i,j,d]O(i,e)Q[i1,k ] H[i,j]Q[i,k]S[i,j,d]O(i,e)S[i1,j,d ] H[i,j]Q[i,k]S[i,j,d]O(i,e)H[i1,jm ] 0i p(n)1, 0j p(n), 0k r, 0d v, 1e l SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 32] ---
+Grupo 7: Continuidad de contenidos H[i,j]S[i,j,d]S[i1,j,d] 0i p(n)1, 0j,j p(n),(j 6j) 0d v SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 33] ---
+Grupo 8: Funcionamiento de la Máquina, después de parar Si δ(q ,s )0/, entonces añadimos todas las cláusulas: H[i,j]Q[i,k]S[i,j,d]Q[i1,k] H[i,j]Q[i,k]S[i,j,d]S[i1,j,d] H[i,j]Q[i,k]S[i,j,d]H[i1,j] 0i p(n)1, 0j p(n), 0k r, 0d v, 1e l SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 34] ---
+Grupo 9: Condición de aceptación Q[p(n),1]: En el último paso, p(n), la máquina se encuentra en un SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 35] ---
+elegida. Si al final se puede satisfacer la cláusula Q[p(n),1] es que SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 36] ---
+logarítmica en función de la longitud de x: xn. Primero, n se representa con t log(n) bits. El cálculo de p(n) requiere realizar varias operaciones, multiplicaciones y será del orden de t log(n). p(n) se representará también con un número de cifras que será del orden de tlog(n). p(n) o entre dos valores constantes. En el segundo caso, el espacio no espacio de orden tlog(n) (el espacio necesario para el índice más grande) para almacenarlos. O(log(n)). SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 37] ---
+Tenemos que hacer: Determinar un problema NP-completo ya conocido Pr, y PrPr SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 38] ---
+Hay dos formas de entender 3-SAT: a lo más 3 literates y NP: el mismo algoritmo vale. ejemplo de 3-SAT que tenga la misma respuesta: las cláusulas son SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 39] ---
+SAT 3-SAT U y algunos adicionales y cuyas cláusulas, C, se obtienen de C de la siguiente forma: cual a C. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 40] ---
+SAT 3-SAT (Cont.) La reducción se basa en el siguiente hecho: Si tengo la fórmula PQ donde P y Q son dos fórmulas, entonces Px, Qx SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 41] ---
+SAT 3-SAT (Cont.) La reducción se basa en el siguiente hecho: Si tengo la fórmula PQ donde P y Q son dos fórmulas, entonces Px, Qx deduzco que PQ se puede satisfacer. Si PQ se puede satisfacer, entonces existe una asignación con la caso contrario hago x verdadero: está claro que ambas cláusulas se SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 42] ---
+SAT 3-SAT (Cont.) Para cada clásula en C de longitud mayor o igual que 4: l l l , k 4, donde l ,...,l son literales, añado 2 k l l x , x l x , ,x l x , x l l , 1 2 2 2 3 3 k3 k2 k2 k2 k1 k SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 43] ---
+l l l , este es el resultado de aplicar la regla básica k 2 k l l x , x l l l x l l l , pero añadiendo cada vez una variable distinta SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 44] ---
+prstq hacerdeformarecursivacalculandolascláusulasintermedias (esascláusulaspueden serdetamañodelmismoordenquelaentrada). Hayquehacerlo deformaiterativa SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 45] ---
+prstq prx2 x2stq hacerdeformarecursivacalculandolascláusulasintermedias (esascláusulaspueden serdetamañodelmismoordenquelaentrada). Hayquehacerlo deformaiterativa SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 46] ---
+prstq prx2 x2stq x2sx3 x3tq hacerdeformarecursivacalculandolascláusulasintermedias (esascláusulaspueden serdetamañodelmismoordenquelaentrada). Hayquehacerlo deformaiterativa SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 47] ---
+Por ejemplo t se transformaría en tx x . ser falsas: todas las cláusulas de tamaño 3 con estas 3 variables, excepto x x x . Estas 7 cláusulas solo se pueden satisfacer si SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 48] ---
+Consideremos un problema 2-SAT, entonces construimos el grafo: Nodos: Variables y sus negaciones (todos los posibles literales) Arcos: (α,β) es un arco si y solo si (αβ) está en el SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 49] ---
+C {x x ,x x ,x x ,x x } x3 Grafo: x1 x2 par de nodos x,x, tal que existe un camino de x a x y otro camino de x a x. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 50] ---
+C {x x ,x x ,x x ,x x } x3 Grafo: x x x x x 3 x 2 x1 x2 par de nodos x,x, tal que existe un camino de x a x y otro camino de x a x. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 51] ---
+C {x x ,x x ,x x ,x x } x3 Grafo: x1 x2 Si hay un camino de x a x, se deduce x Si hay un camino de x a x, se deduce x par de nodos x,x, tal que existe un camino de x a x y otro camino de x a x. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 52] ---
+C {x x ,x x ,x x ,x x } x3 Grafo: x1 x2 NLCoNL, 2-SAT está en Si hay un camino de x a x, se deduce x Si hay un camino de x a x, se deduce x par de nodos x,x, tal que existe un camino de x a x y otro camino de x a x. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 53] ---
+Idea del algoritmo polinómico: (V el conjunto de variables proposicionales). Se consideran los conjuntos C (todos los literales son negativos) y C (existe un literal positivo). SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 54] ---
+Algoritmo (Cont.) de la forma z z z y con todas las variables añadir y a H. ( Como z z z y es equivalente a (z z z )y, si todos los antecedentes son verdaderos, entonces el consecuente también lo tiene que ser). conjunto y falsas las de V H. exista un literal con su variable en V H. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 55] ---
+Datos: Un conjunto de cláusulas con dos literales y un valor K 0. Pregunta: ¿Pueden satisfacerse, al menos, K cláusulas? SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 56] ---
+Reducción: 3-SAT MAX2SAT Para ello cada cláusula de longitud 3, xyz se transforma en las siguientes 10 cláusulas (w es una nueva variable añadida), x, y, z, w, xy, yz, zx, xw, yw, zw Se selecciona K 7m, donde m es el número de cláusulas. Técnica: Construcción de Gadgets Estosepuedecomprobar, viendoqueparacadacláusula,sixyz esverdadero cláusulas(pero nomás). Sixyz esfalso,entonces nunca podemos llegara SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 57] ---
+SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 58] ---
+el siguiente procedimiento: Se añaden las cláusulas: x x ,x x ,...,x x Estas son equivalentes a: x x ,x x ,...,x x SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 59] ---
+en tiempo polinómico si se verifican las condiciones especificadas: SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 60] ---
+Si los tres literales son distintos pqr añadimos una variable s (significado: pqs) y las cláusulas: srz, pqs, psz, qsz SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 61] ---
+Dados dos grafos no dirigidos G (V ,E ) y G (V ,E ), aplicación biyectiva f :V V , tal que (u,v)E (f(u),f(v))E . SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 62] ---
+Acoplamiento de Tripletas (ACTRI) Datos: Un subconjunto M WXY de compatibilidades Pregunta: ¿Contiene M un subconjunto MM con q elementos,tal que para cada (w1,x1,y1),(w2,x2,y2)M, si (w1,x1,y1)6(w2,x2,y2), entonces w16w2, x16x2, y16y2?. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 63] ---
+Acoplamiento de Tripletas (ACTRI) Datos: Un subconjunto M WXY de compatibilidades Pregunta: ¿Contiene M un subconjunto MM con q elementos,tal que para cada (w1,x1,y1),(w2,x2,y2)M, si (w1,x1,y1)6(w2,x2,y2), entonces w16w2, x16x2, y16y2?. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 64] ---
+SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 65] ---
+Vamos a suponer un ejemplo de 3-SAT con los siguientes datos: U{u1,u2,...,u }, C {c1,c2,...,c } M WXY. u [j],u [j], j 1,...,m, en X los elementos a [j],j 1,...,m y en Y los elementos b [j],j 1,...,m. En M se introducen las tripletas: Tt {(u [j],a [j],b [j]) : 1j m} y Tf {(u [j],a [j1],b [j]) : 1j m}{(u [m],a [1],b [m])}. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 66] ---
+Ejemplo: U {u ,u ,u ,u }, C {u u u ,u u u } {(u1[1],a1[1],b1[1]),(u1[2],a1[2],b1[2]),(u1[1],a1[2],b1[1]),(u1[2],a1[1],b1[2]), (u2[1],a2[1],b2[1]),(u2[2],a2[2],b2[2]),(u2[1],a2[2],b2[1]),(u2[2],a2[1],b2[2]), (u3[1],a3[1],b3[1]),(u3[2],a3[2],b3[2]),(u3[1],a3[2],b3[1]),(u3[2],a3[1],b3[2]), (u4[1],a4[1],b4[1]),(u4[2],a4[2],b4[2]),(u4[1],a4[2],b4[1]),(u4[2],a4[1],b4[2]), } SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 67] ---
+Gráfica de tripletas: ui[1] bi[1] b ai[2] ui[4] ai[1] bi[4] ai[4] b bi[3] ui[3] ui[1] bi[2] ai[3] ui[2] ui[4] ui[3] efecto es que en M ui[2] u [1],u [2],u [3],u [4] i i i i u [1],u [2],u [3],u [4]. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 68] ---
+Gráfica de tripletas: ui[1] bi[1] b ai[2] ui[4] ai[1] bi[4] ai[4] b bi[3] ui[3] ui[1] bi[2] ai[3] ui[2] ui[4] ui[3] efecto es que en M deberán de estas ui[2] u [1],u [2],u [3],u [4] i i i i u [1],u [2],u [3],u [4]. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 69] ---
+Gráfica de tripletas: ui[1] bi[1] b ai[2] ui[4] ai[1] bi[4] ai[4] b bi[3] ui[3] ui[1] bi[2] ai[3] ui[2] ui[4] ui[3] efecto es que en M ui[2] deberán de estas u [1],u [2],u [3],u [4] i i i i u [1],u [2],u [3],u [4]. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 70] ---
+Por cada cláusula c C: Añadir un elemento s[j] a X Añadir un elemento t[j] a Y {(u [j],s[j],t[j]) : u está en c } {(u [j],s[j],t[j]) : u está en c } La idea es que en cada acoplamiento M debe de contener alguna Si, de las tripletas anteriores, quedaban libres (no elegidos) los elementos u [1],u [2],u [3],u [4] corresponde al caso en el que u es cierto. Si quedaban libres u [1],u [2],u [3],u [4], corresponde al SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 71] ---
+Se añden los siguientes elementos: g[k], 1k m(n1) al conjunto X h[k], 1k m(n1) al conjunto Y Al conjunto M las tripletas: (u [j],g[k],h[k]),(u [j],g[k],h[k]), 1km(n1),1in,1jm La idea es la siguiente: Noshanquedado libresenW después deelegirentrelasprimerastripletas: m.n cláusula,nosquedan m.nmm(n1). Ahoraañadimosestenúmerode ElnúmerodetripletasdeM es: 2mn3m2m2n(n1) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 72] ---
+U {u ,u ,u ,u }, C {u u u ,u u u } W {u1[1],u1[2],u1[1],u1[2],u2[1],u2[2],u2[1],u2[2], u3[1],u3[2],u3[1],u3[2],u4[1],u4[2],u4[1],u4[2]} X {a1[1],a1[2],a2[1],a2[2],a3[1],a3[2],a4[1],a4[2],s[1],s[2], g[1],g[2],g[3],g[4],g[5],g[6]} Y {b1[1],b1[2],b2[1],b2[2],b3[1],b3[2],b4[1],b4[2],t[1],t[2], h[1],h[2],h[3],h[4],h[5],h[6]} SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 73] ---
+U {u ,u ,u ,u }, C {u u u ,u u u } M {(u1[1],a1[1],b1[1]),(u1[2],a1[2],b1[2]),(u1[1],a1[2],b1[1]),(u1[2],a1[1],b1[2]), (u2[1],a2[1],b2[1]),(u2[2],a2[2],b2[2]),(u2[1],a2[2],b2[1]),(u2[2],a2[1],b2[2]), (u3[1],a3[1],b3[1]),(u3[2],a3[2],b3[2]),(u3[1],a3[2],b3[1]),(u3[2],a3[1],b3[2]), (u4[1],a4[1],b4[1]),(u4[2],a4[2],b4[2]),(u4[1],a4[2],b4[1]),(u4[2],a4[1],b4[2]), (u1[1],s[1],t[1]),(u3[1],s[1],t[1]),(u4[1],s[1],t[1]), (u1[2],s[2],t[2]),(u2[2],s[2],t[2]),(u4[2],s[2],t[2]), (u [j],g[k],h[k]),(u [j],g[k],h[k])(i 1,...,4,j 1,2,k1,...,6)} SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 74] ---
+Si tenemos una asignación de valores de verdad t(u ){V,F} que M de la siguiente forma: Si u es cierto elegimos las tripletas: {(u [j],a [j],b [j]) : 1j m} Si u es falso: {(u [j],a [j1],b [j]) : 1j m}{(u [m],a [1],b [m])}. Para cada cláusula j elegimos de entre las tripletas: {(u [j],s[j],t[j]) : u está en c } {(u [j],s[j],t[j]) : u está en c } elegimos aquella que Nos quedan por elegir exactamente n(m1) elementos de (u [j],g[k],h[k]),(u [j],g[k],h[k]). Aquí no hay problema, ya SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 75] ---
+supongamos que tenemos un subconjunto M de tripletas solución. tripletas en una solución: o se eligen las {(u [j],a [j],b [j]) : 1j m} o se eligen las {(u [j],a [j1],b [j]) : 1j m}{(u [m],a [1],b [m])}. 3 Para cada cláusula alguna de las 3 tripletas: {(u [j],s[j],t[j]) : u está en c }{(u [j],s[j],t[j]) : u está en c } debe de haberse elegido en M. 4 Si hemos elegido (u i [j],s[j],t[j]) con u i en c j , entonces, u i [j] no 5 Si hemos elegido (u i [j],s[j],t[j]) con u i en c j , entonces, u i [j] no SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 76] ---
+Cubr. por conj. de tamaño tres (3-SET) Datos: Un conjunto finito X con X3q y un subconjunto C Pregunta: ¿Existe CC tal que X S A y los elementos AC de C son disjuntos dos a dos (A,B C y A6B, entonces AB 0/)? muy sencilla: ACTRI 3-SET. donde X W Y Z y C {{w,y,z} : (w,y,z)M} SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 77] ---
+Clique: Dado un grafo G (V,E), un clique es un subconjunto maximal totalmente conectado. Es decir, un subconjunto V V tal que v ,v V , (v ,v )E, y que no está estrictamente El problema del Clique Máximo (Clique): Dado un grafo G (V,E) y un número natural J V, determinar si existe un SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 78] ---
+En el siguiente grafo, tenemos un clique de tamaño 4 (en rojo): SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 79] ---
+Cubrimiento por Vértices (CV) Dado un grafo G (V,E) y un subconjunto V V, se dice que grafo tiene un extremo en V : (u,v)E, (uV v V ) Problema: Dado un grafo G (V,E) y un número natural K V, determinar si existe un cubrimiento por vértices de SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 80] ---
+tamaño 3 (en rojo): SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 81] ---
+Conjunto Independiente (CI) Dado un grafo G (V,E) y un subconjunto V V, se dice que arista que una vértices de V : u,v V , (u,v)6E Problema: Dado un grafo G (V,E) y un número natural J V, determinar si existe un conjunto independiente de tamaño SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 82] ---
+tamaño 4 (en rojo): SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 83] ---
+Si G (V,E) es un grafo y VV, entonces las siguientes condiciones son equivalentes: a) V es un cubrimiento por vértices de G b) V V es un conjunto independiente de G c) V V es un subgrafo totalmente conectado del grafo complementario G (V,E). Donde E V V E. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 84] ---
+SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 85] ---
+Los tres problemas (Clique, Cubrimiento por Vértices y Conjunto Independiente) son equivalente y si uno es NP-completo los otros Si n es es número de nodos de G, entonces: nK G tiene un clique de tamaño mayor o igual que nK SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 86] ---
+Cubr. por Vértices (CV) es NP-completo Está claro que es NP: se elige de forma no determinista un SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 87] ---
+Para demostrar que es completo reduciremos 3-SAT: 3-SAT CV. Se crea un ejemplo de CV, dado por un grafo G (V,E). SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 88] ---
+Para cada variables u U se añaden dos vértices u ,u y un Para cada cláusula c C, se añaden tres vértices a [j],a [j],a [j] y tres aristas que los unan (se forma un triángulo). Para cada clásula c C si en el literal número k de esta clásula aparece la variable u , se añade una arista de u [j] al Se pone un límite K n2m. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 89] ---
+Ejemplo de 3-SAT: U {u ,u ,u ,u }, C {u u u ,u u u }. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 90] ---
+Ejemplo de 3-SAT: U {u ,u ,u ,u }, C {u u u ,u u u }. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 91] ---
+Ejemplo de 3-SAT: U {u ,u ,u ,u }, C {u u u ,u u u }. a1[2] a2[2] a1[1] a1[3] a2[1] a2[3] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 92] ---
+Ejemplo de 3-SAT: U {u ,u ,u ,u }, C {u u u ,u u u }. a1[2] a2[2] a1[1] a1[3] a2[1] a2[3] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 93] ---
+Ejemplo de 3-SAT: U {u ,u ,u ,u }, C {u u u ,u u u }. a1[2] a2[2] a1[1] a1[3] a2[1] a2[3] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 94] ---
+Ejemplo de 3-SAT: U {u ,u ,u ,u }, C {u u u ,u u u }. a1[2] a2[2] a1[1] a1[3] a2[1] a2[3] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 95] ---
+Equivalencia CV 3-SAT Ejemplo de 3-SAT: U {u ,u ,u ,u }, C {u u u ,u u u }. a1[2] a2[2] Cubrimiento: a1[1] a1[3] a2[1] a2[3] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 96] ---
+de cada conjunto: {a [j],a [j],a [j]}. Como el cubrimiento tiene, a lo más, n2m vértices, entonces conjunto {a [j],a [j],a [j]}. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 97] ---
+Las clásulas se pueden satisfacer haciendo para cada variable u : u cierto si u V u falso si u 6V de {a [j],a [j],a [j]} que están en V vértices correspondientes a las variables: u o u . El valor de verdad SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 98] ---
+se consigue de la siguiente forma: V {u : u es verdadero}{u : u es falso} S ({a [j],a [j],a [j]}{a [j]}) [j] corres(cid:0)ponde al literal que hace verdad(cid:1)era la cláusula C SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 99] ---
+El Problema del Circuito Hamiltoniano (CH) solo tiene que elegir n nodos (número de nodos en el grafo) y problema. Sea G (V,E) y K V un problema de cubrimiento Vamos a construir un grafo G(V,E) de tal forma que la existencia de un circuito hamiltoniano para G sea equivalente a la existencia de un recubrimiento de tamaño K para G. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 100] ---
+Reducción: grafos base Para cada e (u,v)E se añade el siguiente grafo a G (con vértices). (u,e,1) (v,e,1) (u,e,2) (v,e,2) (u,e,3) (v,e,3) (u,e,4) (v,e,4) (u,e,5) (v,e,5) (u,e,6) (v,e,6) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 101] ---
+Reducción: grafos base Para cada e (u,v)E se añade el siguiente grafo a G (con vértices). (u,e,1) (v,e,1) (u,e,2) (v,e,2) (u,e,3) (v,e,3) (u,e,4) (v,e,4) (u,e,5) (v,e,5) (u,e,6) (v,e,6) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 102] ---
+Reducción: recorridos (u,e,1) (u,e,1) (v,e,1) (v,e,1) (u,e,6) (u,e,6) (v,e,6) (v,e,6) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 103] ---
+Reducción: conectando grafos básicos Para cada v V sea e [i] e [1],...,e [r ] cos que contienen v. (v,ev[i1],1) (v,ev[i],6) Para 1 i r unimos el sub- grafo asociado a e [i] y el subgrafo e [i1]medianteun arcoque vade (v,e [i],6) a (v,e [i1],1). v v e [i1] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 104] ---
+Reducción: Nodos Adicionales subgrafos de la siguiente forma: Para cada v V sea e [1],...,e [r ], la lista de las aristas que Se añade una arista de cada uno de los a a (v,e [1],1) (vértice extremo de la primera arista correspondiente a v) Se añade una arista de cada uno de los a a (v,e [r ],6) (vértice extremo de la última arista correspondiente a v) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 105] ---
+Reducción: Nodos Adicionales (v,ev[1],1) (v,ev[rv],6) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 106] ---
+K SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 107] ---
+1 3 K 2 v e 2 w SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 108] ---
+1 3 K 2 v e 2 w Nodo u: aristas e1,e3 Nodo v: aristas e1,e2 u Nodo w: aristas e2,e3 SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 109] ---
+e 1 e 3 K 2 a 1 v e 2 w Nodo u: aristas e1,e3 Nodo v: aristas e1,e2 u Nodo w: aristas e2,e3 SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 110] ---
+e 1 e 3 K 2 a 1 v e 2 w Nodo u: aristas e1,e3 Nodo v: aristas e1,e2 u Nodo w: aristas e2,e3 SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 111] ---
+K Nodo u: aristas e1,e3 Nodo v: aristas e1,e2 Nodo w: aristas e2,e3 SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 112] ---
+Equivalencia de Soluciones: CV CH Sean K vértices que forman un cubrimiento por vértices: {v ,...,v }. Un circuito hamiltoniano se puede construir de la siguiente forma comenzando en a : asociados a las aristas de v : para cada arista si tiene sólo a v arista de forma completa; si la arista contiene los dos extremos i1 K SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 113] ---
+Equivalencia de Soluciones: CH CV Desde cada a al siguiente a (y también desde a a a ) i i1 K (v si es el recorrido de a a a ). El conjunto {v ,...,v } es un cubrimiento por vértices, ya que hamiltoniano entra una vez. El vértice por el que se entra (que ha de coincidir con el de salida) ha de estar en el cubrimiento por SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 114] ---
+Datos: Un conjunto A y un tamaño para cada uno de sus elementos: s :AN y un número entero B Pregunta: Determinar si existe un AA tal que se verifique: s(a)B aA Este es claramente un problema de NP: se eligen de forma no determinista los elementos de A y en tiempo polinómico se cubrimiento por tripletas (ACTRI) a este problema. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 115] ---
+Reducción, ACTRI SUMA Sea W,X,Y con WXYq y un subconjunto M X Y Z un ejemplo del problema ACTRI, vamos a Consideremos: W {w ,...,w }, X {x ,...,x } Y {y ,...,y } M {m ,m ,...,m } El conjunto A va a contener k elementos A{a ,...,a }. Cada elemento a A se corresponde con una tripleta m M. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 116] ---
+Si sumanos k unos, ¿cuantas cifras como máximo puede tener el número resultante? SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 117] ---
+Si sumanos k unos, ¿cuantas cifras como máximo puede tener el número resultante? El resultado tiene a lo más tamaño p[log (k)]1 (sumar uno a log (k) sin decimales). SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 118] ---
+Reducción ACTRI SUMA Para cada tripleta m (w ,x ,y ), se considera el elemento i f(i) g(i) h(i) a con un peso: s(a )2p(3qf(i))2p(2qg(i))2p(qh(i)) donde p[log (k)]1. grupo corresponde a un elemento de W,X o Y: Cada tripleta m (w ,x ,y ) se corresponde con un número con i f(i) g(i) h(i) f(i) g(i) h(i) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 119] ---
+Reducción ACTRI SUMA Para cada tripleta m (w ,x ,y ), se considera el elemento i f(i) g(i) h(i) a con un peso: s(a )2p(3qf(i))2p(2qg(i))2p(qh(i)) donde p[log (k)]1. grupo corresponde a un elemento de W,X o Y: Cada tripleta m (w ,x ,y ) se corresponde con un número con i f(i) g(i) h(i) f(i) g(i) h(i) Ejemplo: Tripleta: (w2,x1,y ) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 120] ---
+Reducción ACTRI SUMA Si p [log (k)]1, entonces sumando k o menos unos nunca obtenemos un número con un 1 más allá de la posición p Finalmente, B 3q1 2p.j. Este número tiene un 1 a la derecha j de cada una de las zonas: SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 121] ---
+Supongamos el problema de tripletas con: W {w ,w ,w },X {x ,x ,x },Y {y ,y ,y } y las tripletas (w ,x ,y ),(w ,x ,y ),(w ,x ,y ),(w ,x ,y ),(w ,x ,y ). SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 122] ---
+Supongamos el problema de tripletas con: W {w ,w ,w },X {x ,x ,x },Y {y ,y ,y } y las tripletas (w ,x ,y ),(w ,x ,y ),(w ,x ,y ),(w ,x ,y ),(w ,x ,y ). Construimos el siguiente problema de la SUMA: el número de tripletas es k 5, y p[log(k)]13. Hay un individuo para cada tripleta definido por su peso (se supone un orden w ,w ,w ,x ,x ,x ,y ,y ,y ): 1 000 001 000 001 000 000 000 000 001 (w ,x ,y ) 2 000 001 000 000 001 000 000 001 000 (w ,x ,y ) 3 000 000 001 000 001 000 001 000 000 (w ,x ,y ) 4 000 000 001 000 000 001 000 001 000 (w ,x ,y ) 5 001 000 000 000 000 001 000 001 000 (w ,x ,y ) y B 001 001 001 001 001 001 001 001 001. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 123] ---
+Las tripletas 1, 3, 5: (w ,x ,y ),(w ,x ,y ),(w ,x ,y ) son una 1 000 001 000 001 000 000 000 000 001 (w ,x ,y ) 3 000 000 001 000 001 000 001 000 000 (w ,x ,y ) 5 001 000 000 000 000 001 000 001 000 (w ,x ,y ) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 124] ---
+Reducción ACTRI SUMA Como una consencuencia, para cada A {a ,...,a }, tenemos s(a)B aA si y solo si M{m : a A} es un recubrimiento por tripletas. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 125] ---
+Datos: Un conjunto C y un tamaño para cada uno de sus elementos: s :C N Pregunta: Determinar si existe un CC tal que se verifique: s(a) s(a) aC aCC Este es claramente un problema de NP: se eligen de forma no determinista los elementos de C y en tiempo polinómico se determina si los tamaños totales de los conjuntos C y CC son SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 126] ---
+C A{b ,b } (añadimos dos valores nuevos). Los tamaños de los nuevos elementos, b y b , son: s(b 1 ) k i1 s(a i ) s(b )2B (cid:0) (cid:1) Cada uno de estos pesos necesita, a lo más, (3pq) bits. Se pueden SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 127] ---
+El conjunto C es igual a {a ,...,a ,b ,b }. s(x) s(a )s(b )s(b ) xA i s(a )s(a )2B 2s(a )2B i1 i1 i Este conjunto se parte en dos mitades cuando cada una pesa: s(a )B i SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 128] ---
+Supongamos CC, tal que s(a) s(a) aA aAA Entonces cada una de estas sumas es k i1 s(a i )B. Uno de los conjuntos (supongamos que es A) debe de contener b y no b . La suma de los pesos de los elementos de C distintos de b tiene SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 129] ---
+Si el problema de la suma tiene solución con A tal que B, aA entonces C{b }A ya que la suma de los pesos de C es (s(a )B) i SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 130] ---
+Del libro de Garey-Johnson: SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 131] ---
+Subproblema significa que eligiendo unos parámetros concretos de SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 132] ---
+Ejemplo: Problema de la Mochila tamaño, s(u)N, y un valor v(u)N. Tenemos, además, dos números naturales: B (el tamaño máximo) y K (el valor mínimo). La pregunta es si existe un subconjunto de objetos UU, tal que s(u)B, v(u)K uU uA en el que s(u)v(u),u y B K (1/2) s(u). uU SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 133] ---
+Ejemplo: Problema de la Mochila tamaño, s(u)N, y un valor v(u)N. Tenemos, además, dos números naturales: B (el tamaño máximo) y K (el valor mínimo). La pregunta es si existe un subconjunto de objetos UU, tal que s(u)B, v(u)K uU uA en el que s(u)v(u),u y B K (1/2) s(u). uU REDUCCIÓN de PARTICIÓN(C,s) a MOCHILA(U,s,v,B,K): U C,ss,vs,B K (1/2) s(u) uC SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 134] ---
+Datos: Un conjunto A de tareas, cada tarea, aA, tiene una longitud l(a)N. Tenemos, además, un número de procesadores m y un tiempo límite, D N. Pregunta: ¿Existe una partición de A: {A ,...,A } en m max{ l(a) : 1i m}D aAi Si nos restringimos al caso m2 y D 1/2 l(a) obtenemos el aA SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 135] ---
+Cada elemento de un problema NP-completo Π se transforma en Ejemplo: Reducción de SAT a 3-SAT SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 136] ---
+Partición en Triángulos (PARTRI) Se parte de un grafo G (V,E) con un número de vértices V3q. de tamaño 3: V ,...,V , de tal manera que si V {V ,V ,V }, entonces los arcos i i[1] i[2] i[3] (V ,V ),(V ,V ),(V ,V )E (los subconjuntos de i[1] i[2] i[2] i[3] i[1] i[3] vértices son triángulos). reduciento 3-SET (cubrimiento por conjuntos de tamaño 3). SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 137] ---
+Reducción: 3-SET PARTRI Sea X con X3q y C una familia de subconjuntos de tres Construimos el grafo G (V,E) con un número de vértices V3q de la siguinete forma: todos los elementos de X serán vértices del grafo. ai[3] ai[9] Para cada conjunto c i ai[6] {x ,y ,z }C, añadimos siguiente subgrafo: ai[1] ai[2] ai[7] ai[8] ai[4] ai[5] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 138] ---
+los subgrafos de G: ai[3] ai[9] ai[6] ai[1] ai[2] ai[7] ai[8] ai[4] ai[5] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 139] ---
+los subgrafos de G: ai[3] ai[9] ai[6] ai[1] ai[2] ai[7] ai[8] ai[4] ai[5] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 140] ---
+los subgrafos de G: ai[3] ai[9] ai[6] ai[1] ai[2] ai[7] ai[8] ai[4] ai[5] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 141] ---
+los subgrafos de G: ai[3] ai[9] ai[6] ai[1] ai[2] ai[7] ai[8] ai[4] ai[5] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 142] ---
+los subgrafos de G: ai[3] ai[9] ai[3] ai[9] ai[6] ai[6] ai[1] ai[2] ai[7] aai[i8[1]] ai[2] ai[7] ai[ ai[4] ai[5] ai[4] ai[5] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 143] ---
+los subgrafos de G: ai[3] ai[9] ai[3] ai[9] ai[6] ai[6] ai[1] ai[2] ai[7] aai[i8[1]] ai[2] ai[7] ai[ ai[4] ai[5] ai[4] ai[5] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 144] ---
+los subgrafos de G: ai[3] ai[9] ai[3] ai[9] ai[6] ai[6] ai[1] ai[2] ai[7] aai[i8[1]] ai[2] ai[7] ai[ ai[4] ai[5] ai[4] ai[5] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 145] ---
+los subgrafos de G: ai[3] ai[9] ai[3] ai[9] ai[6] ai[6] ai[1] ai[2] ai[7] aai[i8[1]] ai[2] ai[7] ai[ ai[4] ai[5] ai[4] ai[5] SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 146] ---
+los subgrafos de G: ai[3] ai[9] ai[3] ai[9] ai[6] ai[6] ai[1] ai[2] ai[7] aai[i8[1]] ai[2] ai[7] ai[ ai[4] ai[5] ai[4] ai[5] La primera corresponde al caso en que {x ,y ,z } está en el cubrimiento C, la segunda al caso en el que no está. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 147] ---
+transforman los elementos de Π, se añaden algunos elementos Ejemplo: La reducción del cubrimiento por tripletas al problema de la partición: ACTRI PARTICION. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 148] ---
+Conjunto Mínimo de Tests (CMT) Datos: Un conjunto finito A (posibles diagnósticos), una familia C de subconjuntos de A (posibles tests) y un entero J N que Pregunta: ¿Existe una subfamilia de test CC con CJ y tal que para cada par de elementos distintos a ,a A, existe un test c C que contiene uno y sólo uno de los elementos del par (un elemento, por ejemplo, a está en c y el otro fuera)? SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 149] ---
+Reducción: ACTRI a CMT de ACTRI con M W XY y WXYq. Hacemos AW XY {w ,x ,y } C {{w,x,y} : (w,x,y)M}{W {w },X{x }} J q SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 150] ---
+Distintas componentes del problema a reducir Π se transforman en Ejemplos: SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 151] ---
+Un problema Π se reduce Turing a Π lo que se representa como Π Π algoritmo que puede llamar a una función que resuelve Π contando visto de reducibilidad espacio logarítmica: Si Π se reduce a Π, SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 152] ---
+NP-completo Π que se puede reducir (Turing) a Π: Π Π P NP. una dificultad similar a los NP-completos (existe reducción Turing entre ambos): Clase Co-NP: Complementarios de los problemas de NP Clase FNP: Problemas que buscan una solución, cuando saber SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 153] ---
+CoNP {L : LNP} válidas (se satisfacen para todas las asignaciones de valores de verdad). problema si TODAS las opciones responden SI: Si la respuesta es positiva TODAS las opciones acaba en SI; si la respuesta es SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 154] ---
+L es NP Completo L es CoNP Completo Si un problema CoNP completo está en NP, entonces CoNP NP. Si P NP, entonces CoNP NP SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 155] ---
+SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 156] ---
+Un problema P(x) con entrada x A está en NP si y solo si existe una relación R en AA calculable en tiempo polinómico y un polinomio p(n) tal que P(x)Si y A con yp(x), R(x,y) verificar en tiempo polinómio (de forma eficiente). Al algoritmo que Un problema P(x) está en CoNP si y solo si existe una relación R en AA calculable en tiempo polinómico y un polinomio p(n) tal que P(x)Si y A con yp(x), R(x,y) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 157] ---
+Un número p 1 es primo si y solo si existe un número 1r p tal que rp1 1 mod p y, además, r p 61 mod p, para todos los divisores primos q de p1. Teorema: Teorema de Pratt que rp11 mod p y que además verificase r p q 1 61 mod p, para todos los divisores primos q de p1. La comprobación de que rp1 1 mod p se puede hacer en tiempo polinómico en función de la longitud de p, que es de orden l log(p): Para calcular 3 rp1, se calculan r2,r4,...,r2l . Esto tiene un orden de O(l3 ). r por sí solo no es un certificado: 202111 mod 21 y 21 no es primo SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 158] ---
+El certificado tiene que adjuntar todos los divisores primos de p1. Es decir constará, en principio de r y una lista de divisores de p 1:(q ,...,q ). El comprobar que la lista es completa se hace por divisiones sucesivas dep1entreestosnúmerosycomprobando que Nos queda una cuestión, ¿cómo sabemos que los números (q ,...,q ) son primos? Pues dando certificados para ellos. Excepto El certificado sería una estructura recursiva: un certificado del número p sería r y una lista de divisores completa de p 1: (q ,...,q ), y certificados de primalidad para cada uno de ellos. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 159] ---
+Cert(67) ((67: 2 (2, 3, 11)), (3: 2 (2)), (11: 8 (2,5)), (5: 3 (2))) La longitud del certificado es de orden log2(p). La longitud de un número y su lista es de orden log(p). El número de listas es de orden log(p). SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 160] ---
+Sea A un alfabeto y R una relación en AA, el problema de búsqueda P(x) asociado a esta relación consiste en dado un ejemplo x A, calcular y tal que R(x,y) si {z : R(x,z)1}6 0/ P(x) ε si {z : R(x,z)1}0/ (cid:26) Dado un grafo calcular un circuito hamiltoniano (si este existe) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 161] ---
+Un problema P(x) con entrada x A está en NP si y solo si existe una relación R en AA calculable en tiempo polinómico y un polinomio p(n) tal que P(x)Si y A con yp(x), R(x,y) Un problema P(x) está en FNP si y solo si está asociado a una relación R decidible en tiempo polinómico y tal que si R(x,y)1, entonces yp(x) para un polinomio p: y tal que R(x,y) si {z : R(x,z)1}6 0/ P(x) ε si {z : R(x,z)1}0/ (cid:26) SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 162] ---
+FP: La clase de problemas de funciones de FNP tales que existe FNPT: La clase de los problema de FNP totales. Si para todo x existe un y con yp(x) tal que R(x,y) ppk1.pk2.....pkm SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 163] ---
+Un problema de funciones Π se reduce a un problema Π si y solo si, para toda cadena x y z ocurre lo siguiente: Si x es un ejemplo de Π entonces R(x) es un ejemplo de Π. Además si z es una solución correcta de R(x) entonces S(z) es una solución correcta de x. Un problema FNP-completo: FSAT SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 164] ---
+NP P si y solo si FNP FP La demostraciónes muy sencilla: si FNPFP entonceses inmediatoque NP P. Para la implicación inversa, supongamos que NP P, entonces la consis- Ahora,vamosaencontrarunaasignación(siexiste)entiempopolinómico. verdadero (todas las cláusulas con x se eliminan y en aquellas en las que aparezca x se elimina este literal) y C2 que es C suponiendo x SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 165] ---
+SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 166] ---
+circuito óptimo: el valor de distancia más grande, multiplicado Después realizando una búsqueda binaria en el intervalo [0,R] el valor del circuito óptimo: K. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 167] ---
+El Viajante de Comercio (Cont.) A continuación para cada par de ciudades se hace lo siguiente: presupuesto K e incrementando el coste de c a c1. óptimo. Entonces se deja el coste a c1 y se continúa. c1, puede que no se obtenga el óptimo, ya que si hay dos circuitos SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 168] ---
+R(x,y). Es decir, el problema de decisión no es difícil: siempre tiene una SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 169] ---
+Datos: Un grafo (V,E) y un peso w (que puede ser positivo o negativo para cada arco). Un estado es una aplicación s :V {1,1} (-1 , 1 ). s(i). s(j).w(i,j) (i,j)E Solución: Un estado s en el que todos los nodos sean felices. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 170] ---
+Φ(s) s(i)s(j)w(i,j) (i,j)E s(i). s(j).w(i,j)δ (i,j)E Sea el estado s igual que s, excepto que s(i)s(i). Entonces Φ(s)Φ(s)2δ. SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 171] ---
+Φ SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 172] ---
+Φ Cambiamos un nodo infeliz: Φ SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr4.pdf, Página: 173] ---
+SerafínMoral Tema4: NP-completitud
+
+--- [Fuente: tr5redu.pdf, Página: 0] ---
+Tema 5: Complejidad de Problemas de SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 1] ---
+Análisisde problemas:cubrimientoporvértices, viajante SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 2] ---
+G.Ausiello,P.Creszendietal. (1999) Complexityand http://www.nada.kth.se/theory/compendium SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 3] ---
+ProblemadeOptimización (minimización) factibles F(x) . s F(x) tenemosunafunción C(s) queevalúael coste de Elproblemaesencontarunelemento s talque C(s ) min C(s) sF(x) Sisólo se trata decalcular C(s ), tendremosla versión de SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 4] ---
+Datos:ungrafo G no dirigido. Solucionesfactibles F(G): conjuntodelos cubrimientos Coste deunasolución factible A: su númerode vértices. SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 5] ---
+ProblemasdeOptimización:Maximización factibles F(x) . s F(x) tenemosunafunción B(s) queevalúael beneficio Elproblemaesencontarunelemento s talque B(s ) max sF(x) B(s) SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 6] ---
+Turinga los problemasde decisión asociados(ver la temadelcálculo defunciones)cuandoelproblemade diferentescuandointentamosaproximarlos: unosnose puedenaproximarcon ningúnerror;otros se pueden pequeños;y otrosse puedenaproximarcon errores SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 7] ---
+Razón de Eficacia (maximización) entradax tiene unóptimoOPT(x)yALG un algoritmo factible ALG(x)con uncoste (beneficio)de C(ALG(x)) (B(ALG(x))). Razónde eficacia (maximización) OPT(x) δ B(ALG(x)) SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 8] ---
+Razón de Eficacia (minimización) Razónde eficacia (minimización) C(ALG(x)) δ OPT(x) SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 9] ---
+UmbraldeAproximación: Ínfimo dela razón deeficacia 1 Umbral SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 10] ---
+aproximaciónsea infinito (no hayalgoritmospolinómicos con unarazónde eficacia δ). SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 11] ---
+sea uncubrimiento para G (V,E). Algoritmo Aproximado: C Mientrashaya aristas en G Elegirunnodode G congradomaximo Añadirelnodoa C Borrarde G ese nodoy todossusenlaces Elerrorpuedellegara serde orden log(n). SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 12] ---
+SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 13] ---
+c 5 a guiente procedimiento: Para i desde 2 a (unomenosquelosnodosdelcentro)Sede- Razón 13/62.Puedellegara log(n). SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 14] ---
+Algoritmo 2-Aproximado: C Mientrashaya aristas en G Elegirunaarista cualquierade G Añadirsus dosextremosa C Borrarde G losdosnodosy todassus aristas Este es unalgoritmo 2-aproximado: todaslas aristas tienen con δ 1.1659. SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 15] ---
+El problema del Corte Máximo: CM Datos: Ungrafo no dirigido G (V,E). Problema: Partir V endosconjuntos S y V S de tal V S. SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 16] ---
+El problema del Corte Máximo: CM Datos: Ungrafo no dirigido G (V,E). Problema: Partir V endosconjuntos S y V S de tal V S. SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 17] ---
+mismo:estosarcos se puedenquitarya quenoestán nuncaen arc(x,A): elnúmerodearcos queunenv con A. Comenzamoscon unconjunto S arbitrario Mientras S cambie Para cadavertice v delgrafo Sielvertice esta en S Siarc(v,V S) arc(v,S) Eliminarv de S Sielvertice no esta en S Siarc(v,V S) arc(v,S) Añadirv a S Este algoritmo espolinómico,ya quedacomo máximo E SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 18] ---
+Sea e , 1 i j 4 elnúmerodearcos entre V y V. son menosquelosquevan a V y V : x V ,arc(x ,V )arc(x ,V ) arc(x ,V )arc(x ,V ). obtenemos:2e e e e y, portanto,e e e . SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 19] ---
+e e e , e e e , e e e , e e e e e e e e e Tambiénes obvioquee e e e e e . Sumando,las dosúltimas desigualdadesobtenemos: e e e e 2.(e e e e ) obtienela mitad dearcosdelóptimo:Larazónde aproximación SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 20] ---
+Satisfacción Máxima: K-GMAXSAT DATOS: Tenemosn variablesp ,...,p y m fórmulas booleanas: {φ ,...,φ } talquecadaunade ellastiene,a lo Problema: Queremosencontrarunaasignacióndevalores SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 21] ---
+calculamosla p robabilidaddeque φ sea cierta: P(φ) P(Φ) P(φ) Xi SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 22] ---
+P(Φ)1/2(P(Φ[x verdadero])P(Φ[x falso])) donde Φ[x verdadero], Φ[x falso]sonlosconjuntosde substituyendo x porverdadero(x falso)y x porfalso(x verdadero)respectivamente. Elegimos x verdaderosi P(Φ[x verdadero])P(Φ[x falso])y x falsoencaso variablescon Φ[x verdadero]ysilohacemosfalso trabajamoscon Φ[x falso]. SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 23] ---
+Num.Esp.13/411/23/47/81/2163/ V, rq, V, s qs, rsq, s, V pq, prq, p, ps qs, rsq, s, rps Num.Esp.3/47/81/23/43/47/81/27/ 57/ q, V, F, V qs, rsq, s, rs Num.Esp.1/21013/47/81/23/453/ SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 24] ---
+Num.Esp.13/411/23/47/81/2163/ V, rq, V, s qs, rsq, s, V pq, prq, p, ps qs, rsq, s, rps Num.Esp.3/47/81/23/43/47/81/27/ 57/ q, V, F, V qs, rsq, s, rs Num.Esp.1/21013/47/81/23/453/ SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 25] ---
+Cuandollegamosalfinal(todaslasvariablestienensu valordeverdad),elnumeroesperadoeselnúmeroexacto original P(Φ). fórmulas φ paralasque P(φ) 0,lo quedenotamos como {φ : P(φ) 0}. SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 26] ---
+Larazóndeaproximaciónes: OPT(x) {φ : P(φ)0} APROX(x) APROX(x) {φ : P(φ)0} P(φ )...P(φ ) mın{P(φ ) : P(φ )0} Esteesunalgoritmoδ-aproximadocon δ 1 . mın{P(φi):P(φi)0} δ 2k. Paracláusulascon k literales distintoses δ 1 . 1(2k) SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 27] ---
+Si P6NP elproblemadelviajantede comercionnotiene un paraelproblemadelviajante decomercio ( δ ). Entonces, Sea G (V,E) ungrafo, entoncesconstruimosun problema 1 si (i,j) E d(i,j) (cid:26) V.δ si (i,j) 6 E SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 28] ---
+Sielalgoritmoencuentrauncircuitodecoste V,existeuncircuito Sielalgoritmoaproximadonoencuentrauncircuitodecoste V, devolveráuncircuitodecostemayorde V.δ,entoncescomo δ Optimo V Comoconsecuencia,OptimoVyelóptimotieneunarcoqueno SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 29] ---
+Pesos: w ,...,w Valores: v ,...,v Pesolímite: W Problema: Encontrar S {1,...,n} talque w W y iS i iS v i seamáximo. P Podemossuponerquetodoobjetotieneunpeso w W (todoslos objetoscabenenla mochila).Siun objetonocabe, SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 30] ---
+Pesos: w ,...,w Valores: v ,...,v Pesolímite: W Problema: Encontrar S {1,...,n} talque w W y iS i iS v i seamáximo. P Podemossuponerquetodoobjetotieneunpeso w W (todoslos objetoscabenenla mochila).Siun objetonocabe, SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 31] ---
+Sea V max{v } Para i 0,1,...,n y 0 v nV calculamos: W(i,v): Mínimopeso quese puedeconseguireligiendoitems Se calcula con: W(i 1,v) mın{W(i,v),W(i,v v )w } i1 i SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 32] ---
+Para i 0,1,...,n y 0 v nV calculamos: W(i,v): Mínimopeso quese puedeconseguireligiendoitems Se calcula con: W(i 1,v) mın{W(i,v),W(i,v v )w } i1 i Complejidad O(n2V).Es Pseudo-polinómico(exponencialen función dela longituddeV). Cuandose hacalculado W(n,v) esfácil calcularelóptimo: Comparamos,desde i nV hasta i 0 losvalores W(n,i) con ellímite W. Elprimer i para elque W(n,i) W esel SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 33] ---
+Dadounejemplo I (w ,...,w ,W,v ,...,v ) consideramos I (w,...,w ,W,v ,...,v ) donde v 2b v i . (Los b bits men(cid:2)os(cid:3)significativos se reemplazanpor0). (cid:16) (cid:17) SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 34] ---
+b log( (δ1).V ) . Sea h S elconjunt i oóptimodelproblemaoriginaly S elque V(S) v elvalorconseguidocon elalgoritmo óptimoy iS i V(S ) P iS SupondremosqueV(S ) V (como todoslosobjetoscaben, mayorvalor). Tenemosque: V(S) v V(S ) v v v iS i iS i iS i iS i iS (v iP2b) ( iS v i )Pn.2b V(PS)n.2b P SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 35] ---
+V(S) V(S ) V(S)n.2b Sib log( (δ1).V ) ,y sielvalorde nuestroalgoritmo aproximadoes,almenos, V (esto ocurre si todoslositems cabenenla mochila)tenemosque V(S) V(S)n2b V(S)n(δ1)V V(S)n(δ1)V(S ) n n V(S) V(S) V(S) V(S) 1 V.(δ1) δ , quepara b log( (δ1).V ) , se (cid:16) (cid:17) h i convierte en O(n3/(δ1)). SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 36] ---
+δ 1 y cadaejemplo x de Π, devuelveunaaproximaciónde x (elpolinomiopuededependerde δ). en (1/(δ1)),se dice quees unesquemade aproximación SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 37] ---
+Si existe un algoritmo δ -aproximado polinómico con δ SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 38] ---
+cumplenlassiguientescondiciones: y q(x), y ademáspara cada y q(x) esdecidible Ejemplo: Elcubrimiento mínimoporvértices. SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 39] ---
+Ejemplo: Ladistancia mínima engrafos. SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 40] ---
+Optimización Decisión Dadounproblemade optimización(minimización o maximización), siemprepodemosasociarle unproblemade decisión:porejemplopara unproblemade minización,se da SiP 6NP entoncesPO 6NPO. SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 41] ---
+Definición:ClaseAPX admitenunalgoritmo δ-aproximadopolinómicopara δ . Ejemplo:ProblemasenAPX Ejemplo:Problemasquenoestán enAPX Si N6 NP,entonces APX6 NPO SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 42] ---
+Definición:ClaseAPX admitenunalgoritmo δ-aproximadopolinómicopara δ . Ejemplo:ProblemasenAPX Ejemplo:Problemasquenoestán enAPX Si N6 NP,entonces APX6 NPO SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 43] ---
+Definición:ClaseAPX admitenunalgoritmo δ-aproximadopolinómicopara δ . Ejemplo:ProblemasenAPX Ejemplo:Problemasquenoestán enAPX Si N6 NP,entonces APX6 NPO SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 44] ---
+Definición:ClaseAPX admitenunalgoritmo δ-aproximadopolinómicopara δ . Ejemplo:ProblemasenAPX Ejemplo:Problemasquenoestán enAPX Si N6 NP,entonces APX6 NPO SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 45] ---
+Ejemplo:Un problemadePTAS Ejemplo:ProblemasdeAPX queno está enPTAS(si P6 NP) SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 46] ---
+Definición:Problemascon unesquemadeaproximación polinómicototal(FPTAS) δ 1,elalgoritmo devuelveparala entrada (x,δ) unasolución δ-aproximada queespolinómicoen x y (1/(δ1)). SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 47] ---
+Definición:Problemasacotadospolinómicamente c(x,y) p(x) donde c(x,y) eselcoste dela solución y. SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 48] ---
+Si P6 NP entonces PTAS6 FPTAS en PTAS FPTAS. SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 49] ---
+estructural combinatoria:no haynúmeros,sólo ungrafo programacióndinámicaen tiempo O(n2p ) donde p tiempoquedependepolinómicamentede x y delentero SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 50] ---
+problema c (x) verifica: c (x) p(x,max(x)) donde max(x)eselenteromayorqueapareceen x,entonces p(x,max (x)) δ p(x,max (x)) SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 51] ---
+SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 52] ---
+Existe unconcepto dereducción(L-reducción paraproblemas NPO). SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+
+--- [Fuente: tr5redu.pdf, Página: 53] ---
+Ejemplo:ProblemasNPO-completos gramaciónlineal {0,1}y elproblemadelviajante decomercio. Ejemplo:ProblemasAPX-completos SerafínMoral Tema5:ComplejidaddeProblemasdeOptimizaciónAproximados
+

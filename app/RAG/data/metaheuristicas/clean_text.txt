@@ -1,0 +1,702 @@
+--- [Fuente: Guion_P1a_LocalGreedy_MDD_MHs_2024-25.pdf, Página: 0] ---
+Diferencial (MDD)
+
+--- [Fuente: Guion_P1a_LocalGreedy_MDD_MHs_2024-25.pdf, Página: 1] ---
+(MDD) descrito en las transparencias del Seminario 2. Para ello, se requerirá que el estudiante adapte los siguientes algoritmos a dicho problema: Algoritmos de Búsqueda Local (BL). La práctica se evalúa sobre un total de 2 puntos, distribuidos de la siguiente forma: BL (1 puntos). Random (0.5 puntos). Greedy (0.5 puntos). La fecha límite de entrega será el el martes 1 de abril de 2025 antes de las 23:55 horas. La El problema de la mínima dispersión diferencial (en inglés, minimum differential dispersion problem, MDD) es un problema de optimización combinatoria consistente en seleccionar un subconjunto M de m elementos (Mm) de un conjunto inicial N de n elementos (con nm) de forma que se minimice la dispersión entre los elementos escogidos. El MDD se puede formular como: Minimizar Max xiM d ijMin xiM d ij con M N,Mm jM jM donde: MDPLIB (https://grafo.etsii.urjc.es/optsicom/mdp/), todas pertenecientes al grupo GDK con distancias aleatorias: 50 del grupo GDK-b con distancias reales con, n entre {25, 50, 75, 100, 125, 150}, y m entre 2 y 45 (GDK-bGKD-b_1_n25_m2.txt a GKD-b_50_n150_m45.txt),
+
+--- [Fuente: Guion_P1a_LocalGreedy_MDD_MHs_2024-25.pdf, Página: 2] ---
+incluye las características (nombre, tamaño y coste de la mejor solución conocida) de las instancias incluido también en las dos localizaciones del espacio de la asignatura (PRADO y web externa) El formato de los ficheros es el siguiente: n(n-1)/2 líneasconelformatoi j d (i,j{0,...,n-1})querecogenelcontenidodelamatriz Ejemplo (GKD-b_50_n150_m45): de elementos seleccionados. Se empleará el movimiento de intercambio Int(Sel,i,j) que intercambia de forma distinta según dos opciones: En orden totalmente aleatorio (randLS). actual (heurLS).
+
+--- [Fuente: Guion_P1a_LocalGreedy_MDD_MHs_2024-25.pdf, Página: 3] ---
+resultado medio (y a veces la desviación típica) de todas las ejecuciones para representar con mayor se obtengan números en una secuencia lo suficientemente grande (es decir, que no se repitan los números en un margen razonable) como para considerarse aleatoria. En el espacio de PRADO se puede encontrar una implementación en lenguaje C de un generador aleatorio de buena calidad (random.hpp). semillas deben mantenerse en los distintos algoritmos (es decir, la semilla para la primera ejecución de la anterior, etc.). Por simplificar y facilitar la reproducibilidad, se usará la misma semilla para experimento y obtener los mismos resultados si fuera necesario (en caso contrario, los resultados podrían variar en cada ejecución del mismo algoritmo sobre el mismo caso del problema). distintos denominados Desv y Tiempo:
+
+--- [Fuente: Guion_P1a_LocalGreedy_MDD_MHs_2024-25.pdf, Página: 4] ---
+problema de minimización como el MDD: X ValorAlgoritmo MejorValor Desv 100 i i iCasos i obtienen soluciones de la misma calidad (tienen valores de Desv similares), uno será mejor que el en C (timer) para un cálculo adecuado del tiempo de ejecución de los algoritmos metaheurísticos. elementos seleccionados. Se diseñará una tabla para cada algoritmo (Greedy, LSrandom, LSheur)
+
+--- [Fuente: Guion_P1a_LocalGreedy_MDD_MHs_2024-25.pdf, Página: 5] ---
+Tabla 1: Resultados obtenidos por el Algoritmo X en el MDD
+
+--- [Fuente: Guion_P1a_LocalGreedy_MDD_MHs_2024-25.pdf, Página: 6] ---
+Tabla 2: Resultados globales por Tamaño en el MDD Tabla 3: Resultados globales totales en el MDD incluir, al menos, el siguiente contenido: a) Portadaconelnúmeroytítulodelapráctica(conelnombredelproblema),elcursoacadémico, b) Índice del contenido de la documentación con la numeración de las páginas. c) Breve descripción/formulación del problema (máximo 1 página). Podrá incluirse el mismo d) Breve descripción de la aplicación de los algoritmos empleados al problema (máximo páginas): Todas las consideraciones comunes a los distintos algoritmos se describirán en este (no código) de la función objetivo y los operadores comunes. e) Descripción en pseudocódigo de la estructura del método de búsqueda y de todas forzosamente reflejar la implementación/ el desarrollo realizados y no ser una Para esta primera práctica, se incluirán al menos las descripciones en pseudocódigo de:
+
+--- [Fuente: Guion_P1a_LocalGreedy_MDD_MHs_2024-25.pdf, Página: 7] ---
+f) Breve explicación de la estructura del código de la práctica, incluyendo un pequeño pueda compilarlo (usando un sistema automático como make o similar) y cómo g) Experimentos y análisis de resultados: consideradosenlasejecucionesdecadaalgoritmo(incluyendo las semillas utilizadas). Análisis de resultados. El análisis deberá estar orientado a justificar (según el compor- tamiento de cada algoritmo) los resultados obtenidos en lugar de realizar una mera lectura de las tablas. Se valorará la inclusión de otros elementos de comparación tales h) Referencias bibliográficas u otro tipo de material distinto del proporcionado en la asignatura que se haya consultado para realizar la práctica (en caso de haberlo hecho). construir los ejecutables según el entorno de desarrollo empleado (tales como .prj, makefile, .ide, etc.). En este directorio se adjuntará también un pequeño fichero de texto de nombre LEEME etiquetado con los apellidos y nombre del estudiante (Ej. Pérez Pérez Manuel.zip). Este fichero será algoritmo y su análisis. La inclusión de trabajo voluntario (desarrollo de variantes adicionales, algoritmo,análisisextendido,etc.)podrá incrementar la nota finalporencimadelapuntuación En caso de que el comportamiento del algoritmo en la versión implementada/ desarro- requeridas, se podría reducir hasta en un 50 la calificación del algoritmo correspon-
+
+--- [Fuente: Guion_P1a_LocalGreedy_SNIMP_MHs_2024-25.pdf, Página: 0] ---
+En Redes Sociales (SNIMP)
+
+--- [Fuente: Guion_P1a_LocalGreedy_SNIMP_MHs_2024-25.pdf, Página: 1] ---
+(SNIMP) descrito en las transparencias del Seminario 2. Para ello, se requerirá que el estudiante adapte los siguientes algoritmos a dicho problema: Algoritmos de Búsqueda Local (BL). La práctica se evalúa sobre un total de 2 puntos, distribuidos de la siguiente forma: BL (1 puntos). Random (0.5 puntos). Greedy (0.5 puntos). La fecha límite de entrega será el el martes 1 de abril de 2025 antes de las 23:55 horas. La Sociales (SNIMP) Elproblemadela(eninglés,social network influece maximization problem,SNIMP)esunproblema deoptimizacióncombinatoriaconsistenteenseleccionarunsubconjuntoM dem elementos(Mm) de un conjunto inicial N de n elementos (con nm) de forma que se maximice el conjunto de nodos information. El SNIMP se puede formular como: S maxICM(G,S,p,ev) sS donde: ev es el número de iteraciones usadas en la simulación (usando una simulación de Montecarlo)
+
+--- [Fuente: Guion_P1a_LocalGreedy_SNIMP_MHs_2024-25.pdf, Página: 2] ---
+el modelo más simple, el modelo independiente (en inglés, Independent Cascade Model, ICM). Visualmente se puede mostrar el seudocódigo: en donde: A es el conjunto de nodos infectados sobre el que se inician los contagios/influencias. A es el total de nodos infectados. Portanto,elprocesoeselsiguiente:Partiendo de los nodos indicados en la solución, se inicia el algoritmo ICM usando p0.01 y env10. Dado que es un proceso no determinístico, los números aleatorios de la siguiente manera: Al principio se consultará el estado actual (semilla), luego se le asignará un valor concreto, como 35, y al terminar de Large Network Dataset Collection disponibles en https://snap.stanford.edu/data/index.html. Tabla 1: Ficheros de redes usadas Nombre Nodo Enlaces web ca-GrQc 5242 14496 https://snap.stanford.edu/data/ca-GrQc.html p2p-Gnutella05 8846 31839 https://snap.stanford.edu/data/p2p-Gnutella05.html p2p-Gnutella08 6301 20777 https://snap.stanford.edu/data/p2p-Gnutella08.html p2p-Gnutella25 22687 54705 https://snap.stanford.edu/data/p2p-Gnutella25.html En particular, se han usado un caso de autores en una revista online (General Relativity and Quantum Cosmology), y conexiones en una red social muy poco usada (Gnutella) en tres días
+
+--- [Fuente: Guion_P1a_LocalGreedy_SNIMP_MHs_2024-25.pdf, Página: 3] ---
+distintos (5, 8, y 25 de Agosto de 2002). La tabla 1 muestra sus características. total de evaluaciones se ha mantenido reducido que en otras prácticas (a 1000). El formato de los ficheros es el siguiente: Un par de líneas con comentarios iniciadas con . Una línea indicando el número de nodos y conexiones: Ejemplo: Nodes: 5242 Edges: 28980 La línea con el formato, todas en este caso siguen el mismo: FromNodeId ToNodeId por lo Líneas con los datos de conexión, indica primero el nodo de salida (numerado desde 0), un Ejemplo (ca-GrQc.txt) Directed graph (each unordered pair of nodes is saved once): CA-GrQc.txt Collaboration network of Arxiv General Relativity category (there is an edge Nodes: 5242 Edges: 28980 FromNodeId ToNodeId Formalmente se puede definir la función heurística de un nodo u (g(u)) como: g (u)d d vNu
+
+--- [Fuente: Guion_P1a_LocalGreedy_SNIMP_MHs_2024-25.pdf, Página: 4] ---
+en donde d(u)N y N {w V :(u,w)E} siendo E el conjunto de conexiones. conjunto de elementos seleccionados. Se empleará el movimiento de intercambio Int(Sel,i,j) que hará el recorrido del entorno de forma totalmente aleatoria. Se aplicarán dos criterios de parada: Hasta llegar a 1000 evaluaciones (LSall). Hasta llegar a 1000 evaluaciones, o sin mejoras en 20 evaluaciones (BLsmall). resultado medio (y a veces la desviación típica) de todas las ejecuciones para representar con mayor se obtengan números en una secuencia lo suficientemente grande (es decir, que no se repitan los números en un margen razonable) como para considerarse aleatoria. En el espacio de PRADO se puede encontrar una implementación en lenguaje C de un generador aleatorio de buena calidad (random.hpp). semillas deben mantenerse en los distintos algoritmos (es decir, la semilla para la primera ejecución
+
+--- [Fuente: Guion_P1a_LocalGreedy_SNIMP_MHs_2024-25.pdf, Página: 5] ---
+de la anterior, etc.). Por simplificar y facilitar la reproducibilidad, se usará la misma semilla para repetir el experimento y obtener los mismos resultados si fuera necesario (en caso contrario, los resultados podrían variar en cada ejecución del mismo algoritmo sobre el mismo caso del problema). de forma ordenada, y se generarán los números aleatorios de la siguiente manera: Al principio se consultará el estado actual (semilla), luego se le asignará un valor concreto, 35, y al terminar de de elementos seleccionados. Se diseñará una tabla para cada algoritmo (Greedy, LSall, LSsmall) Tabla 2: Formato de resultados para el Algoritmo X Conjunto Fitness Tiempo (segs) Evaluaciones en la tabla 3. Se incluirá su posición según el fitness (1 para el mejor, 2 para el segundo, ...). Tabla 3: Formato de resultados para el conjunto XXX Algoritmo Posición Fitness Tiempo (segs) Evaluaciones
+
+--- [Fuente: Guion_P1a_LocalGreedy_SNIMP_MHs_2024-25.pdf, Página: 6] ---
+Tabla 4: Tabla final de resultados Algoritmo Posición Promedia Tiempo Promedio (segs) Total evaluaciones incluir, al menos, el siguiente contenido: a) Portadaconelnúmeroytítulodelapráctica(conelnombredelproblema),elcursoacadémico, b) Índice del contenido de la documentación con la numeración de las páginas. c) Breve descripción/formulación del problema (máximo 1 página). Podrá incluirse el mismo d) Breve descripción de la aplicación de los algoritmos empleados al problema (máximo páginas): Todas las consideraciones comunes a los distintos algoritmos se describirán en este (no código) de la función objetivo y los operadores comunes. e) Descripción en pseudocódigo de la estructura del método de búsqueda y de todas forzosamente reflejar la implementación/ el desarrollo realizados y no ser una Para esta primera práctica, se incluirán al menos las descripciones en pseudocódigo de: f) Breve explicación de la estructura del código de la práctica, incluyendo un pequeño pueda compilarlo (usando un sistema automático como make o similar) y cómo g) Experimentos y análisis de resultados: consideradosenlasejecucionesdecadaalgoritmo(incluyendo las semillas utilizadas). Análisis de resultados. El análisis deberá estar orientado a justificar (según el compor- tamiento de cada algoritmo) los resultados obtenidos en lugar de realizar una mera lectura de las tablas. Se valorará la inclusión de otros elementos de comparación tales h) Referencias bibliográficas u otro tipo de material distinto del proporcionado en la asignatura que se haya consultado para realizar la práctica (en caso de haberlo hecho).
+
+--- [Fuente: Guion_P1a_LocalGreedy_SNIMP_MHs_2024-25.pdf, Página: 7] ---
+construir los ejecutables según el entorno de desarrollo empleado (tales como .prj, makefile, .ide, etc.). En este directorio se adjuntará también un pequeño fichero de texto de nombre LEEME etiquetado con los apellidos y nombre del estudiante (Ej. Pérez Pérez Manuel.zip). Este fichero será algoritmo y su análisis. La inclusión de trabajo voluntario (desarrollo de variantes adicionales, algoritmo,análisisextendido,etc.)podrá incrementar la nota finalporencimadelapuntuación En caso de que el comportamiento del algoritmo en la versión implementada/ desarro- requeridas, se podría reducir hasta en un 50 la calificación del algoritmo correspon-
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 0] ---
+metaheurísticas: Introducción: Optimización
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 1] ---
+1. Introducción: Optimización ¿Optimizar? Contexto científico: La optimización es el proceso de Nivel Empresarial: Reducir los costes. Mejorar la Experiencia del cliente.
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 2] ---
+1. Introducción: Optimización Problema de optimización: Encontrar el valor de unas variables de decisión (sujeto a restricciones)
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 3] ---
+1. Introducción: Optimización Problema de optimización (minimización): f(x): x X R El objetivo es encontrar x que verifique x X: f(x) f(x), x X Optimización combinatoria Variable discreta Un Problema de Optimización Combinatoria consiste en encontrar un objeto entre un conjunto finito (o al menos contable) de posibilidades Max{ g(x) } Min{ f(x) } con f(x) -g(x)
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 4] ---
+1. Introducción: Optimización Tipos de problemas de optimización (representación de una solución): Permutaciones (Problemas de ordenación) Binarios (Problemas de pertenencia) Enteros (Problemas de cardinalidad, asignación, selección) De optimización numérica (Optimización de funciones no lineales)
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 5] ---
+1. Introducción: Optimización Problemas de optimización fáciles de resolver: Lineales: función objetivo y restricciones lineales (método Simplex) Problemas de optimización difíciles de resolver (NP- duros):
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 6] ---
+Problemas de explosión combinatorios. Pocos modelos teóricos
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 7] ---
+Viajante Mochila Asignación Cuadrática Asignación Generalizada Problema de Máxima Diversidad Problemas de Mínima Dispersión Enrutamiento de vehículos Empaquetado en Cinta
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 8] ---
+Problema del Viajante de Comercio: Travelling Salesman Problema:
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 9] ---
+Definición Problema del Viajante de comercio, TSP:
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 10] ---
+¿Para qué sirve? Diseño chips: Rutas más cortas. Rutas aéreas: Entre aeropuestos. Reparto almacén: Optimizar entregas. Cableado (eléctrico): Recorrido mínimo.
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 11] ---
+Ciudades (N) Fuerza Bruta Algoritmo Held-Karp https://nbviewer.jupyter.org/url/norvig.com/ipython/ ¡Necesitamos buenos algoritmos y eficientes!
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 12] ---
+Problema de la mochila, Knapsack Problem:
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 13] ---
+Quadratic knapsack problem (KQP):
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 14] ---
+Quadratic knapsack problem (KQP):
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 15] ---
+Problema del enrutamiento de vehículos, VRP: conjunto de vehículos (con capacidad limitada) lo más pequeño posible tal a una serie de clientes (con demanda diferente) distribuidos
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 16] ---
+Problema de la asignación cuadrática, QAP: min ( ) QAP f d S Π ij S(i)S( j) N i1 j
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 17] ---
+Problema de la máxima diversidad, MDP:
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 18] ---
+Problema de la dispersión diferencial, MDD:
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 19] ---
+Utilidades de este problema: Diseño de Redes: minimizar la diferencia de grados entre Redes Sociales: Al reducir la diferencia de grados entre los Gestión de la red eléctrica: Optimizar la ubicación y
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 20] ---
+Problema del empaquetado en cinta, SPP:
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 21] ---
+Problema del cliqué máximo: Encontrar la mayor Problema del coloreado de grafos: Encontrar la mínima Problema del árbol de Steiner: Encontrar un árbol de coste Problemas de asignación: Dada una tabla de tareas y personas que pueden realizarlas (coste distinto), encontrar la
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 23] ---
+Fuente: A. Telikani, A. Tahmassebi, W. Banzhaf, y A. H. Gandomi, Evolutionary Machine Learning: A Survey, ACM Computing Surveys}, vol. 54, 8, 2022, doi: 10.1145/3467477
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 24] ---
+Ejemplo: Feature Selection
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 25] ---
+Ejemplo: Feature Selection
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 26] ---
+Ejemplo: Feature Selection Learning que use distancias (KNN). En vez de:
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 27] ---
+Metaheurísticas y Simulación
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 32] ---
+Diseño Aerodinámico Planificación de Rutas para Transporte de Mercancías Canalización automática Juegos Equilibrado de Líneas de Montaje en Nissan y otros Identificación Forense de Personas Desaparecidas
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 33] ---
+La disminución de la resistencia al avance es clave Se calcula resolviendo unas ecuaciones que simulan el comportamiento de un objeto sólido (el avión) en interacción con un fluido (el aire), según la Dinámica Computacional de Después se usan métodos de optimización para obtener la Los diseños prometedores mediante la simulación
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 34] ---
+Diseño Aerodinámico
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 35] ---
+En casos reales, cada ejecución puede requerir meses de Por ello, se han empleado los algoritmos evolutivos para esta Además, como optimizadores multiobjetivo, pueden optimizar varios criterios a la vez (velocidad, estabilidad o gasto de combustible, por ejemplo)
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 36] ---
+Hoy en día es difícil encontrar empresas que gestionen las El problema típico es diseñar las rutas más adecuadas de transporte/recogida de productos entre un almacén central y unos Su resolución de forma adecuada puede suponer ahorros muy
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 37] ---
+Los algoritmos de hormigas (AntRoute) son una herramienta
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 38] ---
+AntRoute planifica diariamente las rutas de reparto desde el supermercados, localizado en Suhr (AG), a toda Suiza Migros dispone de una flota de entre 150 y 200 vehículos con tres tamaños: camiones (capacidad de 17 palés), trailers (35 palés) y unidades tractoras (33 palés) Esto provoca restricciones de acceso a los almacenes de los supermercados, restricciones de uso de ciertas carreteras, Los repartos tienen de realizarse a horas específicas, todos ellos en un solo día (productos perecederos) y el último tiene que hacerse lo más lejos posible del almacén (servicios extra)
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 39] ---
+Por ejemplo, en un reparto de 52000 palés a 6800 clientes en un Los expertos de la empresa necesitaron tres horas Las soluciones de AntRoute fueron de mucha mejor calidad en aprovechamiento de los vehículos:
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 40] ---
+Trabajamos con empresa de ingeniería para optimizar canalización Se diseñó un modelo automático con criterios que había que
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 41] ---
+Problema real pero que se discretizó (ángulos fijos). Hablando con expertos, múltiples restricciones. Múltiples Objetivos: Reducir número de codos (cambios).
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 42] ---
+Aproximando cuadro
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 43] ---
+Optimizar una red para jugar
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 45] ---
+Objetivo: Crear mazos para Juego de
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 46] ---
+Aprendiendo a jugar
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 47] ---
+82 de victorias mejor solución. Segundo mejor sistema: 74 victorias competición.
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 48] ---
+La mayoría de los sistemas productivos actuales se basan en líneas de La producción de un ítem se divide en un conjunto de tareas que tienen Cada tarea necesita un tiempo dado (más un área de trabajo) y tiene El diseño (equilibrado) de la línea requiere agrupar de forma eficiente las
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 49] ---
+El parámetro clave es el tiempo de ciclo que indica el máximo tiempo Los objetivos del equilibrado son: agrupar las tareas en el menor número posible de estaciones de trabajo obtener la agrupación que minimiza el tiempo de ciclo
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 50] ---
+Los algoritmos de OCH se han aplicado con gran éxito al equilibrado de Trabajamos con la Cátedra Nissan de la UPC para resolver el problema Pathfinder:
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 51] ---
+Es un problema multiobjetivo con muchas restricciones fuertes y un espacio de búsqueda de gran dimensión: oportunidad para El objetivo es proporcionar al ingeniero de planta con diversas opciones de
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 52] ---
+Una solución a este problema (TSALBP) es una asociación de tareas a las A 20 C 12 A 16 C 11 A 24 C Hemos diseñado un algoritmo de Optimización de Colonias de Hormigas El rastro de feromona se asocia al par (tarea, estación)
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 53] ---
+Introducimos una filosofía multicolonia para obtener un mayor abanico de soluciones posibles: cada hormiga utiliza distintos umbrales de llenado Nuestra propuesta obtiene muy buenos resultados. El algoritmo de
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 54] ---
+Motor del Nissan Pathfinder: 747 piezas y 330 referencias en 6 versiones del motor diesel 378 operaciones de montaje (prueba rápida incluida) agrupadas en 79 operarios para un turno de 301 motores
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 55] ---
+TSALBP que mejora los resultados del algoritmo de OCH:
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 57] ---
+Distintos problemas de clasificación: médicos, plantas, Poyatos, J., Molina, D., Martinez, A. D., Del Ser, J., Herrera, F. (2023). EvoPruneDeepTL: An evolutionary pruning model for transfer learning based deep neural networks. Neural Networks, 158, 59-82. https://doi.org/10.1016/j.neunet.2022.10.
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 58] ---
+Distintos problemas de clasificación: médicos, plantas, Mejora un 5 de acierto (83-88, 93-98, ). Poyatos, J., Molina, D., Martinez, A. D., Del Ser, J., Herrera, F. (2023). EvoPruneDeepTL: An evolutionary pruning model for transfer learning based deep neural networks. Neural Networks, 158, 59-82. https://doi.org/10.1016/j.neunet.2022.10.
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 59] ---
+1.
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 61] ---
+La superposición craniofacial es una técnica de identificación forense basada en la comparación de un modelo del cráneo encontrado y una Proyectando uno sobre otro (solapamiento cráneo-cara), el antropólogo forense puede
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 64] ---
+craneofacial: obtener modelos 3D de cráneos (con algoritmos evolutivos, AEs) Diseño de métodos de registrado 3D/2D automáticos para el solapamiento cráneo-cara (con AEs y conjuntos fuzzy) en la decisión final de la identificación (con visión por ordenador y operadores fuzzy) Proyectos Plan Nacional IDI (2006-09, 2009-12, 2013-15, 2016-18, 19-21) y Excelencia Junta de Andalucía (2007-10, 2013-18, 2020-22). Patente MEPROCS (2012-14). Premios Internacionales
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 65] ---
+? ? Identificación {Positiva/negativa/ probable positiva/probable negativa/ indeterminada} ? RI 3D-2D: traslación,
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 66] ---
+Producto comercial: Skeleton-Id https://www.youtube.com/watch?v4p8Ufws8OJ
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 68] ---
+Algoritmos Meméticos con codificación real para el modelado 3D de cráneos. Representación de una solución a este problema: Eje Eje Eje t t t Eje (Eje , Eje ,Eje )
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 69] ---
+Entrada: vistas 3D Reconstrucción
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 70] ---
+Registrado de Imágenes (RI) Evolutivo
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 71] ---
+Solución final: escenario original replicado mediante RI 3D-2D
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 72] ---
+Solución final: escenario original replicado mediante RI 3D-2D
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 73] ---
+(Algoritmo Evolutivo con Codificación Real) f f Evaluación f Rotación {60,(0,1,0)} Traslación {2, 0, 1} f
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 74] ---
+Distancias entre landmarks cráneo-cara. Los puntos no casan Nuestro método incorpora información de esas distancias para obtener
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 75] ---
+Area deviation error: 34.70 Area deviation error: 13.23
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 76] ---
+Area deviation error: 32.64 Area deviation error: 15.84
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 77] ---
+Distintos entornos y lenguajes: Matlab (mayoritario),
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 78] ---
+4. Software de Metaheurísticas
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 79] ---
+Ejemplo para distintos lenguajes (hay muchos más): Java: Jblas C: Eigen, Armadillo Python: Numpy Rust: ndarray Julia, Matlab, R: en el propio lenguaje
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 80] ---
+emplear el entorno/lenguaje que se desee.
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 81] ---
+emplear el entorno/lenguaje que se desee. ¿Puedo elegir? Lenguaje bajo nivel: (C,Java, Rust) adecuados pero mejor Python: Cuidado si no se conoce cómo optimizar la función de fitness (uso de numpy/numba). Matlab: no recomendada, software libre compatible (Octave) lento y errores. Julia: Falta de conocimiento/experiencia.
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 82] ---
+jMetal (Java) ó jMetalPy PlatEMO (Python) Algoritmos Multi-objetivo. Muchos algoritmos. Fácil de usar, problemas Matlab.
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 83] ---
+ECJ, Java Jenetics, Java Optaplanner, Java
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 84] ---
+Inspyred, Python Pyswarms, Python Mealpy, Python
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 85] ---
+JuMP, Julia Optimization, Julia Metaheuristics, Julia Evolutionary, Julia
+
+--- [Fuente: Sem01-Problemas-MHs.pdf, Página: 86] ---
+ParaDisEO, C OptFrame, C Pagmo, C
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 0] ---
+1. Problema de la Mínima dispersión differencial (MDDP)
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 1] ---
+El Problema de Dispersión Diferencial, Minimum Differential Dispersion Problem (MDDP) es un problema de optimización compleja (es NP-completo), que solo con tamaño 50 implica más de El problema general consiste en seleccionar un subconjunto Sel de m elementos (Mm) de un conjunto inicial S de n elementos (obviamente, n m) de forma que se minimize la dispersión entre Además de los n elementos (e , i1,...,n) y el número de elementos a seleccionar m, se dispone de una matriz D(d ) de dimensión nn
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 2] ---
+Para el problema Min Differential Dispersion, con el que trabajaremos en prácticas, se busca lo siguiente: Las distancias entre pares de elementos se usan para formular el Esa formulación es poco eficiente. Se suele resolver como un problema
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 3] ---
+Para el problema Min Differential Dispersion, con el que trabajaremos en prácticas, se calcula la dispersión como: 1) Para cada punto elegido v se calcula Δ(v) como la suma de las 2) La dispersión de una solución, denotada como diff(S) se define como la diferencia entre los valores extremos: 3) El objetivo es minimizar dicha medida de dispersión:
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 4] ---
+Ejemplo de Aplicación: Tenemos n8 posibles localizaciones para colocar m4 farmacias. distancia parecida (mínima dispersión entre sí):
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 5] ---
+Ejemplo de Aplicación: La distancia entre los puntos del gráfico refleja la distancia entre las La matriz D contiene los valores de dichas distancias. En este ejemplo
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 6] ---
+Ejemplo de Aplicación: EJEMPLO DEL MODELO MIN-DIFF (Min-Diff) La dispersión entre los elementos escogidos es la máxima diferencia de las sumas de las distancias existentes entre ellos: Localizaciones seleccionadas: 1 14 30 25 32 32 40 50 x { 3, 4, 6, 8 } V(3)224022 V(4)221832 V(6)401847 V(8)223247 diff(x) 105 72
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 7] ---
+Ejemplo de Aplicación: EJEMPLO DEL MODELO MINDIFF (MinDiff) (2/3) La dispersión entre los elementos escogidos es la máxima diferencia de las sumas de las distancias existentes entre ellos: Sol 2: Localizaciones seleccionadas: 1 14 30 25 32 32 40 50 x { 1, 3, 6, 7 } V(1)303240 V(3)304030 V(6)324042 V(7)403042 diff(x) 114 100
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 8] ---
+Ejemplo de Aplicación: EJEMPLO DEL MODELO MAXMIN (MMDP) (3/3) La diversidad entre los elementos escogidos es el mínimo de las distancias existentes entre ellos: Sol 1: seleccionadas: Sol 2: seleccionadas: x { 3, 4, 6, 8 } x { 1, 3, 6, 7 } diff(x ) 33 diff(x )
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 9] ---
+Elegir localización de elementos públicos (farmacias, ) Selección de grupos homogéneos Identificación de redes densas Reparto equitativo Problemas de flujo Duarte, A, Sánchez-Oro, J., Resende, M.G.C, Glover, F, Martí, R (2015). Greedy randomized adaptive
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 10] ---
+Duarte, A, Sánchez-Oro, J., Resende, M.G.C, Glover, F, Martí, R (2015). Greedy randomized adaptive para resolver el problema es:
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 11] ---
+El algoritmo valora en cada caso cómo varía la dispersión al seleccionar cada nuevo elemento: El primer elemento seleccionado no está definido, puede ser Cada vez que se añade un nuevo elemento al conjunto de seleccionados Sel, se valora cuál incrementa menos (o reduce) la El proceso itera hasta seleccionar los m elementos deseados
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 12] ---
+ALGORITMO GREEDY:
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 13] ---
+El cálculo de g(u) se aplica de la siguiente manera: 1) Para cada elemento u no escogido: uV Sel,(u) d vSel 2) Luego para cada elemento v existente: vSel,(v)SumaAnterior(v)d 3) Una vez actualizado las sumas para cada elemento, se calcula: (u)max ((u),max (v)) (u)min((u),min (v)) max vSel min vSel 4) El cálculo final de g(u) es: g(u) (u) (u)
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 14] ---
+Búsquedas por Trayectorias Simples: Representación: Problema de selección: un conjunto Sel{s , , s } restricciones (ser un conjunto de tamaño m): No puede tener elementos repetidos Ha de contener exactamente m elementos El orden de los elementos no es relevante
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 15] ---
+Búsquedas por Trayectorias Simples: Operador de vecino de intercambio y su entorno: El entorno de Dada una solución (conjunto de elementos seleccionados) se escoge (Int(Sel,i,j)): Sel {s , , i, , s } Sel {s , , j, , s } Int(Sel,i,j) verifica las restricciones: si la solución original Sel es decir, del conjunto S-Sel, siempre genera una solución vecina Sel
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 16] ---
+Búsquedas por Trayectorias Simples: Su aplicación provoca que el tamaño del entorno sea demasiado grande (m!), m10 más de 3 millones combinaciones. La BL del Mejor del MDP explora todo el vecindario, las soluciones resultantes de los m(n-m) intercambios posibles, escoge el mejor Si no la hay, detiene la ejecución y devuelve la solución actual El método funciona bien pero es muy lento incluso para casos no demasiado grandes (n500) y usando un cálculo factorizado del coste z (Sel) para acelerar la ejecución (O(n)) Es recomendable utilizar una estrategia avanzada más eficiente
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 17] ---
+Duarte, A, Sánchez-Oro, J., Resende, M.G.C, Glover, F, Martí, R (2015). Greedy randomized adaptive Algoritmo de búsqueda local del primer mejor: en cuanto se genera una Se detiene la búsqueda cuando se ha explorado el vecindario completo sin obtener mejora (o tras un número fijo de evaluaciones) Se puede explorar el vecindario de forma inteligente: Se calcula la contribución de cada elemento seleccionado al coste de la solución actual (valor de la función objetivo z (Sel)) Se aplican primero los intercambios de elementos que menos contribuyen Se considera una factorización para calcular el coste de Sel a partir del movimiento aplicado. Además, se factoriza también el cálculo de la
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 18] ---
+Técnica que permite focalizar la BL en una zona del espacio de Reduce significativamente el tiempo de ejecución con una reducción muy pequeña de la eficacia de la BL del Mejor (incluso puede mejorarla en algunos problemas) Se basa en definir un orden de aplicación de los intercambios (exploración de los vecinos) en una BL del primer mejor En cada iteración, al cambiar un nodo u por el nodo v mode(Sel, u, v) mejor calcular la mejora definida como move_value(Sel, u, v)
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 19] ---
+En lugar de calcular el valor del movimiento Int(Sel,i,j) para todos los i el menor aporte (es decir, el valor v para el que se move_value(Sel, u, v) sea mínimo). Tras escoger el elemento a extraer, se prueban sucesivamente los intercambios por los elementos no seleccionados: Si se encuentra un movimiento de mejora, se aplica. Si no, se pasa al siguiente Si ningún movimiento del vecindario provoca mejora, se finaliza la ejecución y se
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 20] ---
+Para generar Sel, el operador de vecino Int(Sel,i,j) escoge un elemento seleccionado i y lo cambia por uno no seleccionado j: Sel {s , , i, , s } Sel Sel - {i} {j} Sel {s , , j, , s } No es necesario recalcular todas las distancias de la función objetivo: Al añadir un elemento, las distancias entre los que ya estaban en la solución se mantienen y basta Al eliminar un elemento, las distancias entre elementos que se quedan en la solución se Se calcula el nuevo coste de la solución original Sel como: Z (Sel, u, v) ( )z (Sel) max ((v),max (w)) min((v),min (w)) max wSel min wSel (v) d wSel,(w)anterior(w)d d wSel
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 21] ---
+El coste del movimiento (la diferencia de costes entre las dos soluciones) z (Sel,i,j) z (Sel) - z (Sel) se calcula factorizado. El cálculo original, implicaba calcular para cada uno de los m elementos la distancia al resto, por tanto era O(n²). De forma factorizada es sól O(n) Si z (Sel,i,j) es negativo (z (Sel,i,j)0), la solución vecina Sel es mejor que la actual Sel (es un problema de minimización) y se acepta. Si no, se descarta Podemos combinar fácilmente la factorización del coste con el cálculo de la contribución de los elementos para mejorar aún más la eficiencia: Las distancias del elemento eliminado equivalen directamente a la contribución de dicho El cálculo de las aportaciones de los elementos actualmente seleccionados también se puede elemento eliminado y sumar la del añadido:
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 22] ---
+BL-MDP: Factorización del Movimiento El coste z (Sel) de la nueva solución vecina es: z (Sel) z (Sel) z (Sel,i,j) Sólo es necesario calcularlo al final de la ejecución. Durante todo el Sel GENERA_VECINO(Sel); Hasta (z (Sel,i,j) 0) O (se ha generado E(Sel) al completo)
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 23] ---
+Existen distintos grupos de casos del problema para los que se conoce la Para el MDP, disponemos de cuatro grandes grupos de casos: Casos GKD (Glover, Kuo and Dhir, 1998): Entre otras, 20 matrices nn con distancias Euclideas calculadas a partir de puntos con r coordenadas (r{2, , 21}) aleatorias en [0,10]. n500 elementos y m Casos SOM (Silva, Ochi y Martins, 2004): Entre otras, 20 matrices nn con distancias enteras aleatorias en {0,9} con n{100, , 500} elementos y m{0.1n, ,0.4n}. P.ej. para n100 hay 4 casos con m10, 20, 30, Casos MDG (Duarte y Martí, 2007): Tipo a: 40 matrices nn con distancias enteras aleatorias en {0,10}: 20 con n500 y m50; y 20 con n2000 y m Tipo b: 40 matrices nn con distancias reales aleatorias en [0,1000]: 20 con n500 y m50; y 20 con n2000 y m Tipo c: 20 matrices nn con distancias enteras aleatorias en {0,1000}. n3000 y m{300,400,500,600}
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 24] ---
+Los casos están recopilados en la biblioteca MDPLib, accesible en la Web en la dirección siguiente: https://grafo.etsii.urjc.es/optsicom/mindiff/ En dicha dirección pueden encontrarse tanto los datos como los Además, están disponibles los resultados de un ejemplo de una
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 25] ---
+El formato de los ficheros de datos es un fichero de texto con la siguiente estructura: Al ser D una matriz simétrica, sólo se almacena la diagonal superior. El fichero contendrá n(n-1)/2 entradas, una por línea, con el siguiente formato: donde i, j{0, , n-1} son respectivamente la fila y la columna de la matriz D, mientras que d es el valor de la distancia existente entre los elementos i1 y j
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 26] ---
+EJEMPLO: FICHERO DEL CASO GKD-c_1_n500_m50:
+
+--- [Fuente: Sem02-ProblemaMinDiff-BusquedaLocal-MH.pdf, Página: 27] ---
+Para la preparación de las transparencias de presentación del problema MDPLIB se han usado materiales de los profesores: Rafael Martí. Universidad de Valencia Abraham Duarte. Universidad Rey Juan Carlos Jesús Sánchez-Oro. Universidad Rey Juan Carlos Su grupo de investigación ha realizado muchas publicaciones sobre el problema y mantiene la biblioteca MDPLIB. Referencias: Duarte A., Sánchez-Oro J., Resende M.G.C., Glover F., Martí R. Greedy randomized minimization. Information Sciences, (2016), 46-60. Resende M.G.C., Werneck R.F.A hybrid heuristic for the p-median problemJournal of Heuristics, 10(1) (2016), 59- Lai X., Hao J-K, Glover, Fred, Yue D. Intensification-driven tabu search for the Aringhieri, R., Cordone R., Grosso A. Construction and improvement algorithms for dispersion problems. European Journal of Operational Research 242 (2015), 21-33.
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 0] ---
+(SNIMP)
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 1] ---
+Definición del Problema
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 2] ---
+Definición del Problema
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 3] ---
+Definición del Problema
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 4] ---
+Definición del Problema
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 5] ---
+Definición del Problema
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 8] ---
+El Problema de Maximizar la Influencia en Redes Sociales, Social resolución compleja (es NP-completo). El problema general consiste en seleccionar un subconjunto Sel de m elementos (Mm) de un conjunto inicial S de n elementos (obviamente, n m) de forma que se maximice la influencia entre Además de los n elementos (e , i1,...,n) y el número de elementos a seleccionar m, se dispone de una matriz C(C ) de dimensión nn no C puede ser bastante dispersa, con un número muy variable de
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 9] ---
+Para el problema con el que trabajaremos en prácticas, se busca lo siguiente: s max ICM (G , S , p ,ev) sS G es el grafo del problema. S es el conjunto de posibles combinaciones. p es la probabilidad de influencia/contagio (p0.01) ev es el número de simulación del ICM (ev10)
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 10] ---
+A es el conjunto de nodos activados, I su tamaño
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 11] ---
+I. Lozano-Osorio, J. Sánchez-Oro, A. Duarte, y O. Cordón, A quick GRASP-based method for influence maximization in social networks, J Ambient Intell Human Comput, vol. 14, n. 4, pp. 3767- 3779, abr. 2023, doi: 10.1007/s12652-021-03510-4. buen resultado según experimentos:
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 12] ---
+ALGORITMO GREEDY:
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 13] ---
+1) Se calcula para cada nodo u el número de nodos vecinos: d(u)N , N wV :(u , v)E 2) Se define como valor heurístico de un nodo el total de vecinos, y vecinos de éstos: g(u)d s d vN 3) Se listan los valores posibles ordenados por su valor 4) Se escogen los k primeros.
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 14] ---
+Búsquedas por Trayectorias Simples: Representación: Problema de selección: un conjunto Sel{s , , s } restricciones (ser un conjunto de tamaño m): No puede tener elementos repetidos Ha de contener exactamente m elementos El orden de los elementos no es relevante
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 15] ---
+Búsquedas por Trayectorias Simples: Operador de vecino de intercambio y su entorno: El entorno de Dada una solución (conjunto de elementos seleccionados) se escoge (Int(Sel,i,j)): Sel {s , , i, , s } Sel {s , , j, , s } Int(Sel,i,j) verifica las restricciones: si la solución original Sel es decir, del conjunto S-Sel, siempre genera una solución vecina Sel
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 16] ---
+Búsquedas por Trayectorias Simples: Su aplicación provoca que el tamaño del entorno sea demasiado grande (m!), m10 más de 3 millones combinaciones. La BL del Mejor del MDP explora todo el vecindario, las soluciones resultantes de los m(n-m) intercambios posibles, escoge el mejor Si no la hay, detiene la ejecución y devuelve la solución actual El método funciona bien pero es muy lento incluso para casos no Vamos a probar también parar cuando tras Nvecinos no mejore (Nvecinos50).
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 17] ---
+Se utilizarán 4 casos reales seleccionados de varios de los conjuntos de instancias del Stanford Large Network Dataset Collection: https://snap.stanford.edu/data/index.html. Se podría usar esos ficheros, pero hemos modificado y puesto en PRADO una No planteamos el óptimo, porque en la mayoría de los casos no se conocen, Para el MDDP, disponemos de cuatro conjunto de datos: Ca-GrCQc: Relación de autores en revista científica, tiene 5 242 nodos y 14 P2p-Gnutella05: Intercambio de mensajes en una red social el 5 Agosto 2002, tiene P2p-Gnutella08: Intercambio de mensajes en una red social el 8 Agosto 2002, tiene P2p-Gnutella25: Intercambio de mensajes en una red social, 25 Agosto 2002, tiene
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 18] ---
+El formato de los ficheros de datos es un fichero de texto con la siguiente cabecera: Directed graph (each unordered pair of nodes is saved once): NombreFichero.txt Descripción Nodes: N Edges: E FromNodeId ToNodeId Donde N es el número de elementos, E es el número de conexiones. A continuación aparecen los pares de valores (u, v) pertenecientes a E. La
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 19] ---
+EJEMPLO: FICHERO DEL CASO ca-GrQc.txt: . FromNodeId ToNodeId
+
+--- [Fuente: Sem02-ProblemaSNIM-BusquedaLocal-MH.pdf, Página: 20] ---
+Para la preparación de las transparencias de presentación del Isaac Lozano-Osorio. Universidad Rey Juan Carlos Jesús Sánchez-Oro. Universidad Rey Juan Carlos Abraham Duarte. Universidad Rey Juan Carlos Óscar Cordón. Universidad de Granada. Otra referencia que me ha servido muy útil: Y. Ye, Y. Chen, y W. Han, Influence maximization in social networks: Theories, methods and challenges, Array, vol. 16, p. 100264, dic. 2022, doi: 10.1016/j.array.2022.100264 Además, agradecimientos a Óscar por introducirme al problema.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 0] ---
+Tema 2. Modelos de Búsqueda: Entornos y Tema 4: Algoritmos Meméticos
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 2] ---
+Tipos de algoritmos aproximados: Heurísticas: Dependientes del problema Metaheurísticas: Algoritmos aproximados más generales Resuelven problemas de forma más rápida Resuelven problemas más complejos Obtienen algoritmos más robustos
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 3] ---
+Metaheurísticas: Optimización/búsqueda Intersección de campos: para resolver problemas: Procesos físicos: enfriamiento de partículas, Sociedades de insectos: Colonias de hormigas, abejas, Comportamiento de especies,
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 4] ---
+3. Metaheurísticas: definición y clasificación 4. Metaheurísticas: Paralelización
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 5] ---
+Ejemplo: El problema del viajante de comercio Representación como secuencia de ciudades (1 a n), n! soluciones https://www.ibm.com/developerworks/community/blogs/jfp/resource/BLOGS_UPLOADED_IMAGES/usa.gif ¿Necesitamos una solución exacta o una Buena solución para el problema? https://www.ibm.com/developerworks/community/blogs/jfp/resource/BLOGS_UPLOADED_IMAGES/usa.gif
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 6] ---
+Complejidad algorítmica: Algoritmos en tiempo polinomial y no polinomial n5 n10 n100 n1000 n! 120 3.6 x 106 9.33 x 10157 4.02 x 102567 ¡Necesitamos buenos algoritmos y eficientes!
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 7] ---
+Existen problemas reales (de optimización o búsqueda) de difícil solución que requieren de tareas tales como encontrar:
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 8] ---
+Estos problemas se caracterizan porque: presentan una gran complejidad computacional (son NP- duros) los algoritmos exactos (Programación Dinámica, Backtracking, Branch and Bound, ...) son ineficientes o (no necesariamente la óptima) al problema en un
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 9] ---
+Max (Min) una función con variables de decisión Subject to (s.t.) igualdad () restricciones desigualdad (,, , ) restricciones
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 10] ---
+Ejemplo: El problema del viajante de comercio (impresión de los buses de distancia o el costo de ir del nodo i al nodo j. estaño) Ejercicio: Analizar el espacio de búsqueda ¿Cómo representar una solución al problema?
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 11] ---
+Ejemplo: El problema del viajante de comercio Ejemplo: Viajante de Comercio
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 12] ---
+Ejemplo: El problema del viajante de comercio X (x , ....., x ) x {1, ..., N} Aplicaciones: Viajante de Comercio (TSP), Coloreo (asignación cuadrática), ....
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 13] ---
+Ejemplo: El problema del viajante de comercio Ejemplo: Viajante de Comercio Representación de una solución: Camino (1 2 4 3 8 5 7 6)
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 14] ---
+Ejemplo: El problema del viajante de comercio 1. Esquema de representación: Permutación de {1, ..., n}. 2. Función objetivo: n Min C(S) ( D S i ,S i 1 ) D S n ,S 1 i
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 15] ---
+Representación del espacio de búsqueda
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 16] ---
+3. Metaheurísticas: definición y clasificación 4. Metaheurísticas: Paralelización Optimization: Principles, Methodsand RecentTrends. International Journal of ComputationalIntelligentSystems(IJCIS), 8, 2015, 606-636.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 17] ---
+3. Metaheurísticas: Definición cercanas a la óptima en problemas complejos (NP- duros) en un tiempo razonable (ineficiente)
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 18] ---
+3. Metaheurísticas: Definición Ventajas: Inconvenientes: Son no determinísticos (probabilísticos)
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 19] ---
+3. Metaheurísticas: Taxonomía Una posible taxonomía:
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 20] ---
+3. Metaheurísticas: Taxonomía Una posible taxonomía: Basadas en métodos constructivos: (mecanismos para construir soluciones) GRASP, Optimización Basada en
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 21] ---
+3. Metaheurísticas: Taxonomía Una posible taxonomía: Basadas en métodos constructivos: GRASP, Basadas en trayectorias (la heurística subordinada es en el espacio de búsqueda): Búsqueda Local, Enfriamiento N(σ ) N ( σ ) ( σ ) N ( σ ) N ( σ ) Óptimo local/global
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 22] ---
+3. Metaheurísticas: Taxonomía Una posible taxonomía: Basadas en métodos constructivos: GRASP, Basadas en trayectorias (la heurística subordinada es en el espacio de búsqueda): Búsqueda Local, Enfriamiento Basadas en poblaciones (el proceso considera múltiples puntos de búsqueda en el espacio): Algoritmos Genéticos,
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 23] ---
+3. Metaheurísticas: Definición
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 24] ---
+3. Metaheurísticas: Taxonomía
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 25] ---
+3. Metaheurísticas: Clasificación My high is better! Height is ...
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 26] ---
+3. Metaheurísticas: Clasificación
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 27] ---
+https://arxiv.org/abs/2002.08136
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 28] ---
+3. Metaheurísticas: definición y clasificación 4. Metaheurísticas: Paralelización
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 29] ---
+4. Metaheurísticas: Paralelización
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 30] ---
+3. Metaheurísticas: definición y clasificación 4. Metaheurísticas: Paralelización Optimization: Principles, Methods and Recent Trends. International Journal of Computational Intelligent Systems (IJCIS), 8, 2015, 606-636.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 31] ---
+5. Metaheurísticas: Aplicaciones
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 32] ---
+Ejemplo Real: Diseño de antenas https://en.wikipedia.org/wiki/Evolved_antenna
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 33] ---
+Ejemplo Real: Organización de equipos médicos
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 34] ---
+Ejemplo Real: Registrado de imágenes.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 35] ---
+Ejemplo Real: Registrado de imágenes. (Algoritmo Evolutivo) f f Evaluación f Rotación {60,(0,1,0)} Traslación {2, 0, 1} f
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 36] ---
+Ejemplo Real: Registrado de imágenes.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 37] ---
+Ejemplo Real: Registrado de imágenes. aprovechan la potencia del Soft Computing:
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 38] ---
+Ejemplo Real: Registrado de imágenes.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 39] ---
+3. Metaheurísticas: definición y clasificación 4. Metaheurísticas: Paralelización
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 40] ---
+3. Metaheurísticas: Ej. (Alg. Basado en Poblaciones) Ejemplo: El problema del viajante de comercio Ejemplo: 17 ciudades (3 5 1 13 6 15 8 2 17 11 14 4 7 9 10 12 16)
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 41] ---
+Ejemplo: El problema del viajante de comercio 17! (3.5568734e14) Solución óptima: Coste226.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 42] ---
+Iteración: 25 Costo: 303. Iteración: 0 Costo: 403. Solución óptima: 226.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 43] ---
+Iteración: 25 Costo: 303. Iteración: 50 Costo: 293. Solución óptima: 226.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 44] ---
+Iteración: 50 Costo: 293.6 Iteración: 100 Costo: 256. Solución óptima: 226.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 45] ---
+Iteración: 100 Costo: 256.55 Iteración: 200 Costo: 231. Solución óptima: 226.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 46] ---
+Iteración: 250 Solución Iteración: 200 Costo: 231. óptima: 226.
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 47] ---
+Ejemplo: El problema del viajante de comercio 532! soluciones posibles Coste solución óptima
+
+--- [Fuente: Tema01-Metaheuristicas-24-25.pdf, Página: 48] ---
+Tema 2. Modelos de Búsqueda: Entornos y Tema 4: Algoritmos Meméticos
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 0] ---
+Tema 2. Modelos de Búsqueda: Entornos y Tema 4: Algoritmos Meméticos
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 2] ---
+TEMA 2. Modelos de Búsqueda: Entornos E.-G. Talbi. Metaheuristics. From design to implementation. Wiley, J. Brownlee. Clever Algorithms (Nature-Inspired Programming Recipes). 2012, Brownlee. http://cleveralgorithms.com/
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 3] ---
+1.1. Término LOCAL . Estructura de entorno. Proceso 1.1. Término LOCAL . Estructura de entorno. Proceso El término local se utiliza frecuentemente en los estudios
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 4] ---
+1.1. Término LOCAL
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 5] ---
+N ( σ ) N(σ ) N ( σ ) N ( σ ) N(σ ) Óptimo local/global
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 7] ---
+Operador de vecino: Proceso de selección de solución/generación de una solución vecina: S S, S E(S) (también notado N(S)). N(σ ) N(σ ) N ( σ ) N(σ ) N(σ ) Óptimo local/global
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 8] ---
+GENERA(Solución Inicial) Solución Actual Solución Inicial; Mejor Solución Solución Actual; Solución Vecina GENERA_VECINO(Solución Actual); Si Acepta(Solución Vecina) entonces Solución Actual Solución Vecina; Si Objetivo(Solución Actual) es mejor que Objetivo(Mejor Solución) entonces Mejor Solución Solución Actual; Hasta (Criterio de parada); DEVOLVER (Mejor Solución);
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 11] ---
+población.
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 12] ---
+combinan cromosomas (algoritmos genéticos)
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 13] ---
+genética, cómo se combinan cromosomas (algoritmos genéticos)
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 14] ---
+¿Otras propuestas de obtención de poblaciones? cromosomas (algoritmos genéticos)
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 15] ---
+¿Otras propuestas de obtención de poblaciones?
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 16] ---
+¿Otras Metaheurísticas? https://arxiv.org/abs/2002.08136
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 18] ---
+búsqueda: E(s) todo el espacio de búsqueda.
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 19] ---
+GENERA(Solución Inicial) Solución Actual Solución Inicial; Mejor Solución Solución Actual; GENERA(Solución Actual); Generación Aleatoria Si Objetivo(Solución Actual) es mejor que Objetivo(Mejor Solución) entonces Mejor Solución Solución Actual; Hasta (Criterio de parada); DEVOLVER (Mejor Solución);
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 20] ---
+EJEMPLO:
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 21] ---
+obtenga la óptima es 1/m. absoluta de obtener el óptimo en la iteración i: P(A ) 1/m i 1, , n.
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 22] ---
+La probabilidad de obtener el óptimo en n iteraciones sería: P(A A A )
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 23] ---
+P(A A A ) Si es tal que 0 (probabilidad a priori de error encuentre el óptimo), entonces: óptimo con probabilidad 1-
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 24] ---
+EJEMPLO: (número de o 1- m n o 1- m n iteraciones necesario) 0.1 0.9 1000 2302 0.1 0.9 3000 6907 de fallo y
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 25] ---
+El entorno de cualquier solución es propio (no consta de todas las soluciones del espacio de búsqueda). N(σ ) N(σ ) N ( σ ) N(σ ) N(σ ) Óptimo local/global
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 26] ---
+3.4. Ejemplo: Viajante de Comercio Hay dos versiones: del Mejor y del Primer Mejor. En ambos casos, el algoritmo devuelve la última solución visitada (no es necesario ir almacenando la mejor solución).
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 27] ---
+GENERA(Solución Inicial); Solución Actual Solución Inicial; GENERA_SOLUCIÓN_ENTORNO(Solución Vecina tal que Objetivo(Solución Vecina) mejor que Objetivo(Solución Actual)); Si Objetivo(Solución Vecina) mejor que Objetivo(Solución Actual) entonces Solución Actual Solución Vecina; Hasta (Objetivo(Solución Vecina) peor o igual que Objetivo(Solución Actual), S E(Solución Actual)); DEVOLVER(Solución Actual);
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 28] ---
+Steepest-Ascent Hill Climbing (best neighbor)
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 29] ---
+GENERA(S ); Mejor Vecino S Repetir para toda S E(S ) S GENERA_VECINO(S ); Si Objetivo(S) mejor que Objetivo(Mejor Vecino) entonces Mejor Vecino S; Si Objetivo(Mejor Vecino) mejor que Objetivo(S ) entonces S Mejor Vecino; Hasta (Objetivo(Mejor Vecino) peor o igual que Objetivo(S )); DEVOLVER(S );
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 30] ---
+EJEMPLO: E(s) {si / si (xi {0,1}, yi {0,1}) si s}
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 31] ---
+Simple Hill Climbing (first-best neighbor)
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 32] ---
+GENERA(S ); S GENERA_VECINO(S ); Hasta (Objetivo(S) mejor que Objetivo(S )) O (se ha generado E(S ) al completo) Si Objetivo(S) mejor que Objetivo(S ) entonces S S; Hasta (Objetivo(S) peor o igual que Objetivo(S )); DEVOLVER(S );
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 33] ---
+EJEMPLO: E(s) {si / si (xi {0,1}, yi {0,1}) si s}
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 34] ---
+3.4. Ejemplo: Viajante de Comercio Ejemplo: Viajante de Comercio Representación de una solución: Camino (1 2 4 3 8 5 7 6)
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 35] ---
+1. Esquema de representación: Permutación de {1, ..., n}. 2. Función objetivo: n Min C(S) ( D S i ,S i 1 ) D S n ,S 1 i 3. Mecanismo de generación de la solución inicial:
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 36] ---
+4. Operador de generación de nuevas soluciones: escoger dos posiciones e intercambiar sus valores (2-opt): 5. Mecanismo de selección: Selección del mejor o el primer mejor. 6. Criterio de parada: Cuando el vecino generado no mejore a la
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 37] ---
+Otro operador: Viajante de Comercio Inversión simple (2-Opt): se escoge una sublista y se invierte (1 2 4 3 8 5 7 6) (1 2 5 8 3 4 7 6)
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 38] ---
+Intercambio: se escogen dos elementos y se intercambian (1 2 4 3 8 5 7 6) (1 2 5 3 8 4 7 6)
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 39] ---
+TSP: Factorización del Movimiento 2-Opt Sea f() el coste de la solución original Para generar , el operador de vecino elimina los arcos: (i)(i1) y (j) (j1), y restablece el circuito con los arcos: (i)(j1) y (j) (i1) Por lo tanto, el coste del movimiento se puede factorizar como: y la variación en el coste de f() es: f() f() f()
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 40] ---
+532! soluciones posibles Coste solución óptima
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 42] ---
+TSP Instancia Berlin52
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 45] ---
+Preguntas: ¿Cómo de diferente puede llegar a ser la solución de vecindario empleado? ¿Cuál es el tamaño del entorno generado por cada operador de vecino? El efecto al aplicar un operador concreto, ¿es el mismo en todos los problemas? Por ejemplo, ¿es lo mismo generar un vecino por problema?
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 47] ---
+SOLUCIONES: 3 opciones para salir de los óptimos locales Ejemplo: Enfriamiento Simulado, Búsqueda Tabú (T5). Ejemplo: Búsqueda Tabú, Búsqueda en Entornos Variables: VNS, (T5) Ejemplo: Búsquedas Multiarranque, ILS, VNS, (T5).
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 48] ---
+[Tal09] E.-G. Talbi. Metaheuristics. From design to [Bro12] J. Brownlee. Clever Algorithms (Nature-Inspired Programming Recipes). 2012, Brownlee. http://cleveralgorithms.com/ http://cleveralgorithms.com/
+
+--- [Fuente: Tema02-Modelos de Búsqueda-Trayectorias-vs-Poblaciones-24-25.pdf, Página: 49] ---
+Tema 2. Modelos de Búsqueda: Entornos y Tema 4: Algoritmos Meméticos
+
+--- [Fuente: problema_diseño.pdf, Página: 0] ---
+3.2 Python/Julia . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+--- [Fuente: problema_diseño.pdf, Página: 1] ---
+La guía está planteada en C, que es el lenguaje que más se ha usado en las prácticas, aunque si alguien quisiese utilizar otro lenguaje Orientado a Objeto (OO) como Java no habría problema, siempre que aplicase el mismo criterio (con los cambios de sintaxis correspondientes). Para lenguajes no OO daré práctica, P2 para la segunda, ... y quizás alguna clase con utilidades (Utils o similar), pero sin una ¿Eso que problemas presenta? De todo tipo: La metaheurística depende del problema: Lo primero, la metaheurística no se puede probar con un problema de juguete (como optimizar el número total de unos en un vector binario) que Reutilizar código: Elproblemaescomúnparatodoslosalgoritmos. Alnohacerloasí,seproducían
+
+--- [Fuente: problema_diseño.pdf, Página: 2] ---
+Aislar la complejidad del problema: De esta forma la complejidad del problema y la función de Pruebas independientes del problema: Una mayor separación facilita el poder probar por Pruebas automáticas: Las pruebas anteriores pueden automatizarse. Ejemplo para representación binaria: typedef vectorbool tSolution y para una representación de números reales: typedef vectorfloat tSolution sentido (una solución no válida) o bien porque se quiere postergar la evaluación de la solución. El uso de un typedef en vez de un class facilita el procesarlo de forma más clara: acceder a elementos, El interfaz es el mínimo posible: virtual class Problem { public : virtual float fitness (tSolution );
+
+--- [Fuente: problema_diseño.pdf, Página: 3] ---
+virtual tSolution createSolution (); virtual int getSize (); } getSize permite conocer la longitud de cada variable. createSolution permite crear una solución de forma totalmente aleatoria. fitness es para evaluar una solución dada. Siempre ante la misma solución se de deberá de ontener Todo algoritmo implementado deberá de cumplir el siguiente interfaz: class MH { public: virtual pairtSolution , tFitness optimize(Problem problem , int maxevals) 0; };
+
+--- [Fuente: problema_diseño.pdf, Página: 4] ---
+Como se puede observar, lo principal es implementar el método optimize, que: Recibe un objeto de tipo Problem, con el que podrá evaluar las soluciones, entre otras cosas. Recibe el número máximo de evaluaciones de soluciones permitido. La plantilla posee la siguiente estructura: src Implementación de las clases cuyas cabeceras se encuentran en inc/. compilarlo: cmake . make Si se desea mejorar el rendimiento es conveniente compilar en modo "Release" en vez de en modo "Debug" cmake DCMAKE_BUILD_TYPERelease . make Aunque la plantilla está claramente pensada para C, eso es porque es el principal lenguaje usado A continuación presentamos cómo se puede adaptar a distintos lenguajes:
+
+--- [Fuente: problema_diseño.pdf, Página: 5] ---
+Para definir la clase solución se puede aplicar directamente herencia de una collección, como: class tSolution extends ArrayListsFloat {} La clase Problem puede definirse directamente como lo que es, un interfaz: public interface Problem { float fitness (tSolution ); tSolution createSolution (); int getSize (); } public class MH { // ... public PairtSolution , tFitness optimize(Problem problem , int maxevals); }; E implementarlo como: public class Greedy extends MH { // ... overide public PairtSolution , tFitness optimize(Problem problem , int maxevals); } 3.2 Python/Julia
+

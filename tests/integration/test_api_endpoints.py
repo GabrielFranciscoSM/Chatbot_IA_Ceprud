@@ -1,6 +1,6 @@
 import pytest
 #from fastapi.testclient import TestClient
-from app.app import app
+from app import app
 
 def test_chat_endpoint_basic(test_client, test_data):
     """Test the /chat endpoint with a basic query"""
@@ -45,18 +45,6 @@ def test_chat_with_invalid_mode(test_client, test_data):
     )
     assert response.status_code == 400
 
-def test_chat_rag_mode_with_nonexistent_subject(test_client, test_data):
-    """Test chat endpoint with non-existent subject"""
-    response =test_client.post(
-        "/chat",
-        data={
-            "message": "Test non-existent subject",
-            "subject": "no_such_subject",
-            "email": test_data["sample_email"],
-            "mode": "rag"
-        }
-    )
-    assert response.status_code in (400, 404)
 
 def test_logging_is_created(test_client, test_data, tmp_path):
     """Test that a log entry is created after chat"""

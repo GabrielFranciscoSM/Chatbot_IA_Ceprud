@@ -4,7 +4,7 @@ from datetime import datetime
 from fastapi import APIRouter, Form, HTTPException, Depends
 from fastapi.responses import JSONResponse
 from typing import Dict, List#, Tuple
-from query_logic import (
+from logic.query_logic import (
     query_rag
 )
 from dotenv import load_dotenv

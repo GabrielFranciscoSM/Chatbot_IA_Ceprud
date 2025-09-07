@@ -1,0 +1,333 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: #1f2937; /* Fondo oscuro más suave */
+  color: #d1d5db; /* Texto claro pero no blanco puro */
+}
+
+/* Contenedor principal del chat */
+.chat-container {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  height: 80vh;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para mejorar la estética */
+}
+
+body.dark-mode .chat-container {
+  background: #1f2937; /* Fondo oscuro más suave */
+  border-color: #4b5563; /* Borde oscuro */
+}
+
+/* Columna izquierda: Lista de chats disponibles */
+.chat-sidebar {
+  width: 250px;
+  background: #f9f9f9;
+  border-right: 1px solid #ccc;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .chat-sidebar {
+  background: #1f2937; /* Fondo oscuro más suave */
+  border-color: #4b5563; /* Borde oscuro */
+}
+
+.chat-sidebar h3 {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 15px;
+  transition: color 0.3s ease;
+}
+
+body.dark-mode .chat-sidebar h3 {
+  color: #d1d5db; /* Texto claro */
+}
+
+.chat-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.chat-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #fff;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .chat-item {
+  background: #374151; /* Fondo oscuro más suave */
+  color: #d1d5db; /* Texto claro */
+}
+
+.chat-item:hover {
+  background: #ffebee; /* Tono claro de rojo */
+}
+
+body.dark-mode .chat-item:hover {
+  background: #4b5563; /* Neutral para modo oscuro */
+}
+
+.chat-item.active {
+  background: #A6192E; /* Color oficial de la UGR */
+  color: #fff;
+}
+
+/* Columna derecha: Chat principal */
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado del chat */
+.chat-header {
+  background: #A6192E; /* Color oficial de la UGR */
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  font-size: 1.2em;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+body.dark-mode .chat-header {
+  background: #1f2937; /* Fondo oscuro más suave */
+}
+
+.sync-email-button {
+  transform: translateY(-50%);
+  background-color: #A6192E; /* Color oficial de la UGR */
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sync-email-button:hover {
+  background-color: #7d1221; /* Tono más oscuro del rojo de la UGR */
+}
+
+body.dark-mode .sync-email-button {
+  background-color: #4b5563; /* Neutral para modo oscuro */
+}
+
+body.dark-mode .sync-email-button:hover {
+  background-color: #6b7280; /* Neutral para modo oscuro */
+}
+
+/* Botón de modo oscuro/claro */
+.theme-toggle {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  color: #ffcc00;
+}
+
+/* Área de mensajes */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .chat-messages {
+  background: #1f2937; /* Fondo oscuro más suave */
+  border-color: #4b5563; /* Borde oscuro */
+}
+
+/* Estilos para los mensajes */
+.message {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.message.user {
+  background: #ffebee; /* Tono claro de rojo */
+  align-self: flex-end;
+}
+
+body.dark-mode .message.user {
+  background: #4b5563; /* Neutral para modo oscuro */
+  color: #d1d5db; /* Texto claro */
+}
+
+.message.bot {
+  background: #ebebeb;
+  align-self: flex-start;
+}
+
+body.dark-mode .message.bot {
+  background: #374151; /* Neutral para modo oscuro */
+  color: #d1d5db; /* Texto claro */
+}
+
+/* Área de entrada de texto y botones */
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background: #f9f9f9;
+  transition: background-color 0.3s ease;
+}
+
+body.dark-mode .chat-input {
+  background: #1f2937; /* Fondo oscuro más suave */
+}
+
+.chat-input input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .chat-input input[type="text"] {
+  background: #374151; /* Fondo oscuro más suave */
+  border-color: #4b5563; /* Borde oscuro */
+  color: #d1d5db; /* Texto claro */
+}
+
+.chat-input button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background: #A6192E; /* Color oficial de la UGR */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chat-input button:hover {
+  background: #7d1221; /* Tono más oscuro del rojo de la UGR */
+}
+
+body.dark-mode .chat-input button {
+  background: #4b5563; /* Neutral para modo oscuro */
+}
+
+body.dark-mode .chat-input button:hover {
+  background: #6b7280; /* Neutral para modo oscuro */
+}
+
+/* Estilo para el botón personalizado */
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #A6192E; /* Color oficial de la UGR */
+  color: #fff;
+  font-size: 1em;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #7d1221; /* Tono más oscuro del rojo de la UGR */
+}
+
+body.dark-mode .custom-file-upload {
+  background: #4b5563; /* Neutral para modo oscuro */
+}
+
+body.dark-mode .custom-file-upload:hover {
+  background: #6b7280; /* Neutral para modo oscuro */
+}
+
+.custom-file-upload::before {
+  content: "📎"; /* Ícono de clip */
+  margin-right: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* Ajustar el contenedor principal para pantallas pequeñas */
+  .chat-container {
+    flex-direction: column;
+    height: auto;
+    max-height: 90vh;
+  }
+
+  /* Ocultar la barra lateral en pantallas pequeñas */
+  .chat-sidebar {
+    display: none;
+  }
+
+  /* Ajustar el chat principal para ocupar todo el ancho */
+  .chat-main {
+    width: 100%;
+  }
+
+  /* Ajustar el encabezado */
+  .chat-header {
+    font-size: 1em;
+    padding: 10px;
+  }
+
+  /* Ajustar el área de mensajes */
+  .chat-messages {
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  /* Ajustar el área de entrada */
+  .chat-input {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .chat-input input[type="text"] {
+    width: 100%;
+  }
+
+  .chat-input button {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
