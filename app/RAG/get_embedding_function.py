@@ -6,11 +6,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-VLLM_URL = "http://vllm-openai-embeddings:8001/v1"  # URL del servicio de embeddings
-VLLM_MODEL_NAME = "/models/Qwen--Qwen3-Embedding-0.6B"  # Nombre del modelo de embeddings
-
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
+VLLM_URL = os.getenv("VLLM_EMBEDDING_URL","http://vllm-openai-embeddings:8001") + "/v1"  # URL del servicio de embeddings
+VLLM_MODEL_NAME = os.getenv("EMBEDDING_MODEL_DIR","/models/Qwen--Qwen3-Embedding-0.6B")  # Nombre del modelo de embeddings
 
 def get_embedding_function():
     """

@@ -14,7 +14,10 @@ RECOMMENDED_MODELS = [
     "TheBloke/TinyLlama-1.1B-Chat-v1.0-AWQ",
     "jinaai/jina-embeddings-v2-base-es",
     "jinaai/jina-embeddings-v3",
-    "Qwen/Qwen3-Embedding-0.6B"
+    "Qwen/Qwen3-Embedding-0.6B",
+    "casperhansen/llama-3-8b-instruct-awq",
+    "Sreenington/Phi-3-mini-4k-instruct-AWQ",
+    "ibm-granite/granite-3.3-2b-instruct"
 ]
 
 def download_model(model_name, target_dir):

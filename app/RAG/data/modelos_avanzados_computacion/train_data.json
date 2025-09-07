@@ -1,0 +1,3596 @@
+[
+  {
+    "question": ") M ) L(M) u la r ( e l)",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del domingo en Cataluña",
+    "source": "EjemploReduccion.pdf",
+    "page": 0
+  },
+  {
+    "question": "e l e l e l e l e l",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la decisión de la Generalitat de suspender la actividad del organismo",
+    "source": "EjemploReduccion.pdf",
+    "page": 1
+  },
+  {
+    "question": ") r ( L ( M ,u ) R ( M ') ",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del partido de Rajoy",
+    "source": "EjemploReduccion.pdf",
+    "page": 2
+  },
+  {
+    "question": "question: What is the s re g u la r?",
+    "answer": "A R E G G U U, n s o s u n o s, n i i i n e n e i n o r u u u n e in in o s",
+    "source": "EjemploReduccion.pdf",
+    "page": 3
+  },
+  {
+    "question": "question: What is the definition of a problem that is not decidible?",
+    "answer": "El algoritmo de Rice : Teorema 1, una maquina de Turing que compruebe todas las posibilidades es un algoritmo que resuelve el problema",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 0
+  },
+  {
+    "question": "question: What is the name of the teorema of Rice?",
+    "answer": "Para demostrar que un problema no es decidible contamos con el teorema de Rice : Teorema 1. 1, la propiedad de los lenguajes recursivamente enumerables",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 0
+  },
+  {
+    "question": "question: What is the MT M?",
+    "answer": "La propiedad de una palabra en menos de 5 movimientos no es una propiedad de los lenguajes recursivamente enumerables",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 0
+  },
+  {
+    "question": "question: What is the UNIVERSAL?",
+    "answer": "La propiedad de L a L es trivial, ningun lenguaje r. e... todos los lenguajes son numerables",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 1
+  },
+  {
+    "question": "question: La maquina de Turing no determinista generica sigue",
+    "answer": "La maquina de Turing que acepte las palabras del lenguaje requiere comprobar que, en un conjunto infinito, existe un elemento que cumple cierta propiedad",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 1
+  },
+  {
+    "question": "question: What is the main problem with selección?",
+    "answer": "Las dudas sobre los problemas que se pueden utilizar para combatir los problemas de la población en el mundo se multiplican.",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 1
+  },
+  {
+    "question": "question: What is the definition of a diagonal?",
+    "answer": "El lenguaje asociado es el lenguaje de diagonalizacion L. C. en general, según un estudio",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 2
+  },
+  {
+    "question": "question: What is the difference between a maquina and a semidecimal one",
+    "answer": "El problema no es si L ( M ) L, sino si L, M y M ( M, M, C / M, E. C. ) L ( C ) L / M ( C ( M. L ) L ) es semidecible, por lo que nuestro problema tampoco lo será",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 2
+  },
+  {
+    "question": "question: What is the difference between P1 and P2?",
+    "answer": "Un algoritmo F, demaneraquesiM esunainstanciapositiva delproblemablemaP1",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 2
+  },
+  {
+    "question": "question: What is the process of elaborating a codification of R?",
+    "answer": "La codificacion de cualquier entrada M. Ademas es un proceso. Un proceso es",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 2
+  },
+  {
+    "question": "question: What is the difference between the two cases?",
+    "answer": "El algoritmo que calcula una gramatica libre de contexto G, que genera el mismo lenguaje que el de la lengua",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 3
+  },
+  {
+    "question": "question: What is the gramatica G(cid:48) equivalente to?",
+    "answer": "El algoritmo elimina producciones nulas de una gramatica libre de contexto",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 3
+  },
+  {
+    "question": "question: What is the gramatica C equivalent to?",
+    "answer": "El algoritmo de calculo de la forma normal de Chomsky, que nos asegura si C y a u se puede, no es decidible",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 3
+  },
+  {
+    "question": "question: What is the name of the palabra that is aceptable?",
+    "answer": "Se puede observar que aceptar una palabra de longitud menor o iguala20esunapropiedaddellenguajeaceptadoporlamaquinadeTuring, nodelamaquina de Turing",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 3
+  },
+  {
+    "question": "question: What is the definition of a maquina?",
+    "answer": "Para demostrar que es semidecidible, podemos construir una maquina de Turing no de - terminista R que acepte la codificacion de las maquinas",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 4
+  },
+  {
+    "question": "question: What is the entrada of a maquina de Turing?",
+    "answer": "¿ Existe una palabra u de longitud menor que 20 y la copiamos a continuacion de 3",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 4
+  },
+  {
+    "question": "question: La codificacion de la maquina de Turing en una",
+    "answer": "Maquina de Turing determinista que no es valida la entrada 8 : S en la segunda cinta 6 : S",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 4
+  },
+  {
+    "question": "question: What is the name of the maquinauniversal?",
+    "answer": "Laserechacealestarindefinidamenteenmovimiento ( lamaquina universalcicleconesaentradaentradarrada )",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 4
+  },
+  {
+    "question": ". . . . . . . . . .",
+    "answer": "Sigue en EL PAÍS VÍDEO la comparecencia del número dos de la revista El País Semanal",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 4
+  },
+  {
+    "question": "question: En la lnea 5, la salida dira",
+    "answer": "A veces las palabras de A por comprobar, aumentamos el número de pasos de calculo y repetimos las palabras",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 5
+  },
+  {
+    "question": "question: La maquina universal acepta la entrada en una",
+    "answer": "Maquina de Turing determinista S Entrada : La codificacion ( cid : 104 ) de una maquina, la maquina M no acepta ninguna palabra de A",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 5
+  },
+  {
+    "question": "question: La maquina M acepta la palabra 3, ver Figura",
+    "answer": "La maquina M cicla, que no resuelve correctamente el problema, realiza una búsquedadaenprofundida en anchura, ver Figura 2",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 5
+  },
+  {
+    "question": "question: What is the name of the figure that shows the error?",
+    "answer": "El problema es que hay un número infinito de palabras a comprobar. Si para todas, la respuesta es no",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 6
+  },
+  {
+    "question": "question: En el caso de Turing M, es un problema que ",
+    "answer": "El problema es que hay un número infinito de palabras a comprobar. ¿ Por qué hay una maquina de Turing",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 6
+  },
+  {
+    "question": "question: En el que se ejecutamos 10 pasos, ",
+    "answer": "Si existe una palabra que hace que la maquina se ejecute mas de 10 pasos, solo se pueden leer 10 casillas de la cinta",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 7
+  },
+  {
+    "question": "question: What is the problem with L?",
+    "answer": "El problema no es semidecible. Construimos una reduccion desde el complemen - universal, determinar si para cualquier entrada.",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 7
+  },
+  {
+    "question": "question: What is the entrada of the maquina?",
+    "answer": "La maquina de Turing F - UNIVERSAL, que es una de las máquinas más potentes de la historia, se ha convertido en una herramienta para entender la complejidad y la complejidad de la vida",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 7
+  },
+  {
+    "question": "question: What is the case of M not acepting w?",
+    "answer": "En vez de utilizar una re - duccion, F ( M, w ) puede ser un caso positivo de C - UNIVERSAL",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 8
+  },
+  {
+    "question": "question: What is the problem with C-PAL?",
+    "answer": "El problema C - PAL : Dada un maquina de Turing M, determinar si M acepta un...",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 8
+  },
+  {
+    "question": "question: Si no 1: Si no 2: Si no 3: Si no 4: Si no",
+    "answer": "El teorema de Rice, C - PAL no determinista, utilizamoslasiguientema norteamericanadeTuringnodeterminista Maquina",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 8
+  },
+  {
+    "question": "question: What is the definition of a maquina de Turing?",
+    "answer": "El lenguaje no es una propiedad de los lenguajes recursivamente enumerables y enumerables que lo aceptan",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 9
+  },
+  {
+    "question": "question: What is the name of the problem that we're trying to solve?",
+    "answer": "Con - struimos entonces una reduccion desde el problema universal. Consideramos los siguientes problemas : UNIVERSAL",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 9
+  },
+  {
+    "question": "question: What is the symbolo 1 that is a part of the ",
+    "answer": "Maquina de Turing F ( M, w ) es una instancia de ESC - 1 que construía las siguientes maquinas",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 9
+  },
+  {
+    "question": "escribe un1cuandocomienzaconlacintavac",
+    "answer": "Maquina de Turing es un algoritmo que permite a los usuarios de todo tipo de sistemas de control de tiempo",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 10
+  },
+  {
+    "question": "question: What is the problem with diagonal?",
+    "answer": "El problema no es semidecible. realizando una reduccion desde el problema diagonal. Consideramos los problemas",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 10
+  },
+  {
+    "question": "question: What is the palabra v 0,1?",
+    "answer": "El algoritmo de Turing F ( M ) es un algoritmo que permite entender el significado de las palabras en inglés",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 11
+  },
+  {
+    "question": "question: What is the acepta of M?",
+    "answer": "El lenguaje aceptado por F ( M ) es un caso negativo de DIAGONANAL, que tiene un número de palabras",
+    "source": "Manual_Decibilidad_Semidecibilidad.pdf",
+    "page": 11
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "SerafínMoralDepartismodeComputaciónDehloos 44. 000. 000 kilómetros de la ciudad murcial. SeramínMaspoadcehloo",
+    "source": "Presentacion.pdf",
+    "page": 0
+  },
+  {
+    "question": "Qué es la hora de la hora?",
+    "answer": "Viñeta de El Roto del 17 de octubre de 2017",
+    "source": "Presentacion.pdf",
+    "page": 1
+  },
+  {
+    "question": "question: What is the name of the subgrupo that is a result of the ",
+    "answer": "Viñeta de El Roto del 17 de febrero de 2017",
+    "source": "Presentacion.pdf",
+    "page": 2
+  },
+  {
+    "question": "Qué es el ao que es a",
+    "answer": "El periodista de EL PAÍS Fernando Berzal analiza las claves de la última semana de la campaña electoral española",
+    "source": "Presentacion.pdf",
+    "page": 3
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "SerafínMoralDepartismodeComputaciónDehloos 44. 000. 000 kilómetros de la ciudad murcial. SeramínMaspoadcehloo",
+    "source": "Presentacion.pdf",
+    "page": 4
+  },
+  {
+    "question": "question: Dos Asignaturas Primer Cuatrimestre - Obligatori",
+    "answer": "Dos Asignaturas Primer Cuatrimestre - Obligatoria - tercero curso ( 33. 45, Canal + ) ( 33 % )",
+    "source": "Presentacion.pdf",
+    "page": 5
+  },
+  {
+    "question": "question: Qué puede ser resoluelto en un",
+    "answer": "¿ Qué puede ser resuelto en un ordenador? ¿ Qué ha sido resuelto en el ordenador? complejidad : determinar qué problemas se pueden resolver en un ordenadores?",
+    "source": "Presentacion.pdf",
+    "page": 6
+  },
+  {
+    "question": "question: What is the main topic of Tema 1?",
+    "answer": "El mundo de la tecnología se ha convertido en un lugar de encuentro en el que todos los rincones de la vida son tan diversos como los de la Tierra",
+    "source": "Presentacion.pdf",
+    "page": 7
+  },
+  {
+    "question": "question: Addison Wesley (2002) S. Arora, B. Barak, Co",
+    "answer": "Un repaso a lo mejor y lo mejor de la historia reciente de la humanidad",
+    "source": "Presentacion.pdf",
+    "page": 8
+  },
+  {
+    "question": "question: What is the minimum number of questions in the final exam?",
+    "answer": "La resolución de problemas en clase y entrega de estudio de un problema NP - completo ( 20 ) es una lección de problemas para todos",
+    "source": "Presentacion.pdf",
+    "page": 9
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "SerafínMoralDepartismodeComputaciónDehloos 44. 000. 000 kilómetros de la ciudad murcial. SeramínMaspoadcehloo",
+    "source": "Presentacion.pdf",
+    "page": 10
+  },
+  {
+    "question": "question: What is the title of the Tema 1: Máquinas de",
+    "answer": "Máquinas de Turing y Lenguajes Calculables ( MáquinasdeTuring. FuncionesyLenguajesCalculables ) ( Material ). Matemáticas y lenguajes Calculable ( Matemáticas )",
+    "source": "tr1a.pdf",
+    "page": 0
+  },
+  {
+    "question": "Qué es la tecnica deconstrucciónde?",
+    "answer": "La memoriaadicional, pistas SerafínMoral, tema1 : MáquinasdeTuring. FuncionesyLenguajesCalculables. Estructurasdectsutsu Marsh Marsh MarshM. Tecnologíasdecucing",
+    "source": "tr1a.pdf",
+    "page": 1
+  },
+  {
+    "question": "question: What is the difference between a program and a data?",
+    "answer": "El programa cicla de forma indefinida para esos datos de entrada : MáquinasdeTuring. FuncionesyLenguajesCalculables",
+    "source": "tr1a.pdf",
+    "page": 2
+  },
+  {
+    "question": "question: What is the name of the program that is able to be used?",
+    "answer": "¿ Por qué es difícil saber si un programa termina? ¿ A qué punto se debe?",
+    "source": "tr1a.pdf",
+    "page": 3
+  },
+  {
+    "question": "n2 segn el ltimo nos diga si",
+    "answer": "Máquinas que se saben que no termina para n2 según el último nos diga si cualquier programa termina! SerafínMoral",
+    "source": "tr1a.pdf",
+    "page": 4
+  },
+  {
+    "question": "question: What is the name of the Máquina de Turing?",
+    "answer": "Una Máquina de Turing es la función de transición que asigna a cada estado qQ y símbolo bB, el valor",
+    "source": "tr1a.pdf",
+    "page": 5
+  },
+  {
+    "question": "(q ,0)(q ,0,D) (q",
+    "answer": "Las transiciones no nulas son las siguientes en las que las transiciones son las que más transiciones se nutren",
+    "source": "tr1a.pdf",
+    "page": 6
+  },
+  {
+    "question": "question: What is the name of the selección that is used in the t",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 7
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 8
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 9
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 10
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 11
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 12
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 13
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 14
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 15
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 16
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 17
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 18
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 19
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 20
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 21
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 22
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 23
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 24
+  },
+  {
+    "question": "question: What is the name of the pregunta sobre?",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 25
+  },
+  {
+    "question": "question: What is the name of the pregunta sobre?",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 26
+  },
+  {
+    "question": "question: What is the name of the pregunta sobre?",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 27
+  },
+  {
+    "question": "question: What is the name of the pregunta sobre?",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 28
+  },
+  {
+    "question": "question: What is the name of the pregunta sobre?",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 29
+  },
+  {
+    "question": "question: What is the name of the pregunta sobre?",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 30
+  },
+  {
+    "question": "question: What is the name of the pregunta sobre?",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 31
+  },
+  {
+    "question": "question: What is the name of the pregunta sobre?",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 32
+  },
+  {
+    "question": "question: What is the name of the triplet?",
+    "answer": "Una configuración de una Máquina de Turing es una tripleta ( q, w1, w2, win ) izquierda de la posición del cabezal de lectura ( puede ser vacío ) de lectura",
+    "source": "tr1a.pdf",
+    "page": 33
+  },
+  {
+    "question": "question: What is the name of the Máquina de Turing?",
+    "answer": "Si uA, la configuración inicial de la Máquina de Turing ( Q, A, C, C ) asociada a esta palabra es ( q,, u,,, F,, E,, C o,, u u otra, u otrasdeTuring. FuncionesyLen",
+    "source": "tr1a.pdf",
+    "page": 34
+  },
+  {
+    "question": "question: What is the name of the pregunta that is given when a user enters",
+    "answer": "Un repaso a lo que se ha dado de sí el año que viene en la historia reciente de la historia de la política española",
+    "source": "tr1a.pdf",
+    "page": 35
+  },
+  {
+    "question": "question: What is the name of the movimiento a la derecha?",
+    "answer": "Un repaso a lo que se ha hecho en la historia reciente y lo que ha cambiado la forma en que se realiza el cálculo",
+    "source": "tr1a.pdf",
+    "page": 36
+  },
+  {
+    "question": "question: What is the name of the máquina de Turing M?",
+    "answer": "R R R y R R. R son configuraciones de una máquina de Turing M ( Q, A, C, E,, F, C ), n i SerafínMoral Tema1",
+    "source": "tr1a.pdf",
+    "page": 37
+  },
+  {
+    "question": "question: What is the name of the tema that is used in the video?",
+    "answer": "El conjunto de palabras L ( M ) tales que uL ( M, M ) si y solo si existen w, w B y qF tal que ul ( uL ) se uL, w b o qF tales, walculables",
+    "source": "tr1a.pdf",
+    "page": 38
+  },
+  {
+    "question": "question: What does the term \"e.r.\" mean?",
+    "answer": "Un lenguaje LA se dice recursivamente enumerable ( e. r. ) si y solo si existe una máquina de Turing M ( Q, A, C,, q, E,, E ) tal que L ( M ) L ( E, A ) L, E (, E.",
+    "source": "tr1a.pdf",
+    "page": 39
+  },
+  {
+    "question": "distintas: SerafnMoral Tema1: Má",
+    "answer": "El tema1 : Máquinas deTuring. FuncionesyLenguajes. Funciones y otras : SerafínMoral sobre Máquinas, Máquinas y otras... Las claves para saber cuál es el tema más claro",
+    "source": "tr1a.pdf",
+    "page": 40
+  },
+  {
+    "question": "question: La pregunta sobre: aceptada o rechaza",
+    "answer": "Las palabras son aceptadas o rechazadas. tipos de estados finales : de aceptación y de rechazo. La máquina SerafínMoral. FuncionesyLenguajesCalculables",
+    "source": "tr1a.pdf",
+    "page": 41
+  },
+  {
+    "question": "question: What is the MT M?",
+    "answer": "D B tal que D. I es el conjunto de entradas para los que la MT termina y si uD, entonces f ( u ) es el contenido de la cinta Si una función es parcialmente calculable y D A",
+    "source": "tr1a.pdf",
+    "page": 42
+  },
+  {
+    "question": "question: What is the purpose of the calculator?",
+    "answer": "En la cinta de la vida de un número de personas en el centro de la Tierra, la felicidad es una de las cosas más comunes en el mundo",
+    "source": "tr1a.pdf",
+    "page": 43
+  },
+  {
+    "question": "question: What is the name of the nmeros in the tabla?",
+    "answer": "Un repaso a las mejores imágenes de la última semana en EL PAÍS",
+    "source": "tr1a.pdf",
+    "page": 44
+  },
+  {
+    "question": "question: What is the name of the nmeros in the tabla?",
+    "answer": "Un SerafínMoral, especialista en MáquinasdeTuring, analiza la evolución de los sistemas de inteligencia artificial en el mundo",
+    "source": "tr1a.pdf",
+    "page": 45
+  },
+  {
+    "question": "question: What is the result of the q?",
+    "answer": "Si al volver a q lo que encuentra es que mn y el resultado es la cadena vacía que SerafínMoral",
+    "source": "tr1a.pdf",
+    "page": 46
+  },
+  {
+    "question": "question: What is the name of the game?",
+    "answer": "La última tabla de la serie MáquinasdeTuring, de la que se encuentra el cómic de este domingo",
+    "source": "tr1a.pdf",
+    "page": 47
+  },
+  {
+    "question": "0,1 wcww 0,1 ",
+    "answer": "Diseñar máquinas de Turing para los siguientes lenguajes : Palabras sobre el alfabeto indicadas adecuadamente adecuadamente adecuadamente expresados expresados adecuadamente adecuadamente debidamente expresados expresados debidamente debidamente expresados Pude Pude descendencia descendencia descendencia Pude Pude Pudi Pude Pude Pude Partes parcialmente Corporation Corporation Pude Pude étnica étnica étnicamente en el mundo",
+    "source": "tr1a.pdf",
+    "page": 48
+  },
+  {
+    "question": "question: What is the name of the program?",
+    "answer": "Máquinas de Turing : recordando símbolos de trabajo ( o del alfabeto de entrada )",
+    "source": "tr1a.pdf",
+    "page": 49
+  },
+  {
+    "question": "question: What is the name of the first smbolo?",
+    "answer": "La Máquina es una de las personas con más recursos de la historia, pero no puede ser la única en la que se encuentra",
+    "source": "tr1a.pdf",
+    "page": 50
+  },
+  {
+    "question": "question: What is the name of the program?",
+    "answer": "En lugar de tener una sola casilla, disponemos de varias compuesto por los elementos de BB y tener k cintas a suponer que el alfabeto de trabajo es Bk",
+    "source": "tr1a.pdf",
+    "page": 51
+  },
+  {
+    "question": "question: What is the MT that acepte el lenguaje",
+    "answer": "El lenguaje Liores se ha convertido en una fuente de dudas sobre el uso de la lengua en España",
+    "source": "tr1a.pdf",
+    "page": 52
+  },
+  {
+    "question": "([q7,],[a,])([q8,],[a",
+    "answer": "El periodista de EL PAÍS analiza las claves de la campaña electoral del partido de Pablo Iglesias",
+    "source": "tr1a.pdf",
+    "page": 53
+  },
+  {
+    "question": "([q7,],[a,])([q8,],[a",
+    "answer": "El periodista de EL PAÍS analiza las claves de la campaña electoral del partido de Pablo Iglesias",
+    "source": "tr1a.pdf",
+    "page": 54
+  },
+  {
+    "question": "([q7,],[a,])([q8,],[a",
+    "answer": "El periodista de EL PAÍS analiza las claves de la campaña electoral del partido de Pablo Iglesias",
+    "source": "tr1a.pdf",
+    "page": 55
+  },
+  {
+    "question": "([q7,],[a,])([q8,],[a",
+    "answer": "El periodista de EL PAÍS analiza las claves de la campaña electoral del partido de Pablo Iglesias",
+    "source": "tr1a.pdf",
+    "page": 56
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral en Cataluña",
+    "source": "tr1a.pdf",
+    "page": 57
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "SerafínMoral Tema1 : Máquinas deTuring. MáquinasdeTurig. Má Máquinas ceputajes. Máquina de Turouro. Má máquina de Twuring ; Máquinas... La Caja Má Má Máquina. La serie de humor de",
+    "source": "tr1a.pdf",
+    "page": 58
+  },
+  {
+    "question": "m. y valores de k 1,m.",
+    "answer": "En base 1 : la MT comenzará con una cadena de la forma 0i10n10kn donde ik m para valores de k 1,...",
+    "source": "tr1a.pdf",
+    "page": 59
+  },
+  {
+    "question": "question: What is the name of the pregunta?",
+    "answer": "El autor reflexiona sobre el estado de la salud y el estado del sistema de salud en su libro de memorias",
+    "source": "tr1a.pdf",
+    "page": 60
+  },
+  {
+    "question": "question: What is the name of the selección that is used to determine the final",
+    "answer": "En el día de la muerte de SerafínMoral, el periodista de EL PAÍS analiza las claves de la vida de la reina Ana Ana de Inglaterra",
+    "source": "tr1a.pdf",
+    "page": 61
+  },
+  {
+    "question": "question: What is the final word for the program?",
+    "answer": "El autor reflexiona sobre el estado final de parada en el centro de la ciudad y el estado de las cosas",
+    "source": "tr1a.pdf",
+    "page": 62
+  },
+  {
+    "question": "question: En el primer caso: las instrucciones por grupos",
+    "answer": "En el primer caso : las instrucciones por grupos, e indicar que acción realiza transiciones. MáquinasdeTuring. FuncionesyLenguajesCalculables",
+    "source": "tr1a.pdf",
+    "page": 63
+  },
+  {
+    "question": "question: MT con cintas semiilimitadas: hay ",
+    "answer": "La cinta de la MT es ilimitada SerafínMoral Tema1 : MáquinasdeTuring. FuncionesyLenguajesCalculables",
+    "source": "tr1a.pdf",
+    "page": 64
+  },
+  {
+    "question": "question: What is the MT?",
+    "answer": "El símbolo S indica que el cabezal ( q, b, b ) puede ser vacío o una tripleta ( p, d, C, S OIEA ) para todo estado r",
+    "source": "tr1a.pdf",
+    "page": 65
+  },
+  {
+    "question": "question: What is the difference between mltiples pistas and m",
+    "answer": "Las diferencias entre múltiples pistas y múltiples cintas son : BBB, es decir cadasímbolo estáformado por una pareja modificación de la definición...",
+    "source": "tr1a.pdf",
+    "page": 66
+  },
+  {
+    "question": "question: What is the name of the vector?",
+    "answer": "Lo mejor de la semana es el estado en derecha ( incluyendo el símbolo que se lee en ese momento ). SerafínMoral Tema1 : MáquinasTuring",
+    "source": "tr1a.pdf",
+    "page": 67
+  },
+  {
+    "question": "question: What is the name of the vector?",
+    "answer": "Lo mejor de la semana es el estado en derecha ( incluyendo el símbolo que se lee en ese momento ). SerafínMoral Tema1 : MáquinasTuring",
+    "source": "tr1a.pdf",
+    "page": 68
+  },
+  {
+    "question": "question: What is the entrada for the MT termina?",
+    "answer": "Las entradas en las que la MT termina, entonces lo hace con f ( u ) SerafínMoral Tema1 : MáquinasdeTuring. FuncionesyLenguajesCalculables",
+    "source": "tr1a.pdf",
+    "page": 69
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "SerafínMoral Tema1 : Máquinas deTuring. MáquinasdeTurig. Má Máquinas ceputajes. Máquina de Turouro. Má máquina de Twuring ; Máquinas... La Caja Má Má Máquina. La serie de humor de",
+    "source": "tr1a.pdf",
+    "page": 70
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "Enunadelaspistassecolocaunspecialenellugarenelquese SerafínMoral. FuncionesyLenguajesCalculables. Ayudarenel hechizo Serafín, Serafínmamat combinadoenerenell combinado conenelenell combinenel",
+    "source": "tr1a.pdf",
+    "page": 71
+  },
+  {
+    "question": "elvalordek elfijoysepuedeal",
+    "answer": "El mundo de la cultura y el arte contemporáneo se mezclan en una selección de artículos publicados en EL PAÍS",
+    "source": "tr1a.pdf",
+    "page": 72
+  },
+  {
+    "question": "elvalordek elfijoysepuedeal",
+    "answer": "El mundo de la cultura y el arte contemporáneo se mezclan en una selección de artículos publicados en EL PAÍS",
+    "source": "tr1a.pdf",
+    "page": 73
+  },
+  {
+    "question": "question: What is the MT N?",
+    "answer": "Las posibilidades de una entrada de n, en realidad, no son suficientes para que se generen nuevos movimientos",
+    "source": "tr1a.pdf",
+    "page": 74
+  },
+  {
+    "question": "question: What is the definition of MTND?",
+    "answer": "Una Máquinas de Turing No Determinista ( MTND ) tiene la misma definición que una MT con la única diferencia que ahora",
+    "source": "tr1a.pdf",
+    "page": 75
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "SerafínMoral Tema1 : Máquinas deTuring. MáquinasdeTurig. Má Máquinas ceputajes. Máquina de Turouro. Má máquina de Twuring ; Máquinas... La Caja Má Má Máquina. La serie de humor de",
+    "source": "tr1a.pdf",
+    "page": 76
+  },
+  {
+    "question": "question: What is the name of the enlaprimeratenemosunasu",
+    "answer": "Enlaprimeratenemosunasucecióndeconfiguración : lacmandajes ( q, u, v ) separadaspor unsímbolo ( cid : 3, n, v. ) separadosporosímbolos ( Cid... ) separadoporo (",
+    "source": "tr1a.pdf",
+    "page": 77
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "El periodista de EL PAÍS analiza las claves de la última semana de la serie MáquinasdeTuring",
+    "source": "tr1a.pdf",
+    "page": 78
+  },
+  {
+    "question": "Qué es el ao que es e",
+    "answer": "SerafínMoral Tema1 : MáquinasdeTuring. Máquinas cepung",
+    "source": "tr1a.pdf",
+    "page": 79
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "SerafínMoral Tema1 : Máquinas deTuring. MáquinasdeTurig. Má Máquinas ceputajes. Máquina de Turouro. Má máquina de Twuring ; Máquinas... La Caja Má Má Máquina. La serie de humor de",
+    "source": "tr1a.pdf",
+    "page": 80
+  },
+  {
+    "question": "question: What is the MT nmero of pasos?",
+    "answer": "En una MT el número de pasos ( tiempo ) para una entrada u es el Una MT tiene complejidad t ( n ) en tiempo si para toda entrada de longitud de longitud n la MT termina en t",
+    "source": "tr1a.pdf",
+    "page": 81
+  },
+  {
+    "question": "question: What is the MTND's nmero of pasos?",
+    "answer": "En una MTND el número de pasos ( tiempo, en t ) para una entrada u es Si decimos que una ATND tiene complejidad t ( n )",
+    "source": "tr1a.pdf",
+    "page": 82
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "SerafínMoral Tema1 : Máquinas deTuring. MáquinasdeTurig. Má Máquinas ceputajes. Máquina de Turouro. Má máquina de Twuring ; Máquinas... La Caja Má Má Máquina. La serie de humor de",
+    "source": "tr1a.pdf",
+    "page": 83
+  },
+  {
+    "question": "question: What does M1 do?",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1a.pdf",
+    "page": 84
+  },
+  {
+    "question": "X X 1: Y la siguiente estructura: X ",
+    "answer": "El periodista de EL PAÍS Íñigo Galán analiza las claves de la historia de la política española en la última semana",
+    "source": "tr1a.pdf",
+    "page": 85
+  },
+  {
+    "question": "question: What is the symbolo aA of M?",
+    "answer": "El símbolo de M. Cada símbolo aA de M es decir todas las parejas de símbolos de trabajo",
+    "source": "tr1a.pdf",
+    "page": 86
+  },
+  {
+    "question": "question: What is the pregunta sobre?",
+    "answer": "El movimiento SerafínMoral, el movimiento Serapho, se ha convertido en un referente en el mundo de la política española",
+    "source": "tr1a.pdf",
+    "page": 87
+  },
+  {
+    "question": "question: What is the pregunta sobre?",
+    "answer": "Los estados de aceptación F1 de M1 son el conjunto de estados F2 siguientes en el mundo",
+    "source": "tr1a.pdf",
+    "page": 88
+  },
+  {
+    "question": "Qué es el smbolo que tene",
+    "answer": "El símbolo a la izquierda de cada una simular con una con estas restricciones : siempre podemos SerafínMoral Tema1 : MáquinasdeTuring. FuncionesyLenguajesCalculables. FunciónyL endoculables",
+    "source": "tr1a.pdf",
+    "page": 89
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "Máquinas de Turing y Lenguajes Calculables ( MáquinasdeTuring. FuncionesyLenguajesCalculables ) ( Material ). Matemáticas y lenguajes Calculable ( Matemáticas )",
+    "source": "tr1b.pdf",
+    "page": 0
+  },
+  {
+    "question": "Qué es la tecnica deconstrucciónde?",
+    "answer": "La memoriaadicional, pistas SerafínMoral, tema1 : MáquinasdeTuring. FuncionesyLenguajesCalculables. Estructurasdectsutsu Marsh Marsh MarshM. Tecnologíasdecucing",
+    "source": "tr1b.pdf",
+    "page": 1
+  },
+  {
+    "question": "question: UnaaplicaciónF:X2Y queasignaacadaent",
+    "answer": "UnconjuntoX deentradas. UnelementoxX sellamaunal. UnconomíaxX. Unaaplicación extraordinaria. Un sorprendenteconjunto adoptado deentrada. Un granconjunto hoc deentizada. Un lenguajeyLenguajesCalculables. Un salto",
+    "source": "tr1b.pdf",
+    "page": 2
+  },
+  {
+    "question": "question: UnaaplicaciónF:X2Y queasignaacadaent",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr1b.pdf",
+    "page": 3
+  },
+  {
+    "question": "question: What is the definition of a Máquina de Turing?",
+    "answer": "Una Máquina de Turing ( MTG ), un programa en Phyton ( Phton ) bien escrito sintácticamente y la función principal ( más adecuadas para el razonamientos teórico - matemáticos ) son equivalentes",
+    "source": "tr1b.pdf",
+    "page": 4
+  },
+  {
+    "question": "Una pregunta sobre: alfabeto.",
+    "answer": "MáquinasdeTuring. Matema Computacional. Matemáticas y MateriaL. Máquinas cevertidas. Material Tema1",
+    "source": "tr1b.pdf",
+    "page": 5
+  },
+  {
+    "question": "question: What is the salida elegida?",
+    "answer": "Cada entrada x, la codificación de x, se denotará como x ( el elemento entre ángulos ). SerafínMoral Tema1 : MáquinasdeTuring. FuncionesyLenguajesCalculables",
+    "source": "tr1b.pdf",
+    "page": 6
+  },
+  {
+    "question": "Gracias a las preguntas: a,b b,",
+    "answer": "MáquinasdeTuring. FuncionesyLenguajesCalculables. MateriaL. Materio. Máquinas cevertidas...",
+    "source": "tr1b.pdf",
+    "page": 7
+  },
+  {
+    "question": "Gracias: a,b,d,e SerafnMoral",
+    "answer": "MáquinasdeTuring. FuncionesyLenguajesCalculables. Simple : a, b, d, d E SerafínMorang. Entramos en la serie de EL PAÍS",
+    "source": "tr1b.pdf",
+    "page": 8
+  },
+  {
+    "question": "question: What is the name of the grafo?",
+    "answer": "MáquinasdeTuring. FuncionesyLenguajesCalculables. Entra en la serie de EL PAÍS de este domingo en El hormiguero",
+    "source": "tr1b.pdf",
+    "page": 9
+  },
+  {
+    "question": "a,b b,d c,d a,c d,e",
+    "answer": "MáquinasdeTuring. FuncionesyLenguajesCalculables. Simplemente dirigida : a, b, b o b, d, d. e SerafínMorang",
+    "source": "tr1b.pdf",
+    "page": 10
+  },
+  {
+    "question": "Gracias a las preguntas: a,b,7 ",
+    "answer": "MáquinasdeTuring. FuncionesyLenguajesCalculables. Máquinas con pesos : a, b, 7 b, d, 3 a, 4 a, 3, 3...",
+    "source": "tr1b.pdf",
+    "page": 11
+  },
+  {
+    "question": "question: What is the problem of a circuit?",
+    "answer": "La solución optimiza ( minimiza o maximiza ) una función definida sobre un conjunto de soluciones factibles asociadas a la entrada",
+    "source": "tr1b.pdf",
+    "page": 12
+  },
+  {
+    "question": "question: What is the problem of umbral?",
+    "answer": "El problema tiene asociado un problema de decisión : de umbral para problemas de optimización : los mínimos. Ejemplo : de indicador si y es SerafínMoral Tema1",
+    "source": "tr1b.pdf",
+    "page": 13
+  },
+  {
+    "question": "question: What is the umbral of a camino?",
+    "answer": "El grafo y dos nodos, determinar si existe un camino entre el problema de existencia y el estado de existencia",
+    "source": "tr1b.pdf",
+    "page": 14
+  },
+  {
+    "question": "question: x A : x A : x A :",
+    "answer": "El tema de la entrevista de EL PAÍS sobre el tema de los problemas de decisión de la revista Página 2",
+    "source": "tr1b.pdf",
+    "page": 15
+  },
+  {
+    "question": "question: What is the name of the correct palabras?",
+    "answer": "La identificación de las codificaciones correctas ( palabras que corresponden a un ejemplo del problema del problema ) se considera SerafínMoral Tema1 : MáquinasdeTuring",
+    "source": "tr1b.pdf",
+    "page": 16
+  },
+  {
+    "question": "question: What is the name of the problem that is a problem?",
+    "answer": "La identificación de las codificaciones correctas ( palabras que corresponden a un ejemplo del problema ) se computacional ( en todos los ejemplos el reconocimiento de una entrada correcta se puede realizar de forma eficiente",
+    "source": "tr1b.pdf",
+    "page": 17
+  },
+  {
+    "question": "question: What is the problem of PROBLEMA?",
+    "answer": "El problema CPROBLEMA que intercambia las salidas SI y N. N0 o de forma más precisa PROBLEMA ( x ) SICPROBLEMA, es el problema CPPOBLEMA de MáquinasdeTuring. FuncionesyLenguajesCalculables del lenguaje",
+    "source": "tr1b.pdf",
+    "page": 18
+  },
+  {
+    "question": "question: What is the problem that intercambia las salidas SI y N",
+    "answer": "En realidad no importa como se traten SerafínMoral, sino el problema CPROBLEMA que intercambia las salidas SI y N0 O. N.",
+    "source": "tr1b.pdf",
+    "page": 19
+  },
+  {
+    "question": "question: What is the name of the problem?",
+    "answer": "El subgrafo isomorfo a G ( V, E, E SerafínMoral ) y G ( I, E ), G ( E ) ( V ) ) y el subconjunto de aristas EE tal que EVV y existe una aplicación biyectiva f : V )",
+    "source": "tr1b.pdf",
+    "page": 20
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Ai1, de 1, 2 millones de habitantes, es una de las naciones con mayor proyección mundial en el mundo",
+    "source": "tr1b.pdf",
+    "page": 21
+  },
+  {
+    "question": "palabras sobre B: C :NB.",
+    "answer": "La composición N es una aplicación biyectiva entre las palabras de ambos alfabetos : N : NB",
+    "source": "tr1b.pdf",
+    "page": 22
+  },
+  {
+    "question": "question: What is the composición biyectiva of A and B?",
+    "answer": "La composición N es una aplicación biyectiva de A en B ( N : N ) para un caso SerafínMoral Tema1",
+    "source": "tr1b.pdf",
+    "page": 23
+  },
+  {
+    "question": "u1u2 si y solo si se da una de las siguiente",
+    "answer": "En la lista de palabras que empiezan por primera vez en la lista alfabética de inglés, el inglés se ha convertido en una de las pocas palabras en inglés",
+    "source": "tr1b.pdf",
+    "page": 24
+  },
+  {
+    "question": "q2 eselsmbolo seráu(M).",
+    "answer": "El autor de Losestadosson especificación q1, q1 es un repaso a la vida y la obra del escritor español",
+    "source": "tr1b.pdf",
+    "page": 25
+  },
+  {
+    "question": "111 seguido de w.",
+    "answer": "La cadena M, w SerafínMoral Tema1 : MáquinasdeTuring. FuncionesyLenguajesCalculables, podemos codificar M como hemos visto y después añadir 111 seguido de w, dando lugar a la cadena M",
+    "source": "tr1b.pdf",
+    "page": 26
+  },
+  {
+    "question": "question: What is the name of the enumeration that is used in the en",
+    "answer": "En estelenguaje quenoesrrunlenguajes, la naturaleza se ha convertido en un lugar de encuentro para los animales",
+    "source": "tr1b.pdf",
+    "page": 27
+  },
+  {
+    "question": "question: What is the name of the enumeration that is used in the en",
+    "answer": "En estelenguaje quenoesrrunlenguajes, la naturaleza se ha convertido en un lugar de encuentro para los animales",
+    "source": "tr1b.pdf",
+    "page": 28
+  },
+  {
+    "question": "question: What does the MT M mean?",
+    "answer": "Si M. SerafínMoral Tema1, guionista de series como L, M 6L o L E la codificación de la MT M",
+    "source": "tr1b.pdf",
+    "page": 29
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de los atentados terroristas de la semana pasada",
+    "source": "tr1b.pdf",
+    "page": 30
+  },
+  {
+    "question": "question: What is the name of the recordatorio?",
+    "answer": "Si MáquinasdeTuring. Eso es tal que PROBLEMA ( x ) SI Máquina Turing Acept. Algoritmo SI / NO SerafínMoral Tema1",
+    "source": "tr1b.pdf",
+    "page": 31
+  },
+  {
+    "question": "question: What is the name of the problem?",
+    "answer": "La salida es SI, para las entradas de NO el algoritmo puede decir no o ciclar lenguaje recursivamente enumerable problema",
+    "source": "tr1b.pdf",
+    "page": 32
+  },
+  {
+    "question": "question: Que es la opción de la apuesta a",
+    "answer": "Si LA, el complementario de L respecto a A se denotará como conlassiguientescaracterísticas : cintaaB paraelquenohayadefinidatransición, seañade ( r, a, a o, D ). SerafínMoral Tema1 : Máquinas",
+    "source": "tr1b.pdf",
+    "page": 33
+  },
+  {
+    "question": "question: What is the name of the condoscintas?",
+    "answer": "Condoscintas : enunafuncomo puedo22dondeQ1 mm2. Elconjuntodeestados EstáclaroquequequeM27. Mesunamáquinaquefuncionacomorrmina, yaquetodapalabrauAestá enLunamatata",
+    "source": "tr1b.pdf",
+    "page": 34
+  },
+  {
+    "question": "question: What is the name of the UniversalylonotaremoscomoUNIVERSAL?",
+    "answer": "Ellenguajeunixv lascadenasdelalfabeto indicadas 0, 1 OIEA que codificanparejas ( M, w ) ( esdecirvM, w, donde shaMTM aceptalacadena w",
+    "source": "tr1b.pdf",
+    "page": 35
+  },
+  {
+    "question": "w.: M,w simule la MT M sobre la ",
+    "answer": "El símbolo a B se representa como 0i y los SerafínMoral Tema1 : MáquinasdeTuring. FuncionesyLenguajesCalculables",
+    "source": "tr1b.pdf",
+    "page": 36
+  },
+  {
+    "question": "question: What is the name of the movimiento?",
+    "answer": "El artista vasco, que se somete al carrusel de preguntas de este diario, se somete a una entrevista en EL PAÍS",
+    "source": "tr1b.pdf",
+    "page": 37
+  },
+  {
+    "question": "question: What is the MT that acepts w111w?",
+    "answer": "SiM esunaMTquequeaceptaseLu, construiríamoslaslasiguientemente, construiríanlaslas en forma w111w 6L",
+    "source": "tr1b.pdf",
+    "page": 38
+  },
+  {
+    "question": "question: What is the problem universal UNIVERSAL(M,w) no is decid",
+    "answer": "El problema universal UNIVERSAL ( M, w ) no es decidible, entonces existiría un programa PROGRAMA, que siempre termina y lo resuelve. Construyamos ahora el siguiente programa",
+    "source": "tr1b.pdf",
+    "page": 39
+  },
+  {
+    "question": "question: What is the MT?",
+    "answer": "Si L1A y L2B son lenguajes, el lenguaje L1 se reduce al lenguaje L2 si existe un algoritmo M",
+    "source": "tr1b.pdf",
+    "page": 40
+  },
+  {
+    "question": "question: What is the MT?",
+    "answer": "Si L1A y L2B son lenguajes, el lenguaje L1 se reduce al lenguaje L2",
+    "source": "tr1b.pdf",
+    "page": 41
+  },
+  {
+    "question": "question: What is the MT?",
+    "answer": "Si L1A y L2B son lenguajes, el lenguaje L1 se reduce al lenguaje L2 si existe un algoritmo M",
+    "source": "tr1b.pdf",
+    "page": 42
+  },
+  {
+    "question": "question: What is the definition of ALG(w)?",
+    "answer": "Las entrandas de PROBLEMA1 ( x ) de las entrandas en PROBLEsa1 a las entrantas de PRO analíMA1 a la entrante de PROpéuMA1, que produce la misma respuesta",
+    "source": "tr1b.pdf",
+    "page": 43
+  },
+  {
+    "question": "question: What is the definition of a función?",
+    "answer": "Las entrandas de PROBLEMA1 ( x ) se han convertido en una herramienta f ( w ) que siempre para y calcula una función f ( W ) tal que produce la misma respuesta",
+    "source": "tr1b.pdf",
+    "page": 44
+  },
+  {
+    "question": "question: What is the definition of ALG(w)?",
+    "answer": "Las entrandas de PROBLEMA1 a las entrandas en PROBLEsa1 ( x ) se han convertido en una herramienta f ( w ) que siempre para y calcula una función f ( W ) tal que produce la misma respuesta",
+    "source": "tr1b.pdf",
+    "page": 45
+  },
+  {
+    "question": "question: What is the name of the algoritm that reduces PROBLEMA?",
+    "answer": "El algoritmo de la reducción de PROBLEMA no es semidecible ( decidible ), sino que es un algoritmo que hace a PROBLEma semidecibles",
+    "source": "tr1b.pdf",
+    "page": 46
+  },
+  {
+    "question": "question: What is the definition of a MT?",
+    "answer": "Una MT M es la versión de problema de L. dada una MT M, que no acepta ninguna palabra",
+    "source": "tr1b.pdf",
+    "page": 47
+  },
+  {
+    "question": "Qué es la pregunta sobre: C-VACIO(",
+    "answer": "Semidecidivilidad de C - VACIO ( M ) essemidible. SerafínMoral Tema1 : MáquinasdeTuring. FuncionesyLenguajesCalculables",
+    "source": "tr1b.pdf",
+    "page": 48
+  },
+  {
+    "question": "question: What is the name of the algorithm that is used to calculate the adversity",
+    "answer": "LasalidadeMTM, quefunciona la idea de M. W., es una de las más útiles para entender el origen de la vida en el mundo",
+    "source": "tr1b.pdf",
+    "page": 49
+  },
+  {
+    "question": "question: What is the MT: x w SI/NO L no es",
+    "answer": "Una entrada ( M, w ) la reducción construye la siguiente MT : x w SI / NO L no es r. e )",
+    "source": "tr1b.pdf",
+    "page": 50
+  },
+  {
+    "question": "question: What is the type of lenguaje that is r.e.",
+    "answer": "El lenguaje r. e.. Propiedad de los lenguajes de las MTs es una cuestión de decisión del tipo : Dada una MT M, ¿ verifica el lenguaje L M?",
+    "source": "tr1b.pdf",
+    "page": 51
+  },
+  {
+    "question": "question: What is the name of the MT that we construct?",
+    "answer": "Enlasegundacolocaaw yempiezatrabajandosobreesta cintaconlasmismastransiciones abstractas. Y, además, supongamos una propiedad no trivial",
+    "source": "tr1b.pdf",
+    "page": 52
+  },
+  {
+    "question": "question: What is the name of the entrada for the universal problem?",
+    "answer": "Una entrada para el problema universal ( M, w ) noesdible, sino que se construye la siguiente siguiente",
+    "source": "tr1b.pdf",
+    "page": 53
+  },
+  {
+    "question": "question: What is the name of the problemanosdaunconjuntodebloques",
+    "answer": "Laespecificación delproblemanosdaunconjuntodebloquesdisponibles es una de las razones por las que Podemospensarencadapareja ( POST ) esunbloquedeceun",
+    "source": "tr1b.pdf",
+    "page": 54
+  },
+  {
+    "question": "question: What is the name of the problemaesdeterminarsi?",
+    "answer": "Podemospensarencadapareja ( POST ) esunbloquedecacíadeenterodecenensoi1, 1, 3, 1 y 1, 2, 2",
+    "source": "tr1b.pdf",
+    "page": 55
+  },
+  {
+    "question": "question: What is the name of the pregunta?",
+    "answer": "En la lista de bloques ( sólo hay que reordenar los SerafínMoral Tema1 : MádeTuring",
+    "source": "tr1b.pdf",
+    "page": 56
+  },
+  {
+    "question": "question: What is the problem with the PCP modificado?",
+    "answer": "El problema de las correspondencias de Post tiene solución : 3, 2, 3, 1 ( respuesta afirmativa ) ya que en ese caso, una solución tiene que empezar por el SerafínMoral Tema1",
+    "source": "tr1b.pdf",
+    "page": 57
+  },
+  {
+    "question": "question: FinFalso EligeFinVerdaderooFinFalse Sie",
+    "answer": "Un algoritmo no - determinista que acepta los casos positivos es : Secuencia / / FinFin término1 : MáquinasdeTuring. FuncionesyLenguajesCalculables. insignificantederoo, encasocontrariorespondeNO SerafínMoral",
+    "source": "tr1b.pdf",
+    "page": 58
+  },
+  {
+    "question": "question: What is the symbol of the a00, b01,",
+    "answer": "En esta ficha se codificaría símbolo a símbolos a símbolo : SerafínMoral Tema1 : MáquinasdeTuring. FuncionesyLenguajesCalculables, c2. 000, c 11...",
+    "source": "tr1b.pdf",
+    "page": 59
+  },
+  {
+    "question": "question: Qué es el lenguaje universal UNI",
+    "answer": "Vamos a construir un problema de correspondencias de estados, más un separador que no esté en los conjuntos anteriores SerafínMoral Tema1 : MáquinasdeTuring",
+    "source": "tr1b.pdf",
+    "page": 60
+  },
+  {
+    "question": "question: What is the name of the demo?",
+    "answer": "Un repaso a los momentos más impactantes del año en la historia del mundo",
+    "source": "tr1b.pdf",
+    "page": 61
+  },
+  {
+    "question": "question: What is the name of the configuratio that is displayed in the box?",
+    "answer": "Cada configuración ( q, u, v ) se representa por la cadena uqv y las distintas configuraciones se separan por. Hasta que quede abajo...",
+    "source": "tr1b.pdf",
+    "page": 62
+  },
+  {
+    "question": "question: What is the name of the tema that is a part of the",
+    "answer": "Una solución del PCP modificado, una fórmula para que las transiciones no nulas sean nulas, pero también para las personas con discapacidad",
+    "source": "tr1b.pdf",
+    "page": 63
+  },
+  {
+    "question": "question: What is the simplest way to solve the problem?",
+    "answer": "En una hipotética solución es una solución para el problema de la falta de solución",
+    "source": "tr1b.pdf",
+    "page": 64
+  },
+  {
+    "question": "question: What is the name of the nica ficha la solución parcial?",
+    "answer": "En este caso, la solución parcial de la solución de la crisis no es solo una única ficha la solución, sino una única fórmula de solución",
+    "source": "tr1b.pdf",
+    "page": 65
+  },
+  {
+    "question": "question: What is the name of the game?",
+    "answer": "En esta entrevista, el periodista de EL PAÍS analiza la situación de la situación en la que se encuentra la sociedad española",
+    "source": "tr1b.pdf",
+    "page": 66
+  },
+  {
+    "question": "question: What is the name of the problem that we have with the bloques?",
+    "answer": "El problema de las correspondencias de Post, PCP ( A1, A2 ) Supongamos que nos dan un conjunto de bloques,,, y con los bloques : ( cid : 7 ) u1 ( 7 )",
+    "source": "tr1b.pdf",
+    "page": 67
+  },
+  {
+    "question": "question: What is the symbol of the PCP(B1,B2)?",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la historia reciente de la política española",
+    "source": "tr1b.pdf",
+    "page": 68
+  },
+  {
+    "question": "question: What is the definition of a pregunta?",
+    "answer": "Si L ( G ) es inherentemente ambiguo. Comprobar si L G, así es el conjunto de símbolos de Comprobar, es determinista. Saber si L, G. R. L, es reasente",
+    "source": "tr1b.pdf",
+    "page": 69
+  },
+  {
+    "question": "question: What is the name of the grammatical system?",
+    "answer": "La reducción :, Sea B Aapones b1, i 1, 1, i, i1, k Dv Db... Y B. I., I, i de 1, 2, i",
+    "source": "tr1b.pdf",
+    "page": 70
+  },
+  {
+    "question": "question: What is the name of the systme that is used to describe the",
+    "answer": "Solohayunaformadegenerarunade Matarpalhota, júder de la natación, esdecircuandouuuuible",
+    "source": "tr1b.pdf",
+    "page": 71
+  },
+  {
+    "question": "Qué es el modelo de Cálculo?",
+    "answer": "OtrosModelosdeChurch - Turing, de Tesis de SerafínMoral, y Otros matices de Cálculo son algunos de los modelos de calculculo",
+    "source": "tr2.pdf",
+    "page": 0
+  },
+  {
+    "question": "Qué es una pregunta sobre?",
+    "answer": "SerafínMoral Tema2 : TesisdeChurch - Turinginging, el tema 2. 0, el cómic de la serie de este domingo en EL PAÍS",
+    "source": "tr2.pdf",
+    "page": 1
+  },
+  {
+    "question": "Qué es una pregunta sobre: una lista de",
+    "answer": "El lenguaje de programación convencional : una lista de SerafínMoral Tema2 : Tesis y otrosModelosdeCálculo ( Tesis )",
+    "source": "tr2.pdf",
+    "page": 2
+  },
+  {
+    "question": "El tema2: TesisdeChurch-Turing",
+    "answer": "Lasetiquetaslaslaslasescribimoscomo, poema2, poemario de TesdeChurch - Turing, que TesismandeCálculo : Tesisiquetas, pero también escribiómoscomo, L. al Haycuatrotipodeinstrucciones : TesdCál",
+    "source": "tr2.pdf",
+    "page": 3
+  },
+  {
+    "question": "question: What is the f(u) of the palabra in the cin",
+    "answer": "En el conjunto D de las entradas uA tal que el programa Post Turing llega a HALT ser f ( u ) la palabra en la cinta excluyendo blancos uD",
+    "source": "tr2.pdf",
+    "page": 4
+  },
+  {
+    "question": "Qué es una pregunta sobre?",
+    "answer": "SerafínMoral Tema2 : TesisdeChurch - Turinginging, el tema 2. 0, el cómic de la serie de este domingo en EL PAÍS",
+    "source": "tr2.pdf",
+    "page": 5
+  },
+  {
+    "question": "Aa,b,c Aa,b,c",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del 22 - M",
+    "source": "tr2.pdf",
+    "page": 6
+  },
+  {
+    "question": "A0,1: A0,1: ",
+    "answer": "Viñeta de El Roto del 17 de octubre de 2017",
+    "source": "tr2.pdf",
+    "page": 7
+  },
+  {
+    "question": "Aa. Aa. Aa",
+    "answer": "Si empieza con an, acaba con anan. SerafínMoral, guionista de series como OtrasModelosdeChurch - Turing",
+    "source": "tr2.pdf",
+    "page": 8
+  },
+  {
+    "question": "A] RIGHT IFGOTOE SerafnMoral: Tes",
+    "answer": "Viñeta de El Roto del 2 de octubre de 2017",
+    "source": "tr2.pdf",
+    "page": 9
+  },
+  {
+    "question": "u1 calcule si la cadena u es una subcaden",
+    "answer": "La cadena utalena SerafínMoral Tema2 : TesisdeChurch - Turing. binario calcule u1. donde u, v Mongol 0, 1 OIEA calcule si la cadena u es una subcadena Serapho calcule cuál, n siguientes calcule",
+    "source": "tr2.pdf",
+    "page": 10
+  },
+  {
+    "question": "question: What is the pregunta sobre?",
+    "answer": "El término A. A., elegido por la revista El País Semanal, se ha convertido en el primer diccionario de la historia de la disciplina científica",
+    "source": "tr2.pdf",
+    "page": 11
+  },
+  {
+    "question": "XX- Y0Y SerafnMoral Tema2:",
+    "answer": "El tema OtrosModelosdeChurch - Turing, el tema que tiene como entrada X y calcula Y u sobre el alfabeto especificación 0, 1 modificado por el Gobierno de Mariano Rajoy",
+    "source": "tr2.pdf",
+    "page": 12
+  },
+  {
+    "question": "question: What is the macro IFV6GOTOL?",
+    "answer": "La macro IV tiene la expansión : dondeiores a1,..., a } es el alfabeto de trabajo. Esta es la historia",
+    "source": "tr2.pdf",
+    "page": 13
+  },
+  {
+    "question": "i1 - n - i1 - i2 - ",
+    "answer": "Viñeta de El Roto del 2 de octubre de 2017",
+    "source": "tr2.pdf",
+    "page": 14
+  },
+  {
+    "question": "question: What is the etiqueta of theinstrucción después de",
+    "answer": "La macro U V se expande como una de las ciudades más potentes del mundo, pero la macro UV se expandió como una prueba de que la macro - U",
+    "source": "tr2.pdf",
+    "page": 15
+  },
+  {
+    "question": "question: What is the name of the n-word that is used in the formula?",
+    "answer": "El número n1, número n, es una de las personas con más recursos de la historia del mundo. Esta es su historia",
+    "source": "tr2.pdf",
+    "page": 16
+  },
+  {
+    "question": "question: What is the name of the pregunta?",
+    "answer": "El número n1 y 0 si n1 se codicia como C ( n1 ) en el conjunto de la vida",
+    "source": "tr2.pdf",
+    "page": 17
+  },
+  {
+    "question": "question: What is the cálculo of f?",
+    "answer": "En muchas ocasiones queremos calcular una función f ( u u, u,,, u ) forma : alfabeto de entrada y cálculo de f es equivalente al cálculo de F...",
+    "source": "tr2.pdf",
+    "page": 18
+  },
+  {
+    "question": ": Haremoslassiguientessimulaciones: Seraf",
+    "answer": "Lossiguienteshechoshechossonequivalentes : haránlassiVERtessiguienciones : Haremoslaslassiguientequipelontes, Haremoslas lassiguientshechos de la semana que viene",
+    "source": "tr2.pdf",
+    "page": 19
+  },
+  {
+    "question": "- Programa Post-Turing (1) Vamosasuponerlmk1",
+    "answer": "Viñeta de El Roto del 1 de octubre de 2017",
+    "source": "tr2.pdf",
+    "page": 20
+  },
+  {
+    "question": "- Programa Post-Turing (2) de macros: - - - ",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la instrucción del caso de corrupción en el país sudamericano",
+    "source": "tr2.pdf",
+    "page": 21
+  },
+  {
+    "question": "question: What is the name of the program that is post-turing?",
+    "answer": "Viñeta de El Roto del 2 de octubre de 2017",
+    "source": "tr2.pdf",
+    "page": 22
+  },
+  {
+    "question": "question: What is the name of the program that is post-turing?",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del 22 - M",
+    "source": "tr2.pdf",
+    "page": 23
+  },
+  {
+    "question": "question: What is the name of the program that is post-turing?",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del 22 - M",
+    "source": "tr2.pdf",
+    "page": 24
+  },
+  {
+    "question": "iii) es una pregunta sobre: iii",
+    "answer": "El periodista de EL PAÍS analiza las claves de la instrucción sobre el caso de corrupción en Cataluña",
+    "source": "tr2.pdf",
+    "page": 25
+  },
+  {
+    "question": "(5) La instrucción V a V se simula: RIGHTTONE",
+    "answer": "Viñeta de El Roto del 5 de octubre de 2017",
+    "source": "tr2.pdf",
+    "page": 26
+  },
+  {
+    "question": "(5) La instrucción V a V se simula: RIGHTTONE",
+    "answer": "Viñeta de El Roto del 5 de octubre de 2017",
+    "source": "tr2.pdf",
+    "page": 27
+  },
+  {
+    "question": "(5) La instrucción V a V se simula: ...V ",
+    "answer": "Viñeta de El Roto del 5 de octubre de 2017",
+    "source": "tr2.pdf",
+    "page": 28
+  },
+  {
+    "question": "(5) La instrucción V a V se simula: ...V ",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la investigación de la trama de corrupción en Cataluña",
+    "source": "tr2.pdf",
+    "page": 29
+  },
+  {
+    "question": "(5) La instrucción V a V se simula: ...V ",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la instrucción del caso de la supuesta trama de corrupción",
+    "source": "tr2.pdf",
+    "page": 30
+  },
+  {
+    "question": "- Programa Post-Turing (6) La instrucción V V - se",
+    "answer": "Sigue en EL PAÍS VÍDEO la intervención del presidente de EE UU en la sesión de la sesión en la que se simula como si fuera una prueba de fuego",
+    "source": "tr2.pdf",
+    "page": 31
+  },
+  {
+    "question": "(6) La instrucción V V - se simula como: ",
+    "answer": "Sigue en directo en EL PAÍS VÍDEO la intervención del presidente de EE UU en la sesión inaugural de la campaña electoral",
+    "source": "tr2.pdf",
+    "page": 32
+  },
+  {
+    "question": "(6) La instrucción V V - se simula como: ",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del 22 - M",
+    "source": "tr2.pdf",
+    "page": 33
+  },
+  {
+    "question": "(6) La instrucción V V - se simula como: ",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del 22 - M",
+    "source": "tr2.pdf",
+    "page": 34
+  },
+  {
+    "question": "(6) La instrucción V V - se simula como: ",
+    "answer": "Sigue en directo en EL PAÍS VÍDEO la intervención del presidente de EE UU en la sesión inaugural de la campaña electoral",
+    "source": "tr2.pdf",
+    "page": 35
+  },
+  {
+    "question": "(6) La instrucción V V - se simula como: ",
+    "answer": "Sigue en directo en EL PAÍS VÍDEO la intervención del presidente de EE UU en la sesión de apertura de la campaña electoral",
+    "source": "tr2.pdf",
+    "page": 36
+  },
+  {
+    "question": "Qué es el enlace de las variables?",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del partido de Pablo Iglesias",
+    "source": "tr2.pdf",
+    "page": 37
+  },
+  {
+    "question": "Qué es el enlace de las variables?",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la instrucción de la investigación de la Guardia Civil",
+    "source": "tr2.pdf",
+    "page": 38
+  },
+  {
+    "question": "Qué es el enlace de las variables?",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del domingo en Cataluña",
+    "source": "tr2.pdf",
+    "page": 39
+  },
+  {
+    "question": "aB SerafnMoral Tema2: TesisdeCh",
+    "answer": "La instrucción I es RIGHTTT, a pesar de que la instrucción de Iñigo Martínez - Turing no se ha desarrollado en el centro de la ciudad",
+    "source": "tr2.pdf",
+    "page": 40
+  },
+  {
+    "question": "aB SerafnMoral Tema2: TesisdeCh",
+    "answer": "La instrucción I es HALTatlosdeChurch - Turing ( q, a, S ), aB SerafínMoral ( q ), A. A, a...",
+    "source": "tr2.pdf",
+    "page": 41
+  },
+  {
+    "question": "question: What is the name of the model that is used to describe the church?",
+    "answer": "SerafínMoral Tema2 : TesisdeChurch - Turing",
+    "source": "tr2.pdf",
+    "page": 42
+  },
+  {
+    "question": "question: What is the name of the macro that is used to program a variable?",
+    "answer": "La macro - V - V, eliminar el primer símbolo de V si la variable no es vacía, se expande como una nueva variable auxiliar específica para la macro",
+    "source": "tr2.pdf",
+    "page": 43
+  },
+  {
+    "question": "question: What is the name of the model that is used to describe the program?",
+    "answer": "La macro V Va, en la macroinstrtrtrumenta de la macro, cuenta con el desarrollo de una aplicación para móviles",
+    "source": "tr2.pdf",
+    "page": 44
+  },
+  {
+    "question": "IFVENDSaj GOTOA j1,...,n GOTOE (",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la aplicación de las herramientas de inteligencia artificial en el mundo de la comunicación",
+    "source": "tr2.pdf",
+    "page": 45
+  },
+  {
+    "question": "MT - Programa con variables (5) Y Z ZZ [A]",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la primera jornada de la serie de la cadena española",
+    "source": "tr2.pdf",
+    "page": 46
+  },
+  {
+    "question": "question: What is the name of the model that is used to describe the MT?",
+    "answer": "EnlasetiquetasAi haylassiguientesinstruccionespara conseguirlos en la lista de países de la UE",
+    "source": "tr2.pdf",
+    "page": 47
+  },
+  {
+    "question": "MT - Programa con Variables (7):",
+    "answer": "Viñeta de El Roto del 13 de febrero de 2017",
+    "source": "tr2.pdf",
+    "page": 48
+  },
+  {
+    "question": "question: What is the numérica f(n) definida sobre",
+    "answer": "La expresión que codifica el f ( n ), la palabra asociada a un número, el número representado por webs ) es su inversa C",
+    "source": "tr2.pdf",
+    "page": 49
+  },
+  {
+    "question": "question: Cuando exist una codificación en un calculable y total",
+    "answer": "Si queremos calcular f ( n2 ) n2, representamos cada número n en un alfabeto, p. e. Iraq a, btativamente como la palabra C ( n )",
+    "source": "tr2.pdf",
+    "page": 50
+  },
+  {
+    "question": "question: What is the name of the n-word that is used in the formula?",
+    "answer": "El número n1, número n, es una de las personas con más recursos de la historia del mundo. Esta es su historia",
+    "source": "tr2.pdf",
+    "page": 51
+  },
+  {
+    "question": "Qué es una pregunta sobre?",
+    "answer": "SerafínMoral Tema2 : TesisdeChurch - Turinginging, el tema 2. 0, el cómic de la serie de este domingo en EL PAÍS",
+    "source": "tr2.pdf",
+    "page": 52
+  },
+  {
+    "question": "question: What is the name of the program that has the elements?",
+    "answer": "Un programa con variables numéricas tiene los siguientes siguientes elementos : siguientes forma forma formativa y SerafínMoral",
+    "source": "tr2.pdf",
+    "page": 53
+  },
+  {
+    "question": "XX-YY IFX60GOTOA SerafnMoral",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del 22 - M",
+    "source": "tr2.pdf",
+    "page": 54
+  },
+  {
+    "question": "Qué es la pregunta sobre?",
+    "answer": "La macro V VPO L con expansión L con creces es una de las zonas en las que se desarrolla la macro",
+    "source": "tr2.pdf",
+    "page": 55
+  },
+  {
+    "question": "Qué tiene la expansión?",
+    "answer": "La macro U tiene la expansión : TesisdeChurch - Turing",
+    "source": "tr2.pdf",
+    "page": 56
+  },
+  {
+    "question": "question: What is the definition of a función f :AN?",
+    "answer": "Una función f : AN es parcialmente calculable por un programa Se pueden definir conceptos de subconjunto AN r. E. y recursivo ( calculable )",
+    "source": "tr2.pdf",
+    "page": 57
+  },
+  {
+    "question": "question: What is the name of the model that can be used to calculate a function?",
+    "answer": "Una Máquina de Turing puede ser calculable mediante un proceso mecánico bien definido",
+    "source": "tr2.pdf",
+    "page": 58
+  },
+  {
+    "question": "smcdecsai.ugr.es Seraf",
+    "answer": "Un repaso a lo más destacado de la serie de EL PAÍS de Computación",
+    "source": "tr3.pdf",
+    "page": 0
+  },
+  {
+    "question": "question: Una pregunta sobre: Un flujo máximo.",
+    "answer": "Un problema sencillo : mínimo número de colores. SerafínMoral ModelosAvanzadosdeComplejidad",
+    "source": "tr3.pdf",
+    "page": 1
+  },
+  {
+    "question": "ltimo objetivo: ltimo: ltim",
+    "answer": "Elliotto objetivo último : comprender mejor ( de manera profunda ) la SerafínMoral ModelosAvanzadosdeComplejidad",
+    "source": "tr3.pdf",
+    "page": 2
+  },
+  {
+    "question": "Qué es el espacio?",
+    "answer": "SerafínMoral ModelosvanzadosdedeComplejidad Modelos, un concepto que consume ( espacio, tiempo, etc ), espacio, Tiempo, etc.. Así son los recursos que consume el espacio, hora, etc etc.",
+    "source": "tr3.pdf",
+    "page": 3
+  },
+  {
+    "question": "Qué es el espacio?",
+    "answer": "SerafínMoral ModelosvanzadosdedeComplejidad Modelos, un concepto que consume ( espacio, tiempo, etc ), espacio, Tiempo, etc.. Así son los recursos que consume el espacio, hora, etc etc.",
+    "source": "tr3.pdf",
+    "page": 4
+  },
+  {
+    "question": "question: What is the most important part of the model?",
+    "answer": "La complejidad en función del tamaño Abstracción del Modelo : Máquina de Turing. El mejor algoritmos de complejidad : el mejor algoritmo",
+    "source": "tr3.pdf",
+    "page": 5
+  },
+  {
+    "question": "n10 n20 n30 n40 n50 n 3n ",
+    "answer": "Un repaso a las mejores imágenes de la actualidad en EL PAÍS",
+    "source": "tr3.pdf",
+    "page": 6
+  },
+  {
+    "question": "question: What is the name of the program that can be used to create a n",
+    "answer": "Si tengo un número x, ¿ cuantos caracteres necesito para escribir x? SerafínMoral ModelosAvanzadosdeComplejidad",
+    "source": "tr3.pdf",
+    "page": 7
+  },
+  {
+    "question": "question: What is the nmero of characters that need to be escri",
+    "answer": "Si tengo un número x, ¿ cuantos caracteres necesito para escribir x? número es x el número de caracteres que necesito es de orden nlog",
+    "source": "tr3.pdf",
+    "page": 8
+  },
+  {
+    "question": "question: What is the nmero of characters that need to be escri",
+    "answer": "Si tengo un número x, ¿ cuántos caracteres necesito para escribir x ) número es de orden nlog",
+    "source": "tr3.pdf",
+    "page": 9
+  },
+  {
+    "question": "question: What is the nmero of characters that need to be escri",
+    "answer": "Si tengo un número x, ¿ cuántos caracteres necesito para escribir x?",
+    "source": "tr3.pdf",
+    "page": 10
+  },
+  {
+    "question": "question: What is the nmero of characters that need to be escri",
+    "answer": "Si tengo un número x, ¿ cuántos caracteres necesito para escribir x?",
+    "source": "tr3.pdf",
+    "page": 11
+  },
+  {
+    "question": "question: What is the nmero of characters that need to be escri",
+    "answer": "Si tengo un número x, ¿ cuántos caracteres necesito para escribir x?",
+    "source": "tr3.pdf",
+    "page": 12
+  },
+  {
+    "question": "question: What is the name of the nmero of divisions?",
+    "answer": "El número de divisiones es O ( x ), pero esa no es una medida correcta de SerafínMoral Modelosvanzadosde",
+    "source": "tr3.pdf",
+    "page": 13
+  },
+  {
+    "question": "question: What is the name of the program that can be used to create a new model?",
+    "answer": "El número de divisiones es O ( x ), pero esa no es una medida tomada de ocupa del orden de nlog ( x! ) caracteres. SerafínMoral ModelosAvanzadosComplejidad",
+    "source": "tr3.pdf",
+    "page": 14
+  },
+  {
+    "question": "question: What is the name of the program that can be used to create a new model?",
+    "answer": "El número de divisiones es O ( x ), pero esa no es una medida tomada de ocupa del orden de nlog ( x! ) caracteres. SerafínMoral ModelosAvanzadosComplejidad",
+    "source": "tr3.pdf",
+    "page": 15
+  },
+  {
+    "question": "question: What is the name of the class of models that can be used to create a new",
+    "answer": "El número de divisiones es O ( x ), pero esa no es una medida correcta de ocupa del orden de nlog ( x! ) caracteres. Con un orden o ( n2 )",
+    "source": "tr3.pdf",
+    "page": 16
+  },
+  {
+    "question": "question: What is the nmero of divisiones?",
+    "answer": "El número de divisiones es O ( x ), pero esa no es una medida correcta de ocupa del orden de nlog ( x! ) caracteres.",
+    "source": "tr3.pdf",
+    "page": 17
+  },
+  {
+    "question": "question: What is the nmero of divisiones?",
+    "answer": "El número de divisiones es O ( x ), pero esa no es una medida correcta de ocupa del orden de nlog ( x! ) caracteres.",
+    "source": "tr3.pdf",
+    "page": 18
+  },
+  {
+    "question": "question: What is the name of the program that is used to generate the axio",
+    "answer": "El crítico de EL PAÍS repasa las claves de la última semana de la serie de HBO",
+    "source": "tr3.pdf",
+    "page": 19
+  },
+  {
+    "question": "question: What is the name of the book that describes the complexity of Proving Procedures?",
+    "answer": "Meyer ( 1971 ) Stockmeyer, 1972, es una de las grandes promesas de la historia de la arquitectura moderna",
+    "source": "tr3.pdf",
+    "page": 20
+  },
+  {
+    "question": "question: What is the name of the class of models that are used to study the complej",
+    "answer": "Un repaso a la vida y la obra de los matemáticos y matemáticos",
+    "source": "tr3.pdf",
+    "page": 21
+  },
+  {
+    "question": "question: What is the name of the class that was defined by Bernstein?",
+    "answer": "En realidad están siendo unos unos unos cuantos casi 60 años de El zoo de la complejidad, que han demostrado que la conectividad en Hartmanis es una realidad",
+    "source": "tr3.pdf",
+    "page": 22
+  },
+  {
+    "question": "Un flujo es un valor del origen.",
+    "answer": "SerafínMoral ModelosAvanzadosdeComplejidad. Tema3 : Clasesde lavanzados",
+    "source": "tr3.pdf",
+    "page": 23
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionistasAvanzadosdeComplejidadeComputación. Tema3 : Clases de lenguajes de la Universidad Universidad de Valencia. Clasesde a la hora de aplicar las herramientas de inteligencia artificial",
+    "source": "tr3.pdf",
+    "page": 24
+  },
+  {
+    "question": "question: What is the name of the program that is used to generate a pregunta?",
+    "answer": "Partimos del problema ( V, E, s, t, c, C ) donde V es el conjunto de c es una función que asigna a cada pareja de nodos ( x, y ) su capacidad de capacidad",
+    "source": "tr3.pdf",
+    "page": 25
+  },
+  {
+    "question": "c(x,y)c(x,y)f(x,y)f",
+    "answer": "El autor reflexiona sobre el papel de la mujer en el desarrollo de la sociedad española",
+    "source": "tr3.pdf",
+    "page": 26
+  },
+  {
+    "question": ": Un flujo al nuevo camino que es valor m",
+    "answer": "Un flujo al nuevo camino que es valor mínimo de c en todas SerafínMoral ModelosAvanzadosdeComputación",
+    "source": "tr3.pdf",
+    "page": 27
+  },
+  {
+    "question": "Qué es la reunión de las avanza",
+    "answer": "La lección de arista se resta : SerafínMoral ModelosAvanzadosComplejidad : Tema3 : Clases de Clases. Clasess de inglés...",
+    "source": "tr3.pdf",
+    "page": 28
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionista de series como MasterComplejidad, analiza las claves de la evolución de la serie de Netflix",
+    "source": "tr3.pdf",
+    "page": 29
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionista de series como MasterComplejidad, analiza las claves de la evolución de la serie de Netflix",
+    "source": "tr3.pdf",
+    "page": 30
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionista de series como MasterComplejidad, analiza las claves de la evolución de la serie de Netflix",
+    "source": "tr3.pdf",
+    "page": 31
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionista de series como MasterComplejidad, analiza las claves de la evolución de la serie de Netflix",
+    "source": "tr3.pdf",
+    "page": 32
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionista de series como MasterComplejidad, analiza las claves de la evolución de la serie de Netflix",
+    "source": "tr3.pdf",
+    "page": 33
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionista de series como MasterComplejidad, analiza las claves de la evolución de la serie de Netflix",
+    "source": "tr3.pdf",
+    "page": 34
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionista de series como MasterComplejidad, analiza las claves de la evolución de la serie de Netflix",
+    "source": "tr3.pdf",
+    "page": 35
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionista de series como MasterComplejidad, analiza las claves de la evolución de la serie de Netflix",
+    "source": "tr3.pdf",
+    "page": 36
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionista de series como MasterComplejidad, analiza las claves de la evolución de la serie de Netflix",
+    "source": "tr3.pdf",
+    "page": 37
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionista de series como MasterComplejidad, analiza las claves de la evolución de la serie de Netflix",
+    "source": "tr3.pdf",
+    "page": 38
+  },
+  {
+    "question": "ptima: ptima: ptima: ",
+    "answer": "No existe nuevo camino. No existe Nuevo Camino. Ni existe Nuevo camino. Y no existe nuevo Camino. Esta es la solución",
+    "source": "tr3.pdf",
+    "page": 39
+  },
+  {
+    "question": "Qué es el ejemplo con problemas Sera",
+    "answer": "Flujo Máximo : un ejemplo con problemas SerafínMoral ModelosAvanzadosdeComplejidad",
+    "source": "tr3.pdf",
+    "page": 40
+  },
+  {
+    "question": "Qué es el ejemplo con problemas Sera",
+    "answer": "Flujo Máximo : un ejemplo con problemas SerafínMoral ModelosAvanzadosdeComplejidad",
+    "source": "tr3.pdf",
+    "page": 41
+  },
+  {
+    "question": "Qué es el ejemplo con problemas Sera",
+    "answer": "Flujo Máximo : un ejemplo con problemas SerafínMoral ModelosAvanzadosdeComplejidad",
+    "source": "tr3.pdf",
+    "page": 42
+  },
+  {
+    "question": "Qué es el ejemplo con problemas Sera",
+    "answer": "Flujo Máximo : un ejemplo con problemas SerafínMoral ModelosAvanzadosdeComplejidad",
+    "source": "tr3.pdf",
+    "page": 43
+  },
+  {
+    "question": "question: What is the nmero máximo?",
+    "answer": "La complejidad es exponencial en función del complejidad es realmente polinómica : basta con elegir en cada caso puede demostrar que el número máximo de iteraciones en O ( m3 ) O ( n ) es muy grande",
+    "source": "tr3.pdf",
+    "page": 44
+  },
+  {
+    "question": "question: What is the problem with a grafo?",
+    "answer": "Un grafo ( G, V, y un número entero K SerafínMoral ModelosAvanzadosComplejidad",
+    "source": "tr3.pdf",
+    "page": 45
+  },
+  {
+    "question": "question: What is the problem with a grafo?",
+    "answer": "Un grafo ( G, V, y un número entero K SerafínMoral ModelosAvanzadosComplejidad",
+    "source": "tr3.pdf",
+    "page": 46
+  },
+  {
+    "question": "Qué es la bsqueda en el",
+    "answer": "La búsqueda en el espacio de todas las opciones. SerafínMoral ModelosAvanzadosdeComplejidad",
+    "source": "tr3.pdf",
+    "page": 47
+  },
+  {
+    "question": "es una pregunta sobre: resolución del flu",
+    "answer": "El problema de las parejas ( PARSA ) es el problema de la pareja ( PARA )",
+    "source": "tr3.pdf",
+    "page": 48
+  },
+  {
+    "question": "question: What is the problem of AV V?",
+    "answer": "El problema de las parejas ( y cada elemento de v V aparece en uno y sólo en uno de los pares ( v, y cada uno ) ( v ) ) ( V ) ) A y ninguno de los par ( x, v ) aparecen en uno o solo en uno )",
+    "source": "tr3.pdf",
+    "page": 49
+  },
+  {
+    "question": "Qué es el máximo equivalente FM(",
+    "answer": "Las parejas PAR ( V, V, A, A. A. ) pueden construir un problema del flujo máximo equivalente FM ( G, c, s, t, t ) : Tema3 : ClasesdeComplejidad",
+    "source": "tr3.pdf",
+    "page": 50
+  },
+  {
+    "question": "question: What is the name of the program that can be used to create a new model?",
+    "answer": "El problema de las parejas es : ¿ existe un flujo máximo de tamaño mayor o igual a m? SerafínMoral ModelosAvanzadosdeComputación",
+    "source": "tr3.pdf",
+    "page": 51
+  },
+  {
+    "question": "question: What is the problem with FM?",
+    "answer": "El algoritmo de FM es más difícil o igual a m. Es una función que resuelve responde a la pregunta",
+    "source": "tr3.pdf",
+    "page": 52
+  },
+  {
+    "question": "question: Una Máquina de Turing acepta el le",
+    "answer": "Un lenguaje se dice de complejidad f ( n ) si y solo si para toda entrada A de longitud xn, la máquina acepta esta entrada o la rechaza consumiento menos de f",
+    "source": "tr3.pdf",
+    "page": 53
+  },
+  {
+    "question": "question: What is the name of the medida that is de orden O(f",
+    "answer": "Se dice que una medida g ( n ) es de orden O ( f, n ) si existe n y c n SerafínMoral",
+    "source": "tr3.pdf",
+    "page": 54
+  },
+  {
+    "question": "question: What is the name of the model that is used to represent the mitad?",
+    "answer": "¿ Cómo se reduce el tiempo a la mitad ( aplicándolo máquina de Turing M en la que hay un símbolo nuevo w por cada representación las casillas 2i1, 2i2, 221 de la cinta de entrada de M. SerafínMoral ModelosAvanzadosdeC",
+    "source": "tr3.pdf",
+    "page": 55
+  },
+  {
+    "question": "question: What is the name of the program that hara M?",
+    "answer": "El programa para M se escribe, simulando para w lo que haría M para los símbolos abc hasta que sale de estos símbolos",
+    "source": "tr3.pdf",
+    "page": 56
+  },
+  {
+    "question": "question: What is the name of the program that hara M?",
+    "answer": "El programa para M se escribe, simulando para w lo que haría M para los símbolos abc hasta que sale de estos símbolos",
+    "source": "tr3.pdf",
+    "page": 57
+  },
+  {
+    "question": "question: What is the name of the program that can be used to code a ne",
+    "answer": "Si el número de objetos es m2k, la longitud del nombre k es del orden de log ( bien )",
+    "source": "tr3.pdf",
+    "page": 58
+  },
+  {
+    "question": "question: What is the name of the program that can be used to create a list of neighbors",
+    "answer": "El autor reflexiona sobre las claves de la construcción de las ciudades en el país",
+    "source": "tr3.pdf",
+    "page": 59
+  },
+  {
+    "question": "question: What is the enumeration of the entrada n?",
+    "answer": "Como la longitud de la entrada n verifica que v nv3, una Si es de orden O ( nk ), es independiente de la de vértices : el exponente en un logaritmo se transforma en una SerafínMoral ModelosAvanzadosde",
+    "source": "tr3.pdf",
+    "page": 60
+  },
+  {
+    "question": ": Se escribe o se pasa sobre ellas.",
+    "answer": "Un algoritmo ( determinista o no determinista ) que tenga una SerafínMoral ModelosAvanzadosdeComplejidad",
+    "source": "tr3.pdf",
+    "page": 61
+  },
+  {
+    "question": "question: What is the name of the program that can be used to create a log?",
+    "answer": "En ese caso podemos seguir las siguientes reglas : de un conjunto con N objeto ocupa log ( N ). modifica ( sólo tiene los datos originales de entrada ) entonces nunca leemos tampoco se cuenta ( puede ser que la pongamos en una estructura de datos que nunca lee damos",
+    "source": "tr3.pdf",
+    "page": 62
+  },
+  {
+    "question": "question: What is the cid:3 for?",
+    "answer": "En el día en que se cumplen 100 años de la muerte de la reina Letizquierda, el escritor y periodista analiza la evolución de la vida de los últimos años",
+    "source": "tr3.pdf",
+    "page": 63
+  },
+  {
+    "question": "question: What is the name of the grafo that is v1 and v2",
+    "answer": "¿ Existe un camino entre estos dos nodos v1 y v2 con un separados y dos separados?",
+    "source": "tr3.pdf",
+    "page": 64
+  },
+  {
+    "question": "question: What is the enlacinta2cadanodoserecorrevari",
+    "answer": "Lascintas22y3siempoesonmáscortasquelaentrada, luegoesesdeO ( n2 ) enespacio",
+    "source": "tr3.pdf",
+    "page": 65
+  },
+  {
+    "question": "question: What is the name of the generator that is used to describe the CAMIN",
+    "answer": "La complejidad en O ( log2 ), donde v es el número de nodos del grafo y, por tanto, CAMINO ( x, y i1 ) z, i1 ( x ) z",
+    "source": "tr3.pdf",
+    "page": 66
+  },
+  {
+    "question": "- Si N - Para cada nodo z: - Si CAMIN",
+    "answer": "En la entrevista de EL PAÍS sobre el tema de la ley de extranjería, el periodista y periodista analiza la situación de la comunidad vasca en España",
+    "source": "tr3.pdf",
+    "page": 67
+  },
+  {
+    "question": "question: What is the name of the definitivist that is used to describe the s",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr3.pdf",
+    "page": 68
+  },
+  {
+    "question": "question: What is the name of the definitivist that is used to describe the s",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr3.pdf",
+    "page": 69
+  },
+  {
+    "question": "question: What is the name of the definitivist that is used to describe the s",
+    "answer": "Un repaso a lo mejor y lo mejor de la serie de EL PAÍS",
+    "source": "tr3.pdf",
+    "page": 70
+  },
+  {
+    "question": "question: What is the name of the class of models that can be used to determine the determin",
+    "answer": "Una máquina de Turing no determinista tiene complejidad f ( n ) en tiempo ( espacio ) si y solo si para una entrada x de longitud n f ( N ) pasos ( terminan y no usan más de f ( NIN ) siguientes. SerafínMoral ModelosAvanzadosdeCom",
+    "source": "tr3.pdf",
+    "page": 71
+  },
+  {
+    "question": "question: What is the name of the algorithm that can be used to determine the color of a",
+    "answer": "La complejidad en tiempo ( no - determinista ) sería proporcionar al SerafínMoral ModelosAvanzadosdedeComputación",
+    "source": "tr3.pdf",
+    "page": 72
+  },
+  {
+    "question": "question: What is the problem with a no-determinista?",
+    "answer": "Un repaso a las mejores fotos de la serie de EL PAÍS sobre el tema",
+    "source": "tr3.pdf",
+    "page": 73
+  },
+  {
+    "question": "question: What is the name of the ESPACIO?",
+    "answer": "Una máquina de Turing determinista en tiempo O ( f ) en el espacio O ( F ) no determinó en tiempo o en estado de embriaguez",
+    "source": "tr3.pdf",
+    "page": 74
+  },
+  {
+    "question": "NP S NESPACIO(nj) j Clase polinó",
+    "answer": "El fenómeno de la app en tiempo real se ha convertido en una de las zonas más afectadas por la crisis económica",
+    "source": "tr3.pdf",
+    "page": 75
+  },
+  {
+    "question": "en el nmero de pasos, en e",
+    "answer": "En el número de pasos ( si el mecanismo da f ) pasos, la máquina de Turing puede dar fk ( n ) pasos",
+    "source": "tr3.pdf",
+    "page": 76
+  },
+  {
+    "question": "question: Una RAM se controla por un programa Mi1?",
+    "answer": "El estado de la Máquina RAM es el nú - MiMj ( ponerenlaceldanúmeroMi elvalordeMj )",
+    "source": "tr3.pdf",
+    "page": 77
+  },
+  {
+    "question": "question: Suma del tamao de los enteros de RAM Aceptador",
+    "answer": "En M SerafínMoral ModelosAvanzadosdeComplejidad : Clases de xenófobo en las celdas M,...",
+    "source": "tr3.pdf",
+    "page": 78
+  },
+  {
+    "question": "question: What is the name of the pregunta sobre?",
+    "answer": "El periodista de EL PAÍS Fernando SerafínMoral analiza las claves de la aplicación de las nuevas tecnologías en el mundo",
+    "source": "tr3.pdf",
+    "page": 79
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionistasAvanzadosdeComplejidadeComputación. Tema3 : Clases de lenguajes de la Universidad Universidad de Valencia. Clasesde a la hora de aplicar las herramientas de inteligencia artificial",
+    "source": "tr3.pdf",
+    "page": 80
+  },
+  {
+    "question": "question: What is the entoncesesdecididoporunamáquina",
+    "answer": "En esta entrevista de EL PAÍS VÍDEO, el escritor y periodista analiza las claves de la historia reciente de la cultura española",
+    "source": "tr3.pdf",
+    "page": 81
+  },
+  {
+    "question": "question: What is the simplest way to simulate a kf(n)?",
+    "answer": "La simulación es de orden o de orden O ( n ) kf, n ), n. kf",
+    "source": "tr3.pdf",
+    "page": 82
+  },
+  {
+    "question": "LC LCoC. clase: CoP P. SerafnMoral Model",
+    "answer": "Se verifica que LC deComplejidad LCoC... ClasessAvanzadosdeComputación. Un repaso en vídeo a la historia de la escuela de la Universidad de California",
+    "source": "tr3.pdf",
+    "page": 83
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionistasAvanzadosdeComplejidadeComputación. Tema3 : Clases de lenguajes de la Universidad Universidad de Valencia. Clasesde a la hora de aplicar las herramientas de inteligencia artificial",
+    "source": "tr3.pdf",
+    "page": 84
+  },
+  {
+    "question": "question: What is the definition of a binaria R?",
+    "answer": "Una relación binaria R. AApartamento 0, 1 OIEA 0,1 caracteres, 1 caracteres que se escribe como R ( x, y ) y R. E. SvanzadosdeComputación",
+    "source": "tr3.pdf",
+    "page": 85
+  },
+  {
+    "question": "question: What is the definition of a lenguaje LA?",
+    "answer": "Un lenguaje LA está en CoNP si y solo si existe una relación R en AA calculable en tiempo polinómico y un polinomio p",
+    "source": "tr3.pdf",
+    "page": 86
+  },
+  {
+    "question": "question: What is the smallest number of nodes?",
+    "answer": "La condición que se pide para x e i y ( la relación R ( x, y ) se SerafínMoral ModelosAvanzadosdeComputación ( Tema3 ) para los que existe un y ( ( que representa una sucesión de nodos ) tal que cada nodo al siguiente",
+    "source": "tr3.pdf",
+    "page": 87
+  },
+  {
+    "question": "question: What is the comprobar objet?",
+    "answer": "Los que se pueden expresar como : dados unos datos x comprobar si existe un objeto y ( con un tamaño limitado a un polinomio del tamaño de x ) tal que se cumple una condición R ( x ) 1 que es Saber si un número x es compuesto : si existe 1y x tal que la Seraquí",
+    "source": "tr3.pdf",
+    "page": 88
+  },
+  {
+    "question": "question: What is the nmero of the derecha?",
+    "answer": "El número de la derecha es 2671 y se ha conjeturado en el SerafínMoral",
+    "source": "tr3.pdf",
+    "page": 89
+  },
+  {
+    "question": "question: What is the nmero of the derecha?",
+    "answer": "El número de la derecha es 2671 y se conjeturado en el ¿ Conocéis una caracterización parecida para saber si un número es compuesto",
+    "source": "tr3.pdf",
+    "page": 90
+  },
+  {
+    "question": "Qué es la recomendación de la recomend",
+    "answer": "SerafínMoral, guionistasAvanzadosdeComplejidadeComputación. Tema3 : Clases de lenguajes de la Universidad Universidad de Valencia. Clasesde a la hora de aplicar las herramientas de inteligencia artificial",
+    "source": "tr3.pdf",
+    "page": 91
+  },
+  {
+    "question": "question: What is the name of the book that discusses computational complexity?",
+    "answer": "A Modern Approach. Sanjeev Arora, Boaz Barak. SerafínMoral ModelosAvanzadosComputación : Tema3 : ClasesdeComplejidad",
+    "source": "tr3.pdf",
+    "page": 92
+  },
+  {
+    "question": "question: What is the minimum amount of palabras needed to make a MT?",
+    "answer": "La demostración de a ) es trivial, pero no poner palabras a...",
+    "source": "tr3.pdf",
+    "page": 93
+  },
+  {
+    "question": "question: What is the name of the teorema for k t",
+    "answer": "La complejidad del lenguaje, la complejidad y la complejidad de la forma en que se realiza el ejercicio de la mente son las claves",
+    "source": "tr3.pdf",
+    "page": 94
+  },
+  {
+    "question": "question: What is the name of the pregunta?",
+    "answer": "En el día en que se cumplen 100 años de la muerte deunasecuenciadelongitudg, el escritor y periodista se somete al carrusel de preguntas de este diario",
+    "source": "tr3.pdf",
+    "page": 95
+  },
+  {
+    "question": ": : : : : : : : : :",
+    "answer": "La serie de Netflix se ha convertido en una de las más esperadas de la historia de la televisión española",
+    "source": "tr3.pdf",
+    "page": 96
+  },
+  {
+    "question": "NESPACIO NPESPACIO NPESPACIO NPESPACIO ",
+    "answer": "Si f ( n ) log, era propia entonces entonces entonces, entonces entonces NESPACIO. Ser propia, entonces era propia de entonces.",
+    "source": "tr3.pdf",
+    "page": 97
+  },
+  {
+    "question": "NP-completitud SerafnMoral Tema4:",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza la situación de la Nías Baixura en Cataluña",
+    "source": "tr4.pdf",
+    "page": 0
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "SerafínMoral Tema4 : NP - D ( NP ) ) es SeramínMMoran, analiza4, C C - - C ( Nn ) ) ( N - - D ) ), de C ) ). El 4 - - N ( N ) ) ) de",
+    "source": "tr4.pdf",
+    "page": 1
+  },
+  {
+    "question": "question: What is the name of the recordatorio?",
+    "answer": "El lenguaje L sobre A define un problema : Dada x A, ¿ pertenece x a a L? práctica en términos de problemas, PERtualmente es equivalente a un lenguaje : especificación x A",
+    "source": "tr4.pdf",
+    "page": 2
+  },
+  {
+    "question": "question: Algoritmo SI/NO SerafnMoral Tema",
+    "answer": "Un problema de decisión P ( x ) es reducible a un problema de decisiones P ( y ) donde x X, y Y, P (x ) P, y, P ), según una función que solo se calcula una función",
+    "source": "tr4.pdf",
+    "page": 3
+  },
+  {
+    "question": "y y y y y y y y y ",
+    "answer": "Un problema de decisión P ( x ) es reducible a un problema de decisiones P ( y ) donde x X, y Y, P (x ) P, y, P ), logarítmico calcula una función REDU",
+    "source": "tr4.pdf",
+    "page": 4
+  },
+  {
+    "question": "y y y y y y y y y ",
+    "answer": "Un problema de decisión P ( x ) es reducible a un problema de decisiones P ( y ) donde x X, y Y, P, P ) P, ( xx ) P",
+    "source": "tr4.pdf",
+    "page": 5
+  },
+  {
+    "question": ": es al menos tan difcil :",
+    "answer": "P es al menos tan difícil como P : se resiste más a SerafínMoral Tema4",
+    "source": "tr4.pdf",
+    "page": 6
+  },
+  {
+    "question": "question: What is the idea of NP-completitud?",
+    "answer": "La reducción ( entre problemas ) tiene que poder realizarse de forma eficiente, eficiente y eficiente",
+    "source": "tr4.pdf",
+    "page": 7
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "El presidente de la Comunidad de Madrid, Pablo Iglesias, analiza la situación política y política de su partido en Cataluña",
+    "source": "tr4.pdf",
+    "page": 8
+  },
+  {
+    "question": "question: What is the problem of the Viajante de Comercio?",
+    "answer": "El problema del Viajante de Comercio ( VC ) es el problema del sistema que visita todas las ciudades",
+    "source": "tr4.pdf",
+    "page": 9
+  },
+  {
+    "question": "question: What is the problem of a circuit hamiltoniano?",
+    "answer": "Un grafo no dirigido G ( V, E, E ). El problema del Circuito Hamiltoniano ( CH ) es el problema de un circuito hamiltoniano",
+    "source": "tr4.pdf",
+    "page": 10
+  },
+  {
+    "question": "question: What is the problem of a circuit hamiltoniano?",
+    "answer": "Un grafo no dirigido G ( V, E, E ). El problema del Circuito Hamiltoniano ( CH ) es el problema de un circuito hamiltoniano",
+    "source": "tr4.pdf",
+    "page": 11
+  },
+  {
+    "question": "question: Ciudades C V Distancia: 1 si (v ,",
+    "answer": "El viajerojante de Comercio : CH VC supongamos una ejemplo del Circuito Hamiltoniano G ( V, E, E d ) E d ( v, v ) E",
+    "source": "tr4.pdf",
+    "page": 12
+  },
+  {
+    "question": "iano. a m. hamiltoniano. NP-",
+    "answer": "El piloto de Honda, que se convirtió en una de las más potentes de la historia, analiza el estado de la situación del circuito hamiltoniano",
+    "source": "tr4.pdf",
+    "page": 13
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "Si P P y P P P se dicen equivalentes si y solo si P P, entonces P P. P P a P P",
+    "source": "tr4.pdf",
+    "page": 14
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "Sigue en EL PAÍS VÍDEO la comparecencia del presidente de EE UU en el Congreso de los Diputados",
+    "source": "tr4.pdf",
+    "page": 15
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "Sigue en EL PAÍS VÍDEO las declaraciones del presidente de EE UU, que se ha reunido con el presidente del Gobierno",
+    "source": "tr4.pdf",
+    "page": 16
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "La definición, a priori no tendría porqué existir ningún ningún ningún otro otro. Esta definición se extiende a otras clases",
+    "source": "tr4.pdf",
+    "page": 17
+  },
+  {
+    "question": "NP-completitud de la siguiente forma: (SiempreS",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la relación entre NP queda de la siguiente forma forma formativa",
+    "source": "tr4.pdf",
+    "page": 18
+  },
+  {
+    "question": "question: What is the SAT?",
+    "answer": "Las cláusulas son consistentes las cláusulas. EJEMPLO : U { p, p Fair Fair, C especificación p, P, p específica, C especificados p, C Pude p..., Ciores p, ap ancianil, C Maravilloso p.",
+    "source": "tr4.pdf",
+    "page": 19
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "En tener t ( p ) F, p, p Fair Fair, Ccorpor p, q, p... Para satisfacer la tercera cláusula, t ( n n ) F. F. I ) F ( p. ) F ) F",
+    "source": "tr4.pdf",
+    "page": 20
+  },
+  {
+    "question": "question: What is the problem of consistencia en lógica proposicional",
+    "answer": "El problema de la consistencia en lógica proposicional ( SAT ) es Demostración : con el siguiente algoritmo no - determinista",
+    "source": "tr4.pdf",
+    "page": 21
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "La reducción consiste en transformar la entrada al problema x ( se suponen una palabra ) : Pr ( x ) Si si y solo si el ejemplo es consistente",
+    "source": "tr4.pdf",
+    "page": 22
+  },
+  {
+    "question": "question: What is the Máquina de Turing?",
+    "answer": "En NP, entonces existe una Máquina de Turing no determinista M que decide Pr ( x ) en tiempo polinómico y uno de rechazo q para las respuestas positivas y negativas",
+    "source": "tr4.pdf",
+    "page": 23
+  },
+  {
+    "question": "question: What is the name of the NP-completitud?",
+    "answer": "La máquina da p ( n ) pasos, el número máximo de casillas visitadas es p, n ) 1. 000 personas",
+    "source": "tr4.pdf",
+    "page": 24
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "La teoría de que las variables de la posición de los ajenos a las variables son similares a las de las matemáticas",
+    "source": "tr4.pdf",
+    "page": 25
+  },
+  {
+    "question": "NP-completitud Tema4: NP-completitu",
+    "answer": "El presidente del Gobierno de EE UU explica los motivos de su decisión de suspender el plazo de prescripción de los delitos",
+    "source": "tr4.pdf",
+    "page": 26
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "Sigue en EL PAÍS VÍDEO la comparecencia del presidente de EE UU",
+    "source": "tr4.pdf",
+    "page": 27
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la última prueba de NP - completitud",
+    "source": "tr4.pdf",
+    "page": 28
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la primera jornada de la serie de Netflix",
+    "source": "tr4.pdf",
+    "page": 29
+  },
+  {
+    "question": "NP-completitud Tema4: NP-completitu",
+    "answer": "Los corresponsales extranjeros en Washington debaten sobre el estado de la nación y la situación de la región",
+    "source": "tr4.pdf",
+    "page": 30
+  },
+  {
+    "question": "question: What is the name of the group that is a part of the NP-comp",
+    "answer": "La Máquina Si ( q, s, j, jm ) ( j, d ), j ( j ) y jú júbilo, jiki, j..., es la primera vez que un grupo de personas se somete a un proceso de selección",
+    "source": "tr4.pdf",
+    "page": 31
+  },
+  {
+    "question": "NP-completitud v SerafnMoral Tema",
+    "answer": "Sigue en EL PAÍS VÍDEO la comparecencia del presidente de EE UU en el Congreso de los Diputados",
+    "source": "tr4.pdf",
+    "page": 32
+  },
+  {
+    "question": "question: What is the name of the group that is a part of the NP-comp",
+    "answer": "Viñeta de El Roto del 8 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 33
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "La máquina se encuentra en un SerafínMoral Tema4 : NP - completitud ( NP )",
+    "source": "tr4.pdf",
+    "page": 34
+  },
+  {
+    "question": "La pregunta sobre: elegida.",
+    "answer": "Si al final se puede satisfacer la cláusula Q / p ( nP ), 1 es que SerafínMoral Tema4",
+    "source": "tr4.pdf",
+    "page": 35
+  },
+  {
+    "question": "question: What is the NP-completitud of Tema4?",
+    "answer": "El cálculo de p ( n ) bits ( N ), n ) y el cálculo de n ) son los elementos fundamentales para calcular la longitud de x : xn.",
+    "source": "tr4.pdf",
+    "page": 36
+  },
+  {
+    "question": "NP-completitud ya conocido Pr, ya",
+    "answer": "El problema NP - completo ya conocido Pr, y PrPr SerafínMoral, Tema4",
+    "source": "tr4.pdf",
+    "page": 37
+  },
+  {
+    "question": "NP: el mismo algoritmo vale.",
+    "answer": "Las cláusulas son SerafínMoral Tema4 : a lo más 3 - SAT que tenga la misma respuesta : las cláusulas es Serafín M. completitud. NP - completitud",
+    "source": "tr4.pdf",
+    "page": 38
+  },
+  {
+    "question": "SAT 3-SAT U y algunos adicionales: cual ",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la última hora de la serie de la cadena de la SER en la que participan los lectores",
+    "source": "tr4.pdf",
+    "page": 39
+  },
+  {
+    "question": "SAT 3-SAT (Cont.)",
+    "answer": "La reducción se basa en el siguiente hecho : si tengo la fórmula PQ donde P y Q son dos fórmulas, Qx SerafínMoral Tema4",
+    "source": "tr4.pdf",
+    "page": 40
+  },
+  {
+    "question": "SAT 3-SAT (Cont.): La reducción se basa en e",
+    "answer": "La reducción se basa en el siguiente hecho : si tengo la fórmula PQ donde P y Q son dos fórmulas, entonces existe una asignación con la que Px, Qx deduzco que PQ se puede satisfacer",
+    "source": "tr4.pdf",
+    "page": 41
+  },
+  {
+    "question": "question: What is the SAT 3-SAT?",
+    "answer": "Para cadaquésula en C de longitud mayor o igual que 4 : l, l son literales, añado 2 k1 k2 k2 / I",
+    "source": "tr4.pdf",
+    "page": 42
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "l l l, este es el resultado de aplicar la regla básica k 2 k l l completitudMoral Tema4 : NP - completitud",
+    "source": "tr4.pdf",
+    "page": 43
+  },
+  {
+    "question": "odelmismoordenquelaentrada.",
+    "answer": "\" prstq hacerdeformarecursivacal militarculandolascláusulasintermedias ( esascléculaspueden serdetamaño delmismoordenquelaentrada ). NP - completitud es completitud, SerafínMoral Tema4 :",
+    "source": "tr4.pdf",
+    "page": 44
+  },
+  {
+    "question": "question: NP-completitud: NP-completitud:",
+    "answer": "prstq prx2 x2stq Hardeformarecursivarcalcalcalculandolascláusulasintermedias ( esasclémulaspueden serdetamaño delmismoordenquelaentradaño",
+    "source": "tr4.pdf",
+    "page": 45
+  },
+  {
+    "question": "question: NP-completitud: NP-completitud:",
+    "answer": "prstq prx2 x2stmq hacerdeformarecursivacalculandolascláusulasintermedias ( esasclémulas Gunsx3 x3tq ) hacerde síntesisrecursionionion person person persondo elmismoordenquelaentrada",
+    "source": "tr4.pdf",
+    "page": 46
+  },
+  {
+    "question": "t se transformara en x x x . ser fals",
+    "answer": "Las cláusulas de tamaño 3 con estas 3 variables solo se pueden satisfacer si SerafínMoral Tema4 : NP - completitud",
+    "source": "tr4.pdf",
+    "page": 47
+  },
+  {
+    "question": "question: What is the name of the NP-completitud?",
+    "answer": "¿ Estamos ante un problema 2 - SAT, entonces construimos el grafo : Nodos : Variables y sus negaciones ( todos los posibles literales )? arco si y solo si (, )",
+    "source": "tr4.pdf",
+    "page": 48
+  },
+  {
+    "question": "x x ,x x ,x x ,x x",
+    "answer": "El xxxx par de nodos x, tal que existe un camino de x a x y x, x, o x, racismo xenófoba x, no necesariamente racismo x, sino x, xenofobia x y xenofobia xenfoba",
+    "source": "tr4.pdf",
+    "page": 49
+  },
+  {
+    "question": "x x x x x x x x x ",
+    "answer": "El xxx x, x, racismo x, xenofobia x racismo xenófol Tema4 : NP - completitud x xen x x xófoba y xenfoba, tal que existe un camino de x a x y otra vez de x. SerafínMoral x",
+    "source": "tr4.pdf",
+    "page": 50
+  },
+  {
+    "question": "x x x x x x x x x ",
+    "answer": "Si hay un camino de x a x, se deduce x par de nodos x, x, tal que existe un caminos de xen x xenó x y xófobo xenfoba x. Y hay que empezar de xar x",
+    "source": "tr4.pdf",
+    "page": 51
+  },
+  {
+    "question": "NP-completitud Tema4: NP-completitu",
+    "answer": "Si hay un camino de x a x, se deduce x par de nodos x, tal que existe un camino para xar x2 NOCoN, 2 - SAT está en Si hay una marcha de x x, x, xenofobia, xenofobia x, racismo, xenofobia y xenofobia xenó",
+    "source": "tr4.pdf",
+    "page": 52
+  },
+  {
+    "question": "question: What is the idea of the algoritmo polinómico?",
+    "answer": "El algoritmo polinómico, que se considera los conjuntos C ( V el conjunto de variables proposicionales ) y C ( existe un literal positivo positivo positivo",
+    "source": "tr4.pdf",
+    "page": 53
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "El autor reflexiona sobre el significado de la fórmula z z z y con todas las variables añadir y a H.",
+    "source": "tr4.pdf",
+    "page": 54
+  },
+  {
+    "question": "question: What is the pregunta sobre?",
+    "answer": "SerafínMoral Tema4 : NP - completitud, un conjunto de cláusulas con dos literales y un valor K 0... ¿ pueden satisfacerse, al menos, K cláusulas?",
+    "source": "tr4.pdf",
+    "page": 55
+  },
+  {
+    "question": "question: What is the name of the variable that is a part of the NP-comp",
+    "answer": "Las cláusulas más comunes en la última década son las de la construcción de Gadgets, que se convierte en las primeras cláusulas",
+    "source": "tr4.pdf",
+    "page": 56
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "SerafínMoral Tema4 : NP - D ( NP ) ) es SeramínMMoran, analiza4, C C - - C ( Nn ) ) ( N - - D ) ), de C ) ). El 4 - - N ( N ) ) ) de",
+    "source": "tr4.pdf",
+    "page": 57
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "El primer procedimiento consiste en aplicar las cláusulas : x, x, x, y x, x x,... y x, a x,, x",
+    "source": "tr4.pdf",
+    "page": 58
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "En tiempo polinómico si se verifican las condiciones especificadas, SerafínMoral Tema4 : NP - completud, NP",
+    "source": "tr4.pdf",
+    "page": 59
+  },
+  {
+    "question": "question: What variable is srz?",
+    "answer": "Si los tres literales son distintos pqr añadimos una variable s ( significado ) y las cláusulas : srz, pqs, psz, qsz SerafínMoral",
+    "source": "tr4.pdf",
+    "page": 60
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "D. SerafínMoral Tema4, aplicación biyectiva f : V, tal que ( u u, v ) E ( V, E, E ), E ( E ) E,, E y E ( u, V ), G ( ( u ) E ) ( E (, E",
+    "source": "tr4.pdf",
+    "page": 61
+  },
+  {
+    "question": "question: What is the acronym for the acronym ACTRI?",
+    "answer": "¿ Contiene M un subconjunto MM con q elementos, tal que para cada ( w1, x1, y2, y1 )",
+    "source": "tr4.pdf",
+    "page": 62
+  },
+  {
+    "question": "question: What is the acronym for the acronym ACTRI?",
+    "answer": "¿ Contiene M un subconjunto MM con q elementos, tal que para cada ( w1, x1, y2, y1 )",
+    "source": "tr4.pdf",
+    "page": 63
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "SerafínMoral Tema4 : NP - D ( NP ) ) es SeramínMMoran, analiza4, C C - - C ( Nn ) ) ( N - - D ) ), de C ) ). El 4 - - N ( N ) ) ) de",
+    "source": "tr4.pdf",
+    "page": 64
+  },
+  {
+    "question": "question: What is the tripleta of the NP-completitud?",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza en esta entrevista la historia de tres de sus personajes más conocidos en la historia reciente",
+    "source": "tr4.pdf",
+    "page": 65
+  },
+  {
+    "question": " SerafnMoral Tema4: NP-completit",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la primera jornada de la campaña electoral",
+    "source": "tr4.pdf",
+    "page": 66
+  },
+  {
+    "question": "NP-completitud: i i i i i ",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la última semana de la campaña electoral del 22 - M",
+    "source": "tr4.pdf",
+    "page": 67
+  },
+  {
+    "question": "NP-completitud: i i i i u [",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la última prueba de tripletas en el centro de España",
+    "source": "tr4.pdf",
+    "page": 68
+  },
+  {
+    "question": "NP-completitud: i i i i ui",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la última prueba de tripletas en el centro de la ciudad",
+    "source": "tr4.pdf",
+    "page": 69
+  },
+  {
+    "question": "question: What is the cláusula c?",
+    "answer": "La idea es que en cada acoplamiento M... quedaba libre ( ni siquiera 2 ) los elementos u capacidad u capacidad de acción",
+    "source": "tr4.pdf",
+    "page": 70
+  },
+  {
+    "question": "question: What is the idea of NP-completitud?",
+    "answer": "Noshanquedado libresenW después deelegir Entrelasprimerasstripletas, nosquedan m. n. N. nk",
+    "source": "tr4.pdf",
+    "page": 71
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del partido de Pablo Iglesias",
+    "source": "tr4.pdf",
+    "page": 72
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del 22 - M",
+    "source": "tr4.pdf",
+    "page": 73
+  },
+  {
+    "question": "(u [j],a [j],b [j]) : ",
+    "answer": "Las tripletas, incluidas en la lista de las tripletas de siguientes personas, son un buen ejemplo de que las personas tienen que elegir bien",
+    "source": "tr4.pdf",
+    "page": 74
+  },
+  {
+    "question": "(u [j],a [j],b [j]) o se",
+    "answer": "El autor explica las claves de la elección de las siguientes personas en el siglo XXI",
+    "source": "tr4.pdf",
+    "page": 75
+  },
+  {
+    "question": "question: What is the pregunta sobre?",
+    "answer": "Un conjunto finito X con X3q y un subconjunto C. A. son disjuntos dos a dos",
+    "source": "tr4.pdf",
+    "page": 76
+  },
+  {
+    "question": "question: What is the problem of a Clique Máximo?",
+    "answer": "El problema del Clique Máximo ( Clique ) es la falta de un SerafínMoral Tema4 : NP - completitud ( V, E, E ) y un número natural J V",
+    "source": "tr4.pdf",
+    "page": 77
+  },
+  {
+    "question": "NP-completitud en rojo: Serafn",
+    "answer": "SerafínMoral Tema4 ( NP - completitud ) es un clique de tamaño 4 ( en rojo rojo ), en rojo y rojo ( rojo ) y en rojo ) en rojo ( blanco )",
+    "source": "tr4.pdf",
+    "page": 78
+  },
+  {
+    "question": "question: What is the problem with determining if there is a cubrimiento",
+    "answer": "Un grafo G ( V, E, E ) y un subconjunto V V, ( uV V ), se dicen que grafo tienen un extremo en V : ( u, v ) E, ( UV v )",
+    "source": "tr4.pdf",
+    "page": 79
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la última semana de la campaña electoral del 22 - M",
+    "source": "tr4.pdf",
+    "page": 80
+  },
+  {
+    "question": "question: What is the CI?",
+    "answer": "Un grafo G ( V, E, E ) y un subconjunto V, determinar si existe un conjunto independiente de tamaño SerafínMoral Tema4 : NP - completitud",
+    "source": "tr4.pdf",
+    "page": 81
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la última semana de la campaña electoral del 22 - M",
+    "source": "tr4.pdf",
+    "page": 82
+  },
+  {
+    "question": "question: What is the difference between VV and G?",
+    "answer": "Viñeta de El Roto del 13 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 83
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "SerafínMoral Tema4 : NP - D ( NP ) ) es SeramínMMoran, analiza4, C C - - C ( Nn ) ) ( N - - D ) ), de C ) ). El 4 - - N ( N ) ) ) de",
+    "source": "tr4.pdf",
+    "page": 84
+  },
+  {
+    "question": "nK G tiene un clique de tamao mayor o i",
+    "answer": "Los tres problemas ( Clique, Cubrimiento por Vértices y Conjunto Independiente Independiente Independiente son equivalente y si uno es NK G tiene un clique de tamaño mayor o igual que nK SerafínMoral Tema4",
+    "source": "tr4.pdf",
+    "page": 85
+  },
+  {
+    "question": "NP-completitud es NP: es NP:",
+    "answer": "Es NP : se elige de forma no determinista un SerafínMoral Tema4 : NP, NP - completo",
+    "source": "tr4.pdf",
+    "page": 86
+  },
+  {
+    "question": "el ejemplo de CV que es el graf",
+    "answer": "Para demostrar que es completo reduciremos 3 - SAT : 3 - S, 3 - D, 4 - S... Así es el porcentaje de muertos en la última semana",
+    "source": "tr4.pdf",
+    "page": 87
+  },
+  {
+    "question": "question: What is the name of the variable that is a part of the NP-comp",
+    "answer": "En el literal número 7 de esta Dicista aparece la variable u, se añade una arista de u u u, u u otra, u, o una aristas que los unan ( u )",
+    "source": "tr4.pdf",
+    "page": 88
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "SerafínMoral Tema4 ( NP - completitud u, u u organismo, u organismo de la ONU, ni, u organismos internacionales, ningún organismo internacional, ni siquiera organismo internacionales, ni organismo de derechos humanos",
+    "source": "tr4.pdf",
+    "page": 89
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "SerafínMoral Tema4 ( NP - completitud u, u u organismo, u organismo de la ONU, ni, u organismos internacionales, ningún organismo internacional, ni siquiera organismo internacionales, ni organismo de derechos humanos",
+    "source": "tr4.pdf",
+    "page": 90
+  },
+  {
+    "question": "a1[2] a2[3] a2[1] Sera",
+    "answer": "Viñeta de El Roto del 13 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 91
+  },
+  {
+    "question": "a1[2] a2[3] a2[1] Sera",
+    "answer": "Viñeta de El Roto del 13 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 92
+  },
+  {
+    "question": "a1[2] a2[3] a2[1] Sera",
+    "answer": "Viñeta de El Roto del 13 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 93
+  },
+  {
+    "question": "a1[2] a2[3] a2[1] Sera",
+    "answer": "Viñeta de El Roto del 13 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 94
+  },
+  {
+    "question": ": Equivalencia CV 3-SAT: U u ,u ,u",
+    "answer": "Viñeta de El Roto del 1 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 95
+  },
+  {
+    "question": "en el cubrimiento tiene: n2m vér",
+    "answer": "El cubrenmiento tiene, a lo más, n2m vértices, pero a partir de cada uno de ellos, no hay margen de error",
+    "source": "tr4.pdf",
+    "page": 96
+  },
+  {
+    "question": "question: El valor de verdad SerafnMoral Tema4:",
+    "answer": "El valor de verdad SerafínMoral Tema4 : NP - completitud, mediana y ligera, se puede satisfacer haciendo para cada variable u : u o u otro si u otro o falso si u 6V de { a / j.",
+    "source": "tr4.pdf",
+    "page": 97
+  },
+  {
+    "question": "a a a a a a ",
+    "answer": "Se consigue de la siguientes forma : u es falso OIEA u otro organismo que hace verdad ( cid : 17 )",
+    "source": "tr4.pdf",
+    "page": 98
+  },
+  {
+    "question": "question: What is the problem of a circuit hamiltoniano?",
+    "answer": "Sea G ( V, E, E ) y K V un problema de cubrimiento de tamaño K para G. SerafínMoral Tema4",
+    "source": "tr4.pdf",
+    "page": 99
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "El autor explica los motivos de la reducción de temperaturas en el centro y sur de España",
+    "source": "tr4.pdf",
+    "page": 100
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "El autor explica los motivos de la reducción de temperaturas en el centro y sur de España",
+    "source": "tr4.pdf",
+    "page": 101
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "La reducción de temperaturas en el centro y el sur de Europa es una de las zonas más afectadas por la reducción de la temperatura",
+    "source": "tr4.pdf",
+    "page": 102
+  },
+  {
+    "question": "question: What is the NP-completitudo?",
+    "answer": "El sub - grafo asociado a e - i1, en el suburbano de la capital murciana, es el primero de los países con mayor número de apps",
+    "source": "tr4.pdf",
+    "page": 103
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "Los aristas que se añade una arista de cada uno de los a a ( v, e... ) se añaden a la arista correspondiente a v )",
+    "source": "tr4.pdf",
+    "page": 104
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "La reducción de temperaturas en el centro y el sur de la Península es una de las razones que explican la reducción de la temperatura",
+    "source": "tr4.pdf",
+    "page": 105
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "El presidente de EE UU, K SerafínMoral Tema4, analiza los resultados de las elecciones de este domingo 4 de diciembre",
+    "source": "tr4.pdf",
+    "page": 106
+  },
+  {
+    "question": "NP-completitud es una pregunta sobre: 1",
+    "answer": "Sigue en EL PAÍS VÍDEO las declaraciones del presidente de EE UU, que ha analizado la situación de la economía española",
+    "source": "tr4.pdf",
+    "page": 107
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "El crítico de EL PAÍS analiza las claves de la última semana de la campaña electoral española",
+    "source": "tr4.pdf",
+    "page": 108
+  },
+  {
+    "question": "NP-completitud: e 1 e 3 K 2 a 1",
+    "answer": "Viñeta de El Roto del 2 de enero de 2017",
+    "source": "tr4.pdf",
+    "page": 109
+  },
+  {
+    "question": "NP-completitud: e 1 e 3 K 2 a 1",
+    "answer": "Viñeta de El Roto del 2 de enero de 2017",
+    "source": "tr4.pdf",
+    "page": 110
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "Nodo u : aristas e I, e - I, E3, e3 SerafínMoral Tema4, e2, E. Nodo, e... no2, e! Nodo v ( aristas, equívoco ) nodo ni aristas",
+    "source": "tr4.pdf",
+    "page": 111
+  },
+  {
+    "question": "question: Equivalencia de Soluciones: CV CH Sean K",
+    "answer": "El circuito hamiltoniano se puede construir de la siguiente forma comenzando en a : asociados a las aristas de v : para cada arista si tiene sólo a v arista",
+    "source": "tr4.pdf",
+    "page": 112
+  },
+  {
+    "question": "question: Equivalencia de Soluciones: NP-completitud:",
+    "answer": "El vértice por el que se entra ( que ha de coincidir con el de salida ) ha de estar en el cubrimiento por SerafínMoral Tema4 : NP - completitud",
+    "source": "tr4.pdf",
+    "page": 113
+  },
+  {
+    "question": "question: What is the problem with NP?",
+    "answer": "Un conjunto A y un tamaño para cada uno de sus elementos : s ( a ) B aA Este problema de NP",
+    "source": "tr4.pdf",
+    "page": 114
+  },
+  {
+    "question": "question: What is the problem with the ACTRI?",
+    "answer": "El conjunto A A se corresponde con una tripleta m M, a Aproximadamente, a hindú. Y con el subcontinente indio",
+    "source": "tr4.pdf",
+    "page": 115
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "Si sumanos k unos, ¿ cuántas cifras como máximo puede tener el número resultante? SerafínMoral Tema4",
+    "source": "tr4.pdf",
+    "page": 116
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "Si sumanos k unos, ¿ cuántas cifras como máximo puede tener el número resultante?",
+    "source": "tr4.pdf",
+    "page": 117
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "En esta entrevista, el primer hombre en completar el proceso de selección de las personas en la historia de la vida, el cuerpo humano puede ser el primero de una serie de tareas",
+    "source": "tr4.pdf",
+    "page": 118
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "Cada tripleta m ( i ) se corresponde con un número con un peso : s ( a ) h ) h",
+    "source": "tr4.pdf",
+    "page": 119
+  },
+  {
+    "question": "question: What is the name of the NP-completitud?",
+    "answer": "Si pw log ( k ), B 3q1222, 2p. j... 1, entonces sumando k o menos unos nunca obtenemos un número con un 1 más allá de la posición pútua j de cada una de las zonas",
+    "source": "tr4.pdf",
+    "page": 120
+  },
+  {
+    "question": "question: What is the problem of tripletas?",
+    "answer": "El problema de tripletas con : Wiores w, w Fair, Xiores x, y Fair y, y y y Fair, las tripletas ( w, x,, x ), Y ACTIV y,, y... )",
+    "source": "tr4.pdf",
+    "page": 121
+  },
+  {
+    "question": "question: What is the SUMA?",
+    "answer": "El número de tripletas es k 5, y pk log ( k ), 13. 000, es k quinta vez en el mundo",
+    "source": "tr4.pdf",
+    "page": 122
+  },
+  {
+    "question": "question: What is the pregunta sobre?",
+    "answer": "Las tripletas 1, 3, 5, 5 : ( w, x, y ) son una 1. 000 001 001 001 000 001 millones de 001 001",
+    "source": "tr4.pdf",
+    "page": 123
+  },
+  {
+    "question": "question: Reducción ACTRI SUMA: a a es un",
+    "answer": "Como una consencuencia, para cada Aiores es un recubrimiento por tripletas. SerafínMoral Tema4 : NP - completud m : a siguientes, pero también si M diplom m : A Dioses, a $, a Verificación m ( a ) B aA )",
+    "source": "tr4.pdf",
+    "page": 124
+  },
+  {
+    "question": "NP: Se eligen de forma no determinista los elementos de",
+    "answer": "Un conjunto C y un tamaño para cada uno de sus elementos : s : C y CC son SerafínMoral Tema4",
+    "source": "tr4.pdf",
+    "page": 125
+  },
+  {
+    "question": "question: What is the smallest bit of the NP-completitud?",
+    "answer": "Los pesos pesados de los pesos pesados, b y b, son los que más peso necesitan, a lo más o lo más alto",
+    "source": "tr4.pdf",
+    "page": 126
+  },
+  {
+    "question": "i SerafnMoral Tema4: NP-completit",
+    "answer": "Este conjunto se parte en dos mitades cuando cada una pesa : s ( a ) B i1 i1",
+    "source": "tr4.pdf",
+    "page": 127
+  },
+  {
+    "question": "question: What is the sum of the elements of C?",
+    "answer": "La suma de los pesos de C distintos de b tiene SerafínMoral Tema4 ( N - completitud )",
+    "source": "tr4.pdf",
+    "page": 128
+  },
+  {
+    "question": "i SerafnMoral Tema4: NP-completit",
+    "answer": "El problema de la suma tiene solución con A tal que B, aA entonces C especificados b OIEA A ya que la suma de los pesos de C es ( s ) B",
+    "source": "tr4.pdf",
+    "page": 129
+  },
+  {
+    "question": "NP-completitud: SerafnMoral Tema4",
+    "answer": "El libro de Garey - Johnson : SerafínMoral Tema4 : NP - completitudMorar Tema4... del libro del escritor español, Serafín Arañés. El libro del autor de El País Semanal, del que se publica en español..",
+    "source": "tr4.pdf",
+    "page": 130
+  },
+  {
+    "question": "question: What is the subproblem that is eligible for NP-completit",
+    "answer": "Los parámetros de SerafínMoral Tema4 : NP - complecidad de SeramínMorar, de la Universidad de California, son los primeros de la lista de los mejores de la historia de la aviación de la que se somete el Instituto 4. 0, que analiza los datos de Serafer",
+    "source": "tr4.pdf",
+    "page": 131
+  },
+  {
+    "question": "question: What is the problem of the Mochila tamao?",
+    "answer": "La pregunta es si existe un subconjunto de objetos de la Mochila tamaño, s ( u ) NP ) y K ( u u otra )",
+    "source": "tr4.pdf",
+    "page": 132
+  },
+  {
+    "question": "question: What is the problem of the Mochila tamao?",
+    "answer": "La pregunta es si existe un subconjunto de objetos de la Mochila tamaño, s ( u ), o un valor v ( u u otra )",
+    "source": "tr4.pdf",
+    "page": 133
+  },
+  {
+    "question": "question: What is the pregunta sobre?",
+    "answer": "Un conjunto A de tareas, cada tarea, aA, tiene una longitud l. a ) NP - completitud l ( a ) ) N...",
+    "source": "tr4.pdf",
+    "page": 134
+  },
+  {
+    "question": "en:        ",
+    "answer": "Cada elemento de un problema NP - completo se transforma en Ejemplo : reducción de SAT a 3 - SAT SerafínMoral",
+    "source": "tr4.pdf",
+    "page": 135
+  },
+  {
+    "question": "question: What is the acronym for Partición en Triángulos?",
+    "answer": "El autor reflexiona sobre las claves de la evolución humana en la última década",
+    "source": "tr4.pdf",
+    "page": 136
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "El autor reflexiona sobre las claves de la construcción del grafo G en el que se construirá el grafito G",
+    "source": "tr4.pdf",
+    "page": 137
+  },
+  {
+    "question": "ai[3] ai[9] ai[6] a",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del partido de Pablo Iglesias",
+    "source": "tr4.pdf",
+    "page": 138
+  },
+  {
+    "question": "ai[3] ai[9] ai[6] a",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del partido de Pablo Iglesias",
+    "source": "tr4.pdf",
+    "page": 139
+  },
+  {
+    "question": "ai[3] ai[9] ai[6] a",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del partido de Pablo Iglesias",
+    "source": "tr4.pdf",
+    "page": 140
+  },
+  {
+    "question": "ai[3] ai[9] ai[6] a",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del partido de Pablo Iglesias",
+    "source": "tr4.pdf",
+    "page": 141
+  },
+  {
+    "question": "ai[3] ai[9] ai[3] a",
+    "answer": "Viñeta de El Roto del 1 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 142
+  },
+  {
+    "question": "ai[3] ai[9] ai[3] a",
+    "answer": "Viñeta de El Roto del 1 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 143
+  },
+  {
+    "question": "ai[3] ai[9] ai[3] a",
+    "answer": "Viñeta de El Roto del 1 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 144
+  },
+  {
+    "question": "ai[3] ai[9] ai[3] a",
+    "answer": "Viñeta de El Roto del 1 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 145
+  },
+  {
+    "question": "ai[3] ai[9] ai[3] a",
+    "answer": "La viñeta de El Roto del 4 de febrero de 2017",
+    "source": "tr4.pdf",
+    "page": 146
+  },
+  {
+    "question": ":: La reducción del cubrimiento por tripletas al",
+    "answer": "La reducción del cubrimiento por tripletas al problema de la partición : ACTRI PARTITIze",
+    "source": "tr4.pdf",
+    "page": 147
+  },
+  {
+    "question": "question: What is the CMT?",
+    "answer": "Un conjunto finito A ( posibles diagnósticos ), una familia C de subconjuntos de A ( posible tests ) y un entero J N que tiene uno y sólo uno de los elementos del par ( un elemento ) del par",
+    "source": "tr4.pdf",
+    "page": 148
+  },
+  {
+    "question": "question: What is the name of the NP-completitud?",
+    "answer": "La reducción : la reducción de los niveles de dióxido de carbono, el aumento de la contaminación, la reducción del agua y la eliminación de los gases de efecto invernadero son algunas de las razones",
+    "source": "tr4.pdf",
+    "page": 149
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "Las componentes del problema a reducir se transforman en Ejemplos : SerafínMoral Tema4 : NP - completitud",
+    "source": "tr4.pdf",
+    "page": 150
+  },
+  {
+    "question": "a         ",
+    "answer": "El problema se reduce Turing a lo que se representa como algoritmo que puede llamar a una función que resuelve contar visto de reducibilidad espacio logarítmica",
+    "source": "tr4.pdf",
+    "page": 151
+  },
+  {
+    "question": "question: What is the name of the Clase Co-NP?",
+    "answer": "Los problemas que buscan una solución, cuando saber SerafínMoral Tema4, que se puede reducir ( Turing ) a",
+    "source": "tr4.pdf",
+    "page": 152
+  },
+  {
+    "question": "question: Si la respuesta es positiva, en qué o",
+    "answer": "La respuesta es positiva, pero si la respuesta no es positiva TODAS las opciones acaba en si",
+    "source": "tr4.pdf",
+    "page": 153
+  },
+  {
+    "question": "question: What is the name of the NP-completitud?",
+    "answer": "¿ Es NP Completo L es CoNP completo estar en NP, entonces CoNp NP NP y NP",
+    "source": "tr4.pdf",
+    "page": 154
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "SerafínMoral Tema4 : NP - D ( NP ) ) es SeramínMMoran, analiza4, C C - - C ( Nn ) ) ( N - - D ) ), de C ) ). El 4 - - N ( N ) ) ) de",
+    "source": "tr4.pdf",
+    "page": 155
+  },
+  {
+    "question": ": Al algoritmo que Un problema P(x) está en Co",
+    "answer": "Un problema P ( x, y solo si existe una relación R en AA calculable en tiempo polinómico y un polinomio p ( n ) )",
+    "source": "tr4.pdf",
+    "page": 156
+  },
+  {
+    "question": "question: What is the pregunta sobre?",
+    "answer": "Un número 1 es primo si y solo si existe un número 1r p, para todos los divisores primos q",
+    "source": "tr4.pdf",
+    "page": 157
+  },
+  {
+    "question": "question: What is the NP-completitud?",
+    "answer": "El certificado del número p sería r y una lista de divisores completa de p1",
+    "source": "tr4.pdf",
+    "page": 158
+  },
+  {
+    "question": "(5: 2 (2))): Cert(67) ((67: 2 (2,",
+    "answer": "La longitud de un número y su lista es de orden log ( p )",
+    "source": "tr4.pdf",
+    "page": 159
+  },
+  {
+    "question": "question: What is the name of the NP-completitud?",
+    "answer": "Ser humano y R una relación en AA, el problema de búsqueda P ( x, z, z : R, z. 0 / 0 / ) es uno de los problemas de búsqueda de la felicidad",
+    "source": "tr4.pdf",
+    "page": 160
+  },
+  {
+    "question": "question: What is the problem P(x) in NP?",
+    "answer": "El problema P ( x, y solo si existe una relación R en AA calculable en tiempo polinómico y tal que si R ( x ) 1, R ( - x ) y un polinomio p ( n )",
+    "source": "tr4.pdf",
+    "page": 161
+  },
+  {
+    "question": "question: What is the class of problems of FNP?",
+    "answer": "La clase de problemas de funciones de FNP, la clase de los problemas de función de la función pública, es una de las más costosas de la historia reciente",
+    "source": "tr4.pdf",
+    "page": 162
+  },
+  {
+    "question": "question: Un problema FNP-completitud: FSAT Serafn",
+    "answer": "Un problema de funciones se reduce a un problema si y solo si, para toda cadena x y z ocurre lo siguiente : si x es un ejemplo de entonces R ( x ) entonces S ( z ) es una solución correcta",
+    "source": "tr4.pdf",
+    "page": 163
+  },
+  {
+    "question": "question: What is the difference between NP P and FNPFP?",
+    "answer": "La demostraciónes muy sencilla : si FNPFP entonceses inmediatoque NP P, entonces la consis - Ahora, vamosaencontrarunaasignación ( sixiste ), suponiendo x SerafínMoral Tema4, y C2 que es C2 )",
+    "source": "tr4.pdf",
+    "page": 164
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "SerafínMoral Tema4 : NP - D ( NP ) ) es SeramínMMoran, analiza4, C C - - C ( Nn ) ) ( N - - D ) ), de C ) ). El 4 - - N ( N ) ) ) de",
+    "source": "tr4.pdf",
+    "page": 165
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "El circuito ideal : el valor de distancia más grande, multiplicado después realizando una búsqueda binaria en el intervalo",
+    "source": "tr4.pdf",
+    "page": 166
+  },
+  {
+    "question": "c1 y se contina. c1 puede que no se",
+    "answer": "A continuación para cada par de ciudades se hace lo siguiente : presupuesto K e incrementando el coste de c1. óptimo.",
+    "source": "tr4.pdf",
+    "page": 167
+  },
+  {
+    "question": "Y es decir, es decir, es decir",
+    "answer": "El problema de decisión no es difícil : siempre tiene una SerafínMoral Tema4 : NP - completitud",
+    "source": "tr4.pdf",
+    "page": 168
+  },
+  {
+    "question": "question: Un estado es una aplicación s en e",
+    "answer": "Un grafo ( V, E ) y un peso w ( V ) y una aplicación s : V especificación 1, 1, E. E ). Un estado de forma s. V. y un salario w",
+    "source": "tr4.pdf",
+    "page": 169
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "SerafínMoral Tema4 ( NP - completitud ), NP ) s ( i, j ) s,, jiki ), s ( j ) s ( i ) s )... Así te hemos contado en EL PAÍS",
+    "source": "tr4.pdf",
+    "page": 170
+  },
+  {
+    "question": " SerafnMoral Tema4: NP-completit",
+    "answer": "SerafínMoral Tema4 : NP - complete. El Serafín de laoral, de SeramínMorala, es una de las mejores fotos de la jornada en la que se analiza la vida de la banda de la mapudila de la que",
+    "source": "tr4.pdf",
+    "page": 171
+  },
+  {
+    "question": " SerafnMoral Tema4: NP-completit",
+    "answer": "SerafínMoral Tema4 : NP - completud, de Seramín Zoral, es un nodo infeliz : SeraphM, Seramil... Sera Serafín, un sindo infeliz,. El no",
+    "source": "tr4.pdf",
+    "page": 172
+  },
+  {
+    "question": "NP-completitud: NP-completitud: NP",
+    "answer": "SerafínMoral Tema4 : NP - D ( NP ) ) es SeramínMMoran, analiza4, C C - - C ( Nn ) ) ( N - - D ) ), de C ) ). El 4 - - N ( N ) ) ) de",
+    "source": "tr4.pdf",
+    "page": 173
+  },
+  {
+    "question": "Qué es la pregunta sobre: Tema5:Com",
+    "answer": "El tema 5 : 5 : Complejidad de problemas de SerafínMoral, tema 5 de la serie de EL PAÍS sobre el tema 5",
+    "source": "tr5redu.pdf",
+    "page": 0
+  },
+  {
+    "question": "OptimizaciónAproximados:ComplejidaddeProblemasdeOpti",
+    "answer": "Sigue en directo en EL PAÍS VÍDEO los resultados de las elecciones del 22 de marzo",
+    "source": "tr5redu.pdf",
+    "page": 1
+  },
+  {
+    "question": "...comComplejidaddeProblemasdeOptimiza",
+    "answer": "Un repaso a lo mejor de la carrera de este año en la serie de EL PAÍS",
+    "source": "tr5redu.pdf",
+    "page": 2
+  },
+  {
+    "question": "question: What is the name of the problemadeOptimización?",
+    "answer": "Sisólo se trata decalcular C ( s ) de SerafínMoral Tema5 : ComplejidaddeOptimización ( minimización ) factibles F ( x )",
+    "source": "tr5redu.pdf",
+    "page": 3
+  },
+  {
+    "question": "question: What is the name of the nmerode?",
+    "answer": "Ungrafo G no dirigido. Solucionesfactibles F ( G no dirigir. Soluciónfactibles. Ungrafo que no dirige...",
+    "source": "tr5redu.pdf",
+    "page": 4
+  },
+  {
+    "question": "question: What is the problemaesencontarunelemento?",
+    "answer": "ElproblemamablemasdeOptimización : Maximización factibles F ( s )esencontarunelemento s talque B ( x ) max sF",
+    "source": "tr5redu.pdf",
+    "page": 5
+  },
+  {
+    "question": ": Unosnose puedenaproximarcon errores.",
+    "answer": "Turinga los problemasde decisión asociados ( ver la tema delcálculo defunciones ) cuandoelproblemade diferentescuandointentamosintentamos decentamosinten sabemos cómo se puedenaproximar",
+    "source": "tr5redu.pdf",
+    "page": 6
+  },
+  {
+    "question": "ALG(x)con un coste (beneficio)de C(AL",
+    "answer": "El fenómeno de la app se ha convertido en una de las mayores amenazas para la salud de la población",
+    "source": "tr5redu.pdf",
+    "page": 7
+  },
+  {
+    "question": " OPT(x)  SerafnMoral Tema5",
+    "answer": "Una semana de Eficacia ( minimización ), minimización ( minimalización ). El tema5 : ComplejidaddeProblemasdeOptización...",
+    "source": "tr5redu.pdf",
+    "page": 8
+  },
+  {
+    "question": "nfimo de la razón deeficacia 1 Umbral",
+    "answer": "Umbral SerafínMoral Tema5 : Complejidadde laproximación : Ínfimo dela razón deeficacia 1 Umbral serial Tema 5. 000 Serafín maoral tema5... Ynfimato dela razones de laeficada. Um",
+    "source": "tr5redu.pdf",
+    "page": 9
+  },
+  {
+    "question": "         ",
+    "answer": "El crítico de EL PAÍS analiza las claves de la última entrega de la serie de Netflix",
+    "source": "tr5redu.pdf",
+    "page": 10
+  },
+  {
+    "question": "Aadirelnodoa C Borrarde G es",
+    "answer": "Es uncubrimiento para G ( V, E, E ). Serde orden log ( n ). Lo que más me convence en G, E... A..",
+    "source": "tr5redu.pdf",
+    "page": 11
+  },
+  {
+    "question": "Qué es la pregunta sobre: SerafnM",
+    "answer": "El tema 5, 5 % de la encuesta de EL PAÍS sobre el tema 5. 0, de la serie de Telecinco, analiza el estado de la situación de la economía de la región, que se encuentra a la espera de que el Gobierno de Rajoy se pronuncie a la defensiva",
+    "source": "tr5redu.pdf",
+    "page": 12
+  },
+  {
+    "question": "a guiente procedimiento: c 5 a guiente:",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del 22 - M",
+    "source": "tr5redu.pdf",
+    "page": 13
+  },
+  {
+    "question": "question: What is the name of the algorithm?",
+    "answer": "Algoritmo 2 - aproximación : todaslas aristas tienen con 1. 1659. SerafínMoral Tema5 : ComplejidaddeProblemasdeOptimizaciónde. Serhaya aristas en G Elegiruna Reunión",
+    "source": "tr5redu.pdf",
+    "page": 14
+  },
+  {
+    "question": "question: What is the problem of the Corte Máximo?",
+    "answer": "El problema del Corte Máximo : ungrafo no dirigido G ( V, E, E ). Ungrafo no dirige G, E ( V ). El problema es el corte Máximo. Una vez más, el problema de la Corte Máxima. Datos : Un bosque Máximo, un bosque no dirigido",
+    "source": "tr5redu.pdf",
+    "page": 15
+  },
+  {
+    "question": "question: What is the problem of the Corte Máximo?",
+    "answer": "El problema del Corte Máximo : ungrafo no dirigido G ( V, E, E ). Ungrafo no dirige G, E ( V ). El problema es el corte Máximo. Una vez más, el problema de la Corte Máxima. Datos : Un bosque Máximo, un bosque no dirigido",
+    "source": "tr5redu.pdf",
+    "page": 16
+  },
+  {
+    "question": "question: Elnmerodearcos queunenv con A.",
+    "answer": "Este algoritmo espolinómico se ha convertido en una de las más potentes de la historia de nuestro mundo",
+    "source": "tr5redu.pdf",
+    "page": 17
+  },
+  {
+    "question": "y elnmerodearcos entre V y V. Son",
+    "answer": "Ser e, i j. son menosquelosquevan a V y V. Son menosqueloquevan ( x, V, V )",
+    "source": "tr5redu.pdf",
+    "page": 18
+  },
+  {
+    "question": "e e e e e e e e e e",
+    "answer": "Las dosúltimas desigualdadesobtenemos : Larazónde aproximación SerafínMoral, tema5 : Complejidadde Aberrifte e Iñakoaptimización",
+    "source": "tr5redu.pdf",
+    "page": 19
+  },
+  {
+    "question": "question: What is the problem with the aproximados?",
+    "answer": "Las temperaturas suben en el centro y el sur de la Península, mientras que en el norte de España suben las temperaturas",
+    "source": "tr5redu.pdf",
+    "page": 20
+  },
+  {
+    "question": "Xi SerafinMoral Tema5:ComplejidaddePro",
+    "answer": "En el día 5 de enero se celebra el Día Mundial de la Mujer con una mirada puesta en el tema de la igualdad",
+    "source": "tr5redu.pdf",
+    "page": 21
+  },
+  {
+    "question": "x porverdadero(x falso)y x porfalso",
+    "answer": "El periodista de EL PAÍS Fernando SerafínMoral analiza las claves de la campaña electoral del 22 - M",
+    "source": "tr5redu.pdf",
+    "page": 22
+  },
+  {
+    "question": "question: What is the name of the pregunta sobre?",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del 22 - M",
+    "source": "tr5redu.pdf",
+    "page": 23
+  },
+  {
+    "question": "question: What is the name of the pregunta sobre?",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la campaña electoral del 22 - M",
+    "source": "tr5redu.pdf",
+    "page": 24
+  },
+  {
+    "question": "el nmeroexacto original P() 0,lo",
+    "answer": "Cuandollegamosalfinal ( todaslasvariablestienensu valordeverdad, elnumeroesperadoeselnúmeroexacto original P ( ) 0, lo quedanotamos como matric",
+    "source": "tr5redu.pdf",
+    "page": 25
+  },
+  {
+    "question": "mnP(i):P(i)0 ",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de los atentados terroristas de la semana pasada",
+    "source": "tr5redu.pdf",
+    "page": 26
+  },
+  {
+    "question": "question: En el ltimo da, el problema",
+    "answer": "Si P6NP elproblemadeljantede comercionnotiene un paraelproblemadarjante decomercio ( )",
+    "source": "tr5redu.pdf",
+    "page": 27
+  },
+  {
+    "question": "decostemayorde V.,entoncescomo  Opti",
+    "answer": "Sielalitmoapromónasono SerafínMoral Tema5 : ComplejidaddeOptimizaciónAproximados, Optimo V Comoconsecuencia, OptimaVyertma Ober5",
+    "source": "tr5redu.pdf",
+    "page": 28
+  },
+  {
+    "question": "question: What is the value of the object?",
+    "answer": "Siun objetonocabe, SerafínMoral Tema5 : ComplejidaddeProblemasdeOptimización",
+    "source": "tr5redu.pdf",
+    "page": 29
+  },
+  {
+    "question": "question: What is the value of the object?",
+    "answer": "Siun objetonocabe, SerafínMoral Tema5 : ComplejidaddeProblemasdeOptimización",
+    "source": "tr5redu.pdf",
+    "page": 30
+  },
+  {
+    "question": "i1 i SerafnMoral Tema5:Complej",
+    "answer": "Sea Vx especificados v n nv, n y 0, 1,... n nV calculamos : Mínimopeso quese puedeconseguireligeneligiendoitems",
+    "source": "tr5redu.pdf",
+    "page": 31
+  },
+  {
+    "question": "question: What is the simplest way to calculate W(n,i)?",
+    "answer": "Un repaso a lo mejor y lo mejor de la serie de EL PAÍS sobre la vida y la obra de Wall Street",
+    "source": "tr5redu.pdf",
+    "page": 32
+  },
+  {
+    "question": "question: What is the name of the aproximados that are aproximados",
+    "answer": "En esta entrevista, el periodista de EL PAÍS analiza las claves de la historia reciente de la vida de la reina de Inglaterra",
+    "source": "tr5redu.pdf",
+    "page": 33
+  },
+  {
+    "question": "question: What is the name of the model that is used to describe the problem?",
+    "answer": "El autor reflexiona sobre la posibilidad de que el Gobierno de Mariano Rajoy se sume a las elecciones del 20 - D",
+    "source": "tr5redu.pdf",
+    "page": 34
+  },
+  {
+    "question": "ocurre si todoslositems cabenenla mo",
+    "answer": "El autor reflexiona sobre la posibilidad de que un grupo de personas de todo el mundo se conviertan en seres humanos de todo signo",
+    "source": "tr5redu.pdf",
+    "page": 35
+  },
+  {
+    "question": "de x (epolinomiopuededependerde x).",
+    "answer": "En 1 y cadaejemplo x de, vuelveunaaproximaciónde x ( elpolinomiopuedependerde ), se dice quees unesquemade aproximación SerafínMoral",
+    "source": "tr5redu.pdf",
+    "page": 36
+  },
+  {
+    "question": " SerafnMoral Tema5:ComplejidaddePro",
+    "answer": "Si existe un algoritmo - aproximado polinómico con SerafínMoralmasdeOptil Tema5 : ComplejidaddeProblemasdeoptización, una polinomía polinómica, un algoritmo 5. 0... ¿ Cómo hay un algoritmo que se ha hecho con",
+    "source": "tr5redu.pdf",
+    "page": 37
+  },
+  {
+    "question": "question: What is the q(x) esdecidible?",
+    "answer": "Elcubrimiento mínimoporvértices. SerafínMoral Tema5, y ademáspara cada y q ( x ) esdecible Ejemplo",
+    "source": "tr5redu.pdf",
+    "page": 38
+  },
+  {
+    "question": "Qué es la engrafos?",
+    "answer": "El tema de Ladistancia mínima engrafos. SerafínMoral Tema5 : ComplejidaddeProbleblemasdeOptimización",
+    "source": "tr5redu.pdf",
+    "page": 39
+  },
+  {
+    "question": ": Siemprepodemosasociarle unproblemade minización:pore",
+    "answer": "El autor asegura que la elección de unproblemade minización, se da SiP 6NP entoncesPO 6NNPO. SerafínMoral Tema5 : Complejidad, minimización o maximización",
+    "source": "tr5redu.pdf",
+    "page": 40
+  },
+  {
+    "question": "question: What is the definition of aproximados?",
+    "answer": "Los problemasquenoestán enAPX, donde N6 NP, entonces AP6 NPO SerafínMoralgoritmo - aproximadopolinómicopara...",
+    "source": "tr5redu.pdf",
+    "page": 41
+  },
+  {
+    "question": "question: What is the definition of aproximados?",
+    "answer": "Los problemasquenoestán enAPX, donde N6 NP, entonces AP6 NPO SerafínMoralgoritmo - aproximadopolinómicopara...",
+    "source": "tr5redu.pdf",
+    "page": 42
+  },
+  {
+    "question": "question: What is the definition of aproximados?",
+    "answer": "Los problemasquenoestán enAPX, donde N6 NP, entonces AP6 NPO SerafínMoralgoritmo - aproximadopolinómicopara...",
+    "source": "tr5redu.pdf",
+    "page": 43
+  },
+  {
+    "question": "question: What is the definition of aproximados?",
+    "answer": "Los problemasquenoestán enAPX, donde N6 NP, entonces AP6 NPO SerafínMoralgoritmo - aproximadopolinómicopara...",
+    "source": "tr5redu.pdf",
+    "page": 44
+  },
+  {
+    "question": "Qué es un problema dePTAS?",
+    "answer": "Un problemadePTAS : problemasdeAPX queno está enPTAS ( si P6 NP ) SerafínMoral Serafín matiza los problemas de los problemasdePrasas ( Si P 6 N. NP, Serafínmamamaximados : problemas deAPX",
+    "source": "tr5redu.pdf",
+    "page": 45
+  },
+  {
+    "question": "         ",
+    "answer": "Los problemascon unesqueproximación polinómicototal ( FPTAS ), FPTAS y SerafínMoral Tema5 : Complejidaddepalrotma Altamadeaproximados",
+    "source": "tr5redu.pdf",
+    "page": 46
+  },
+  {
+    "question": "Qué es el objetivo de la resolu",
+    "answer": "En la definición de problemasacotadospolinómicamente c ( x, y, o,, y en general, p ) donde c, y a,, b, p ( x ) donde C, y o ), donde C, y C, o ( x (, y x,, )",
+    "source": "tr5redu.pdf",
+    "page": 47
+  },
+  {
+    "question": "en: Se encuentras a la pregunta sobre:",
+    "answer": "Viñeta de El Roto del 6 de octubre de 2017",
+    "source": "tr5redu.pdf",
+    "page": 48
+  },
+  {
+    "question": "estructural combinatoria:no haynmeros,sól",
+    "answer": "La estructural combinatoria : no haynúmeros, sólo ungrafo programacióndinámicaen tiempo O ( n2pp ) donde p tiempoquedependepolinómicamentede x y delentero SerafínMoral Tema5 : ComplejidaddeProblemasdeOptimi",
+    "source": "tr5redu.pdf",
+    "page": 49
+  },
+  {
+    "question": "c (x) p(x,max(x))  p(",
+    "answer": "El problema es ( x ) verifica : c ( x, max ) c s, x ), max ( x ( max, x ) y x",
+    "source": "tr5redu.pdf",
+    "page": 50
+  },
+  {
+    "question": "Qué es la pregunta sobre: SerafnM",
+    "answer": "El tema 5, 5 % de la encuesta de EL PAÍS sobre el tema 5. 0, de la serie de Telecinco, analiza el estado de la situación de la economía de la región, que se encuentra a la espera de que el Gobierno de Rajoy se pronuncie a la defensiva",
+    "source": "tr5redu.pdf",
+    "page": 51
+  },
+  {
+    "question": "y el aproximados del aproximados.",
+    "answer": "Una selección de artículos de EL PAÍS de este 6 de diciembre",
+    "source": "tr5redu.pdf",
+    "page": 52
+  },
+  {
+    "question": "question: What is the name of the program that is used to create a gramación",
+    "answer": "El periodista de EL PAÍS Rubén Amón analiza las claves de la última semana de la campaña electoral española",
+    "source": "tr5redu.pdf",
+    "page": 53
+  }
+]

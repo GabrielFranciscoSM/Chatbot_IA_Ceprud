@@ -1,0 +1,33 @@
+--- Página 1 ---
+SerafínMoralDepartamentodeCienciasdelaComputaciónDeMspoadcehloos4.A4vanzadosdeComputación
+
+--- Página 2 ---
+CLASES (Teoría) Aula 0. Miércoles 17:30-19:30 (Aula 0.6)
+
+--- Página 3 ---
+CLASES (Teoría) Aula 0. Miércoles 17:30-19:30 (Aula 0.6) CLASES (Prácticas) Subgrupo 1. Martes 15:30-17:30 Aula, 1.1 (Fernando Berzal) Subgrupo 2. Miércoles 15:30-17:30 Aula 1.4 (José Ramón Trillo) Subgrupo 3. Jueves 15:30-17:30 Aula 1.7 (Fernando Berzal)
+
+--- Página 4 ---
+CLASES (Teoría) Aula 0. Miércoles 17:30-19:30 (Aula 0.6) CLASES (Prácticas) Subgrupo 1. Martes 15:30-17:30 Aula, 1.1 (Fernando Berzal) Subgrupo 2. Miércoles 15:30-17:30 Aula 1.4 (José Ramón Trillo) Subgrupo 3. Jueves 15:30-17:30 Aula 1.7 (Fernando Berzal) Serafín Moral: Lunes 11-13, Martes: 11-13, Miércoles: 11- (Despacho 4) smcdecsai.ugr.es
+
+--- Página 5 ---
+SerafínMoralDepartamentodeCienciasdelaComputaciónDeMspoadcehloos4.A4vanzadosdeComputación
+
+--- Página 6 ---
+Informática Teórica: Dos Asignaturas Primer Cuatrimestre - Obligatoria - Tercer Curso (33) (Autómatas, Lenguajes Formales, Computabilidad) Inteligentes - Tercer Curso (33) (Computatibilidad, Complejidad Algorítmica)
+
+--- Página 7 ---
+¿Qué puede ser resuelto en un ordenador? complejidad: determinar qué problemas se pueden resolver en un
+
+--- Página 8 ---
+Tema 1: Máquinas de Turing. Funciones y lenguajes calculables. Parte 1: Máquinas de Turing Tema 2: Otros models de cálculo. Tesis de Church-Turing Tema 1: Máquinas de Turing. Funciones y lenguajes calculables. Parte 2: Funciones y lenguajes calculables Tema 3: Clases de Complejidad Tema 4: NP-Completitud Tema 5: Complejidad de problemas de optimización Tema 6: Complejidad en espacio. La jerarquía polinómica Tema 7: Complejidad basada en modelos de computación
+
+--- Página 9 ---
+Addison Wesley (2002) S. Arora, B. Barak, Computational complexity: a modern approach, Cambridge University Press (2009). and Languages: Fundamentals of theoretical Computer Science (2nd. Ed.) Academic Press (1994) Press (2018)  Programmers Perspective. CRC Press (2019)  C.H. Papadimitriou: Computational Complexity. Addison Wesley (1994) C. Moore, S. Mertens: The Nature of Computation. Oxford University Press (2011)
+
+--- Página 10 ---
+Examen Final de la Asignatura (50) Resolución de problemas en clase y entrega (media de 3 notas de clase y entrega de estudio de un problema NP-completo) (20) Pruebas en Clase de Problemas (30) Participación y otros (10 adicional) Importante: Hay que tener un mínimo de 3.5 en cada parte para
+
+--- Página 11 ---
+SerafínMoralDepartamentodeCienciasdelaComputaciónDeMspoadcehloos4.A4vanzadosdeComputación
+

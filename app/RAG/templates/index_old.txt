@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot UGR</title>
+  <!-- Vincular el archivo CSS externo -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="chat-container">
+    <!-- Columna izquierda: Lista de chats disponibles -->
+    <div class="chat-sidebar">
+      <h3>Asignaturas</h3>
+      <ul class="chat-list">
+        <li class="chat-item" data-subject="ingenieria_servidores">Ingeniería de Servidores</li>
+        <li class="chat-item" data-subject="calculo">Cálculo</li>
+        <li class="chat-item" data-subject="algoritmica">Algorítmica</li>
+        <li class="chat-item" data-subject="sistemas_operativos">Sistemas Operativos</li>
+        <li class="chat-item" data-subject="modelos_avanzados_computacion">Modelos Avanzados de Computación</li>
+        <li class="chat-item" data-subject="metaheuristicas">metaheuristicas</li>
+      </ul>
+      <!-- Botón de sincronización de correo -->
+      <button id="syncEmailButton" class="sync-email-button">📧 Sincronizar correo</button>
+    </div>
+
+    <!-- Columna derecha: Chat principal -->
+    <div class="chat-main">
+      <div class="chat-header">
+        🤖 Chatbot UGR
+        <!-- Botón de modo oscuro/claro -->
+        <button id="themeToggle" class="theme-toggle">☀️</button>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Escribe tu mensaje aquí..." />
+        
+        <!-- Botón personalizado para seleccionar archivo -->
+        <label for="pdfInput" class="custom-file-upload">
+          Adjuntar archivo
+        </label>
+        <input type="file" id="pdfInput" accept="application/pdf" style="display: none;" />
+        
+        <button onclick="sendMessage()">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const chatMessages = document.getElementById('chatMessages');
+    const userInput = document.getElementById('userInput');
+    const pdfInput = document.getElementById('pdfInput');
+    let selectedSubject = "default"; // Asignatura seleccionada por defecto
+    let userEmail = null; // Correo del usuario
+    let isDarkMode = false; // Estado del modo oscuro
+
+    // Función para agregar un mensaje al chat
+    function addMessage(sender, message) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message', sender);
+      messageElement.textContent = message;
+      chatMessages.appendChild(messageElement);
+      chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll automático
+    }
+
+    // Función para cargar mensajes desde el localStorage
+    function loadMessages(subject) {
+      const savedMessages = localStorage.getItem(subject);
+      if (savedMessages) {
+        const messages = JSON.parse(savedMessages);
+        chatMessages.innerHTML = ''; // Limpiar mensajes actuales
+        messages.forEach(({ sender, text }) => addMessage(sender, text));
+      } else {
+        chatMessages.innerHTML = ''; // Limpiar mensajes si no hay nada guardado
+      }
+    }
+
+    // Función para guardar mensajes en el localStorage
+    function saveMessages(subject) {
+      const messages = [];
+      chatMessages.querySelectorAll('.message').forEach(messageElement => {
+        const sender = messageElement.classList.contains('user') ? 'user' : 'bot';
+        const text = messageElement.textContent;
+        messages.push({ sender, text });
+      });
+      localStorage.setItem(subject, JSON.stringify(messages));
+    }
+
+    // Función para enviar un mensaje al servidor
+    async function sendMessage() {
+      const userMessage = userInput.value.trim();
+      if (!userMessage && !pdfInput.files.length) return;
+
+      // Si hay un mensaje de texto, mostrarlo con el emoji de persona
+      if (userMessage) {
+        addMessage('user', `👤 ${userMessage}`);
+        userInput.value = '';
+      }
+
+      // Crear FormData para enviar al servidor
+      const formData = new FormData();
+      formData.append('subject', selectedSubject); // Añadir la asignatura al FormData
+      formData.append('email', userEmail); // Añadir el correo del usuario
+      if (pdfInput.files.length > 0) {
+        const pdfFile = pdfInput.files[0];
+        formData.append('pdf', pdfFile);
+
+        // Mostrar mensaje del usuario indicando que el archivo ha sido enviado
+        addMessage('user', `👤 Archivo (${pdfFile.name})`);
+      } else {
+        formData.append('message', userMessage);
+      }
+
+      // Guardar mensajes en el localStorage
+      saveMessages(selectedSubject);
+
+      // Enviar solicitud al servidor
+      try {
+        const response = await fetch('/chat', {
+          method: 'POST',
+          body: formData,
+        });
+        const data = await response.json();
+
+        // Mostrar respuesta del bot
+        addMessage('bot', data.response);
+
+        // Guardar mensajes en el localStorage nuevamente
+        saveMessages(selectedSubject);
+      } catch (error) {
+        console.error("Error al enviar el mensaje:", error);
+        addMessage('bot', "🤖 Lo siento, ocurrió un error al procesar tu solicitud.");
+      }
+
+      // Limpiar input de archivo
+      pdfInput.value = '';
+    }
+
+    // Manejar tecla Enter para enviar mensaje
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // Sincronizar correo del usuario
+    document.getElementById('syncEmailButton').addEventListener('click', () => {
+      const email = prompt("Por favor, introduce tu correo electrónico:");
+      if (email && email.includes('@')) {
+        userEmail = email;
+        alert(`Correo sincronizado: ${userEmail}`);
+      } else {
+        alert("Por favor, introduce un correo válido.");
+      }
+    });
+
+    // Cambiar la asignatura seleccionada
+    document.querySelectorAll('.chat-item').forEach(item => {
+      item.addEventListener('click', () => {
+        // Desactivar todos los elementos
+        document.querySelectorAll('.chat-item').forEach(el => el.classList.remove('active'));
+        // Activar el elemento seleccionado
+        item.classList.add('active');
+        // Actualizar la asignatura seleccionada
+        const subject = item.getAttribute('data-subject');
+        selectedSubject = subject;
+        // Cargar los mensajes guardados para esta asignatura
+        loadMessages(subject);
+        // Agregar un mensaje de bienvenida si no hay mensajes guardados
+        if (!localStorage.getItem(subject)) {
+          addMessage('bot', `🤖 Bienvenido al chat de ${item.textContent}. ¿En qué puedo ayudarte?`);
+          saveMessages(subject);
+        }
+      });
+    });
+
+    // Botón de modo oscuro/claro
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      isDarkMode = !isDarkMode; // Alternar el estado del modo oscuro
+      document.body.classList.toggle('dark-mode', isDarkMode);
+      themeToggle.textContent = isDarkMode ? '🌙' : '☀️'; // Cambiar el ícono
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+--- Página 1 ---
+(SNIMP)
+
+--- Página 2 ---
+Definición del Problema
+
+--- Página 3 ---
+Definición del Problema
+
+--- Página 4 ---
+Definición del Problema
+
+--- Página 5 ---
+Definición del Problema
+
+--- Página 6 ---
+Definición del Problema
+
+--- Página 7 ---
+
+
+--- Página 8 ---
+
+
+--- Página 9 ---
+El Problema de Maximizar la Influencia en Redes Sociales, Social resolución compleja (es NP-completo). El problema general consiste en seleccionar un subconjunto Sel de m elementos (Mm) de un conjunto inicial S de n elementos (obviamente, n m) de forma que se maximice la influencia entre Además de los n elementos (e , i1,...,n) y el número de elementos a seleccionar m, se dispone de una matriz C(C ) de dimensión nn no C puede ser bastante dispersa, con un número muy variable de
+
+--- Página 10 ---
+Para el problema con el que trabajaremos en prácticas, se busca lo siguiente: s max ICM (G , S , p ,ev) sS G es el grafo del problema. S es el conjunto de posibles combinaciones. p es la probabilidad de influencia/contagio (p0.01) ev es el número de simulación del ICM (ev10)
+
+--- Página 11 ---
+A es el conjunto de nodos activados, I su tamaño
+
+--- Página 12 ---
+I. Lozano-Osorio, J. Sánchez-Oro, A. Duarte, y O. Cordón, A quick GRASP-based method for influence maximization in social networks, J Ambient Intell Human Comput, vol. 14, n. 4, pp. 3767- 3779, abr. 2023, doi: 10.1007/s12652-021-03510-4. buen resultado según experimentos:
+
+--- Página 13 ---
+ALGORITMO GREEDY:
+
+--- Página 14 ---
+1) Se calcula para cada nodo u el número de nodos vecinos: d(u)N , N wV :(u , v)E 2) Se define como valor heurístico de un nodo el total de vecinos, y vecinos de éstos: g(u)d s d vN 3) Se listan los valores posibles ordenados por su valor 4) Se escogen los k primeros.
+
+--- Página 15 ---
+Búsquedas por Trayectorias Simples: Representación: Problema de selección: un conjunto Sel{s , , s } restricciones (ser un conjunto de tamaño m): No puede tener elementos repetidos Ha de contener exactamente m elementos El orden de los elementos no es relevante
+
+--- Página 16 ---
+Búsquedas por Trayectorias Simples: Operador de vecino de intercambio y su entorno: El entorno de Dada una solución (conjunto de elementos seleccionados) se escoge (Int(Sel,i,j)): Sel {s , , i, , s } Sel {s , , j, , s } Int(Sel,i,j) verifica las restricciones: si la solución original Sel es decir, del conjunto S-Sel, siempre genera una solución vecina Sel
+
+--- Página 17 ---
+Búsquedas por Trayectorias Simples: Su aplicación provoca que el tamaño del entorno sea demasiado grande (m!), m10 más de 3 millones combinaciones. La BL del Mejor del MDP explora todo el vecindario, las soluciones resultantes de los m(n-m) intercambios posibles, escoge el mejor Si no la hay, detiene la ejecución y devuelve la solución actual El método funciona bien pero es muy lento incluso para casos no Vamos a probar también parar cuando tras Nvecinos no mejore (Nvecinos50).
+
+--- Página 18 ---
+Se utilizarán 4 casos reales seleccionados de varios de los conjuntos de instancias del Stanford Large Network Dataset Collection:  Se podría usar esos ficheros, pero hemos modificado y puesto en PRADO una No planteamos el óptimo, porque en la mayoría de los casos no se conocen, Para el MDDP, disponemos de cuatro conjunto de datos: Ca-GrCQc: Relación de autores en revista científica, tiene 5 242 nodos y 14 P2p-Gnutella05: Intercambio de mensajes en una red social el 5 Agosto 2002, tiene P2p-Gnutella08: Intercambio de mensajes en una red social el 8 Agosto 2002, tiene P2p-Gnutella25: Intercambio de mensajes en una red social, 25 Agosto 2002, tiene
+
+--- Página 19 ---
+El formato de los ficheros de datos es un fichero de texto con la siguiente cabecera: Directed graph (each unordered pair of nodes is saved once): NombreFichero.txt Descripción Nodes: N Edges: E FromNodeId ToNodeId Donde N es el número de elementos, E es el número de conexiones. A continuación aparecen los pares de valores (u, v) pertenecientes a E. La
+
+--- Página 20 ---
+EJEMPLO: FICHERO DEL CASO ca-GrQc.txt: . FromNodeId ToNodeId
+
+--- Página 21 ---
+Para la preparación de las transparencias de presentación del Isaac Lozano-Osorio. Universidad Rey Juan Carlos Jesús Sánchez-Oro. Universidad Rey Juan Carlos Abraham Duarte. Universidad Rey Juan Carlos Óscar Cordón. Universidad de Granada. Otra referencia que me ha servido muy útil: Y. Ye, Y. Chen, y W. Han, Influence maximization in social networks: Theories, methods and challenges, Array, vol. 16, p. 100264, dic. 2022, doi: 10.1016/j.array.2022.100264 Además, agradecimientos a Óscar por introducirme al problema.
+

@@ -1,0 +1,1111 @@
+## Modelos Avanzados de Computación: Tema 3: Clases de Complejidad
+
+## Serafín Moral
+
+smc@decsai.ugr.es Departamento de Ciencias de la Computación e IA ETSI Informática
+
+Abril, 2024
+
+<!-- image -->
+
+## Contenido
+
+- El problema de la complejidad estructural.
+- Introducción histórica.
+- Un problema sencillo: el flujo máximo.
+- Un problema difícil: mínimo número de colores.
+- Reducción de problemas.
+- Clases de complejidad deterministas
+- Tiempo
+- Espacio
+- Clases No Deterministas
+- Relaciones entre Clases de Complejidad
+
+Clasificar los problemas de acuerdo a su dificultad.
+
+Nuesto objetivo último: comprender mejor (de manera profunda) la naturaleza de los problemas y los algoritmos que los resuelven.
+
+<!-- image -->
+
+## Recursos
+
+Recursos que consume (espacio, tiempo, etc.) Dificultad absoluta o relativa.
+
+<!-- image -->
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## Recursos
+
+Recursos que consume (espacio, tiempo, etc.) Dificultad absoluta o relativa.
+
+<!-- image -->
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+- Abstracción de ejemplos: complejidad en función del tamaño de la entrada y en el peor de los casos.
+- Abstracción del Modelo: Máquina de Turing. Inicialmente se trabaja con lenguajes (se abstrae la codificación).
+- Recursos: Tiempo, espacio
+- Algoritmos: El mejor algoritmo
+- Clases de complejidad: clases muy amplias.
+
+## Tasas de Crecimiento Comparadas
+
+## Crecimiento Polinómico vs Crecimiento Exponencial
+
+|     | n = 10     | n = 20      | n = 30      | n = 40      | n = 50          | n = 60               |
+|-----|------------|-------------|-------------|-------------|-----------------|----------------------|
+| n   | 0.00001 sg | 0.00002 sg. | 0.00003 sg. | 0.00004 sg. | 0.00005 sg.     | 0.00006 sg.          |
+| n 2 | 0.0001 sg. | 0.0004 sg.  | 0.0009 sg.  | 0.0016 sg.  | 0.0025 sg.      | 0.0036 sg.           |
+| n 3 | 0.001 sg.  | 0.008 sg.   | 0.027 sg.   | 0.064 sg.   | 0.125 sg.       | 0.216 sg.            |
+| n 5 | 0.1 sg.    | 3.2 sg.     | 24.3 sg.    | 1.7 min.    | 5.2 min.        | 13.0 min.            |
+| 2 n | 0.001 sg.  | 1.0 sg.     | 17.9 min.   | 12.7 días   | 35.7 años       | 366 siglos           |
+| 3 n | 0.059 sg.  | 58 min.     | 6.5 años    | 3855 siglos | 2 × 10 8 siglos | 1 , 3 × 10 13 siglos |
+
+<!-- image -->
+
+La complejidad se mide en función de la longitud de la entrada
+
+## Importante Pregunta
+
+Si tengo un número x , ¿cuantos caracteres necesito para escribir x ?
+
+La complejidad se mide en función de la longitud de la entrada
+
+## Importante Pregunta
+
+Si tengo un número x , ¿cuantos caracteres necesito para escribir x ?
+
+## Respuesta
+
+Ya sea en binario, decimal, o con la codificación del tema anterior, si el número es x el número de caracteres que necesito es de orden n =log( x ) .
+
+La complejidad se mide en función de la longitud de la entrada
+
+## Importante Pregunta
+
+Si tengo un número x , ¿cuantos caracteres necesito para escribir x ?
+
+## Respuesta
+
+Ya sea en binario, decimal, o con la codificación del tema anterior, si el número es x el número de caracteres que necesito es de orden n =log( x ) .
+
+Si quiero escribir un número en decimal, por ejemplo 1365, necesito 4 caracteres (dígitos).
+
+La complejidad se mide en función de la longitud de la entrada
+
+## Importante Pregunta
+
+Si tengo un número x , ¿cuantos caracteres necesito para escribir x ?
+
+## Respuesta
+
+Ya sea en binario, decimal, o con la codificación del tema anterior, si el número es x el número de caracteres que necesito es de orden n =log( x ) .
+
+Si quiero escribir un número en decimal, por ejemplo 1365, necesito 4 caracteres (dígitos).
+
+La complejidad de un problema en el que aparezca este número 1365 no hay que medirla en función de su valor (1365), sino en función del número de caracteres necesario para escribirlo (4)
+
+La complejidad se mide en función de la longitud de la entrada
+
+## Importante Pregunta
+
+Si tengo un número x , ¿cuantos caracteres necesito para escribir x ?
+
+## Respuesta
+
+Ya sea en binario, decimal, o con la codificación del tema anterior, si el número es x el número de caracteres que necesito es de orden n =log( x ) .
+
+Si quiero escribir un número en decimal, por ejemplo 1365, necesito 4 caracteres (dígitos).
+
+La complejidad de un problema en el que aparezca este número 1365 no hay que medirla en función de su valor (1365), sino en función del número de caracteres necesario para escribirlo (4)
+
+Esta medida se puede aplicar a cualquier problema, sea numérico, de grafos, de conjuntos, o de cualquier tipo.
+
+La complejidad se mide en función de la longitud de la entrada
+
+## Importante Pregunta
+
+Si tengo un número x , ¿cuantos caracteres necesito para escribir x ?
+
+## Respuesta
+
+Ya sea en binario, decimal, o con la codificación del tema anterior, si el número es x el número de caracteres que necesito es de orden n =log( x ) .
+
+Si quiero escribir un número en decimal, por ejemplo 1365, necesito 4 caracteres (dígitos).
+
+La complejidad de un problema en el que aparezca este número 1365 no hay que medirla en función de su valor (1365), sino en función del número de caracteres necesario para escribirlo (4)
+
+Esta medida se puede aplicar a cualquier problema, sea numérico, de grafos, de conjuntos, o de cualquier tipo.
+
+Si n es la longitud del número en binario, entonces su valor x es de orden 2 n (si es en decimal, entonces cambia la base por 10).
+
+## Serafín Moral
+
+## Algoritmo de Primalidad
+
+El algoritmo que para comprobar la primalidad de un número natural x va dividiendo ese número por todos los números y menores que x para ver si una división es exacta es exponencial.
+
+El número de divisiones es O ( x ) , pero esa no es una medida correcta de la complejidad.
+
+## Algoritmo de Primalidad
+
+El algoritmo que para comprobar la primalidad de un número natural x va dividiendo ese número por todos los números y menores que x para ver si una división es exacta es exponencial.
+
+El número de divisiones es O ( x ) , pero esa no es una medida correcta de la complejidad.
+
+Hay que tener en cuenta que la representación en binario de un número x ocupa del orden de n =log( x ) caracteres.
+
+<!-- image -->
+
+## Algoritmo de Primalidad
+
+El algoritmo que para comprobar la primalidad de un número natural x va dividiendo ese número por todos los números y menores que x para ver si una división es exacta es exponencial.
+
+El número de divisiones es O ( x ) , pero esa no es una medida correcta de la complejidad.
+
+Hay que tener en cuenta que la representación en binario de un número x ocupa del orden de n =log( x ) caracteres.
+
+Un número y menor que x ocupa también del orden de n casillas.
+
+<!-- image -->
+
+## Algoritmo de Primalidad
+
+El algoritmo que para comprobar la primalidad de un número natural x va dividiendo ese número por todos los números y menores que x para ver si una división es exacta es exponencial.
+
+El número de divisiones es O ( x ) , pero esa no es una medida correcta de la complejidad.
+
+Hay que tener en cuenta que la representación en binario de un número x ocupa del orden de n =log( x ) caracteres.
+
+Un número y menor que x ocupa también del orden de n casillas. Una división de un número de longitud n por otro de longitud n se hace con un orden O ( n 2 ) .
+
+<!-- image -->
+
+## Algoritmo de Primalidad
+
+El algoritmo que para comprobar la primalidad de un número natural x va dividiendo ese número por todos los números y menores que x para ver si una división es exacta es exponencial.
+
+El número de divisiones es O ( x ) , pero esa no es una medida correcta de la complejidad.
+
+Hay que tener en cuenta que la representación en binario de un número x ocupa del orden de n =log( x ) caracteres.
+
+Un número y menor que x ocupa también del orden de n casillas.
+
+Una división de un número de longitud n por otro de longitud n se hace con un orden O ( n 2 ) .
+
+Como el número n =log( x ) , entonces x es de orden 2 n , y el número de divisiones es de orden O ( 2 n ) .
+
+## Algoritmo de Primalidad
+
+El algoritmo que para comprobar la primalidad de un número natural x va dividiendo ese número por todos los números y menores que x para ver si una división es exacta es exponencial.
+
+El número de divisiones es O ( x ) , pero esa no es una medida correcta de la complejidad.
+
+Hay que tener en cuenta que la representación en binario de un número x ocupa del orden de n =log( x ) caracteres.
+
+Un número y menor que x ocupa también del orden de n casillas. Una división de un número de longitud n por otro de longitud n se hace con un orden O ( n 2 ) .
+
+Como el número n =log( x ) , entonces x es de orden 2 n , y el número de divisiones es de orden O ( 2 n ) .
+
+Multiplicando una división por el número de divisiones, nos sale O ( n 2 2 n ) , que es una complejidad exponencial.
+
+<!-- image -->
+
+- G. Lamé (1884).Número de divisiones para el máximo común divisor de dos números.
+2. Años 50 y 60.Algoritmos Polinómicos = Algoritmos Buenos
+- J. Von Neumann, M.D. Rubin, J. Edmons
+4. Hartamis, Stearns (1965).Análisis sistemático de medidas de complejidad específicas. Inclusión de las clases de complejidad.
+- M. Blum (1967).Axiomas para una medida de complejidad.
+
+<!-- image -->
+
+## Referencias Históricas
+
+- Cook (1971) The Complexity of Proving Procedures - Lavine .-
+- Reducción Polinómica de Problemas
+- Problemas NP
+- NP-completitud
+- Demostración de que el problema de la consistencia en Lógica Proposicional es NP-completo
+- Karp (1972).Dió una amplia lista de problemas NP-completos.
+- Meyer(1970) Stockmeyer (1976).Definieron la jerarquían polinómica, muy útil para clasificar problemas difíciles.
+
+- Baker, Hill and Solovay (1975).Resultados sobre complejidad relativos a oráculos.
+- Berman y Hartmanis (1977) propusieron la conjetura del isomorfismo de los problemas NP-completos.
+- Solovay y Strassen (1977).Consideraron algoritmos probabilistas.
+- Valiant (1979).Definió la clase #P de las funciones que cuentan el número de soluciones.
+- Yao (1979).Propuso estudiar la complejidad de la comunicación (problemas distribuidos).
+- Finales de los 70 y años 80.- Comenzó interés por la complejidad en función de circuitos booleanos y modelos de computación paralela en general.
+
+## Referencias Históricas
+
+- Babai (1985).Sistemas interactivos de demostración.
+- Papadimitriou y Yannakakis (1988).Definieron clases de complejidad para la resolución aproximada de problemas.
+- Bernstein y Vazirani (1997).Complejidad de la computación cuántica.
+- Los problemas matemáticos del milenio: P frente a NP http://www.claymath.org/prize\_problems/index.html
+- Agrawal, Kayal y Saxena (2002).Han demostrado que la primalidad está en P.
+- Reingold (2005).Ha demostrado que la conectividad en grafos no dirigidos se puede resolver en espacio logarítmico.
+- Hartmanis (31 de diciembre de 1962).'Este ha sido un buen año', En realidad están siendo unos buenos casi 60 años de complejidad computacional.
+
+El zoo de la complejidad:
+
+https://complexityzoo.net/Complexity\_Zoo
+
+¡545 clases en abril de 2022! y subiendo.
+
+- Tenemos un grafo dirigido en el que los arcos están etiquetados por su capacidad. Hay un origen ( s ) y un destino ( t ).
+- Un flujo es una asignación de valor a cada arco que no supere su capacidad y de forma que la suma de lo que entra a cada nodo intermedio es igual a la suma de lo que sale.
+- El valor de un flujo es la suma de lo que sale del origen (que es igual a la suma de lo que llega al destino).
+- Se trata de calcular el flujo de valor máximo.
+
+<!-- image -->
+
+En rojo está representado un flujo de valor 4
+
+<!-- image -->
+
+## El Algoritmo de Ford-Fulkenson
+
+Partimos del problema ( V , E , s , t , c ) donde V es el conjunto de vértices, E el conjunto de aristas, s el nodo inicial, t el nodo final y c es una función que asigna a cada pareja de nodos ( x , y ) su capacidad c ( x , y ) .
+
+Un flujo se representará por una función f
+
+- Se comienza con un flujo cualquiera, por ejemplo el flujo cero:
+1. f ( x , y ) = 0
+
+<!-- image -->
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## El Algoritmo de Ford-Fulkenson
+
+2. Se calcula el grafo diferencia ( v , E ′ , s , t , c ′ ) donde
+
+<!-- formula-not-decoded -->
+
+En nuestro caso, el grafo es el mismo del principio.
+
+<!-- image -->
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## El Algoritmo de Ford-Fulkenson
+
+3. Se calcula un camino de s a t en el nuevo grafo. Se le asigna un flujo al nuevo camino que es valor mínimo de c ′ en todas las aristas que lo componen.
+
+<!-- image -->
+
+Si no existe el camino se termina y f contiene el flujo máximo.
+
+Serafín Moral
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+4. Se añade el flujo del camino al flujo original. Si una arista está en el camino en sentido inverso, entonces el valor de esta arista se resta:
+5. Se vuelve al paso 2.
+
+<!-- image -->
+
+## Ejemplo (cont.)
+
+<!-- image -->
+
+## Ejemplo (cont.)
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+Serafín Moral
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## Ejemplo (cont.)
+
+## Flujo Inicial
+
+<!-- image -->
+
+## Ejemplo (cont.)
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+Serafín Moral
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## Ejemplo (cont.)
+
+## Flujo Inicial
+
+<!-- image -->
+
+## Ejemplo (cont.)
+
+<!-- image -->
+
+<!-- image -->
+
+Serafín Moral
+
+## Flujo Máximo: Un ejemplo con problemas
+
+Supongamos el siguiente ejemplo, con un óptimo de 2 C .
+
+<!-- image -->
+
+Flujo Obtenido
+
+<!-- image -->
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+Flujo Máximo: Un ejemplo con problemas
+
+<!-- image -->
+
+Serafín Moral
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+Flujo Máximo: Un ejemplo con problemas
+
+<!-- image -->
+
+Serafín Moral
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+Flujo Máximo: Un ejemplo con problemas
+
+<!-- image -->
+
+Serafín Moral
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+Así el flujo se va siempre mejorando, pero de una manera muy lenta: una unidad cada vez. Si el número C es muy grande, esto da a muchas iteraciones: la complejidad es exponencial en función del número de dígitos de C .
+
+Afortunadamente existe una forma de elegir los caminos que garantiza que este crecimiento tan lento no ocurre y que la complejidad es realmente polinómica: basta con elegir en cada caso el camino más corto entre el origen y el destino. En ese caso, se puede demostrar que el número máximo de iteraciones en O ( m 3 ) donde m es el número de nodos. La complejidad total es de orden O ( n 5 ) donde n es la longitud de la entrada.
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## Problema de colorear un grafo (COLOR)
+
+## Dado un grafo ( G , V ) y un número entero K
+
+<!-- image -->
+
+## Problema de colorear un grafo (COLOR)
+
+## Dado un grafo ( G , V ) y un número entero K
+
+<!-- image -->
+
+<!-- image -->
+
+- En el problema del flujo máximo se conoce un procedimiento que necesita hacer un cálculo polinómico y que va acercándose al óptimo de forma creciente.
+- En el problema de colorear grafos nadie conoce nada que se puede calcular en el grafo en tiempo polinómico y que evite la fuerza bruta: la búsqueda en el espacio de todas las opciones.
+
+<!-- image -->
+
+Hay otros problemas cuya resolución se puede reducir a la resolución del flujo máximo (FM). Este es el caso del problema de las pareja (PAR).
+
+<!-- image -->
+
+## El problema de las parejas PAR ( V 1 , V 2 , A )
+
+Tenemos dos conjuntos del mismo tamaño V 1 y V 2 y un subconjunto A ⊆ V 1 × V 2 (representa las compatibilidades de elementos de V 1 con elementos de V 2 . El problema consiste en decidir si existe un subconjunto A ′ ⊆ A tal que cada elemento de v 1 ∈ V 1 aparece en uno y sólo en uno de los pares ( v 1 , y ) ∈ A ′ y cada elemento de v 2 ∈ V 2 aparece en uno y sólo en uno de los pares ( x , v 2 ) ∈ A ′ .
+
+<!-- image -->
+
+<!-- image -->
+
+Para cada ejemplo de las parejas PAR ( V 1 , V 2 , A ) podemos construir un problema del flujo máximo equivalente FM ( G , c , s , t ) :
+
+- 1 Añadir un nodo s y arcos dirigidos desde este nodo a todos los de V 1 .
+- 2 Dirigir los arcos originales desde V 1 a V 2 .
+- 3 Añadir un nodo final t y arcos dirigidos desde los nodos de V 2 a este nodo.
+- 4 Asignar una capacidad de 1 a todos los arcos
+
+Todo esto se puede hacer mediante un algoritmo que además es rápido.
+
+<!-- image -->
+
+Si m es el número de elementos en V 1 y V 2 , la pregunta equivalente al problema de las parejas es:
+
+¿Existe un flujo máximo de tamaño mayor o igual a m ?
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## Reducción
+
+- Supongamos que FM ( G , c , s , t , m ) es una función que resuelve el problema del flujo máximo en su versión decisión, es decir responde a la pregunta: ¿Existe un flujo de valor mayor o igual a m ?
+- Supongamos que REDUCE ( V 1 , V 2 , A ) es el algoritmo que implementa la reducción, es decir calcula ( G , c , s , t , m ) = REDUCE ( V 1 , V 2 , A ) .
+- Entonces podemos hacer un algoritmo para resolver el problema de las parejas:
+- Calcula ( G , c , s , t , m ) = REDUCE ( V 1 , V 2 )
+- Return FM ( G , c , s , t , m )
+- Con eso podemos usar un algoritmo del FM para resolver PAR, pero de forma más importante, como REDUCE es rápido, nos compara la dificultad de FM y PAR: FM es más difícil o igual que PAR, ya que cualquier algoritmo de FM se puede usar para PAR.
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## CLASES DE COMPLEJIDAD
+
+## Complejidad de una Máquina de Turing
+
+Una Máquina de Turing (u otro dispositivo de cálculo) es de complejidad f ( n ) si y solo si para toda entrada x ∈ A ∗ de longitud | x | = n , la máquina acepta esta entrada o la rechaza consumiento menos de f ( n ) unidades.
+
+## Complejidad de un Lenguaje o Problema de Decisión
+
+Un lenguaje se dice de complejidad f ( n ) si existe una Máquina de Turing que acepta el lenguaje y tiene complejidad f ( n ) .
+
+- Unidades pasos de cálculo → complejidad en tiempo
+- Unidades casillas de la cinta → complejidad en espacio
+
+Existen otras medidas de complejidad
+
+<!-- image -->
+
+Se dice que una medida g ( n ) es de orden O ( f ( n )) si existe n 0 y c &gt; 0 tal que ∀ n ≥ n 0 , g ( n ) ≤ c . f ( n ) .
+
+## Teorema
+
+Si L es aceptado en tiempo t ( n ) por una Máquina de Turing con k cintas, entonces ∀ m ≥ 0 existe una Máquina de Turing con k + 1 cintas que acepta el mismo lenguaje en tiempo
+
+<!-- formula-not-decoded -->
+
+## Idea de la Demostración
+
+- Vamos a ver cómo se reduce el tiempo a la mitad (aplicándolo varias veces se puede obtener el resultado deseado
+- Si M es la máquina que acepta con alfabeto A , construimos una máquina de Turing M ′ en la que hay un símbolo nuevo w por cada 3 símbolos abc de A .
+- La Máquina es tal que codifica la cinta de entrada en otra cinta de la nueva máquina de forma que la casilla i de la nueva cinta va a representar las casillas 2 i -1 , 2 i , 2 i + 1 de la cinta de entrada de M .
+
+<!-- image -->
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## Idea de la Demostración
+
+- El programa para M ′ se escribe, simulando para w lo que haría M para los símbolos abc hasta que sale de estos símbolos (o cicla en ellos). Esto siempre se puede calcular ya que son sólo 3 casillas. Esto conlleva resumir, al menos, dos pasos, por cada paso de la original.
+- Para llevar cuenta de los símbolos escritos en las casillas comunes a dos celdas consecutivas de M ′ se supone que ese símbolo se guarda en memoria (añadiendo estados).
+- Con esto, cada dos pasos se hacen en 1 y se dividen los pasos por la mitad (hace falta n para cambiar la entrada y codificarla en el nuevo alfabeto).
+- Repitiendo varias veces el mismo procedimiento, se obtiene el resultado deseado.
+
+aba
+
+acc
+
+cab
+
+↑
+
+Serafín Moral
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## Idea de la Demostración
+
+- El programa para M ′ se escribe, simulando para w lo que haría M para los símbolos abc hasta que sale de estos símbolos (o cicla en ellos). Esto siempre se puede calcular ya que son sólo 3 casillas. Esto conlleva resumir, al menos, dos pasos, por cada paso de la original.
+- Para llevar cuenta de los símbolos escritos en las casillas comunes a dos celdas consecutivas de M ′ se supone que ese símbolo se guarda en memoria (añadiendo estados).
+- Con esto, cada dos pasos se hacen en 1 y se dividen los pasos por la mitad (hace falta n para cambiar la entrada y codificarla en el nuevo alfabeto).
+- Repitiendo varias veces el mismo procedimiento, se obtiene el resultado deseado.
+
+<!-- image -->
+
+## Codificando Problemas
+
+## Codificando Números
+
+Los números se pueden codificar en cualquier base menos unario (es muy poco eficiente y necesita mucha longitud). En teoría supondremos binario, pero en la práctica usaremos decimal.
+
+## Codificando Objetos de un Conjunto
+
+- Supongamos que tenemos que codificar un conjunto de objetos en un problema, por ejemplo, en un grafo un conjunto de vértices.
+- Podemos suponer que cada objeto se codifica con un nombre en un cierto alfabeto, por ejemplo { a , b } .
+- Si tenemos m objetos, ¿cual será lo longitud del nombre de un objeto?
+- Con palabras de longitud k tenemos para darle nombre a m = 2 k objetos (hay 2 k palabras distintas de longitud k ).
+- Luego, si el número de objetos es m = 2 k , la longitud del nombre k es del orden de log( m ) donde m es el número de objetos.
+
+## Distintas Codificaciones de un Grafo
+
+Para representar un grafo podemos usar distintos procedimientos:
+
+- a) Listas los vértices y las aristas
+- b) Dar una lista de vecinos para cada vértice
+- c) Dar una matriz de adyacencia del grafo
+
+<!-- image -->
+
+| Mét.   | Representación                       |   lg. | Cota Inf.   | Cota Superior                   |
+|--------|--------------------------------------|-------|-------------|---------------------------------|
+| a)     | v[1]v[2]v[3]v[4](v[1]v[2])(v[2]v[3]) |    36 | 4 v + 10 a  | 4 v + 10 a +( v + 2 a )log 10 v |
+| b)     | (v[2])(v[1]v[3])(v[2])()             |    24 | 2 v + 8 a   | 2 v + 8 a + 2 a log 10 v        |
+| c)     | 0100/1010/0010/0000                  |    19 | v 2 + v - 1 | v 2 + v - 1                     |
+
+donde a el número de aristas está acotado por v 2
+
+## Complejidad de problemas de grafos
+
+- En la complejidad de problemas sobre grafos, si lo que estamos interesados es en saber si es polinómica, da igual la representación que usemos y si la medimos en función del número de vértices.
+- Como la longitud de la entrada n verifica que v ≤ n ≤ v 3 , una función es de orden polinómico como función de n si y solo si lo es en función de v .
+- Si es de orden O ( n k ) , entonces será a lo más O ( v 3 k ) .
+- Si es de orden O ( v k ) , entonces será a lo más O ( n k ) .
+- También ocurre lo mismo si queremos saber si la complejidad es de orden logarítmico O (log( n )) : es independiente de la representación o si lo medimos como una función del número de vértices: el exponente en un logaritmo se transforma en una constante.
+
+En general para medir el número de unidades que se consumen se siguen las siguiente reglas:
+
+- Se cuentan las casillas que se usan (se escribe o se pasa sobre ellas).
+- Si nunca se escribe sobre la cinta de entrada, entonces las casillas de esta cinta no se cuentan.
+- Si las casillas de la cinta de salida se escriben de izquierda a derecha, sin volver nunca hacia atrás, tampoco se cuentan.
+
+Un algoritmo (determinista o no determinista) que tenga una determinada complejidad en espacio podría ciclar en algunas entradas, pueden existir cálculos que nunca acaben, pero siempre se puede transformar el algoritmo en uno que no cicle.
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## Complejidad en Espacio en Algoritmos
+
+- En la práctica, en algunas ocasiones, vamos a tener un algoritmo en lugar de una MT.
+- En ese caso podemos seguir las siguientes reglas:
+- Se cuenta el espacio total que necesitemos para ejecutar el algoritmo, teniendo en cuenta que el nombre de un elemento de un conjunto con N objetos ocupa log( N ) .
+- Si la entrada está en una estructura de datos que nunca se modifica (sólo tiene los datos originales de entrada) entonces el espacio de esa estructura de datos no se cuenta.
+- Si la salida la vamos escribiendo en un dispositivo del que nunca leemos tampoco se cuenta (puede ser que la pongamos en una estructura de datos que nunca leemos).
+
+<!-- image -->
+
+## Reconocer palíndromos en espacio O (log( n ))
+
+## Se hace con una Máquina de Turing con las siguiente estructura de cintas:
+
+1
+
+2
+
+3
+
+3
+
+2
+
+1
+
+/square
+
+Entrada
+
+1
+
+0
+
+1
+
+/square
+
+/square
+
+Posición que se está comprobando (binario) N 2
+
+1
+
+1
+
+/square
+
+/square
+
+/square
+
+Contador en binario para encontrar posiciones
+
+N 3
+
+- Ponemos 1 en la segunda cinta ( N 2), Ponemos 1 en la tercera cinta ( N 3)
+- Nos ponemos al principio de la primera cinta.
+- Repetir:
+- Repetir: Incrementar N 3 en 1, mover a la derecha en la primera , hasta N 2 = N 3
+- Copiar el símbolo de la primera cinta en memoria
+- Si el símbolo en memoria es blanco Aceptar
+- en otro caso
+- Poner 1 en la tercera cinta ( N 3 = 1), ir al final de la primera cinta
+- Repetir: Incrementar N 3 en 1, mover izquierda en la primera, hasta N 2 = N 3
+- Si símbolo en primera cinta es distinto al de memoria Rechazar
+- Incrementar N 2 en 1
+
+Los números N 2 y N 3 necesitan log( n ) casillas donde n es la longitud del número en la cinta 1.
+
+Serafín Moral
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## Existencia de Caminos
+
+Tenemos un grafo dirigido G y dos nodos v 1 y v 2 . ¿Existe un camino entre estos dos nodos? Problema CAMINO ( G , v 1 , v 2 )
+
+Por ejemplo la MT con tres cintas que tiene como entrada una cinta con las aristas ( v , v ′ ) del grafo, y después v 1 y v 2 con un separados y que funciona de la siguiente forma:
+
+- Colocamos v 1 en la segunda y tercera cinta
+- Repetir hasta que la segunda cinta esté vacía:
+- Cogemos el último elemento de la segunda cinta v
+- Buscamos todos los pares ( v , v ′ ) en la primera cinta
+- Si v ′ = v 2 Aceptar
+- Si v ′ no está en la tercera cinta, se añade a la segunda y la tercera cinta
+- Se borra v de la segunda cinta
+
+## -Rechazar
+
+| G   | G   | v 1   | v 2                | Entrada            | Entrada            |
+|-----|-----|-------|--------------------|--------------------|--------------------|
+| u   | z   | v     | Nodos por analizar | Nodos por analizar | Nodos por analizar |
+| x   | y   | u     | z                  | v                  | Nodos visitados    |
+
+<!-- image -->
+
+## Existencia de Caminos
+
+G
+
+v
+
+1
+
+v
+
+2
+
+Entrada
+
+u
+
+z
+
+v
+
+Nodos por analizar
+
+x
+
+y
+
+u
+
+z
+
+v
+
+Nodos visitados
+
+Supongamos n el tamaño de la entrada en la primera cinta.
+
+Las cintas 2 y 3 siempre son más cortas que la entrada, luego es de O ( n ) en espacio. El número de pasos sobre las tres cintas es:
+
+- La cinta 1 se recorre un número de veces menor o igual al número de vértices v que a su vez es menor o igual a n y como su tamaño es n , el número de pasos es de orden O ( n 2 ) .
+- En la cinta 2 cada nodo se recorre varias veces: para escribirlo, buscarlo en la primera cinta y borrarlo. Buscarlo en la entrada, a lo más una vez por arista. El número de aristas es menor o igual a n , y recorrer todos los nodos una vez es, a lo más n , luego la complejidad total es de orden O ( n 2 ) .
+- La cinta 3, hay que recorrerla cada vez que analizamos un nodo v y encontramos la arista ( v , v ′ ) . Como cada nodo se analiza solo una vez, entonces a lo más se recorre una vez por arista. Como el número de aristas es O ( n ) y el tamaño de la cinta es O ( n ) , obtenemos O ( n 2 ) en total.
+
+En total , la complejidad en tiempo es O ( n 2 ) y en espacio O ( n ) También se puede hacer en espacio O ( v ) y en tiempo O ( v 3 ) , donde v es el número de vértices (por ejemplo codificando como matriz 0-1).
+
+<!-- image -->
+
+Teorema de Savitch: Existencia de Caminos La complejidad en espacio de existencia de caminos en grafos dirigidos es del orden O (log 2 ( v )) , donde v es el número de nodos del grafo y, por tanto, también en función del tamaño de la entrada n .
+
+La demostración se basa en una resolución ordenada del problema CAMINO ( x , y , i ) : Existencia de un camino de longitud ≤ 2 i , y la relación
+
+CAMINO ( x , y , i ) ⇔∃ z , CAMINO ( x , z , i -1 ) y CAMINO ( z , y , i -1 )
+
+## CAMINO: Espacio Determinista
+
+Como si ejecutásemos el siguiente algoritmo recursivo al que hay que llamar con N &gt; log( v ) :
+
+CAMINO(x,y,N)
+
+- Si x=y Return TRUE
+- Si N=0
+- Return TRUE si hay un enlace entre x e y en G
+- Return FALSE si no hay un enlace entre x e y en G
+- Para cada nodo z :
+- Si CAMINO(x,z,N-1)
+- Si CAMINO(z,y,N-1)
+- Return TRUE
+- Return FALSE
+
+<!-- image -->
+
+## CAMINO: Espacio Determinista
+
+<!-- image -->
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## CAMINO: Espacio Determinista
+
+<!-- image -->
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## CAMINO: Espacio Determinista
+
+<!-- image -->
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+La función de complejidad se puede medir en una máquina de Turing no-determinista.
+
+## Clases no-deterministas
+
+Una máquina de Turing no determinista tiene complejidad f ( n ) en tiempo (espacio) si y solo si para una entrada x de longitud n todas las posibles opciones de cálculo de la máquina terminan en f ( n ) pasos (terminan y no usan más de f ( n ) casillas).
+
+<!-- image -->
+
+## Ejemplo (en términos de algoritmos)
+
+Un algoritmo no-determinista que resuelve el problema de los colores en un grafo donde m máximo de colores.
+
+1. Asignar un color posible a cada nodo: mediante una serie de pasos que asignan de forma no determinista un número mediante una serie de 0s o 1s de longitud menor o igual a la longitud de m .
+2. Si para un nodo hemos asignado un número mayor que m rechazar.
+3. Comprobar si no hay dos nodos conectados con el mismo color, entonces aceptar.
+4. En caso contrario rechazar.
+
+Para que el algoritmo resuelva el problema, si la respuesta es SI, entonces debe de existir la posibilidad de que acepte; si la respuesta es NO, necesariamente ha de rechazar.
+
+La complejidad en tiempo (no-determinista) sería proporcionar al número de arcos.
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## Búsqueda de Caminos en Grafos: Espacio no-determinista
+
+En espacio no-determinista el problema se resuelve en espacio O (log( v )) donde v es el número de vértices, (la misma complejidad en función de la entrada O (log( n )) ).
+
+Supongamos que queremos determinar si existe un camino entre el nodo x i y el nodo x j :
+
+Llamamos a Camino ( x i , x j , m ) con m = v (el número de nodos).
+
+/negationslash
+
+Si m = 0 solo acepta si x i = x k y rechaza si x i = x k .
+
+Si m &gt; 0:
+
+El algoritmo funciona escribiendo el identificador de un nodo x k conectado con x i de forma no-determinista (si no existe ninguno rechaza).
+
+- a) Si x k es igual a x j , entonces para y acepta.
+- b) Si x k es distinto de x j , vuelve a ejecutar el algoritmo con x k en el lugar de x i y m decrementado en uno.
+
+m &gt; 0:
+
+a)
+
+x
+
+i
+
+x
+
+j
+
+=
+
+SI
+
+b)
+
+<!-- image -->
+
+<!-- image -->
+
+Llamada recursiva a Camino( x k , x j , m -1)
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+k
+
+j
+
+TIEMPO ( f )
+
+Todos los lenguajes aceptados por una máquina de Turing determinista en tiempo O ( f ( n )) .
+
+ESPACIO ( f )
+
+Todos los lenguajes aceptados por una máquina de Turing determinista en espacio O ( f ( n )) .
+
+NTIEMPO ( f )
+
+Todos los lenguajes aceptados por una máquina de Turing n determinista en tiempo O ( f ( n )) .
+
+NESPACIO ( f )
+
+Todos los lenguajes aceptados por una máquina de Turing n determinista en espacio O ( f ( n )) .
+
+- Clase polinómica (tiempo): P = ⋃ j &gt; 0 TIEMPO ( n j )
+- Clase polinómica no determinista (tiempo): NP = ⋃ j &gt; 0 NTIEMPO ( n j )
+- Clase polinómica (espacio): PESPACIO = ⋃ j &gt; 0 ESPACIO ( n j )
+- Clase polinómica no determinista (espacio): NPESPACIO = ⋃ j &gt; 0 NESPACIO ( n j )
+- Clase de espacio logarítmico determinista: L = ESPACIO (log( n ))
+- Clase de espacio logarítmico no determinista: NL = NESPACIO (log( n ))
+- Clase exponencial en tiempo: EXP = ⋃ j &gt; 0 ( 2 n j )
+
+## Tesis de Church-Turing
+
+Todo procedimiento de cálculo físicamente realizable se puede simular por una máquina de Turing.
+
+## Tesis de Church-Turing Fuerte
+
+Todo procedimiento de cálculo físicamente realizable se puede simular por una máquina de Turing, con una sobrecarga polinómica en el número de pasos (si el mecanismo da f ( n ) pasos, entonces la máquina de Turing puede dar f k ( n ) pasos).
+
+La tesis de Church-Turing fuerte es más controvertida, ya que no se piensa que no se verifica para ordernadores cuánticos.
+
+<!-- image -->
+
+<!-- image -->
+
+Mi ← 1
+
+Mi ← Mj + Mk
+
+Mi ← Mj -Mk
+
+Mi ← [ M 1 / 2 ]
+
+Mi ← MMj (poner en Mi el valor contenido en la celda número Mj )
+
+← Mj (poner en la celda número Mi
+
+MMi el valor de Mj ) Goto m if Mi &gt; 0 Halt
+
+Cada celda contiene un entero de cualquier longitud.
+
+Una RAM se controla por un programa que se guarda en la unidad de control. El estado de la Máquina RAM es el número de instrucción que se está ejecutando.
+
+Entrada: m enteros en las celdas M 1 , . . . , M m Tamaño de la Entrada: Suma del tamaño de los enteros de entrada RAM Aceptadoras: Escriben 0 en M 0 si rechazan y 1 si aceptan.
+
+Si no paran rechazan
+
+RAM calculadoras de f ( x ) :
+
+Escriben f ( x ) en M
+
+0
+
+## Tabla de Simulaciones
+
+|                              | Máquina Simuladora   | Máquina Simuladora   | Máquina Simuladora      |
+|------------------------------|----------------------|----------------------|-------------------------|
+| Máquina Simulada             | 1TM                  | kTM                  | RAM                     |
+| Máquina Turing 1 cinta: 1TM  |                      | O ( T ( n ))         | O ( T ( n )log T ( n )) |
+| Máquina Turing k cintas: kTM | O ( T 2 ( n ))       |                      | O ( T ( n )log T ( n )) |
+| Máquina RAM: RAM             | O ( T 3 ( n ))       | O ( T 2 ( n ))       |                         |
+
+(Del libro de Garey, Johnson. Distintos autores pueden dar distintas relaciones. Lo importante es que no cambiemos de clase cambiando de modelo.)
+
+- La definición formal de clases de complejidad se realiza con respecto a Máquinas de Turing. A esta definición nos tenemos que atener en caso de duda.
+- Pero, en muchas ocasiones,
+
+## Simulación de Máquinas No-Deterministas
+
+Teorema.Supongamos que L es decidido por una máquina de Turing no-determinista en tiempo f ( n ) , entonces es decidido por una máquina de Turing determinística con 3 cintas en tiempo O ( d f ( n ) ) donde d &gt; 1 es una constante que depende de la máquina no determinística inicial.
+
+Supongamos que k es el número máximo de opciones de la MT no determinista y que k &gt; 1 (en otro caso la Máquina es determinista y el resultado es trivial):
+
+- Para L = 0 , 1 , 2 , . . .
+- Vamos colocando en la tercera cinta todas las secuencias a 1 . . . a L de longitud L , donde cada símbolo se elige entre { 1 , . . . , k } .
+- Para cada secuencia a 1 . . . a L , simulamos la MT no determinista L pasos en una segunda cinta donde en el paso i se elige la opción a i .
+- Si para una secuencia la simulación acepta, termina y acepta
+- Si para todas las secuencias de longitud L la simulación rechaza, entonces termina y rechaza
+- Si no ocurre ninguna de las dos cosas, pasa al siguiente L
+
+<!-- image -->
+
+## Simulación de Máquinas No-Deterministas
+
+- La simulación termina seguro cuando L = f ( n ) o antes.
+- La cantidad de secuencias de longitud L es k L . La cantidad total de secuencias es menor o igual a :
+
+<!-- formula-not-decoded -->
+
+que es de orden k f ( n ) .
+
+- Cada simulación y cada cambio de secuencia (para pasar a la siguiente) se lleva del orden de L ≤ f ( n ) pasos.
+- En total tenemos que la simulación es de orden O ( f ( n ) k f ( n ) ) y como f ( n ) es menor que k f ( n ) , tenemos que la simulación es de orden O ( k f ( n ) . k f ( n ) ) y teniendo en cuenta que k f ( n ) . k f ( n ) = k 2 f ( n ) =( k 2 ) f ( n ) y el resultado se obtiene para d = k 2 .
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+La clase de los lenguajes complementarios de los lenguajes en la clase C se llama CoC .
+
+Se verifica que L ∈ C ⇔ L ∈ CoC .
+
+El complementario de una clase determinista coincide con la propia clase: CoP = P.
+
+La clase CoNP es el conjunto de problemas cuyo complementario
+
+No ocurre lo mismo con las clase no deterministas. está en NP.
+
+<!-- image -->
+
+<!-- image -->
+
+## Relaciones Binarias
+
+## Relación binaria en A ∗ × A ∗
+
+Una relación binaria R es una aplicación R : A ∗ × A ∗ →{ 0 , 1 }
+
+Algunas veces R ( x , y ) = 1 se escribe como R ( x , y ) y R ( x , y ) = 0 como ¬ R ( x , y ) (interpretando 1 como Verdadero y 0 como Falso).
+
+## Relación calculable polinómicamente
+
+R en A ∗ × A ∗ se dice calculable polinómicamente si existe una MT M que calcula R en tiempo polinómico.
+
+## NP
+
+Un lenguaje L ⊆ A ∗ está en NP si y solo si existe una relación R en A ∗ × A ∗ calculable en tiempo polinómico y un polinomio p ( n ) tal que
+
+<!-- formula-not-decoded -->
+
+Se dice que los lenguajes (problemas) de NP son los problemas que se pueden verificar en tiempo polinómio ( de forma eficiente ).
+
+Al algoritmo que calcula R se le llama un verificador. A y se le llama un certificado.
+
+## CoNP
+
+Un lenguaje L ⊆ A ∗ está en CoNP si y solo si existe una relación R en A ∗ × A ∗ calculable en tiempo polinómico y un polinomio p ( n ) tal que
+
+<!-- formula-not-decoded -->
+
+El problema del circuito hamiltoniano está en NP, porque se puede expresar como determinar los x (que representan grafos) para los que existe un y (que representa una sucesión de nodos) tal que todos los nodos aparecen una y una sola vez y existe un arco desde cada nodo al siguiente y del último al primero (relación R ).
+
+- La condición que se pide para x e y (la relación R ( x , y ) ) se puede calcular en tiempo polinómico.
+- La longitud del y que cumple la relación es menor que la de x , entonces la longitud de y está acotada por un polinomio de la longitud de x .
+
+## Problemas NP
+
+Los que se pueden expresar como: dados unos datos x comprobar si existe un objeto y (con un tamaño limitado a un polinomio del tamaño de x ) tal que se cumple una condición R ( x , y ) = 1 que es verificable en tiempo polinómico.
+
+## Ejemplo
+
+Saber si un número x es compuesto: si existe 1 &lt; y &lt; x tal que la división entera de x entre y es exacta.
+
+<!-- image -->
+
+## Problemas NP
+
+Los que se pueden expresar como: dados unos datos x comprobar si existe un objeto y (con un tamaño limitado a un polinomio del tamaño de x ) tal que se cumple una condición R ( x , y ) = 1 que es verificable en tiempo polinómico.
+
+## Ejemplo
+
+Saber si un número x es compuesto: si existe 1 &lt; y &lt; x tal que la división entera de x entre y es exacta.
+
+- C. Moore, S. Mertens (2011) The Nature of Computation.
+
+## 193707721 × 761838257287 = 147573952588676412927
+
+Frank Nelson Cole, American Mathematical Society, 1903 (trabajó en ello los domingos de 3 años).
+
+El número de la derecha es 2 67 -1 y se había conjeturado en el siglo XVII que era primo.
+
+<!-- image -->
+
+## Problemas NP
+
+Los que se pueden expresar como: dados unos datos x comprobar si existe un objeto y (con un tamaño limitado a un polinomio del tamaño de x ) tal que se cumple una condición R ( x , y ) = 1 que es verificable en tiempo polinómico.
+
+## Ejemplo
+
+Saber si un número x es compuesto: si existe 1 &lt; y &lt; x tal que la división entera de x entre y es exacta.
+
+- C. Moore, S. Mertens (2011) The Nature of Computation.
+
+## 193707721 × 761838257287 = 147573952588676412927
+
+Frank Nelson Cole, American Mathematical Society, 1903 (trabajó en ello los domingos de 3 años).
+
+El número de la derecha es 2 67 -1 y se había conjeturado en el siglo XVII que era primo.
+
+¿Conocéis una caracterización parecida para saber si un número es primo? Existe, pero no es sencilla.
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+<!-- image -->
+
+No es fácil convencer de que realmente se puede obtener un mate en ese número de jugadas. El tamaño del objeto necesario para convencer es el espacio de todas las posibles jugadas de blancas y negras, y ese objeto es de tamaño exponencial.
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+## Condiciones
+
+- Existe un demostrador con capacidad ilimitada de cálculo (siempre quiere convencer de que la respuesta es positiva)
+- Existe un verificador con capacidad polinómica de cálculo (quiere saber la verdad)
+- Se pueden intercambiar mensajes de un tamaño polinómico en función de una palabra inicial x
+
+## Clase NP
+
+Clase de problemas que el verificador puede decidir, teniendo en cuenta que si la respuesta es positiva, el demostrador tratará de convencer al verificador de que lo es.
+
+El escenario es distinto si se permite aleatorizar las preguntas y un error para el verificador (Computational Complexity: A Modern Approach. Sanjeev Arora, Boaz Barak)
+
+## Relaciones entre Clases de Complejidad
+
+- a) ESPACIO ( f ( n )) ⊆ NESPACIO ( f ( n ))
+2. TIEMPO ( f ( n )) ⊆ NTIEMPO ( f ( n ))
+- b) NTIEMPO ( f ( n )) ⊆ ESPACIO ( f ( n ))
+- c) NESPACIO ( f ( n )) ⊆ TIEMPO ( k f ( n ) ) para un k &gt; 1
+- a) La demostración de a) es trivial.
+- b) La demostración de b) se basa en la simulación de una MT no determinista mediante una determinista y que consistía en ir poniendo palabras a 1 . . . a L donde a i ∈ { 1 , . . . , k } y entonces ir simulando la MT por una determinista que en el paso i coge la opción número i . El espacio que hace falta es el espacio para escribir las palabras que es menor o igual a f ( n ) (recordemos que L ≤ f ( n ) ) y el espacio para hacer la simulación de L pasos, que también es de orden f ( n ) . En total, el espacio necesario es de orden f ( n ) .
+
+## c) NESPACIO ( f ( n )) ⊆ TIEMPO ( k f ( n ) )
+
+## El Método de la Alcanzabilidad:
+
+Se basa en considerar un grafo en el que los nodos son las posibles configuraciones de una Máquina de Turing, y los arcos conectan configuraciones tales que se puede llegar de una a otra en un paso de cálculo. Para simplificar vamos a suponer una MT con una sola cinta. Una configuración es una tripleta ( q , u , v ) . Como no se ocupa más de f ( n ) en espacio, la longitud de u y v es menor o igual a f ( n ) . El número de configuraciones es por tanto del orden de
+
+## | Q || B | 2 f ( n )
+
+donde B es el alfabeto de trabajo. Es decir del orden de t f ( n ) donde t = | B | 2 .
+
+Saber si una palabra es aceptada es equivalente a saber si existe un camino desde el estado inicial a una configuración que contenga un estado final y eso se puede comprobar en tiempo O ( m 3 ) donde m es el número de nodos, en nuestro caso en orden ( t f ( n ) ) 3 = t 2 f ( n ) =( t 3 ) f ( n ) . Lo que demuestra el teorema para k = t 3 .
+
+<!-- image -->
+
+## Teorema de la Jerarquía
+
+## Funciones de Complejidad Propias
+
+Son aquellas que verifican: f ( n + 1 ) ≥ f ( n ) y tales que la función g ( u ) = f ( | u | ) expresando g ( u ) como una secuencia de longitud g ( u ) (es decir usando unario) es calculable en espacio O ( f ( n )) y tiempo O ( f ( n ) + n ) .
+
+## Teorema de la jerarquía en Tiempo
+
+Si f ( n ) ≥ n es propia, entonces TIEMPO (( f ( n )) ⊂ TIEMPO ( f 2 ( n )) TIEMPO (( f ( n )) = TIEMPO ( f 2 ( n ))
+
+/negationslash
+
+## Corolario.
+
+P = EXP
+
+/negationslash
+
+Dem. P ⊆ TIEMPO ( 2 n ) /notsubsetoreql TIEMPO (( 2 n ) 2 ) ⊆ EXP
+
+## Jerarquía en Espacio
+
+Si f ( n ) es una función de complejidad propia, entonces ESPACIO ( f ( n )) ⊂ ESPACIO ( f ( n )log f ( n )) ESPACIO ( f ( n )) = ESPACIO ( f ( n )log f ( n ))
+
+/negationslash
+
+## Serafín Moral
+
+## L ⊆ NL ⊆ P ⊆ NP ⊆ PESPACIO
+
+No se sabe si alguna o varias de estas inclusiones son igualdades. Lo único que se sabe es que, NL está incluida escrictamente en PESPACIO .
+
+<!-- image -->
+
+Modelos Avanzados de Computación: Tema 3: Clases de C
+
+<!-- image -->
+
+Modelos Avanzados de Computación: Tema 3: Clases de C

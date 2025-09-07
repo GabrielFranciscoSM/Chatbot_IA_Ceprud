@@ -1,0 +1,84 @@
+--- Página 1 ---
+1. Problema de la Mínima dispersión differencial (MDDP)
+
+--- Página 2 ---
+El Problema de Dispersión Diferencial, Minimum Differential Dispersion Problem (MDDP) es un problema de optimización compleja (es NP-completo), que solo con tamaño 50 implica más de El problema general consiste en seleccionar un subconjunto Sel de m elementos (Mm) de un conjunto inicial S de n elementos (obviamente, n m) de forma que se minimize la dispersión entre Además de los n elementos (e , i1,...,n) y el número de elementos a seleccionar m, se dispone de una matriz D(d ) de dimensión nn
+
+--- Página 3 ---
+Para el problema Min Differential Dispersion, con el que trabajaremos en prácticas, se busca lo siguiente: Las distancias entre pares de elementos se usan para formular el Esa formulación es poco eficiente. Se suele resolver como un problema
+
+--- Página 4 ---
+Para el problema Min Differential Dispersion, con el que trabajaremos en prácticas, se calcula la dispersión como: 1) Para cada punto elegido v se calcula Δ(v) como la suma de las 2) La dispersión de una solución, denotada como diff(S) se define como la diferencia entre los valores extremos: 3) El objetivo es minimizar dicha medida de dispersión:
+
+--- Página 5 ---
+Ejemplo de Aplicación: Tenemos n8 posibles localizaciones para colocar m4 farmacias. distancia parecida (mínima dispersión entre sí):
+
+--- Página 6 ---
+Ejemplo de Aplicación: La distancia entre los puntos del gráfico refleja la distancia entre las La matriz D contiene los valores de dichas distancias. En este ejemplo
+
+--- Página 7 ---
+Ejemplo de Aplicación: EJEMPLO DEL MODELO MIN-DIFF (Min-Diff) La dispersión entre los elementos escogidos es la máxima diferencia de las sumas de las distancias existentes entre ellos: Localizaciones seleccionadas: 1 14 30 25 32 32 40 50 x { 3, 4, 6, 8 } V(3)224022 V(4)221832 V(6)401847 V(8)223247 diff(x) 105 72
+
+--- Página 8 ---
+Ejemplo de Aplicación: EJEMPLO DEL MODELO MINDIFF (MinDiff) (2/3) La dispersión entre los elementos escogidos es la máxima diferencia de las sumas de las distancias existentes entre ellos: Sol 2: Localizaciones seleccionadas: 1 14 30 25 32 32 40 50 x { 1, 3, 6, 7 } V(1)303240 V(3)304030 V(6)324042 V(7)403042 diff(x) 114 100
+
+--- Página 9 ---
+Ejemplo de Aplicación: EJEMPLO DEL MODELO MAXMIN (MMDP) (3/3) La diversidad entre los elementos escogidos es el mínimo de las distancias existentes entre ellos: Sol 1: seleccionadas: Sol 2: seleccionadas: x { 3, 4, 6, 8 } x { 1, 3, 6, 7 } diff(x ) 33 diff(x )
+
+--- Página 10 ---
+Elegir localización de elementos públicos (farmacias, ) Selección de grupos homogéneos Identificación de redes densas Reparto equitativo Problemas de flujo Duarte, A, Sánchez-Oro, J., Resende, M.G.C, Glover, F, Martí, R (2015). Greedy randomized adaptive
+
+--- Página 11 ---
+Duarte, A, Sánchez-Oro, J., Resende, M.G.C, Glover, F, Martí, R (2015). Greedy randomized adaptive para resolver el problema es:
+
+--- Página 12 ---
+El algoritmo valora en cada caso cómo varía la dispersión al seleccionar cada nuevo elemento: El primer elemento seleccionado no está definido, puede ser Cada vez que se añade un nuevo elemento al conjunto de seleccionados Sel, se valora cuál incrementa menos (o reduce) la El proceso itera hasta seleccionar los m elementos deseados
+
+--- Página 13 ---
+ALGORITMO GREEDY:
+
+--- Página 14 ---
+El cálculo de g(u) se aplica de la siguiente manera: 1) Para cada elemento u no escogido: uV Sel,(u) d vSel 2) Luego para cada elemento v existente: vSel,(v)SumaAnterior(v)d 3) Una vez actualizado las sumas para cada elemento, se calcula: (u)max ((u),max (v)) (u)min((u),min (v)) max vSel min vSel 4) El cálculo final de g(u) es: g(u) (u) (u)
+
+--- Página 15 ---
+Búsquedas por Trayectorias Simples: Representación: Problema de selección: un conjunto Sel{s , , s } restricciones (ser un conjunto de tamaño m): No puede tener elementos repetidos Ha de contener exactamente m elementos El orden de los elementos no es relevante
+
+--- Página 16 ---
+Búsquedas por Trayectorias Simples: Operador de vecino de intercambio y su entorno: El entorno de Dada una solución (conjunto de elementos seleccionados) se escoge (Int(Sel,i,j)): Sel {s , , i, , s } Sel {s , , j, , s } Int(Sel,i,j) verifica las restricciones: si la solución original Sel es decir, del conjunto S-Sel, siempre genera una solución vecina Sel
+
+--- Página 17 ---
+Búsquedas por Trayectorias Simples: Su aplicación provoca que el tamaño del entorno sea demasiado grande (m!), m10 más de 3 millones combinaciones. La BL del Mejor del MDP explora todo el vecindario, las soluciones resultantes de los m(n-m) intercambios posibles, escoge el mejor Si no la hay, detiene la ejecución y devuelve la solución actual El método funciona bien pero es muy lento incluso para casos no demasiado grandes (n500) y usando un cálculo factorizado del coste z (Sel) para acelerar la ejecución (O(n)) Es recomendable utilizar una estrategia avanzada más eficiente
+
+--- Página 18 ---
+Duarte, A, Sánchez-Oro, J., Resende, M.G.C, Glover, F, Martí, R (2015). Greedy randomized adaptive Algoritmo de búsqueda local del primer mejor: en cuanto se genera una Se detiene la búsqueda cuando se ha explorado el vecindario completo sin obtener mejora (o tras un número fijo de evaluaciones) Se puede explorar el vecindario de forma inteligente: Se calcula la contribución de cada elemento seleccionado al coste de la solución actual (valor de la función objetivo z (Sel)) Se aplican primero los intercambios de elementos que menos contribuyen Se considera una factorización para calcular el coste de Sel a partir del movimiento aplicado. Además, se factoriza también el cálculo de la
+
+--- Página 19 ---
+Técnica que permite focalizar la BL en una zona del espacio de Reduce significativamente el tiempo de ejecución con una reducción muy pequeña de la eficacia de la BL del Mejor (incluso puede mejorarla en algunos problemas) Se basa en definir un orden de aplicación de los intercambios (exploración de los vecinos) en una BL del primer mejor En cada iteración, al cambiar un nodo u por el nodo v mode(Sel, u, v) mejor calcular la mejora definida como move_value(Sel, u, v)
+
+--- Página 20 ---
+En lugar de calcular el valor del movimiento Int(Sel,i,j) para todos los i el menor aporte (es decir, el valor v para el que se move_value(Sel, u, v) sea mínimo). Tras escoger el elemento a extraer, se prueban sucesivamente los intercambios por los elementos no seleccionados: Si se encuentra un movimiento de mejora, se aplica. Si no, se pasa al siguiente Si ningún movimiento del vecindario provoca mejora, se finaliza la ejecución y se
+
+--- Página 21 ---
+Para generar Sel, el operador de vecino Int(Sel,i,j) escoge un elemento seleccionado i y lo cambia por uno no seleccionado j: Sel {s , , i, , s } Sel Sel - {i} {j} Sel {s , , j, , s } No es necesario recalcular todas las distancias de la función objetivo: Al añadir un elemento, las distancias entre los que ya estaban en la solución se mantienen y basta Al eliminar un elemento, las distancias entre elementos que se quedan en la solución se Se calcula el nuevo coste de la solución original Sel como: Z (Sel, u, v) ( )z (Sel) max ((v),max (w)) min((v),min (w)) max wSel min wSel (v) d wSel,(w)anterior(w)d d wSel
+
+--- Página 22 ---
+El coste del movimiento (la diferencia de costes entre las dos soluciones) z (Sel,i,j) z (Sel) - z (Sel) se calcula factorizado. El cálculo original, implicaba calcular para cada uno de los m elementos la distancia al resto, por tanto era O(n²). De forma factorizada es sól O(n) Si z (Sel,i,j) es negativo (z (Sel,i,j)0), la solución vecina Sel es mejor que la actual Sel (es un problema de minimización) y se acepta. Si no, se descarta Podemos combinar fácilmente la factorización del coste con el cálculo de la contribución de los elementos para mejorar aún más la eficiencia: Las distancias del elemento eliminado equivalen directamente a la contribución de dicho El cálculo de las aportaciones de los elementos actualmente seleccionados también se puede elemento eliminado y sumar la del añadido:
+
+--- Página 23 ---
+BL-MDP: Factorización del Movimiento El coste z (Sel) de la nueva solución vecina es: z (Sel) z (Sel) z (Sel,i,j) Sólo es necesario calcularlo al final de la ejecución. Durante todo el Sel GENERA_VECINO(Sel); Hasta (z (Sel,i,j) 0) O (se ha generado E(Sel) al completo)
+
+--- Página 24 ---
+Existen distintos grupos de casos del problema para los que se conoce la Para el MDP, disponemos de cuatro grandes grupos de casos: Casos GKD (Glover, Kuo and Dhir, 1998): Entre otras, 20 matrices nn con distancias Euclideas calculadas a partir de puntos con r coordenadas (r{2, , 21}) aleatorias en [0,10]. n500 elementos y m Casos SOM (Silva, Ochi y Martins, 2004): Entre otras, 20 matrices nn con distancias enteras aleatorias en {0,9} con n{100, , 500} elementos y m{0.1n, ,0.4n}. P.ej. para n100 hay 4 casos con m10, 20, 30, Casos MDG (Duarte y Martí, 2007): Tipo a: 40 matrices nn con distancias enteras aleatorias en {0,10}: 20 con n500 y m50; y 20 con n2000 y m Tipo b: 40 matrices nn con distancias reales aleatorias en [0,1000]: 20 con n500 y m50; y 20 con n2000 y m Tipo c: 20 matrices nn con distancias enteras aleatorias en {0,1000}. n3000 y m{300,400,500,600}
+
+--- Página 25 ---
+Los casos están recopilados en la biblioteca MDPLib, accesible en la Web en la dirección siguiente:  En dicha dirección pueden encontrarse tanto los datos como los Además, están disponibles los resultados de un ejemplo de una
+
+--- Página 26 ---
+El formato de los ficheros de datos es un fichero de texto con la siguiente estructura: Al ser D una matriz simétrica, sólo se almacena la diagonal superior. El fichero contendrá n(n-1)/2 entradas, una por línea, con el siguiente formato: donde i, j{0, , n-1} son respectivamente la fila y la columna de la matriz D, mientras que d es el valor de la distancia existente entre los elementos i1 y j
+
+--- Página 27 ---
+EJEMPLO: FICHERO DEL CASO GKD-c_1_n500_m50:
+
+--- Página 28 ---
+Para la preparación de las transparencias de presentación del problema MDPLIB se han usado materiales de los profesores: Rafael Martí. Universidad de Valencia Abraham Duarte. Universidad Rey Juan Carlos Jesús Sánchez-Oro. Universidad Rey Juan Carlos Su grupo de investigación ha realizado muchas publicaciones sobre el problema y mantiene la biblioteca MDPLIB. Referencias: Duarte A., Sánchez-Oro J., Resende M.G.C., Glover F., Martí R. Greedy randomized minimization. Information Sciences, (2016), 46-60. Resende M.G.C., Werneck R.F.A hybrid heuristic for the p-median problemJournal of Heuristics, 10(1) (2016), 59- Lai X., Hao J-K, Glover, Fred, Yue D. Intensification-driven tabu search for the Aringhieri, R., Cordone R., Grosso A. Construction and improvement algorithms for dispersion problems. European Journal of Operational Research 242 (2015), 21-33.
+

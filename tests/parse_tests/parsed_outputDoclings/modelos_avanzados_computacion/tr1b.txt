@@ -1,0 +1,959 @@
+## Tema 1: Máquinas de Turing. Funciones y Lenguajes Calculables (Parte 2)
+
+## Serafín Moral
+
+Universidad de Granada
+
+Febrero, 2025
+
+<!-- image -->
+
+## Contenido
+
+- Máquinas de Turing
+- Lenguajes recursivamente enumerables. Lenguajes recursivos
+- Técnicas de construcción de Máquinas de Turing: memoria adicional, pistas múltiples, subrutinas
+- Extensiones del concepto de MT
+- Pasos estáticos
+- Máquinas multicinta
+- Máquinas no deterministas
+- Limitaciones de las MT
+- Máquinas con cintas semiilimitadas
+- Problemas y Programas
+- Tipos de problemas
+- Programas
+- Problemas de decisión y Lenguajes
+- Palabras y Números
+- Calculabilidad
+- El lenguaje diagonal
+- El lenguaje universal
+- Problemas indecidibles
+- Teorema de Rice
+- El problema de las correspondencias de Post
+
+## Definición
+
+Un problema PROBLEMA ( x ) ó PROBLEMA consta de:
+
+- Un conjunto X de entradas. Un elemento x ∈ X se llama una entrada.
+- Un conjunto Y de solución. Un elemento y ∈ Y se llama una solución.
+- Una aplicación F : X → 2 Y que asigna a cada entrada x ∈ X un conjunto A ⊆ Y de soluciones posibles.
+
+<!-- image -->
+
+## Definición
+
+Un problema PROBLEMA ( x ) ó PROBLEMA consta de:
+
+- Un conjunto X de entradas. Un elemento x ∈ X se llama una entrada.
+- Un conjunto Y de solución. Un elemento y ∈ Y se llama una solución.
+- Una aplicación F : X → 2 Y que asigna a cada entrada x ∈ X un conjunto A ⊆ Y de soluciones posibles.
+
+## Ejemplo
+
+Búsqueda de caminos en grafos dirigidos:
+
+- Entradas X : conjunto formado por las tripletas ( G , ns , nl ) , donde G es un grafo dirigido, ns es un nodo de salida, nl es un nodo de llegada.
+- Conjunto Y : lista de nodos ( n 1 , . . . , nk )
+- F ( G , ns , nl ) es el conjunto de las listas de nodos ( n 1 , . . . , nk ) tales que n 1 = ns , nk = nl y todas las parejas ( ni , ni + 1 ) sean arcos de G .
+
+<!-- image -->
+
+## Resolución de Problemas
+
+- Los problemas se resuelven mediante algoritmos.
+- ¿Qué es un algoritmo? En esta asignatura vamos a considerar dos conceptos que son equivalentes:
+- Un programa en Phyton (Ph) bien escrito sintácticamente y con, al menos, una función definida, la primera de las cuales es la función principal (más adecuados para una resolución efectiva de problemas).
+- Una Máquina de Turing (MT) que definiremos en el siguiente tema (más adecuadas para el razonamientos teórico-matemáticos).
+- Un algoritmo ALG resuelve un problema PROBLEMA ( x ) cuando el argumento de dicho algoritmo es un elemento x ∈ X y ALG ( x ) es un y ∈ F ( x ) o dice 'No hay Solución' si F ( x ) = / 0 .
+
+## Problemas y su codificación
+
+- Si queremos resolver un problema en un ordenador habrá que codificar las entradas y las soluciones en unos datos que pueda entender el ordenador.
+- Nosotros vamos a suponer que las entradas y soluciones están siempre codificadas como palabras o cadenas de caracteres.
+- Esto no supone ninguna restricción ya que cualquier tipo de entrada a un programa se puede representar mediante una cadena de caracteres, así como cualquier tipo de salida.
+- También supondremos que hay sólo una palabra de entrada y una palabra de salida. Esto tampoco supone restricción ya que un conjunto de palabras se pueden codificar como una sola palabra en la que aparecen las palabras originales encadenadas con un separador para indicar el final de una y el comienzo de la siguiente.
+- A partir de ahora, en términos generales hablaremos sólo sobre problemas en las que las entradas y las salidas son palabras sobre un alfabeto (Problema Computacional), aunque al hablar de un problema concreto hablaremos de grafos, números u otros elementos.
+
+## Problemas y su Codificación
+
+- Cualquier problema se transforma en un problema computacional con un sistema de codificación de las entradas y salidas.
+- Puede haber palabras que no sean una codificación correcta de una entrada del problema original. En ese caso, supondremos que a esa entrada le corresponde una salida especial: 'NO'.
+- En general, nuestro estudio teórico se hará sobre problemas computacionales, pero su resultado se aplicará también a problemas en general, ya que estos resultados no dependerán de la codificación elegida (siempre que ésta sea razonable).
+- Si tenemos un problema y un sistema de codificación, para cada entrada x , la codificación de x, se denotará como &lt; x &gt; (el elemento entre ángulos).
+
+<!-- image -->
+
+## Codificando Grafos
+
+Grafo: a,b b,d c,d a,c d,e Camino: a,b,d,e
+
+<!-- image -->
+
+## Codificando Grafos
+
+Grafo: a,b b,d c,d a,c d,e Ciclo: a,b,d,c
+
+<!-- image -->
+
+Grafo dirigido: a,b b,d c,d a,c d,e
+
+<!-- image -->
+
+Grafo con pesos: a,b,7 b,d,3 c,d,4 a,c,2 d,e,5
+
+<!-- image -->
+
+## Tipos de Problemas
+
+- Problemas de Búsqueda: Son los problemas genéricos cuando F ( x ) puede ser vacío o contener varios elementos: Para una entrada x el problema consiste en encontrar una solución y que cumpla una relación con x cuando este exista y decir 'NO' cuando F ( x ) = / 0 . Ejemplo: dado un grafo no dirigido encontrar un circuito hamiltoniano.
+- Problemas de Decisión: Son aquellos en los que las soluciones son Y = { SI , NO } y cada entrada x tiene una única solución. Ejemplo: dado un grafo determinar si tiene un circuito hamiltoniano.
+- Problemas de Optimización: La solución optimiza (minimiza o maximiza) una función definida sobre un conjunto de soluciones factibles asociadas a la entrada. Ejemplo: el problema del viajante de comercio.
+- Problemas de función: Cada entrada x tiene siembre una y sólo una solución: F ( x ) tiene un solo elemento. Por ejemplo, dado un número n calcular su cuadrado n 2 . A la solución que
+
+corresponde a la entrada
+
+## Versión Decisión de los problemas
+
+Los probemas de decisión son especialmente importantes ya que son simples y es fácil razonar sobre ellos y además cualquier otro problema tiene asociado un problema de decisión:
+
+- Problemas de umbral para problemas de optimización: Los mismos datos de un problema de optimización más un umbral K y ahora se pregunta si existe una solución de valor mayor o menor que el valor K según sea un problema de máximo o mínimo. Ejemplo: dado un caso del problema del viajante de comercio y un valor K determinar si existe un circuito de coste menor o igual que K .
+- Problemas de existencia para problemas de búsqueda: Dado un x , determinar si existe un y tal que sea una solución de x .
+- Problemas de comprobación para problemas de función y búsqueda: Dado x y una posible solución y determinar si y es una solución de x .
+
+- Camino mínimo: Dado un grafo y dos nodos, encontrar un camino de longitud mínima entre estos nodos si este existe (problema de optimización).
+- Búsqueda de caminos: Dado un grafo y dos nodos, encontrar un camino entre ambos nodos, en caso de que exista, decir 'NO' en caso contrario.
+- Existencia de Caminos: Dado un grafo y dos nodos, determinar si existe un camino entre ellos (problema de existencia).
+- Umbral del camino mínimo: Dado un grafo, dos nodos, y un umbral K determinar si existe un camino entre estos nodos de longitud menor o igual a K (problema de umbral).
+- Problema de comprobación: Dado un grafo, dos nodos, y un camino, determinar si es un camino que une esos dos nodos (problema de comprobación).
+
+## Problemas de Decisión y Lenguajes
+
+Un problema computacional de decisión en el que las entradas se codifican como palabras del alfabeto A con el lenguaje de las entradas que tienen respuesta 'SI':
+
+L ( PROBLEMA ( x )) = { x ∈ A ∗ : PROBLEMA ( x ) = ′ SI ′ } .
+
+- Es decir los casos con respuesta afirmativa.
+- Un lenguaje L sobre un alfabeto A , siempre define también un problema de decisión: dada x ∈ A ∗ determinar si x ∈ L .
+
+<!-- image -->
+
+## Problemas y Lenguajes
+
+<!-- image -->
+
+- En muchos casos, la teoría se desarrolla hablando de lenguajes.
+- Cuando comenzamos con un problema genérico de decisión y lo transformamos en un problema computacional mediante una codificación de las entradas, las palabras que no son una codificación correcta de un ejemplo del problema se meten en el mismo 'saco' que los casos en los que la respuesta es 'NO'.
+- La identificación de las codificaciones correctas (palabras que corresponden realmente a un ejemplo del problema) se considera que no es importante desde el punto de vista computacional y no se tendrá en cuenta.
+
+## Problemas y Lenguajes
+
+Un problema de decisión + Una codificación ≡ Problema Computacional 'SI' 'NO' ≡ Problema Computacional 'SI' 'NO' ≡ Lenguaje
+
+- Las definiciones sobre lenguajes se pueden transformar en definiciones sobre los problemas asociados. Los problemas cuyos lenguajes son recursivos se llaman decidibles o calculable y los que no lo son indecidibles o no calculables. Esta terminología se aplica también a los lenguajes.
+- Los problemas cuyos lenguajes son r.e. se llaman semidecidibles o parcialmente calculables.
+- La identificación de las codificaciones correctas (palabras que corresponden realmente a un ejemplo del problema) se considera que no es importante desde el punto de vista computacional (en todos los ejemplos el reconocimiento de una entrada correcta se puede realizar de forma eficiente).
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## Problema Contrario
+
+Dado un problema de decisión PROBLEMA , el problema contrario de PROBLEMA , es el problema C -PROBLEMA que intercambia las salidas 'SI' y 'N0' o de forma más precisa PROBLEMA ( x ) = ′ SI ′ ⇔ C -PROBLEMA ( x ) = ′ NO ′ .
+
+## Problemas contrarios y lenguajes
+
+El lenguaje asociado al problema contrario de PROBLEMA es el lenguaje complementario del lenguaje del lenguaje asociado a PROBLEMA :
+
+L ( C -PROBLEMA ) = L ( PROBLEMA )
+
+## Problema Contrario
+
+Dado un problema de decisión PROBLEMA , el problema contrario de PROBLEMA , es el problema C -PROBLEMA que intercambia las salidas 'SI' y 'N0' o de forma más precisa PROBLEMA ( x ) = ′ SI ′ ⇔ C -PROBLEMA ( x ) = ′ NO ′ .
+
+## Problemas contrarios y lenguajes
+
+El lenguaje asociado al problema contrario de PROBLEMA es el lenguaje complementario del lenguaje del lenguaje asociado a PROBLEMA :
+
+L ( C -PROBLEMA ) = L ( PROBLEMA )
+
+Nota: Cuando hablamos de problemas genéricos, esto no es del todo exacto: ya que las codificaciones incorrectas estarán englobadas con el 'SI' en el lenguaje complementario o problema contrario, pero nosotros consideraremos que esta propiedad también se aplica a los problemas genéricos sin tener esto en cuenta: en realidad no importa como se traten las codificaciones incorrectas, ya que estas son siempre fáciles de detectar.
+
+## Ejemplo: Isomorfismo de subgrafos
+
+- X : Datos
+
+Dos grafos G 1 =( V 1 , E 1 ) y G 2 =( V 2 , E 2 )
+
+- Y : 'SI','NO' (Problema de Decisión)
+
+Relación: Respuesta 'SI' corresponde a ¿Contiene G 1 un subgrafo isomorfo a G 2 ?
+
+Es decir, existe un subconjunto V ′ ⊆ V 1 y un subconjunto de aristas E ′ ⊆ E 1 tal que E ′ ⊆ V ′ × V ′ y existe una aplicación biyectiva f : V 2 → V ′ de tal manera que se verifica
+
+( u , v ) ∈ E 2 ⇔ ( f ( u ) , f ( v )) ∈ E ′
+
+## Palabras y Números
+
+Supongamos un alfabeto A = { a 1 , . . . , an } . Podemos establecer una correspondencia biyectiva entre las palabras sobre este alfabeto y los números naturales. Supongamos w = ai k . . . , ai 1 , entonces el número de w que denotaremos como N ( w ) es ∑ k j = 1 i j . n j -1 , siendo N ( ε ) = 0.
+
+## Ejemplo
+
+Si A = { 0 , 1 , 2 } , N ( ε ) = 0 , N ( 0 ) = 1 , N ( 1 ) = 2 , N ( 2 ) = 3 , N ( 202 ) = 3 + 1 × 3 + 3 × 3 2
+
+Dado un alfabeto A = { a 1 , . . . , an } , Si m es un número natural, siempre se puede encontrar una cadena, que denotaremos como C ( m ) o como wm cuya codificación sea m . Esto se puede conseguir de la siguiente forma,
+
+- Si m = 0, C ( m ) = ε
+- Si m &gt; 0, sea
+
+<!-- formula-not-decoded -->
+
+p
+
+=
+
+{
+
+[
+
+m
+
+/
+
+n
+
+]
+
+si n no divide a m
+
+[
+
+m
+
+/
+
+n
+
+]
+
+-
+
+1
+
+si n divide a m donde R ( m , n ) es el resto de la división entera de m entre n y [ m / n ] es la división entera de m entre n . Entonces C ( m ) = C ( p ) ai .
+
+## Serafín Moral
+
+## Distintos alfabetos
+
+Si tenemos dos alfabetos A y B podemos establecer una aplicación biyectiva entre las palabras de ambos alfabetos:
+
+- Sea N A la aplicación que codifica las palabras de A como números naturales: N A : A ∗ → N .
+- Sea C B la aplicación que transforma números naturales en palabras sobre B : C B : N → B ∗ .
+- La composición C B ◦ N A es una aplicación biyectiva de A ∗ en B ∗ (primero se calcula el código numérico de una palabra de B y entonces la palabra del alfabeto de A que corresponde a ese código.
+- Esta función es calculable en una MT.
+
+<!-- image -->
+
+Si tenemos dos alfabetos A y B podemos establecer una aplicación biyectiva entre las palabras de ambos alfabetos:
+
+- Sea N A la aplicación que codifica las palabras de A como números naturales: N A : A ∗ → N .
+- Sea C B la aplicación que transforma números naturales en palabras sobre B : C B : N → B ∗ .
+- La composición C B ◦ N A es una aplicación biyectiva de A ∗ en B ∗ (primero se calcula el código numérico de una palabra de B y entonces la palabra del alfabeto de A que corresponde a ese código.
+- Esta función es calculable en una MT.
+
+Es suficiente trabajar sobre un sólo alfabeto. Usualmente, lo haremos sobre el alfabeto { 0 , 1 } (para desarrollar la teoría) aunque lo haremos sobre alfabetos más amplios (ASCII) para un caso práctico.
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## Orden Total en las Palabras de un Alfabeto
+
+- Si A = { a 1 , . . . , a n } nosotros siempre vamos a considerar el siguiente orden total en sus palabras:
+- u 1 ≤ u 2 si y solo si se da una de las siguientes condiciones:
+- 1 u 1 = u 2
+- 2 | u 1 | &lt; | u 2 |
+- 3 | u 1 | = | u 2 | y u 1 precede a u 2 en orden alfabético, teniendo en cuenta que a 1 &lt; a 2 &lt; · · · &lt; a n . Es decir si u 1 = a r 1 . . . a ri a s 1 . . . a sm y u 2 = a r 1 . . . a ri a l 1 . . . a lm y s 1 &lt; l 1 (el primer símbolo en el que son distintas las palabras es menor en u 1 que en u 2 .
+- Esto es equivalente a u 1 ≤ u 2 si y solo si N ( u 1 ) ≤ N ( u 2 )
+- El orden alfabético como tal no es operativo ya que no podemos establecer un ciclo infinito que recorra todas las palabras: hay infinitas palabras que empiezan por a 1 antes de las palabras que empiezan por a 2 y nunca se llegaría a ellas.
+
+## Codificando Máquinas de Turing
+
+Se le puede asignar a cada MT sobre un alfabeto { 0 , 1 } una cadena y un número natural. Para ello, suponemos
+
+- Los estados son { q 1 , . . . , qk } . El estado inicial es q 1 y hay un único estado final q 2 (esto siempre se puede conseguir).
+- Los símbolos de B son { a 1 , a 2 , . . . , am } donde a 1 es 0, a 2 es 1 y a 3 es el símbolo blanco.
+- Al movimiento izquierda le asignamos un 1 y al de la derecha un 2. Este número será u ( M ) .
+
+La codificación de la MT se realiza de la siguiente forma:
+
+- Cada transición δ ( qi , aj ) = ( qk , al , M ) se codifica como 0 i 10 j 10 k 10 l 10 u ( M ) .
+- Todas las transiciones se van añadiendo a la codificación separadas por 11.
+
+Una vez calculada la cadena w = &lt; M &gt; , podemos calcular su número N ( w ) con el alfabeto { 0 , 1 } , según el procedimiento que hemos visto para asignar números a palabras. Este número también se denotará como N ( M ) .
+
+Cada número natural corresponderá a una MT, o corresponderá a una cadena sin sentido alguno. Sea T ( n ) la MT correspondiente al número n o 'Nula' (que rechaza todas las palabras) si no hay MT asociada al número n . También denotaremos como T ( w ) la MT cuyo código es w : &lt; M &gt; = w .
+
+## Codificando Máquinas de Turing y Entradas
+
+- Para codificar una MT M y una palabra w sobre el alfabeto { 0 , 1 } , podemos codificar M como hemos visto y después añadir 111 seguido de w , dando lugar a la cadena &lt; M , w &gt;
+
+<!-- image -->
+
+## El lenguaje de diagonalización
+
+Vamos a definir un lenguaje Ld sobre { 0 , 1 } que no es r.e. Este lenguaje se conoce como lenguaje de diagonalización.
+
+## Lenguaje de Diagonalización
+
+Sea w ∈{ 0 , 1 } ∗ , w ∈ Ld si y solo si la MT cuya codificación es w ( T ( w ) ) no acepta w . Se interpreta que si w no es un MT correcta, entonces representa una MT con un sólo estado y ninguna transición (siempre rechaza).
+
+Si w 0 , w 1 , w 2 , . . . son todas las palabras de { 0 , 1 } ∗ ordenadas, entonces
+
+<!-- image -->
+
+Ld = { &lt; M &gt; | M no acepta &lt; M &gt; como entrada }
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## El lenguaje de diagonalización
+
+Vamos a definir un lenguaje Ld sobre { 0 , 1 } que no es r.e. Este lenguaje se conoce como lenguaje de diagonalización.
+
+## Lenguaje de Diagonalización
+
+Sea w ∈{ 0 , 1 } ∗ , w ∈ Ld si y solo si la MT cuya codificación es w ( T ( w ) ) no acepta w . Se interpreta que si w no es un MT correcta, entonces representa una MT con un sólo estado y ninguna transición (siempre rechaza).
+
+Si w 0 , w 1 , w 2 , . . . son todas las palabras de { 0 , 1 } ∗ ordenadas, entonces
+
+<!-- image -->
+
+Ld = { &lt; M &gt; | M no acepta &lt; M &gt; como entrada }
+
+Serafín Moral
+
+## Teorema
+
+L d no es r.e.
+
+Supongamos una MT M d que acepta L d . Dicha MT estará definida sobre el alfabeto { 0 , 1 } . Dicha máquina acepta palabras w tales que la máquina de Turing con codificación w no acepta w .
+
+Sea &lt; M d &gt; la codificación de la MT M d .
+
+- Si &lt; M d &gt; ∈ L d entonces M d acepta &lt; M d &gt; (ya que M d acepta L d ), como consecuencia y por la definición de L d , &lt; M d &gt; /negationslash∈ L d .
+- Si &lt; M d &gt; /negationslash∈ L d entonces M d no acepta &lt; M d &gt; (ya que M d acepta L d ) y, por la definición de L d , &lt; M d &gt; ∈ L d .
+
+Con lo que la existencia de una MT M d que acepte L d nos lleva a una contradicción.
+
+A la versión problema de decisión del lenguaje de diagonalización le llamaremos Problema de Diagonalización y lo notaremos como DIAGONAL ( M ) .
+
+Consiste en determinar si dada una máquina de Turing M , entonces M no acepta cuando se lee a ella misma.
+
+<!-- image -->
+
+## Recordatorio: Problemas y Lenguajes
+
+Dada u , ¿es u ∈ L ?
+
+Lenguaje
+
+L
+
+Problema Decisión PROBLEMA
+
+Conjunto x , es tal que PROBLEMA ( x ) = SI
+
+Aceptar
+
+≡
+
+Responder SI
+
+Máquina Turing Acept.
+
+Algoritmo SI/NO
+
+## Recordatorio: Problemas y Lenguajes
+
+- Lenguaje recursivamente enumerable ≡ Problema semidecidible
+- Existe una MT que acepta las palabras del lenguaje. Para las palabras del lenguaje la MT puede rechazar o ciclar.
+- Existe un algoritmo que responde correctamente las entradas cuya salida es 'SI', para las entradas de 'NO' el algoritmo puede decir 'NO' o ciclar
+- Lenguaje recursivo ≡ Problema decidible
+- Existe una MT que acepta las palabras del lenguaje y rechaza las palabras que no son del lenguaje (nunca cicla).
+- Existe un algoritmo que responde correctamente las entradas cuya salida es 'SI' y aquellas cuya salida es 'NO' (nunca cicla).
+
+<!-- image -->
+
+## Complementarios de los lenguajes recursivos y r.e.
+
+Si L ⊆ A ∗ , el complementario de L respecto a A ∗ se denotará como L .
+
+<!-- image -->
+
+## Complementarios de los lenguajes recursivos y r.e.
+
+<!-- image -->
+
+El lenguaje Ld no es r.e. Su complementario podría ser r.e., pero nunca recursivo. De hecho, es r.e.
+
+## El Lenguaje Universal
+
+## Definición
+
+El lenguaje universal Lu es el conjunto de todas v las cadenas del alfabeto { 0 , 1 } que codifican parejas ( M , w ) (es decir v = &lt; M , w &gt; ) tales que la MT M acepta la cadena w , donde w ∈ { 0 , 1 } ∗ y el alfabeto de entrada de M es { 0 , 1 } ∗ .
+
+## Problema Universal
+
+A la versión problema de decisión del lenguaje universal le llamaremos Problema Universal y lo notaremos como UNIVERSAL ( M . w ) .
+
+Consiste en determinar si dada una máquina de Turing M y una entrada w , entonces M acepta w .
+
+## Teorema
+
+El lenguaje Lu es r.e.
+
+La idea básica es construir una MT M u que lea la codificación &lt; M , w &gt; simule la MT M sobre la entrada w y termine cuando termina M , aceptando si lo hace M . Esta MT se llama Máquina de Turing Universal. Está claro que si hace la simulación, aceptará cuando M acepta w . M u contiene varias cintas:
+
+- En la primera contiene la codificación de M y w
+- En la segunda contiene lo que sería la cinta de M para la entrada w . Un símbolo a i ∈ B se representa como 0 i y los distintos símbolos se separan por un 1.
+- En la tercera cinta representa el estado de M . El estado q i se representa mediante 0 i
+- La cuarta cinta se utiliza para cálculos auxiliares
+
+## Demostración (cont.)
+
+- 1 Primero Mu examina M y w para asegurarse de que la entrada es correcta.
+- 2 Inicializa la segunda cinta con w . El 0 se codifica como 01. El 1 se codifica como 001. Cada vez que introduzca un blanco lo tendrá que hacer como 0001. Todo de acuerdo con los códigos vistos.
+- 3 Inicializa la tercera cinta con 0 que corresponde con el estado inicial (suponemos que es q 1 ).
+- 4 Simula los movimientos. Tendrá que localizar en la primera cinta 0 i 10 j 10 k 10 l 10 m donde qi es el estado en el que se encuentra, 0 j 1 es lo que se ve en la segunda cinta. Si no lo encuentra para. Entonces debe de ejecutar el movimiento correspondientes:
+- 1 Cambiar el la cinta 3, el estado a 0 k
+- 2 Sustituir 0 j en la cinta 2 por 0 l
+- 3 Hacer el movimiento en la cinta 2, según sea m ( m = 1 a la izquierda, m = 2 a la derecha).
+- 5 Si M pasa a un estado de aceptación (el estado q 2 ), entonces Mu para y acepta.
+
+<!-- image -->
+
+## Indecibilidad del Lenguaje Universal
+
+<!-- image -->
+
+## Demostración en términos de problemas y programas
+
+## Teorema
+
+El problema universal UNIVERSAL( M , w ) no es decidible.
+
+## Demostración
+
+Por reducción al absurdo:
+
+- Si UNIVERSAL ( M , w ) fuese decidible, entonces existiría un programa PROGRAMA ( M , w ) que siempre termina y lo resuelve.
+- Construyamos ahora el siguiente programa: PROGRAMAD(M) SAL ← PROGRAMA(M,&lt;M&gt;) Si SAL=='NO' Return 'SI' En otro Caso Return 'NO'
+- Pero este programa tiene como entrada una MT M y responde 'SI' cuando esta máquina no acepta su propia codificación, luego implicaría que el problema de diagonalización es decidible, lo que sabemos que no es cierto.
+
+## Reducción (en términos de lenguajes)
+
+Si L 1 ⊆ A ∗ y L 2 ⊆ B ∗ son lenguajes, el lenguaje L 1 se reduce al lenguaje L 2 si existe un algoritmo M (una MT) que siempre para y calcula una función f : A ∗ → B ∗ tal que para toda entrada w ∈ A ∗ , w ∈ L 1 ⇔ f ( w ) ∈ L 2 .
+
+<!-- image -->
+
+## Teorema
+
+Si L 1 se reduce a L 2 , entonces si L 1 no es recursivo, tampoco lo es L 2 y si L 1 no es r.e., tampoco lo es L 2 .
+
+Serafín Moral
+
+## Reducción (en términos de lenguajes)
+
+Si L 1 ⊆ A ∗ y L 2 ⊆ B ∗ son lenguajes, el lenguaje L 1 se reduce al lenguaje L 2 si existe un algoritmo M (una MT) que siempre para y calcula una función f : A ∗ → B ∗ tal que para toda entrada w ∈ A ∗ , w ∈ L 1 ⇔ f ( w ) ∈ L 2 .
+
+<!-- image -->
+
+## Teorema
+
+Si L 1 se reduce a L 2 , entonces si L 1 no es recursivo, tampoco lo es L 2 y si L 1 no es r.e., tampoco lo es L 2 .
+
+Serafín Moral
+
+## Reducción (en términos de lenguajes)
+
+Si L 1 ⊆ A ∗ y L 2 ⊆ B ∗ son lenguajes, el lenguaje L 1 se reduce al lenguaje L 2 si existe un algoritmo M (una MT) que siempre para y calcula una función f : A ∗ → B ∗ tal que para toda entrada w ∈ A ∗ , w ∈ L 1 ⇔ f ( w ) ∈ L 2 .
+
+<!-- image -->
+
+## Teorema
+
+Si L 1 se reduce a L 2 , entonces si L 1 no es recursivo, tampoco lo es L 2 y si L 1 no es r.e., tampoco lo es L 2 .
+
+Serafín Moral
+
+## Reducción (en términos de problemas)
+
+Sean PROBLEMA 1 y PROBLEMA 2 problemas de decisión, entonces decimos que PROBLEMA 1 se reduce a PROBLEMA 2 si existe un algoritmo ALG ( w ) que siempre para y calcula una función f ( w ) tal que para toda entrada w a PROBLEMA 1 , tenemos que PROBLEMA 2 produce la misma respuesta para la entrada f ( w ) = ALG ( w ) .
+
+<!-- image -->
+
+Una reducción de PROBLEMA 1 a PROBLEMA 2 es una algoritmo ALG ( x ) de las entrandas de PROBLEMA 1 a las entrandas de PROBLEMA 2 de tal forma que
+
+PROBLEMA 1 ( x ) = PROBLEMA 2 ( ALG ( x ))
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## Reducción (en términos de problemas)
+
+Sean PROBLEMA 1 y PROBLEMA 2 problemas de decisión, entonces decimos que PROBLEMA 1 se reduce a PROBLEMA 2 si existe un algoritmo ALG ( w ) que siempre para y calcula una función f ( w ) tal que para toda entrada w a PROBLEMA 1 , tenemos que PROBLEMA 2 produce la misma respuesta para la entrada f ( w ) = ALG ( w ) .
+
+<!-- image -->
+
+Una reducción de PROBLEMA 1 a PROBLEMA 2 es una algoritmo ALG ( x ) de las entrandas de PROBLEMA 1 a las entrandas de PROBLEMA 2 de tal forma que
+
+PROBLEMA 1 ( x ) = PROBLEMA 2 ( ALG ( x ))
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## Reducción (en términos de problemas)
+
+Sean PROBLEMA 1 y PROBLEMA 2 problemas de decisión, entonces decimos que PROBLEMA 1 se reduce a PROBLEMA 2 si existe un algoritmo ALG ( w ) que siempre para y calcula una función f ( w ) tal que para toda entrada w a PROBLEMA 1 , tenemos que PROBLEMA 2 produce la misma respuesta para la entrada f ( w ) = ALG ( w ) .
+
+<!-- image -->
+
+Una reducción de PROBLEMA 1 a PROBLEMA 2 es una algoritmo ALG ( x ) de las entrandas de PROBLEMA 1 a las entrandas de PROBLEMA 2 de tal forma que
+
+PROBLEMA 1 ( x ) = PROBLEMA 2 ( ALG ( x ))
+
+Serafín Moral
+
+## Reducción (en términos de problemas)
+
+## Teorema
+
+Si PROBLEMA 1 se reduce a PROBLEMA 2 , entonces si PROBLEMA 1 es indecidible, también lo es PROBLEMA 2 y si PROBLEMA 1 no es semidecidible, tampoco lo es PROBLEMA 2 .
+
+Sea ALG ( w ) el algoritmo de la reducción de PROBLEMA 1 a PROBLEMA 2 . Supongamos que ALG 2 ( x ) es un algoritmo que hace a PROBLEMA 2 semidecidible (decidible), entonces el algoritmo:
+
+ALG1(x) w = ALG(x) Return (ALG2(w))
+
+hará al problema PROBLEMA 1 semidecidible (decidible). Por lo tanto si PROBLEMA 1 no es semidecidible (decidible), tampoco lo puede ser PROBLEMA 2 .
+
+Serafín Moral
+
+## MTs que aceptan el lenguaje vacío
+
+## Definimos los siguientes lenguajes sobre el alfabeto { 0 , 1 } :
+
+- L e conjunto de palabras &lt; M &gt; tales que M es una MT sobre { 0 , 1 } que no acepta ninguna palabra ( L ( M ) = / 0 ).
+- L ne conjunto de palabras &lt; M &gt; tales que M es una MT sobre { 0 , 1 } que acepta alguna palabra ( L ( M ) = / 0 )( L ( M ) = / 0 ).
+
+/negationslash
+
+## Versión Problema
+
+- VACIO(M) es la versión de problema de L e : dada una MT M , determinar si acepta el lenguaje vacío.
+- C-VACIO(M) es la versión de problema de L ne : dada una MT M , determinar si acepta un lenguaje distinto del vacío.
+
+## Semidecidivilidad de C-VACIO(M)
+
+<!-- image -->
+
+C-VACIO(M) es semidecidible.
+
+<!-- image -->
+
+## MTs que aceptan el lenguaje vacío
+
+## Teorema
+
+Lne no es recursivo (C-VACIO(M) no es decidible)
+
+## Demostración
+
+Vamos a demostrarlo usando los problemas asociados. Vamos a reducir UNIVERSAL(M,w) and C-VACIO(M') . Eso consiste en un algoritmo ALG(M,w) que calcula una MT M ′ de tal manera que UNIVERSAL(M,w) tenga la misma solución que C-VACIO(M') . Este funciona de la siguiente forma:
+
+- Supongamos una entrada ( M , w ) vamos a construir una MT M ′ que funciona de la siguiente forma.
+- M ′ ignora su entrada x y coloca en la cinta de entrada w . Si la longitud de w es n , esto se puede hacer con n estados. Cada estado qi escribe el símbolo i de ( M , w ) y se mueve a la derecha. Después pasaría a un nuevo estado en el que borra lo que quede de x .
+- M ′ se mueve a la izquierda hasta el primer símbolo de w .
+- M ′ pasa al estado inicial de M con w y funciona como M para w .
+- La salida de M ′ es la misma que la de M para w .
+
+Está claro que M acepta w si y solo si M ′ acepta alguna palabra. De hecho L ( M ′ ) = A ∗ si M acepta w y L ( M ′ ) = / 0 si M no acepta w .
+
+## Demostración Gráfica y Consecuencia
+
+Dada una entrada ( M , w ) la reducción construye la siguiente MT:
+
+<!-- image -->
+
+<!-- image -->
+
+Propiedad lenguaje r.e. ↔ Propiedad de los lenguajes de las MTs Una propiedad de los lenguajes r.e. se identifica con el problema de saber si el lenguaje de una MT verifica esa propiedad.
+
+Es una problema de decisión del tipo: Dada una MT M , ¿verifica el lenguaje L ( M ) la propiedad P ?
+
+## Ejemplo
+
+Propiedades
+
+Saber si el lenguaje de una MT es finito.
+
+No es una propiedad de los r.e. saber si una MT tiene más de 10 estados.
+
+## Definición
+
+Una propiedad de los lenguajes r.e. se dice trivial si para toda MT su lenguaje aceptado no verifica la propiedad o para toda MT su lenguaje aceptado siempre verifica la propiedad.
+
+## Teorema de Rice
+
+Toda propiedad no trivial sobre los lenguajes r.e. es indecidible
+
+## Demostración
+
+Llamemos NOTRIVIAL(M) a dicha propiedad no trivial y supongamos una propiedad no trivial y supongamos que el lenguaje vacío aceptado por la MT Me no verifica la propiedad que otro lenguaje L aceptado por la MT ML si verifica la propiedad.
+
+Vamos a reducir el problema UNIVERSAL(M,w) a esta propiedad. Supongamos ( M , w ) una MT y su entrada construimos M ′ de la siguiente forma (se supone que tiene una entrada x en la primera cinta):
+
+- M ′ tiene dos cintas. En la segunda coloca a w y empieza trabajando sobre esta cinta con las mismas transiciones de M . Si termina y no acepta, entonces M ′ no acepta.
+- Si M termina y acepta con w , entonces empieza a funcionar como ML sobre la entrada x en la primera cinta y tiene la misma salida que ML .
+
+Está claro que si M acepta w , entonces el lenguaje de M ′ es L y verifica la propiedad. Si M no acepta w , entonces el lenguaje de M ′ es vacío y no verifica la propiedad. Con esto se acaba la reducción y la propiedad no es decidible.
+
+Si el lenguaje vacío acepta la propiedad se haría la misma transformación con la propiedad complementaria, demostrando que no es decidible y, por lo tanto, la propiedad original tampoco lo es.
+
+## Teorema de Rice. Gráfica de la Reducción
+
+Dada una entrada para el problema universal ( M , w ) se construye la siguiente MT M ′
+
+<!-- image -->
+
+Está claro UNIVERSAL(M,w) tiene respuesta 'SI', entonces M acepta w , entonces M ′ acepta L y la respuesta de NOTRIVIAL(M') es también 'SI'. Si UNIVERSAL(M,w) tiene respuesta 'NO', entonces M no acepta w , y esta máquina M ′ acepta / 0 y la respuesta de NOTRIVIAL(M') es también 'NO'. Como UNIVERSAL(M,w) no es decidible, NOTRIVIAL(M') tampoco lo es.
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## Otros Problemas Indecidibles
+
+## El Problema de las Correspondencias de Post ( POST(A1,A2) )
+
+Tenemos un alfabeto de referencia A , y dos listas con la misma longitud B 1 = w 1 , . . . , wk , B 2 = u 1 , . . . , uk de palabras sobre A . El problema es determinar si existe una secuencia no vacía de enteros i 1 , . . . , im tales que wi 1 . . . wim = ui 1 . . . uim .
+
+Podemos pensar en cada pareja ( wi , ui ) como un bloque de construcción:
+
+.
+
+<!-- image -->
+
+La especificación del problema nos da un conjunto de bloques disponibles. Por ejemplo:
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+## Otros Problemas Indecidibles
+
+## El Problema de las Correspondencias de Post ( POST(A1,A2) )
+
+Tenemos un alfabeto de referencia A , y dos listas con la misma longitud B 1 = w 1 , . . . , wk , B 2 = u 1 , . . . , uk de palabras sobre A . El problema es determinar si existe una secuencia no vacía de enteros i 1 , . . . , im tales que wi 1 . . . wim = ui 1 . . . uim .
+
+Podemos pensar en cada pareja ( wi , ui ) como un bloque de construcción:
+
+<!-- image -->
+
+La especificación del problema nos da un conjunto de bloques disponibles. Por ejemplo:
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+En este caso, la respuesta es afirmativa. Secuencia: 1 , 3 , 1 , 1 , 3 , 2 , 2
+
+<!-- image -->
+
+| abb   | a   | abb   | abb   | a   | b   | b   | abbaabbabbabb   |
+|-------|-----|-------|-------|-----|-----|-----|-----------------|
+| a     | bb  | a     | a     | bb  | abb | abb | abbaabbabbabb   |
+
+Si visitáis la página web: https://people.ksp.sk/~kuko/pcp/ podéis practicar con numerosos ejemplos de este puzzle.
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## El Problema de las Correspondencias de Post Modificado ( POSTM(A1,A2) )
+
+## PCP Modificado
+
+/negationslash
+
+Tenemos un alfabeto de referencia A , y dos listas con la misma longitud B 1 = w 1 , . . . , w k , B 2 = u 1 , . . . , u k de palabras sobre A tales que u i , w j = ε y un entero i . El problema es determinar si existe una secuencia no vacía de enteros i 1 , . . . , i m tales que i 1 = i y w i 1 . . . w im = u i 1 . . . u im .
+
+La única diferencia es que ahora nos dicen el bloque por el que necesariamente hay que comenzar y que las palabras son no vacías. Vamos a suponer siempre que el bloque por el que hay que empezar es el primero de la lista de los bloques (sólo hay que reordenar los bloques para que el que nos indican como bloque por el que hay que empezar aparezca primero.
+
+## Ejemplo
+
+Supongamos el ejemplo:
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+Como problema de las correspondencias de Post, tiene solución: 3,2,3,1 (respuesta afirmativa) Efectivamente sale:
+
+| bba   | ab   | bba   | a   |
+|-------|------|-------|-----|
+| bb    | aa   | bb    | baa |
+
+Con lo que se lee bbaabbbaa en la parte superior e inferior. Sin embargo, como PCP modificado no tiene solución (respuesta negativa) ya que en ese caso, una solución tiene que empezar por el primer bloque, y así la palabra superior empieza por baa y la inferior por bb y ya, pongamos lo que pongamos después, las palabras resultantes no pueden ser iguales.
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## Semidecidibilidad del probl. de las correspondencias de Post
+
+Se supone que la entrada al problema contiene k bloques
+
+<!-- image -->
+
+· · ·
+
+<!-- image -->
+
+Un algoritmo no-determinista que acepta los casos positivos es:
+
+Secuencia = []
+
+Fin = Falso
+
+Mientras No Fin
+
+Elige
+
+i
+
+entre 1 y
+
+k
+
+Añade
+
+i
+
+a Secuencia
+
+Elige Fin = Verdadero o Fin = False
+
+Comprueba que eligiendo los bloques en el orden Secuencia es una solución del PCP Si es solución responde 'SI', en caso contrario responde 'NO'
+
+El algoritmo resuelve el problema, ya que si la respuesta es afirmativa puede responder de forma afirmativa y si es negativa NUNCA responderá de forma afirmativa.
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## El Problema de las Correspondencias de Post Modificado
+
+## Teorema
+
+El problema de las correspondencias de Post modificado es indecidible si A tiene al menos 2 símbolos.
+
+- Si A tiene dos símbolos, podemos codificar palabras de cualquier alfabeto, de manera que sea un homomorfismo y tal que el problema codificado tenga solución si y solo si el original la tiene. Por ejemplo, si el alfabeto es A = { a , b , c } , podemos codificar a = 00, b = 01, c = 11. Así una ficha se codificaría símbolo a símbolo:
+
+<!-- image -->
+
+Codificando así todas las fichas, el problema original tiene solución si y solo si el problema codificado con dos símbolos tiene solución.
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+Vamos a reducir el lenguaje universal UNIVERSAL ( M , w ) a este problema.
+
+Vamos a suponer una MT M y una palabra w . La pregunta es si w ∈ L ( M ) . Vamos a construir un problema de correspondencias de Post modificado con la misma solución.
+
+El alfabeto que vamos a considerar para el alfabeto del problema de las correspondencias es el alfabeto de la MT, más el conjunto de estados, más un separador que no esté en los conjuntos anteriores ∗
+
+<!-- image -->
+
+## Demostración (Cont.)
+
+<!-- image -->
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## Demostración (Cont.)
+
+- La idea de la reducción es representar en los bloques de una posible solución el cálculo que realiza la MT para la palabra de entrada w escribiendo el historial de sus configuraciones.
+- Cada configuración ( q , u , v ) se representa por la cadena uqv y las distintas configuraciones se separan por ∗ .
+- En la parte de abajo se lleva una configuración de ventaja respecto a la parte de arriba. Eso ocurre para cada cálculo, pero cuando se llega a un estado de aceptación, entonces la parte de abajo empieza a disminuir símbolo a símbolo paso a paso y copiándose arriba, hasta que quede abajo . . . ∗ q ∗ y arriba . . . ∗ qa ∗ ó . . . ∗ aq ∗ donde q es el estado final. Entonces podemos completar con el último bloque q ∗∗ ∗ y se completa la solución.
+- Así se obtiene una solución si y solo si el cálculo de la MT llega a un estado de aceptación.
+- Como el Problema Universal se reduce al PCP modificado y el problema universal no es decidible, entonces el PCP no es decidible.
+
+<!-- image -->
+
+Serafín Moral
+
+Consideremos la MT
+
+M =( { q 0 , q 1 , q 2 , q 3 , q 4 } , { 0 , 1 } , { 0 , 1 , X , Y , # } , δ , q 0 , # , { q 4 } ) donde las transiciones no nulas son las siguientes:
+
+δ ( q , 0 ) = ( q , X , D )
+
+0 1 0 3
+
+δ ( q , Y ) = ( q , Y , D )
+
+δ ( q 1 , 0 ) = ( q 1 , 0 , D )
+
+δ ( q 1 , 1 ) = ( q 2 , Y , I )
+
+δ ( q 1 , Y ) = ( q 1 , Y , D ) δ ( q 2 , 0 ) = ( q 2 , 0 , I )
+
+δ ( q 2 , X ) = ( q 0 , X , D ) δ ( q 2 , Y ) = ( q 2 , Y , I )
+
+δ ( q 3 , Y ) = ( q 3 , Y , D ) δ ( q 3 , #) = ( q 4 , # , D )
+
+y la palabra de entrada 000111
+
+Una solución del PCP modificado, tiene que empezar con la ficha:
+
+<!-- image -->
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## Ejemplo (Cont.)
+
+| ∗              | q 0 0   |   0 |   0 |   1 |   1 |   1 | ∗   |
+|----------------|---------|-----|-----|-----|-----|-----|-----|
+| ∗ q 0 000111 ∗ | Xq 1    |   0 |   0 |   1 |   1 |   1 | ∗   |
+
+<!-- image -->
+
+Si nos fijamos, hemos copiado en la parte superior la configuración que teníamos en la parte inferior y en la inferior se ha añadido la configuración del siguiente paso en el cálculo de la MT. Se puede comprobar que esto es siempre así.
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## Ejemplo (Cont.)
+
+De esta forma, al final del cálculo de la MT llegaremos a una situación en la que tendremos lo siguiente en las partes superior e inferior de una solución (representamos como una única ficha la solución parcial):
+
+<!-- image -->
+
+donde u es la misma palabra en las dos partes. Podemos ver que aún no es una solucion, pero como q 4 es estado final, podemos continuar con los bloques
+
+| u ∗                | X   | X   | X   | Y   | Y   | Y   | # q 4   | ∗   |
+|--------------------|-----|-----|-----|-----|-----|-----|---------|-----|
+| u ∗ XXXYYY # q 4 ∗ | X   | X   | X   | Y   | Y   | Y   | q 4     | ∗   |
+
+Si nos damos cuenta, el estado final permite copiar lo que hay de más en la parte inferior en la parte superior, y en la parte inferior se copia todo menos un símbolo que esté al lado del estado final.
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## Ejemplo (Cont.)
+
+Si vamos repitiendo este proceso, cada vez podemos disminuir lo que hay en la parte inferior en un símbolo de la cinta, hasta que lleguemos a una situación en la que tenemos:
+
+<!-- image -->
+
+Así se pueden completar dos palabras iguales si y solo si M llega a un estado final cuando tiene a w como entrada.
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## El PCP es indecidible
+
+/diamondsolid
+
+<!-- image -->
+
+## PCP No decidible. Continuación
+
+<!-- image -->
+
+Serafín Moral
+
+Tema 1: Máquinas de Turing. Funciones y Lenguajes Calcul
+
+## Problemas sobre Gramáticas
+
+## Problemas sobre Gramáticas
+
+Suponemos que G , G 1 y G 2 son gramáticas independientes del contexto dadas y R es un lenguaje regular.
+
+- Saber si L ( G 1 ) ∩ L ( G 2 ) = / 0 .
+- Determinar si L ( G ) = T ∗ , donde T es el conjunto de símbolos terminales.
+- Comprobar si L ( G 1 ) = L ( G 2 ) .
+- Determinar si L ( G 1 ) ⊆ L ( G 2 ) .
+- Determinar si L ( G 1 ) = R .
+- Comprobar si L ( G ) es regular.
+- Determinar si G es ambigua.
+- Conocer si L ( G ) es inherentemente ambiguo.
+- Comprobar si L ( G ) es determinista.
+
+## Teorema
+
+Saber si una gramática independiente del contexto es ambigua ( AMBIGUA(G) ) es indecidible.
+
+Se reduce el problema de las correspondencias de Post. Supongamos el alfabeto A y los bloques
+
+u
+
+1
+
+,
+
+· · ·
+
+,
+
+u
+
+k
+
+.
+
+1
+
+v
+
+v
+
+k
+
+Sea B = A ∪{ b 1 , . . . , b k } donde b i /negationslash∈ A y construimos la siguiente gramática:
+
+S → C | D
+
+C → u i Cb i | u i b i , i = 1 , . . . , k
+
+D → v i Db i | v i b i , i = 1 , . . . , k
+
+La solución al problema de las correspondencias de Post es equivalente a que la gramática sea ambigua.
+
+Supongamos el alfabeto A y los bloques
+
+<!-- image -->
+
+Sea B = A ∪{ b 1 , . . . , bk } donde bi /negationslash∈ A y construimos la siguiente gramática: S → C | D , C → ui Cbi | ui bi , i = 1 , . . . , k , D → vi Dbi | vi bi , i = 1 , . . . , k , Se basa en lo siguiente:
+
+- Las palabras generadas por la gramática son las generadas a partir de C más las generadas a partir de D
+- Las palabras generadas a partir de C son de la forma ui 1 . . . ui l bi l . . . bi 1 , donde i j ∈ { 1 , . . . , k } . Sólo hay una forma de generar una de estas palabras a partir de C .
+- Las palabras generadas a partir de D son de la forma vi 1 . . . vi l bi l . . . bi 1 , donde i j ∈ { 1 , . . . , k } . Sólo hay una forma de generar una de estas palabras a partir de D .
+- La gramática es ambigua cuando una misma palabra u es generada a partir de C y a partir de D , es decir cuando u = ui 1 . . . uin bi l . . . bin = vi ′ 1 . . . v i ′ n ′ b i ′ 1 . . . bi ′ n ′ . Esto solo ocurre si n ′ = n e i j = i ′ j , ∀ j . Es decir cuando existen ( i 1 , . . . , in ) tal que ui 1 . . . uin = vi 1 . . . vin , es decir cuando el PCP tiene solución.
