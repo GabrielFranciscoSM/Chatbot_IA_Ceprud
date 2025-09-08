@@ -51,12 +51,10 @@ async def index(request: Request):
 @app.get("/graphs", response_class=JSONResponse)
 async def list_graphs():
     """Lists available graph images for the frontend."""
-    graphs_dir = os.path.join(os.path.dirname(__file__), "graphs")
-    # if not os.path.isdir(graphs_dir):
     if not os.path.isdir(GRAPHS_DIR):
         return []
     # This endpoint is specific to the UI, so it stays here
-    return [f for f in os.listdir(graphs_dir) if f.endswith((".png", ".jpg", ".jpeg", ".gif"))]
+    return [f for f in os.listdir(GRAPHS_DIR) if f.endswith((".png", ".jpg", ".jpeg", ".gif"))]
 
 
 # Note: The /graphs/{fname} endpoint is now handled by the StaticFiles mount above,

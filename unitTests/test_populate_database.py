@@ -1,5 +1,5 @@
 import pytest
-from app.rag.populate_database import clean_text, load_documents, add_to_chroma, Document
+from rag.populate_database import clean_text, load_documents, add_to_chroma, Document
 import tempfile
 import os 
 
@@ -42,7 +42,7 @@ def test_load_documents(monkeypatch):
         mock_result = MagicMock()
         mock_result.document.export_to_markdown.return_value = "Texto principal"
         mock_converter.convert.return_value = mock_result
-        monkeypatch.setattr("RAG.populate_database.DocumentConverter", lambda: mock_converter)
+        monkeypatch.setattr("rag.populate_database.DocumentConverter", lambda: mock_converter)
 
         # Call load_documents
         docs = load_documents(subject_dir)
@@ -58,7 +58,7 @@ def test_add_to_chroma(monkeypatch):
         chroma_path = os.path.join(tmpdir, "chroma")
         mock_db = MagicMock()
         mock_db.get.return_value = {"ids": []}
-        monkeypatch.setattr("RAG.populate_database.Chroma", lambda **kwargs: mock_db)
+        monkeypatch.setattr("rag.populate_database.Chroma", lambda **kwargs: mock_db)
         # Create fake chunks
         chunk = MagicMock()
         chunk.metadata = {"source": "test_source"}

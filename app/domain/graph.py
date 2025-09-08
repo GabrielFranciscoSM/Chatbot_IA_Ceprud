@@ -1,5 +1,6 @@
 import json
 import os
+import sqlite3
 from dotenv import load_dotenv
 from typing import Literal, List, Dict, Any, Tuple
 from langchain_core.documents import Document
@@ -179,7 +180,11 @@ def build_graph():
     graph_builder.add_edge("tools", "agent")
 
     # Use storage directory for checkpoints - persistent across container restarts
-    checkpoint_path = "/app/storage/checkpoints.sqlite"
+    # Create storage directory if it doesn't exist
+    storage_dir = os.path.join(os.path.dirname(__file__), "..", "storage")
+    os.makedirs(storage_dir, exist_ok=True)
+    
+    checkpoint_path = os.path.join(storage_dir, "checkpoints.sqlite")
     conn = sqlite3.connect(checkpoint_path, check_same_thread=False)
     memory = SqliteSaver(conn)
 
