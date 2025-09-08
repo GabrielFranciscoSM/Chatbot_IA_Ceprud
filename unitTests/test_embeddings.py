@@ -1,5 +1,5 @@
 import pytest
-from RAG.get_embedding_function import get_embedding_function
+from app.rag.get_embedding_function import get_embedding_function
 
 def test_embedding_function_type():
     """Test that get_embedding_function returns a valid embedding object"""

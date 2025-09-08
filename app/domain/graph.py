@@ -14,7 +14,7 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from typing_extensions import TypedDict
 
 # Asumo que get_embedding_function es una función que tienes en otro archivo
-from RAG.get_embedding_function import get_embedding_function
+from rag.get_embedding_function import get_embedding_function
 from langchain_core.runnables import RunnableConfig
 import sqlite3
 

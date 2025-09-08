@@ -1,8 +1,28 @@
-2025-09-07 20:10:59,081 - api_router - INFO - Chat request received - Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
-2025-09-07 20:11:00,218 - api_router - INFO - Request: POST /chat | Status: 200 | Duration: 1.138s | Response Size: 134b | Client IP: 10.89.0.4
-2025-09-07 20:24:57,988 - api_router - INFO - Chat request received - Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
-2025-09-07 20:24:58,676 - api_router - INFO - Request: POST /chat | Status: 200 | Duration: 0.688s | Response Size: 66b | Client IP: 10.89.0.4
-2025-09-07 20:26:28,276 - api_router - INFO - Chat request received - Session: 874f1912, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
-2025-09-07 20:26:29,377 - api_router - INFO - Request: POST /chat | Status: 200 | Duration: 1.108s | Response Size: 103b | Client IP: 10.89.0.7
-2025-09-07 20:41:30,831 - api_router - INFO - Chat request received - Session: 874f1912, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
-2025-09-07 20:41:31,457 - api_router - INFO - Request: POST /chat | Status: 200 | Duration: 0.626s | Response Size: 101b | Client IP: 10.89.0.7
+2025-09-08 10:25:26,111 - services.session_service - INFO - Created new session for user nuevo@ej... in subject metaheuristicas
+2025-09-08 10:28:24,861 - services.session_service - INFO - Created new session for user nuevo@ej... in subject metaheuristicas
+2025-09-08 10:28:24,861 - api_router - INFO - Chat request received - Session: fb1ee6f5-da4f-4cf3-ad89-305583e19311, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
+2025-09-08 10:28:25,781 - api_router - ERROR - Error processing request: log_user_message() got an unexpected keyword argument 'response_time_ms'
+Traceback (most recent call last):
+  File "/app/api_router.py", line 116, in chat_endpoint
+    log_user_message(
+TypeError: log_user_message() got an unexpected keyword argument 'response_time_ms'
+2025-09-08 10:28:25,782 - services.analytics_service - INFO - Request: POST /chat | Status: 500 | Duration: 0.922s | Size: 0 bytes
+2025-09-08 10:28:50,542 - api_router - INFO - Chat request received - Session: fb1ee6f5-da4f-4cf3-ad89-305583e19311, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
+2025-09-08 10:28:51,368 - api_router - ERROR - Error processing request: log_user_message() got an unexpected keyword argument 'response_time_ms'
+Traceback (most recent call last):
+  File "/app/api_router.py", line 116, in chat_endpoint
+    log_user_message(
+TypeError: log_user_message() got an unexpected keyword argument 'response_time_ms'
+2025-09-08 10:28:51,369 - services.analytics_service - INFO - Request: POST /chat | Status: 500 | Duration: 0.826s | Size: 0 bytes
+2025-09-08 10:29:06,828 - api_router - INFO - Chat request received - Session: fb1ee6f5-da4f-4cf3-ad89-305583e19311, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
+2025-09-08 10:29:07,992 - api_router - ERROR - Error processing request: log_user_message() got an unexpected keyword argument 'response_time_ms'
+Traceback (most recent call last):
+  File "/app/api_router.py", line 116, in chat_endpoint
+    log_user_message(
+TypeError: log_user_message() got an unexpected keyword argument 'response_time_ms'
+2025-09-08 10:29:07,993 - services.analytics_service - INFO - Request: POST /chat | Status: 500 | Duration: 1.164s | Size: 0 bytes
+2025-09-08 10:30:34,479 - services.session_service - INFO - Created new session for user nuevo@ej... in subject metaheuristicas
+2025-09-08 10:30:34,479 - api_router - INFO - Chat request received - Session: 7a4c656f-79b8-456c-bd3a-866fd91edb7c, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
+2025-09-08 10:30:35,422 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.943s | Size: 172 bytes
+2025-09-08 10:30:39,367 - api_router - INFO - Chat request received - Session: 7a4c656f-79b8-456c-bd3a-866fd91edb7c, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
+2025-09-08 10:30:39,880 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.513s | Size: 21 bytes

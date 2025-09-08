@@ -1,7 +1,7 @@
 import os
 import re
 from langchain_chroma import Chroma
-from RAG.get_embedding_function import get_embedding_function
+from rag.get_embedding_function import get_embedding_function
 import requests
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
@@ -9,7 +9,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 
 from langchain_core.messages import HumanMessage, SystemMessage
 
-from logic.graph import build_graph, AgentState # Importa AgentState también
+from domain.graph import build_graph, AgentState # Importa AgentState también
 
 load_dotenv()
 

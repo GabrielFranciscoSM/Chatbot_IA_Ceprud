@@ -261,34 +261,56 @@
         userInput.value = '';
       }
 
-      // Mostrar indicador de escritura
-      showTypingIndicator();
-
-      // Crear FormData para enviar al servidor
-      const formData = new FormData();
-      formData.append('subject', selectedSubject); // Añadir la asignatura al FormData
-      formData.append('email', userEmail); // Añadir el correo del usuario
-      formData.append('mode', selectedMode); // Añadir el modo seleccionado
+      // Si hay archivo PDF, mostrar mensaje del usuario
       if (pdfInput.files.length > 0) {
         const pdfFile = pdfInput.files[0];
-        formData.append('pdf', pdfFile);
-        // Mostrar mensaje del usuario indicando que el archivo ha sido enviado
         addMessage('user', `👤 Archivo (${pdfFile.name})`, { mode: selectedMode });
         // Limpiar la visualización del archivo seleccionado
         document.getElementById('selectedFileDisplay').style.display = 'none';
-      } else {
-        formData.append('message', userMessage);
       }
 
       // Guardar mensajes en el localStorage
       saveMessages(selectedSubject);
 
+      // Mostrar indicador de escritura
+      showTypingIndicator();
+
       // Enviar solicitud al servidor
       try {
-        const response = await fetch(`${apiBase}/chat`, {
-          method: 'POST',
-          body: formData,
-        });
+        let requestOptions;
+        
+        if (pdfInput.files.length > 0) {
+          // Si hay archivo PDF, usar FormData
+          const formData = new FormData();
+          formData.append('subject', selectedSubject);
+          formData.append('email', userEmail);
+          formData.append('mode', selectedMode);
+          formData.append('pdf', pdfInput.files[0]);
+          if (userMessage) {
+            formData.append('message', userMessage);
+          }
+          
+          requestOptions = {
+            method: 'POST',
+            body: formData,
+          };
+        } else {
+          // Si solo hay texto, usar JSON
+          requestOptions = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              message: userMessage,
+              subject: selectedSubject,
+              email: userEmail,
+              mode: selectedMode
+            }),
+          };
+        }
+
+        const response = await fetch(`${apiBase}/chat`, requestOptions);
         const data = await response.json();
         // Quitar indicador de escritura
         removeTypingIndicator();

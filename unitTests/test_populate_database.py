@@ -1,5 +1,5 @@
 import pytest
-from RAG.populate_database import clean_text, load_documents, add_to_chroma, Document
+from app.rag.populate_database import clean_text, load_documents, add_to_chroma, Document
 import tempfile
 import os 
 

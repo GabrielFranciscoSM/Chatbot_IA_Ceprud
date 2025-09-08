@@ -35,5 +35,8 @@ COPY requirements.txt ./
 # in constraints.txt, preventing it from reinstalling torch.
 RUN pip3 install --no-cache-dir -r requirements.txt 
 
+# 6. Copy the application code
+#COPY app/ /app/
+
 # Default command to run the application
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5001"]

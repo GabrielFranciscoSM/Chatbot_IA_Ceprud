@@ -1,5 +1,5 @@
 import pytest
-from logic.query_logic import query_rag
+from app.domain.query_logic import query_rag
 from unittest.mock import patch, MagicMock
 
 def test_query_rag_basic():

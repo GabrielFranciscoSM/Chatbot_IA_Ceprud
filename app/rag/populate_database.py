@@ -4,7 +4,7 @@ import shutil
 from langchain_text_splitters import RecursiveCharacterTextSplitter, MarkdownTextSplitter
 from langchain.schema.document import Document
 from langchain_chroma import Chroma
-from RAG.get_embedding_function import get_embedding_function
+from rag.get_embedding_function import get_embedding_function
 
 from docling.document_converter import DocumentConverter
 

@@ -1,5 +1,5 @@
 import pytest
-from RAG.add_subject import process_pdf_files, update_index_html, add_new_subject
+from app.rag.add_subject import process_pdf_files, update_index_html, add_new_subject
 import os
 import tempfile
 from unittest.mock import patch, MagicMock

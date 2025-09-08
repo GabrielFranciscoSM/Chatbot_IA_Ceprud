@@ -10,9 +10,9 @@ from api_router import router as api_router
 
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_DIR = os.path.join(APP_ROOT, "static")
-TEMPLATES_DIR = os.path.join(APP_ROOT, "templates")
-GRAPHS_DIR = os.path.join(APP_ROOT, "graphs")
+STATIC_DIR = os.path.join(APP_ROOT, "web", "static")
+TEMPLATES_DIR = os.path.join(APP_ROOT, "web", "templates")
+GRAPHS_DIR = os.path.join(APP_ROOT, "analytics", "graphs")
 
 # Create the main FastAPI app
 app = FastAPI()

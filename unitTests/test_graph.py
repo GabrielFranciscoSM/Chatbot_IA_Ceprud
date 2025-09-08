@@ -1,5 +1,5 @@
 import pytest
-from logic.graph import build_graph
+from app.domain.graph import build_graph
 from unittest.mock import patch, MagicMock
 
 def test_build_graph_returns_graph():
