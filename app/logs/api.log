@@ -26,3 +26,8 @@ TypeError: log_user_message() got an unexpected keyword argument 'response_time_
 2025-09-08 10:30:35,422 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.943s | Size: 172 bytes
 2025-09-08 10:30:39,367 - api_router - INFO - Chat request received - Session: 7a4c656f-79b8-456c-bd3a-866fd91edb7c, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
 2025-09-08 10:30:39,880 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.513s | Size: 21 bytes
+2025-09-08 10:47:39,944 - services.session_service - INFO - Created new session for user nuevo@ej... in subject metaheuristicas
+2025-09-08 10:47:39,946 - api_router - INFO - Chat request received - Session: 0e353e48-fefb-4fce-9798-e7ec0ba0be85, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
+2025-09-08 10:47:40,757 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.813s | Size: 129 bytes
+2025-09-08 10:47:45,814 - api_router - INFO - Chat request received - Session: 0e353e48-fefb-4fce-9798-e7ec0ba0be85, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
+2025-09-08 10:47:46,794 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.980s | Size: 159 bytes

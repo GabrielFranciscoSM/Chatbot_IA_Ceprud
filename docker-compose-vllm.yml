@@ -86,7 +86,7 @@ services:
         environment:
             HF_HUB_DISABLE_SYMLINKS_WARNING: 1
         volumes:
-        - ./app:/app
+        #- ./app:/app
         - ./.env:/app/.env
         - ./unitTests:/unitTests
         - ./pytest.ini:/pytest.ini

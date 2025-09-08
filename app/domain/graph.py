@@ -178,7 +178,9 @@ def build_graph():
     )
     graph_builder.add_edge("tools", "agent")
 
-    conn = sqlite3.connect("checkpoints.sqlite", check_same_thread=False)
+    # Use storage directory for checkpoints - persistent across container restarts
+    checkpoint_path = "/app/storage/checkpoints.sqlite"
+    conn = sqlite3.connect(checkpoint_path, check_same_thread=False)
     memory = SqliteSaver(conn)
 
     return graph_builder.compile(checkpointer=memory)
