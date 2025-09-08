@@ -8,6 +8,7 @@ from datetime import datetime
 from fastapi import APIRouter, Form, HTTPException, Depends, Request
 from fastapi.responses import JSONResponse
 from typing import Dict, List, Optional
+from pydantic import BaseModel, Field, EmailStr, validator
 from logic.query_logic import (
     query_rag
 )
@@ -254,23 +255,63 @@ def log_learning_event(session_id: str, event_type: str, topic: str, confidence_
             ])
         writer.writerow(row)
 
+# --- Pydantic Models for Request/Response Validation ---
+class ChatRequest(BaseModel):
+    """Simple request model for chat endpoint"""
+    message: str = Field(..., min_length=1, max_length=1000, description="User query text")
+    subject: str = Field(default="default", max_length=50, description="Subject/course name")
+    email: str = Field(default="anonimo", max_length=100, description="User email (anonymized)")
+    mode: str = Field(default="rag", description="Chat mode (rag, base, rag_lora)")
+    
+    @validator('mode')
+    def validate_mode(cls, v):
+        allowed_modes = ['rag', 'base', 'rag_lora']
+        if v.lower() not in allowed_modes:
+            raise ValueError(f'Mode must be one of: {allowed_modes}')
+        return v.lower()
+    
+    @validator('message')
+    def validate_message(cls, v):
+        if not v.strip():
+            raise ValueError('Message cannot be empty')
+        return v.strip()
+
+class ChatResponse(BaseModel):
+    """Simple response model for chat endpoint"""
+    response: str = Field(..., description="Bot response text")
+    sources: List[str] = Field(default=[], description="Source documents used")
+    model_used: str = Field(..., description="Model type used for response")
+    session_id: str = Field(..., description="Session identifier")
+    query_type: str = Field(..., description="Classified query type")
+
+class ErrorResponse(BaseModel):
+    """Standard error response model"""
+    error: str = Field(..., description="Error message")
+    detail: Optional[str] = Field(None, description="Detailed error information")
+
+class HealthResponse(BaseModel):
+    """Health check response model"""
+    status: str = Field(..., description="Service status")
+    timestamp: str = Field(..., description="Current timestamp")
+    version: str = Field(default="1.0.0", description="API version")
+
 # --- API Endpoints ---
-@router.post("/chat", response_class=JSONResponse)
+@router.post("/chat", response_model=ChatResponse, responses={400: {"model": ErrorResponse}, 500: {"model": ErrorResponse}})
 async def chat_endpoint(
     request: Request,
-    message: str = Form(...),
-    subject: str = Form("default"),
-    email: str = Form("anonimo"),
-    mode: str = Form("rag")
+    chat_request: ChatRequest
 ):
     """
-    Main chatbot endpoint. Handles queries and returns responses
-    using RAG, base model, or fine-tuned models.
+    Main chatbot endpoint with Pydantic validation. 
+    Handles queries and returns responses using RAG, base model, or fine-tuned models.
     """
     start_time = time.time()
-    user_message = message.strip()
-    selected_subject = subject.lower()
-    selected_mode = mode.lower()
+    
+    # Extract validated data from Pydantic model
+    user_message = chat_request.message
+    selected_subject = chat_request.subject.lower()
+    selected_mode = chat_request.mode.lower()
+    email = chat_request.email
 
     # Get or create session for this user-subject combination
     session_id = get_or_create_session(email, selected_subject)
@@ -280,10 +321,6 @@ async def chat_endpoint(
         cleanup_old_sessions()
 
     logger.info(f"Chat request received - Session: {session_id}, Subject: {selected_subject}, Mode: {selected_mode}, Email: {email}")
-
-    if not user_message:
-        log_request_info(request, start_time, 400)
-        return JSONResponse(content={"response": "❌ Por favor, escribe una pregunta."}, status_code=400)
 
     try:
         query_start_time = time.time()
@@ -298,7 +335,7 @@ async def chat_endpoint(
                 )
         else:
             log_request_info(request, start_time, 400)
-            return JSONResponse(content={"response": f"❌ Modo no válido: '{mode}'"}, status_code=400)
+            raise HTTPException(status_code=400, detail=f"❌ Modo no válido: '{selected_mode}'")
 
         query_end_time = time.time()
         response_time_ms = int((query_end_time - query_start_time) * 1000)
@@ -325,21 +362,30 @@ async def chat_endpoint(
         response_size = len(response_text.encode('utf-8')) + sum(len(src.encode('utf-8')) for src in sources)
         log_request_info(request, start_time, 200, response_size)
 
-        return JSONResponse(content={
-            "response": f"🤖: {response_text}",
-            "sources": sources,
-            "model_used": model_used,
-            "session_id": session_id,  # Include session ID for frontend tracking
-            "query_type": query_type   # Include query classification
-        })
+        # Return validated Pydantic response
+        return ChatResponse(
+            response=f"🤖: {response_text}",
+            sources=sources,
+            model_used=model_used,
+            session_id=session_id,
+            query_type=query_type
+        )
 
     except Exception as e:
         logger.error(f"Error processing request: {str(e)}", exc_info=True)
         log_request_info(request, start_time, 500)
-        return JSONResponse(
-            content={"response": "❌ An error occurred while processing your request."},
-            status_code=500
-        )
+        raise HTTPException(status_code=500, detail="❌ An error occurred while processing your request.")
+
+@router.get("/health", response_model=HealthResponse)
+async def health_check():
+    """
+    Simple health check endpoint to verify API is running and Pydantic models work.
+    """
+    return HealthResponse(
+        status="healthy",
+        timestamp=datetime.now().isoformat(),
+        version="1.0.0"
+    )
 
 def cleanup_old_sessions():
     """
