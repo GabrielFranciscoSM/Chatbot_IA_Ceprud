@@ -39,6 +39,75 @@ os.makedirs(BASE_LOG_DIR, exist_ok=True)
 # Session management for learning analytics
 active_sessions: Dict[str, Dict] = {}
 
+# --- Simple Rate Limiting ---
+# In-memory rate limiting (requests per minute per user)
+rate_limit_storage: Dict[str, Dict] = {}
+RATE_LIMIT_REQUESTS = int(os.getenv("RATE_LIMIT_REQUESTS", "20"))  # 20 requests per minute
+RATE_LIMIT_WINDOW = int(os.getenv("RATE_LIMIT_WINDOW", "60"))      # 60 seconds window
+
+def check_rate_limit(user_identifier: str) -> bool:
+    """
+    Simple rate limiting: Allow max X requests per minute per user.
+    Returns True if request is allowed, False if rate limited.
+    """
+    current_time = time.time()
+    
+    # Clean up old entries (older than rate limit window)
+    cleanup_time = current_time - RATE_LIMIT_WINDOW
+    users_to_remove = []
+    
+    for user_id, data in rate_limit_storage.items():
+        # Remove old requests outside the time window
+        data['requests'] = [req_time for req_time in data['requests'] if req_time > cleanup_time]
+        if not data['requests']:
+            users_to_remove.append(user_id)
+    
+    # Clean up empty users
+    for user_id in users_to_remove:
+        del rate_limit_storage[user_id]
+    
+    # Check current user's rate limit
+    if user_identifier not in rate_limit_storage:
+        rate_limit_storage[user_identifier] = {'requests': []}
+    
+    user_requests = rate_limit_storage[user_identifier]['requests']
+    
+    # Count requests in current window
+    recent_requests = [req_time for req_time in user_requests if req_time > cleanup_time]
+    
+    if len(recent_requests) >= RATE_LIMIT_REQUESTS:
+        logger.warning(f"Rate limit exceeded for user: {user_identifier[:8]}... ({len(recent_requests)} requests)")
+        return False
+    
+    # Add current request
+    user_requests.append(current_time)
+    rate_limit_storage[user_identifier]['requests'] = user_requests
+    
+    return True
+
+def get_rate_limit_info(user_identifier: str) -> Dict[str, int]:
+    """
+    Get rate limit information for a user.
+    """
+    current_time = time.time()
+    cleanup_time = current_time - RATE_LIMIT_WINDOW
+    
+    if user_identifier not in rate_limit_storage:
+        return {
+            "requests_made": 0,
+            "requests_remaining": RATE_LIMIT_REQUESTS,
+            "reset_time": int(current_time + RATE_LIMIT_WINDOW)
+        }
+    
+    user_requests = rate_limit_storage[user_identifier]['requests']
+    recent_requests = [req_time for req_time in user_requests if req_time > cleanup_time]
+    
+    return {
+        "requests_made": len(recent_requests),
+        "requests_remaining": max(0, RATE_LIMIT_REQUESTS - len(recent_requests)),
+        "reset_time": int(min(user_requests) + RATE_LIMIT_WINDOW) if recent_requests else int(current_time + RATE_LIMIT_WINDOW)
+    }
+
 # This dictionary will store user session data
 user_data: Dict[str, Dict[str, object]] = {}
 
@@ -289,6 +358,14 @@ class ErrorResponse(BaseModel):
     error: str = Field(..., description="Error message")
     detail: Optional[str] = Field(None, description="Detailed error information")
 
+class RateLimitResponse(BaseModel):
+    """Rate limit exceeded response"""
+    error: str = Field(..., description="Rate limit error message")
+    requests_made: int = Field(..., description="Number of requests made in current window")
+    requests_remaining: int = Field(..., description="Requests remaining in current window")
+    reset_time: int = Field(..., description="Unix timestamp when rate limit resets")
+    retry_after: int = Field(..., description="Seconds to wait before retrying")
+
 class HealthResponse(BaseModel):
     """Health check response model"""
     status: str = Field(..., description="Service status")
@@ -296,14 +373,20 @@ class HealthResponse(BaseModel):
     version: str = Field(default="1.0.0", description="API version")
 
 # --- API Endpoints ---
-@router.post("/chat", response_model=ChatResponse, responses={400: {"model": ErrorResponse}, 500: {"model": ErrorResponse}})
+@router.post("/chat", response_model=ChatResponse, responses={
+    400: {"model": ErrorResponse}, 
+    429: {"model": RateLimitResponse}, 
+    500: {"model": ErrorResponse}
+})
 async def chat_endpoint(
     request: Request,
     chat_request: ChatRequest
 ):
     """
-    Main chatbot endpoint with Pydantic validation. 
+    Main chatbot endpoint with Pydantic validation and rate limiting. 
     Handles queries and returns responses using RAG, base model, or fine-tuned models.
+    
+    Rate limit: 20 requests per minute per user.
     """
     start_time = time.time()
     
@@ -312,6 +395,29 @@ async def chat_endpoint(
     selected_subject = chat_request.subject.lower()
     selected_mode = chat_request.mode.lower()
     email = chat_request.email
+
+    # Create user identifier for rate limiting (use anonymized user ID)
+    user_identifier = anonymize_user_id(email)
+    
+    # Check rate limit before processing
+    if not check_rate_limit(user_identifier):
+        rate_info = get_rate_limit_info(user_identifier)
+        current_time = int(time.time())
+        retry_after = max(1, rate_info['reset_time'] - current_time)
+        
+        log_request_info(request, start_time, 429)
+        
+        # Return rate limit error with helpful information
+        raise HTTPException(
+            status_code=429,
+            detail={
+                "error": "Rate limit exceeded",
+                "requests_made": rate_info['requests_made'],
+                "requests_remaining": rate_info['requests_remaining'],
+                "reset_time": rate_info['reset_time'],
+                "retry_after": retry_after
+            }
+        )
 
     # Get or create session for this user-subject combination
     session_id = get_or_create_session(email, selected_subject)
@@ -362,14 +468,28 @@ async def chat_endpoint(
         response_size = len(response_text.encode('utf-8')) + sum(len(src.encode('utf-8')) for src in sources)
         log_request_info(request, start_time, 200, response_size)
 
-        # Return validated Pydantic response
-        return ChatResponse(
+        # Get rate limit info for response headers
+        rate_info = get_rate_limit_info(user_identifier)
+
+        # Create response with rate limit headers
+        response_data = ChatResponse(
             response=f"🤖: {response_text}",
             sources=sources,
             model_used=model_used,
             session_id=session_id,
             query_type=query_type
         )
+        
+        # Return JSON response with rate limit headers
+        response = JSONResponse(
+            content=response_data.dict(),
+            headers={
+                "X-RateLimit-Limit": str(RATE_LIMIT_REQUESTS),
+                "X-RateLimit-Remaining": str(rate_info['requests_remaining']),
+                "X-RateLimit-Reset": str(rate_info['reset_time'])
+            }
+        )
+        return response
 
     except Exception as e:
         logger.error(f"Error processing request: {str(e)}", exc_info=True)
@@ -385,6 +505,25 @@ async def health_check():
         status="healthy",
         timestamp=datetime.now().isoformat(),
         version="1.0.0"
+    )
+
+@router.get("/rate-limit/{email}", response_model=RateLimitResponse)
+async def get_rate_limit_status(email: str):
+    """
+    Check rate limit status for a specific user email.
+    Useful for frontend applications to show remaining requests.
+    """
+    user_identifier = anonymize_user_id(email)
+    rate_info = get_rate_limit_info(user_identifier)
+    current_time = int(time.time())
+    retry_after = max(0, rate_info['reset_time'] - current_time)
+    
+    return RateLimitResponse(
+        error="Rate limit status" if rate_info['requests_remaining'] > 0 else "Rate limit exceeded",
+        requests_made=rate_info['requests_made'],
+        requests_remaining=rate_info['requests_remaining'],
+        reset_time=rate_info['reset_time'],
+        retry_after=retry_after
     )
 
 def cleanup_old_sessions():
