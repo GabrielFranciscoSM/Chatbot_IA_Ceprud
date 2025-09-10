@@ -1,0 +1,160 @@
+En matemáticas, estadística, economía, ciencias empíricas y ciencia de la computación, la optimización (también, optimización matemática o programación matemática) es la selección del mejor elemento (con respecto a algún criterio) de un conjunto de elementos disponibles. La investigación operativa es uno de los campos de la matemática en cuyas bases funciona la optimización.​
+En el caso más simple, un problema de optimización consiste en maximizar o minimizar una función real eligiendo sistemáticamente valores de entrada (tomados de un conjunto permitido) y computando el valor de la función. La generalización de la teoría de la optimización y técnicas para otras formulaciones comprende un área grande de las matemáticas aplicadas. De forma general, la optimización incluye el descubrimiento de los "mejores valores" de alguna función objetivo dado un dominio definido, incluyendo una variedad de diferentes tipos de funciones objetivo y diferentes tipos de dominios.
+Optimización hace referencia a la acción y efecto de optimizar. En términos generales, se refiere a la capacidad de hacer o resolver alguna cosa de la manera más eficiente posible y, en el mejor de los casos, utilizando la menor cantidad de recursos.
+En las últimas décadas, el término optimización se ha vinculado al mundo de la informática. Sin embargo, es un concepto que también se utiliza en las matemáticas, en la gestión de procesos y la economía.
+
+Problemas de optimización:
+Un problema de optimización puede ser representado de la siguiente forma:
+
+Dada: una función f : A 
+
+Buscar: un elemento x0 en A tal que f(x0) ≤ f(x) para todo x en A («minimización») o tal que f(x0) ≥ f(x) para todo x en A («maximización»).
+Tal formulación es llamada un problema de optimización o un problema de programación matemática (un término no directamente relacionado con la programación de computadoras pero todavía en uso, por ejemplo en la programación lineal - véase la sección Historia). Muchos problemas teóricos y del mundo real pueden ser modelados mediante este esquema general. Problemas formulados usando esta técnica en los campos de física y visión por computadora se refieren a la técnica como minimización de la energía, hablando del valor de la función f representando la energía del sistema que está siendo modelado.
+Típicamente, A es algún subconjunto del espacio euclídeo Rn, con frecuencia delimitado por un conjunto de restricciones, igualdades o desigualdades que los elementos de A tienen que satisfacer. El dominio A de f es llamado el espacio de búsqueda o el conjunto de elección, mientras que los elementos de A son llamados soluciones candidatas o soluciones factibles.
+La función f es llamada, diversamente, función objetivo, función de costo (minimización),​ función de utilidad (maximización), función de utilidad indirecta (minimización),​ o, en ciertos campos, función de energía, o energía funcional. Una solución factible que minimice (o maximice, si este es el propósito) la función objetivo, es llamada una solución óptima.
+Por convenio, el formato estándar de un problema de optimización está declarado en términos de minimización. Generalmente, a menos que ambas, la función objetivo y la región factible sean convexas en un problema de minimización, puede haber varios mínimos locales, donde un mínimo local x* se define como un punto para el cual existe algún δ > 0, donde para todo x tal que
+
+ -\mathbf ^\|\leq \delta \,}
+
+la expresión
+
+ ^)\leq f(\mathbf )}
+
+es verdadera; es decir, en alguna región alrededor de x*, todos los valores de la función son mayores que o iguales al valor en ese punto. El máximo local se define de modo similar.
+Un gran número de algoritmos propuestos para resolver problemas no-convexos – incluyendo a la mayoría de los solucionadores disponibles comercialmente – no son capaces de hacer una distinción entre soluciones óptimas locales y soluciones óptimas rigurosas, y tratan a las primeras como soluciones actuales del problema original. La rama de las matemáticas aplicadas y el análisis numérico que se responsabiliza con el desarrollo de algoritmos deterministas que son capaces de garantizar convergencia en tiempo finito a la solución óptima real de un problema no convexo se llama optimización global.
+
+Notación:
+Los problemas de optimización se expresan a menudo con una notación especial. A continuación se muestran algunos ejemplos.
+
+Mínimo y Máximo valor de una función:
+Considere la siguiente notación:
+
+Esta denota el valor mínimo de la función objetivo 
+
+, cuando x se selecciona del conjunto de números reales 
+
+. El valor mínimo en este caso es 
+
+ y ocurre para 
+
+De modo similar, la notación
+
+expresa el valor máximo de la función objetivo 2x, siendo x cualquier número real. En este caso, no existe tal máximo, luego no hay un valor óptimo acotado.
+
+Argumentos de la entrada óptima:
+Considérese la siguiente expresión:
+
+o de manera equivalente
+
+ sujeto a:
+
+ }}\;x^+1,\;}\;x\in (-\infty ,-1].}
+
+Esta representa el valor (o valores) del argumento de x en el intervalo 
+
+ que minimizan (o maximizan) la función objetivo x2 + 1 (y no el valor mínimo que alcanza la función objetivo para dichos valores). En este caso, la respuesta es x = -1, puesto que x = 0 no es factible, es decir no pertenece al dominio del problema.
+De modo similar,
+
+que equivalente a
+
+ sujeto a:
+
+ }}\;x\cos(y),\;}\;x\in [-5,5],\;y\in \mathbb ,}
+
+representa al par (o pares) (x,y) que minimizan (o maximizan) el valor de la función objetivo xcos(y), con la restricción añadida de que x se encuentra en el intervalo [-5,5] (nuevamente, el valor mínimo de la función no importa). En este caso, las soluciones son los pares de la forma (5, 2kπ) y (−5,(2k+1)π), donde k recorre todos los enteros.
+Arg min y arg max a veces aparecen escritos como argmin y argmax, y quieren decir argumento del mínimo y argumento del máximo.
+
+Historia:
+Pierre de Fermat y Joseph Louis Lagrange encontraron fórmulas basadas en el cálculo para identificar valores óptimos, mientras que Isaac Newton y Carl Friedrich Gauss propusieron métodos iterativos para aproximar el óptimo. Históricamente, el término programación lineal para referirse a ciertos problemas de optimización se debe a George B. Dantzig, aunque gran parte de la teoría había sido introducida por Leonid Kantorovich en 1939. Dantzig publicó el Algoritmo símplex en 1947 y John von Neumann desarrolló la teoría de la dualidad en el mismo año.
+El término programación en este contexto no se refiere a la programación de computadoras. Más bien, el término viene del uso de programa por el ejército de Estados Unidos al referirse a la propuesta de entrenamiento y planificación logística, el cual fue el problema estudiado por Dantzig en aquel entonces.
+Otros investigadores importantes en el campo de la optimización matemática fueron los siguientes:[cita requerida]
+
+Subcampos principales:
+Programación convexa estudia el caso en que la función objetivo es convexa (minimización) o cóncava (maximización) y el conjunto de restricciones es convexo. Este puede ser visto como un caso particular de la programación no lineal o como la generalización de la programación lineal o de la convexa cuadrática.
+Programación lineal (PL): es un tipo de programación convexa, en el que la función objetivo f es lineal y el conjunto de restricciones se especifica usando solamente ecuaciones e inecuaciones lineales. Dicho conjunto es llamado poliedro o politopo si está acotado.
+Programación cónica: es una forma general de la programación convexa. PL, PCSO y PSD pueden todos ser vistos como programas cónicos con el tipo de cono apropiado.
+Programación de cono de segundo orden (PCSO): es un tipo de programación convexa e incluye ciertos tipos de problemas de programación cuadrática.
+Programación semidefinida (PSD): es un subcampo de la optimización convexa donde las variables fundamentales son matrices semidefinidas. Es una generalización de la programación lineal y la programación cuadrática convexa.
+Programación geométrica: es una técnica por medio de la cual el objetivo y las restricciones de desigualdad expresados como polinomios y las restricciones de igualdad como monomios, pueden ser transformados en un programa convexo.
+Programación con enteros o Programación entera: estudia programas lineales en los cuales algunas o todas las variables están obligadas a tomar valores enteros. Esta no es convexa y en general es mucho más compleja que la programación lineal regular.
+Programación cuadrática: permite a la función objetivo tener términos cuadráticos, mientras que el conjunto factible puede ser especificado con ecuaciones e inecuaciones lineales. Para formas específicas del término cuadrático, esta es un tipo de programación convexa.
+Programación fraccionaria: estudia la optimización de razones de dos funciones no lineales. La clase especial de programas fraccionarios cóncavos puede ser transformada a un problema de optimización convexa.
+Programación no lineal: estudia el caso general en el que la función objetivo, o las restricciones, o ambos, contienen partes no lineales. Este puede o no, ser un programa convexo. En general, si el programa es convexo afecta la dificultad de resolución.
+Programación estocástica u Optimización estocástica: estudia el caso en el que alguna de las restricciones o parámetros depende de variables aleatorias.
+Programación robusta: como la programación estocástica, es un intento por capturar la incertidumbre en los datos fundamentales del problema de optimización. Esto se hace mediante el uso de variables aleatorias, pero en cambio, el problema es resuelto teniendo en cuenta imprecisiones en los datos de entrada.
+Optimización combinatoria: se preocupa de los problemas donde el conjunto de soluciones factibles es discreto o puede ser reducido a uno.
+Optimización dimensional-infinita: estudia el caso donde el conjunto de soluciones factibles es un subconjunto de un espacio de dimensión infinita, por ejemplo un espacio de funciones.
+Heurísticas y Metaheurísticas: hacen suposiciones sobre el problema que está siendo optimizado. Usualmente, las heurísticas no garantizan que cualquier solución óptima sea encontrada. Luego, las heurísticas son usadas para encontrar soluciones aproximadas para muchos problemas de optimización complicados.
+Satisfacción de restricción: estudia el caso en el cual la función objetivo f es constante (esta es usada en inteligencia artificial, particularmente en razonamiento automatizado).
+Programación disyuntiva: se usa cuando al menos una restricción puede ser satisfecha pero no todas. Esta es de uso particular en la programación en un número de subcampos. Las técnicas son diseñadas principalmente para la optimización en contextos dinámicos (es decir, toma de decisiones con el transcurso del tiempo).
+Cálculo de variaciones: busca optimizar un objetivo definido sobre muchos puntos con el tiempo, considerando como la función objetivo cambia si el cambio es pequeño en el camino de elección. La técnica del control óptimo es una generalización de este.
+Programación dinámica estudia el caso en el que la estrategia de optimización se basa en la división del problema en subproblemas más pequeños. La ecuación que describe la relación entre estos subproblemas se llama ecuación de Bellman.
+Programación matemática con restricciones de equilibrio es donde las restricciones incluyen desigualdades variables o complementarias.
+
+Clasificación de puntos críticos y extremos:
+
+Factibilidad del problema:
+La solubilidad del problema, también llamada factibilidad del problema, es la cuestión de si existe alguna solución factible, al margen de su valor objetivo. Este puede ser considerado como el caso especial de la optimización matemática donde el valor objetivo es el mismo para toda solución, y así cualquier solución es óptima.
+Muchos algoritmos de optimización necesitan comenzar a partir de un punto factible. Una vía para obtener tal punto es relajar las condiciones de factibilidad usando una variable de holgura; con suficiente holgura, cualquier punto de partida es factible. Entonces, se minimiza esa variable de holgura hasta que la holgura sea nula o negativa.
+
+Existencia:
+El teorema de Weierstrass afirma que una función real y continua en un conjunto compacto alcanza su valor máximo y mínimo. De forma más general, una función semi-continua inferior en un conjunto compacto alcanza su mínimo; una función semi-continua superior en un conjunto compacto alcanza su máximo.
+
+Condiciones necesarias de optimalidad:
+Uno de los teoremas de Fermat asegura que los óptimos de los problemas irrestrictos son encontrados en los puntos estacionarios, donde la primera derivada de la función objetivo es cero (o su gradiente nulo). De forma más general, también pueden ser encontrados en los puntos críticos donde la primera derivada o el gradiente de la función objetivo no está definido, o en la frontera del conjunto de elección. Una ecuación (o conjunto de ecuaciones) indicando que la(s) primera(s) derivada(s) es(son) igual(es) a cero en un óptimo interior se llama una condición de primer orden o un conjunto de condiciones de primer orden.
+Los óptimos de los problemas con restricciones de desigualdad son en cambio encontrados mediante el método de los multiplicadores de Lagrange. Este método computa un sistema de desigualdades llamado Condiciones de Karush–Kuhn–Tucker o condiciones de holguras complementarias, las cuales se usan entonces para calcular el óptimo.
+
+Condiciones suficientes de optimalidad:
+Mientras la prueba de la primera derivada identifica los puntos que pueden ser extremos, esta prueba no distingue si un punto es mínimo, máximo, o ninguno de los dos. Cuando la función objetivo es dos veces diferenciable, estos casos pueden ser distinguidos estudiando la segunda derivada o la matriz de las segundas derivadas (llamada matriz Hessiana),en problemas irrestrictos, o la matriz de las segundas derivadas de la función objetivo y las restricciones llamada la matriz Hessiana orlada, en problemas restrictos.
+Las condiciones que distinguen a los máximos, o mínimos, de otros puntos estacionarios son llamadas condiciones de segundo orden. Si un candidato a solución satisface las condiciones de primer orden y las condiciones de segundo orden también, es suficiente para establecer, al menos, optimalidad local.
+
+Sensibilidad y continuidad del óptimo:
+El teorema de la envoltura describe como el valor de una solución óptima cambia cuando un parámetro subyacente cambia. El proceso que computa este cambio es llamado estática comparativa.
+El teorema del máximo de Claude Berge (1963) describe la continuidad de una solución óptima como una función de parámetros subyacentes.
+
+Cálculos de optimización:
+Para los problemas irrestrictos con funciones dos veces diferenciables, algunos puntos críticos pueden ser encontrados detectando los puntos donde el gradiente de la función objetivo es cero (es decir, los puntos estacionarios). De forma más general, un subgradiente cero certifica que un mínimo local ha sido encontrado para los problemas de minimización con funciones convexas u otras funciones de Lipschitz.
+Además, los puntos críticos pueden ser clasificados usando la definitud de la matriz Hessiana: si es definida positiva en un punto crítico, entonces el punto es un mínimo local; si es definida negativa, entonces el punto es un máximo local; finalmente, si es indefinida, entonces el punto es algún tipo de punto de ensilladura.
+Los problemas restrictos pueden con frecuencia ser transformados en problemas irrestrictos con ayuda de los multiplicadores de Lagrange. La relajación Lagrangiana puede también proveer soluciones aproximadas a difíciles problemas restrictos.
+Cuando la función objetivo es convexa, entonces cualquier mínimo local será también un mínimo global. Existen técnicas numéricas eficientes para minimizar funciones convexas, por ejemplo los métodos de punto interior.
+
+Técnicas de optimización computacional:
+Para resolver problemas, los investigadores pueden usar algoritmos que terminen en un número finito de pasos, o métodos iterativos que convergen a una solución (en alguna clase específica de problemas), o heurísticas que pueden proveer soluciones aproximadas a algunos problemas (aunque sus iteraciones no convergen necesariamente).
+
+Algoritmos de optimización:
+Algoritmo Simplex de George Dantzig, diseñado para la programación lineal.
+Extensiones del algoritmo Simplex, diseñados para la programación cuadrática y para la programación lineal-fraccionaria.
+Variantes del algoritmo Simplex que son especialmente apropiadas para la optimización de redes.
+Algoritmos combinatorios.
+
+Métodos iterativos:
+Los métodos iterativos usados para resolver problemas de programación no lineal difieren según lo que evalúen: Hessianas, gradientes, o solamente valores de función. Mientras que evaluando Hessianas (H) y gradientes (G) mejora la velocidad de convergencia, tales evaluaciones aumentan la complejidad computacional (o costo computacional) de cada iteración. En algunos casos, la complejidad computacional puede ser excesivamente alta.
+Un importante criterio para los optimizadores es justo el número de evaluaciones de funciones requerido, como este con frecuencia es de por sí un gran esfuerzo computacional, usualmente mucho más esfuerzo que el del optimizador en sí, ya que en su mayoría tiene que operar sobre N variables. Las derivadas proveen información detallada para los optimizadores, pero son aún más costosas de calcular, por ejemplo aproximando el gradiente toma al menos N+1 evaluaciones de funciones. Para la aproximación de las segundas derivadas (agrupadas en la matriz Hessiana) el número de evaluaciones de funciones es de orden N². El método de Newton requiere las derivadas de Segundo orden, por lo tanto por cada iteración el número de llamadas a función es de orden N², pero para el optimizador de un gradiente puro más simple es de orden N. Sin embargo, los optimizadores de gradiente necesitan usualmente más iteraciones que el algoritmo de Newton. Ser mejor con respecto al número de llamadas a funciones depende del problema en sí.
+
+Métodos que evalúan Hessianas (o aproximan Hessianas, usando diferencias finitas):
+Método de Newton.
+Programación secuencial cuadrática: un método de Newton basado en problemas restrictos de pequeña-mediana escala. Algunas versiones pueden manejar problemas de gran dimensión.
+Métodos que evalúan gradientes o aproximan gradientes usando diferencias finitas (o incluso subgradientes):
+Métodos Quasi-Newton: métodos iterativos para problemas medianos-grandes (ejemplo N<1000).
+Métodos de gradiente conjugado: métodos iterativos para problemas grandes. (En teoría, estos métodos terminan en un número finito de pasos con funciones objetivo cuadráticas, pero esta terminación finita no se observa en la práctica en computadoras de precisión finita.)
+Métodos de punto interior: esta es una gran clase de métodos para la optimización restricta. Algunos métodos de punto interior usan solamente información del subgradiente, y otros requieren la evaluación de las Hessianas.
+Descenso del gradiente (alternativamente, descenso pronunciado o ascenso pronunciado): un método lento de interés teórico e histórico, el cual ha sido renovado para encontrar soluciones aproximadas de problemas enormes.
+Método del subgradiente: un método iterativo para grandes funciones de Lipschitz localmente usando gradientes generalizados.
+Métodos que evalúan solamente valores de funciones: si un problema es continuamente diferenciable, entonces los gradientes pueden ser aproximados usando diferencias finitas, en tal caso puede ser usado un método basado en gradiente.
+Métodos de interpolación.
+Métodos de búsqueda de patrones, los cuales tienen mejores propiedades de convergencia que la heurística de Nelder-Mead.
+
+Convergencia global:
+De modo general, si la función objetivo no es una función cuadrática, entonces muchos métodos de optimización usan otros métodos para garantizar que alguna subsecuencia de iteraciones converge a una solución óptima. El primer método popular que garantiza convergencia se apoya en búsquedas lineales, el cual optimiza una función en una dimensión. Un segundo y popularizado método para garantizar convergencia usa regiones de confianza. Ambos búsquedas lineales y regiones de confianza son usados en métodos modernos de optimización no diferenciable. Usualmente un optimizador global es mucho más lento que los optimizadores locales avanzados (por ejemplo BFGS), por lo tanto con frecuencia un optimizador global eficiente puede ser construido por el inicio del optimizador local de diferentes puntos de partida.
+
+Heurísticas:
+Además de los algoritmos (terminación finita) y los métodos iterativos (convergentes), existen heurísticas que pueden proveer soluciones aproximadas a algunos problemas de optimización: 
+
+Evolución diferencial.
+Algoritmo de búsqueda diferencial.
+Relajación Dinámica.
+Algoritmos genéticos.
+Ascenso de montañas.
+Nelder-Mead: una heurística popular por aproximar la minimización (sin llamadas a gradientes).
+Optimización por enjambre de partículas.
+Optimización artificial de la colonia de abejas.

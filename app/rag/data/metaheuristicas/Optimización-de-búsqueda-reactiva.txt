@@ -1,0 +1,50 @@
+Optimización de búsqueda reactiva (RSO) define heurísticas de búsqueda local basadas en el aprendizaje de máquina, es una familia de algoritmos de optimización basados en técnicas de búsqueda local. Es una clase de heurísticas que ajustan automáticamente sus parámetros de trabajo durante la fase de optimización.
+
+Resumen RSO: aprendizaje durante la optimización:
+Optimización de búsqueda reactiva (RSO), como todas las técnicas de búsqueda local, se aplica al problema de encontrar la configuración óptima de un sistema; tal configuración se compone generalmente de forma continua o discreta de parámetros variables, mientras que el criterio de optimalidad es un valor numérico asociado con cada configuración. En la mayoría de los casos, un problema de optimización puede reducirse a encontrar el mínimo (global) de una función cuyos argumentos son los parámetros de configuración, vistos como variables libres en el espacio de dominio de la función.
+La optimización de búsqueda reactiva aboga por la integración de las técnicas sub-simbólicas de aprendizaje automático en búsquedas heurísticas para resolver problemas complejos de optimización. La palabra reactiva sugiere una pronta respuesta a los acontecimientos durante la búsqueda a través de un ciclo de retroalimentación en línea de auto-ajuste y adaptación dinámica. En búsqueda reactiva, la historia de la búsqueda y el conocimiento acumulado mientras se mueve en el espacio de configuración, se utiliza para la auto-adaptación de una manera autónoma: el algoritmo mantiene la flexibilidad interna necesaria para abordar diferentes situaciones durante la búsqueda, pero la adaptación es automática, y ejecutada mientras que el algoritmo se corre en una sola instancia y reflexiona sobre su experiencia pasada.
+
+Las metáforas de búsqueda reactiva se derivan principalmente de la experiencia humana individual. Su lema es "aprender sobre la marcha". Los problemas del mundo real tienen una rica estructura. Mientras que muchas soluciones alternativas se ponen a prueba en la exploración de un espacio de búsqueda, los patrones y regularidades aparecen. El cerebro humano aprende rápidamente y conduce las decisiones futuras sobre la base de las observaciones anteriores. Esta es la fuente de inspiración principal para la inserción de técnicas de aprendizaje en línea de la máquina en la optimización de motores de búsqueda reactivos.
+
+Ajuste de parámetros en la heurística:
+La mayoría de las heurísticas basadas en búsqueda local, como la búsqueda tabú y el recocido simulado, aunque son muy eficientes y útiles en muchas aplicaciones prácticas, son muy sensibles a sus parámetros internos.Por ejemplo, el recocido simulado depende de la programación del recocido, descrito a menudo por un parámetro de tasa de enfriamiento cuyo valor óptimo puede diferir de acuerdo con el problema a resolver. Por lo tanto, el mismo algoritmo requiere ser precisamente ajustado, con el fin de ser aplicado a un nuevo problema.
+Una actividad de optimización típica es en realidad un ciclo en la que el investigador realiza pequeña optimización corriendo el algoritmo con pequeños ajustes de los parámetros con el fin de acelerar el sistema.
+
+Se ha observado que muchos trabajos de investigación que las heurísticas para optimización global están sesgadas por este problema, ya que la eficiencia de un algoritmo se mide a veces sólo después de que el ajuste de parámetro se ha realizado, de modo que el esfuerzo global de optimización (incluyendo la fase de afinamiento) no se tiene en cuenta.
+
+Ajuste de parámetro como un componente integral de la heurística:
+La optimización de búsqueda reactiva proporciona una solución a este problema mediante la inclusión del mecanismo de ajuste de parámetros en el algoritmo de búsqueda en sí: los parámetros se ajustaron por un ciclo de retroalimentación automático que actúa de acuerdo a la calidad de las soluciones encontradas, la historia de las búsquedas pasadas y otros criterios.
+
+Ventajas:
+Las principales ventajas de la optimización de búsqueda reactiva son:
+
+Automatización total del procedimiento de optimización, incluyendo la fase de afinamiento;
+Ajuste dinámico de los parámetros de búsqueda, posiblemente en cada paso de la búsqueda, lo que lleva, por lo general, a la optimización más rápida en cuanto a tiempo;
+Reproducibilidad mejorada de los resultados, debido a una completa descripción algorítmica del ajuste de parámetros.
+
+RSO y optimización inteligente:
+
+RSO es un área de investigación multidisciplinaria entre Investigación de Operaciones (optimización), Ciencias de la Computación, aprendizaje de máquinas y redes neuronales.
+. Su objetivo específico es el estudio de los sistemas de aprendizaje en línea aplicadas a la resolución de problemas y optimización, de acuerdo con el principio aprender mientras se optimiza.
+Las señales de aprendizaje para la adaptación de los parámetros internos de la técnica de solución provienen de tres fuentes:
+
+. El problema de optimización. Por ejemplo, los parámetros y opciones para la búsqueda local aplicada al Problema del Viajante (TSP) pueden ser muy diferentes a los aplicados para la búsqueda local en el problema de la Satisfacibilidad.
+La instancia específica. Por ejemplo, resolver un problema del viajante con las ciudades de los Alpes pueden requerir parámetros distintos a los que corresponden a las ciudades de una región plana.
+Las características locales en el espacio de configuración en torno a una solución candidata determinada. Por ejemplo, si la solución actual es confinada en una cuenca de atracción en torno a un punto óptimo local (a.k.a óptimo local), las características de la cuenca de atracción (como su dimensión y altura de los obstáculos) se puede utilizar para ajustar la diversificación (escape) métodos.
+Optimización inteligente de un superconjunto de Búsqueda Reactiva, se refiere a un área más extensa de la investigación, incluidos los planes en línea y fuera de línea basados en el uso de la memoria, la adaptación, el desarrollo incremental de modelos, algoritmos experimentales aplicados a la optimización, personalización inteligente y diseño de heurísticas. En algunos casos, el trabajo está en un nivel superior, donde los métodos básicos están adecuadamente orientados y combinados, y el término metaheurística se ha propuesto en el pasado.
+Inteligencia de negocios reactiva defiende los principios de RSO principales para aplicaciones en el área de minería de datos, análisis de negocios, y visualización interactiva.
+
+Aplicaciones:
+El campo de aplicación de la búsqueda reactiva es la misma de todas las técnicas de búsqueda local. En particular, las aplicaciones de búsqueda reactiva a los siguientes temas han sido publicados en los últimos años:
+
+Asignación cuadrática
+Entrenamiento de redes neuronales y problemas de control
+Enrutamiento de vehículos
+Control acústico estructural
+Particionamiento de grafos
+Distribución de energía eléctrica
+Satisfacibilidad máxima
+Optimización de funciones continuas
+Clique máximo
+Incrementar la capacidad de Internet
+Simulaciones de reconocimiento aéreo

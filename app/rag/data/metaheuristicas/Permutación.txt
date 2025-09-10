@@ -1,0 +1,240 @@
+En matemáticas, una permutación de un conjunto es, en términos generales, una disposición de sus miembros en una secuencia u orden lineal, o si el conjunto ya está ordenado, una variación del orden o posición de los elementos de un conjunto ordenado o una tupla. La palabra «permutación» también se refiere al acto o proceso de cambiar el orden lineal de un conjunto ordenado.​
+Las permutaciones difieren de las combinaciones, que son selecciones de algunos miembros de un conjunto sin importar el orden. Por ejemplo, escritas como tuplas, hay seis permutaciones del conjunto , a saber (1, 2, 3), (1, 3, 2), (2, 1, 3), (2, 3, 1), (3, 1, 2) y (3, 2, 1). Estas son todas las ordenaciones posibles de este conjunto de tres elementos. Los anagramas de palabras cuyas letras son diferentes también son permutaciones: las letras ya están ordenadas en la palabra original, y el anagrama es una reordenación de las letras. El estudio de las permutaciones de conjuntos finitos es un tema importante en los campos de la combinatoria y la teoría de grupos.
+Las permutaciones se utilizan en casi todas las ramas de las matemáticas y en muchos otros campos de la ciencia. En informática, se utilizan para analizar algoritmos de ordenación; en física cuántica, para describir estados de partículas; y en biología, para describir secuencias de ARN. 
+El número de permutaciones de n objetos distintos es n factorial, normalmente escrito como n!, que significa el producto de todos los enteros positivos menores o iguales a n.
+Técnicamente, una permutación de un set S se define como una biyección de S a sí mismo.​​ Es decir, es una función de S a S para la cual cada elemento ocurre exactamente una vez como un valor de imagen. Esto está relacionado con el reordenamiento de los elementos de S en el que cada elemento s es reemplazado por el correspondiente f(s). Por ejemplo, la permutación (3, 1, 2) mencionada anteriormente es descrita por la función 
+
+ definida como
+
+El conjunto de todas las permutaciones de un conjunto forman un grupo llamado grupo simétrico del conjunto. La operación de grupo es la composición (realizar dos reordenamientos dados sucesivamente), que da como resultado otro reordenamiento. Como las propiedades de las permutaciones no dependen de la naturaleza de los elementos del conjunto, suelen ser las permutaciones del conjunto 
+
+ las que se consideran para estudiar las permutaciones. 
+En combinatoria elemental, las k-permutaciones, o permutaciones parciales, son los arreglos ordenados de k elementos distintos seleccionados de un conjunto. Cuando k es igual al tamaño del conjunto, son las permutaciones del conjunto.
+
+Definición formal:
+La definición intuitiva de permutación, como un ordenamiento de los elementos de un conjunto se formaliza con el uso del lenguaje de funciones matemáticas.
+
+Ejemplos:
+1. En el caso de un elemento (1) solo hay una posible permutación: 
+
+ A&\xrightarrow &A\\1&\longmapsto &1\\\end}}
+
+2. En el caso de dos elementos solo hay dos posibles permutaciones (ordenamientos o posiciones de cada elemento): 
+
+ A&\xrightarrow &A\\1&\longmapsto &1\\2&\longmapsto &2\\\end}}
+
+ A&\xrightarrow &A\\1&\longmapsto &2\\2&\longmapsto &1\\\end}}
+
+3. En el caso de tres elementos cada permutación diferente sobre el conjunto equivale a una forma de ordenar los elementos.
+
+ A&\xrightarrow &A\\1&\longmapsto &1\\2&\longmapsto &2\\3&\longmapsto &3\\\end}}
+
+ A&\xrightarrow &A\\1&\longmapsto &2\\2&\longmapsto &1\\3&\longmapsto &3\\\end}}
+
+ A&\xrightarrow &A\\1&\longmapsto &3\\2&\longmapsto &2\\3&\longmapsto &1\\\end}}
+
+ A&\xrightarrow &A\\1&\longmapsto &1\\2&\longmapsto &3\\3&\longmapsto &2\\\end}}
+
+ A&\xrightarrow &A\\1&\longmapsto &2\\2&\longmapsto &3\\3&\longmapsto &1\\\end}}
+
+ A&\xrightarrow &A\\1&\longmapsto &3\\2&\longmapsto &1\\3&\longmapsto &2\\\end}}
+
+En la definición de permutación, no se establece condición alguna sobre X, el cual puede incluso ser infinito. Sin embargo, es común considerar únicamente el caso en que X es un conjunto finito al estudiar permutaciones.
+
+En combinatoria:
+La combinatoria trata del número de diferentes maneras que existen de considerar conjuntos formados a partir de elementos de un conjunto dado, respetando ciertas reglas, como el tamaño, el orden, la repetición, la partición. Así un problema combinatorio consiste usualmente en establecer una regla sobre cómo deben ser las agrupaciones y determinar cuántas existen que cumplan dicha regla. Básicamente, tres asuntos: permutaciones, combinaciones y variaciones.
+Un tipo importante de esas agrupaciones son las llamadas permutaciones. Dada una n-tupla ordenada de los elementos de un conjunto, el número de permutaciones es el número de n-tuplas ordenadas posibles.
+
+Fórmula del número de permutaciones:
+Dado un conjunto finito 
+
+ elementos, el número de todas sus permutaciones es igual a factorial de n:
+
+Demostración:
+Dado que hay 
+
+ formas de escoger el primer elemento y, una vez escogido este, solo tenemos 
+
+ formas de escoger el segundo elemento, y así sucesivamente, vemos que cuando llegamos al elemento k-ésimo solo tenemos 
+
+ posibles elementos para escoger, lo que nos lleva a que tenemos 
+
+ formas de ordenar el conjunto, justamente lo que enunciamos anteriormente.
+Ejemplo: sea el conjunto A= en este caso hay 6 permutaciones, en forma compacta: 123, 132, 213, 231, 312, 321. En álgebra, para estudiar los grupos simétricos se presentan entre paréntesis y en dos filas, en la primera siempre aparece 1 2 3. 
+Otro ejemplo de lo mismo: si se va a formar un comité que involucra presidente, tesorero y secretario, habiendo tres candidatos a, b, c ; cuando se elige por sorteo los cargos sucesivamente, hay seis posibilidades u ordenaciones: abc, acb, bac, bca, cab, cba.
+
+En teoría de grupos:
+
+Notaciones:
+
+La primera forma de escribir una permutación 
+
+, aunque no es la más compacta, consiste en escribirla en forma de matriz de dos filas, situando en la primera los elementos ordenados del dominio 1, 2, 3,...,n, y en la segunda fila las imágenes correspondientes a los elementos reordenados 
+
+Por ejemplo, dado el conjunto ordenado 
+
+ podemos expresar una permutación 
+
+ sobre éste mediante una matriz de correspondencias:
+
+ 1&2&3&4&5&6&7&8\\3&4&5&7&6&1&8&2\end}}
+
+Por ser biyectiva por definición, podemos encontrar una aplicación inversa 
+
+ de forma que su composición genera la aplicación identidad. Para ello, en primer lugar intercambiamos las filas y finalmente reordenamos las columnas de modo que los elementos del dominio queden ordenados de forma natural:
+
+ 3&4&5&7&6&1&8&2\\1&2&3&4&5&6&7&8\end}}
+
+ 1&2&3&4&5&6&7&8\\6&8&1&2&3&5&4&7\end}}
+
+Notación de ciclos:
+Existe otra notación más compacta, llamada notación de ciclos. Un ciclo es una permutación que intercambia cíclicamente elementos y fija los restantes.
+Esta notación revela mejor la estructura interna de la permutación. Para ello:
+
+Empezamos con cualquier elemento. Lo escribimos, a su derecha escribimos su imagen, a la derecha de esta, la imagen de su imagen, y seguimos así hasta que se complete un ciclo.
+Luego cogemos cualquier elemento no contenido en el primer ciclo, volvemos a escribir su imagen a su derecha, y continuamos hasta completar el segundo ciclo.
+El proceso continúa hasta que la permutación entera ha quedado descrita como producto de ciclos disjuntos.
+Siguiendo con el mismo ejemplo de antes, en notación de ciclos, 
+
+ quedaría expresada como composición de dos ciclos:
+
+Un ciclo de longitud k es llamado k-ciclo.
+
+Descomposición de una permutación en ciclos disjuntos:
+La descomposición realizada por el procedimiento anterior no es única en principio, pues podrían haberse obtenido cualquiera de estos resultados equivalentes:
+
+La descomposición canónica de una permutación como producto de ciclos se obtiene en dos pasos (según Miklós Bóna): 
+
+Dentro de cada ciclo, se escribe primero el elemento más grande;
+A continuación, ordenamos los ciclos en orden creciente en base al primer elemento de cada ciclo.
+Frecuentemente, suelen omitirse los ciclos de longitud 1. Así la permutación (1 3)(2)(4 5) se escribe simplemente como (3 1)(5 4) en forma canónica.
+Richard P. Stanley llama «representación estándar» a esta forma,​ mientras que Martin Aigner usa el término «forma estándar».​ Sergey Kitaev también usa el término «forma estándar» pero invierte los criterios: en cada ciclo se lista primero el elemento más pequeño y luego los ciclos se ordenan de mayor a menor según el primer elemento.​
+Como curiosidad, la forma canónica permite eliminar los paréntesis sin que haya pérdida de información, o bien recuperar la posición de los paréntesis a partir de un listado de elementos sin ellos. Por ejemplo, usando los criterios de Miklós Bóna, en una forma canónica que haya «perdido» los paréntesis, como 3 1 2 5 4 6, el primer ciclo estará formado por el primer elemento de la lista, 3, y los siguientes que sean menores que él: (3 1 2). El siguiente elemento mayor que el primero (5 > 3) inicia un nuevo ciclo, junto con los siguientes menores que él, y así sucesivamente. Por lo tanto, la forma canónica ha de ser (3 1 2) (5 4) (6).
+
+Descomposición de una permutación en transposiciones:
+
+Una transposición es una permutación que intercambia dos elementos y fija los restantes. Dicho de otro modo, es un ciclo de longitud 2. Una propiedad interesante es que cualquier permutación se puede construir como una composición de transposiciones, aunque no de manera única. Dadas dos descomposiciones en transposiciones de una permutación se cumple que ambas usaran un número par o ambas usarán un número impar, eso permite definir de manera unívoca la signatura de una permutación.
+Las transposiciones permiten descomponer una permutación cualquiera de una forma diferente a la descomposición en ciclos. En particular, las transposiciones que aparezcan no tendrán que ser disjuntas: Por ejemplo, el ciclo (1 2 3 4) = (1 2) (2 3) (3 4). 
+Nótese la diferencia entre permutación, ciclo y transposición, dado lo similar de la notación, la expresión anterior es equivalente a:
+
+ 1&2&3&4\\2&3&4&1\end}=1&2&3&4\\2&1&3&4\end}\circ 1&2&3&4\\2&3&4&1\end}\circ 1&2&3&4\\1&3&2&4\end}\circ 1&2&3&4\\1&2&4&3\end}}
+
+La composición señalada como: 
+
+ se opera de derecha a izquierda y no es conmutativa.
+Aquí el orden de aplicación es importante: en primer lugar (3 4) deja el 4 en su sitio definitivo y el 3 descolocado. Después (2 3) deja en su sitio definitivo el 3 y el 2 descolocado, que quedará recolocado definitivamente por (1 2).
+Para ver que cualquier permutación se descompone como producto de transposiciones bastará ver que todo ciclo lo hace. La descomposición no es única. Por ejemplo:
+
+ ,a_)(a_,a_)\cdots (a_,a_)=(a_,a_)(a_,a_)\cdots (a_,a_).}
+
+El número de transposiciones de la descomposición tampoco es único. Por ejemplo:
+
+ ,a_)(a_,a_)(a_,a_)(a_,a_)(a_,a_)\cdots (a_,a_).}
+
+Pero la paridad del número de transposiciones de la descomposición sí está determinada. Es decir, para cualquier par de descomposiciones distintas de 
+
+ con n y con m transposiciones, respectivamente, n y m tienen la misma paridad (serán simultáneamente pares o impares). 
+Dada una permutación cualquiera, se define el siguiente homomorfismo de grupos:
+
+ \to (\,\cdot )\approx (\mathbb _,+),\qquad \varepsilon (\sigma )=(-1)^,}
+
+ es el grupo simétrico de n elementos y m es un número entero, tal que existen transposiciones 
+
+ tales que:
+
+ \tau _\dots \tau _\in S_.}
+
+Permutación par y permutación impar:
+
+Llamaremos permutación par (resp. impar) a la que se escribe como composición de un número par (resp. impar) de transposiciones.
+Como ejemplo, dado el conjunto de las 6=3! permutaciones posibles:
+
+Permutación 1:
+La permutación
+
+Escritas en notación de ciclos:
+
+Las transposiciones:
+La identidad no tiene transposiciones. El número de transposiciones de id es 0(cero).
+
+Permutación 2:
+La permutación
+
+Escritas en notación de ciclos:
+
+Las transposiciones:
+
+El número de transposiciones es :1.
+
+Permutación 3:
+La permutación
+
+Escritas en notación de ciclos:
+
+Las transposiciones:
+
+El número de transposiciones es :1.
+
+Permutación 4:
+La permutación
+
+Escritas en notación de ciclos:
+
+Las transposiciones:
+
+El número de transposiciones es :2.
+
+Permutación 5:
+La permutación
+
+Escritas en notación de ciclos:
+
+Las transposiciones:
+
+El número de transposiciones es :2.
+
+Permutación 6:
+La permutación
+
+Escritas en notación de ciclos:
+
+Las transposiciones:
+La transposición es:
+
+El número de transposiciones es :1.
+
+Conclusión:
+En general, se demuestra que la mitad de las n! permutaciones de un conjunto de n elementos son pares y la otra mitad impares. Esto surge como consecuencia directa de la existencia del morfismo 
+
+ que tiene como núcleo justamente a las permutaciones pares.
+
+Estructura de grupo:
+
+Dado un número natural 
+
+, consideramos el conjunto 
+
+. Definimos el grupo de permutaciones de 
+
+ elementos, que denotaremos por 
+
+, o lo que es lo mismo, el conjunto de aplicaciones biyectivas de 
+
+Las permutaciones pares forman un subgrupo normal de índice 2 del grupo Sn, al que llamaremos grupo alternado, y notaremos por 
+
+Desorden:
+Permutación completa o desorden es una permutación de objetos en la que ninguno de los elementos aparece en su lugar natural.
+Por ejemplo: la permutación 23451 es un desorden o permutación completa de un 12345 ya que ninguna cifra se encuentra en su posición original. Pero si la permutación fuera 15423 no se consideraría un desorden, debido a que el número 1 se encuentra en su posición natural.
+
+El número de permutaciones completas de un conjunto de 
+
+ elementos es:
+
+ =n!\left(1-+-+...+(-1)^\right)}
+
+Se puede demostrar utilizando el principio de inclusión-exclusión.
+
+Dato histórico:
+
+El estudio de las permutaciones de las raíces de ecuaciones algebraicas le permitió a Galois elaborar los inicios de la teoría de grupos y usar este vocablo, por primera vez, en matemáticas. Y empezó por los grupos no abelianos.
+El concepto de permutación aparece en la obra hebrea Séfer Yetzirah ('El libro de la creación'), un manuscrito elaborado por un místico entre el año 200 y el 600. Pero existía ya un resultado anterior de Jenócrates de Calcedonia (396-314 a. C.)​

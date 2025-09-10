@@ -1,0 +1,257 @@
+El análisis formal de conceptos (AFC), también denominado análisis de conceptos formales,​ en inglés Formal Concept Analysis (FCA), es una teoría matemática y un método para el análisis de datos en cuanto a sus relaciones y estructura. Al aplicarla, la pretensión es que los datos se organicen de manera tal que, sin dejar de responder a la exigencia de rigor de un modelo matemático, se adapten mejor a la forma en que está organizado el pensamiento humano en relación con los conceptos y a su orden. El término en alemán (formale Begriffsanalyse) fue introducido por Rudolf Wille en 1984, quien se basó en la teoría de retículos y en la teoría matemática del orden desarrollada por Garrett Birkhoff y otros en 1930.
+
+Introducción:
+El análisis formal de conceptos estudia las relaciones existentes en y entre conjuntos de datos, a la vez que revela las estructuras de los mismos. Los «objetos» (en alemán Gegenstände, G), por ejemplo descritos a través de registros, con base en sus características (en alemán, Merkmale, M), se organizan en grupos que coinciden en cuanto a esas características (contenido de los datos). Tales grupos se vuelven a subdividir con base en otras características. De esto resulta una estructura jerárquica que se puede ilustrar por medio de un diagrama de orden. El objetivo es definir un método basado en las matemáticas que corresponda al pensamiento conceptual del ser humano.
+
+Extensión, intensión y concepto:
+Cada uno de los grupos de objetos determinados por sus características comunes se define como un Begriffsumfang (extensión del concepto) y el conjunto correspondiente de todas las características comunes como un Begriffsinhalt (intensión). Ambas partes en conjunto, es decir, respectivamente, cada extensión con su correspondiente intensión, conforman un «concepto formal», donde el adjetivo «formal» indica que se trata de una construcción matemática. Un concepto formal está siempre determinado de manera unívoca tanto por su extensión como por su intensión.
+
+Hiperónimo e hipónimo:
+Un concepto formal es un hipónimo (concepto subordinado) de un segundo concepto formal cuando su extensión está contenida de manera completa dentro de la extensión del segundo. Por tanto, la intensión del hiperónimo (del concepto con la extensión mayor) está contenida en la intensión del concepto hipónimo.​
+
+Relación con la teoría matemática de retículos:
+Este tipo de orden de los conceptos formales hipónimo-hiperónimo se manifiesta por regla general como una estructura ordenada en forma de malla con ramificaciones, comúnmente no tiene forma de forma de árbol y ni menos es lineal. Se puede demostrar, sin embargo, que estos órdenes poseen características especiales y bien estudiadas: se trata aquí de los retículos completos.​
+De esta manera, un concepto puede tener no solo un único concepto superordinado (hiperónimo). Más bien, la regla es que para cada concepto sean varios sus hiperónimos, también aquellos que no están en relación entre sí a nivel del concepto superordinado. Por ejemplo, el concepto ave rapaz (o cazadora) reúne las características tanto de su concepto hiperónimo, aves, como también las de otro concepto hiperónimo, animales cazadores.
+
+Origen:
+La teoría en su actual formulación se remonta al grupo de investigación de Darmstadt del círculo de Rudolf Wille, Bernhard Ganter y Peter Burmeister donde surgió a comienzos de los años 1980 el análisis formal de conceptos. Los fundamentos matemáticos, sin embargo, fueron desarrollados en los años 1930 en el contexto de la teoría general de retículos. Antes de los trabajos del grupo de Darmstadt ya existían algunas aproximaciones de distintos grupos franceses. Los escritos de Charles S. Peirce y Hartmut von Hentig también tuvieron influencia en el surgimiento del análisis formal de conceptos.
+
+Áreas de aplicación:
+El AFC tiene aplicación práctica en varias áreas, tales como la minería de datos y la minería de textos, la Gestión del conocimiento, web semántica, ingeniería de software, economía y biología.
+
+Motivación y trasfondo filosófico:
+En el artículo Restructuring Lattice Theory (1982), que fundó el análisis formal de conceptos como disciplina, Wille menciona como motivación el malestar con la teoría de retículos y con la matemática pura, en general: la producción de resultados teóricos a menudo alcanzada a través de un «deporte mental altamente competitivo» habría llegado a ser impresionante, pero las relaciones entre campos vecinos e incluso entre las partes de una misma teoría se habrían debilitado. 
+
+Este objetivo hace referencia a Hartmut von Hentig, quien en 1972 propugnaba una reestructuración de las ciencias, «para hacerlas más aprendibles, recíprocamente disponibles y criticables de manera más general (es decir, más allá de la competencia profesional)».​ Con esto, el AFC apunta desde sus orígenes a la interdiciplinaridad y al control democrático de la investigación.​
+Mientras en la lógica formal un concepto, en su calidad de predicado unario, se reduce a su extensión, el AFC, al considerar su intensión, hace que la teoría de los conceptos sea menos abstracta.​ Con ello el AFC se orienta por las categorías de Extensión e intensión de la lingüística y de la lógica conceptual clásica.
+La claridad de conceptos en el sentido de la máxima pragmática de Charles S. Peirce se pretende lograr a través del despliegue de las características elementales observables de los objetos subsumados.​ En su obra filosófica tardía, Pierce partía del supuesto de que el pensamiento lógico tiene como fin la comprensión de la realidad a través de la tríada, concepto, juicio y conclusión. La matemática abstrae el pensamiento lógico, desarrolla modelos posibles de realidad y es por eso que puede servir de apoyo a la comunicación racional. Rudolf Wille define en este contexto: 
+
+Fundamentos matemáticos:
+El objetivo principal del análisis formal de conceptos es la representación de retículos completos a través de contextos formales. Además, permite también a la inversa el examen de datos en forma de contextos formales con herramientas de la teoría del orden. En esta sección se discuten las definiciones básicas para ello.
+
+Contextos formales y conceptos formales:
+Dados dos conjuntos 
+
+ y una relación 
+
+. Entonces, el trío 
+
+ se denomina contexto formal,​ 
+
+ conjunto de objetos y 
+
+ su conjunto de características; para un objeto 
+
+ y una característica 
+
+ tiene la característica 
+
+». Frecuentemente se escribe también como 
+
+. El conjunto 
+
+ se denomina relación de incidencia del contexto formal.
+Si los conjuntos 
+
+ son finitos, entonces pueden los contextos formales representarse bien como «tablas cruzadas». Tómese en cuenta aquí que objetos y características pueden ordenarse de manera arbitraria en esta representación. Pero ese orden, entonces, no forma parte del contexto formal, sino solo de su representación.
+
+ un conjunto de objetos de un contexto formal 
+
+, entonces se denota con
+
+el conjunto de las características comunes de los objetos en 
+
+. Respectivamente, se define para un conjunto 
+
+ de características de 
+
+ el conjunto
+
+de todos los objetos que poseen todas las características de 
+
+. Los conjuntos 
+
+ se denominan «derivaciones» (Ableitungen/derivative) de los correspondientes conjuntos 
+
+ y las funciones, designadas ambas con 
+
+ , se denominan «operadores de derivación» 
+
+Los operadores de derivación cumplen con una serie de propiedades fundamentales. Sean 
+
+ conjuntos de objetos y 
+
+ conjuntos de características, entonces:
+
+ \subseteq A_\,\implies \,A_'\subseteq A_'}
+
+ \subseteq B_\,\implies \,B_'\subseteq B_'}
+
+En realidad, con esto los operadores de derivación definen una conexión de Galois antítona entre los retículos de conjuntos potencia de los conjuntos de objetos y los conjuntos de características. A la inversa, cualquiera de estas conexiones de Galois entre retículos de conjuntos potencia puede representarse como un par de operadores de derivación de un contexto formal. 
+Para un contexto formal 
+
+ se denomina entonces un concepto formal​ de 
+
+, si se cumple:
+
+ es un conjunto de objetos de 
+
+ es un conjunto de características de 
+
+El conjunto 
+
+ se denomina entonces extensión y el conjunto 
+
+ intensión (contenido) del concepto 
+
+ . El conjunto de todos los conceptos se designa con 
+
+. Si se representan los contextos formales como tablas cruzadas, se pueden comprender los conceptos formales — existiendo un orden apropiado de los objetos y características — como rectángulos máximos completamente llenos en esa tabla cruzada.
+Finalmente, sean 
+
+, entonces con
+
+se puede definir un orden parcial 
+
+. Ese orden constituye entonces la estructura 
+
+ }(\mathbb ),\leq )}
+ 
+ en un retículo completo. De hecho, a la inversa, según el teorema principal del análisis formal de conceptos, todo retículo completo es isomorfo respecto de un retículo de conceptos.
+
+Los retículos de conceptos pueden representarse como diagramas de orden (diagramas de líneas) y desplegar así los datos en su estructura y sus relaciones. En ellos, todos los objetos tienen características (unidas por los cantos); en el ejemplo que figura al lado es 4 un número par, compuesto, cuadrado. 
+De manera matemáticamente más precisa se puede fundamentar primeramente la rotulación simplificada de retículos de conceptos. Si se considera para un objeto 
+
+ el conjunto de todos los conceptos que contienen 
+
+ en su extensión, entonces ese conjunto tiene un filtro principal en el retículo de conceptos. Por eso el objeto 
+
+ se registra solo debajo del concepto más pequeño, que contiene 
+
+ en la extensión. Dualmente, se registra la característica 
+
+ encima del concepto más grande que posee una característica dada 
+
+ en la intensión (contenido). En el diagrama de orden, un concepto tiene entonces exactamente un objeto en su extensión cuando se encuentra por encima del concepto que está rotulado con el objeto. Correspondientemente, un concepto tiene, en el diagrama de orden, una característica en su intensión (contenido) cuando está por debajo del concepto que está rotulado con esa característica. 
+
+Teorema principal del análisis formal de conceptos:
+
+ un contexto formal y 
+
+ su retículo de conceptos. Se pueden considerar para objetos 
+
+ y características 
+
+ los conceptos
+
+Se denomina 
+
+ al concepto de objeto de 
+
+ al concepto de característica de 
+
+. Además rige
+
+ }m\iff \gamma (g)\leq \mu (m)}
+
+Sea, por último, 
+
+ un retículo completo, entonces 
+
+ entonces es isomorfo respecto de 
+
+, precisamente cuando existen aplicaciones 
+
+ }\colon G\to L,\mu _}\colon M\to L}
+ 
+ tales que rige
+
+ }m\iff \gamma _}(g)\leq \mu _}(m)}
+
+En particular, 
+
+ es isomorfo respecto de 
+
+Teoría de las implicaciones de los contextos formales:
+Para un contexto formal 
+
+ se puede estudiar su teoría de las implicaciones. Aquí una implicación de 
+
+ es simplemente un par 
+
+, lo suele denotarse como 
+
+. Se dice que 
+
+, si todo objeto que posee todas las características de 
+
+, también posee todas las características de 
+
+, es decir, si también rige 
+
+. Esta condición es equivalente a que rija 
+
+ un conjunto de implicaciones de 
+
+, entonces se designa con 
+
+ el conjunto más pequeño que contiene 
+
+ y que sea un conjunto cerrado bajo 
+
+. Aquí se entiende que un conjunto 
+
+ es cerrado bajo 
+
+, si para todas las implicaciones siempre rige 
+
+, es decir, cuando 
+
+ implica siempre 
+
+. Se observa entonces que la aplicación 
+
+ es un operador de cierre sobre el conjunto potencia 
+
+ una implicación de 
+
+ se sigue de 
+
+. Esto es equivalente a decir que en todo contexto formal en el que rigen todas las implicaciones de 
+
+, también rige siempre la implicación de 
+
+Entonces, una base para 
+
+ es un conjunto 
+
+ de implicaciones válidas de 
+
+, tales que toda implicación (semánticamente) válida de 
+
+ ya se sigue de
+
+, a través de la aplicación de reglas de inferencia sintácticamente apropiadas tales como las reglas de Armstrong.​ El conjunto, cerrado en este nuevo sentido, de todas las implicaciones de 
+
+ es una teoría, puesto que se puede satisfacer además, según su construcción, por ejemplo respecto del contexto subyacente.
+La base se denomina irredundante, si acaso es 
+
+-mínima con esa característica. Un ejemplo de base irredundante es la base canónica (véase también exploración de características), que además tiene la propiedad de ser también mínima en relación con el tamaño de la base. 
+Aquí rige que un conjunto de implicaciones 
+
+ es base de un contexto 
+
+ exactamente cuando el conjunto de los conjuntos cerrados bajo 
+
+ es también exactamente el de los contenidos (intensiones) de 
+
+Exploración de características:
+Es posible representar con ayuda de un contexto formal la teoría de implicaciones de un área temática determinada. En particular, esto significa que uno puede hacerlo con ayuda de un conjunto suficiente de ejemplos que se transformen en los objetos del contexto formal. En teoría, un conjunto tal de ejemplos podría ser aportado por un experto humano o también por una máquina. 
+Aquí surge, sin embargo, el problema de que ni está garantizado de partida que esté dado una conjunto suficiente de ejemplos, ni que no sean redundantes algunos de los ejemplos generados, debido a que los ejemplos ya dados alcancen. Considerando que la generación de buenos ejemplos resulta difícil, las entrevistas a expertos o hasta la realización de nuevos experimentos son iniciativas caras, al tiempo que la investigación bibliográfica o de algoritmos puede ser costosa, se trata de un problema serio.
+Aquí puede ser útil el algoritmo de la exploración de características. A partir de un conjunto previamente conocido de implicaciones y un conjunto ya conocido de ejemplos de esa área temática, el algoritmo propone implicaciones que luego pueden ser aceptadas o rechazadas por un experto (humano o no). Aquí una implicación debe ser aceptada exactamente cuando ella es válida en dicha área temática. Si una implicación se rechaza, el experto tiene que crear un contraejemplo que luego puede ser aceptado o rechazado por un experto (humano o no). A través de un contraejemplo aceptado, la implicación se refuta y con ello genera un conjunto lo más pequeño posible de implicaciones aceptadas que finalmente describe completamente el área temática. Más allá de ello, también se completa el conjunto de los ejemplos.
+
+Experiencias de aplicación de los conceptos formales:
+El análisis formal de conceptos se puede aplicar como método cualitativo para el análisis de datos. Desde los comienzos del AFC en los años 1980 el grupo de investigación de la Universidad Técnica de Darmstadt ha recopilado experiencias de más de 200 proyectos (cifra de 2005), en los que se utilizó el AFC.​ Entre ellos, de las áreas: medicina y biología celular,​​ genética,​​ ecología,​ ingeniería de software,​ ontología (informática),​ gestión de la información y biblioteconomía,​​​ ofimática,​ derecho,​​ lingüística,​ ciencias políticas​
+Muchos otros ejemplos de aplicaciones se describen por ejemplo en: Formal Concept Analysis. Foundations and Applications,​ en los tomos de informes de las conferencias científicas que se celebran regularmente, como por ejemplo: International Conference on Formal Concept Analysis (ICFCA),​ Concept Lattices and their Applications (CLA)​ o International Conference on Conceptual Structures (ICCS)​
+
+Notas:

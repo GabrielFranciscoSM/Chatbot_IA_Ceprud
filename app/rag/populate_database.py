@@ -4,7 +4,11 @@ import shutil
 from langchain_text_splitters import RecursiveCharacterTextSplitter, MarkdownTextSplitter
 from langchain.schema.document import Document
 from langchain_chroma import Chroma
-from rag.get_embedding_function import get_embedding_function
+
+try:
+    from rag.get_embedding_function import get_embedding_function
+except ImportError:
+    from get_embedding_function import get_embedding_function
 
 from docling.document_converter import DocumentConverter
 
@@ -12,8 +16,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 # --- Configuration and Shared State ---
-BASE_CHROMA_PATH = os.getenv("BASE_CHROMA_PATH", "chroma")
-DATA_PATH = os.getenv("BASE_DATA_PATH","data")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_CHROMA_PATH = os.path.join(SCRIPT_DIR,os.getenv("BASE_CHROMA_PATH","chroma")) 
+DATA_PATH = os.path.join(SCRIPT_DIR,os.getenv("BASE_DATA_PATH","data"))  
 
 def main():
     # Configurar argumentos
@@ -109,54 +114,43 @@ def load_documents(data_path):
                             "subject": data_path.split("/")[-1]
                         }
                     )
-                )             
-                # with pdfplumber.open(file_path) as pdf:
-                #     for page_num, page in enumerate(pdf.pages):
-                #         text = page.extract_text()
-                #         if text:
-                #             cleaned_text = clean_text(text)
-                #             print("DOCUMENTO: " + filename + "\n CONTENIDO: \n" + cleaned_text + "\n")
-                #             valid_documents.append(
-                #                 Document(
-                #                     page_content=cleaned_text,
-                #                     metadata={
-                #                         "source": filename,
-                #                         "page": page_num,
-                #                         "subject": data_path.split("/")[-1]
-                #                     }
-                #                 )
-                #             )
+                )    
             except Exception as e:
                 print(f"❌ Error al procesar {filename}: {str(e)}")
+        elif filename.endswith(".txt"):
+            print(f"🔍 Procesando archivo: {filename}")
+            file_path = os.path.join(data_path, filename)
+            try:
+                with open(file_path,"r") as file:             
+                    text = file.read()
+
+                    valid_documents.append(
+                        Document(
+                            page_content=text,
+                            metadata={
+                                "source": filename.split(".")[0],
+                                "subject": data_path.split("/")[-1]
+                            }
+                        )
+                    )   
+            except Exception as e:
+                print(f"❌ Error al procesar {filename}: {str(e)}")
+ 
+
     return valid_documents
 
 def split_documents(documents):
     """Dividir texto en fragmentos con parámetros optimizados."""
 
-
-    # headers_to_split_on = [
-    #     ("#", "Header 1"),
-    #     ("##", "Header 2"),
-    # ]
-
-    # MD splits
-    markdown_splitter = MarkdownTextSplitter(
-        chunk_size=500,          # Tamaño reducido para mayor precisión
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=200,          # Tamaño reducido para mayor precisión
         chunk_overlap=50,        # Overlap para mantener coherencia
+        separators=["\n\n", "\n", ". ", " ", ""],  # Jerarquía de separadores
         length_function=len
     )
-    #header_md_split = MarkdownHeaderTextSplitter(headers_to_split_on=headers_to_split_on, strip_headers=False)
-    md_header_splits = markdown_splitter.split_documents(documents)
+    recursive_splits = text_splitter.split_documents(documents)
 
-    # text_splitter = RecursiveCharacterTextSplitter(
-    #     chunk_size=3000,          # Tamaño reducido para mayor precisión
-    #     chunk_overlap=300,        # Overlap para mantener coherencia
-    #     separators=["\n\n", "\n", ". ", " ", ""],  # Jerarquía de separadores
-    #     length_function=len
-    # )
-    # recursive_splits = text_splitter.split_documents(documents)
-
-    return md_header_splits 
+    return recursive_splits 
 
     
 def add_to_chroma(chunks, chroma_path):

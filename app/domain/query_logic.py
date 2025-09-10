@@ -18,7 +18,7 @@ load_dotenv()
 # =====================================
 
 VLLM_URL = os.getenv("VLLM_URL") + "/v1"
-VLLM_MODEL_NAME = ".." + os.getenv("MODEL_DIR") 
+VLLM_MODEL_NAME = os.getenv("MODEL_DIR", "/models/Sreenington--Phi-3-mini-4k-instruct-AWQ") 
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY

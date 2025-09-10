@@ -1,0 +1,25 @@
+En teoría de la computación, un problema es un conjunto de frases de longitud finita que tienen asociadas frases resultantes también de longitud finita. Un problema de decisión es un problema en donde las respuestas posibles son «sí» o «no». 
+Un problema de decisión también se puede formalizar como el problema de decidir si una cierta frase pertenece a un conjunto dado de frases, también llamado lenguaje formal. El conjunto contiene exactamente las frases para las cuales la respuesta a la pregunta es positiva. 
+
+Concepto intuitivo:
+Se usa el término «problema» para designar a toda una clase de preguntas que tienen una estructura similar y cuya respuesta depende de ciertos parámetros de entrada. Una instancia es un caso particular que se obtiene de un problema al asignar valores concretos a los parámetros de entrada. Por tanto una instancia tiene una respuesta específica: «sí» o «no».
+Un ejemplo típico de problema de decisión es la pregunta: ¿Es un número entero dado primo? Una instancia de este problema sería: ¿Es 17 primo?
+La pregunta anterior sobre los números primos se puede véase también como el lenguaje de todas las frases en el alfabeto tales que el entero correspondiente es primo.
+
+Problema decidible:
+Si existe un algoritmo que pueda decidir para cada posible frase de entrada si esa frase pertenece al lenguaje, entonces se dice que el problema es decidible, de otra forma se dice que es un problema indecidible. Cuando existe un algoritmo que puede responder positivamente cuando la frase está en el lenguaje, pero que corre indefinidamente cuando la frase no pertenece al lenguaje se dice que el problema es parcialmente decidible. En teoría de la computabilidad, se estudia qué lenguajes son decidibles con diferentes tipos de máquinas. En teoría de la complejidad computacional se estudia cuántos recursos necesita un algoritmo decidible para ejecutar (recursos de tiempo, espacio, número de procesadores, tipo de máquina, etc.).
+
+Ejemplos:
+Esos son algunos ejemplos de problemas de decisión expresados como lenguajes:
+
+Las frases sobre el alfabeto que contienen alternadas las letras a y b.
+Las frases sobre el alfabeto que contienen igual número de letras a y b.
+Las frases que describen un grafo con aristas etiquetadas con números naturales que indican su longitud, dos vértices del grafo y un camino en el grafo que es el camino más corto entre esos dos vértices.
+Las frases que describen una máquina de Turing y una cinta de entrada para esta máquina tal que la máquina se detiene en un tiempo finito al procesar esa entrada.
+Los problemas de decisión son interesantes dado que todos los problemas formales (que incluye tanto lógicos como matemáticos) pueden ser redactados para que tomen la forma de un problema de decisión. Las soluciones al problema de decisión y al problema original se diferencian a lo sumo por un factor lineal.
+
+Decidibilidad y conjuntos recursivos:
+Mediante codificaciones, se puede hablar de decidibilidad en conjuntos que no necesariamente son conjuntos de frases. Un problema de decisión se identifica de nuevo con el subconjunto para el cual la respuesta es positiva. Para conjuntos de números naturales se emplea una terminología alternativa:
+
+A los conjuntos decidibles se les llama recursivos.
+A los conjuntos parcialmente decidibles se les llama recursivamente enumerables.

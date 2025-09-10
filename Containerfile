@@ -8,7 +8,7 @@ ENV HF_HUB_DISABLE_SYMLINKS_WARNING=1 \
     PYTHONUNBUFFERED=1
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /chatbot
 
 # 2. Install Python and system dependencies
 # The NVIDIA base image does not include Python
@@ -31,12 +31,21 @@ COPY requirements.txt ./
 # RUN pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 # 5. Install your application's Python dependencies
-# The --constraint flag is the key. It forces pip to use the versions specified
-# in constraints.txt, preventing it from reinstalling torch.
 RUN pip3 install --no-cache-dir -r requirements.txt 
 
+# 5.1. Verify wikipedia package is installed
+#RUN python3 -c "import wikipedia; print('Wikipedia package installed successfully')" 
+
+
 # 6. Copy the application code
-COPY app/ /app/
+# Note: This should be one of the last steps to ensure code changes invalidate the cache
+COPY ./app ./app
+
+# 7. Set environment variables for Python path
+#ENV PYTHONPATH=/chatbot/app
+
+# 8. Set proper permissions (if needed)
+#RUN chmod -R 755 /app
 
 # Default command to run the application
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5001"]
+#CMD ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "5001"]

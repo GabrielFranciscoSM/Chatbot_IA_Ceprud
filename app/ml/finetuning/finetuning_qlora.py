@@ -13,10 +13,10 @@ load_dotenv()
 HF_TOKEN = os.getenv("HF_TOKEN")  # Reemplaza con tu token
 login(token=HF_TOKEN)
 
-MODEL="..".join(os.getenv("MODEL_DIR"))
-SHORT_MODEL_NAME = os.getenv("MODEL_NAME").split("/")[1]
+MODEL = os.getenv("MODEL_NAME", "TinyLlama/TinyLlama-1.1B-Chat-v1.0")
+SHORT_MODEL_NAME = os.getenv("MODEL_NAME", "TinyLlama/TinyLlama-1.1B-Chat-v1.0").split("/")[1]
 
-MODELS_DIR_PATH = "../models/"
+MODELS_DIR_PATH = "../../models/"
 
 def fine_tune_deepseek(subject):
     data_path = f"../data/{subject}/train_data.json"
