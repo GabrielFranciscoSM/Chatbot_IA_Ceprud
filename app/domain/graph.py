@@ -179,20 +179,13 @@ def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[D
     El 'subject' se inyectará desde la configuración del agente, no lo provee el LLM.
     """
     try:
-        print(f"[DEBUG CHROMA] === INICIANDO chroma_retriever ===")
-        print(f"[DEBUG CHROMA] TIMESTAMP BUILD: 2025-09-10 12:00:00")
-        print(f"[DEBUG CHROMA] Pregunta: '{pregunta}'")
-        
         # Extract subject from config
         subject = config["configurable"]["subject"]
-        print(f"[DEBUG CHROMA] Asignatura: '{subject}'")
+        print(f"[DEBUG CHROMA] Búsqueda para: '{pregunta}' en asignatura: '{subject}'")
 
         # Get current working directory and script directory
         current_dir = os.getcwd()
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        print(f"[DEBUG CHROMA] Directorio actual: {current_dir}")
-        print(f"[DEBUG CHROMA] Directorio del script: {script_dir}")
-        print(f"[DEBUG CHROMA] BASE_CHROMA_PATH: {BASE_CHROMA_PATH}")
 
         # List possible paths to search for ChromaDB
         possible_paths = [
@@ -214,90 +207,141 @@ def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[D
             os.path.join(BASE_CHROMA_PATH, subject),
             os.path.abspath(os.path.join(BASE_CHROMA_PATH, subject)),
         ]
-
-        print(f"[DEBUG CHROMA] Probando {len(possible_paths)} rutas posibles:")
         
         chroma_path = None
         for i, test_path in enumerate(possible_paths):
             abs_path = os.path.abspath(test_path)
-            print(f"[DEBUG CHROMA] [{i+1}] Probando: {abs_path}")
             
             if os.path.exists(abs_path):
                 if os.path.isdir(abs_path):
                     chroma_path = abs_path
-                    print(f"[DEBUG CHROMA] ✅ Directorio encontrado: {chroma_path}")
-                    
-                    # List contents of the directory
-                    try:
-                        contents = os.listdir(chroma_path)
-                        print(f"[DEBUG CHROMA] Contenido del directorio ({len(contents)} elementos):")
-                        for item in contents[:10]:  # Show first 10 items
-                            item_path = os.path.join(chroma_path, item)
-                            item_type = "DIR" if os.path.isdir(item_path) else "FILE"
-                            print(f"[DEBUG CHROMA]   - {item} ({item_type})")
-                        if len(contents) > 10:
-                            print(f"[DEBUG CHROMA]   ... y {len(contents) - 10} elementos más")
-                    except Exception as e:
-                        print(f"[DEBUG CHROMA] Error listando contenido: {e}")
-                    
                     break
-                else:
-                    print(f"[DEBUG CHROMA] ❌ Existe pero no es directorio: {abs_path}")
-            else:
-                print(f"[DEBUG CHROMA] ❌ No existe: {abs_path}")
 
         if not chroma_path:
             error_msg = f"[ERROR CHROMA] No se encontró la base de datos ChromaDB para la asignatura '{subject}'."
-            print(error_msg)
-            print(f"[DEBUG CHROMA] Directorio actual: {current_dir}")
-            print(f"[DEBUG CHROMA] Estructura del directorio actual:")
-            try:
-                for root, dirs, files in os.walk(current_dir):
-                    level = root.replace(current_dir, '').count(os.sep)
-                    indent = ' ' * 2 * level
-                    print(f"{indent}{os.path.basename(root)}/")
-                    subindent = ' ' * 2 * (level + 1)
-                    for file in files[:5]:  # Limit to 5 files per directory
-                        print(f"{subindent}{file}")
-                    if len(files) > 5:
-                        print(f"{subindent}... y {len(files) - 5} archivos más")
-                    if level > 3:  # Limit depth
-                        break
-            except Exception as e:
-                print(f"[DEBUG CHROMA] Error explorando estructura: {e}")
-            
+            print(error_msg)            
             return error_msg, []
 
-        print(f"[DEBUG CHROMA] Usando ChromaDB en: {chroma_path}")
-
-        # Initialize ChromaDB
-        print(f"[DEBUG CHROMA] Inicializando ChromaDB...")
         vector_store = Chroma(persist_directory=chroma_path, embedding_function=get_embedding_function())
-        print(f"[DEBUG CHROMA] ✅ ChromaDB inicializado correctamente")
 
-        # Perform similarity search
-        print(f"[DEBUG CHROMA] Realizando búsqueda de similitud (k=3)...")
-        print(f"[DEBUG CHROMA] Pregunta: {pregunta}")
-        retrieved_docs = vector_store.similarity_search(pregunta, k=3)
-        print(f"[DEBUG CHROMA] ✅ Búsqueda completada. Documentos encontrados: {len(retrieved_docs)}")
+        # 3. Query expansion - Simple synonym addition
+        expanded_queries = [pregunta]
+        # Add simple expansions for common technical terms
+        expansions = {
+            "algoritmo": ["método", "técnica", "procedimiento"],
+            "metaheurística": ["metaheurísticas", "heurística", "optimización"],
+            "evaluación": ["evaluacion", "examen", "prueba"],
+            "implementación": ["implementacion", "código", "programación"],
+            "ejemplo": ["ejemplos", "caso", "aplicación"]
+        }
+        
+        pregunta_lower = pregunta.lower()
+        for term, synonyms in expansions.items():
+            if term in pregunta_lower:
+                for synonym in synonyms:
+                    expanded_queries.append(pregunta.replace(term, synonym))
 
-        if not retrieved_docs:
-            print(f"[DEBUG CHROMA] ❌ No se encontraron documentos relevantes")
+        # Get results from all expanded queries
+        all_docs = []
+        for query in expanded_queries[:3]:  # Limit to avoid too many calls
+            docs = vector_store.similarity_search_with_score(query, k=6)
+            all_docs.extend(docs)
+
+        if not all_docs:
             return "No se encontraron documentos relevantes en los apuntes.", []
 
-        # Process results
-        print(f"[DEBUG CHROMA] Procesando resultados:")
-        for i, doc in enumerate(retrieved_docs):
-            print(f"[DEBUG CHROMA] Documento {i+1}:")
-            print(f"[DEBUG CHROMA]   - Longitud: {len(doc.page_content)} caracteres")
-            print(f"[DEBUG CHROMA]   - Metadatos: {doc.metadata}")
-            print(f"[DEBUG CHROMA]   - Chunk: {doc.page_content}...")
+        # 1. Adaptive threshold tuning
+        scores = [score for _, score in all_docs]
+        if scores:
+            avg_score = sum(scores) / len(scores)
+            std_score = (sum((s - avg_score) ** 2 for s in scores) / len(scores)) ** 0.5
+            # Use mean - 0.5*std as threshold to keep better half
+            adaptive_threshold = max(avg_score - 0.5 * std_score, 0.5)
+        else:
+            adaptive_threshold = 0.7
 
-        context_string = "\n\n---\n\n".join([doc.page_content for doc in retrieved_docs])
-        result_message = f"Información encontrada en los apuntes:\n{context_string}"
+        print(f"[DEBUG CHROMA] Threshold adaptativo: {adaptive_threshold:.3f}")
+
+        # Filter by adaptive threshold
+        filtered_docs = [(doc, score) for doc, score in all_docs if score < adaptive_threshold]
+
+        # 4. Simple metadata filtering (if available)
+        # Priority to docs with certain metadata patterns
+        priority_docs = []
+        regular_docs = []
         
-        print(f"[DEBUG CHROMA] ✅ Resultado generado ({len(result_message)} caracteres)")
-        return result_message, retrieved_docs
+        for doc, score in filtered_docs:
+            metadata = doc.metadata
+            # Prioritize docs with specific metadata
+            if any(key in metadata for key in ['chapter', 'section', 'title', 'topic']):
+                priority_docs.append((doc, score))
+            else:
+                regular_docs.append((doc, score))
+
+        # Combine prioritized and regular docs
+        sorted_docs = priority_docs + regular_docs
+
+        # Remove duplicates based on content similarity
+        unique_docs = []
+        seen_content = set()
+        
+        for doc, score in sorted_docs:
+            # Simple deduplication based on first 100 chars
+            content_signature = doc.page_content[:100].strip()
+            if content_signature not in seen_content:
+                seen_content.add(content_signature)
+                unique_docs.append((doc, score))
+
+        # 2. Simple reranking based on keyword overlap and content quality
+        pregunta_words = set(pregunta.lower().split())
+        reranked_docs = []
+        
+        for doc, original_score in unique_docs:
+            content_lower = doc.page_content.lower()
+            
+            # Keyword overlap score
+            doc_words = set(content_lower.split())
+            keyword_overlap = len(pregunta_words.intersection(doc_words))
+            
+            # Content quality score
+            content_length = len(doc.page_content)
+            length_score = 1.0 if 100 <= content_length <= 1500 else 0.5
+            
+            # Has structured content (headings, lists, etc.)
+            structure_score = 1.2 if any(marker in content_lower for marker in [':', '•', '-', '1.', '2.']) else 1.0
+            
+            # Combined reranking score (lower is better)
+            rerank_score = original_score - (keyword_overlap * 0.1) - (length_score * 0.05) - (structure_score * 0.02)
+            
+            reranked_docs.append((doc, rerank_score, original_score))
+
+        # Sort by reranked score and take top results
+        reranked_docs.sort(key=lambda x: x[1])
+        final_docs = [doc for doc, _, _ in reranked_docs[:4]]
+
+        # Debug info
+        print(f"[DEBUG CHROMA] Documentos finales ({len(final_docs)}):")
+        for i, doc in enumerate(final_docs):
+            print(f"[DEBUG CHROMA] Doc {i+1}: {len(doc.page_content)} chars, metadata: {doc.metadata}")
+
+        # 5. Enhanced formatting with metadata
+        context_parts = []
+        for i, doc in enumerate(final_docs):
+            # Extract useful metadata for context
+            source_info = ""
+            if 'source' in doc.metadata:
+                source_info = f" (Fuente: {doc.metadata['source']})"
+            elif 'filename' in doc.metadata:
+                source_info = f" (Archivo: {doc.metadata['filename']})"
+            elif 'chapter' in doc.metadata:
+                source_info = f" (Capítulo: {doc.metadata['chapter']})"
+                
+            context_parts.append(f"[Documento {i+1}]{source_info}:\n{doc.page_content}")
+        
+        context_string = "\n\n---\n\n".join(context_parts)
+        result_message = f"Información encontrada en los apuntes:\n\n{context_string}"
+        
+        return result_message, final_docs
 
     except Exception as e:
         error_msg = f"[ERROR CRÍTICO CHROMA] Error en chroma_retriever: {str(e)}"
@@ -359,8 +403,16 @@ def execute_tools(state: AgentState) -> Dict[str, Any]:
 
         tool_args = call['args']
 
+        # Create proper config with subject from state
+        config = RunnableConfig(
+            configurable={
+                "subject": state.get("subject", "unknown"),
+                "thread_id": "default"
+            }
+        )
+
         try:
-            content, docs = tool_function.invoke(tool_args)
+            content, docs = tool_function.invoke(tool_args, config)
             tool_messages.append(ToolMessage(content=content, tool_call_id=call['id']))
             if docs:
                 all_retrieved_docs.extend(docs)

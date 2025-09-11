@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       python3-pip \
       build-essential \
       cmake \
-      pkg-config && \
+      pkg-config \
+      curl && \
     # Clean up apt cache to reduce image size
     rm -rf /var/lib/apt/lists/*
 

@@ -185,7 +185,7 @@ def add_to_chroma(chunks, chroma_path):
     # --- INICIO DE LA MODIFICACIÓN CLAVE ---
     
     # Procesar en lotes para no sobrecargar el servidor de embeddings
-    batch_size = 8  # Puedes ajustar este valor. Empieza con algo pequeño.
+    batch_size = 32  # Puedes ajustar este valor. Empieza con algo pequeño.
     total_new_chunks = len(new_chunks)
     
     print(f"👉 Insertando {total_new_chunks} nuevos chunks en lotes de {batch_size}...")

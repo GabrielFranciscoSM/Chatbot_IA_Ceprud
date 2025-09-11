@@ -48,6 +48,12 @@ async def index(request: Request):
     return templates.TemplateResponse('index.html', {"request": request})
 
 
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for service readiness verification."""
+    return {"status": "healthy", "service": "chatbot"}
+
+
 @app.get("/graphs", response_class=JSONResponse)
 async def list_graphs():
     """Lists available graph images for the frontend."""

@@ -60,7 +60,7 @@ services:
             - 8001:8001
         ipc: host
         image: docker.io/vllm/vllm-openai:latest
-        command: --model /models/BAAI--bge-m3 --port 8001 --max-num-seqs 8 --gpu-memory-utilization 0.15 --max_model_len=3000
+        command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 64 --gpu-memory-utilization 0.15 --max_model_len=3000
     chatbot:
         container_name: my-chatbot-app
         build:
@@ -93,8 +93,8 @@ services:
         # DEVELOPMENT: Uncomment next line for hot-reload (code changes without rebuild)
         # - ./app:/app  # Mount the app directory for live code updates
         #S- ./.env:/app/.env
-        - ./unitTests:/app/unitTests
-        - ./pytest.ini:/app/pytest.ini
+        - ./unitTests:/chatbot/app/unitTests
+        - ./pytest.ini:/chatbot/app/pytest.ini
 
 
         restart: unless-stopped

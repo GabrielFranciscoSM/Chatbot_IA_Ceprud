@@ -91,3 +91,21 @@
 2025-09-08 13:07:23,503 - services.session_service - INFO - Created new session for user pytest@u... in subject metaheuristicas
 2025-09-08 13:07:23,504 - api_router - INFO - Chat request received - Session: e1c4a326-d2db-4a95-9c22-abdf9ce9c864, Subject: metaheuristicas, Mode: rag, Email: pytest@ugr.es
 2025-09-08 13:07:24,205 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.702s | Size: 55 bytes
+2025-09-11 11:35:41,320 - services.session_service - INFO - Created new session for user test@ugr... in subject metaheuristicas
+2025-09-11 11:35:41,320 - api_router - INFO - Chat request received - Session: 6843f0eb-33c7-428f-852b-8cfada34eed9, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-11 11:35:42,935 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.615s | Size: 131 bytes
+2025-09-11 11:35:42,939 - api_router - INFO - Chat request received - Session: 6843f0eb-33c7-428f-852b-8cfada34eed9, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-11 11:35:44,469 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.530s | Size: 161 bytes
+2025-09-11 11:35:44,472 - api_router - INFO - Chat request received - Session: 6843f0eb-33c7-428f-852b-8cfada34eed9, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-11 11:35:47,680 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.208s | Size: 1375 bytes
+2025-09-11 11:35:47,685 - services.session_service - INFO - Created new session for user memoryte... in subject metaheuristicas
+2025-09-11 11:35:47,685 - api_router - INFO - Chat request received - Session: ae03f0f8-3d5f-473a-9e29-7a0e7bfbd1b9, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-11 11:35:48,659 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.974s | Size: 62 bytes
+2025-09-11 11:35:48,662 - api_router - INFO - Chat request received - Session: ae03f0f8-3d5f-473a-9e29-7a0e7bfbd1b9, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-11 11:35:49,591 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.928s | Size: 52 bytes
+2025-09-11 11:35:50,376 - services.session_service - INFO - Created new session for user test@tes... in subject metaheuristicas
+2025-09-11 11:35:50,376 - api_router - INFO - Chat request received - Session: 3fedb621-7f22-4330-87d3-0573d22735ee, Subject: metaheuristicas, Mode: rag, Email: test@test.com
+2025-09-11 11:35:51,887 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.511s | Size: 131 bytes
+2025-09-11 11:35:51,900 - services.session_service - INFO - Created new session for user pytest@u... in subject metaheuristicas
+2025-09-11 11:35:51,901 - api_router - INFO - Chat request received - Session: f1d1b702-e5fe-4e6d-a381-273d810c0cac, Subject: metaheuristicas, Mode: rag, Email: pytest@ugr.es
+2025-09-11 11:35:52,764 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.864s | Size: 44 bytes
