@@ -70,3 +70,16 @@ class RateLimitStatus(BaseModel):
     requests_remaining: int = Field(..., description="Requests remaining in current window")
     reset_time: int = Field(..., description="Unix timestamp when rate limit resets")
     user_identifier: str = Field(..., description="User identifier (anonymized)")
+
+
+class ClearSessionRequest(BaseModel):
+    """Request model for clearing a chat session"""
+    subject: str = Field(..., max_length=50, description="Subject/course name")
+    email: str = Field(..., max_length=100, description="User email")
+
+
+class ClearSessionResponse(BaseModel):
+    """Response model for clearing a chat session"""
+    success: bool = Field(..., description="Whether the session was cleared successfully")
+    message: str = Field(..., description="Confirmation message")
+    session_id: str = Field(..., description="ID of the cleared session")

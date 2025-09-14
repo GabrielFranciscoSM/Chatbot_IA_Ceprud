@@ -9,7 +9,8 @@ This package contains essential application infrastructure:
 
 from .models import (
     ChatRequest, ChatResponse, ErrorResponse,
-    RateLimitResponse, HealthResponse, RateLimitStatus
+    RateLimitResponse, HealthResponse, RateLimitStatus,
+    ClearSessionRequest, ClearSessionResponse
 )
 
 from .config import (

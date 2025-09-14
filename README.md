@@ -2,12 +2,32 @@
 
 Un chatbot educativo avanzado basado en Inteligencia Artificial diseñado para CEPRUD (Centro de Producción de Recursos para la Universidad Digital). Utiliza arquitectura de microservicios, técnicas RAG (Retrieval-Augmented Generation) y modelos finos para responder preguntas especializadas sobre las asignaturas de la carrera de Ingeniería Informática.
 
+## 🆕 Nueva Interfaz Frontend
+
+Este proyecto ahora incluye una **interfaz frontend moderna** desarrollada con React TypeScript, que ofrece:
+
+- 🎓 **Selección de Asignaturas**: Interfaz intuitiva para cambiar entre diferentes materias
+- 💬 **Chat en Tiempo Real**: Experiencia de chat moderna con historial de mensajes
+- 📱 **Diseño Responsivo**: Funciona perfectamente en desktop y móvil
+- 🔄 **Gestión de Sesiones**: Historial persistente por asignatura usando localStorage
+- ⚡ **Control de Límites**: Información en tiempo real sobre límites de API
+- 🎨 **UI Académica**: Diseño limpio y profesional adaptado al entorno universitario
+
 ---
 
 ## 🏗️ Arquitectura del Proyecto
 
 ### Estructura Modular Profesional
 ```
+├── 🌐 frontend/              # Frontend React TypeScript
+│   ├── src/
+│   │   ├── components/       # Componentes React
+│   │   ├── types.ts         # Definiciones TypeScript  
+│   │   ├── api.ts           # Cliente API
+│   │   └── utils.ts         # Utilidades
+│   ├── Dockerfile           # Contenedor frontend
+│   └── nginx.conf           # Configuración Nginx
+│
 app/
 ├── 🚀 Puntos de Entrada
 │   ├── api_router.py          # Rutas API principales (refactorizado)
@@ -107,53 +127,82 @@ Las dependencias están organizadas en `config/requirements.txt`
 
 ## 📦 Instalación Rápida
 
-### 1. **Clonar y Configurar**
+### 🚀 Opción 1: Setup Automático (Recomendado)
 ```bash
+# Clonar el repositorio
 git clone https://github.com/javitrucas/Chatbot_IA_Ceprud.git
 cd Chatbot_IA_Ceprud
+
+# Ejecutar setup automático
+./setup.sh
 ```
 
-### 2. **Descargar Modelos**
+### ⚙️ Opción 2: Setup Manual
+
+#### 1. **Configurar Entorno**
+```bash
+# Copiar configuración de ejemplo
+cp .env.example .env
+# Editar con tu token de Hugging Face
+nano .env
+```
+
+#### 2. **Descargar Modelos**
 ```bash
 python3 download_llm.py
 ```
 
-### 3. **Configurar Entorno**
+#### 3. **Frontend (Desarrollo)**
 ```bash
-# Copiar configuración de ejemplo
-cp app/config/.env.example app/config/.env
-# Editar variables según tu entorno
-nano app/config/.env
+cd frontend
+npm install
+npm run dev  # Para desarrollo local
+cd ..
 ```
 
-### 4. **Levantar Servicios**
+#### 4. **Levantar Servicios Completos**
 ```bash
-# Opción 1: Con vLLM (recomendado)
+# Todos los servicios (Frontend + Backend + LLM)
+docker-compose -f docker-compose-full.yml up --build
+
+# Solo backend y LLM (sin frontend)
 docker-compose -f docker-compose-vllm.yml up --build
-
-# Opción 2: API separada
-docker-compose -f docker-compose-vllm-api.yml up --build
-
-# Opción 3: Solo embeddings
-docker-compose -f docker-compose-vllm-embeddings.yml up --build
 ```
+
+---
+
+## 🌐 Acceso a los Servicios
+
+### **Frontend Moderno**
+- **URL**: `http://localhost:3000`
+- **Descripción**: Interfaz React con chat en tiempo real y gestión de sesiones
+
+### **Backend API**
+- **URL**: `http://localhost:8080`
+- **Documentación**: `http://localhost:8080/docs`
+- **Health check**: `GET /health`
+
+### **Servicios Internos**
+- **LLM API**: `http://localhost:8000` (vLLM OpenAI compatible)
+- **Embeddings**: `http://localhost:8001` (Servicio de embeddings)
 
 ---
 
 ## 🚀 Uso del Sistema
 
-### **Aplicación Web**
-Accede a `http://localhost:8000` para la interfaz web completa.
+### **Interfaz Web (Recomendado)**
+1. Navega a `http://localhost:3000`
+2. Configura tu email UGR en el panel lateral
+3. Selecciona una asignatura
+4. ¡Comienza a chatear!
 
 ### **API REST**
 - **Endpoint principal**: `POST /chat`
-- **Documentación**: `http://localhost:8000/docs`
-- **Health check**: `GET /health`
-- **Rate limit status**: `GET /rate-limit/{email}`
+- **Rate limit status**: `GET /rate-limit-info`
 
 #### Ejemplo de uso de la API:
 ```bash
-curl -X POST "http://localhost:8000/chat" \
+curl -X POST "http://localhost:8080/chat" \
      -H "Content-Type: application/json" \
      -d '{
        "message": "¿Qué son las metaheurísticas?",

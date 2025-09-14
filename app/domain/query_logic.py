@@ -39,6 +39,7 @@ Nunca respondas desde tu conocimiento previo. Siempre usa una herramienta. Una v
 def query_rag(query_text: str,
               subject: str = None,
               use_finetuned: bool = False,
+              email: str = "anonymous"
               ) -> dict:
     """
     Realiza búsqueda RAG y genera una respuesta.
@@ -51,11 +52,12 @@ def query_rag(query_text: str,
     else:
         model_desc = "base"    
 
-    conversation_id = "-".join(["email", subject]) 
+    conversation_id = "-".join([email, subject]) 
     config = {
         "configurable": {
             "thread_id": conversation_id,
             "subject": subject,
+            "email": email,
             }
         }
     
@@ -93,6 +95,71 @@ def query_rag(query_text: str,
 
     return {"response": final_response, "sources": sources, "model_used": model_desc}
 
+def clear_session(subject: str, email: str) -> bool:
+    """
+    Limpia la memoria de una sesión específica (email + subject).
+    
+    Args:
+        subject: Nombre de la asignatura
+        email: Email del usuario
+        
+    Returns:
+        bool: True si la sesión fue limpiada exitosamente
+    """
+    import time
+    try:
+        conversation_id = "-".join([email, subject])
+        config = {
+            "configurable": {
+                "thread_id": conversation_id,
+                "subject": subject,
+                "email": email,
+            }
+        }
+        
+        # Verificar si existe estado previo
+        existing_state = rag_graph.get_state(config)
+        
+        if existing_state and existing_state.values.get("messages"):
+            print(f"--- INFO: Limpiando sesión con ID: {conversation_id} ---")
+            
+            # Enfoque directo: Crear estado completamente vacío con solo system prompt
+            # Esto efectivamente "reinicia" la conversación
+            system_prompt = SystemMessage(
+                content="""Eres un asistente experto. Tu trabajo es responder preguntas usando las herramientas proporcionadas.
+Analiza la pregunta del usuario y usa **obligatoriamente** una de estas dos herramientas:
+1. `consultar_guia_docente`: Para preguntas sobre la estructura del curso (profesores, temario, evaluación).
+2. `chroma_retriever`: Para todas las demás preguntas conceptuales sobre el material de la asignatura.
+Nunca respondas desde tu conocimiento previo. Siempre usa una herramienta. Una vez que la herramienta devuelva información, úsala para formular la respuesta final."""
+            )
+            
+            # Crear estado inicial limpio (solo con system prompt)
+            clean_state = {
+                "messages": [system_prompt],  # Solo system prompt, sin historia
+                "subject": subject,
+                "retrieved_docs": []
+            }
+            
+            # Sobrescribir completamente el estado
+            try:
+                rag_graph.update_state(config, clean_state, as_node="__start__")
+                print(f"--- INFO: Estado completamente reiniciado ---")
+            except Exception as update_error:
+                print(f"--- WARNING: Error con as_node: {update_error} ---")
+                # Fallback sin as_node
+                rag_graph.update_state(config, clean_state)
+                print(f"--- INFO: Estado reiniciado (fallback) ---")
+                
+            print(f"--- INFO: Sesión {conversation_id} limpiada exitosamente ---")
+            return True
+        else:
+            print(f"--- INFO: No hay sesión existente para limpiar: {conversation_id} ---")
+            return True  # Consideramos exitoso si no hay nada que limpiar
+            
+    except Exception as e:
+        print(f"--- ERROR: Error al limpiar sesión {email}-{subject}: {str(e)} ---")
+        return False
+
 # Ejemplo de uso conversacional
 if __name__ == "__main__":
     # ID de conversación que persistirá entre llamadas
@@ -105,7 +172,7 @@ if __name__ == "__main__":
     response_1 = query_rag(
         query_text="¿qué es un algoritmo greedy?",
         subject="metaheuristicas",
-        conversation_id=chat_id
+        email="test@correo.ugr.es"
     )
     print(f"Agente: {response_1['response']}")
     
@@ -114,6 +181,6 @@ if __name__ == "__main__":
     response_2 = query_rag(
         query_text="¿y podrías darme un ejemplo de uno de esos algoritmos?",
         subject="metaheuristicas", # El subject debe ser consistente
-        conversation_id=chat_id   # Usamos el MISMO ID
+        email="test@correo.ugr.es"   # El email debe ser consistente
     )
     print(f"Agente: {response_2['response']}")

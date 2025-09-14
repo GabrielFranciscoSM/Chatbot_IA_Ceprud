@@ -18,11 +18,16 @@ GRAPHS_DIR = os.path.join(APP_ROOT, "analytics", "graphs")
 app = FastAPI()
 
 # CORS Configuration
-origins = ["*"]  # Configure appropriately for production
+origins = [
+    "http://localhost:3000",  # React frontend in development
+    "http://frontend:80",     # Frontend service in Docker
+    "http://localhost:80",    # Frontend served via nginx
+    "*"  # Allow all for development - configure appropriately for production
+]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
     allow_credentials=True,
 )
@@ -30,14 +35,24 @@ app.add_middleware(
 # Include the Shared API Router
 app.include_router(api_router)
 
-# Frontend Setup
+# Static files for legacy support and analytics
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 app.mount("/graphs", StaticFiles(directory=GRAPHS_DIR), name="graphs")
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
-@app.get("/", response_class=HTMLResponse)
-async def index(request: Request):
-    """Serves the main HTML page."""
+@app.get("/", response_class=JSONResponse)
+async def root():
+    """API root endpoint - frontend is served separately."""
+    return {
+        "message": "Chatbot UGR API",
+        "version": "2.0",
+        "frontend_url": "http://localhost:3000",
+        "docs": "/docs"
+    }
+
+@app.get("/legacy", response_class=HTMLResponse)
+async def legacy_frontend(request: Request):
+    """Serves the legacy HTML page for backwards compatibility."""
     return templates.TemplateResponse('index.html', {"request": request})
 
 
@@ -47,7 +62,7 @@ async def health_check():
     return {"status": "healthy", "service": "chatbot"}
 
 
-@app.get("/graphs", response_class=JSONResponse)
+@app.get("/graphs-list", response_class=JSONResponse)
 async def list_graphs():
     """Lists available graph images for the frontend."""
     if not os.path.isdir(GRAPHS_DIR):
@@ -57,4 +72,4 @@ async def list_graphs():
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app, host='0.0.0.0', port=5001)
+    uvicorn.run(app, host='0.0.0.0', port=8080)
