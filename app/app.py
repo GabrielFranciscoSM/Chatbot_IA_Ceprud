@@ -17,9 +17,8 @@ GRAPHS_DIR = os.path.join(APP_ROOT, "analytics", "graphs")
 # Create the main FastAPI app
 app = FastAPI()
 
-# --- CORS Configuration ---
-# Adjust origins as needed
-origins = ["*"] # Example: allow all for simplicity in dev
+# CORS Configuration
+origins = ["*"]  # Configure appropriately for production
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -28,16 +27,10 @@ app.add_middleware(
     allow_credentials=True,
 )
 
-# --- Include the Shared API Router ---
-# All routes from api_router.py ("/chat", etc.) are now part of this app
+# Include the Shared API Router
 app.include_router(api_router)
 
-
-# --- Frontend Specific Setup ---
-# app.mount("/static", StaticFiles(directory="static"), name="static")
-# app.mount("/graphs", StaticFiles(directory="graphs"), name="graphs")
-# templates = Jinja2Templates(directory="templates")
-
+# Frontend Setup
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 app.mount("/graphs", StaticFiles(directory=GRAPHS_DIR), name="graphs")
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
@@ -59,14 +52,9 @@ async def list_graphs():
     """Lists available graph images for the frontend."""
     if not os.path.isdir(GRAPHS_DIR):
         return []
-    # This endpoint is specific to the UI, so it stays here
     return [f for f in os.listdir(GRAPHS_DIR) if f.endswith((".png", ".jpg", ".jpeg", ".gif"))]
 
 
-# Note: The /graphs/{fname} endpoint is now handled by the StaticFiles mount above,
-# so a separate endpoint for it is not strictly necessary unless you need custom logic.
-
 if __name__ == '__main__':
     import uvicorn
-    # This will run the full application with the frontend
     uvicorn.run(app, host='0.0.0.0', port=5001)

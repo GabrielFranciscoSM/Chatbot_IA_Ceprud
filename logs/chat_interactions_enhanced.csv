@@ -1,0 +1,8 @@
+session_id,user_id_partial,subject,message_length,query_type,complexity,response_length,source_count,model_used,date,time,timestamp
+b673e8cf-1e6e-48ab-a292-f21bbed54dcf,test@ugr...,metaheuristicas,27,question,simple,131,0,base,2025-09-14,16:51:02,1757861462.185607
+b673e8cf-1e6e-48ab-a292-f21bbed54dcf,test@ugr...,metaheuristicas,39,question,simple,157,0,base,2025-09-14,16:51:03,1757861463.670426
+b673e8cf-1e6e-48ab-a292-f21bbed54dcf,test@ugr...,metaheuristicas,30,question,simple,808,0,base,2025-09-14,16:51:06,1757861466.301204
+b06a43f8-e8cd-48e7-a293-664e16797bc2,memoryte...,metaheuristicas,17,general,simple,60,0,base,2025-09-14,16:51:07,1757861467.026049
+b06a43f8-e8cd-48e7-a293-664e16797bc2,memoryte...,metaheuristicas,19,question,simple,50,0,base,2025-09-14,16:51:07,1757861467.623342
+357bc847-ab32-46ba-8f7a-687daaf2253f,test@tes...,metaheuristicas,27,question,simple,131,0,base,2025-09-14,16:51:09,1757861469.939799
+18f0c990-c380-4d4e-9d1a-69fd48e8556d,pytest@u...,metaheuristicas,8,general,simple,43,0,base,2025-09-14,16:51:10,1757861470.853466

@@ -61,13 +61,7 @@ def consultar_guia_docente(seccion: str, config: RunnableConfig) -> Tuple[str, L
     - Qué conocimientos previos se necesitan
     """
     try:
-        print(f"[DEBUG GUIA] === INICIANDO consultar_guia_docente ===")
-        print(f"[DEBUG GUIA] TIMESTAMP BUILD: 2025-09-09 11:30:00")
-        print(f"[DEBUG GUIA] Sección solicitada: '{seccion}'")
-        
-        # CORRECTO: Extraer subject desde el config
         subject = config["configurable"]["subject"]
-        print(f"[DEBUG GUIA] Asignatura: '{subject}'")
 
         # Rutas posibles para el archivo de guía docente
         possible_paths = [
@@ -77,34 +71,24 @@ def consultar_guia_docente(seccion: str, config: RunnableConfig) -> Tuple[str, L
             os.path.join("rag", "data", subject, "guia_docente.json")
         ]
         
-        # Obtener directorio actual y script
+        # Obtener directorio actual
         current_dir = os.getcwd()
-        # Nota: __file__ puede no funcionar en todos los entornos (ej. notebooks)
-        # script_dir = os.path.dirname(os.path.abspath(__file__)) 
-        print(f"[DEBUG GUIA] Directorio actual: {current_dir}")
         
         # Buscar el archivo
         path = None
         for test_path in possible_paths:
             abs_path = os.path.abspath(test_path)
-            print(f"[DEBUG GUIA] Probando: {abs_path}")
             if os.path.exists(abs_path):
                 path = abs_path
-                print(f"[DEBUG GUIA] ✅ Archivo encontrado: {path}")
                 break
-            else:
-                print(f"[DEBUG GUIA] ❌ No existe: {abs_path}")
         
         if not path:
-            error_msg = f"[ERROR] No se encontró archivo de guía docente para '{subject}'. Directorio actual: {current_dir}"
-            print(error_msg)
+            error_msg = f"No se encontró archivo de guía docente para '{subject}'"
             return error_msg, []
             
         # Cargar el JSON
-        print(f"[DEBUG GUIA] Cargando JSON desde: {path}")
         with open(path, 'r', encoding='utf-8') as f:
             guia = json.load(f)
-        print(f"[DEBUG GUIA] ✅ JSON cargado con {len(guia)} claves")
         
         # Mapeo de secciones
         seccion_mapping = {
@@ -135,24 +119,18 @@ def consultar_guia_docente(seccion: str, config: RunnableConfig) -> Tuple[str, L
         }
         
         seccion_limpia = seccion.lower().strip()
-        print(f"[DEBUG GUIA] Sección limpia: '{seccion_limpia}'")
         
         # Buscar mapeo exacto
         target_key = seccion_mapping.get(seccion_limpia)
-        print(f"[DEBUG GUIA] Mapeo encontrado: '{target_key}'")
         
         if target_key and target_key in guia:
-            print(f"[DEBUG GUIA] ✅ Clave encontrada en JSON: {target_key}")
             resultado = {target_key: guia[target_key]}
             result_json = json.dumps(resultado, ensure_ascii=False, indent=2)
-            print(f"[DEBUG GUIA] ✅ Resultado generado ({len(result_json)} caracteres)")
             return result_json, []
         
         # Búsqueda parcial
-        print(f"[DEBUG GUIA] Búsqueda parcial en claves: {list(guia.keys())}")
         for key in guia.keys():
             if seccion_limpia in key.lower():
-                print(f"[DEBUG GUIA] ✅ Coincidencia parcial encontrada: {key}")
                 resultado = {key: guia[key]}
                 return json.dumps(resultado, ensure_ascii=False, indent=2), []
         
@@ -160,14 +138,10 @@ def consultar_guia_docente(seccion: str, config: RunnableConfig) -> Tuple[str, L
         secciones_disponibles = list(guia.keys())
         error_msg = f"Error: La sección '{seccion}' no se encontró.\n\nSecciones disponibles:\n" + \
                    "\n".join([f"- {s}" for s in secciones_disponibles])
-        print(f"[DEBUG GUIA] ❌ {error_msg}")
         return error_msg, []
         
     except Exception as e:
-        error_msg = f"[ERROR CRÍTICO] Error en consultar_guia_docente: {str(e)}"
-        print(error_msg)
-        import traceback
-        traceback.print_exc()
+        error_msg = f"Error en consultar_guia_docente: {str(e)}"
         return error_msg, []
 
 
@@ -179,9 +153,7 @@ def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[D
     El 'subject' se inyectará desde la configuración del agente, no lo provee el LLM.
     """
     try:
-        # Extract subject from config
         subject = config["configurable"]["subject"]
-        print(f"[DEBUG CHROMA] Búsqueda para: '{pregunta}' en asignatura: '{subject}'")
 
         # Get current working directory and script directory
         current_dir = os.getcwd()
@@ -218,8 +190,7 @@ def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[D
                     break
 
         if not chroma_path:
-            error_msg = f"[ERROR CHROMA] No se encontró la base de datos ChromaDB para la asignatura '{subject}'."
-            print(error_msg)            
+            error_msg = f"No se encontró la base de datos ChromaDB para la asignatura '{subject}'"
             return error_msg, []
 
         vector_store = Chroma(persist_directory=chroma_path, embedding_function=get_embedding_function())
@@ -259,8 +230,6 @@ def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[D
             adaptive_threshold = max(avg_score - 0.5 * std_score, 0.5)
         else:
             adaptive_threshold = 0.7
-
-        print(f"[DEBUG CHROMA] Threshold adaptativo: {adaptive_threshold:.3f}")
 
         # Filter by adaptive threshold
         filtered_docs = [(doc, score) for doc, score in all_docs if score < adaptive_threshold]
@@ -319,12 +288,7 @@ def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[D
         reranked_docs.sort(key=lambda x: x[1])
         final_docs = [doc for doc, _, _ in reranked_docs[:4]]
 
-        # Debug info
-        print(f"[DEBUG CHROMA] Documentos finales ({len(final_docs)}):")
-        for i, doc in enumerate(final_docs):
-            print(f"[DEBUG CHROMA] Doc {i+1}: {len(doc.page_content)} chars, metadata: {doc.metadata}")
-
-        # 5. Enhanced formatting with metadata
+        # Enhanced formatting with metadata
         context_parts = []
         for i, doc in enumerate(final_docs):
             # Extract useful metadata for context
@@ -344,17 +308,13 @@ def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[D
         return result_message, final_docs
 
     except Exception as e:
-        error_msg = f"[ERROR CRÍTICO CHROMA] Error en chroma_retriever: {str(e)}"
-        print(error_msg)
-        import traceback
-        traceback.print_exc()
+        error_msg = f"Error en chroma_retriever: {str(e)}"
         return error_msg, []
 
 # --- LÓGICA DEL GRAFO ---
 
 def call_agent(state: AgentState):
     """Nodo del Agente. Decide si responder o usar una herramienta."""
-    print("--- INFO: Agente decidiendo... ---")
 
     if LOCAL_INFERENCE:
         llm = ChatOpenAI(model=VLLM_MODEL_NAME, openai_api_key="EMPTY", openai_api_base=VLLM_URL, temperature=0)
@@ -381,7 +341,6 @@ def execute_tools(state: AgentState) -> Dict[str, Any]:
     Ejecuta las herramientas. Extrae dependencias (como 'subject') del estado
     y las inyecta en la llamada a la herramienta. Maneja correctamente la salida.
     """
-    print("--- INFO: Ejecutando herramientas... ---")
     last_message = state['messages'][-1]
     tool_calls = last_message.tool_calls
     
@@ -393,7 +352,6 @@ def execute_tools(state: AgentState) -> Dict[str, Any]:
     
     for call in tool_calls:
         tool_name = call['name']
-        print(f"--- INFO: Preparando llamada a la herramienta '{tool_name}' ---")
         
         tool_function = tool_map.get(tool_name)
         if not tool_function:
@@ -418,7 +376,6 @@ def execute_tools(state: AgentState) -> Dict[str, Any]:
                 all_retrieved_docs.extend(docs)
         except Exception as e:
             error_msg = f"Error al ejecutar la herramienta {tool_name}: {e}"
-            print(f"--- ERROR: {error_msg} ---")
             tool_messages.append(ToolMessage(content=error_msg, tool_call_id=call['id']))
 
     return {"messages": tool_messages, "retrieved_docs": all_retrieved_docs}
@@ -516,8 +473,6 @@ Ejemplo de uso:
     # Usamos .stream() para ver cada paso del proceso
     events = graph.stream(initial_state, config=thread_config)
     for event in events:
-        print("\n--- Evento del Grafo ---")
-        print(event)
         # Busca el evento final del nodo 'agent' que no tiene tool_calls
         if "agent" in event:
             last_msg = event["agent"].get("messages", [])[-1]
@@ -526,14 +481,12 @@ Ejemplo de uso:
 
     # Mostrar la respuesta y los documentos recuperados del estado final
     if final_agent_response:
-        print("\n\n--- Respuesta Final del Agente ---")
-        final_agent_response.pretty_print()
+        # In production, we just return the response without printing
+        pass
 
     # Recupera el estado final completo para verificar los documentos
     final_state = graph.get_state(thread_config)
     final_docs = final_state.values.get('retrieved_docs')
     if final_docs:
-        print("\n--- Fuentes Consultadas ---")
-        for i, doc in enumerate(final_docs):
-            # Asumiendo que tus metadatos tienen 'source'
-            print(f"  [{i+1}] {doc.metadata.get('source', 'N/A')}")
+        # In production, we just use the docs without printing
+        pass
