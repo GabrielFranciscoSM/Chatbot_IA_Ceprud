@@ -13,10 +13,6 @@ INDEX_HTML_PATH = os.path.join(TEMPLATES_DIR, "index.html")
 
 # Mapeo de íconos por asignatura (puedes personalizarlo)
 ICON_MAPPING = {
-    "ingenieria_servidores": "💻",
-    "calculo": "📊",
-    "algoritmica": "🧩",
-    "sistemas_operativos": "⚙️",
     "modelos_avanzados_computacion": "🧠",
     "metaheuristicas": "🔍",
     # Agrega aquí más asignaturas y sus íconos

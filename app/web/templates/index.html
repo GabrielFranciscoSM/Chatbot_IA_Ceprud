@@ -41,15 +41,6 @@
           <span class="subject-icon">📄</span> Ingenieria del Conocimiento
         </li>
       </ul>
-      <!-- Selector de modo -->
-      <div class="mode-selector">
-        <label for="response-mode">Responde con:</label>
-        <select id="response-mode">
-          <option value="rag">RAG Base</option>
-          <option value="rag_lora">RAG + Fine-tuning</option>
-          <option value="base">Modelo Base</option>
-        </select>
-      </div>
       <!-- Botón para ver gráficas -->
       <div class="graphs-button-container">
         <button id="showGraphsButton" class="show-graphs-button">Ver Estadísticas</button>
@@ -161,28 +152,8 @@
         });
       }
       
-      // Si es un mensaje del usuario, mostrar el modo utilizado
-      if (sender === 'user' && additionalInfo && additionalInfo.mode) {
-        const modeLabel = document.createElement('div');
-        modeLabel.classList.add('mode-label');
-        
-        // Mapear el modo a un texto más descriptivo
-        let modeText = 'Desconocido';
-        switch (additionalInfo.mode) {
-          case 'rag':
-            modeText = 'RAG';
-            break;
-          case 'rag_lora':
-            modeText = 'RAG + Finetune';
-            break;
-          case 'base':
-            modeText = 'Modelo Base';
-            break;
-        }
-        
-        modeLabel.textContent = `Modo: ${modeText}`;
-        messageElement.appendChild(modeLabel);
-      }
+      // Si es un mensaje del usuario, mostrar el modo utilizado (removed mode display)
+      // Mode selector was removed, so we no longer show mode information
       
       chatMessages.appendChild(messageElement);
       chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll automático
@@ -209,16 +180,8 @@
         // Extraer información adicional
         let additionalInfo = {};
         
-        // Para mensajes de usuario, guardar el modo
-        if (sender === 'user') {
-          const modeLabel = messageElement.querySelector('.mode-label');
-          if (modeLabel) {
-            const modeText = modeLabel.textContent.replace('Modo: ', '');
-            if (modeText === 'RAG') additionalInfo.mode = 'rag';
-            else if (modeText === 'RAG + Finetune') additionalInfo.mode = 'rag_lora';
-            else if (modeText === 'Modelo Base') additionalInfo.mode = 'base';
-          }
-        }
+        // Para mensajes de usuario, guardar el modo (removed mode tracking)
+        // Mode selector was removed, so we no longer track mode information
         
         // Para mensajes del bot, guardar las fuentes
         if (sender === 'bot') {
@@ -252,19 +215,19 @@
 
     async function sendMessage() {
       const userMessage = userInput.value.trim();
-      const selectedMode = document.getElementById('response-mode').value; // Obtener el modo seleccionado
+      const selectedMode = "rag"; // Fixed mode since selector was removed
       if (!userMessage && !pdfInput.files.length) return;
 
-      // Si hay un mensaje de texto, mostrarlo con el emoji de persona y el modo
+      // Si hay un mensaje de texto, mostrarlo con el emoji de persona
       if (userMessage) {
-        addMessage('user', `👤 ${userMessage}`, { mode: selectedMode });
+        addMessage('user', `👤 ${userMessage}`);
         userInput.value = '';
       }
 
       // Si hay archivo PDF, mostrar mensaje del usuario
       if (pdfInput.files.length > 0) {
         const pdfFile = pdfInput.files[0];
-        addMessage('user', `👤 Archivo (${pdfFile.name})`, { mode: selectedMode });
+        addMessage('user', `👤 Archivo (${pdfFile.name})`);
         // Limpiar la visualización del archivo seleccionado
         document.getElementById('selectedFileDisplay').style.display = 'none';
       }

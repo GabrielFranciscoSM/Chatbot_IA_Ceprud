@@ -1,8 +1,0 @@
-2025-09-07 20:10:59,081 - api_router - INFO - Chat request received - Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
-2025-09-07 20:11:00,218 - api_router - INFO - Request: POST /chat | Status: 200 | Duration: 1.138s | Response Size: 134b | Client IP: 10.89.0.4
-2025-09-07 20:24:57,988 - api_router - INFO - Chat request received - Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
-2025-09-07 20:24:58,676 - api_router - INFO - Request: POST /chat | Status: 200 | Duration: 0.688s | Response Size: 66b | Client IP: 10.89.0.4
-2025-09-07 20:26:28,276 - api_router - INFO - Chat request received - Session: 874f1912, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
-2025-09-07 20:26:29,377 - api_router - INFO - Request: POST /chat | Status: 200 | Duration: 1.108s | Response Size: 103b | Client IP: 10.89.0.7
-2025-09-07 20:41:30,831 - api_router - INFO - Chat request received - Session: 874f1912, Subject: metaheuristicas, Mode: rag, Email: nuevo@ejemplo.com
-2025-09-07 20:41:31,457 - api_router - INFO - Request: POST /chat | Status: 200 | Duration: 0.626s | Response Size: 101b | Client IP: 10.89.0.7

@@ -1,3 +1,0 @@
-session_id,user_id,query,response,time,date,subject,sources,query_type,query_complexity,query_length,response_length,source_count,response_time_ms,timestamp
-874f1912,000bbed29e7d5f03,jiji,¿Hay algo en lo que te pueda ayudar? ¿Tienes alguna pregunta sobre el curso o el material de estudio?,20:26:29,2025-09-07,metaheuristicas,N/A,general,low,1,19,0,1093,1757276789
-874f1912,000bbed29e7d5f03,ey,Hola. ¿En qué puedo ayudarte hoy? ¿Tienes alguna pregunta sobre el curso o el material de estudio?,20:41:31,2025-09-07,metaheuristicas,N/A,general,low,1,17,0,625,1757277691

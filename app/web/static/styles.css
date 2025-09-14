@@ -603,72 +603,6 @@ body.dark-mode .chat-input button:hover {
   font-size: 1rem;
 }
 
-/* Estilos para el contenedor del selector de modos */
-.mode-selector {
-  margin: 16px 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: #4b5563;
-  transition: all 0.3s ease;
-}
-body.dark-mode .mode-selector {
-  color: #e5e7eb;
-}
-
-/* Etiqueta del selector */
-.mode-selector label {
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-/* Estilos para el desplegable <select> */
-.mode-selector select {
-  padding: 8px 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  background-color: #fff;
-  color: #333;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  appearance: none; /* Eliminar estilo predeterminado */
-  -webkit-appearance: none; /* Para navegadores basados en WebKit */
-  -moz-appearance: none; /* Para Firefox */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23333' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
-}
-body.dark-mode .mode-selector select {
-  background-color: #374151;
-  border-color: #4b5563;
-  color: #e5e7eb;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23e5e7eb' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
-}
-
-/* Hover y focus para el desplegable */
-.mode-selector select:hover {
-  border-color: #A6192E;
-  box-shadow: 0 0 0 3px rgba(166, 25, 46, 0.2);
-}
-body.dark-mode .mode-selector select:hover {
-  border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
-}
-
-.mode-selector select:focus {
-  outline: none;
-  border-color: #A6192E;
-  box-shadow: 0 0 0 3px rgba(166, 25, 46, 0.2);
-}
-body.dark-mode .mode-selector select:focus {
-  border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
-}
-
 /* Contenedor para el botón de subir archivos y la visualización del archivo */
 .file-upload-container {
   display: flex;
@@ -810,19 +744,6 @@ body.dark-mode .sources-container {
   word-break: break-all;
 }
 
-/* Estilos para la etiqueta de modo */
-.mode-label {
-  font-size: 0.75rem;
-  color: #6b7280;
-  margin-top: 4px;
-  font-style: italic;
-  text-align: right;
-}
-
-body.dark-mode .mode-label {
-  color: #9ca3af;
-}
-
 /* Ajustes en la estructura de mensajes */
 .message {
   display: flex;
@@ -842,10 +763,6 @@ body.dark-mode .mode-label {
   
   .sources-button {
     font-size: 0.75rem;
-  }
-  
-  .mode-label {
-    font-size: 0.7rem;
   }
 }
 
