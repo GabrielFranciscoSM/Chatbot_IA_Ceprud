@@ -447,7 +447,6 @@ HERRAMIENTAS DISPONIBLES:
 INSTRUCCIONES:
 - Analiza cuidadosamente la pregunta del usuario para determinar qué herramienta es más apropiada
 - Para la guía docente, especifica claramente la sección que necesitas (ej: "evaluacion", "profesores", "temario")
-- NUNCA respondas desde tu conocimiento previo sin usar herramientas
 - Una vez que obtengas información de las herramientas, úsala para formular una respuesta completa y útil
 - Si la información no es suficiente, puedes usar ambas herramientas de forma complementaria
 

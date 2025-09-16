@@ -123,8 +123,14 @@ function App() {
 
       const response = await chatApi.sendMessage(request);
       
-      // Add assistant response
-      const assistantMessage = createMessage(response.response, 'assistant', selectedSubject);
+      // Add assistant response with sources and model info
+      const assistantMessage = createMessage(
+        response.response, 
+        'assistant', 
+        selectedSubject,
+        response.sources,
+        response.model_used
+      );
       const finalSession = addMessageToSession(updatedSession, assistantMessage);
       
       // Update sessions

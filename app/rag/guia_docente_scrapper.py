@@ -135,7 +135,12 @@ def guardar_en_json(datos, nombre_archivo):
 
 if __name__ == '__main__':
     #url_guia = 'https://grados.ugr.es/ramas/ingenieria-arquitectura/grado-ingenieria-informatica/metaheuristicas-especialidad-computacion-y-sistemas-inteligentes/guia-docente'
-    url_guia = "https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/modelos-avanzados-computacionecompsist/guia-docente"
+    #url_guia = "https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/modelos-avanzados-computacionecompsist/guia-docente"
+    
+    url_guia = "https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/ingenieria-servidores/guia-docente"
+    #url_guia = "https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/estadistica/guia-docente"
+    #url_guia = "https://www.ugr.es/estudiantes/grados/grado-estadistica/inferencia-estadistica-i/guia-docente"
+
     print(f"Extrayendo datos de: {url_guia}")
     datos_guia = scrape_guia_docente_ugr(url_guia)
     if datos_guia:

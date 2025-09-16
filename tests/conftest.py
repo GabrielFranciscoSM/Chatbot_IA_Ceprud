@@ -15,7 +15,7 @@ def docker_compose_file(pytestconfig):
     """Get the Docker Compose file path"""
     return os.path.join(
         str(pytestconfig.rootdir),
-        "docker-compose-vllm.yml"
+        "docker-compose-full.yml"
     )
 
 @pytest.fixture(scope="session")

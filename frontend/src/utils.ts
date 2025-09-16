@@ -64,12 +64,20 @@ export const cleanOldSessions = (sessions: Session[], maxAge: number = 24 * 60 *
 };
 
 // Message Creation
-export const createMessage = (content: string, role: 'user' | 'assistant', subject?: string): Message => ({
+export const createMessage = (
+  content: string, 
+  role: 'user' | 'assistant', 
+  subject?: string, 
+  sources?: string[], 
+  modelUsed?: string
+): Message => ({
   id: uuidv4(),
   content,
   role,
   timestamp: new Date(),
-  subject
+  subject,
+  sources,
+  modelUsed
 });
 
 // User Settings Management

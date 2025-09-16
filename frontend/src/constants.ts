@@ -2,28 +2,10 @@ import { Subject } from './types';
 
 export const SUBJECTS: Subject[] = [
   {
-    id: 'ingenieria_servidores',
+    id: 'ingenieria_de_servidores',
     name: 'Ingeniería de Servidores',
     icon: '💻',
     description: 'Gestión y configuración de servidores'
-  },
-  {
-    id: 'calculo',
-    name: 'Cálculo',
-    icon: '📊',
-    description: 'Matemáticas y análisis matemático'
-  },
-  {
-    id: 'algoritmica',
-    name: 'Algorítmica',
-    icon: '🧩',
-    description: 'Algoritmos y estructuras de datos'
-  },
-  {
-    id: 'sistemas_operativos',
-    name: 'Sistemas Operativos',
-    icon: '⚙️',
-    description: 'Fundamentos de sistemas operativos'
   },
   {
     id: 'modelos_avanzados_computacion',
@@ -38,10 +20,16 @@ export const SUBJECTS: Subject[] = [
     description: 'Algoritmos de optimización'
   },
   {
-    id: 'ingenieria_conocimiento',
-    name: 'Ingeniería del Conocimiento',
+    id: 'inferencia_estadistica_1',
+    name: 'Inferencia Estadistica I (Estadistica)',
     icon: '📄',
-    description: 'Gestión y representación del conocimiento'
+    description: ''
+  },
+  {
+    id: 'estadistica',
+    name: 'Estadistica (Ingeniería Informática)',
+    icon: '📄',
+    description: ''
   }
 ];
 

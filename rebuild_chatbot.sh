@@ -8,12 +8,12 @@ echo "🔨 Rebuilding the chatbot container..."
 
 # 1. Stop the chatbot service
 echo "⏹️  Stopping the current chatbot service..."
-podman-compose -f docker-compose-vllm-embeddings.yml stop
+podman-compose -f docker-compose-full.yml stop
 
 # 3. Prune build cache to ensure fresh build
 echo "🔄 Rebuilding the image without cache..."
 sleep 5
-podman-compose -f docker-compose-vllm-embeddings.yml build --no-cache --pull chatbot
+podman-compose -f docker-compose-full.yml build --no-cache --pull 
 
 # 4. Rebuild the image without using cache
 # The --no-cache flag ensures all layers are rebuilt, picking up any code changes
@@ -23,7 +23,7 @@ podman system prune -f --filter="label!=keep"
 
 # 5. Start the updated service in detached mode
 echo "🚀 Starting the updated service..."
-podman-compose -f docker-compose-vllm-embeddings.yml up -d
+podman-compose -f docker-compose-full.yml up -d
 
 echo "⏳ Waiting for services to be ready..."
 
@@ -81,31 +81,32 @@ echo "⏳ Waiting for services to initialize..."
 sleep 10
 
 # Check if services are responding (optional - you can comment these out if they don't have health endpoints)
-check_service_endpoint "http://localhost:8000/health" "vLLM Main Service"
 check_service_endpoint "http://localhost:8001/health" "vLLM Embeddings Service" 
-check_service_endpoint "http://localhost:5001/health" "Chatbot Service"
+check_service_endpoint "http://localhost:8080/health" "backend"
+check_service_endpoint "http://localhost:3000/health" "frontend"
+
 
 echo "🗃️ All services are ready! Now populating the RAG database..."
 
 # Check if the chatbot container is running before trying to execute commands
-if ! podman ps --format "table {{.Names}}" | grep -q "my-chatbot-app"; then
-    echo "❌ Chatbot container 'my-chatbot-app' is not running!"
-    echo "   Something went wrong during startup. Check logs with: podman logs my-chatbot-app"
+if ! podman ps --format "table {{.Names}}" | grep -q "chatbot-backend"; then
+    echo "❌ Chatbot container 'chatbot-backend' is not running!"
+    echo "   Something went wrong during startup. Check logs with: podman logs chatbot-backend"
     exit 1
 fi
 
 # Populate the database inside the container
 echo "📚 Executing populate_database.py inside the chatbot container..."
-if podman exec my-chatbot-app python3 app/rag/populate_database.py --reset; then
+if podman exec chatbot-backend python3 chatbot/app/rag/populate_database.py --reset; then
     echo "✅ Database population completed successfully!"
 else
     echo "❌ Database population failed!"
-    echo "   Check the container logs with: podman logs my-chatbot-app"
+    echo "   Check the container logs with: podman chatbot-backend"
     echo "   You can try running it manually with:"
-    echo "   podman exec my-chatbot-app python3 app/rag/populate_database.py --reset"
+    echo "   podman exec my-chatbot-app python3 chatbot/app/rag/populate_database.py --reset"
     exit 1
 fi
 
 echo "🎉 Chatbot redeployment and database initialization complete!"
-echo "🌐 Chatbot is available at: http://0.0.0.0:5001"
-echo "📊 You can also check the logs with: podman logs my-chatbot-app"
+echo "🌐 Chatbot is available at: http://localhost:3000"
+echo "📊 You can also check the logs with: podman logs chatbot-backend"

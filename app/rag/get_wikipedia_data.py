@@ -171,34 +171,172 @@ def save_wikipedia_articles(queries: list, output_dir: str = "data/wikipedia", l
         else:
             print(f"❌ No se pudo procesar: {query}")
 
+def process_terminos_clave(
+    terminos_file: str = "./terminos_clave.md", 
+    base_output_dir: str = "data",
+    lang: str = "es"
+):
+    """
+    Lee el archivo terminos_clave.md y descarga artículos de Wikipedia
+    organizados por secciones.
+    
+    Args:
+        terminos_file: Ruta al archivo terminos_clave.md
+        base_output_dir: Directorio base donde crear las carpetas por sección
+        lang: Idioma de Wikipedia
+    """
+    import os
+    
+    try:
+        with open(terminos_file, "r", encoding="utf-8") as f:
+            content = f.read()
+    except FileNotFoundError:
+        print(f"❌ No se encontró el archivo: {terminos_file}")
+        return
+    except Exception as e:
+        print(f"❌ Error al leer el archivo: {e}")
+        return
+    
+    # Parsear el contenido por secciones
+    sections = {}
+    current_section = None
+    
+    for line in content.split('\n'):
+        line = line.strip()
+        
+        # Detectar nueva sección (líneas que empiezan con #)
+        if line.startswith('# '):
+            current_section = line[2:].strip()  # Quitar '# '
+            sections[current_section] = []
+            print(f"📁 Sección encontrada: {current_section}")
+            
+        # Agregar términos a la sección actual (líneas no vacías que no empiecen con #)
+        elif line and not line.startswith('#') and current_section:
+            sections[current_section].append(line)
+    
+    print(f"\n📋 Total de secciones encontradas: {len(sections)}")
+    
+    # Procesar cada sección
+    for section_name, terms in sections.items():
+        if not terms:  # Saltar secciones vacías
+            continue
+            
+        print(f"\n🔄 Procesando sección: {section_name}")
+        print(f"📝 Términos a procesar: {len(terms)}")
+        
+        # Crear directorio para la sección
+        section_dir = os.path.join(base_output_dir, section_name)
+        os.makedirs(section_dir, exist_ok=True)
+        
+        # Procesar cada término en la sección
+        successful_downloads = 0
+        failed_downloads = 0
+        
+        for i, term in enumerate(terms, 1):
+            print(f"  [{i}/{len(terms)}] Descargando: {term}")
+            
+            article_data = get_wikipedia_article(term, lang)
+            
+            if article_data:
+                # Crear nombre de archivo seguro
+                safe_filename = re.sub(r'[^\w\s-]', '', term).strip()
+                safe_filename = re.sub(r'[-\s]+', '-', safe_filename)
+                
+                # Guardar contenido limpio como texto
+                text_file = os.path.join(section_dir, f"{safe_filename}.txt")
+                
+                try:
+                    with open(text_file, "w", encoding="utf-8") as f:
+                        # Incluir metadatos al inicio del archivo
+                        f.write(article_data['content'])
+                    
+                    print(f"    ✅ Guardado: {safe_filename}.txt")
+                    successful_downloads += 1
+                    
+                except Exception as e:
+                    print(f"    ❌ Error al guardar {safe_filename}: {e}")
+                    failed_downloads += 1
+            else:
+                print(f"    ❌ No se pudo obtener: {term}")
+                failed_downloads += 1
+        
+        print(f"  📊 Sección {section_name}: {successful_downloads} exitosos, {failed_downloads} fallidos")
+    
+    print(f"\n🎉 Proceso completado. Revisa el directorio '{base_output_dir}' para ver los resultados.")
+
 # Ejemplo de uso y test
 if __name__ == "__main__":
-    # Test con el texto actual
+    import sys
+    
+    # Configurar idioma de Wikipedia
     wikipedia.set_lang("es")
     
-    print("=== BÚSQUEDA Y DESCARGA ===")
-    query = "Concepto y elementos de los algoritmos basados en poblaciones"
-    article = get_wikipedia_article(query)
+    print("=== PROCESADOR DE TÉRMINOS CLAVE DE WIKIPEDIA ===")
+    print("Este script procesará el archivo terminos_clave.md y descargará")
+    print("artículos de Wikipedia organizados por secciones.\n")
     
-    if article:
-        print(f"Título: {article['title']}")
-        print(f"URL: {article['url']}")
-        print("\n=== CONTENIDO LIMPIO ===")
-        print(article['content'][:1000] + "..." if len(article['content']) > 1000 else article['content'])
+    # Permitir argumentos de línea de comandos para personalizar
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--help" or sys.argv[1] == "-h":
+            print("Uso:")
+            print("  python get_wikipedia_data.py                    # Usar configuración por defecto")
+            print("  python get_wikipedia_data.py --custom          # Configuración personalizada")
+            print("  python get_wikipedia_data.py --test TÉRMINO    # Probar con un término específico")
+            print("  python get_wikipedia_data.py --help            # Mostrar esta ayuda")
+            sys.exit(0)
         
-        # Guardar el artículo limpio
-        with open("wikitext_cleaned.txt", "w", encoding="utf-8") as f:
-            f.write(article['content'])
-        print("\n✅ Texto limpio guardado en wikitext_cleaned.txt")
+        elif sys.argv[1] == "--test" and len(sys.argv) > 2:
+            # Modo test con un término específico
+            test_term = " ".join(sys.argv[2:])
+            print(f"=== MODO TEST: {test_term} ===")
+            article = get_wikipedia_article(test_term)
+            
+            if article:
+                print(f"✅ Título: {article['title']}")
+                print(f"🔗 URL: {article['url']}")
+                print(f"📝 Resumen: {article['summary'][:200]}...")
+                print(f"📄 Contenido: {len(article['content'])} caracteres")
+                
+                # Guardar el artículo de prueba
+                with open(f"test_{test_term.replace(' ', '_')}.txt", "w", encoding="utf-8") as f:
+                    f.write(article['content'])
+                print(f"💾 Guardado en: test_{test_term.replace(' ', '_')}.txt")
+            else:
+                print(f"❌ No se pudo obtener el artículo para: {test_term}")
+            sys.exit(0)
+        
+        elif sys.argv[1] == "--custom":
+            # Modo personalizado
+            print("=== CONFIGURACIÓN PERSONALIZADA ===")
+            terminos_file = input("Archivo de términos [app/rag/terminos_clave.md]: ").strip()
+            if not terminos_file:
+                terminos_file = "app/rag/terminos_clave.md"
+            
+            output_dir = input("Directorio de salida [data]: ").strip()
+            if not output_dir:
+                output_dir = "data"
+            
+            lang = input("Idioma Wikipedia [es]: ").strip()
+            if not lang:
+                lang = "es"
+            
+            wikipedia.set_lang(lang)
+            process_terminos_clave(terminos_file, output_dir, lang)
+            sys.exit(0)
     
-    # # Ejemplo de descarga múltiple
-    # print("\n=== DESCARGA MÚLTIPLE ===")
-    # topics = [
-    #     "algoritmo voraz",
-    #     "programación dinámica", 
-    #     "algoritmo de Dijkstra",
-    #     "inteligencia artificial"
-    # ]
+    # Modo por defecto: procesar términos clave
+    print("Iniciando procesamiento con configuración por defecto...")
+    print("📁 Archivo: ./terminos_clave.md")
+    print("📂 Directorio de salida: data/")
+    print("🌐 Idioma: español")
+    print("=" * 60)
     
-    # save_wikipedia_articles(topics, "data/wikipedia_articles")
-    # print("✅ Artículos guardados en data/wikipedia_articles")
+    try:
+        process_terminos_clave()
+        print("\n🎉 ¡Procesamiento completado exitosamente!")
+        print("💡 Consejo: Usa --help para ver más opciones")
+    except KeyboardInterrupt:
+        print("\n⚠️  Proceso interrumpido por el usuario")
+    except Exception as e:
+        print(f"\n❌ Error durante el procesamiento: {e}")
+        print("💡 Prueba con --test TÉRMINO para verificar la conectividad")

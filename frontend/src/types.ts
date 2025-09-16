@@ -5,6 +5,8 @@ export interface Message {
   role: 'user' | 'assistant';
   timestamp: Date;
   subject?: string;
+  sources?: string[];
+  modelUsed?: string;
 }
 
 export interface Subject {
@@ -26,6 +28,9 @@ export interface ChatResponse {
   subject: string;
   session_id?: string;
   processing_time?: number;
+  sources?: string[];
+  model_used?: string;
+  query_type?: string;
 }
 
 export interface Session {

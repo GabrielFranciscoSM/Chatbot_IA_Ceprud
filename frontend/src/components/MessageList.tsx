@@ -37,6 +37,28 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isLoading }) => {
           <div className="message-content">
             <div className="message-bubble">
               <div className="message-text">{message.content}</div>
+              {message.role === 'assistant' && message.sources && message.sources.length > 0 && (
+                <div className="message-sources">
+                  <details className="sources-details">
+                    <summary className="sources-summary">
+                      📚 Fuentes consultadas ({message.sources.length})
+                    </summary>
+                    <div className="sources-list">
+                      {message.sources.map((source, index) => (
+                        <div key={index} className="source-item">
+                          <span className="source-number">{index + 1}.</span>
+                          <span className="source-text">{source}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </details>
+                </div>
+              )}
+              {message.role === 'assistant' && message.modelUsed && (
+                <div className="message-meta">
+                  <span className="model-info">🤖 {message.modelUsed}</span>
+                </div>
+              )}
             </div>
             <div className="message-timestamp">
               {formatTimestamp(message.timestamp)}

@@ -65,7 +65,7 @@ def test_logging_is_created(test_client, test_data, tmp_path):
 
 def test_serve_graph_success(test_client):
     """Test serving a graph image"""
-    response = test_client.get("/graphs")
+    response = test_client.get("/graphs-list")
     assert response.status_code == 200
     data = response.json()
     assert isinstance(data, list)
