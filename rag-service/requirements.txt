@@ -1,0 +1,18 @@
+# FastAPI y servidor
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# ChromaDB y embeddings
+chromadb==0.4.15
+langchain-chroma==0.1.2
+langchain-openai==0.1.9
+langchain-core==0.2.11
+langchain-text-splitters==0.2.2
+
+# Utilidades
+python-dotenv==1.0.0
+pydantic==2.7.4
+
+# Procesamiento de archivos
+python-multipart==0.0.6
+docling==2.52

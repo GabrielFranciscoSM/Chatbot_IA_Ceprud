@@ -16,6 +16,7 @@ from typing_extensions import TypedDict
 
 # Asumo que get_embedding_function es una función que tienes en otro archivo
 from rag.get_embedding_function import get_embedding_function
+from services.rag_client import rag_client
 from langchain_core.runnables import RunnableConfig
 import sqlite3
 
@@ -148,75 +149,47 @@ def consultar_guia_docente(seccion: str, config: RunnableConfig) -> Tuple[str, L
 @tool
 def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[Document]]:
     """
-    Busca en los apuntes de la asignatura usando ChromaDB.
+    Busca en los apuntes de la asignatura usando el RAG Service.
     Esta herramienta es para preguntas conceptuales, sobre el material de estudio, etc.
     El 'subject' se inyectará desde la configuración del agente, no lo provee el LLM.
     """
     try:
         subject = config["configurable"]["subject"]
-
-        # Get current working directory and script directory
-        current_dir = os.getcwd()
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-
-        # List possible paths to search for ChromaDB
-        possible_paths = [
-            # Absolute paths (container environments)
-            f"/chatbot/app/rag/chroma/{subject}",
-            f"/app/rag/chroma/{subject}",
-            
-            # Relative paths from current directory
-            os.path.join("app", "rag", "chroma", subject),
-            os.path.join("rag", "chroma", subject),
-            os.path.join(".", "app", "rag", "chroma", subject),
-            os.path.join(".", "rag", "chroma", subject),
-            
-            # Paths relative to script directory
-            os.path.join(script_dir, "..", "..", "rag", "chroma", subject),
-            os.path.join(script_dir, "..", "rag", "chroma", subject),
-            
-            # Using BASE_CHROMA_PATH
-            os.path.join(BASE_CHROMA_PATH, subject),
-            os.path.abspath(os.path.join(BASE_CHROMA_PATH, subject)),
-        ]
         
-        chroma_path = None
-        for i, test_path in enumerate(possible_paths):
-            abs_path = os.path.abspath(test_path)
-            
-            if os.path.exists(abs_path):
-                if os.path.isdir(abs_path):
-                    chroma_path = abs_path
-                    break
-
-        if not chroma_path:
-            error_msg = f"No se encontró la base de datos ChromaDB para la asignatura '{subject}'"
+        # Usar el cliente RAG Service
+        documents, sources = rag_client.search_documents(
+            query=pregunta,
+            subject=subject,
+            k=6
+        )
+        
+        if not documents:
+            error_msg = f"No se encontraron documentos para la asignatura '{subject}' en el RAG Service"
             return error_msg, []
-
-        vector_store = Chroma(persist_directory=chroma_path, embedding_function=get_embedding_function())
-
-        # 3. Query expansion - Simple synonym addition
-        expanded_queries = [pregunta]
-        # Add simple expansions for common technical terms
-        expansions = {
-            "algoritmo": ["método", "técnica", "procedimiento"],
-            "metaheurística": ["metaheurísticas", "heurística", "optimización"],
-            "evaluación": ["evaluacion", "examen", "prueba"],
-            "implementación": ["implementacion", "código", "programación"],
-            "ejemplo": ["ejemplos", "caso", "aplicación"]
-        }
         
-        pregunta_lower = pregunta.lower()
-        for term, synonyms in expansions.items():
-            if term in pregunta_lower:
-                for synonym in synonyms:
-                    expanded_queries.append(pregunta.replace(term, synonym))
-
-        # Get results from all expanded queries
-        all_docs = []
-        for query in expanded_queries[:3]:  # Limit to avoid too many calls
-            docs = vector_store.similarity_search_with_score(query, k=6)
-            all_docs.extend(docs)
+        # Formatear resultados
+        formatted_results = []
+        formatted_results.append(f"Encontrados {len(documents)} documentos relevantes:\n")
+        
+        for i, doc in enumerate(documents, 1):
+            source = doc.metadata.get("source", "Fuente desconocida")
+            page = doc.metadata.get("page", "N/A")
+            
+            formatted_results.append(f"--- Resultado {i} ---")
+            formatted_results.append(f"Fuente: {source}")
+            if page != "N/A":
+                formatted_results.append(f"Página: {page}")
+            formatted_results.append(f"Contenido: {doc.page_content}")
+            formatted_results.append("")
+        
+        return "\n".join(formatted_results), documents
+        
+    except KeyError as e:
+        error_msg = f"Error: Falta configuración requerida: {str(e)}"
+        return error_msg, []
+    except Exception as e:
+        error_msg = f"Error en búsqueda RAG: {str(e)}"
+        return error_msg, []
 
         if not all_docs:
             return "No se encontraron documentos relevantes en los apuntes.", []
@@ -234,81 +207,14 @@ def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[D
         # Filter by adaptive threshold
         filtered_docs = [(doc, score) for doc, score in all_docs if score < adaptive_threshold]
 
-        # 4. Simple metadata filtering (if available)
-        # Priority to docs with certain metadata patterns
-        priority_docs = []
-        regular_docs = []
         
-        for doc, score in filtered_docs:
-            metadata = doc.metadata
-            # Prioritize docs with specific metadata
-            if any(key in metadata for key in ['chapter', 'section', 'title', 'topic']):
-                priority_docs.append((doc, score))
-            else:
-                regular_docs.append((doc, score))
-
-        # Combine prioritized and regular docs
-        sorted_docs = priority_docs + regular_docs
-
-        # Remove duplicates based on content similarity
-        unique_docs = []
-        seen_content = set()
+        return result_message, documents
         
-        for doc, score in sorted_docs:
-            # Simple deduplication based on first 100 chars
-            content_signature = doc.page_content[:100].strip()
-            if content_signature not in seen_content:
-                seen_content.add(content_signature)
-                unique_docs.append((doc, score))
-
-        # 2. Simple reranking based on keyword overlap and content quality
-        pregunta_words = set(pregunta.lower().split())
-        reranked_docs = []
-        
-        for doc, original_score in unique_docs:
-            content_lower = doc.page_content.lower()
-            
-            # Keyword overlap score
-            doc_words = set(content_lower.split())
-            keyword_overlap = len(pregunta_words.intersection(doc_words))
-            
-            # Content quality score
-            content_length = len(doc.page_content)
-            length_score = 1.0 if 100 <= content_length <= 1500 else 0.5
-            
-            # Has structured content (headings, lists, etc.)
-            structure_score = 1.2 if any(marker in content_lower for marker in [':', '•', '-', '1.', '2.']) else 1.0
-            
-            # Combined reranking score (lower is better)
-            rerank_score = original_score - (keyword_overlap * 0.1) - (length_score * 0.05) - (structure_score * 0.02)
-            
-            reranked_docs.append((doc, rerank_score, original_score))
-
-        # Sort by reranked score and take top results
-        reranked_docs.sort(key=lambda x: x[1])
-        final_docs = [doc for doc, _, _ in reranked_docs[:4]]
-
-        # Enhanced formatting with metadata
-        context_parts = []
-        for i, doc in enumerate(final_docs):
-            # Extract useful metadata for context
-            source_info = ""
-            if 'source' in doc.metadata:
-                source_info = f" (Fuente: {doc.metadata['source']})"
-            elif 'filename' in doc.metadata:
-                source_info = f" (Archivo: {doc.metadata['filename']})"
-            elif 'chapter' in doc.metadata:
-                source_info = f" (Capítulo: {doc.metadata['chapter']})"
-                
-            context_parts.append(f"[Documento {i+1}]{source_info}:\n{doc.page_content}")
-        
-        context_string = "\n\n---\n\n".join(context_parts)
-        result_message = f"Información encontrada en los apuntes:\n\n{context_string}"
-        
-        return result_message, final_docs
-
+    except KeyError as e:
+        error_msg = f"Error: Falta configuración requerida: {str(e)}"
+        return error_msg, []
     except Exception as e:
-        error_msg = f"Error en chroma_retriever: {str(e)}"
+        error_msg = f"Error en búsqueda RAG: {str(e)}"
         return error_msg, []
 
 # --- LÓGICA DEL GRAFO ---
