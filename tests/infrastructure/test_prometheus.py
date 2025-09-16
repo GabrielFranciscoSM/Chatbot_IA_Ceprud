@@ -54,7 +54,7 @@ def test_prometheus_metrics():
 
 def test_grafana_dashboard():
     """Test if Grafana dashboard is accessible"""
-    grafana_port = 3000
+    grafana_port = 3001
     grafana_host = "127.0.0.1"
 
     # 1. Check if the port is open and listening

@@ -53,18 +53,30 @@ def test_vllm_container_running():
 
 def test_chatbot_container_running():
     """Test if the main chatbot container is running"""
-    inspect_result = run_podman_command(["inspect", "my-chatbot-app"])
-    assert inspect_result.returncode == 0, f"Container 'my-chatbot-app' not found. Stderr: {inspect_result.stderr}"
+    inspect_result = run_podman_command(["inspect", "chatbot-backend"])
+    assert inspect_result.returncode == 0, f"Container 'chatbot-backend' not found. Stderr: {inspect_result.stderr}"
 
     container_info = json.loads(inspect_result.stdout)
-    assert container_info[0]["State"]["Running"], "Container 'my-chatbot-app' is not running."
+    assert container_info[0]["State"]["Running"], "Container 'chatbot-backend' is not running."
 
     # Use our reliable helper to check the port
-    assert is_port_listening("127.0.0.1", 5001), "Port 5001 is not listening."
+    assert is_port_listening("127.0.0.1", 8080), "Port 5001 is not listening."
+
+def test_embeddings_container_running():
+    """Test if the main chatbot container is running"""
+    inspect_result = run_podman_command(["inspect", "my-embedding-service"])
+    assert inspect_result.returncode == 0, f"Container 'my-embedding-service' not found. Stderr: {inspect_result.stderr}"
+
+    container_info = json.loads(inspect_result.stdout)
+    assert container_info[0]["State"]["Running"], "Container 'my-embedding-service' is not running."
+
+    # Use our reliable helper to check the port
+    assert is_port_listening("127.0.0.1", 8001), "Port 5001 is not listening."
+
 
 def test_container_logs():
     """Test if containers are logging properly"""
-    for container in ["my-vllm-service", "my-chatbot-app"]:
+    for container in ["my-vllm-service", "chatbot-backend"]:
         logs_result = run_podman_command(["logs", container])
         assert logs_result.returncode == 0, f"Could not get logs for '{container}'. Stderr: {logs_result.stderr}"
         

@@ -1,5 +1,5 @@
 import pytest
-from RAG.add_subject import process_pdf_files, update_index_html, add_new_subject
+from rag.add_subject import process_pdf_files, update_index_html, add_new_subject
 import os
 import tempfile
 from unittest.mock import patch, MagicMock
@@ -19,7 +19,7 @@ def test_update_index_html_inserts(monkeypatch):
         index_path = os.path.join(tmpdir, "index.html")
         with open(index_path, "w", encoding="utf-8") as f:
             f.write("<html><body><ul>\n</ul></body></html>")
-        monkeypatch.setattr("RAG.add_subject.INDEX_HTML_PATH", index_path)
+        monkeypatch.setattr("rag.add_subject.INDEX_HTML_PATH", index_path)
         update_index_html(subject_name)
         with open(index_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -39,7 +39,7 @@ def test_update_index_html_no_duplicate(monkeypatch):
         entry = f'<li class="chat-item" data-subject="{subject_key}">\n  <span class="subject-icon">🔍</span> {subject_name}\n</li>\n'
         with open(index_path, "w", encoding="utf-8") as f:
             f.write(f"<html><body><ul>\n{entry}</ul></body></html>")
-        monkeypatch.setattr("RAG.add_subject.INDEX_HTML_PATH", index_path)
+        monkeypatch.setattr("rag.add_subject.INDEX_HTML_PATH", index_path)
         update_index_html(subject_name)
         with open(index_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -66,7 +66,7 @@ def test_add_new_subject_calls(monkeypatch):
     called = {}
     def fake_update_index_html(name):
         called["update"] = name
-    monkeypatch.setattr("RAG.add_subject.update_index_html", fake_update_index_html)
+    monkeypatch.setattr("rag.add_subject.update_index_html", fake_update_index_html)
 
     add_new_subject(subject_name, folder_path=folder_path, pdf_files=pdf_files)
     assert called["update"] == subject_name

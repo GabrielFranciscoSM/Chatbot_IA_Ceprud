@@ -1,7 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from app import app
-from RAG.get_embedding_function import get_embedding_function
+from rag.get_embedding_function import get_embedding_function
 import os
 import docker
 
@@ -15,7 +15,7 @@ def docker_compose_file(pytestconfig):
     """Get the Docker Compose file path"""
     return os.path.join(
         str(pytestconfig.rootdir),
-        "docker-compose-vllm.yml"
+        "docker-compose-full.yml"
     )
 
 @pytest.fixture(scope="session")

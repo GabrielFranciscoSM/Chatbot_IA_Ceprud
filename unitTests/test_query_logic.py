@@ -1,10 +1,10 @@
 import pytest
-from logic.query_logic import query_rag
+from domain.query_logic import query_rag
 from unittest.mock import patch, MagicMock
 
 def test_query_rag_basic():
     """Test basic RAG query functionality"""
-    with patch('logic.query_logic.ChatOpenAI') as mock_chat:
+    with patch('domain.query_logic.ChatOpenAI') as mock_chat:
         mock_chat.return_value = MagicMock()
         mock_chat.return_value.invoke.return_value = "Test response"
         
@@ -20,7 +20,7 @@ def test_query_rag_basic():
 @pytest.mark.asyncio
 async def test_query_rag_with_context():
     """Test RAG query with context retrieval"""
-    with patch('logic.query_logic.Chroma') as mock_chroma:
+    with patch('domain.query_logic.Chroma') as mock_chroma:
         mock_chroma.return_value.similarity_search_with_score.return_value = [
             (MagicMock(page_content="test content"), 0.8)
         ]
@@ -36,7 +36,7 @@ async def test_query_rag_with_context():
 
 def test_query_rag_finetuned():
     """Test RAG query with fine-tuned model"""
-    with patch('logic.query_logic.ChatOpenAI') as mock_chat:
+    with patch('domain.query_logic.ChatOpenAI') as mock_chat:
         mock_chat.return_value = MagicMock()
         
         result = query_rag(

@@ -1,0 +1,922 @@
+2025-09-14 16:51:00,614 - services.session_service - INFO - Created new session for user test@ugr... in subject metaheuristicas
+2025-09-14 16:51:00,614 - api_router - INFO - Chat request received - Session: b673e8cf-1e6e-48ab-a292-f21bbed54dcf, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-14 16:51:02,185 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.572s | Size: 131 bytes
+2025-09-14 16:51:02,187 - api_router - INFO - Chat request received - Session: b673e8cf-1e6e-48ab-a292-f21bbed54dcf, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-14 16:51:03,670 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.483s | Size: 161 bytes
+2025-09-14 16:51:03,672 - api_router - INFO - Chat request received - Session: b673e8cf-1e6e-48ab-a292-f21bbed54dcf, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-14 16:51:06,301 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.629s | Size: 833 bytes
+2025-09-14 16:51:06,307 - services.session_service - INFO - Created new session for user memoryte... in subject metaheuristicas
+2025-09-14 16:51:06,307 - api_router - INFO - Chat request received - Session: b06a43f8-e8cd-48e7-a293-664e16797bc2, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-14 16:51:07,026 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.719s | Size: 62 bytes
+2025-09-14 16:51:07,027 - api_router - INFO - Chat request received - Session: b06a43f8-e8cd-48e7-a293-664e16797bc2, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-14 16:51:07,623 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.596s | Size: 52 bytes
+2025-09-14 16:51:07,910 - services.session_service - INFO - Created new session for user test@tes... in subject metaheuristicas
+2025-09-14 16:51:07,910 - api_router - INFO - Chat request received - Session: 357bc847-ab32-46ba-8f7a-687daaf2253f, Subject: metaheuristicas, Mode: rag, Email: test@test.com
+2025-09-14 16:51:09,940 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.030s | Size: 131 bytes
+2025-09-14 16:51:09,948 - services.session_service - INFO - Created new session for user pytest@u... in subject metaheuristicas
+2025-09-14 16:51:09,948 - api_router - INFO - Chat request received - Session: 18f0c990-c380-4d4e-9d1a-69fd48e8556d, Subject: metaheuristicas, Mode: rag, Email: pytest@ugr.es
+2025-09-14 16:51:10,853 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.906s | Size: 44 bytes
+2025-09-16 14:02:45,598 - services.session_service - INFO - Created new session for user test@ugr... in subject metaheuristicas
+2025-09-16 14:02:45,598 - api_router - INFO - Chat request received - Session: 096867c6-801c-44d3-840d-6e8b647e2565, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:02:47,838 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.240s | Size: 578 bytes
+2025-09-16 14:02:47,841 - api_router - INFO - Chat request received - Session: 096867c6-801c-44d3-840d-6e8b647e2565, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:02:49,591 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.750s | Size: 170 bytes
+2025-09-16 14:02:49,593 - api_router - INFO - Chat request received - Session: 096867c6-801c-44d3-840d-6e8b647e2565, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:02:51,515 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.922s | Size: 584 bytes
+2025-09-16 14:02:51,518 - services.session_service - INFO - Created new session for user memoryte... in subject metaheuristicas
+2025-09-16 14:02:51,518 - api_router - INFO - Chat request received - Session: 932a118b-e096-45f6-9291-1b12fcc09b6c, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:02:52,344 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.827s | Size: 166 bytes
+2025-09-16 14:02:52,347 - api_router - INFO - Chat request received - Session: 932a118b-e096-45f6-9291-1b12fcc09b6c, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:02:53,152 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.806s | Size: 21 bytes
+2025-09-16 14:02:53,356 - services.session_service - INFO - Created new session for user test@tes... in subject metaheuristicas
+2025-09-16 14:02:53,356 - api_router - INFO - Chat request received - Session: f97777f4-fb29-4dd5-9dbd-e66277922d06, Subject: metaheuristicas, Mode: rag, Email: test@test.com
+2025-09-16 14:02:55,334 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.978s | Size: 578 bytes
+2025-09-16 14:02:55,342 - services.session_service - INFO - Created new session for user pytest@u... in subject metaheuristicas
+2025-09-16 14:02:55,342 - api_router - INFO - Chat request received - Session: 29a00096-cdec-4f8b-91ea-fb6cbd6952d3, Subject: metaheuristicas, Mode: rag, Email: pytest@ugr.es
+2025-09-16 14:02:56,199 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.857s | Size: 94 bytes
+2025-09-16 14:14:09,106 - services.session_service - INFO - Created new session for user test@ugr... in subject metaheuristicas
+2025-09-16 14:14:09,106 - api_router - INFO - Chat request received - Session: f43addcc-506d-4203-be14-3fa6fab33da6, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:14:12,682 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.576s | Size: 1319 bytes
+2025-09-16 14:14:12,685 - api_router - INFO - Chat request received - Session: f43addcc-506d-4203-be14-3fa6fab33da6, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:14:14,394 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.709s | Size: 212 bytes
+2025-09-16 14:14:14,398 - api_router - INFO - Chat request received - Session: f43addcc-506d-4203-be14-3fa6fab33da6, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:14:16,969 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.570s | Size: 732 bytes
+2025-09-16 14:14:16,972 - services.session_service - INFO - Created new session for user memoryte... in subject metaheuristicas
+2025-09-16 14:14:16,972 - api_router - INFO - Chat request received - Session: 169dada9-a648-48f8-a606-d4829d822688, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:14:17,700 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.728s | Size: 63 bytes
+2025-09-16 14:14:17,703 - api_router - INFO - Chat request received - Session: 169dada9-a648-48f8-a606-d4829d822688, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:14:18,247 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.545s | Size: 21 bytes
+2025-09-16 14:14:18,443 - services.session_service - INFO - Created new session for user test@tes... in subject metaheuristicas
+2025-09-16 14:14:18,443 - api_router - INFO - Chat request received - Session: 88dbe55d-b229-44e0-bb16-d23f3724ab03, Subject: metaheuristicas, Mode: rag, Email: test@test.com
+2025-09-16 14:14:20,361 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.919s | Size: 724 bytes
+2025-09-16 14:14:20,368 - services.session_service - INFO - Created new session for user pytest@u... in subject metaheuristicas
+2025-09-16 14:14:20,369 - api_router - INFO - Chat request received - Session: 8dcd5e92-e263-421c-8eaa-311479906132, Subject: metaheuristicas, Mode: rag, Email: pytest@ugr.es
+2025-09-16 14:14:21,336 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.968s | Size: 195 bytes
+2025-09-16 14:19:46,748 - services.session_service - INFO - Created new session for user test@ugr... in subject metaheuristicas
+2025-09-16 14:19:46,748 - api_router - INFO - Chat request received - Session: 708c3dbc-fecc-4171-a0ee-cff8fedff991, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:19:50,633 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.885s | Size: 1638 bytes
+2025-09-16 14:19:50,635 - api_router - INFO - Chat request received - Session: 708c3dbc-fecc-4171-a0ee-cff8fedff991, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:19:52,485 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.850s | Size: 185 bytes
+2025-09-16 14:19:52,488 - api_router - INFO - Chat request received - Session: 708c3dbc-fecc-4171-a0ee-cff8fedff991, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:19:55,008 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.520s | Size: 816 bytes
+2025-09-16 14:19:55,012 - services.session_service - INFO - Created new session for user memoryte... in subject metaheuristicas
+2025-09-16 14:19:55,012 - api_router - INFO - Chat request received - Session: e4633b29-bd87-4b4b-9768-08d368fc7e5b, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:19:55,787 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.775s | Size: 64 bytes
+2025-09-16 14:19:55,790 - api_router - INFO - Chat request received - Session: e4633b29-bd87-4b4b-9768-08d368fc7e5b, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:19:56,535 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.745s | Size: 99 bytes
+2025-09-16 14:19:56,768 - services.session_service - INFO - Created new session for user test@tes... in subject metaheuristicas
+2025-09-16 14:19:56,769 - api_router - INFO - Chat request received - Session: 696bfbbe-61f6-4c1c-a885-fdddb97494f1, Subject: metaheuristicas, Mode: rag, Email: test@test.com
+2025-09-16 14:20:00,136 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.367s | Size: 1219 bytes
+2025-09-16 14:20:00,144 - services.session_service - INFO - Created new session for user pytest@u... in subject metaheuristicas
+2025-09-16 14:20:00,144 - api_router - INFO - Chat request received - Session: d7955ef5-2fdd-4ea1-8623-788ef4f88466, Subject: metaheuristicas, Mode: rag, Email: pytest@ugr.es
+2025-09-16 14:20:01,151 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 1.007s | Size: 193 bytes
+2025-09-16 14:22:01,757 - services.session_service - INFO - Created new session for user test@ugr... in subject metaheuristicas
+2025-09-16 14:22:01,757 - api_router - INFO - Chat request received - Session: f3e0607a-7999-4ac1-85fb-10086146c02c, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:22:05,911 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 4.153s | Size: 1039 bytes
+2025-09-16 14:22:05,914 - api_router - INFO - Chat request received - Session: f3e0607a-7999-4ac1-85fb-10086146c02c, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:22:07,954 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.040s | Size: 189 bytes
+2025-09-16 14:22:07,956 - api_router - INFO - Chat request received - Session: f3e0607a-7999-4ac1-85fb-10086146c02c, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:22:10,441 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.485s | Size: 593 bytes
+2025-09-16 14:22:10,445 - services.session_service - INFO - Created new session for user memoryte... in subject metaheuristicas
+2025-09-16 14:22:10,445 - api_router - INFO - Chat request received - Session: b08f3698-a917-48da-b766-8442cd0cb938, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:22:10,961 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.516s | Size: 57 bytes
+2025-09-16 14:22:10,963 - api_router - INFO - Chat request received - Session: b08f3698-a917-48da-b766-8442cd0cb938, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:22:11,567 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.604s | Size: 109 bytes
+2025-09-16 14:22:11,791 - services.session_service - INFO - Created new session for user test@tes... in subject metaheuristicas
+2025-09-16 14:22:11,791 - api_router - INFO - Chat request received - Session: d1ae6eff-ab70-4ba4-abbe-d1f030424700, Subject: metaheuristicas, Mode: rag, Email: test@test.com
+2025-09-16 14:22:15,176 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.385s | Size: 1756 bytes
+2025-09-16 14:22:15,184 - services.session_service - INFO - Created new session for user pytest@u... in subject metaheuristicas
+2025-09-16 14:22:15,184 - api_router - INFO - Chat request received - Session: 3159ecf4-374b-473f-8ee6-4f90957a8579, Subject: metaheuristicas, Mode: rag, Email: pytest@ugr.es
+2025-09-16 14:22:16,087 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.903s | Size: 237 bytes
+2025-09-16 14:23:04,512 - services.session_service - INFO - Created new session for user test@ugr... in subject metaheuristicas
+2025-09-16 14:23:04,512 - api_router - INFO - Chat request received - Session: 71592a2a-5023-442c-8f25-f8ea0808b641, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:23:08,242 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.730s | Size: 1005 bytes
+2025-09-16 14:23:08,244 - api_router - INFO - Chat request received - Session: 71592a2a-5023-442c-8f25-f8ea0808b641, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:23:10,516 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.272s | Size: 189 bytes
+2025-09-16 14:23:10,518 - api_router - INFO - Chat request received - Session: 71592a2a-5023-442c-8f25-f8ea0808b641, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:23:13,323 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.805s | Size: 732 bytes
+2025-09-16 14:23:13,327 - services.session_service - INFO - Created new session for user memoryte... in subject metaheuristicas
+2025-09-16 14:23:13,327 - api_router - INFO - Chat request received - Session: 3d662558-850d-4e4d-a341-0a53597e5ee9, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:23:14,222 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.895s | Size: 67 bytes
+2025-09-16 14:23:14,225 - api_router - INFO - Chat request received - Session: 3d662558-850d-4e4d-a341-0a53597e5ee9, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:23:14,897 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.673s | Size: 70 bytes
+2025-09-16 14:23:15,122 - services.session_service - INFO - Created new session for user test@tes... in subject metaheuristicas
+2025-09-16 14:23:15,123 - api_router - INFO - Chat request received - Session: b4069b3b-e93e-4848-9b3c-bc9390f6c023, Subject: metaheuristicas, Mode: rag, Email: test@test.com
+2025-09-16 14:23:18,637 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.514s | Size: 1810 bytes
+2025-09-16 14:23:18,645 - services.session_service - INFO - Created new session for user pytest@u... in subject metaheuristicas
+2025-09-16 14:23:18,646 - api_router - INFO - Chat request received - Session: ff9b295e-8b39-4098-996c-c817bcb8d70f, Subject: metaheuristicas, Mode: rag, Email: pytest@ugr.es
+2025-09-16 14:23:19,638 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.993s | Size: 197 bytes
+2025-09-16 14:23:39,309 - services.session_service - INFO - Created new session for user test@ugr... in subject metaheuristicas
+2025-09-16 14:23:39,310 - api_router - INFO - Chat request received - Session: 6be22dac-7553-4b60-afbc-764ea97d26ad, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:23:43,179 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.870s | Size: 1206 bytes
+2025-09-16 14:23:43,181 - api_router - INFO - Chat request received - Session: 6be22dac-7553-4b60-afbc-764ea97d26ad, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:23:45,527 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.346s | Size: 189 bytes
+2025-09-16 14:23:45,529 - api_router - INFO - Chat request received - Session: 6be22dac-7553-4b60-afbc-764ea97d26ad, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:23:48,654 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.125s | Size: 732 bytes
+2025-09-16 14:23:48,656 - services.session_service - INFO - Created new session for user memoryte... in subject metaheuristicas
+2025-09-16 14:23:48,656 - api_router - INFO - Chat request received - Session: be7bd28e-ad84-4141-89a8-0989431c216c, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:23:49,210 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.553s | Size: 79 bytes
+2025-09-16 14:23:49,211 - api_router - INFO - Chat request received - Session: be7bd28e-ad84-4141-89a8-0989431c216c, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:23:49,828 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.617s | Size: 71 bytes
+2025-09-16 14:23:50,065 - services.session_service - INFO - Created new session for user test@tes... in subject metaheuristicas
+2025-09-16 14:23:50,065 - api_router - INFO - Chat request received - Session: a6062b6b-4f43-457b-9612-f216d8558449, Subject: metaheuristicas, Mode: rag, Email: test@test.com
+2025-09-16 14:23:50,230 - langchain_google_genai.chat_models - WARNING - Retrying langchain_google_genai.chat_models._chat_with_retry.<locals>._chat_with_retry in 2.0 seconds as it raised ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 9
+}
+].
+2025-09-16 14:23:52,305 - api_router - ERROR - Error processing request: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 7
+}
+]
+Traceback (most recent call last):
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/api_router.py", line 100, in chat_endpoint
+    result = query_rag(
+             ^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/domain/query_logic.py", line 113, in query_rag
+    for event in rag_graph.stream(input_data, config=config, stream_mode="values"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langgraph/pregel/__init__.py", line 2534, in stream
+    for _ in runner.tick(
+             ^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/domain/graph.py", line 328, in call_agent
+    response = llm_with_tools.invoke(state["messages"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 5434, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 1334, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 395, in invoke
+    self.generate_prompt(
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 980, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 799, in generate
+    self._generate_with_cache(
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1045, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 1441, in _generate
+    response: GenerateContentResponse = _chat_with_retry(
+                                        ^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 231, in _chat_with_retry
+    return _chat_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 420, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 187, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 222, in _chat_with_retry
+    raise e
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 206, in _chat_with_retry
+    return generation_method(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 868, in generate_content
+    response = rpc(
+               ^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 147, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 7
+}
+]
+During task with name 'agent' and id 'c8e0ae74-27e7-75b6-8769-0690fba20b64'
+2025-09-16 14:23:52,312 - services.analytics_service - INFO - Request: POST /chat | Status: 500 | Duration: 2.247s | Size: 0 bytes
+2025-09-16 14:23:52,320 - services.session_service - INFO - Created new session for user pytest@u... in subject metaheuristicas
+2025-09-16 14:23:52,320 - api_router - INFO - Chat request received - Session: c222c5bf-7f48-4c79-8520-7e19e7f641e9, Subject: metaheuristicas, Mode: rag, Email: pytest@ugr.es
+2025-09-16 14:23:52,459 - langchain_google_genai.chat_models - WARNING - Retrying langchain_google_genai.chat_models._chat_with_retry.<locals>._chat_with_retry in 2.0 seconds as it raised ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 7
+}
+].
+2025-09-16 14:23:54,528 - api_router - ERROR - Error processing request: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 5
+}
+]
+Traceback (most recent call last):
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/api_router.py", line 100, in chat_endpoint
+    result = query_rag(
+             ^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/domain/query_logic.py", line 113, in query_rag
+    for event in rag_graph.stream(input_data, config=config, stream_mode="values"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langgraph/pregel/__init__.py", line 2534, in stream
+    for _ in runner.tick(
+             ^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/domain/graph.py", line 328, in call_agent
+    response = llm_with_tools.invoke(state["messages"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 5434, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 1334, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 395, in invoke
+    self.generate_prompt(
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 980, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 799, in generate
+    self._generate_with_cache(
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1045, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 1441, in _generate
+    response: GenerateContentResponse = _chat_with_retry(
+                                        ^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 231, in _chat_with_retry
+    return _chat_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 420, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 187, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 222, in _chat_with_retry
+    raise e
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 206, in _chat_with_retry
+    return generation_method(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 868, in generate_content
+    response = rpc(
+               ^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 147, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 5
+}
+]
+During task with name 'agent' and id 'daff9ae3-6f57-517e-57ff-f8c0b867d5ad'
+2025-09-16 14:23:54,530 - services.analytics_service - INFO - Request: POST /chat | Status: 500 | Duration: 2.210s | Size: 0 bytes
+2025-09-16 14:24:01,364 - services.session_service - INFO - Created new session for user test@ugr... in subject metaheuristicas
+2025-09-16 14:24:01,364 - api_router - INFO - Chat request received - Session: bfcb08f6-1e98-46a2-a9de-72856628aad5, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:24:01,616 - langchain_google_genai.chat_models - WARNING - Retrying langchain_google_genai.chat_models._chat_with_retry.<locals>._chat_with_retry in 2.0 seconds as it raised ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 58
+}
+].
+2025-09-16 14:24:03,763 - api_router - ERROR - Error processing request: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 56
+}
+]
+Traceback (most recent call last):
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/api_router.py", line 100, in chat_endpoint
+    result = query_rag(
+             ^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/domain/query_logic.py", line 113, in query_rag
+    for event in rag_graph.stream(input_data, config=config, stream_mode="values"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langgraph/pregel/__init__.py", line 2534, in stream
+    for _ in runner.tick(
+             ^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/domain/graph.py", line 328, in call_agent
+    response = llm_with_tools.invoke(state["messages"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 5434, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 1334, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 395, in invoke
+    self.generate_prompt(
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 980, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 799, in generate
+    self._generate_with_cache(
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1045, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 1441, in _generate
+    response: GenerateContentResponse = _chat_with_retry(
+                                        ^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 231, in _chat_with_retry
+    return _chat_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 420, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 187, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 222, in _chat_with_retry
+    raise e
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 206, in _chat_with_retry
+    return generation_method(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 868, in generate_content
+    response = rpc(
+               ^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 147, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 56
+}
+]
+During task with name 'agent' and id 'e59e3659-be44-04e8-f250-044802cfcd9c'
+2025-09-16 14:24:03,767 - services.analytics_service - INFO - Request: POST /chat | Status: 500 | Duration: 2.403s | Size: 0 bytes
+2025-09-16 14:24:03,882 - services.session_service - INFO - Created new session for user memoryte... in subject metaheuristicas
+2025-09-16 14:24:03,882 - api_router - INFO - Chat request received - Session: 3b84a755-59c6-41ab-951d-c77f493f7b40, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:24:04,075 - langchain_google_genai.chat_models - WARNING - Retrying langchain_google_genai.chat_models._chat_with_retry.<locals>._chat_with_retry in 2.0 seconds as it raised ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 55
+}
+].
+2025-09-16 14:24:06,163 - api_router - ERROR - Error processing request: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 53
+}
+]
+Traceback (most recent call last):
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/api_router.py", line 100, in chat_endpoint
+    result = query_rag(
+             ^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/domain/query_logic.py", line 113, in query_rag
+    for event in rag_graph.stream(input_data, config=config, stream_mode="values"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langgraph/pregel/__init__.py", line 2534, in stream
+    for _ in runner.tick(
+             ^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/domain/graph.py", line 328, in call_agent
+    response = llm_with_tools.invoke(state["messages"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 5434, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 1334, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 395, in invoke
+    self.generate_prompt(
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 980, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 799, in generate
+    self._generate_with_cache(
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1045, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 1441, in _generate
+    response: GenerateContentResponse = _chat_with_retry(
+                                        ^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 231, in _chat_with_retry
+    return _chat_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 420, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 187, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 222, in _chat_with_retry
+    raise e
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 206, in _chat_with_retry
+    return generation_method(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 868, in generate_content
+    response = rpc(
+               ^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 147, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 53
+}
+]
+During task with name 'agent' and id 'd0251ff0-3b65-2ba1-53d1-31427e642f3f'
+2025-09-16 14:24:06,165 - services.analytics_service - INFO - Request: POST /chat | Status: 500 | Duration: 2.284s | Size: 0 bytes
+2025-09-16 14:24:06,290 - services.session_service - INFO - Created new session for user test@tes... in subject metaheuristicas
+2025-09-16 14:24:06,290 - api_router - INFO - Chat request received - Session: 721b9923-40dd-4dfc-aa45-86192eccea40, Subject: metaheuristicas, Mode: rag, Email: test@test.com
+2025-09-16 14:24:06,570 - langchain_google_genai.chat_models - WARNING - Retrying langchain_google_genai.chat_models._chat_with_retry.<locals>._chat_with_retry in 2.0 seconds as it raised ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 53
+}
+].
+2025-09-16 14:24:08,686 - api_router - ERROR - Error processing request: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 51
+}
+]
+Traceback (most recent call last):
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/api_router.py", line 100, in chat_endpoint
+    result = query_rag(
+             ^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/domain/query_logic.py", line 113, in query_rag
+    for event in rag_graph.stream(input_data, config=config, stream_mode="values"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langgraph/pregel/__init__.py", line 2534, in stream
+    for _ in runner.tick(
+             ^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/app/domain/graph.py", line 328, in call_agent
+    response = llm_with_tools.invoke(state["messages"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 5434, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 1334, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 395, in invoke
+    self.generate_prompt(
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 980, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 799, in generate
+    self._generate_with_cache(
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1045, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 1441, in _generate
+    response: GenerateContentResponse = _chat_with_retry(
+                                        ^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 231, in _chat_with_retry
+    return _chat_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 420, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 187, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 222, in _chat_with_retry
+    raise e
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/langchain_google_genai/chat_models.py", line 206, in _chat_with_retry
+    return generation_method(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 868, in generate_content
+    response = rpc(
+               ^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 147, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gabriel/clase/TFG/Practicas/Chatbot_IA_Ceprud/.venv/lib/python3.12/site-packages/google/api_core/grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 51
+}
+]
+During task with name 'agent' and id '47f4bb0f-bde5-e2d9-2bfb-84c2564ee2a6'
+2025-09-16 14:24:08,688 - services.analytics_service - INFO - Request: POST /chat | Status: 500 | Duration: 2.398s | Size: 0 bytes
+2025-09-16 14:24:08,698 - services.session_service - INFO - Created new session for user pytest@u... in subject metaheuristicas
+2025-09-16 14:24:08,698 - api_router - INFO - Chat request received - Session: 9035980b-d025-4851-b0b8-a2b4f2b910b6, Subject: metaheuristicas, Mode: rag, Email: pytest@ugr.es
+2025-09-16 14:24:08,959 - langchain_google_genai.chat_models - WARNING - Retrying langchain_google_genai.chat_models._chat_with_retry.<locals>._chat_with_retry in 2.0 seconds as it raised ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 51
+}
+].
+2025-09-16 14:24:11,536 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.838s | Size: 123 bytes
+2025-09-16 14:25:51,904 - services.session_service - INFO - Created new session for user test@ugr... in subject metaheuristicas
+2025-09-16 14:25:51,905 - api_router - INFO - Chat request received - Session: 0de81c90-83fa-4bde-8ce0-947d4c34848c, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:25:55,426 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.522s | Size: 1063 bytes
+2025-09-16 14:25:55,429 - api_router - INFO - Chat request received - Session: 0de81c90-83fa-4bde-8ce0-947d4c34848c, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:25:57,768 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 2.340s | Size: 189 bytes
+2025-09-16 14:25:57,771 - api_router - INFO - Chat request received - Session: 0de81c90-83fa-4bde-8ce0-947d4c34848c, Subject: metaheuristicas, Mode: rag, Email: test@ugr.es
+2025-09-16 14:26:00,796 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.025s | Size: 732 bytes
+2025-09-16 14:26:00,799 - services.session_service - INFO - Created new session for user memoryte... in subject metaheuristicas
+2025-09-16 14:26:00,799 - api_router - INFO - Chat request received - Session: 16a2ab62-ddeb-4383-a6f7-396488ddb0da, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:26:01,386 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.587s | Size: 57 bytes
+2025-09-16 14:26:01,388 - api_router - INFO - Chat request received - Session: 16a2ab62-ddeb-4383-a6f7-396488ddb0da, Subject: metaheuristicas, Mode: rag, Email: memorytest@ugr.es
+2025-09-16 14:26:02,201 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.813s | Size: 68 bytes
+2025-09-16 14:26:02,435 - services.session_service - INFO - Created new session for user test@tes... in subject metaheuristicas
+2025-09-16 14:26:02,435 - api_router - INFO - Chat request received - Session: aa8f922f-edcc-4f45-a7f2-9600caa6af02, Subject: metaheuristicas, Mode: rag, Email: test@test.com
+2025-09-16 14:26:05,858 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 3.423s | Size: 1333 bytes
+2025-09-16 14:26:05,867 - services.session_service - INFO - Created new session for user pytest@u... in subject metaheuristicas
+2025-09-16 14:26:05,868 - api_router - INFO - Chat request received - Session: 43df3938-13ee-42c1-8d9a-d65a95cd5882, Subject: metaheuristicas, Mode: rag, Email: pytest@ugr.es
+2025-09-16 14:26:06,630 - services.analytics_service - INFO - Request: POST /chat | Status: 200 | Duration: 0.763s | Size: 145 bytes

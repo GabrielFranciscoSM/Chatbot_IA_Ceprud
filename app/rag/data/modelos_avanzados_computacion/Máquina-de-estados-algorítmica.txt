@@ -1,0 +1,23 @@
+La Máquina de estados algorítmica (ASM) es un método para el diseño de Máquina de estados finitos. Se utiliza para representar los diagramas de circuitos integrados digitales. El diagrama de ASM es como un diagrama de estado, pero menos formal y por tanto más fácil de entender. Un gráfico de ASM es un método para describir las operaciones por orden de un sistema digital.
+
+El método ASM:
+El método de ASM se compone de los siguientes pasos:
+
+ 1 .. Crear un algoritmo, utilizando pseudocódigo , para describir la operación deseada del dispositivo.
+ 2 .. Convertir el pseudocódigo en un diagrama ASM .
+ 3 .. Diseño de la Ruta de Datos o Camino de Datos basado en el diagrama ASM.
+ 4 ..Crear diagrama ASM detallado basado en la ruta o camino de datos.
+ 5 .. Diseño de la lógica de control o Unidad de Control basada en el diagrama ASM detallado.
+
+Diagrama ASM:
+
+Un diagrama ASM se compone de una interconexión de los tres tipos de elementos básicos: los estados, los controles condición, y salidas condicionales. Un estado de ASM, representada como un rectángulo, corresponde a un estado de un diagrama de estado regular o máquina de estados finitos. El nombre del estado se indica fuera de la caja en la esquina superior izquierda. El Moore tipo de productos se enumeran dentro de la caja.
+Una condición de verificación de ASM, indicado por un diamante con una entrada y dos salidas (de verdadero y falso), se utiliza para la transferencia condicional entre dos estados o entre un Estado y una salida condicional. El cuadro de decisión contiene la expresión condición establecida para la prueba, la expresión contiene una o más entradas de las FSM.
+Cuadro de decisión: Un diamante indica que la expresión condición establecida es de pruebas, y la ruta de salida es a elegir en consecuencia. La expresión de condición contiene una o más entradas a las Máquinas de Estados.
+Caja de salida condicional: un óvalo indica las señales de salida que son de Mealy tipo. Estos resultados dependen no solo del estado sino también las aportaciones al FSM.
+
+Ruta de Datos:
+Una vez que la operación deseada de un circuito ha sido descrito utilizando RTL operaciones, los componentes de la ruta de datos pueden ser derivadas. Cada variable única que se le asigna un valor al programa RTL puede ser implementado como un registro. Dependiendo de la operación funcional a cabo cuando se asigna un valor a una variable, el registro para esta variable se puede implementar como un registro sencillo, un registro de desplazamiento, un contador o un registro precedido de un bloque lógico combinatorio. La lógica combinatoria bloque asociado a un registro que puede llevar a cabo un sumador, restador, multiplexor, o algún otro tipo de función lógica combinatoria.
+
+Diagrama ASM Detallado:
+Una vez que la ruta de datos está diseñada, el diagrama ASM se convierte en un diagrama ASM detallado. La notación del RTL es sustituida por las señales definidos en la ruta de datos.

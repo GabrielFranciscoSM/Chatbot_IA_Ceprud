@@ -1,0 +1,213 @@
+La computación distribuida es un modelo para resolver problemas de computación masiva utilizando un gran número de ordenadores organizados en clústeres incrustados en una infraestructura de telecomunicaciones distribuida.
+La computación distribuida es un modelo informático que permite hacer grandes cálculos utilizando miles de ordenadores de voluntarios. Este sistema se basa en repartir la información a través de Internet mediante un software, previamente descargado por el usuario, a diferentes ordenadores, que van resolviendo los cálculos y una vez tienen el resultado lo envían al servidor. Este proyecto, casi siempre solidario, reparte la información a procesar entre los miles de ordenadores voluntarios para poder alcanzar cuotas de procesamiento a menudo mayores que las de superordenadores y a un costo mucho menor.
+El beneficio de la computación distribuida es que la actividad de procesamiento se puede asignar a la ubicación o ubicaciones donde sea posible realizarlo con más eficiencia. Podemos tomar como ejemplo la computación distribuida en una empresa: cada oficina puede organizar y manipular los datos para satisfacer necesidades específicas, así como compartir el producto con el resto de la organización. También nos permite la optimización de los equipos y mejora el balanceo del procesamiento dentro de una aplicación. Este último es de gran importancia, ya que en algunas aplicaciones simplemente no hay una máquina que sea capaz de realizar todo el procesamiento.
+Para ello se puede hablar de "procesos". Un proceso realiza dos tipos de operaciones:
+
+Declaración Inicial y las Solicitudes Externas realizadas por otros procesos. Estas operaciones se ejecutan una a la vez intercalándose entre sí. Esto continúa hasta que la declaración termina o espera que una condición se convierta en realidad.
+Luego se inicia otra operación (como resultado de una solicitud externa). Cuando esta operación, a su vez, termina o espera, el proceso comenzará otra operación (volver a cuestionado por otro proceso) o reanudará una operación anterior (como resultado de que una condición se convierta en verdadera).
+Este entrelazado de la declaración inicial y las solicitudes externas continúa para siempre. Si la declaración inicial termina, el proceso continúa existiendo, a pesar de que el primer proceso termine, continuará aceptando solicitudes Externas.
+
+Introducción:
+Desde el surgimiento de la computadora moderna en 1945 hasta mediados de la década de 1980, la computación se caracterizó principalmente por un modelo centralizado. Sin embargo, a partir de esa época comenzaron a emerger dos avances tecnológicos fundamentales que sentaron las bases de la computación distribuida:
+
+El desarrollo de microprocesadores potentes y económicos, disponibles en arquitecturas de 8, 16, 32 y 64 bits.
+La aparición de redes de área local (LAN) de alta velocidad, capaces de conectar cientos de computadoras con tasas de transferencia del orden de millones de bits por segundo.
+Estos avances permitieron la transición de los sistemas centralizados a los sistemas distribuidos, en los cuales los componentes de hardware o software están ubicados en computadoras diferentes, interconectadas mediante una red de comunicaciones.
+Un sistema distribuido es una colección de computadoras independientes que se presenta como un sistema coherente para los usuarios. Los sistemas operativos diseñados para entornos distribuidos han tenido avances significativos, aunque aún presentan desafíos en aspectos como la transparencia, la escalabilidad y la tolerancia a fallos. Gracias a estos sistemas, los usuarios pueden acceder a una amplia gama de recursos, tanto de hardware como de software, distribuidos entre múltiples máquinas.
+Un sistema distribuido posee características fundamentales como:
+
+Concurrencia: La ejecución simultánea de procesos en distintos nodos es una práctica común.
+Ausencia de reloj global: La coordinación entre procesos debe lograrse sin una referencia temporal compartida.
+Tolerancia a fallos independientes: Pueden producirse fallos por desconexiones de red, errores de hardware o terminaciones anómalas de software, sin afectar necesariamente al sistema completo.
+
+Evolución histórica:
+El concepto de transmisión de mensajes se originó a finales de la década de los 60. A pesar de que el multiprocesador de propósito general y las redes de computadoras no existían en ese momento, surgió la idea de organizar un sistema operativo como una colección de procesos de comunicación donde cada proceso tiene una función específica, en la cual, no pueden interferir otros (variables no compartidas). De esta forma, en los años 70 nacieron los primeros sistemas distribuidos generalizados, las redes de área local (LAN) como Ethernet.​ 
+Este suceso generó inmediatamente una gran cantidad de lenguajes, algoritmos y aplicaciones, pero no fue hasta que los precios de las LANs bajaron, cuando se desarrolló la computación cliente-servidor.
+A finales de la década de 1960, se creó ‘Advanced Research Projects Agency Network’ (ARPANET). Esta agencia fue la espina dorsal de Internet hasta 1990, tras finalizar la transición al protocolo TCP/IP, iniciada en 1983. En los primeros años de 1970, nace el correo electrónico ARPANET, el que es considerado como la primera aplicación distribuida a gran escala.​
+Durante las dos últimas décadas se han realizado investigaciones en materia de algoritmos distribuidos y se ha avanzado considerablemente en la madurez del campo, especialmente durante los años ochenta. Originalmente la investigación estaba muy orientada hacia aplicaciones de los algoritmos en redes de área amplia (WAN), pero hoy en día se han desarrollado modelos matemáticos que permiten la aplicación de los resultados y métodos a clases más amplias de entornos distribuidos.
+Existen varias revistas y conferencias anuales que se especializan en los resultados relativos a los algoritmos distribuidos y la computación distribuida. La primera conferencia sobre la materia fue el simposio ‘Principles of Distributed Computing’ (PoDC) en 1982, cuyos procedimientos son publicados por ‘Association for Computing Machinery, Inc’. ‘International Workshops on Distributed Algorithms’ (WDAG) se celebró por primera vez en Ottawa en 1985 y después en Ámsterdam (1987) y Niza (1989). Desde entonces, sus actas son publicadas por Springer-Verlag en la serie ‘Lecture Notes on Computer Science’. En 1998, el nombre de esta conferencia cambió a Distributed Computing (DISC). Los simposios anuales sobre teoría de computación (‘SToC’) y fundamentos de informática (FoCS) cubren toda las áreas fundamentales de la informática, llevando a menudo documentos sobre computación distribuida. Las actas de ‘SToC’ son publicadas por ‘Association for Computing Machinery, Inc.’ y los de FoCS por el IEEE. ‘The Journal of Parallel and Distributed Computing (JPDC), ‘Distributed Computing’ e ‘Information Processing Letters’ (IPL) publican algoritmos distribuidos regularmente.​
+Así fue como nacieron los sistemas distribuidos.​
+
+¿Qué esperar del paralelismo?:
+Una cuestión clave en la computación distribuida es qué tan eficiente puede ser la ejecución paralela de tareas. En 1967, Gene Amdahl formuló una ley que establece los límites del rendimiento en entornos multiprocesador, indicando que si una fracción de un programa no es paralelizable, esta limitará la ganancia total que puede obtenerse al distribuir su ejecución entre varios procesadores.
+
+Formalmente, si T(1) es el tiempo de ejecución en un solo procesador, T(P) es el tiempo usando P procesadores, tₛ es el tiempo de la parte secuencial, y tₚ(P) es el tiempo de la parte paralelizable, entonces la ganancia (g) estará restringida por la porción no paralelizable. Esta observación sigue siendo crucial al diseñar algoritmos para entornos distribuidos.
+
+Esta observación, conocida como la Ley de Amdahl, llevó a que por varias
+décadas el cómputo paralelo fuera relegado al cómputo de propósito específico,
+para necesidades muy focalizadas en soluciones altamente paralelizables,
+como el cómputo científico.
+
+Comparación Computación Paralela-Distribuida:
+
+​ Al igual que ocurre con los sistemas distribuidos, en los sistemas paralelos no existe una definición clara. Lo único evidente es que cualquier sistema en el que los eventos puedan ordenarse de manera parcial se consideraría un sistema paralelo y por lo tanto, esto incluiría a todos los sistemas distribuidos y sistemas de memoria compartida con múltiples hilos de control. De esta forma, se podría decir que los sistemas distribuidos forman una subclase de sistemas paralelos, donde los espacios de estado de los procesos no se superponen.
+Aunque comparten similitudes, la computación paralela y la distribuida se distinguen por su arquitectura y objetivos. En términos generales:
+
+Computación paralela: Los procesadores suelen compartir una memoria común, lo que permite una comunicación rápida. Está enfocada principalmente en el rendimiento.
+Computación distribuida: Cada nodo tiene su propia memoria local y se comunica mediante paso de mensajes. Su objetivo principal es la escalabilidad y la tolerancia a fallos.
+Desde esta perspectiva, los sistemas distribuidos pueden considerarse una subcategoría de los sistemas paralelos, pero con un acoplamiento débil entre sus componentes. En cambio, los sistemas paralelos suelen tener un acoplamiento fuerte al compartir memoria y estado global.
+Una representación gráfica de esta diferencia muestra, por un lado, una red de computadoras autónomas (sistema distribuido) y, por otro, un conjunto de procesadores conectados a una memoria compartida (sistema paralelo).​
+Algunos distinguen los sistemas paralelos de los sistemas distribuidos en función de sus objetivos: los sistemas paralelos se centran en el aumento del rendimiento, mientras que los sistemas distribuidos se centran en la tolerancia de fallos parciales. 
+Desde otro punto de vista, en la computación paralela, todos los procesadores pueden tener acceso a una memoria compartida para intercambiar información entre ellos​ y en la computación distribuida, cada procesador tiene su propia memoria privada, donde la información se intercambia pasando mensajes entre los procesadores.
+Luego se podría decir que la computación en paralelo es una forma particular de computación distribuida fuertemente acoplada,​ y la computación distribuida una forma de computación paralela débilmente acoplada.​
+La figura que se encuentra a la derecha ilustra la diferencia entre los sistemas distribuidos y paralelos. La figura a. es un esquema de un sistema distribuido, el cual se representa como una topología de red en la que cada nodo es una computadora y cada línea que conecta los nodos es un enlace de comunicación. En la figura b) se muestra el mismo sistema distribuido con más detalle: cada computadora tiene su propia memoria local, y la información solo puede intercambiarse pasando mensajes de un nodo a otro utilizando los enlaces de comunicación disponibles. En la figura c) se muestra un sistema paralelo en el que cada procesador tiene acceso directo a una memoria compartida.
+
+Arquitecturas:
+Para entrar en materia, es necesario definir algunos términos como paralelismo, computación paralela y computación distribuida. La concurrencia se refiere al uso de diferentes recursos.
+La computación paralela tiene como objetivo resolver un problema rápidamente utilizando muchos procesadores al mismo tiempo, mientras que la computación distribuida es una colección de computadoras independientes que están conectadas e interactúan compartiendo recursos. Entre las características de la computación paralela, tenemos una aplicación que se utilizará en ella dividida en subtareas que se procesan al mismo tiempo. Se procesa una solicitud a la vez y el objetivo es acelerar su creación. Dichos programas a menudo funcionan con diseños similares y pueden compartir un concepto.
+Por otro lado, la computación compartida tiene desafíos en la gestión del acceso a los recursos compartidos, el hardware, la heterogeneidad funcional de los sistemas operativos y lenguajes de programación y la seguridad. Se caracteriza por tener muchos dispositivos en ubicaciones remotas, ejecutando muchas aplicaciones al mismo tiempo, muchas veces diferentes, y dado que el sistema distribuido intenta parecer una sola máquina para los usuarios, no comparten la misma idea. modo (en hardware).
+Modelos Físicos: Capturan la composición del hardware de un sistema en términos de las computadoras y las redes de interconexión.
+Modelos arquitectónicos: Describen el sistema en términos de las tareas computacionales y de comunicación realizadas por los elementos.
+Modelos fundamentales: Describen una perspectiva abstracta para examinar un aspecto individual de un sistema distribuido.
+•	Modelo de Interacción
+•	Modelo de Fallo
+•	Modelo de Seguridad
+Varias arquitecturas de hardware y software son usadas en la computación distribuida. A niveles bajos, es necesaria la interconexión de múltiples CPUs con alguna clase de red. A un nivel superior, es necesario interconectar los procesos que se ejecuntan en esos CPUs con ayuda de algún tipo de sistema de comunicación. 
+La programación distribuida se suele encuadrar en una de las siguientes arquitecturas básicas: cliente-servidor, three-tier, n.tier o peer-to-peer; o categorías: loose coupling o tight coupling
+
+Cliente-servidor: Son arquitecturas en las que los clientes inteligentes se ponen en contacto con el servidor para obtener datos, formatearlos y mostrarlos a los usuarios. Los datos introducidos por el cliente se envían al servidor cuando representan un cambio permanente.
+Three-Tier: Arquitecturas que trasladan la inteligencia del cliente a un nivel intermedio para poder utilizar clientes sin estado. Esto simplifica el despliegue de aplicaciones. La mayoría de las aplicaciones web son de tipo Three-Tier.
+n-Tier: Arquitecturas que se refieren típicamente a aplicaciones web que reenvían sus peticiones a otros servicios de la empresa. Este tipo de aplicaciones es el más responsable del éxito de los servidores de aplicaciones.
+Peer-to-peer: Arquitecturas en las que no hay máquinas especiales que presten un servicio o gestionen los recursos de la red. En su lugar, todas las responsabilidades se reparten uniformemente entre todas las máquinas, conocidas como peers. Entre los ejemplos de esta arquitectura se encuentran BitTorrent y la red bitcoin.
+Otro aspecto básico de la arquitectura de computación distribuida es el método de comunicación y coordinación del trabajo entre procesos concurrentes. A través de varios protocolos de paso de mensajes, los procesos pueden comunicarse directamente entre sí, normalmente en una relación maestro/esclavo. Alternativamente, una arquitectura "centrada en la base de datos" puede permitir que la computación distribuida se realice sin ninguna forma de comunicación directa entre procesos, utilizando una base de datos compartida. La arquitectura centrada en la base de datos, en particular, proporciona análisis de procesamiento relacional en una arquitectura esquemática que permite la retransmisión en vivo del entorno. Esto permite funciones de computación distribuida tanto dentro como fuera de los parámetros de una base de datos en red.
+
+Aplicaciones y ejemplos:
+​ Hay numerosos ejemplos de sistemas distribuidos que se utilizan en la vida cotidiana en una variedad de aplicaciones. La mayoría de los sistemas están estructurados como sistemas cliente-servidor, en los que la máquina servidora es la que almacena los datos o recursos, y proporcionan servicio a varios clientes distribuidos geográficamente. Sin embargo, algunas aplicaciones no dependen de un servidor central, es decir, son sistemas peer-to-peer, cuya popularidad va en aumento. Presentamos aquí algunos ejemplos de sistemas distribuidos:
+
+World Wide Web: es un servicio popular que funciona en Internet. Permite que los documentos de una computadora se refieran a información textual o no textual almacenada en otras. Esas referencias aparecen en el monitor del usuario, y cuando el usuario selecciona las que desea, el sistema obtiene el artículo de un servidor remoto utilizando los protocolos adecuados y presenta la información en la máquina cliente.
+Servidor de archivos de red: una red de área local consiste en un número de computadoras independientes conectadas a través de enlaces de alta velocidad. En muchas redes de área local, una máquina aislada en la red sirve como servidor de archivos. Así, cuando un usuario accede a un archivo, el sistema operativo dirige la solicitud de la máquina local al servidor de archivos, el cual comprueba la autenticidad de la solicitud y decide si puede conceder el acceso.
+Red bancaria
+Redes peer-to-peer
+Sistemas de control de procesos: Las plantas industriales utilizan redes de controladores para inspeccionar la producción y el mantenimiento.
+Redes de sensores: la reducción del costo de los equipos y el crecimiento de la tecnología inalámbrica han dado lugar a nuevas oportunidades en el diseño de sistemas distribuidos de propósito específico, como las redes de sensores, donde cada nodo es un procesador equipado con unos sensores, y es capaz de comunicarse de forma inalámbrica con otros. Estas redes pueden ser utilizadas en una amplia clase de problemas: la vigilancia del campo de batalla, la detección de ataques biológicos y químicos, automatización del hogar, etc.
+Grid Computing: es una forma de computación distribuida que soporta la programación paralela en una red de computadoras de tamaño variable. En el extremo inferior, una red de computación puede utilizar una fracción de los recursos computacionales, mientras que en el extremo superior, puede combinar millones de computadoras en todo el mundo para trabajar en proyectos extremadamente grandes. El objetivo es resolver problemas computacionales difíciles con mayor rapidez y menor costo que con los métodos convencionales.
+Clúster: Clúster significa integrar dos o más computadoras para que trabajen simultáneamente en el procesamiento de una determinada tarea. El clúster comenzó a ser utilizado en 1960, por la empresa IBM (International Business Machines Corporation) con el objetivo de aumentar la eficiencia de sus procesadores. Pero ahora debemos hablar de que para saber que es un clúster debemos entender que se trata de la conexión como ya habíamos comentado de dos o más computadoras con el propósito de mejorar el rendimiento de los sistemas durante la ejecución de diferentes tareas. En un clúster, cada computadora lleva el nombre de “nodo”, y no hay límites sobre cuántos nodos se pueden interconectar. Con esto, las computadoras comienzan a actuar dentro de un solo sistema, trabajando juntas en el procesamiento, análisis e interpretación de los datos e información, o realizando tareas simultáneas.
+
+Modelos:
+​ Los sistemas destinados a ser utilizados en entornos del mundo real deben estar diseñados para funcionar correctamente en la gama más amplia posible de circunstancias y ante posibles dificultades y amenazas. Las propiedades y los problemas de diseño de sistemas distribuidos pueden ser capturados y discutidos mediante el uso de modelos descriptivos. Cada modelo tiene la intención de proporcionar una descripción abstracta y simplificada pero consistente de un aspecto relevante del diseño del sistema distribuido.
+Algunos aspectos relevantes pueden ser: el tipo de nodo y de red, el número de nodos y la responsabilidad de estos y posibles fallos tanto en la comunicación como entre los nodos. Se pueden definir tantos modelos como características queramos considerar en el sistema, pero se suele atender a esta clasificación:
+
+​ Modelos físicos:
+Representan la forma más explícita para describir un sistema, identifican la composición física del sistema en términos computacionales, principalmente atendiendo a heterogeneidad y escala. Podemos identificar tres generaciones de sistemas distribuidos:
+
+Primeros sistemas distribuidos: Surgen los años 70-80 en respuesta a las primeras redes locales (Ethernet). El objetivo era brindar calidad de servicio (coordinación y sincronización) desde el inicio, constituyendo el punto básico del que partir en el futuro.
+Sistemas distribuidos escalables en Internet: Nacen en base al gran crecimiento de internet en los años 90. Se empieza a implantar un entorno de redes interconectadas, más conocido como red de redes (Internet), dando lugar a un aumento considerable en cuanto al número de nodos y al nivel de heterogeneidad. Se definen estándares abiertos como CORBA o el servicio web.
+Sistemas distribuidos contemporáneos: Los sistemas distribuidos han adquirido nuevas características que también se deben incluir al momento de diseñar e implementar un sistema (extensibilidad, seguridad, concurrencia, transparencia...etc). La aparición de la computación móvil, la computación ubicua o la computación en la nube y las arquitecturas de clusters hacen necesaria la implementación de elementos computacionales más complejos sujetos a un control centralizado, ofreciendo una amplia variedad de aplicaciones y servicios acorde a su demanda (miles de nodos).
+
+​ Modelos arquitectónicos:
+El objetivo general de este tipo de modelo es garantizar el reparto de responsabilidades entre componentes del sistema distribuido y la ubicación de dichos componentes. Las principales preocupaciones son determinar la relación entre procesos y hacer al sistema confiable, adaptable y rentable.
+
+​ Cliente-Servidor: modelo de diseño de software en el que las tareas se reparten entre los proveedores de recursos o servicios, llamados servidores, y los demandantes, llamados clientes. Los clientes realizan peticiones al servidor, otro programa, que le da una respuesta. Pero también un servidor puede ser cliente de otros servidores. Un buen ejemplo sería un servidor web, que es un cliente de servidor DNS.
+Una buena práctica es la replicación para aumentar las prestaciones y disponibilidad, más conocido como servidor espejo. Otra opción pueden ser los servidores proxy, que usan cachés con los datos más recientes solicitados.
+Derivados: código móvil, agente móvil, computadores en red, clientes ligeros o Cloud Computing.
+
+Peer-to-peer: Sistemas de igual a igual, es decir, todos los elementos interconectados tienen el mismo papel. Se trata de un servicio totalmente descentralizado y autoorganizado, facilitando un equilibrio dinámico de las cargas (de almacenamiento y de procesamiento) entre las computadoras del sistema.
+
+Arquitectura de Capas: permite aprovechar el concepto de abstracción, en este modelo, un sistema complejo se divide en un número arbitrario de capas, donde las capas superiores hacen uso de los servicios proporcionados por las capas inferiores. De esta forma una capa ofrece un servicio sin que las capas superiores o inferiores estén al tanto de los detalles de implementación. Un servicio distribuido puede ser proporcionado por uno o más procesos del servidor, que interactúan entre sí y con los procesos de cliente para mantener una visión de todo el sistema. La organización de los servicios en capas se da debido a la complejidad de los sistemas distribuidos. 
+Una estructura común del modelo de arquitectura de capas se divide en cuatro capas: la capa de aplicaciones y servicios, la capa de middleware, la capa de sistema operativo y la capa de hardware de redes y computadoras. 
+La plataforma para sistemas y aplicaciones distribuidas se compone de las capas de hardware y software de nivel más bajo, esto incluye el hardware de red, las computadoras y el sistema operativo del sistema distribuido. Esta capa proporciona servicios a las capas superiores, las cuales se implementan de forma independiente en cada equipo. 
+El middleware es todo el software que tiene como finalidad enmascarar el sistema distribuido, proporcionando una apariencia homogénea del sistema. 
+La capa superior, destinada a aplicaciones y servicios son las funcionalidades proporcionadas a los usuarios, estas se conocen como aplicaciones distribuidas.
+
+​ Modelos fundamentales:
+Todos los modelos anteriores comparten un diseño y un conjunto de requisitos necesarios para proporcionar confiabilidad y seguridad a los recursos del sistema. 
+Un modelo fundamental toma una perspectiva abstracta, de acuerdo al análisis de aspectos individuales del sistema distribuido; debe contener solo lo esencial a tener en cuenta para comprender y razonar sobre algunos aspectos de un comportamiento del sistema. 
+
+Modelos de interacción:
+Analizan la estructura y secuencia de la comunicación entre los elementos del sistema. Cobran importancia las prestaciones del canal de comunicación (Latencia, AB, fluctuación), haciendo imposible predecir el retraso con el que puede llegar un mensaje. En otras palabras, no hay un tiempo global a todo el sistema, la ejecución es “no determinista”. Cada computador tiene su propio reloj interno, lo que conlleva tener que sincronizar los relojes locales de todas las máquinas que componen el sistema distribuido. Para ello existen diferentes mecanismos (NTP, receptores GPS, mecanismos de ordenación de eventos).
+Existen dos tipos de modelos de interacción:
+​ Síncrono: Existen límites conocidos para los tiempos de ejecución de las etapas de los procesos, en el tiempo necesario al transmitir mensajes o en las tasas de deriva de los relojes. Es decir, se pueden establecer límites para aproximarse al comportamiento real del sistema, pero en la práctica, esto no es posible y por lo general, se utilizan estimaciones (timeout).
+​ Asíncrono: No existen limitaciones respecto a los modelos sincrónicos. La mayoría de los sistemas distribuidos son asíncronos.
+
+​ Modelos de fallos:
+estudio e identificación de las posibles causas de fallo. Pueden clasificarse según la entidad, dando lugar a fallos de proceso o fallos de comunicación, o según el problema, dando lugar a fallos por omisión o arbitrarios:
+Fallos por omisión en procesos: Fallos del procesamiento, fallo-parada (el proceso para y permanece parado) o detección del fallo por timeout, el proceso no responde (solo en modelos síncronos)
+Fallos por omisión en comunicaciones: fallos en el envío (no se coloca el mensaje en el búfer) o en la recepción (el proceso no recibe el mensaje).
+
+Fallos arbitrarios o bizantinos: en el proceso (omisiones, se realizan pasos incorrectos en el procesamiento o se omiten arbitrariamente la respuesta a mensajes) o en canales de comunicación (corrupción de mensajes, reparto de mensajes inexistentes o duplicado del reparto de mensajes auténticos).
+Enmascaramiento de fallos: algunos fallos detectados pueden ocultarse o atenuarse. Por ejemplo, checksum (de fallo arbitrario a fallo por omisión).
+
+​ Modelos de seguridad:
+La seguridad de un sistema distribuido se puede lograr asegurando los procesos y canales utilizados para sus interacciones y protegiendo los objetos que encapsular contra el acceso no autorizado. Estos modelos proporcionan la base para construir un sistema seguro atendiendo a recursos de todo tipo. Para ello, es clave postular un enemigo que es capaz de enviar cualquier mensaje a cualquier proceso y leer o copiar cualquier mensaje enviado entre un par de procesos.
+
+Por lo tanto, para que pueda afirmarse que existe una comunicación fiable entre dos procesos debe asegurarse su integridad y su validez.
+
+Clasificación en función de la estructura de la red y de la memoria.
+Cuando hablamos de modelos en un sistema distribuido, nos referimos principalmente al hecho de automatizar tareas, usando un computador, del tipo pregunta-respuesta, es decir, que cuando realicemos una pregunta al computador, este nos debe contestar con una respuesta apropiada. En la informática teórica, este proceso se conoce como problemas computacionales.
+Formalmente, un problema computacional consiste en instancias junto con una solución a cada una de ellas. Las instancias se pueden traducir como preguntas que nosotros hacemos al computador y las soluciones como las respuestas del mismo a nuestras preguntas.
+Teóricamente, la informática teórica busca encontrar la relación entre problemas que puedan resolverse mediante un computador (teoría de la computabilidad) y la eficiencia al realizarlo(teoría de la complejidad computacional).
+Comúnmente, hay tres puntos de vista:
+
+Algoritmos paralelos en el modelo de memoria compartida.
+Un algoritmo paralelo define múltiples operaciones para ser ejecutadas en cada paso. Esto incluye comunicación/coordinación entre las unidades de procesamiento.
+Un ejemplo claro para este tipo de modelos sería el modelo de máquinas de acceso aleatorio paralelo (PRAM).​
+
+-	Memoria RAM paralela
+-	Memoria central compartida
+-	Conjunto de unidades de procesamiento (PUs)
+-	El número de unidades de procesamiento y el tamaño de la memoria es ilimitado.
+Detalles del modelo PRAM
+
+-Ejecución lock-step
+Es un ciclo de 3 fases:
+Se leen las celdas de memoria.
+Se ejecutan los cálculos y computaciones locales.
+Escribir en la memoria compartida.
+Todas las unidades de procesamiento ejecutan estos pasos sincrónicamente.
+No hay necesidad de una sincronización explícita.
+La entrada de una programa PRAM consiste de n elementos guardados en M[0], ..., M[n-1]M[0],...,M[n−1]
+La salida del programa PRAM consiste de las siguientes celdas n' de memoria a partir de la última de entrada M[n] ... M[n]...M[n+n′−1]
+Una instrucción se ejecuta en ciclo de 3 fases, las cuales pueden saltarse si fuese necesario:
+Read (Lee de la memoria compartida)
+Escribe en la memoria compartida
+-Acerca de los accesos simultáneos a la memoria:
+Modelos PRAM:
+CREW: Lectura simultánea, escritura exclusiva
+CRCW: Lectura simultánea, escritura simultánea
+EREW: Lectura exclusiva, escritura exclusiva
+Hay mucha más información acerca de este tipo de algoritmo de una forma más resumida en los siguientes libros.​​ 
+
+Algoritmos paralelos en el modelo de paso de mensaje.
+
+--En este algoritmo el programador imagina varios procesadores, cada uno con su propio espacio de memoria, y escribe un programa para ejecutarlo en cada procesador. Hasta ahora, todo bien, pero la programación paralela por definición requiere la cooperación entre los procesadores para resolver una tarea, que requiere algún medio de comunicación. El punto principal del paradigma de paso de mensajes es que los procesos se comunican enviando mensajes unos a otros. Por lo tanto, el modelo de paso de mensajes no tiene el concepto de un espacio de memoria compartido o de que los procesadores acceden directamente a la memoria de cada uno, cualquier otra cosa que no sea el paso de mensajes queda fuera del alcance del paradigma.
+-En lo que respecta a los programas que se ejecutan en los procesadores individuales, las operaciones de paso de mensajes son solo llamadas a subrutinas.
+-Se utilizan modelos como los circuitos booleanos y las redes de clasificación.​ Un circuito booleano puede ser visto como una red de ordenadores: cada puerta es un ordenador que ejecuta un programa informático extremadamente simple. Del mismo modo, una red de clasificación puede ser vista como una red informática: cada comparador es un ordenador.
+Algoritmos distribuidos en el modelo de paso de mensajes.​
+El diseñador del algoritmo solo elige el programa de la computadora. Todas las computadoras ejecutan el mismo programa. El sistema debe funcionar correctamente independientemente de la estructura de la red.
+Un modelo comúnmente utilizado es un gráfico con una máquina de estado finito por nodo.
+
+Propiedades de los sistemas distribuidos:
+Hasta ahora sólo se ha tratado de diseñar un sistema distribuido que resuelva un problema determinado. Un problema de investigación complementario es el estudio de las propiedades de un sistema distribuido dado.
+Los sistemas distribuidos presentan retos importantes en cuanto a la consistencia, especialmente cuando múltiples procesos acceden a datos compartidos de manera concurrente. Esto exige mecanismos eficientes de sincronización y replicación.
+El problema de la parada es un ejemplo análogo del campo de la computación centralizada: se nos da un programa informático y la tarea consiste en decidir si se detiene o se ejecuta para siempre. El problema de la parada es indecidible en el caso general y, naturalmente, comprender el comportamiento de una red de ordenadores es al menos tan difícil como comprender el comportamiento de un solo ordenador.
+Sin embargo, hay muchos casos especiales interesantes que son decidibles. En particular, es posible razonar sobre el comportamiento de una red de máquinas de estado finito. Un ejemplo es saber si una red dada de máquinas de estado finito que interactúan (asíncronas y no deterministas) puede llegar a un punto muerto. Este problema es PSPACE-completo, es decir, es decidible, pero no es probable que exista un algoritmo eficiente (centralizado, paralelo o distribuido) que resuelva el problema en el caso de redes grandes.
+
+Ventajas e inconvenientes:
+
+Ventajas​:
+Ambiente geográficamente distribuido: En primer lugar, en muchas situaciones, el entorno informático en sí mismo está geográficamente distribuido. Como ejemplo, consideremos una red bancaria. Se supone que cada banco debe mantener las cuentas de sus clientes. Además, los bancos se comunican entre sí para monitorear las transacciones interbancarias, o registrar las transferencias de fondos de los cajeros automáticos geográficamente dispersos. Otro ejemplo común de un entorno informático geográficamente distribuido es la Internet, que ha influido profundamente en nuestra forma de vida. La movilidad de los usuarios ha añadido una nueva dimensión a la distribución geográfica.
+Speed up: En segundo lugar, existe la necesidad de acelerar los cálculos. La velocidad de cómputo en los uniprocesadores tradicionales se está acercando rápidamente al límite físico. Mientras que los procesadores superescalares y VLIW estiran el límite introduciendo un paralelismo a nivel arquitectónico (cuestión de la instrucción), las técnicas no se escalan mucho más allá de un cierto nivel. Una técnica alternativa para obtener más potencia de cálculo es utilizar procesadores múltiples. Dividir un problema entero en subproblemas más pequeños y asignar estos subproblemas a procesadores físicos separados que puedan funcionar simultáneamente es un método potencialmente atractivo para aumentar la velocidad de cálculo. Además, este enfoque promueve una mejor escalabilidad, en la que los usuarios pueden aumentar progresivamente la potencia de cálculo adquiriendo elementos o recursos de procesamiento adicionales. A menudo, esto es más sencillo y económico que invertir en un único uniprocesador superrápido.
+Compartir recursos: En tercer lugar, existe la necesidad de compartir los recursos. El usuario de la computadora A puede querer usar una impresora láser conectada con la computadora B, o el usuario de la computadora B puede necesitar un poco de espacio extra en el disco disponible en la computadora C para almacenar un archivo grande. En una red de estaciones de trabajo, es posible que la estación de trabajo A quiera utilizar la potencia de cálculo en reposo de las estaciones de trabajo B y C para aumentar la velocidad de un determinado cálculo. Las bases de datos distribuidas son buenos ejemplos del intercambio de recursos de software, en los que una gran base de datos puede almacenarse en varias máquinas anfitrionas y actualizarse o recuperarse sistemáticamente mediante una serie de procesos de agentes.
+Tolerancia a fallos: Por último, los poderosos uniprocesadores, o sistemas de computación construidos alrededor de un solo nodo central son propensos a un completo colapso cuando el procesador falla. Muchos usuarios consideran que esto es arriesgado. Sin embargo, están dispuestos a transigir con una degradación parcial del rendimiento del sistema, cuando un fallo paraliza una fracción de los muchos elementos de procesamiento o enlaces de un sistema distribuido. Esta es la esencia de la degradación gradual. La otra cara de este enfoque es que, al incorporar elementos de procesamiento redundantes en un sistema distribuido, se puede aumentar potencialmente la fiabilidad o la disponibilidad del sistema. Por ejemplo, en un sistema que tiene triple redundancia modular (TMR), se utilizan tres unidades funcionales idénticas para realizar el mismo cómputo, y el resultado correcto se determina por mayoría de votos. En otros sistemas distribuidos tolerantes de fallos, los procesadores se comprueban mutuamente en puntos de control predefinidos, lo que permite la detección automática de fallos, el diagnóstico y la eventual recuperación. Así pues, un sistema distribuido ofrece una excelente oportunidad para incorporar la tolerancia a fallos y la degradación grácil.
+Modularidad: La arquitectura cliente/servidor está construida sobre la base de módulos conectables. Tanto el cliente como el servidor son módulos del sistema independientes uno del otro y pueden ser reemplazados sin afectarse mutuamente. Se agregan funciones al sistema ya sea creando nuevos módulos o mejorando los existentes.
+Portabilidad: Actualmente el poder de procesamiento se puede encontrar en varios tamaños: super servidores, servidores, desktop, notebooks, máquinas portátiles. Las soluciones con computación distribuida permiten a las aplicaciones estar localizadas donde resulte más ventajoso u óptimo.
+
+Inconvenientes​:
+Escalabilidad: El sistema debe diseñarse de tal manera que la capacidad pueda ser aumentada con la creciente demanda del sistema.
+Heterogeneidad: La infraestructura de comunicaciones consiste en canales de diferentes capacidades. 
+Gestión de los recursos: En los sistemas distribuidos, los recursos se encuentran en diferentes lugares. El enrutamiento es un problema en la capa de red y en la capa de aplicación. 
+Seguridad y privacidad: Dado que los sistemas distribuidos tratan con datos e información sensible, se deben tener fuertes medidas de seguridad y privacidad. La protección de los activos del sistema distribuido así como los compuestos de nivel superior de estos recursos son cuestiones importantes en el sistema distribuido.
+Transparencia: La transparencia significa hasta qué punto el sistema distribuido debe aparecer para el usuario como un sistema único. El sistema distribuido debe ser diseñado para ocultar en mayor medida la complejidad del sistema.
+Apertura: La apertura significa hasta qué punto un sistema es diseñado utilizando protocolos estándar para apoyar la interoperabilidad. Para lograr esto, el sistema distribuido debe tener interfaces bien definidas.
+Sincronización: Uno de los principales problemas es la sincronización de los cálculos consistentes en miles de componentes. Métodos actuales de sincronización como los semáforos, los monitores, las barreras, la llamada a procedimientos remotos, la invocación de métodos de objetos y el paso de mensajes, no escalan bien.
+Interbloqueo y condiciones de carrera: El interbloqueo y las condiciones de carrera son otras grandes cuestiones en el sistema distribuido, especialmente en el contexto de las pruebas. Se convierte en un tema más importante especialmente en el entorno de multiprocesadores de memoria compartida.
+
+Notas:
+
+Lectura suplementaria:
+Andrew S. Tanenbaum, Maarten van Steen (2001), Distributed Systems: Principles and Paradigms . ISBN 9780132392273.
+Banks, M (2012), On the Way to the Web: The Secret History of the Internet and its Founders, Apress . ISBN 9783642381232.
+Coulouris, George (2011), Distributed Systems: Concepts and Design (5th Edition), Addison-Wesley . ISBN 0-132-14301-1.
+Kamal Sheel Mishra, Anil Kumar Tripathi, Some Issues, Challenges and Problems of Distributed Software System, Department of Computer Science & Engineering, Indian Institute of Technology(Banaras Hinhu University) . ISBN 0975-9646.
+Raynal, Michel (2013), Distributed Algorithms for Message-Passing Systems . ISBN 9783642381232.
+Tel, Gerard (1994), Introduction to Distributed Algorithms, Cambridge University Press . ISBN 9780521794831.

@@ -1,0 +1,102 @@
+services:
+    # LLM Service
+    # vllm-openai:
+    #     container_name: my-vllm-service
+    #     deploy:
+    #         resources:
+    #             reservations:
+    #                 devices:
+    #                     - driver: nvidia
+    #                       device_ids: ['0']
+    #                       capabilities:
+    #                           - gpu
+    #     volumes:
+    #         - "./models:/models"
+    #     environment:
+    #         HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
+    #     ports:
+    #         - 8000:8000
+    #     ipc: host
+    #     image: docker.io/vllm/vllm-openai:latest
+    #     command: [
+    #         "--model", "/models/Sreenington--Phi-3-mini-4k-instruct-AWQ",
+    #         "--max-num-seqs", "8",
+    #         "--max-model-len", "1000",
+    #         "--quantization", "awq_marlin",
+    #         "--gpu-memory-utilization", "0.7",
+    #         "--port", "8000",
+    #         "--enable-auto-tool-choice",
+    #         "--tool-call-parser", "phi4_mini_json", 
+    #         "--chat-template", "{{ bos_token }}{% for message in messages %}{% if (message['role'] in ['user', 'system']) %}{{'<|user|>' + '\n' + message['content'] + '<|end|>' + '\n' + '<|assistant|>' + '\n'}}{% elif message['role'] == 'assistant' %}{{message['content'] + '<|end|>' + '\n'}}{% endif %}{% endfor %}",
+    #     ]
+        
+    # Embeddings Service
+    vllm-openai-embeddings:
+        container_name: my-embedding-service
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          device_ids: ['0']
+                          capabilities:
+                              - gpu
+        volumes:
+            - "./models:/models"
+        environment:
+            HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
+        ports:
+            - 8001:8001
+        ipc: host
+        image: docker.io/vllm/vllm-openai:latest
+        command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 16 --gpu-memory-utilization 0.4 --max_model_len=3000
+
+    # Backend Service
+    backend:
+        container_name: chatbot-backend
+        build:
+            context: .
+            dockerfile: Containerfile
+        ports:
+            - 8080:8080
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          device_ids: ['0']
+                          capabilities:
+                              - gpu
+        env_file:
+            - .env
+        environment:
+            HF_HUB_DISABLE_SYMLINKS_WARNING: 1
+            PYTHONPATH: /chatbot/app
+        command: ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8080"]
+        volumes:
+            - ./unitTests:/chatbot/app/unitTests
+            - ./pytest.ini:/chatbot/app/pytest.ini
+            - ./logs:/chatbot/app/logs
+            - ./app/storage:/chatbot/app/storage
+        restart: unless-stopped
+        depends_on:
+            - vllm-openai-embeddings
+
+    # Frontend Service
+    frontend:
+        container_name: chatbot-frontend
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        ports:
+            - 3000:80
+        environment:
+            - NGINX_HOST=localhost
+            - NGINX_PORT=80
+        depends_on:
+            - backend
+        restart: unless-stopped
+
+networks:
+    default:
+        name: chatbot-network

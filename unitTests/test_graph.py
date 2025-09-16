@@ -1,5 +1,5 @@
 import pytest
-from logic.graph import build_graph
+from domain.graph import build_graph
 from unittest.mock import patch, MagicMock
 
 def test_build_graph_returns_graph():
@@ -8,7 +8,7 @@ def test_build_graph_returns_graph():
     assert graph is not None
     assert hasattr(graph, "get_state")
 
-@patch("logic.graph.consultar_guia_docente")
+@patch("domain.graph.consultar_guia_docente")
 def test_consultar_guia_docente_tool(mock_tool):
     """Test consultar_guia_docente tool returns expected tuple"""
     mock_tool.return_value = ("info", [])

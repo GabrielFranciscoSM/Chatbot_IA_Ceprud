@@ -13,7 +13,7 @@ services:
                           capabilities:
                               - gpu
         volumes:
-            - "./app/models:/models"
+            - "./models:/models"
         environment:
             HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
             #VLLM_LOGGING_LEVEL: DEBUG
@@ -52,7 +52,7 @@ services:
                           capabilities:
                               - gpu
         volumes:
-            - "./app/models:/models"
+            - "./models:/models"
         environment:
             HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
             #VLLM_LOGGING_LEVEL: DEBUG
@@ -60,7 +60,7 @@ services:
             - 8001:8001
         ipc: host
         image: docker.io/vllm/vllm-openai:latest
-        command: --model /models/BAAI--bge-m3 --port 8001 --max-num-seqs 8 --gpu-memory-utilization 0.15 --max_model_len=3000
+        command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 64 --gpu-memory-utilization 0.15 --max_model_len=3000
     chatbot:
         container_name: my-chatbot-app
         build:
@@ -83,13 +83,18 @@ services:
                           # count: all
                           capabilities:
                               - gpu
+        env_file:
+            - .env
         environment:
             HF_HUB_DISABLE_SYMLINKS_WARNING: 1
+            PYTHONPATH: /chatbot/app
+        command: ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "5001"]
         volumes:
-        - ./.env:/app/.env
-        - ./app:/app
-        - ./unitTests:/unitTests
-        - ./pytest.ini:/pytest.ini
+        # DEVELOPMENT: Uncomment next line for hot-reload (code changes without rebuild)
+        # - ./app:/app  # Mount the app directory for live code updates
+        #S- ./.env:/app/.env
+        - ./unitTests:/chatbot/app/unitTests
+        - ./pytest.ini:/chatbot/app/pytest.ini
 
 
         restart: unless-stopped

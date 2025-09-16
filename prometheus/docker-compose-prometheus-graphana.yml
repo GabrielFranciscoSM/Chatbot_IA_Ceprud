@@ -16,4 +16,4 @@ services:
     depends_on:
       - prometheus
     ports:
-      - "3000:3000" # the default port used by Grafana
+      - "3001:3000" # the default port used by Grafana

@@ -12,7 +12,7 @@ def test_full_chat_flow(test_client):
     for msg in messages:
         response = test_client.post(
             "/chat",
-            data={
+            json={
                 "message": msg,
                 "subject": "metaheuristicas",
                 "email": "test@ugr.es",
@@ -32,7 +32,7 @@ def test_chatbot_memory_name(test_client):
     # Step 1: Tell the chatbot your name
     response1 = test_client.post(
         "/chat",
-        data={
+        json={
             "message": "Me llamo Gabriel.",
             "subject": subject,
             "email": email,
@@ -43,7 +43,7 @@ def test_chatbot_memory_name(test_client):
     # Step 2: Ask the chatbot to recall your name
     response2 = test_client.post(
         "/chat",
-        data={
+        json={
             "message": "¿Cuál es mi nombre?",
             "subject": subject,
             "email": email,

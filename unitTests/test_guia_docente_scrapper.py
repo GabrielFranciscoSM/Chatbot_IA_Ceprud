@@ -1,5 +1,5 @@
 import pytest
-from RAG.guia_docente_scrapper import parse_profesorado, parse_section_content, guardar_en_json
+from rag.guia_docente_scrapper import parse_profesorado, parse_section_content, guardar_en_json
 from bs4 import BeautifulSoup
 import os
 import tempfile

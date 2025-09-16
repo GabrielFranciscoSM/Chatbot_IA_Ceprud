@@ -151,6 +151,7 @@ pypdfium2==4.30.0
 pypika==0.48.9
 pyproject-hooks==1.2.0
 pytest==8.4.1
+pytest-asyncio==1.1.0
 pytest-dotenv==0.5.2
 pytest-testinfra==10.2.2
 python-bidi==0.6.6
@@ -209,6 +210,7 @@ watchfiles==1.1.0
 wcwidth==0.2.13
 websocket-client==1.8.0
 websockets==15.0.1
+wikipedia==1.4.0
 xlsxwriter==3.2.5
 xxhash==3.5.0
 zipp==3.23.0

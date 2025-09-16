@@ -1,0 +1,100 @@
+La teoría de la computabilidad o teoría de la recursión es la parte de la computación que estudia los problemas de decisión que se pueden resolver con un algoritmo o equivalentemente con una máquina de Turing. Las preguntas fundamentales de la teoría de la computabilidad son:
+
+¿Qué problemas puede resolver una máquina de Turing?
+¿Qué otros formalismos equivalen a las máquinas de Turing?
+¿Qué problemas requieren máquinas más poderosas?
+¿Qué problemas requieren máquinas menos poderosas?
+La teoría de la complejidad computacional clasifica las funciones computables según el uso que hacen de diversos recursos en diversos tipos de máquina.
+
+Introducción:
+La Teoría de la Computabilidad es el estudio matemático de los modelos de computación. Como tal estudio teórico, se originó en la década de los años 30 con los trabajos de los lógicos Church, Gödel, Kleene, Post y Turing.
+Téngase en cuenta que en aquellos años el avance tecnológico ni siquiera podía prever la revolución que en la década de los 60 traerían los ordenadores, y sin embargo, conceptos habituales hoy en día (computadores universales, programas como listas de instrucciones de un lenguaje formal, intérpretes, ...) ya fueron definidos desde un punto de vista teórico por esos matemáticos.
+
+Descripción:
+La teoría de la computabilidad, también denominada teoría de la recursión, es una de las cuatro partes que constituyen la lógica matemática, siendo las otras tres, la teoría de conjuntos, la teoría de modelos y la teoría de la demostración, y se ocupa del estudio y clasificación de las relaciones y aplicaciones computables. Además, la teoría de la computabilidad, junto con la teoría de autómatas, de la información, de los lenguajes y máquinas, y es el fundamento de la informática teórica y esta, a su vez, de la industria de los ordenadores.
+Desde tiempo inmemorial se sabe que cierta clase de problemas, e.g., la determinación del máximo común divisor de dos números enteros, mediante el algoritmo de Euclides, o la determinación de los números primos, mediante la criba de Eratóstenes, son algorítmicamente solubles, i.e., hay algoritmos o procedimientos mecánicos que permiten obtener la solución del problema en cuestión. De manera que hasta principios del siglo XX se daba por hecho que existían algoritmos y que el único problema residía en determinarlos. Así pues, si lo que se desea es determinar un algoritmo, no hay ninguna necesidad de definir la clase de todos los algoritmos; eso sólo es necesario si se pretende demostrar que algún problema no es algorítmicamente soluble, i.e., que para dicho problema no hay ningún algoritmo que lo resuelva.
+Es posible que el primero en afirmar la no existencia de un algoritmo fuera Tietze en 1908, quién dijo de los grupos de presentación finita:
+“. . . la cuestión acerca de cuándo dos grupos son isomorfos no es soluble en general.”​
+Pero parece ser que fue, por una parte, el problema de la decidibilidad de la lógica de predicados planteado por Hilbert y Ackermann en su libro sobre lógica, publicado en 1928, y, por otra, el asunto de la solubilidad de todo problema matemático, lo que indujo, en aras a resolverlos, a diversos investigadores a partir de 1930, y entre los que cabe mencionar a Gödel, Church y Turing, a proponer diversas formalizaciones del concepto informal de función mecánicamente computable. Debido a que de todas esas formalizaciones, y de otras propuestas por Kleene, Post y Markoff, se demostró que eran dos a dos equivalentes, se propuso la hipótesis, conocida como Hipótesis de Church-Turing-Post-Kleene, que afirma la coincidencia entre el concepto informal de función parcial mecánica o algorítmicamente computable, y el concepto formal, matemático, de aplicación parcial recursiva. Naturalmente, esa hipótesis, de carácter similar a otras hipótesis propuestas en las ciencias empíricas, no es demostrable, y su fundamento último reside en las equivalencias antes mencionadas.
+Hay cursos dedicados, en primer lugar, al estudio de diferentes clases de aplicaciones recursivas, desde las recursivas primitivas, hasta las parciales recursivas, pasando por las recursivas generales, así como al de diversas clases de relaciones, entre las que cabe citar a las recursivas primitivas, las recursivamente enumerables y a las recursivas, demostrando además, ciertos teoremas fundamentales de la teoría de la recursión, debidos en gran medida a Kleene; y, en segundo lugar, a la aplicación de la teoría de la recursión a la demostración de la indecidibilidad de la lógica de predicados de primer orden, i.e., a la demostración de que el conjunto de los números de Gödel de los teoremas de la lógica de predicados de primer orden no es recursivo, aunque sí sea recursivamente enumerable; y de los teoremas de incompletitud de Gödel, de los cuales, el primero da cuenta, esencialmente, de la diferencia, en la aritmética, entre las nociones de verdad y demostrabilidad, mientras que el segundo afirma que, bajo ciertas condiciones, no es posible demostrar desde una teoría, la consistencia de la misma, i.e., esencialmente que el infinito no es eliminable en las matemáticas.
+
+Conjuntos computables y no computables:
+
+La teoría de la recursión se originó en la década de 1930, con el trabajo de Kurt Gödel, Alonzo Church, Alan Turing, Stephen Kleene y Emil Post.​
+Los resultados fundamentales que obtuvieron los investigadores estabilizaron el concepto de función computable como la manera correcta de formalizar la idea sobre cálculos efectivos.
+Estos resultados llevaron a Stephen Kleene (1952) a acuñar dos nombres, "Tesis de Church" (Kleene 1952:300) y "Tesis de Turing" (Kleene 1952:376). Hoy en día ambos se consideran como una única hipótesis, la Tesis de Church-Turing, la cual establece que cualquier función que sea computable por un cierto algoritmo es una función computable. Aunque en un principio era algo un tanto escéptico, alrededor del año 1946, Gödel defendió esta tesis:
+
+"Tarksi ha subrayado en su lectura (y creo justamente) la gran importancia del concepto de recursividad general (o computabilidad de Turing). En mi opinión esta importancia se debe en gran medida al hecho de que con este concepto, por fin se ha conseguido darle una noción absoluta a una interesante noción epistemológica, es decir, una que no depende del formalismo elegido.*"(Gödel 1946 en Davis 1965:84).​
+Con una definición sobre cálculos efectivos aparecieron las primeras pruebas de que hay ciertos problemas en las matemáticas que no pueden ser decididos de una manera eficaz. Church (1936p, 1936f) y Turing (1936), inspirados por las técnicas usadas por Gödel (1931) para probar sus teoremas sobre la incompletitud, demostraron por separado que no es posible decidir el Entscheidungsproblem de una manera eficaz. Este resultado demostró que no existe un procedimiento algorítmico que pueda decidir de manera correcta si ciertas proposiciones matemáticas son verdaderas o no.
+Muchos problemas en las matemáticas han sido demostrados ser indecidibles una vez se establecieron estos primeros ejemplos. En 1947, Markov y Post publicaron por separado sus trabajos mostrando que el problema de las palabras para los semigrupos no puede ser decidido de una manera eficaz. Ampliando este resultado, Pyotr Novikov y William Boone demostraron independientemente en la década de 1950 que el problema de las palabras para los semigrupos no se puede resolver de una manera efectiva: no hay ningún procedimiento eficaz que, dada una palabra en un grupo, decida si el elemento representado por la palabra es el elemento identidad del grupo. En 1970, Yuri Matiyasevich demostró (usando los resultados de Julia Robinson) el Teorema de Matiyasevich, el cual implica que el décimo problema de Hilbert no tiene una solución eficaz; este problema preguntaba si había o no un procedimiento mediante el cual se pudiera decidir si una ecuación diofántica sobre los números enteros tiene una solución entera. La lista de problemas indecidibles contiene ejemplos adicionales sobre problemas sin soluciones computables.
+El estudio sobre qué construcciones matemáticas pueden ser llevadas a cabo de una forma eficaz se denomina a veces matemática recursiva; El Handbook of Recursive Mathematics (Ershov et al. 1998) cubre muchos de los resultados conocidos en este campo.
+
+Antecedentes:
+El origen de los modelos abstractos de computación se encuadra en los años 1930 (antes de que existieran los ordenadores modernos), para el trabajo de los lógicos Alonzo Church, Kurt Gödel, Stephen Kleene, Emil Leon Post, y Alan Turing. Estos trabajos iniciales han tenido una profunda influencia, tanto en el desarrollo teórico como en abundantes aspectos de la práctica de la computación; previendo incluso la existencia de ordenadores de propósito general, la posibilidad de interpretar programas, la dualidad entre software y hardware, y la representación de lenguajes por estructuras formales basados en reglas de producción.
+El punto inicial de estos primeros trabajos fueron las cuestiones fundamentales que David Hilbert formuló en 1900, durante el transcurso de un congreso internacional.
+Lo que Hilbert pretendía era crear un sistema matemático formal completo y consistente en el cual todas las aseveraciones fueran planteadas con precisión. Su intención era encontrar un algoritmo que determinara la verdad o falsedad de cualquier proposición en el sistema formal. Al problema en cuestión se le denominó Entscheidungsproblem. En caso de que Hilbert hubiese cumplido su objetivo, cualquier problema bien definido se resolvería simplemente al ejecutar dicho algoritmo.
+Pero fueron otros los que mediante una serie de investigaciones mostraron que esto no era posible. En contra de esta idea K. Gödel sacó a la luz su conocido Primer Teorema de Incompletitud. Este viene a expresar que todo sistema de primer orden consistente que contenga los teoremas de la aritmética y cuyo conjunto de axiomas sea recursivo no es completo. Gödel construyó una fórmula que es satisfactoria pero que no puede ser probada en el sistema. Como consecuencia, no es posible encontrar el sistema formal deseado por Hilbert en el marco de la lógica de primer orden, a no ser que se tome un conjunto no recursivo de axiomas.
+Una posterior versión, que resulta más general, del teorema de incompletitud de Gödel, indica que ningún sistema deductivo que contenga los teoremas de la aritmética, y con los axiomas recursivamente enumerables puede ser consistente y completo a la vez. Esto hace pensar, a nivel intuitivo, que no va a ser posible definir un sistema formal.
+
+¿Qué problemas puede resolver una máquina de Turing?:
+No todos los problemas pueden ser resueltos. Un problema indecidible es uno que no puede ser resuelto con un algoritmo aun si se dispone de espacio y tiempo ilimitado. Actualmente se conocen muchos problemas indecidibles, como por ejemplo:
+
+El Entscheidungsproblem (problema de decisión en alemán) que se define como: Dada una frase del cálculo de predicados de primer orden, decidir si ella es un teorema. Church y Turing demostraron independientemente que este problema es indecidible (ver Tesis de Church-Turing).
+El Problema de la parada, que se define así: Dado un programa y su entrada, decidir si ese programa terminará para esa entrada o si correrá indefinidamente. Turing demostró que se trata de un problema indecidible.
+Un número computable es un número real que puede ser aproximado por un algoritmo con un nivel de exactitud arbitrario. Turing demostró que casi todos los números no son computables. Por ejemplo, la Constante de Chaitin no es computable aunque sí que está bien definida.
+
+¿Qué otros formalismos equivalen a las máquinas de Turing?:
+Los lenguajes formales que son aceptados por una máquina de Turing son exactamente aquellos que pueden ser generados por una gramática formal. El cálculo Lambda es una forma de definir funciones. Las funciones que pueden ser computadas con el cálculo Lambda son exactamente aquellas que pueden ser computadas con una máquina de Turing. Estos tres formalismos, las máquinas de Turing, los lenguajes formales y el cálculo Lambda son formalismos muy disímiles y fueron desarrollados por diferentes personas. Sin embargo, todos ellos son equivalentes y tienen el mismo poder de expresión. Generalmente se toma esta notable coincidencia como evidencia de que la tesis de Church-Turing es cierta, que la afirmación de que la noción intuitiva de algoritmo o procedimiento efectivo de cómputo corresponde a la noción de cómputo en una máquina de Turing.
+Los computadores electrónicos, basados en la arquitectura de von Neumann así como las máquinas cuánticas tendrían exactamente el mismo poder de expresión que el de una máquina de Turing si dispusieran de recursos ilimitados de tiempo y espacio. Como consecuencia, los lenguajes de programación tienen a lo sumo el mismo poder de expresión que el de los programas para una máquina de Turing y en la práctica no todos lo alcanzan. Los lenguajes con poder de expresión equivalente al de una máquina de Turing se denominan Turing completos.
+Entre los formalismos equivalentes a una máquina de Turing están:
+
+Máquinas de Turing con varias cintas
+Máquinas de Turing con cintas bidimensionales, Turmite (o una infinidad de cintas lineales)
+Máquinas de Turing con número limitado de estados y símbolos para la cinta
+Máquinas de Turing con solo dos estados
+Autómatas finitos con dos pilas
+Autómatas finitos con dos contadores
+Gramáticas formales
+Máquina de Post
+Cálculo Lambda
+Funciones recursivas parciales
+Casi todos los lenguajes de programación modernos si dispusieran de memoria ilimitada
+Autómatas celulares
+El Juego de la vida de John Conway
+Máquinas de Turing no determinísticas
+Máquinas de Turing probabilísticas
+Computador cuántico
+Los últimos tres ejemplos utilizan una definición ligeramente diferente de aceptación de un lenguaje. Ellas aceptan una palabra si cualquiera, cómputo acepta (en el caso de no determinismo), o la mayoría de los cómputos aceptan (para las versiones probabilística y cuántica). Con estas definiciones, estas máquinas tienen el mismo poder de expresión que una máquina de Turing.
+
+¿Qué problemas requieren máquinas más poderosas?:
+Se considera que algunas máquinas tienen mayor poder que las máquinas de Turing. Por ejemplo, 
+una máquina oráculo que utiliza una caja negra que puede calcular una función particular que no es calculable con una máquina de Turing. La fuerza de cómputo de una máquina oráculo viene descrita por su grado de Turing. La teoría de cómputos reales estudia máquinas con precisión absoluta en los números reales. Dentro de esta teoría, es posible demostrar afirmaciones interesantes, tales como «el complemento de un conjunto de Mandelbrot es solo parcialmente decidible».
+
+Ejemplos de funciones recursivas primitivas:
+EJEMPLO 1. Sea k ∈, Y sea k la función constante. Definido por k (x) = k para todo x ∈. Demuestre que k está en prim.
+SOLUCIÓN Lo mostramos por inducción sobre k.
+Puesto que 0 es una función inicial, tenemos 0 ∈ prim.
+Dígase k ∈ prim, algo dado k. Entonces (k + 1) (x) = (k (x)) 0, para cada x ∈ ℕ. Así que K + 1 ∈ prim (por sustitución de k en 0).
+EJEMPLO 2. Demuestre que la diferencia absoluta, definida por 
+
+ m-n,&}&m\geq n\\n-m,&}&m<n\end}\right.}
+
+SOLUCIÓN. En este caso, obtenemos la función mediante la sustitución usando ya Funciones recursivas primitivas probadas:
+|m − n| = (m−· n) + (n−· m).
+¡No todos los ejemplos necesitan un esquema recursivo primitivo!
+Podemos esperar que este proceso de construcción cada vez sea más complicado.
+Debemos usar funciones anteriores hasta que tengamos todas las funciones computables, en la medida en que a partir de 1928 Wilhelm Ackermann definió una función computable que no es primitivo recursivo. 
+Para definir la función de Ackermann A, utilizó un anidado recursivo.
+Aquí está una versión simplificada debido al matemático húngaro R'osza P'eter, un cofundador en gran medida olvidado de la teoría de la computabilidad:
+A(m, 0) = m + 1
+A(0, n + 1) = A(1, n)
+A(m + 1, n + 1) = A(A(m, n + 1), n).
+El anidamiento en la última línea conduce a que A (m, m) sea mucho más rápido que el crecimiento de cualquier función recursiva primitiva f (m) podría ser. Uno puede obtener una impresión de la rapidez con la computación sólo unos pocos valores. Para ello, utilice el hecho de que la recursión anidada antedicha da las ecuaciones equivalentes:
+A(m, 0) = m + 1
+A(m, 1) = 2 + (m + 3) − 3
+A(m, 2) = 2 × (m + 3) − 3
+A(m, 3) = 2(m+3) − 3
+2− 3 (m + 3 terms)
+De donde obtendremos los valores:
+A(0,0)=1, A(1,1)=3, A(2,2)=7, A(3,3)=61, A(4,4)= 65536.
+Podemos remediar esta insuficiencia de prim añadiendo sólo una regla más para obtener nuevas funciones.
