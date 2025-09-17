@@ -8,17 +8,13 @@ from langchain_core.messages import HumanMessage, SystemMessage, ToolMessage, AI
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_chroma import Chroma
 from langgraph.graph import StateGraph, END, MessagesState
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.checkpoint.sqlite import SqliteSaver
 from typing_extensions import TypedDict
 
-# Asumo que get_embedding_function es una función que tienes en otro archivo
-from rag.get_embedding_function import get_embedding_function
 from services.rag_client import rag_client
 from langchain_core.runnables import RunnableConfig
-import sqlite3
 
 # --- CONFIGURACIÓN ---
 load_dotenv()
@@ -26,7 +22,6 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 VLLM_URL = os.getenv("VLLM_URL", "http://localhost:8000") + "/v1"
 VLLM_MODEL_NAME = os.getenv("MODEL_DIR", "/models/Sreenington--Phi-3-mini-4k-instruct-AWQ")
-BASE_CHROMA_PATH = "../RAG" + os.getenv("BASE_CHROMA_PATH", "chroma")
 
 LOCAL_INFERENCE=False
 
@@ -64,85 +59,53 @@ def consultar_guia_docente(seccion: str, config: RunnableConfig) -> Tuple[str, L
     try:
         subject = config["configurable"]["subject"]
 
-        # Rutas posibles para el archivo de guía docente
-        possible_paths = [
-            os.path.join("app", "rag", "data", subject, "guía_docente.json"),
-            os.path.join("app", "rag", "data", subject, "guia_docente.json"),
-            os.path.join("rag", "data", subject, "guía_docente.json"),
-            os.path.join("rag", "data", subject, "guia_docente.json")
-        ]
+        # Usar el RAG client para obtener la guía docente
+        guia_data = rag_client.get_guia_docente(subject, seccion)
         
-        # Obtener directorio actual
-        current_dir = os.getcwd()
-        
-        # Buscar el archivo
-        path = None
-        for test_path in possible_paths:
-            abs_path = os.path.abspath(test_path)
-            if os.path.exists(abs_path):
-                path = abs_path
-                break
-        
-        if not path:
-            error_msg = f"No se encontró archivo de guía docente para '{subject}'"
+        if not guia_data:
+            error_msg = f"No se encontró información de guía docente para '{subject}'"
             return error_msg, []
-            
-        # Cargar el JSON
-        with open(path, 'r', encoding='utf-8') as f:
-            guia = json.load(f)
         
-        # Mapeo de secciones
-        seccion_mapping = {
-            "profesorado": "profesorado_y_tutorias",
-            "profesores": "profesorado_y_tutorias", 
-            "tutorias": "profesorado_y_tutorias",
-            "evaluacion": "evaluación",
-            "evaluación": "evaluación",
-            "examen": "evaluación",
-            "examenes": "evaluación",
-            "temario": "programa_de_contenidos_teóricos_y_prácticos",
-            "programa": "programa_de_contenidos_teóricos_y_prácticos",
-            "contenidos": "programa_de_contenidos_teóricos_y_prácticos",
-            "temas": "programa_de_contenidos_teóricos_y_prácticos",
-            "metodologia": "metodología_docente",
-            "metodología": "metodología_docente",
-            "bibliografia": "bibliografía",
-            "bibliografía": "bibliografía",
-            "libros": "bibliografía",
-            "prerrequisitos": "prerrequisitos_o_recomendaciones",
-            "recomendaciones": "prerrequisitos_o_recomendaciones",
-            "competencias": "resultados_del_proceso_de_formación_y_de_aprendizaje",
-            "resultados": "resultados_de_aprendizaje",
-            "enlaces": "enlaces_recomendados",
-            "recursos": "enlaces_recomendados",
-            "informacion_adicional": "información_adicional",
-            "información_adicional": "información_adicional"
-        }
+        # La guía_data ya viene filtrada por sección desde el RAG service
+        # Convertir a formato legible
+        if isinstance(guia_data, dict):
+            if len(guia_data) == 1:
+                # Solo una sección
+                key, value = next(iter(guia_data.items()))
+                content = f"=== {key.replace('_', ' ').title()} ===\n\n"
+                if isinstance(value, dict):
+                    for subkey, subvalue in value.items():
+                        content += f"**{subkey}**: {subvalue}\n\n"
+                else:
+                    content += str(value)
+            else:
+                # Múltiples secciones
+                content = ""
+                for key, value in guia_data.items():
+                    content += f"=== {key.replace('_', ' ').title()} ===\n\n"
+                    if isinstance(value, dict):
+                        for subkey, subvalue in value.items():
+                            content += f"**{subkey}**: {subvalue}\n\n"
+                    else:
+                        content += str(value) + "\n\n"
+        else:
+            content = str(guia_data)
         
-        seccion_limpia = seccion.lower().strip()
+        # Crear documento con la información
+        doc = Document(
+            page_content=content,
+            metadata={
+                "source": f"guia_docente_{subject}",
+                "section": seccion,
+                "type": "guia_docente"
+            }
+        )
         
-        # Buscar mapeo exacto
-        target_key = seccion_mapping.get(seccion_limpia)
-        
-        if target_key and target_key in guia:
-            resultado = {target_key: guia[target_key]}
-            result_json = json.dumps(resultado, ensure_ascii=False, indent=2)
-            return result_json, []
-        
-        # Búsqueda parcial
-        for key in guia.keys():
-            if seccion_limpia in key.lower():
-                resultado = {key: guia[key]}
-                return json.dumps(resultado, ensure_ascii=False, indent=2), []
-        
-        # No encontrado
-        secciones_disponibles = list(guia.keys())
-        error_msg = f"Error: La sección '{seccion}' no se encontró.\n\nSecciones disponibles:\n" + \
-                   "\n".join([f"- {s}" for s in secciones_disponibles])
-        return error_msg, []
+        return content, [doc]
         
     except Exception as e:
-        error_msg = f"Error en consultar_guia_docente: {str(e)}"
+        error_msg = f"Error al consultar guía docente: {str(e)}"
+        print(error_msg)
         return error_msg, []
 
 
@@ -191,32 +154,6 @@ def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[D
         error_msg = f"Error en búsqueda RAG: {str(e)}"
         return error_msg, []
 
-        if not all_docs:
-            return "No se encontraron documentos relevantes en los apuntes.", []
-
-        # 1. Adaptive threshold tuning
-        scores = [score for _, score in all_docs]
-        if scores:
-            avg_score = sum(scores) / len(scores)
-            std_score = (sum((s - avg_score) ** 2 for s in scores) / len(scores)) ** 0.5
-            # Use mean - 0.5*std as threshold to keep better half
-            adaptive_threshold = max(avg_score - 0.5 * std_score, 0.5)
-        else:
-            adaptive_threshold = 0.7
-
-        # Filter by adaptive threshold
-        filtered_docs = [(doc, score) for doc, score in all_docs if score < adaptive_threshold]
-
-        
-        return result_message, documents
-        
-    except KeyError as e:
-        error_msg = f"Error: Falta configuración requerida: {str(e)}"
-        return error_msg, []
-    except Exception as e:
-        error_msg = f"Error en búsqueda RAG: {str(e)}"
-        return error_msg, []
-
 # --- LÓGICA DEL GRAFO ---
 
 def call_agent(state: AgentState):
@@ -232,12 +169,6 @@ def call_agent(state: AgentState):
     llm_with_tools = llm.bind_tools(tools)
 
     response = llm_with_tools.invoke(state["messages"])
-
-    # for message in state["messages"]:
-    #     message.pretty_print()
-        
-    # response.pretty_print()
-    # print("\n\n")
 
     return {"messages": [response]}
 

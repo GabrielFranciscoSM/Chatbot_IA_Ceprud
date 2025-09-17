@@ -101,6 +101,46 @@ class RAGServiceClient:
             return response.status_code == 200
         except:
             return False
+        
+    def get_guia_docente(self, subject: str, section: Optional[str] = None) -> Optional[Dict[str, Any]]:
+        """
+        Obtener información de la guía docente desde el RAG Service
+        
+        Args:
+            subject: Nombre de la asignatura
+            section: Sección específica (opcional)
+            
+        Returns:
+            Diccionario con los datos de la guía docente o None si hay error
+        """
+        try:
+            url = f"{self.base_url}/guia-docente/{subject}"
+            params = {}
+            if section:
+                params["section"] = section
+                
+            response = requests.get(
+                url,
+                params=params,
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                return data["data"]
+            elif response.status_code == 404:
+                print(f"Guía docente no encontrada para: {subject}")
+                return None
+            else:
+                print(f"Error obteniendo guía docente: {response.status_code} - {response.text}")
+                return None
+                
+        except requests.exceptions.RequestException as e:
+            print(f"Error conectando con RAG Service para guía docente: {str(e)}")
+            return None
+        except Exception as e:
+            print(f"Error inesperado obteniendo guía docente: {str(e)}")
+            return None
 
 # Instancia global del cliente
 rag_client = RAGServiceClient()

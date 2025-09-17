@@ -64,7 +64,7 @@ services:
             VLLM_EMBEDDING_URL: http://vllm-openai-embeddings:8001
             EMBEDDING_MODEL_DIR: /models/Qwen--Qwen3-Embedding-0.6B
         volumes:
-            - ./app/rag:/app/data/original_rag  # Para migrar datos existentes
+            - ./rag-service/data:/app/data/  # Guías docentes y archivos de asignaturas
             - rag_data:/app/data/chroma  # Volumen persistente para ChromaDB
         restart: unless-stopped
         depends_on:

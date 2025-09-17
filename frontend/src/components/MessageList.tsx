@@ -1,6 +1,7 @@
 import React from 'react';
 import { Message } from '../types';
 import { formatTimestamp } from '../utils';
+import MarkdownMessage from './MarkdownMessage';
 
 interface MessageListProps {
   messages: Message[];
@@ -36,12 +37,18 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isLoading }) => {
           </div>
           <div className="message-content">
             <div className="message-bubble">
-              <div className="message-text">{message.content}</div>
+              <div className="message-text">
+                {message.role === 'user' ? (
+                  message.content
+                ) : (
+                  <MarkdownMessage content={message.content} />
+                )}
+              </div>
               {message.role === 'assistant' && message.sources && message.sources.length > 0 && (
                 <div className="message-sources">
                   <details className="sources-details">
                     <summary className="sources-summary">
-                      📚 Fuentes consultadas ({message.sources.length})
+                      <span>📚 Fuentes consultadas ({message.sources.length})</span>
                     </summary>
                     <div className="sources-list">
                       {message.sources.map((source, index) => (

@@ -47,6 +47,16 @@ class HealthResponse(BaseModel):
     service: str
     version: str
 
+class GuiaDocenteRequest(BaseModel):
+    subject: str
+    section: Optional[str] = None  # Si no se especifica, devuelve toda la guía
+
+class GuiaDocenteResponse(BaseModel):
+    success: bool
+    data: dict
+    subject: str
+    section: Optional[str] = None
+
 # ===== ENDPOINTS =====
 
 @app.get("/health", response_model=HealthResponse)
@@ -184,6 +194,95 @@ async def clear_subject_database(subject: str):
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al limpiar: {str(e)}")
+
+@app.get("/guia-docente/{subject}")
+async def get_guia_docente(subject: str, section: Optional[str] = None):
+    """
+    Obtener información de la guía docente de una asignatura
+    
+    Args:
+        subject: Nombre de la asignatura
+        section: Sección específica (opcional). Si no se especifica, devuelve toda la guía.
+                Secciones disponibles: profesorado, evaluacion, temario, metodologia, 
+                bibliografia, prerrequisitos, competencias, enlaces, informacion_adicional
+    """
+    try:
+        import json
+        
+        # Buscar el archivo de guía docente
+        possible_paths = [
+            f"/app/data/{subject}/guía_docente.json",
+            f"/app/data/{subject}/guia_docente.json"
+        ]
+        
+        guia_path = None
+        for path in possible_paths:
+            if os.path.exists(path):
+                guia_path = path
+                break
+        
+        if not guia_path:
+            raise HTTPException(
+                status_code=404, 
+                detail=f"Guía docente no encontrada para la asignatura: {subject}"
+            )
+        
+        # Cargar el JSON
+        with open(guia_path, 'r', encoding='utf-8') as f:
+            guia_data = json.load(f)
+        
+        # Si se especifica una sección, extraerla
+        if section:
+            # Mapeo de secciones (igual que en graph.py)
+            section_mapping = {
+                "profesorado": "profesorado_y_tutorias",
+                "profesores": "profesorado_y_tutorias", 
+                "tutorias": "profesorado_y_tutorias",
+                "evaluacion": "evaluación",
+                "evaluación": "evaluación",
+                "temario": "programa_de_contenidos_teóricos_y_prácticos",
+                "programa": "programa_de_contenidos_teóricos_y_prácticos",
+                "metodologia": "metodología_docente",
+                "metodología": "metodología_docente",
+                "bibliografia": "bibliografía",
+                "bibliografía": "bibliografía",
+                "prerrequisitos": "prerrequisitos_o_recomendaciones",
+                "competencias": "resultados_del_proceso_de_formación_y_de_aprendizaje",
+                "resultados": "resultados_de_aprendizaje",
+                "enlaces": "enlaces_recomendados",
+                "informacion_adicional": "información_adicional",
+                "información_adicional": "información_adicional"
+            }
+            
+            section_key = section_mapping.get(section.lower(), section)
+            section_data = guia_data.get(section_key)
+            
+            if section_data is None:
+                available_sections = list(guia_data.keys())
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Sección '{section}' no encontrada. Secciones disponibles: {available_sections}"
+                )
+            
+            return GuiaDocenteResponse(
+                success=True,
+                data={section_key: section_data},
+                subject=subject,
+                section=section
+            )
+        else:
+            # Devolver toda la guía
+            return GuiaDocenteResponse(
+                success=True,
+                data=guia_data,
+                subject=subject,
+                section=None
+            )
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al leer guía docente: {str(e)}")
 
 if __name__ == "__main__":
     uvicorn.run(
