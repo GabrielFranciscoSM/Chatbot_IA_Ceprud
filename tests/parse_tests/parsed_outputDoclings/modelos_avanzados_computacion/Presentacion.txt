@@ -1,0 +1,112 @@
+## Modelos Avanzados de Computación
+
+Serafín Moral Departamento de Ciencias de la Computación Despacho 4.4
+
+Febrero, 2025
+
+<!-- image -->
+
+## CLASES (Teoría) Aula 0.6
+
+- Miércoles 17:30-19:30 (Aula 0.6)
+
+<!-- image -->
+
+## CLASES (Teoría) Aula 0.6
+
+- Miércoles 17:30-19:30 (Aula 0.6)
+
+## CLASES (Prácticas)
+
+- Subgrupo 1. Martes 15:30-17:30 Aula, 1.1 (Fernando Berzal)
+- Subgrupo 2. Miércoles 15:30-17:30 Aula 1.4 (José Ramón Trillo)
+- Subgrupo 3. Jueves 15:30-17:30 Aula 1.7 (Fernando Berzal)
+
+<!-- image -->
+
+## CLASES (Teoría) Aula 0.6
+
+- Miércoles 17:30-19:30 (Aula 0.6)
+
+## CLASES (Prácticas)
+
+- Subgrupo 1. Martes 15:30-17:30 Aula, 1.1 (Fernando Berzal)
+- Subgrupo 2. Miércoles 15:30-17:30 Aula 1.4 (José Ramón Trillo)
+- Subgrupo 3. Jueves 15:30-17:30 Aula 1.7 (Fernando Berzal)
+
+## TUTORÍAS
+
+Mandar correo electrónico para pedir tutorías
+
+- Serafín Moral: Lunes 11-13, Martes: 11-13, Miércoles: 11-13 (Despacho 4) smc@decsai.ugr.es
+
+## Plataforma Docente
+
+- Usaremos Prado para comunicaciones y material docente.
+- Hay que apuntarse a un grupo de prácticas a partir de hoy miércoles 19 de febrero y preferiblemente antes del 1 de marzo.
+- Hacedlo según la asignación de subgrupos proporcionada por la escuela
+
+<!-- image -->
+
+## Informática Teórica: Dos Asignaturas
+
+## Modelos de Computación
+
+Primer Cuatrimestre - Obligatoria - Tercer Curso (3+3) (Autómatas, Lenguajes Formales, Computabilidad)
+
+## Modelos Avanzados de Computación
+
+Segundo Cuatrimestre - Especialidad Computación y Sistemas Inteligentes - Tercer Curso (3+3) (Computatibilidad, Complejidad Algorítmica)
+
+<!-- image -->
+
+## Computabilidad
+
+¿Qué puede ser resuelto en un ordenador?
+
+## Complejidad
+
+Clasificar los problemas que se pueden resolver de acuerdo con su complejidad: determinar qué problemas se pueden resolver en un tiempo razonable .
+
+<!-- image -->
+
+- Tema 1: Máquinas de Turing. Funciones y lenguajes calculables. Parte 1: Máquinas de Turing
+- Tema 2: Otros models de cálculo. Tesis de Church-Turing
+- Tema 1: Máquinas de Turing. Funciones y lenguajes calculables. Parte 2: Funciones y lenguajes calculables
+- Tema 3: Clases de Complejidad
+- Tema 4: NP-Completitud
+- Tema 5: Complejidad de problemas de optimización aproximados
+- Tema 6: Complejidad en espacio. La jerarquía polinómica
+- Tema 7: Complejidad basada en modelos de computación paralela. P-completitud
+
+<!-- image -->
+
+## BIBLIOGRAFÍA BÁSICA
+
+- J.E. Hopcroft, R. Motwani, J.D. Ullman, Introducción a la Teoría de Autómatas, Lenguajes y Programación, 2ª Ed.
+- Addison Wesley (2002)
+- S. Arora, B. Barak, Computational complexity: a modern approach, Cambridge University Press (2009).
+- M.D. Davis, R. Sigal, E.J. Weyujer, Computability, Complexity, and Languages: Fundamentals of theoretical Computer Science (2nd. Ed.) Academic Press (1994)
+- J. MacCormick What can be Computed. Princeton University Press (2018) https://whatcanbecomputed.com/
+- G.L. Gopalakrishnan Automata and Computability. A
+- Programmer's Perspective. CRC Press (2019)
+- https://github.com/ganeshutah/Jove
+- C.H. Papadimitriou: Computational Complexity. Addison Wesley (1994)
+- C. Moore, S. Mertens: The Nature of Computation. Oxford University Press (2011)
+
+## MÉTODO DE EVALUACIÓN
+
+- Examen Final de la Asignatura (50%)
+- Preguntas teóricas
+- Problemas
+- Resolución de problemas en clase y entrega (media de 3 notas de clase y entrega de estudio de un problema NP-completo) (20%)
+- Pruebas en Clase de Problemas (30%)
+- Participación y otros (10% adicional)
+
+Importante: Hay que tener un mínimo de 3.5 en cada parte para hacer media.
+
+<!-- image -->
+
+Si teneis dudas, comentarios o preguntas... ahora es el momento
+
+<!-- image -->

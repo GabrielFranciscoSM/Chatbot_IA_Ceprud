@@ -1,0 +1,313 @@
+## MODELOS AVANZADOS DE COMPUTACI ´ ON
+
+Manual pr´ actico sobre decibilidad y semidecibilidad
+
+## 1 Formas usuales de demostrar el tipo de un problema
+
+- Es decidible . Dise˜ nar un algoritmo que resuelva el problema. Normalmente, esto se demuestra probando que el problema se reduce a realizar un n´ umero finito de comprobaciones (aunque, a priori, no lo parezca), cada una de ellas en un n´ umero finito de pasos. Entonces, una m´ aquina de Turing que compruebe todas las posibilidades es un algoritmo que resuelve el problema (siempre para, ya que realiza un n´ umero finito de pasos).
+- No es decidible . Para demostrar que un problema no es decidible contamos con el teorema de Rice:
+
+Teorema 1.1 (Teorema de Rice) Toda propiedad no trivial de los lenguajes recursivamente enumerables no es decidible.
+
+Por propiedad de los lenguajes recursivamente enumerables se debe entender una propiedad que s´ olo depende del lenguaje en s´ ı y que es independiente de las diferentes m´ aquinas de Turing que acepten dicho lenguaje. Por ejemplo, si consideramos el problema
+
+'Dada un MT M , determinar si M acepta una palabra que empiece por 0', la propiedad 'aceptar una palabra que empieza por 0' es una propiedad de los lenguajes recursivamente enumerables, porque es una propiedad que s´ olo depende de L ( M ). Dicho de otra manera, si otra m´ aquina de Turing M ′ acepta el mismo lenguaje, M cumple esa propiedad si, y s´ olo si, lo hace M ′ .
+
+Por otro lado, si tenemos el problema
+
+'Dada un MT M , determinar si M acepta una palabra en menos de 5 movimientos', la propiedad 'acepta una palabra en menos de 5 movimientos' no es una propiedad de los lenguajes recursivamente enumerables. Es una propiedad asociada a las m´ aquinas de Turing ya que, para dos m´ aquinas de Turing que acepten el mismo lenguaje, una puede aceptar una palabra en menos de 5 movimientos y la otra, no.
+
+Una propiedad de los lenguajes recursivamente enumerables es trivial cuando lo cumplen todos los lenguajes r.e., o bien, no lo cumple ninguno. Por ejemplo,
+
+- -La propiedad 'ser aceptado por una m´ aquina de Turing' es trivial, todos los lenguajes r.e. lo cumplen.
+
+- -La propiedad 'existe una reducci´ on de L d a L ' es trivial, ning´ un lenguaje r.e. L lo cumple (porque si no, no ser´ ıa r.e.).
+- -La propiedad 'ser numerable' es trivial, todos los lenguajes son numerables.
+
+Por tanto, si nuestro problema involucra una propiedad no trivial de los lenguajes r.e., simplemente aplicamos el teorema de Rice para demostrar que no es decidible.
+
+Si la propiedad no es de los lenguajes r.e., entonces necesitamos establecer una reducci´ on desde un problema no decidible. Algunos problemas que se pueden utilizar para esto son:
+
+- -UNIVERSAL: Dada una MT M y una entrada w , determinar si M acepta w . El lenguaje asociado es el lenguaje universal L u .
+- -PARADA: Dada una MT M y una entrada w , determinar si M para con entrada w .
+- -C-DIAGONAL: Dada una MT M , determinar si M acepta su codificaci´ on 〈 M 〉 .
+- -En general, cualquier problema visto en clase que no sea decidible.
+- Es semidecidible . Dise˜ nar una m´ aquina de Turing que acepte las palabras del lenguaje asociado. Esta puede ser determinista o no determinista. Como ayuda para intuir si un problema es semidecidible, normalmente, los problemas semidecidibles son aquellos que requieren comprobar que, en un conjunto infinito A (si es finito, adem´ as, es decidible) existe un elemento que cumple cierta propiedad. En este caso, la m´ aquina de Turing no determinista sigue el siguiente esquema:
+
+## M´ aquina de Turing no determinista gen´ erica
+
+Entrada: Propiedad P , conjunto de posibilidades A
+
+- 1: Seleccionamos de forma no determinista a ∈ A
+- 2: Si a cumple la propiedad P entonces
+- 3: acepta la entrada
+- 4: Si no
+- 5: rechaza la entrada
+
+Obviamente, esto se puede extender a que existan un n´ umero finito n de elementos que cumplan esa propiedad P . Bastar´ ıa seleccionar de forma no determinista n elementos distintos de A .
+
+- No es semidecidible . Establecer una reducci´ on desde un problema que sabemos que no es semidecidible. Algunos problemas que se pueden utilizar para esto son:
+
+- -DIAGONAL: Dada una MT M , determinar si M no acepta su codificaci´ on 〈 M 〉 . El lenguaje asociado es el lenguaje de diagonalizaci´ on L d .
+- -C-UNIVERSAL: Dada una MT M y una entrada w , determinar si M no acepta w . El lenguaje asociado es el complementario del lenguaje universal L u .
+- -EMPTY: Dada una MT M , determinar si L ( M ) = ∅ . El lenguaje asociado es L e .
+- -En general, el complementario de cualquier problema visto en clase que sea semidecidible pero no decidible.
+
+Otra forma de demostrar que un problema/lenguaje no es semidecidible, es demostrar que su complementario es semidecidible pero no decidible.
+
+## 2 Ejemplos
+
+Todos los ejemplos de las siguientes secciones consisten en determinar si los problemas enunciados son decidibles, semidecidibles o no semidecidibles. Se supone que el alfabeto de entrada siempre es { 0 , 1 } .
+
+Ejemplo 2.1 Dadas dos m´ aquinas de Turing M 1 y M 2 , determinar si L ( M 1 ) ⊆ L ( M 2 ) .
+
+Soluci´ on . Este problema necesita comprobar si TODA palabra de L ( M 1 ) (posiblemente un n´ umero infinito) est´ a en L ( M 2 ), por lo que deber´ ıamos intuir que no es semidecible. Para demostrar esto vamos a realizar una reducci´ on desde un problema que no es semidecible, por lo que nuestro problema tampoco lo ser´ a. Consideramos los problemas:
+
+- P1 : Dada una m´ aquina de Turing M , determinar si L ( M ) = ∅ .
+- P2 : Dadas dos m´ aquinas de Turing M 1 y M 2 , determinar si L ( M 1 ) ⊆ L ( M 2 ).
+
+Sabemos, por las transparencias de teor´ ıa, que P1 no es semidecidible, ya que es el problema asociado al lenguaje L e , que no es recursivamente enumerable.
+
+Una reducci´ on de P1 a P2, P 1 ≤ P 2, consiste en asociar a cada instancia de P1 (una m´ aquina de Turing) una instancia de P2 (dos m´ aquinas de Turing) mediante un algoritmo F , de manera que si M es una instancia positiva del problema P1, entonces F ( M ) es una instancia positiva de P2, y, al contrario, si M es una instancia negativa del problema P1, entonces F ( M ) es una instancia negativa de P2.
+
+Consideramos la m´ aquina de Turing R = ( { q 0 } , { 0 , 1 } , { 0 , 1 , # } , δ, q 0 , # , ∅ ), donde δ no tiene transiciones, por lo que L ( R ) = ∅ (se puede considerar cualquier MT que no acepte palabras). Entonces, dada una instancia M de P1, le asociamos el par F ( M ) = ( M,R ). Obviamente, esto es un proceso algor´ ıtmico. Basta con escribir la codificaci´ on de R despu´ es de la codificaci´ on de cualquier entrada M . Adem´ as,
+
+- Si M es un caso positivo de P1, es decir, L ( M ) = ∅ , entonces F ( M ) = ( M,R ) es un caso positivo de P2, ya que ∅ = L ( M ) ⊆ L ( R ) = ∅ .
+
+glyph[negationslash]
+
+- Si M es un caso negativo de P1, es decir, L ( M ) = ∅ , entonces F ( M ) = ( M,R ) es un caso negativo de P2, ya que L ( M ) glyph[negationslash]⊆ L ( R ) = ∅ .
+
+Por lo tanto, P1 se reduce a P2, y entonces P2 no es semidecidible.
+
+Ejemplo 2.2 Dado un aut´ omata con pila no determinista y una palabra de entrada, determinar si el aut´ omata acepta la palabra.
+
+Soluci´ on . Este problema es decidible ya que podemos dise˜ nar un algoritmo que lo resuelva. Supongamos que P es un aut´ omata con pila y u , una palabra. Como vimos en la asignatura Modelos de Computaci´ on (Tema 5 de teor´ ıa) existe un algoritmo que calcula una gram´ atica libre de contexto G que genera el mismo lenguaje que acepta P . En el Tema 4 de teor´ ıa de Modelos de Computaci´ on se explica un algoritmo que elimina producciones nulas de una gram´ atica libre de contexto. Se lo aplicamos a G y obtenemos una gram´ atica G ′ que genera las mismas palabras que G , salvo la palabra vac´ ıa en caso de que G genere glyph[epsilon1] . Si la palabra u es la palabra vac´ ıa, basta con comprobar si el s´ ımbolo inicial es anulable. Si lo es, entonces se acepta, y si no, no se acepta. Si la palabra u no es la palabra vac´ ıa, aplicamos el algoritmo de eliminaci´ on de producciones unitarias y obtenemos una gram´ atica G ′′ equivalente a G ′ pero sin producciones unitarias. Entonces G ′′ est´ a en las condiciones para aplicar el algoritmo de c´ alculo de la forma normal de Chomsky (Tema 4 de teor´ ıa de Modelos de Computaci´ on), y obtenemos una gram´ atica C equivalente a G ′′ en la forma normal de Chomsky. A C y a u se le puede aplicar ahora el algoritmo de Cocke-Younger-Kasami (Tema 6 de teor´ ıa de Modelos de Computaci´ on) que nos asegura si C genera u , o no. Por tanto, decide si P acepta u , o no.
+
+Ejemplo 2.3 Dada una m´ aquina de Turing, determinar si acepta una palabra de longitud menor o igual que 20.
+
+Soluci´ on . Ya que se trata de un problema de comprobar la existencia de algo, deber´ ıamos intuir que este problema no es decidible pero s´ ı semidecidible.
+
+Lo primero es sencillo de demostrar, ya que es una propiedad no trivial de los lenguajes recursivamente enumerables. Se puede observar que 'aceptar una palabra de longitud menor o igual a 20' es una propiedad del lenguaje aceptado por la maquina de Turing, no de la m´ aquina de Turing en s´ ı. Dicho de otra manera, si dos m´ aquinas de Turing acepta el mismo lenguaje, una acepta una palabra de longitud menor o igual a 20 si y s´ olo si lo hace la otra. Por tanto, por el Teorema de Rice, este problema no es decidible.
+
+Para demostrar que es semidecidible, podemos construir una m´ aquina de Turing no determinista R que acepte la codificaci´ on de las m´ aquinas de Turing que cumple esa propiedad (se entiende que si la cadena de entrada no es la codificaci´ on de una m´ aquina de Turing, se rechaza).
+
+## M´ aquina de Turing no determinista R
+
+Entrada: La codificaci´ on 〈 M 〉 de una m´ aquina de Turing M
+
+- 1: A˜ nadimos la palabra 111 al final de la entrada
+- 2: De forma no determinista seleccionamos una palabra u de longitud menor que o igual que 20 y la copiamos a continuaci´ on de 111
+- 3: Ejecutamos la m´ aquina universal sobre la palabra de la cinta, es decir, sobre 〈 M 〉 111 u
+- 4: Si la m´ aquina universal acepta entonces
+- 5: R acepta
+- 6: Si no
+- 7: R no acepta
+
+Vemos que basta con que alguna de las ramas de c´ omputo (al realizar la elecci´ on no determinista de la l´ ınea 2) se acepte para que la entrada se acepte, que es precisamente lo que nos pide el problema: '¿Existe una palabra...?' .
+
+Otra forma de resolverlo es describiendo una m´ aquina determinista. Primero, una propuesta que NO es v´ alida:
+
+## M´ aquina de Turing determinista S QUE NO FUNCIONA
+
+Entrada: La codificaci´ on 〈 M 〉 de una m´ aquina de Turing M
+
+- 1: A˜ nadimos la palabra 111 al final de la entrada
+- 2: Puesto que las palabras de longitud 20 o menos son un conjunto finito, llam´ emoslo A , las ordeno de alguna manera
+- 3: Para cada palabra u ∈ A , en el orden establecido, hacer
+- 4: Copio 〈 M 〉 111 u en una segunda cinta
+- 5: Ejecutamos la m´ aquina universal sobre la segunda cinta
+- 6: Si la m´ aquina universal acepta entonces
+- 7: S acepta la entrada
+- 8: S rechaza la entrada (ya que no se ha aceptado ninguna entrada en el bucle)
+
+¿Por qu´ e no funciona? Porque es posible que para alguna palabra u de A , al ejecutar la m´ aquina universal (l´ ınea 5), esta se rechace al estar indefinidamente en movimiento (la m´ aquina universal cicle con esa entrada). Por tanto, la m´ aquina dise˜ nada S tambi´ en ciclar´ ıa en esa pasada
+
+del bucle (en la l´ ınea 5), y rechazar´ ıa la entrada (la salida dir´ ıa que M no acepta palabras de longitud menor que 21). Sin embargo podr´ ıa no haber ejecutado todas las pasadas del bucle, es decir, faltar´ ıan algunas palabras de A por comprobar, y es posible que alguna de ellas s´ ı es aceptada por M .
+
+¿C´ omo arreglar esto? Ejecutando 'todas las palabras de A a la vez'. Como no podemos realizar una selecci´ on no determinista, lo que vamos a hacer es ejecutar un n´ umero finito de pasos de c´ alculo con todas las palabras. Si con ninguna se acepta, aumentamos el n´ umero de pasos de c´ alculo y repetimos. As´ ı de forma indefinida hasta que una palabra se acepte (que se aceptar´ a en un n´ umero finito de pasos de c´ alculo). Si, en realidad, la m´ aquina M no acepta ninguna palabra de A , nuestra nueva m´ aquina ciclara indefinidamente (ya que es un bucle infinito)
+
+## M´ aquina de Turing determinista S
+
+Entrada: La codificaci´ on 〈 M 〉 de una m´ aquina de Turing M
+
+- 1: A˜ nadimos la palabra 111 al final de la entrada
+- 2: Puesto que las palabras de longitud 20 o menos son un conjunto finito, llam´ emoslo A , las ordeno de alguna manera
+- 3: Para i = 1 , 2 , 3 , ...., ∞ hacer
+- 4: Para cada palabra u ∈ A , en el orden establecido, hacer
+- 5: Copio 〈 M 〉 111 u en una segunda cinta
+- 6: Ejecutamos la m´ aquina universal i pasos sobre la segunda cinta
+- 7: Si la m´ aquina universal acepta entonces
+- 8: S acepta la entrada
+
+Una forma de ver la diferencia entre ambas m´ aquinas es pensar en el ´ arbol de pasos de c´ omputo. La primera m´ aquina, que no resuelve correctamente el problema, realiza una b´ usqueda en profundidad en los pasos de c´ omputo de todas las palabras de longitud menor que 21, ver Figura 1. Como hay una rama infinita, la b´ usqueda en profundidad no es capaz de visitar todos los nodos del ´ arbol. Obs´ ervese que la m´ aquina M cicla con la palabra 2, por lo que nunca llega a verificar la palabra 3, que es la que s´ ı acepta.
+
+Sin embargo, la segunda m´ aquina realiza una b´ usqueda en anchura, ver Figura 2. Puesto que, si alguna palabra se acepta, el nodo de aceptaci´ on debe estar a profundidad finita, esta b´ usqueda nos asegura que llegaremos a dicho nodo.
+
+Ejemplo 2.4 Dada un m´ aquina de Turing M , determinar si, para cualquier entrada, M para antes de 10 pasos de c´ alculo.
+
+Figure 1: B´ usqueda en profundidad
+
+<!-- image -->
+
+Figure 2: B´ usqueda en anchura
+
+<!-- image -->
+
+Soluci´ on . Primero vamos a describir algunos errores muy comunes al resolver este ejercicio.
+
+- ERROR 1. Este problema no es decidible. Es una propiedad no trivial y entonces, por el teorema de Rice, no es decidible.
+- El problema de este argumento es que la propiedad, que ciertamente no es trivial, no es una propiedad de los lenguajes recursivamente enumerables. Es una propiedad de las m´ aquinas de Turing. Un mismo lenguaje puede ser aceptado por dos m´ aquinas de Turing, una que lo acepte para toda palabra en menos de 10 pasos, y otra en m´ as de 10 para alguna palabra. As´ ı que no se puede aplicar el teorema de Rice.
+- ERROR 2. Es decidible. Este ser´ ıa el algoritmo: simplemente, para cada entrada, se ejecuta la m´ aquina 10 pasos. Si no se para, entonces la respuesta es no. Si para para todas, la respuesta es s´ ı.
+
+En este caso, el problema es que hay un n´ umero infinito de palabras a comprobar. Dada una m´ aquina de Turing M , supongamos que comprobamos las palabras en el orden total dado en clase teor´ ıa (primero se mira la longitud, y si tienen la misma, lexicogr´ aficamente).
+
+Si existe una palabra que hace que la m´ aquina se ejecute m´ as de 10 pasos, como tendr´ a una longitud finita, llegar´ a un momento en el que se compruebe que efectivamente, no se para con s´ olo 10 pasos, y la respuesta para M es no. El problema viene si es una m´ aquina que realmente se para siempre antes de 10 pasos. Este procedimiento estar´ a comprobando palabras indefinidamente. Por lo que no es un algoritmo.
+
+La respuesta correcta es que es decidible. En 10 pasos, s´ olo se pueden leer 10 casillas de la cinta como m´ aximo. As´ ı que, para cualquier palabra (da igual la longitud), solo me interesan los 10 primeros s´ ımbolos. Dadas dos palabras u 1 y u 2 con los 10 primeros s´ ımbolos iguales, M se para antes de 10 pasos con u 1 de entrada si, y solo si, M se para antes de 10 pasos con u 2 de entrada. Por tanto, s´ olo necesitamos comprobarlo para las palabras de longitud 10 o menos. Este conjunto es finito (tiene 2 10 elementos), as´ ı que basta ejecutar 10 pasos para cada una de estas palabras. Si con todas para, entonces la respuesta es s´ ı. Si alguna no ha parado, la respuesta es no.
+
+Ejemplo 2.5 Dada un m´ aquina de Turing M , determinar si para para cualquier entrada.
+
+Soluci´ on . El problema no es semidecidible. Construimos una reducci´ on desde el complementario del Problema Universal , cuyo lenguaje asociado es L u , el complementario del lenguaje universal. Puesto que se ha demostrado en teor´ ıa que L u es semidecidible pero no decidible, L u no es semidecidible. Consideramos los problemas:
+
+C-UNIVERSAL : Dada una MT M y una palabra w , determinar si M no acepta w .
+
+ALG : Dada una MT M , determinar si para para cualquier entrada.
+
+Vamos a construir un proceso algor´ ıtmico F para pasar de una instancia de C-UNIVERSAL a una instancia de ALG. Sea ( M,w ) una instancia de C-UNIVERSAL, construimos las siguiente m´ aquina de Turing F ( M,w ) (que es una instancia de ALG)
+
+## M´ aquina de Turing F ( M,w )
+
+Entrada: Una palabra v ∈ { 0 , 1 } ∗
+
+- 1: Calculamos la longitud de v , y se almacena | v | en una segunda cinta
+- 2: Borramos v de la primera cinta y copiamos en ella 〈 M 〉 111 w
+- 3: Simulamos | v | pasos de la m´ aquina de Turing M con la entrada w
+- 4: Si M acepta w en | v | pasos entonces
+- 5: entra en un bucle infinito y se rechaza la entrada, porque cicla
+- 6: Si no
+- 7: se acepta la entrada
+
+Es claro que F es un algoritmo. Adem´ as,
+
+- Si ( M,w ) es un caso positivo de C-UNIVERSAL, es decir, M no acepta w , entonces F ( M,w ) acepta cualquier entrada v (ya que M no acepta w para cualquier n´ umero de pasos). Entonces L ( F ( M,w )) = { 0 , 1 } ∗ y, como consecuencia, F ( M,w ) para para cualquier palabra de entrada. Por lo que F ( M,w ) es un caso positivo de ALG.
+- Si ( M,w ) es un caso negativo de C-UNIVERSAL, entonces M acepta w . Supongamos que se acepta en n pasos. Entonces consideramos una palabra v de longitud n y, para dicha entrada, F ( M,w ) cicla. Por tanto, existe una entrada en la que no para y F ( M,w ) es un caso negativo de ALG.
+
+Entonces, C-UNIVERSAL se reduce a ALG. Como C-UNIVERSAL no es semidecidible, tampoco lo es ALG.
+
+Ejemplo 2.6 Dada un m´ aquina de Turing M , determinar si no acepta ning´ un pal´ ındromo.
+
+Soluci´ on . Este problema no es semidecidible. Para demostrarlo, en vez de utilizar una reducci´ on, estudiaremos el problema complementario. Consideramos el problema C-PAL: Dada un m´ aquina de Turing M , determinar si M acepta un pal´ ındromo. Aceptar un pal´ ındromo es una propiedad no trivial de los lenguajes recursivamente enumerables (por ejemplo, { 11 } s´ ı la cumple pero { 10 } , no). Por el teorema de Rice, C-PAL no es decidible. Para demostrar que es semidecidible, utilizamos la siguiente m´ aquina de Turing no determinista
+
+## M´ aquina de Turing no determinista
+
+Entrada: Una m´ aquina de Turing 〈 M 〉 (su codificaci´ on)
+
+- 1: Seleccionamos de forma no determinista una palabra w ∈ { 0 , 1 } ∗
+- 2: Comprobamos si w es un pal´ ındromo
+- 3: Si w es un pal´ ındromo entonces
+- 4: Simulamos M con entrada w
+- 5: Si M acepta w entonces
+- 6: se acepta la entrada
+- 7: Si no
+- 8: no se acepta la entrada
+- 9: Si no
+- 10: no se acepta la entrada
+
+Una m´ aquina de Turing determinista que acepte el mismo lenguaje podr´ ıa ser la siguiente.
+
+## M´ aquina de Turing determinista
+
+Entrada: Una m´ aquina de Turing 〈 M 〉 (su codificaci´ on)
+
+- 1: Para i = 1 , 2 , 3 , . . . , ∞ hacer
+- 2: Consideramos el conjunto A i de la palabras de longitud menor que i (finito)
+- 3: Para cada palabra a ∈ A i hacer
+- 4: Si a es un pal´ ındromo entonces
+- 5: Simulamos i pasos de M con entrada a
+- 6: Si M acepta a entonces
+- 7: se acepta la entrada
+
+Ejemplo 2.7 Dada un m´ aquina de Turing M , determinar si termina escribiendo un 1 cuando comienza con una cinta completamente en blanco.
+
+Soluci´ on . En este caso, no podemos utilizar el teorema de Rice. Esta propiedad no es una propiedad de los lenguajes recursivamente enumerables. Un mismo lenguaje puede tener MT's que lo aceptan que escriban un 1 cuando empiezan con la cinta vac´ ıa, y otras que no. Construimos entonces una reducci´ on desde el problema universal. Consideramos los siguientes problemas:
+
+UNIVERSAL : Dada una m´ aquina de Turing M y una palabra w , determinar si M acepta w . ESC-1 : Dada una MT M , determinar si escribe un 1 cuando la entrada es glyph[epsilon1] .
+
+Vamos a construir un proceso algor´ ıtmico F para pasar de una instancia de UNIVERSAL a una instancia de ESC-1. Sea ( M,w ) una instancia de UNIVERSAL, construimos las siguiente m´ aquina de Turing F ( M,w ) (que es una instancia de ESC-1)
+
+## M´ aquina de Turing F ( M,w )
+
+Entrada: Una palabra v ∈ { 0 , 1 } ∗
+
+- 1: Si v no es glyph[epsilon1] entonces
+- 2: rechaza la entrada
+- 3: Si no
+- 4: Realizamos una copia M ′ de M donde el s´ ımbolo 1 se ha sustituido por un s´ ımbolo 1' (en el alfabeto de entrada, de la cinta, en las trasiciones, etc)
+- 5: Llamamos w ′ a la palabra w sustituyendo los 1 por 1'
+- 6: Escribimos 〈 M ′ 〉 111 w ′
+- 7: Simulamos M ′ con entrada w ′
+- 8: Si M ′ acepta w ′ (observad que M ′ acepta w ′ si, y solo si, M acepta w ) entonces
+- 9: Escribe un 1
+
+Es claro que F es un algoritmo. Adem´ as,
+
+- Si M acepta w , entonces F ( M,w ) escribe un 1 cuando comienza con la cinta vac´ ıa, porque M ′ acepta w ′ .
+- Si M no acepta w , entonces M ′ no acepta w ′ y nunca escribe 1 (ya que F ( M,w ) s´ olo puede escribir 1').
+
+Entonces UNIVERSAL se reduce a ESC-1, por lo que ESC-1 no es decidible. Sin embargo, s´ ı es semidecidible.
+
+## M´ aquina de Turing
+
+Entrada: Una m´ aquina de Turing M
+
+- 1: Para i = 1 , 2 , . . . ∞ hacer
+- 2: Simular M con entrada glyph[epsilon1] un n´ umero i de pasos
+- 3: Si M escribe un 1 en esos i pasos entonces
+- 4: acepta la entrada
+
+Ejemplo 2.8 Dada un m´ aquina de Turing M , determinar si acepta un n´ umero infinito de palabras.
+
+Soluci´ on . El problema no es semidecidible. Realizamos una reducci´ on desde el problema diagonal. Consideramos los problemas:
+
+DIAGONAL : Dada una m´ aquina de Turing M , determinar si M no acepta 〈 M 〉 .
+
+INFINITY : Dada una MT M , determinar si acepta un n´ umero infinito de palabras.
+
+Vamos a construir un proceso algor´ ıtmico F para pasar de una instancia de DIAGONAL a una instancia de INFINITY. Sea M una instancia de DIAGONAL, construimos las siguiente m´ aquina de Turing F ( M ):
+
+## M´ aquina de Turing F ( M )
+
+Entrada: Una palabra v ∈ { 0 , 1 } ∗
+
+- 1: Si v no es de la forma 0 n con n &gt; 0 entonces
+- 2: rechaza la entrada
+- 3: Si v = 0 n para cierto n &gt; 0 entonces
+- 4: Simulamos M con entrada 〈 M 〉 un n´ umero n de pasos
+- 5: Si M acepta 〈 M 〉 entonces
+- 6: se rechaza la entrada
+- 7: Si no
+- 8: se acepta la entrada
+
+Es claro que F es un algoritmo. Adem´ as,
+
+- si M es un caso positivo de DIAGONAL, entonces M no acepta 〈 M 〉 . Calculamos L ( F ( M )) el lenguaje aceptado por F ( M ). Dada una palabra v ∈ { 0 , 1 } ∗ :
+
+glyph[negationslash]
+
+- -si v = 0 n para alg´ un n &gt; 0, entonces la rechaza.
+- -si v = 0 n para alg´ un n &gt; 0, ejecuta M (con entrada 〈 M 〉 ) n pasos, y no la acepta (ya que M no acepta 〈 M 〉 ), por lo que F ( M ) s´ ı acepta v .
+
+Es decir, L ( F ( M )) = 0 + , que tiene un n´ umero infinito de palabras. Luego F ( M ) es un caso positivo de INFINITY.
+
+- Si M es un caso negativo de DIAGONAL, entonces M acepta 〈 M 〉 . Supongamos que lo acepta en t pasos. Calculamos L ( F ( M )) el lenguaje aceptado por F ( M ). Dada una palabra v ∈ { 0 , 1 } ∗ :
+
+glyph[negationslash]
+
+- -si v = 0 n para alg´ un n &gt; 0, entonces la rechaza.
+- -si v = 0 n para alg´ un n &lt; t , ejecuta M (con entrada 〈 M 〉 ) n pasos, y no la acepta (ya que M acepta 〈 M 〉 en t pasos), por lo que F ( M ) s´ ı acepta v .
+- -si v = 0 n para alg´ un n ≥ t , ejecuta M (con entrada 〈 M 〉 ) n pasos, y s´ ı la acepta (ya que M acepta 〈 M 〉 en t pasos), por lo que F ( M ) rechaza v .
+
+Es decir, L ( F ( M )) = { 0 , 0 2 , . . . , 0 t -1 , que tiene un n´ umero finito de palabras. Luego F ( M ) es un caso negativo de INFINITY.
+
+Entonces DIAGONAL se reduce a INFINITY, por lo que INFINITY no es semidecidible.

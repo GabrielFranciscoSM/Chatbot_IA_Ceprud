@@ -1,0 +1,133 @@
+services:
+    # LLM Service
+    # vllm-openai:
+    #     container_name: my-vllm-service
+    #     deploy:
+    #         resources:
+    #             reservations:
+    #                 devices:
+    #                     - driver: nvidia
+    #                       device_ids: ['0']
+    #                       capabilities:
+    #                           - gpu
+    #     volumes:
+    #         - "./models:/models"
+    #     environment:
+    #         HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
+    #     ports:
+    #         - 8000:8000
+    #     ipc: host
+    #     image: docker.io/vllm/vllm-openai:latest
+    #     command: [
+    #         "--model", "/models/Sreenington--Phi-3-mini-4k-instruct-AWQ",
+    #         "--max-num-seqs", "8",
+    #         "--max-model-len", "1000",
+    #         "--quantization", "awq_marlin",
+    #         "--gpu-memory-utilization", "0.7",
+    #         "--port", "8000",
+    #         "--enable-auto-tool-choice",
+    #         "--tool-call-parser", "phi4_mini_json", 
+    #         "--chat-template", "{{ bos_token }}{% for message in messages %}{% if (message['role'] in ['user', 'system']) %}{{'<|user|>' + '\n' + message['content'] + '<|end|>' + '\n' + '<|assistant|>' + '\n'}}{% elif message['role'] == 'assistant' %}{{message['content'] + '<|end|>' + '\n'}}{% endif %}{% endfor %}",
+    #     ]
+        
+    # Embeddings Service
+    vllm-openai-embeddings:
+        container_name: my-embedding-service
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          device_ids: ['0']
+                          capabilities:
+                              - gpu
+        volumes:
+            - "./models:/models"
+        environment:
+            HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
+        network_mode: host
+        ipc: host
+        image: docker.io/vllm/vllm-openai:latest
+        command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 16 --gpu-memory-utilization 0.4 --max_model_len=3000
+
+    # RAG Service
+    rag-service:
+        container_name: chatbot-rag-service
+        build:
+            context: ./rag-service
+            dockerfile: Dockerfile
+        network_mode: host
+        environment:
+            BASE_CHROMA_PATH: /app/data/chroma
+            VLLM_EMBEDDING_URL: http://localhost:8001
+            EMBEDDING_MODEL_DIR: /models/Qwen--Qwen3-Embedding-0.6B
+        volumes:
+            - ./rag-service/data:/app/data/  # Guías docentes y archivos de asignaturas
+            - rag_data:/app/data/chroma  # Volumen persistente para ChromaDB
+        restart: unless-stopped
+        depends_on:
+            - vllm-openai-embeddings
+
+    # Logging Service
+    logging-service:
+        container_name: chatbot-logging-service
+        build:
+            context: ./logging-service
+            dockerfile: Dockerfile
+        network_mode: host
+        environment:
+            BASE_LOG_DIR: /app/logs
+        volumes:
+            - ./logs:/app/logs  # Mount logs directory
+        restart: unless-stopped
+
+    # Backend Service
+    backend:
+        container_name: chatbot-backend
+        build:
+            context: .
+            dockerfile: Containerfile
+        network_mode: host
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          device_ids: ['0']
+                          capabilities:
+                              - gpu
+        env_file:
+            - .env
+        environment:
+            HF_HUB_DISABLE_SYMLINKS_WARNING: 1
+            PYTHONPATH: /chatbot/app
+            RAG_SERVICE_URL: http://localhost:8082
+            LOGGING_SERVICE_URL: http://localhost:8002
+        command: ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8080"]
+        volumes:
+            - ./unitTests:/chatbot/app/unitTests
+            - ./pytest.ini:/chatbot/app/pytest.ini
+            - ./logs:/chatbot/app/logs
+            - ./app/storage:/chatbot/app/storage
+        restart: unless-stopped
+        depends_on:
+            - vllm-openai-embeddings
+            - rag-service
+
+    # Frontend Service
+    frontend:
+        container_name: chatbot-frontend
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        network_mode: host
+        environment:
+            - NGINX_HOST=localhost
+            - NGINX_PORT=80
+        depends_on:
+            - backend
+        restart: unless-stopped
+
+volumes:
+    rag_data:
+        driver: local

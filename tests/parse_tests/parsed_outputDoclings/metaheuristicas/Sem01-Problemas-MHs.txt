@@ -1,0 +1,906 @@
+## Metaheurísticas
+
+## Seminario 1. Ejemplos de resolución de problemas con metaheurísticas: problemas clásicos y reales
+
+1. Introducción: Optimización
+2. Problemas de Optimización Combinatoria Clásicos
+3. Problemas de Optimización Avanzados
+3. Ejemplos de Problemas de Optimización Reales
+4. Software de Metaheurísticas
+
+## 1. Introducción: Optimización
+
+<!-- image -->
+
+- ¿Optimizar?
+- Mejorar
+- Buscar la mejor manera de realizar una actividad
+-  Contexto científico: La optimización es el proceso de tratar de encontrar la mejor solución posible para un determinado problema.
+
+##  Nivel Empresarial:
+
+-  Reducir los costes.
+-  Mejorar la Experiencia del cliente.
+
+## 1. Introducción: Optimización
+
+-  Problema de optimización:
+- Diferentes soluciones ,  un criterio para discriminar entre ellas y el objetivo es encontrar la mejor
+
+Encontrar el valor de unas variables de decisión (sujeto a restricciones) para los que una determinada función objetivo alcanza su valor máximo o mínimo
+
+## 1. Introducción: Optimización
+
+-  Problema de optimización (minimización):
+- Dado un dominio X y una función objetivo
+
+<!-- formula-not-decoded -->
+
+- El objetivo es encontrar x* que verifique
+
+<!-- formula-not-decoded -->
+
+-  Optimización combinatoria  Variable discreta
+
+'Un Problema de Optimización Combinatoria consiste en encontrar un objeto entre un conjunto finito (o al menos contable) de posibilidades'
+
+Se puede plantear minimizar sin falta de generalidad, optimizar Max{  g(x)  } &lt;=&gt; Min{  f(x)  } con f(x) = -g(x)
+
+## 1. Introducción: Optimización
+
+-  Tipos de problemas de optimización (representación de una solución):
+- Permutaciones (Problemas de ordenación)
+- Binarios (Problemas de pertenencia)
+- Enteros (Problemas de cardinalidad, asignación, selección)
+- De optimización numérica (Optimización de funciones no lineales)
+
+## 1. Introducción: Optimización
+
+-  Problemas de optimización fáciles de resolver:
+- Lineales: función objetivo y restricciones lineales (método Simplex )
+-  Problemas  de  optimización  difíciles  de  resolver  (NPduros):
+- No se puede garantizar el encontrar la mejor solución  posible  en un tiempo razonable
+- Mayoría  de  los  problemas  con aplicación práctica,  científica  o industrial
+- Desarrollo  de  procedimientos eficientes para  encontrar  buenas soluciones aunque sean no óptimas
+
+## 2. Problemas de Optimización Combinatoria Clásicos
+
+<!-- image -->
+
+-  Problemas de explosión combinatorios.
+-  Pocos modelos teóricos
+
+## 2. Problemas de Optimización Combinatoria Clásicos
+
+-  Viajante
+-  Mochila
+-  Asignación Cuadrática
+-  Asignación Generalizada
+-  Problema de Máxima Diversidad
+-  Problemas de Mínima Dispersión
+-  Enrutamiento de vehículos
+-  Empaquetado en Cinta
+
+
+
+…
+
+## Viajante de Comercio
+
+-  Problema del Viajante de Comercio:
+-  Travelling Salesman Problem.
+-  Problema:
+-  Por cada ciudad se pasa una única vez.
+-  Encontrar la ruta más rápida entre N ciudades.
+-  Se debe de volver a la ciudad origen.
+
+<!-- image -->
+
+## Viajante de Comercio
+
+##  Definición Problema del Viajante de comercio, TSP :
+
+<!-- image -->
+
+Un  viajante  de  comercio  ha  de  visitar  n  ciudades, comenzando y finalizando en su propia ciudad. Conociendo el coste de ir de cada ciudad a otra, determinar el recorrido de coste mínimo
+
+## ¿Para qué sirve?
+
+##  Muchas Aplicaciones
+
+Diseño chips: Rutas más cortas. Rutas aéreas: Entre aeropuestos. Reparto almacén: Optimizar entregas. Cableado (eléctrico): Recorrido mínimo.
+
+<!-- image -->
+
+<!-- image -->
+
+## Tiempos
+
+|   Ciudades (N) | Fuerza Bruta   | Algoritmo Held-Karp   |
+|----------------|----------------|-----------------------|
+|             10 | 2 segundos     | 0.1 segundo           |
+|             11 | 22 segundos    | 0.2 segundos          |
+|             14 | 13 horas       | 3 segundos            |
+|             16 | 200 días       | 11 segundos           |
+|             25 | 270000 años    | 4 horas               |
+|             50 | 5 10 50 años   | 58000 años            |
+
+https://nbviewer.jupyter.org/url/norvig.com/ipython/ TSP.ipynb
+
+No es abordable con ningún algoritmo tradicional.
+
+¡Necesitamos buenos algoritmos y eficientes! Algoritmos que proporcionen una buena solución en un tiempo razonable
+
+## Problema de la Mochila
+
+##  Problema de la mochila, Knapsack Problem :
+
+Dados n objetos, cada uno con un peso wj y un valor vj, se debe seleccionar el conjunto de objetos cuyo valor total sea máximo, sin exceder un peso máximo W
+
+<!-- image -->
+
+## Versión cuadrática del problema
+
+-  Problema cuadrático de la mochila, Knapsack Quadratic knapsack problem (KQP) :
+
+Hay beneficio combinado de objetos
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+## Versión cuadrática del problema
+
+##  Problema cuadrático de la mochila, Knapsack Quadratic knapsack problem (KQP) :
+
+Evaluación de soluciones
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+## Enrutamiento de Vehículos
+
+##  Problema del enrutamiento de vehículos, VRP :
+
+Obtener  el  conjunto  de  rutas  más  cortas  posibles  utilizando  un conjunto de vehículos (con capacidad limitada) lo más pequeño posible tal que, partiendo de un almacén y regresando sucesivamente a él, abastecen a una serie de clientes (con demanda diferente) distribuidos geográficamente
+
+<!-- image -->
+
+<!-- formula-not-decoded -->
+
+## Problema de la Asignación Cuadrática
+
+##  Problema de la asignación cuadrática, QAP :
+
+Dadas n unidades y n localizaciones posibles, el problema consiste en determinar la asignación óptima de las unidades  en  las  localizaciones  conociendo  el  flujo  existente entre las primeras y la distancia entre las segundas
+
+<!-- image -->
+
+## Problema de la Máxima Diversidad
+
+##  Problema de la máxima diversidad, MDP :
+
+Seleccionar un conjunto de elementos m de una colección más grande n de tal forma que los elementos seleccionados tengan las características más variadas entre sí
+
+<!-- image -->
+
+<!-- formula-not-decoded -->
+
+## Problema de la Dispersión Diferencial
+
+##  Problema de la dispersión diferencial, MDD :
+
+Seleccionar un conjunto de elementos m de una colección más grande n de tal forma que los la diferencia entre los más lejanos y los más lejamos sea la máxima posible
+
+<!-- image -->
+
+## Problema de la Dispersión Diferencial
+
+-  Utilidades de este problema:
+-  Diseño de Redes: minimizar la diferencia de grados entre nodos puede ayudar a equilibrar la carga y mejorar el rendimiento.
+-  Redes Sociales: Al reducir la diferencia de grados entre los nodos, es posible crear una red más equilibrada
+-  Gestión de la red eléctrica: Optimizar la ubicación y dimensionamiento de los generadores de energía y las líneas de transmisión, minimizando pérdidas de energía.
+
+## Empaquetado en Cinta
+
+##  Problema del empaquetado en cinta, SPP:
+
+Dado  un  conjunto  de  rectángulos  de  diferentes  dimensiones  se colocan sobre una cinta de anchura fija y altura indefinida de tal forma que se minimice la altura alcanzada por dicha colocación
+
+<!-- image -->
+
+## Otros problemas
+
+-  Problema del cliqué máximo : Encontrar la mayor componente conexa de un grafo dado
+-  Problema del coloreado de grafos : Encontrar la mínima cantidad de colores tal que dos vértices adyacentes no pueden tener el mismo color
+-  Problema del árbol de Steiner : Encontrar un árbol de coste mínimo que conecte un conjunto de vértices dado
+-  Problemas de asignación : Dada una tabla de tareas y personas que pueden realizarlas (coste distinto), encontrar la asignación de coste mínimo
+
+## Optimización y Machine Learning
+
+<!-- image -->
+
+-  El uso de metaheurísticas se pueden aplicar a técnicas de aprendizaje automático y viceversa.
+
+## Optimización y Machine Learning
+
+<!-- image -->
+
+## Ejemplo: Feature Selection
+
+<!-- image -->
+
+## Ejemplo: Feature Selection
+
+All Features
+
+Feature Selection
+
+Final Features
+
+## Ejemplo: Feature Selection
+
+-  Ponderar características en un modelo de Machine Learning que use distancias ( KNN ). En vez de:
+
+<!-- formula-not-decoded -->
+
+Todas se consideran igualmente importantes
+
+En Realidad no suele ser así
+
+## Metaheurísticas y Simulación
+
+<!-- image -->
+
+## Problema del Influencer
+
+-  Social Network Influence Maximization Problem, SNIMP
+
+Encontrar los K usuarios más influyentes en una red social, simulando un modelo de difusión de influencia.
+
+<!-- image -->
+
+## Problema del Influencer
+
+-  Social Network Influence Maximization Problem, SNIMP
+
+Encontrar los K usuarios más influyentes en una red social, simulando un modelo de difusión de influencia.
+
+<!-- image -->
+
+## Problema del Influencer
+
+-  Maximizar nodos influídos.
+-  Una conexión no implica influencia, cierta probabilidad.
+-  Se evalúa simulando varias veces.
+
+```
+Algorithm 1 ICM (G = 1: I < 0 2: for i € 1 _ eu do 3: A* 4: A < $ 5: while A + 0 do 6: B < 7: for " € A do 8: for (u,v) € E do 9: if rnd(0,1) < p then B + BU {u} Il: end if 12: end for 13: end 14: A* < A* U B 15: A < B 16: end while 17: 1+ |A* | 18: end for 19: return I/ev for
+```
+
+## Problema del Influencer
+
+-  Márketing digital.
+-  Modelos epidémicos
+
+<!-- image -->
+
+## 3. Algunos Ejemplos de Problemas de Optimización Reales
+
+-  Diseño Aerodinámico
+-  Planificación de Rutas para Transporte de Mercancías
+-  Canalización automática
+-  Juegos
+-  Equilibrado  de  Líneas  de  Montaje  en  Nissan  y  otros procesos industriales
+-  Identificación Forense de Personas Desaparecidas
+
+## Diseño Aerodinámico
+
+-  La disminución de la resistencia al avance es clave
+-  Se calcula resolviendo unas ecuaciones que simulan el comportamiento de un objeto sólido (el avión) en interacción con un fluido (el aire), según la Dinámica Computacional de Fluidos
+-  Después se usan métodos de optimización para obtener la forma óptima del avión que minimiza la resistencia verificando los requisitos geométricos y físicos
+-  Los diseños prometedores mediante la simulación computacional son validados en el túnel de viento
+
+## Diseño Aerodinámico
+
+<!-- image -->
+
+## Diseño Aerodinámico
+
+-  En casos reales, cada ejecución puede requerir meses de cómputo en máquinas de alto rendimiento al tener que realizar una gran cantidad de simulaciones
+-  Por ello, se han empleado los algoritmos evolutivos para esta tarea, que son capaces de proporcionar diseños de buena calidad en un tiempo mucho más reducido
+-  Además, como optimizadores multiobjetivo, pueden optimizar varios criterios a la vez (velocidad, estabilidad o gasto de combustible, por ejemplo)
+
+## Planificación de Rutas para Transporte de Mercancías
+
+-  Hoy en día es difícil encontrar empresas que gestionen las operaciones de logística sin la ayuda del ordenador
+-  El problema típico es diseñar las rutas más adecuadas de transporte/recogida de productos entre un almacén central y unos destinos dispersos geográficamente
+-  Su resolución de forma adecuada puede suponer ahorros muy significativos para la empresa
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+## Planificación de Rutas para Transporte de Mercancías
+
+-  Esta tarea se lleva a cabo empleando una flota de vehículos pertenecientes o no a la empresa
+-  Un sistema de planificación de vehículos debe proporcionar un conjunto de rutas de reparto a los conductores
+-  Las mercancías deben ser entregadas cuándo y donde se requieran, con el mínimo coste posible y verificando todas las restricciones legales y políticas de la empresa
+-  Los algoritmos de hormigas (AntRoute) son una herramienta muy potente para la planificación de rutas
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+## Planificación de Rutas para Transporte de Mercancías
+
+<!-- image -->
+
+-  AntRoute planifica diariamente las rutas de reparto desde el almacén central de Migros , una gran cadena suiza con 600 supermercados, localizado en Suhr (AG), a toda Suiza
+-  Migros dispone de una flota de entre 150 y 200 vehículos con tres tamaños: camiones (capacidad de 17 palés), trailers (35 palés) y unidades tractoras (33 palés)
+-  Esto provoca restricciones de acceso a los almacenes de los supermercados, restricciones de uso de ciertas carreteras, …
+-  Los repartos tienen de realizarse a horas específicas, todos ellos en un solo día ( productos perecederos ) y el último tiene que hacerse lo más lejos posible del almacén ( servicios extra )
+
+## Planificación de Rutas para Transporte de Mercancías
+
+<!-- image -->
+
+-  Por ejemplo, en un reparto de 52000 palés a 6800 clientes en un periodo de 20 días, AntRoute obtuvo el diseño diario de rutas en menos de 5 minutos en un PC estándar
+-  Los expertos de la empresa necesitaron tres horas…
+-  Las soluciones de AntRoute fueron de mucha mejor calidad en cuanto al número de rutas necesario, la distancia total recorrida y al aprovechamiento de los vehículos:
+
+|                       |   Huran Planner |   AR-RegTW | ÄR-Free   |
+|-----------------------|-----------------|------------|-----------|
+|                       |        2056     |   1807     | 1614      |
+|                       |      147271     | 143983     | 126258    |
+| Average truck loading |          76.919 |     87.359 |           |
+
+## Optimizando canalización en buques
+
+-  Trabajamos con empresa de ingeniería para optimizar canalización del diseño de buques.
+-  Se diseñó un modelo automático con criterios que había que optimizar.
+
+<!-- image -->
+
+<!-- image -->
+
+## Optimizando canalización en buques
+
+-  Problema real pero que se discretizó (ángulos fijos).
+-  Hablando con expertos, múltiples restricciones.
+-  Múltiples Objetivos:
+- -Reducir longitud total de canales.
+- -Reducir número de codos (cambios).
+
+## Peor Solución
+
+<!-- image -->
+
+## Mejor Solución
+
+<!-- image -->
+
+## Aproximando cuadro
+
+<!-- image -->
+
+## Optimizar una red para jugar
+
+<!-- image -->
+
+## Aprendiendo a jugar
+
+<!-- image -->
+
+-  Lanzado en 2013.
+-  Más de 40 millones de jugadores.
+-  9 héroes.
+-  Distintas cartas.
+
+<!-- image -->
+
+## Aprendiendo a jugar
+
+-  Objetivo: Crear mazos para Juego de
+- Cartas intercambiables utilizando EAs.
+-  Cada mazo es una solución.
+-  El fitness se mide contra otros mazos.
+-  Aprendiendo jugando contra sí mismo.
+
+<!-- image -->
+
+## Aprendiendo a jugar
+
+<!-- image -->
+
+## Aprendiendo a jugar
+
+-  Usando MetaStone, simulador del juego.
+-  82% de victorias mejor solución.
+-  9 turnos para ganar de media.
+-  Segundo mejor sistema:
+-  74% victorias competición.
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+## Equilibrado de Líneas de Montaje en Nissan
+
+-  La mayoría de los sistemas productivos actuales se basan en líneas de montaje
+-  La producción de un ítem se divide en un conjunto de tareas que tienen que llevarse a cabo según un orden concreto y respetando una serie de precedencias
+-  Cada tarea necesita un tiempo dado (más un área de trabajo) y tiene asociada un conjunto de predecesores directos
+-  El diseño ( equilibrado ) de la línea requiere agrupar de forma eficiente las tareas necesarias en estaciones de trabajo para maximizar la producción y reducir tiempos muertos
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+## Equilibrado de Líneas de Montaje en Nissan
+
+-  El parámetro clave es el tiempo de ciclo que indica el máximo tiempo permitido para que una estación procese sus tareas. A menor tiempo de ciclo, mayor capacidad productiva de la línea
+-  Los objetivos del equilibrado son:
+-  agrupar las tareas en el menor número posible de estaciones de trabajo satisfaciendo un tiempo de ciclo, u
+-  obtener la agrupación que minimiza el tiempo de ciclo
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+## Equilibrado de Líneas de Montaje en Nissan
+
+-  Los algoritmos de OCH se han aplicado con gran éxito al equilibrado de líneas de montaje, resolviendo problemas cada vez más complejos y realistas
+-  Trabajamos con la Cátedra Nissan de la UPC para resolver el problema multiobjetivo de minimizar el número de estaciones y su área para un tiempo de ciclo dado en la línea de montaje del motor del Nissan Pathfinder :
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+## Equilibrado de Líneas de Montaje en Nissan
+
+-  Es un problema multiobjetivo con muchas restricciones fuertes y un espacio de búsqueda de gran dimensión : oportunidad para metaheurísticas como los algoritmos de OCH
+-  El objetivo es proporcionar al ingeniero de planta con diversas opciones de diseño optimales con distinto equilibrio entre ambos objetivos en una sola ejecución del algoritmo
+
+Pareto ootimal tront
+
+<!-- image -->
+
+<!-- image -->
+
+## Equilibrado de Líneas de Montaje en Nissan
+
+-  Una solución a este problema ( TSALBP ) es una asociación de tareas a las distintas estaciones que cumpla las restricciones
+-  Hemos diseñado un algoritmo de Optimización de Colonias de Hormigas multiobjetivo que proporciona varias soluciones con un equilibrio distinto entre el área y el número de estaciones al ingeniero de la planta
+-  El rastro de feromona se asocia al par (tarea, estación)
+
+<!-- image -->
+
+<!-- image -->
+
+## Equilibrado de Líneas de Montaje en Nissan
+
+-  Introducimos una filosofía multicolonia para obtener un mayor abanico de soluciones posibles: cada hormiga utiliza distintos umbrales de llenado de estación
+-  Nuestra propuesta obtiene muy buenos resultados. El algoritmo de hormigas mejora a otras técnicas de búsqueda
+
+<!-- image -->
+
+<!-- image -->
+
+## Equilibrado de Líneas de Montaje en Nissan
+
+## Motor del Nissan Pathfinder:
+
+-  747 piezas y 330 referencias en 6 versiones del motor diesel
+-  378 operaciones de montaje (prueba rápida incluida) agrupadas en 140
+-  79 operarios para un turno de 301 motores
+
+<!-- image -->
+
+<!-- image -->
+
+## Equilibrado de Líneas de Montaje en Nissan
+
+Posteriormente diseñamos un algoritmo genético multiobjetivo específico para el TSALBP que mejora los resultados del algoritmo de OCH:
+
+<!-- image -->
+
+## Problema Industrial
+
+-  Aplicado para un problema Industrial.
+-  No se desea predecir una variable, se desea una ecuación que pueda ser revisada por especialistas.
+
+<!-- image -->
+
+## Simplificando Redes Neuronales
+
+-  Buscando mejorar acierto.
+-  Distintos problemas de clasificación: médicos, plantas, …
+
+Poyatos, J., Molina, D., Martinez, A. D., Del Ser, J., &amp; Herrera, F. (2023). EvoPruneDeepTL: An evolutionary pruning model for transfer learning based deep neural networks. Neural Networks, 158, 59-82. https://doi.org/10.1016/j.neunet.2022.10.011
+
+<!-- image -->
+
+## Simplificando Redes Neuronales
+
+-  Distintos problemas de clasificación: médicos, plantas, …
+-  Mejora un 5% de acierto (83-88%, 93-98%, …).
+
+| Dataset   | Measure                  | Not Pruned   | Best Fixed   | Feature Selection   |
+|-----------|--------------------------|--------------|--------------|---------------------|
+| SRSMAS    | Accuracy % Active neur.  | 0.832 100    | 0.866 20     | 0.884 60            |
+| RPS       | Accuracy % Active neur . | 0.938 100    | 0.938 40     | 0.985 45            |
+| LEAVES    | Accuracy % Active neur.  | 0.923 100    | 0.927 80     | 0.943 59            |
+| PAINTING  | Accuracy % Active neur . | 0.939 100    | 0.945 60     | 0.958 55            |
+| CATARACT  | Accuracy % Active neur . | 0.703 100    | 0.719 70     | 0.747 55            |
+| PLANTS    | Accuracy % Active neur.  | 0.432 100    | 0.432 10     | 0.472 68            |
+
+Poyatos, J., Molina, D., Martinez, A. D., Del Ser, J., &amp; Herrera, F. (2023). EvoPruneDeepTL: An evolutionary pruning model for transfer learning based deep neural networks. Neural Networks, 158, 59-82. https://doi.org/10.1016/j.neunet.2022.10.011
+
+## Simplificando Redes Neuronales
+
+-  Aplicar un multi-objetivo para mejorar también la robustez de precisión.
+
+V
+
+fi
+
+-  Más interpretable
+
+<!-- image -->
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+-  La superposición craniofacial es una técnica de identificación forense basada en la comparación de un 'modelo' del cráneo encontrado y una foto de una persona desaparecida
+-  Proyectando uno sobre otro ( solapamiento cráneo-cara ), el antropólogo forense puede determinar si pertenecen a la misma persona
+
+<!-- image -->
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+Correlación entre los puntos craneométricos y cefalométricos
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+<!-- image -->
+
+Ejemplo real
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+-  Diseño de un procedimiento automático basado en el ordenador para automatizar el proceso de identificación forense por superposición craneofacial:
+-  Diseño de métodos automáticos de registrado de imágenes de rango para obtener modelos 3D de cráneos (con algoritmos evolutivos, AEs)
+-  Diseño de métodos de registrado 3D/2D automáticos para el solapamiento cráneo-cara (con AEs y conjuntos fuzzy)
+-  Diseño de un sistema de ayuda a la decisión para asistir al antropólogo forense en la decisión final de la identificación (con visión por ordenador y operadores fuzzy)
+-  Proyectos Plan Nacional I+D+I (2006-09, 2009-12, 2013-15, 2016-18, 19-21) y Excelencia Junta de Andalucía (2007-10, 2013-18, 2020-22). Patente internacional comercializada 2011. Proyecto Europeo FP7-Security MEPROCS (2012-14). Premios Internacionales
+
+## Identificación Forense de Personas Desaparecidas
+
+?
+
+?
+
+Identificación {Positiva/negativa/ probable positiva/probable negativa/ indeterminada}
+
+1. Modelado del cráneo y mejora facial
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+Apoyo a la toma de decisión con IA
+
+Reconstrucción del modelo 3D
+
+<!-- image -->
+
+Procesado de imagen y localización de landmarks
+
+## 3. Toma de decisiones
+
+2. Solapamiento cráneo-cara
+
+RI 3D-2D: traslación, rotación, escalado, y proyección 2D
+
+<!-- image -->
+
+## Spin-off Panacea Cooperative
+
+-  Se ha llegado a crear una spin-off, Panacea Cooperative Research.
+-  Producto comercial: Skeleton-Id
+
+## https://www.youtube.com/watch?v=4p8Ufws8OJ s
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+## Escáner de rango
+
+<!-- image -->
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+-  Algoritmos Meméticos con codificación real para el modelado 3D de cráneos. Representación de una solución a este problema:
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+## Entrada: vistas 3D
+
+## Reconstrucción
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+## 1. Adquisición de la fotografía
+
+Solapamiento automático cráneo-cara mediante Registrado de Imágenes (RI) Evolutivo
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+2. Adquisición del modelo 3D del cráneo
+
+Solución final: escenario original replicado mediante RI 3D-2D
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+3. Solapamiento final cráneo-cara
+
+Solución final: escenario original replicado mediante RI 3D-2D
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+-  Distancias entre landmarks cráneo-cara. Los puntos no casan perfectamente debido al grosor de los tejidos blandos. Las distancias varían para cada landmark en función de grupo racial, edad, género, ...
+-  Nuestro método incorpora información de esas distancias para obtener mejores superposiciones cráneo-cara
+
+<!-- image -->
+
+<!-- image -->
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+## Manual
+
+## Fuzzy AE
+
+Area deviation error: 34.70% varias horas
+
+<!-- image -->
+
+2-4 minutos Area deviation error: 13.23%
+
+<!-- image -->
+
+## Identificación Forense de Personas Desaparecidas
+
+## Manual
+
+<!-- image -->
+
+<!-- image -->
+
+## Fuzzy AE
+
+Area deviation error: 32.64% varias horas
+
+2-4 minutos Area deviation error: 15.84%
+
+## 4. Software de Metaheurísticas
+
+-  Existen distinto tipo de software de metaheurísticas.
+-  No muy maduro.
+- Código separado de autores de algoritmos.
+- Distintos frameworks , no compatibles.
+- Orientados  a  desarrollo  de  algoritmos,    no  usuario final.
+- Distintos  entornos  y  lenguajes:  Matlab  (mayoritario), Java, Python, ...
+
+## 4. Software de Metaheurísticas
+
+## Metaheuristic optimization frameworks: a survey and benchmarking
+
+José Antonio Parejo Antonio Ruiz-Cortés Sehastián Lozano Pahlo Fernandez
+
+Soft Comput (2012) 165527-561 DOI 10.1007/s00500-011-0754-8
+
+Ahstract This   paper   performs an unprecedented com parative study of Metaheuristic optimization frameworks. As criteria for comparison a sct of 271 fcatures grouped in 30 characteristics   and 6 arcas has been selected. These features include the different metaheuristic   techniques covered mechanisms for constraint handling,  neighborhood   specification; hybridization , par allel and distributed   computation; software   engineering best   practices, documentation   and user  interface, etc. A metric has been defined for each feature so that the scores obtained by a framework are averaged within each group of features, leading to final average score for each frame- work. Out 0fl33 frameworks ten have been selected from the   literature using results of the comparison arc analyzed with the aim of identifying improvement arcas and gaps in specific frameworks and the whole Generally speaking, sig nificant lack of support has been found for hyper-heuristics, and also desirable to have à wider implementation of some Software Engineering best practices. Finally, a wider support for some metaheuristics and hybridization capabilities is needed set.
+
+## 4. Librerías útiles
+
+-  Para  muchos  algoritmos  es  muy  cómodo  trabajar  con operaciones de vectores.
+-  Existen librerías para distintos lenguajes que pueden ser útiles.
+-  Ejemplo para distintos lenguajes (hay muchos más):
+-  Java: Jblas
+-  C++: Eigen, Armadillo
+- 
+- Python: Numpy
+- 
+-  Julia, Matlab, R: en el propio lenguaje
+- Rust: ndarray
+
+## 4. Software de Metaheurísticas
+
+-  Para desarrollar las prácticas de la asignatura se podrá emplear el entorno/lenguaje que se desee.
+-  El profesor de prácticas proporcionará distintos códigos básicos de metaheurísticas desarrollados en C.
+-  El alumno deberá indicar el software considerado en su documentación de prácticas y proporcionar las fuentes y los ejecutables realizados
+
+## 4. Software de Metaheurísticas
+
+-  Para  desarrollar  las  prácticas  de  la  asignatura  se  podrá emplear el entorno/lenguaje que se desee.
+-  ¿Puedo elegir?
+-  Sí, no es una asignatura centrada en desarrollo, interesa conocer algoritmos para implementarlos.
+-  Lenguaje bajo nivel: (C++,Java, Rust) adecuados pero mejor con librerías.
+-  Seguir un esquema API pero adaptable al lenguaje
+-  Python: Cuidado si no se conoce cómo optimizar la función de fitness (uso de numpy/numba).
+-  Julia: Falta de conocimiento/experiencia.
+-  Matlab: no recomendada, software libre compatible ( Octave ) lento y errores.
+
+## 4. Software Destacable
+
+##  jMetal (Java) ó jMetalPy (Python)
+
+##  PlatEMO
+
+- -Algoritmos Multi-objetivo.
+- -Se programa, permite gráficas.
+- -Fácil de usar , problemas propios.
+- -Muchos algoritmos.
+- -Implementado en Matlab.
+- -Bien documentado.
+
+<!-- image -->
+
+<!-- image -->
+
+## 4. Software Destacable
+
+##  ECJ, Java
+
+- -Configurable con ficheros de texto.
+- -Sólo requiere programar la función objetivo.
+
+##  Jenetics, Java
+
+- -Sólo de algoritmos genéticos.
+- -Bien documentado.
+
+##  Optaplanner, Java
+
+- -Planificación y Enrutado.
+- -Ámbito concreto.
+- -Bien documentado.
+
+<!-- image -->
+
+## 4. Software Destacable
+
+##  Inspyred, Python
+
+- -Muchos algoritmos.
+- -Fácil de usar .
+
+##  Pyswarms, Python
+
+- -Limitado a PSO, muy completo.
+- -Visualizaciones.
+
+##  Mealpy, Python
+
+- -El más extenso.
+- -Implementación deja que desear.
+- -No validado autores.
+
+## 4. Software Destacable
+
+##  JuMP, Julia
+
+- -Optimización.
+- -Lenguaje de Modelado.
+
+<!-- image -->
+
+##  Optimization, Julia
+
+- -Muchos algoritmos.
+- -De distinto tipo, evolutivos y exactos.
+
+<!-- image -->
+
+##  Metaheuristics, Julia
+
+- -Distintas metaheurísticas.
+- -Visualizaciones.
+
+##  Evolutionary, Julia
+
+- -Limitado a algoritmos genéticos.
+- -Visualizaciones.
+
+<!-- image -->
+
+## 4. Software Destacable
+
+##  ParaDisEO, C++
+
+- -Paralelismo.
+- -Complejo de integrar un problema.
+- -Gráficas.
+
+##  OptFrame, C++
+
+- -Completo.
+- -Complejo de usar.
+
+##  Pagmo, C++
+
+- -Completo.
+- -Sencillo, mejorable documentación.
+- -Interfaz en Python.
+
+<!-- image -->

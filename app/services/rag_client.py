@@ -1,0 +1,198 @@
+"""
+Cliente HTTP para comunicarse con el RAG Service
+"""
+import os
+import requests
+from typing import List, Dict, Any, Optional, Tuple
+from langchain_core.documents import Document
+from dotenv import load_dotenv
+
+load_dotenv()
+
+class RAGServiceClient:
+    """Cliente para comunicarse con el RAG Service"""
+    
+    def __init__(self):
+        self.base_url = os.getenv("RAG_SERVICE_URL", "http://rag-service:8082")
+        
+    def search_documents(
+        self, 
+        query: str, 
+        subject: str, 
+        k: int = 5,
+        filter_metadata: Optional[Dict] = None
+    ) -> Tuple[List[Document], List[str]]:
+        """
+        Buscar documentos en el RAG Service
+        
+        Args:
+            query: Consulta de búsqueda
+            subject: Asignatura
+            k: Número de documentos a recuperar
+            filter_metadata: Filtros adicionales
+            
+        Returns:
+            Tupla con (documentos, fuentes)
+        """
+        try:
+            payload = {
+                "query": query,
+                "subject": subject,
+                "k": k,
+                "filter_metadata": filter_metadata
+            }
+            
+            response = requests.post(
+                f"{self.base_url}/search",
+                json=payload,
+                timeout=30
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                # Convertir documentos de vuelta a objetos Document
+                documents = []
+                for doc_data in data["documents"]:
+                    doc = Document(
+                        page_content=doc_data["content"],
+                        metadata=doc_data["metadata"]
+                    )
+                    documents.append(doc)
+                
+                return documents, data["sources"]
+            else:
+                print(f"Error en RAG Service: {response.status_code} - {response.text}")
+                return [], []
+                
+        except requests.exceptions.RequestException as e:
+            print(f"Error conectando con RAG Service: {str(e)}")
+            return [], []
+        except Exception as e:
+            print(f"Error inesperado en RAG Service: {str(e)}")
+            return [], []
+    
+    def list_subjects(self) -> List[str]:
+        """Lista las asignaturas disponibles"""
+        try:
+            response = requests.get(
+                f"{self.base_url}/subjects",
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                return data["subjects"]
+            else:
+                print(f"Error listando asignaturas: {response.status_code}")
+                return []
+                
+        except Exception as e:
+            print(f"Error listando asignaturas: {str(e)}")
+            return []
+    
+    def health_check(self) -> bool:
+        """Verifica si el RAG Service está disponible"""
+        try:
+            response = requests.get(
+                f"{self.base_url}/health",
+                timeout=5
+            )
+            return response.status_code == 200
+        except:
+            return False
+        
+    def get_guia_docente(self, subject: str, section: Optional[str] = None) -> Optional[Dict[str, Any]]:
+        """
+        Obtener información de la guía docente desde el RAG Service
+        
+        Args:
+            subject: Nombre de la asignatura
+            section: Sección específica (opcional)
+            
+        Returns:
+            Diccionario con los datos de la guía docente o None si hay error
+        """
+        try:
+            url = f"{self.base_url}/guia-docente/{subject}"
+            params = {}
+            if section:
+                params["section"] = section
+                
+            response = requests.get(
+                url,
+                params=params,
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                return data["data"]
+            elif response.status_code == 404:
+                print(f"Guía docente no encontrada para: {subject}")
+                return None
+            else:
+                print(f"Error obteniendo guía docente: {response.status_code} - {response.text}")
+                return None
+                
+        except requests.exceptions.RequestException as e:
+            print(f"Error conectando con RAG Service para guía docente: {str(e)}")
+            return None
+        except Exception as e:
+            print(f"Error inesperado obteniendo guía docente: {str(e)}")
+            return None
+
+    def populate_subject(self, subject: str, file_paths: List[str], reset: bool = False) -> Dict[str, Any]:
+        """
+        Populate a subject with documents via the RAG Service
+        
+        Args:
+            subject: Subject name
+            file_paths: List of file paths to process
+            reset: Whether to clear existing documents for the subject
+            
+        Returns:
+            Dict with operation result
+        """
+        try:
+            # Prepare files for upload (in a real implementation, this would handle file uploads)
+            # For now, we'll simulate the API call
+            data = {
+                "subject": subject,
+                "documents_path": ",".join(file_paths),  # Simplified for API
+                "clear_existing": reset
+            }
+            
+            response = requests.post(
+                f"{self.base_url}/populate",
+                data=data,
+                timeout=30
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                return {
+                    "status": "success",
+                    "subject": subject,
+                    "documents_added": result.get("documents_processed", 0),
+                    "message": result.get("message", "Documents populated successfully")
+                }
+            else:
+                return {
+                    "status": "error",
+                    "message": f"Error populating subject: {response.status_code} - {response.text}"
+                }
+                
+        except requests.exceptions.RequestException as e:
+            return {
+                "status": "error",
+                "message": f"Error connecting to RAG Service: {str(e)}"
+            }
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": f"Unexpected error: {str(e)}"
+            }
+
+# Instancia global del cliente
+rag_client = RAGServiceClient()

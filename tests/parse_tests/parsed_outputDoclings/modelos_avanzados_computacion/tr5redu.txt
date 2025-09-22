@@ -1,0 +1,642 @@
+## Tema 5: Complejidad de Problemas de Optimización Aproximados
+
+## Serafín Moral
+
+Modelos Avanzados de Computación - Universidad de Granada
+
+<!-- image -->
+
+## Contenido
+
+- Problemas de Optimización
+- Algoritmos δ -aproximados
+- Análisis de problemas: cubrimiento por vértices, viajante de comercio, corte máximo, mochila, satisfacción máxima.
+- Esquema de aproximación polinómico.
+- Clase NPO y PO
+- Clases APX, PTAS y FPTAS
+- Algoritmos pseudo-polinómicos
+- Problemas completos
+
+<!-- image -->
+
+## Bibliografía
+
+- G. Ausiello, P . Creszendi et al. (1999) Complexity and Approximation . Springer-Verlag, Berlin.
+2. A Compendium of NP Optimization Problems. http://www.nada.kth.se/theory/compendium
+
+<!-- image -->
+
+## Problemas de Optimización
+
+## Problema de Optimización (minimización)
+
+Tenemos unos datos x .
+
+Estos datos tienen asociados un conjunto de soluciones factibles F ( x ) .
+
+∀ s ∈ F ( x ) tenemos una función C ( s ) que evalúa el coste de esta solución.
+
+El problema es encontar un elemento s ∗ tal que
+
+<!-- formula-not-decoded -->
+
+Este problema se conoce cómo la versión constructiva del problema de optimización.
+
+Si sólo se trata de calcular C ( s ∗ ) , tendremos la versión de evaluación .
+
+En general, son de dificultad similar.
+
+## El Problema del Cubrimiento por Vértices
+
+## Ejemplo
+
+- Datos: un grafo G no dirigido.
+- Soluciones factibles F ( G ) : conjunto de los cubrimientos por vértices de G el conjunto de todos los subconjuntos de vértices A tales que toda arista tiene, al menos un extremo en A .
+- Coste de una solución factible A : su número de vértices.
+
+Queremos encontrar el cubrimiento por vértices con un número menor de vértices.
+
+## Problemas de Maximización
+
+## Problemas de Optimización: Maximización
+
+Algunas veces, en vez de tener una función de coste, tenemos una función de albluebeneficio B y tratamos de maximizarla. Cada ejemplo x , tiene asociado un conjunto de soluciones factibles F ( x ) .
+
+∀ s ∈ F ( x ) tenemos una función B ( s ) que evalúa el beneficio de esta solución.
+
+El problema es encontar un elemento s ∗ tal que
+
+B ( s ∗ ) = max s ∈ F ( x ) B ( s )
+
+<!-- image -->
+
+- Estos problemas suelen ser equivalentes bajo reducción Turing a los problemas de decisión asociados (ver la reducción del problema del viajante de comercio en el tema del cálculo de funciones) cuando el problema de decisión es NP-completo.
+- En este tema no nos vamos a preocupar de resolverlos de forma exacta.
+- Vamos a ver problemas que son de similar dificultad cuando se resuelven de forma exacta, son bastante diferentes cuando intentamos aproximarlos: unos no se pueden aproximar con ningún error; otros se pueden aproximar con algún error, pero no con errores muy pequeños; y otros se pueden aproximar con errores arbritrariamente pequeños.
+
+## Razón de Eficacia (maximización)
+
+Supongamos un problema de optimización que para una entrada x tiene un óptimo OPT ( x ) y ALG un algoritmo aproximado que para una entrada x obtiene una solución factible ALG ( x ) con un coste (beneficio) de C ( ALG ( x )) ( B ( ALG ( x )) ).
+
+## Razón de eficacia (maximización)
+
+Un problema de maximización tiene una razón δ si y solo si
+
+<!-- formula-not-decoded -->
+
+Buscamos algoritmos polinómicos que tengan una razón de eficacia tan cercana a 1 como sea posible.
+
+## Razón de Eficacia (minimización)
+
+## Razón de eficacia (minimización)
+
+Un problema de minimización tiene una razón δ si y solo si
+
+<!-- formula-not-decoded -->
+
+<!-- image -->
+
+## Umbral de Aproximación
+
+Umbral de Aproximación: Ínfimo de la razón de eficacia mediante algoritmos polinómicos.
+
+/Bullet
+
+<!-- image -->
+
+<!-- image -->
+
+## Valor de la razón de eficacia
+
+- Una razón de 1 es equivalente a un algoritmo exacto.
+- Puede haber problemas en los que el umbral de aproximación sea infinito (no hay algoritmos polinómicos con una razón de eficacia δ ).
+
+<!-- image -->
+
+## Aprox. para Cubrimiento por Vértices
+
+Buscamos el conjunto C con un número mínimo de nodos que sea un cubrimiento para G = ( V , E ) .
+
+Algoritmo Aproximado:
+
+- -C = ∅
+- Mientras haya aristas en G
+- Elegir un nodo de G con grado maximo
+- Añadir el nodo a C
+- Borrar de G ese nodo y todos sus enlaces
+
+Este no es un algoritmo δ -aproximado ningún valor de δ . El error puede llegar a ser de orden log ( n ) .
+
+## Cubrimiento por Vértices
+
+<!-- image -->
+
+## Se puede equivocar más
+
+<!-- image -->
+
+En los nodos de la derecha se sigue el siguiente procedimiento: Para i desde 2 a 5 (uno menos que los nodos del centro) Se deviden los nodos del centro de i en i y cada grupo de i se conecta con un nodo distinto de la derecha.
+
+Si un grupo no está completo no se considera. El siguiente debe de cubrir los nodos que no están cubiertos en este.
+
+Podemos elegir los rojos.
+
+Con los verdes sería suficiente
+
+Razón 13 / 6 &gt; 2.Puede llegar a log ( n ) .
+
+n número de nodos centrales
+
+## Aproximación para Cubrimiento por Vértices
+
+## Algoritmo 2 -Aproximado:
+
+- -C = ∅
+- Mientras haya aristas en G
+- Elegir una arista cualquiera de G
+- Añadir sus dos extremos a C
+- Borrar de G los dos nodos y todas sus aristas
+
+Este es un algoritmo 2-aproximado : todas las aristas tienen que tener un extremos en C . De esta forma, nunca elegimos más del doble de lo necesario.
+
+Es el mejor algoritmo que se conoce. No se puede aproximar con δ = 1 . 1659.
+
+## El problema del Corte Máximo: CM
+
+Datos: Un grafo no dirigido G = ( V , E ) . Problema: Partir V en dos conjuntos S y V \ S de tal manera que haya un número máximo de arcos entre S y V \ S .
+
+El problema de decisión es NP-completo.
+
+## El problema del Corte Máximo: CM
+
+Datos: Un grafo no dirigido G = ( V , E ) . Problema: Partir V en dos conjuntos S y V \ S de tal manera que haya un número máximo de arcos entre S y V \ S .
+
+El problema de decisión es NP-completo.
+
+## Un algoritmo Greedy
+
+Suponemos que no existen arcos que unen un nodo con el mismo: estos arcos se pueden quitar ya que no están nunca en el corte.
+
+Si v es un nodo y A un subconjunto de nodos, consideremos arc ( x , A ) : el número de arcos que unen v con A .
+
+- Comenzamos con un conjunto S arbitrario
+- Mientras S cambie
+- Para cada vertice v del grafo
+- Si el vertice esta en S
+- Si arc ( v , V \ S ) &lt; arc ( v , S )
+- Eliminar v de S
+- Si el vertice no esta en S
+- Si arc ( v , V \ S ) &gt; arc ( v , S )
+- Añadir v a S
+
+Este algoritmo es polinómico, ya que da como máximo
+
+## Es un algoritmo con razón de aproximación 2
+
+<!-- image -->
+
+Sea eij , 1 ≤ i ≤ j ≤ 4 el número de arcos entre Vi y Vj . Para cada nodo de V 1 los arcos que van a nodos de V 1 y V 2 son menos que los que van a V 3 y V 4 : ∀ x 1 ∈ V 1 , arc ( x 1 , V 1 ) + arc ( x 1 , V 2 ) ≤ arc ( x 1 , V 3 ) + arc ( x 1 , V 4 ) . Sumando la desigualdad anterior en todos los nodos de V 1 obtenemos: 2 e 11 + e 12 ≤ e 13 + e 14 y, por tanto, e 12 ≤ e 13 + e 14 .
+
+## Corte Máximo
+
+Repitiendo lo anterior para V 1 , V 2 , V 3 , V 4, obtenemos e 12 ≤ e 13 + e 14 , e 12 ≤ e 23 + e 24 ,
+
+e 34 ≤ e 23 + e 13 , e 34 ≤ e 14 + e 24
+
+Sumando y dividiendo por dos se obtiene e 12 + e 34 ≤ e 14 + e 23 + e 13 + e 24
+
+También es obvio que e 14 + e 23 ≤ e 14 + e 23 + e 13 + e 24 . Sumando, las dos últimas desigualdades obtenemos:
+
+<!-- formula-not-decoded -->
+
+Lo que nos disce que nuestro algoritmo heurístico, al menos, obtiene la mitad de arcos del óptimo: La razón de aproximación es 2.
+
+## Satisfacción Máxima: K-GMAXSAT
+
+DATOS: Tenemos n variables p 1 , . . . , pn y m fórmulas booleanas: { φ 1 , . . . , φ m } tal que cada una de ellas tiene, a lo más, K variables.
+
+Problema: Queremos encontrar una asignación de valores de verdad que maximice el número de fórmulas ciertas.
+
+<!-- image -->
+
+## Algoritmo Aproximado
+
+- Para una asignación de valores de verdad al azar, calculamos la p robabilidad de que φ i sea cierta:
+
+<!-- formula-not-decoded -->
+
+donde t i es el número de asignaciones a las variables que hacen que φ i sea cierta y k el número de variables de la fórmula.
+
+Esto se puede calcular ya que está limitado el número de variables en una fórmula.
+
+- Para una asignación al azar de valores de verdad el número esperado de fórmulas que se satisfacen es
+
+<!-- formula-not-decoded -->
+
+## Algoritmo Aproximado
+
+- Seleccionamos una variable x 1 cualquiera
+- Si seleccionamos una variable x 1, tenemos que
+
+## P (Φ) = 1 / 2 ( P (Φ[ x 1 = verdadero ]) + P (Φ[ x 1 = falso ]))
+
+donde Φ[ x 1 = verdadero ] , Φ[ x 1 = falso ] son los conjuntos de fórmulas que se obtienen a partir de las originales, substituyendo x 1 por verdadero ( ¬ x 1 falso) y x 1 por falso ( ¬ x 1 verdadero) respectivamente.
+
+Elegimos x 1 = verdadero si P (Φ[ x 1 = verdadero ]) ≥ P (Φ[ x 1 = falso ]) y x 1 = falso en caso contrario.
+
+- Si x 1 es verdadero repetimos lo mismo para el resto de las variables con Φ[ x 1 = verdadero ] y si lo hacemos falso trabajamos con Φ[ x 1 = falso ] .
+
+Num. Esp. = 1/2+1+0+1+3/4+7/8+1/2+3/4= 5+3/8
+
+<!-- image -->
+
+Serafín Moral
+
+<!-- image -->
+
+Num. Esp. = 1/2+1+0+1+3/4+7/8+1/2+3/4= 5+3/8
+
+Serafín Moral
+
+## Propiedades del Algoritmo
+
+- De esta manera, el valor esperado del fórmulas que se satisfacen nunca decrece.
+- Cuando llegamos al final (todas las variables tienen su valor de verdad), el numero esperado es el número exacto de fórmulas que se satisfacen, que es al menos el número original P (Φ) .
+- El óptimo del problema es menor o igual que el número de fórmulas φ i para las que P ( φ i ) &gt; 0, lo que denotamos como # { φ i : P ( φ i ) &gt; 0 } .
+
+<!-- image -->
+
+## Razón de aproximación
+
+## La razón de aproximación es:
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+Este es un algoritmo δ -aproximado con δ = 1 m« ın { P ( φ i ) : P ( φ i ) &gt; 0 } .
+
+- Para fórmulas con k variables como máximo es δ -aproximado δ = 2 k .
+- Para cláusulas es un algoritmo con razón 2.
+- Para cláusulas con k literales distintos es δ = 1 1 -( 2 -k ) .
+
+## El Problema del Viajante de Comercio
+
+## Resultado
+
+/negationslash
+
+Si P = NP el problema del viajante de comercion no tiene un algoritmo con umbral δ polinómico.
+
+Supongamos que existe un algoritmo δ -aproximado polinómico para el problema del viajante de comercio ( δ &lt; ∞ ). Entonces, construiremos el siguiente algoritmo para el circuito hamiltoniano.
+
+Sea G = ( V , E ) un grafo, entonces construimos un problema del viajante de comercio con los mismos nodos y en el que
+
+<!-- formula-not-decoded -->
+
+Aplicamos el algoritmo polinómico con razón δ .
+
+## Serafín Moral
+
+## Viajante de Comercio
+
+Si el algoritmo encuentra un circuito de coste | V | , existe un circuito hamiltoniano en G . Si el algoritmo aproximado no encuentra un circuito de coste | V | , devolverá un circuito de coste mayor de | V | .δ , entonces como Coste Circuito Optimo ≤ δ deducimos
+
+<!-- image -->
+
+Como consecuencia, Optimo &gt; | V | y el óptimo tiene un arco que no es de G y, por tanto, G no tiene un circuito hamiltoniano.
+
+## El problema de la Mochila
+
+Pesos: w 1 , . . . , wn Valores: v 1 , . . . , vn Peso límite: W Encontrar 1 tal que y
+
+Problema: S ⊆ { , . . . , n } ∑ i ∈ S wi ≤ W ∑ i ∈ S vi sea máximo.
+
+Podemos suponer que todo objeto tiene un peso wi ≤ W (todos los objetos caben en la mochila). Si un objeto no cabe, entonces se quita del problema y la solución es la misma.
+
+## El problema de la Mochila
+
+Pesos: w 1 , . . . , wn Valores: v 1 , . . . , vn Peso límite: W Problema: Encontrar S ⊆ { 1 , . . . , n } tal que ∑ i ∈ S wi ≤ W y ∑ i ∈ S vi sea máximo.
+
+Podemos suponer que todo objeto tiene un peso wi ≤ W (todos los objetos caben en la mochila). Si un objeto no cabe, entonces se quita del problema y la solución es la misma.
+
+## Algoritmo Pseudo-Polinómico
+
+Sea V = m« ax { v 1 , . . . , vn } Para i = 0 , 1 , . . . , n y 0 ≤ v ≤ nV calculamos: W ( i , v ) : Mínimo peso que se puede conseguir eligiendo items entre los i primeros de valor v exactamente. Se calcula con: W ( i + 1 , v ) = m« ın { W ( i , v ) , W ( i , v -vi + 1 ) + wi + 1 }
+
+<!-- image -->
+
+## Algoritmo Pseudo-Polinómico
+
+Para i = 0 , 1 , . . . , n y 0 ≤ v ≤ nV calculamos: W ( i , v ) : Mínimo peso que se puede conseguir eligiendo items entre los i primeros de valor v exactamente. Se calcula con: W ( i + 1 , v ) = m« ın { W ( i , v ) , W ( i , v -vi + 1 ) + wi + 1 } Complejidad O ( n 2 V ) . Es Pseudo-polinómico (exponencial en función de la longitud de V ). Cuando se ha calculado W ( n , v ) es fácil calcular el óptimo: Comparamos, desde i = nV hasta i = 0 los valores W ( n , i ) con el límite W . El primer i para el que W ( n , i ) ≤ W es el óptimo del problema.
+
+## Algoritmo Aproximado
+
+Dado un ejemplo I = ( w 1 , . . . , wn , W , v 1 , . . . , vn ) consideramos
+
+I ′ = ( wi , . . . , wn , W , v ′ 1 , . . . , v ′ n )
+
+(Los b bits menos significativos se reemplazan por 0).
+
+donde v ′ i = 2 b [ vi 2 b ] .
+
+Entonces aplicamos el algoritmo pseudo-polinómico, pero quitando los 0s a la derecha de los números y añadiéndolos al resultado.
+
+Este tendrá una complejidad en este caso de O ( n 2 V 2 b ) .
+
+## Algoritmo Aproximado
+
+Se obtiene un algoritmo δ -aproximado, haciendo b = [ log ( ( δ -1 ) . V n ) ] .
+
+Supondremos que V ( S ′ ) ≥ V (como todos los objetos caben, siempre podemos considerar la solución que mete el objeto de mayor valor).
+
+Sea S el conjunto óptimo del problema original y S ′ el que obtenemos en el algoritmo aproximado. Vamos a llamar a V ( S ) = ∑ i ∈ S vi el valor conseguido con el algoritmo óptimo y V ( S ′ ) = ∑ i ∈ S vi el valor conseguido con el algoritmo aproximado.
+
+Tenemos que:
+
+V ( S ) = ∑ i ∈ S vi ≥ V ( S ′ ) = ∑ i ∈ S ′ vi ≥ ∑ i ∈ S ′ v ′ i ≥ ∑ i ∈ S v ′ i ≥ ∑ i ∈ S ( vi -2 b ) ≥ ( ∑ i ∈ S vi ) -n .2 b = V ( S ) -n .2 b
+
+## Algoritmo Aproximado
+
+## V ( S ) ≥ V ( S ′ ) ≥ V ( S ) -n .2 b
+
+Por tanto, la diferencia entre el óptimo y lo que calculamos es menor o igual a n .2 b .
+
+Si b = [ log ( ( δ -1 ) . V n ) ] ,y si el valor de nuestro algoritmo aproximado es, al menos, V (esto ocurre si todos los items caben en la mochila) tenemos que
+
+V ( S ) V ( S ′ ) ≤ V ( S ′ )+ n 2 b V ( S ′ ) ≤ V ( S ′ )+ n ( δ -1 ) V n V ( S ′ ) ≤ V ( S ′ )+ n ( δ -1 ) V ( S ′ ) n V ( S ′ ) = 1 + V . ( δ -1 ) V = δ
+
+Es decir es un algoritmo δ -aproximado.
+
+La complejidad es O ( n 2 V 2 b ) , que para b = [ log ( ( δ -1 ) . V n ) ] , se convierte en O ( n 3 / ( δ -1 )) .
+
+## Esquema de Aproximación Polinómico
+
+Un problema de optimización Π tiene un esquema de aproximación polinómico si existe un algoritmo que para cada δ &gt; 1 y cada ejemplo x de Π , devuelve una aproximación de grado δ del óptimo de x , en tiempo polinómico en función de | x | (el polinomio puede depender de δ ).
+
+Si la dependencia de δ se puede expresar como un polinomio en ( 1 / ( δ -1 )) , se dice que es un esquema de aproximación polinómico total .
+
+El problema de la mochila tiene un esquema de aproximación polinómico total
+
+## Conjunto Independiente
+
+## Teorema
+
+Si existe un algoritmo δ 0-aproximado polinómico con δ 0 &lt; ∞ para el máximo conjunto independiente, entonces existe un esquema de aproximación polinómico.
+
+<!-- image -->
+
+## Definición NPO
+
+Un problema de optimización está en NPO si y solo si se cumplen las siguientes condiciones:
+
+- 1 El conjunto de entradas correctas se puede reconocer en tiempo polinómico.
+- 2 Existe un polinomio q tal que para cada caso del problema x , y para cada solución factible y , tenemos que | y | ≤ q ( | x | ) , y además para cada | y | ≤ q ( | x | ) es decidible en tiempo polinómico si es una solución factible del problema.
+- 3 La función de costo se puede calcular en tiempo polinómico.
+
+Ejemplo: El cubrimiento mínimo por vértices.
+
+## Problemas Polinómicos de Optimización
+
+## La clase PO
+
+Un problema de optimización está en la clase PO si está en NPO y existe un algoritmo polinómico tal que para cada caso del problema x existe un algoritmo polinómica que calcula la solución óptima y su coste.
+
+Ejemplo:
+
+La distancia mínima en grafos.
+
+<!-- image -->
+
+Dado un problema de optimización (minimización o maximización), siempre podemos asociarle un problema de decisión: por ejemplo para un problema de minización, se da una cota K y se pregunta si existe una solución factible de costo menor o igual a K .
+
+## Teorema
+
+Para cualquier problema de optimización de NPO su correspondiente problema de decisión está en NP .
+
+## Teorema
+
+Si P = NP entonces PO = NPO .
+
+/negationslash
+
+/negationslash
+
+## La clase APX
+
+## Definición: Clase APX
+
+La clase APX es la clase de todos los problemas tales que admiten un algoritmo δ -aproximado polinómico para δ &lt; ∞ .
+
+## Ejemplo: Problemas en APX
+
+Cubrimiento mínimo por vértices, problema de la mochila, corte máximo, máximo número de cláusulas satisfechas, etc...
+
+## Ejemplo: Problemas que no están en APX
+
+Problema del viajante de comercio, máximo clique, máximo conjunto independiente, etc...
+
+## Teorema
+
+Si
+
+N
+
+/negationslash
+
+=
+
+NP
+
+, entonces
+
+APX
+
+/negationslash
+
+=
+
+## Serafín Moral
+
+NPO
+
+<!-- image -->
+
+## La clase APX
+
+## Definición: Clase APX
+
+La clase APX es la clase de todos los problemas tales que admiten un algoritmo δ -aproximado polinómico para δ &lt; ∞ .
+
+## Ejemplo: Problemas en APX
+
+Cubrimiento mínimo por vértices, problema de la mochila, corte máximo, máximo número de cláusulas satisfechas, etc...
+
+## Ejemplo: Problemas que no están en APX
+
+Problema del viajante de comercio, máximo clique, máximo conjunto independiente, etc...
+
+## Teorema
+
+Si N = NP , entonces APX = NPO
+
+/negationslash
+
+/negationslash
+
+<!-- image -->
+
+## Definición: Clase APX
+
+La clase APX es la clase de todos los problemas tales que admiten un algoritmo δ -aproximado polinómico para δ &lt; ∞ .
+
+## Ejemplo: Problemas en APX
+
+Cubrimiento mínimo por vértices, problema de la mochila, corte máximo, máximo número de cláusulas satisfechas, etc...
+
+## Ejemplo: Problemas que no están en APX
+
+Problema del viajante de comercio, máximo clique, máximo conjunto independiente, etc...
+
+## Teorema
+
+Si N = NP , entonces APX = NPO
+
+/negationslash
+
+/negationslash
+
+<!-- image -->
+
+## Definición: Clase APX
+
+La clase APX es la clase de todos los problemas tales que admiten un algoritmo δ -aproximado polinómico para δ &lt; ∞ .
+
+## Ejemplo: Problemas en APX
+
+Cubrimiento mínimo por vértices, problema de la mochila, corte máximo, máximo número de cláusulas satisfechas, etc...
+
+## Ejemplo: Problemas que no están en APX
+
+Problema del viajante de comercio, máximo clique, máximo conjunto independiente, etc...
+
+## Teorema
+
+Si N = NP , entonces APX = NPO
+
+/negationslash
+
+/negationslash
+
+## Definición de PTAS
+
+Es la clase de problemas con un esquema de aproximación polinómico.
+
+## Ejemplo: Un problema de PTAS
+
+el problema de la mochila en el que puede haber tantas copias como se quiera de cada objeto.
+
+## Ejemplo: Problemas de APX que no está en PTAS (si P = NP )
+
+/negationslash
+
+El corte máximo o el cubrimiento mínimo.
+
+## Teorema
+
+En grafos planares, el cubrimiento mínimo está en PTAS .
+
+## La Clase FPTAS
+
+## Definición: Problemas con un esquema de aproximación polinómico total ( FPTAS )
+
+Para cada ejemplo x del problema Π , y todo número racional δ &gt; 1, el algoritmo devuelve para la entrada ( x , δ ) una solución δ -aproximada que es polinómico en | x | y ( 1 / ( δ -1 )) .
+
+<!-- image -->
+
+## Problemas de FPTAS
+
+## Definición: Problemas acotados polinómicamente
+
+Un problema de optimización está acotado polinómicamente si y solo si existe un polinomio p tal que para todo ejemplo x y para toda solución factible y de x , entonces c ( x , y ) ≤ p ( | x | )
+
+donde c ( x , y ) es el coste de la solución y .
+
+## Ejemplo
+
+El problema del viajante de comercio no está acotado polinómicamente. El del cubrimiento mínimo por vértices si lo está.
+
+## FPTAS y PTAS
+
+## Teorema
+
+No existe un problema NP-difícil acotado polinómicamente con un esquema de aproximación polinómico total.
+
+## Corolario
+
+Si P = NP entonces PTAS = FPTAS
+
+/negationslash
+
+/negationslash
+
+## Ejemplo
+
+El máximo conjunto independiente para grafos planares estaría en PTAS \ FPTAS.
+
+<!-- image -->
+
+## Problemas Pseudo-polinómicos
+
+- En el problema del corte máximo la dificultad está en su estructural combinatoria: no hay números, sólo un grafo con sus vértices y arcos.
+- El problema de la mochila puede resolverse por programación dinámica en tiempo O ( n 2 pmax ) donde pmax es el entero de tamaño máximo que aparece en el problema. Eso no implica que el problema sea polinómico, pero su complejidad se debe al tamaño de los números que aparecen.
+
+## Problemas Pseudo-polinómicos
+
+Los problemas que tienen un algoritmo tal que para cada ejemplo del problema x encuentra la respuesta correcta en un tiempo que depende polinómicamente de | x | y del entero mayor que aparezca en la especificación de x se dice que son Pseudo-Polinómicos.
+
+<!-- image -->
+
+## Problemas NP-completos y pseudo-polin.
+
+## Teorema
+
+Si Π es un problema que está en FPTAS , y si existe un polinomio p tal que para cada ejemplo x , el coste óptimo del problema c ∗ ( x ) verifica:
+
+<!-- formula-not-decoded -->
+
+donde max ( x ) es el entero mayor que aparece en x , entonces el problema es pseudo-polinómico .
+
+## Demostración
+
+Basta con llamar al esquema de aproximación polinómico total para el problema x y para la aproximación
+
+<!-- formula-not-decoded -->
+
+## Clases de Aproximación
+
+<!-- image -->
+
+## Problemas Completos y Difíciles
+
+Existe un concepto de reducción (L-reducción para problemas NPO).
+
+## Definición
+
+Dada una clase C de problemas en NPO , decimos que un problema Π es C -difícil si y solo si cualquier otro problema de C es L-reducible a él. Y es C -completo si, además, está en C .
+
+## Teorema
+
+Si un problema NPO -completo tiene un esquema de aproximación polinómico, entonces todos los problemas de NPO también lo tienen.
+
+Un teorema análogo se puede dar para la clase APX .
+
+## Ejemplo: Problemas NPO -completos
+
+Máxima, mínima satisfacción ponderada, máxima y mínima programación lineal { 0 , 1 } y el problema del viajante de comercio.
+
+## Ejemplo: Problemas APX -completos
+
+Satisfacción máxima de cláusulas de longitud 3, de cláusulas de longitud 2, el corte máximo, viajante de comercio con desigualdad triangular, mínimo cubrimiento por vértices, mínimo conjunto de ruptura de ciclos en grafos dirigidos.
+
+<!-- image -->

@@ -1,0 +1,177 @@
+--- Página 1 ---
+Tema 2: Otros Modelos de Cálculo: Tesis de SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 2 ---
+SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 3 ---
+lenguaje de programación convencional: una lista de SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 4 ---
+palabraenunalfabetodeterminado.Lasetiquetaslasescribimoscomo[L]al Haycuatrotipodeinstrucciones: SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 5 ---
+f :D B definida en el conjunto D de las entradas uA tal que el programa Post Turing llega a HALT siendo f(u) la palabra en la cinta excluyendo blancos uD. Si D A se dice que es calculable total Post Turing. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 6 ---
+SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 7 ---
+Alfabeto de entrada A{a,b,c}. El de trabajo tiene además el símbolo . [A] RIGHT [C] LEFT SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 8 ---
+Alfabeto de entrada A{0,1}. [C] RIGHT IF GOTO E [A] PRINT IF GOTO C [E] HALT SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 9 ---
+Alfabeto de entrada A{a}. Alfabeto de trabajo B {a,,c}. [A] IFGOTOE [B] RIGHT [C] RIGHT [D] LEFT IFGOTOD [E] HALT Si empieza con an, acaba con anan. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 10 ---
+[A] RIGHT IFGOTOE SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 11 ---
+f(u)u1 donde u{0,1}. binario calcule u1. donde u,v {0,1} calcule si la cadena u es una subcadena SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 12 ---
+entrada, un alfabeto B de trabajo y los siguientes elementos: la siguiente forma: A aA, añadir el símbolo a al principio de la variable A. A A-, Eliminar el último símbolo de A (si no es vacía). Se supone que empieza con X u donde uA es el valor de la Calcula una función parcial f si llega a HALT con f(u) almacenado SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 13 ---
+Programa que tiene como entrada X u y calcula Y u sobre el alfabeto {0,1} [A] XX- Y0Y [B] XX- Y1Y SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 14 ---
+La macro IF V 6ε GOTO L con expansión: donde {a1,...,a } es el alfabeto de trabajo. La macro V ε tiene la expansión: [L] VV- IFV6εGOTOL La macro GOTO L tiene la expansión: Zε ZaZ SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 15 ---
+IF V ENDS a GOTO L (i1,...,n) SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 16 ---
+La macro U V se expande como: Zε Uε [A] IFVENDSai GOTOBi (i1,...,n) [Bi] VV- Z U a a i i Z U i1,...,n [C] IFZENDSai GOTODi (i1,...,n) [Di] ZZ- VaiV i1,...,n GOTOC E Es la etiqueta de lainstrucción después de la macro. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 17 ---
+Ejemplo: Sumar Vamos a suponer que A{a ,...,a } y que vamos a calcular la función f(n)n1, donde se supone que el número n se codifica como C(n) en dicho alfabeto. [B] IFXENDSai GOTOAi (i1,...,n) Ya1Y [Ai] XX- Yai1Y i1,...,n- GOTOC [An] XX- Ya1Y [C] IFXENDSai GOTODi (i1,...,n) [Di] XX- YaiY i1,...,n GOTOC SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 18 ---
+Ejemplo: Restar Vamos a suponer que A{a ,...,a } y que vamos a calcular la función f(n)n1 (n1 si n1 y 0 si n1), donde se supone que el número n se codifica como C(n) en dicho alfabeto. [B] IFXENDSai GOTOAi (i1,...,n) [Ai] XX- Yai1Y i2,...,n GOTOC [A1] XX- IFX6εGOTOC2 [C2] YanY [C] IFXENDSai GOTODi (i1,...,n) [Di] XX- YaiY i1,...,n GOTOC SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 19 ---
+En muchas ocasiones queremos calcular una función f(u ,...,u ) forma: alfabeto de entrada y calcular f(u c...cu ). Se entiende que el cálculo de f es equivalente al cálculo de f. ellas contiene al principio uno de los argumentos de entrada: X u . SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 20 ---
+Lossiguienteshechossonequivalentes: Lossiguienteshechossonequivalentes: Haremoslassiguientessimulaciones: SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 21 ---
+Programa con Variables - Programa Post-Turing (1) Vamosasuponerlmk1yvamosaescribirlasvariablesenelmismoordencomo formaenlacinta: X1...XmZ1...ZkY V1...Vj...Vl otroseparadorenlugarde. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 22 ---
+Programa con Variables - Programa Post-Turing (2) de macros: La macro GOTO L se expande como: [A] RIGHT IFGOTOE [E] es la etiqueta de la instrucción inmediatamente después de SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 23 ---
+Programa con Variables - Programa Post-Turing (3) [A] LEFT IFGOTOE [E]eslaetiquetadelainstruccióninmediatamentedespuésdelamacro. LamacroMOVEBLOCKRIGHTseexpandecomo: [C] LEFT IFGOTOA0 IFai GOTOAi (i1,...,n) [Ai] RIGHT Tai i1,...,n [A0] RIGHT PRINT ...0011 ...001 SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 24 ---
+Programa con Variables - Programa Post-Turing (3) [A] LEFT IFGOTOE [E]eslaetiquetadelainstruccióninmediatamentedespuésdelamacro. LamacroMOVEBLOCKRIGHTseexpandecomo: [C] LEFT IFGOTOA0 IFai GOTOAi (i1,...,n) [Ai] RIGHT Tai i1,...,n [A0] RIGHT PRINT ...0011 ... ...001 SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 25 ---
+Programa con Variables - Programa Post-Turing (3) [A] LEFT IFGOTOE [E]eslaetiquetadelainstruccióninmediatamentedespuésdelamacro. LamacroMOVEBLOCKRIGHTseexpandecomo: [C] LEFT IFGOTOA0 IFai GOTOAi (i1,...,n) [Ai] RIGHT Tai i1,...,n [A0] RIGHT PRINT ...0011 ... ...001 ... SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 26 ---
+Programa con Variables - Programa Post-Turing (4) [A] RIGHT IFGOTOE PRINT representar con un [i] después de la instrucción donde i es el número de [3] es una forma resumida de poner: SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 27 ---
+Programa con Variables - Programa Post-Turing (5) La instrucción V a V se simula como: RIGHTTONEXTBLANK[l] MOVEBLOCKRIGHT[l-j1] LEFTTONEXTBLANK[j] V ...V ...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 28 ---
+Programa con Variables - Programa Post-Turing (5) La instrucción V a V se simula como: RIGHTTONEXTBLANK[l] MOVEBLOCKRIGHT[l-j1] LEFTTONEXTBLANK[j] V ...V ...V V ...V ...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 29 ---
+Programa con Variables - Programa Post-Turing (5) La instrucción V a V se simula como: RIGHTTONEXTBLANK[l] MOVEBLOCKRIGHT[l-j1] LEFTTONEXTBLANK[j] V ...V ...V V ...V ...V V ...V ...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 30 ---
+Programa con Variables - Programa Post-Turing (5) La instrucción V a V se simula como: RIGHTTONEXTBLANK[l] MOVEBLOCKRIGHT[l-j1] LEFTTONEXTBLANK[j] V ...V ...V V ...V ...V V ...V ...V V ...a V ...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 31 ---
+Programa con Variables - Programa Post-Turing (5) La instrucción V a V se simula como: RIGHTTONEXTBLANK[l] MOVEBLOCKRIGHT[l-j1] LEFTTONEXTBLANK[j] V ...V ...V V ...V ...V V ...V ...V V ...a V ...V V ...a V ...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 32 ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 33 ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V V1...0011...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 34 ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V V1...0011...V V1...011...V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 35 ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V V1...0011...V V1...011...V V1......V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 36 ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V V1...0011...V V1...011...V V1......V V1......V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 37 ---
+Programa con Variables - Programa Post-Turing (6) La instrucción V V - se simula como: RIGHTTONEXTBLANK[j] IFGOTOC MOVEBLOCKRIGHT[j] [C] LEFTTONEXTBLANK[j-1] V1...0011...V V1...0011...V V1...011...V V1......V V1......V V1......V SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 38 ---
+Programa con Variables - Programa Post-Turing (7) La instrucción IF V ENDS a GOTO L se simula como: RIGHTTONEXTBLANK[j] IFai GOTOC V ...0011...V [C] LEFTTONEXTBLANK[j] [D] RIGHT LEFTTONEXTBLANK[j] entrada y las variables intermedias mediante ERASE BLOCK [l-1] y SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 39 ---
+Programa con Variables - Programa Post-Turing (7) La instrucción IF V ENDS a GOTO L se simula como: RIGHTTONEXTBLANK[j] LEFT V ...0011...V IFai GOTOC GOTOD V ...0011...V [C] LEFTTONEXTBLANK[j] 1 l [D] RIGHT LEFTTONEXTBLANK[j] entrada y las variables intermedias mediante ERASE BLOCK [l-1] y SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 40 ---
+Programa con Variables - Programa Post-Turing (7) La instrucción IF V ENDS a GOTO L se simula como: RIGHTTONEXTBLANK[j] V ...0011...V IFai GOTOC GOTOD V 1 ...0011...V l [C] LEFTTONEXTBLANK[j] GOTOL V ...0111...V [D] RIGHT LEFTTONEXTBLANK[j] entrada y las variables intermedias mediante ERASE BLOCK [l-1] y SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 41 ---
+Programa Post Turing - MT (1) q k1 sin transiciones donde k es el número de instrucciones del SilainstrucciónI esPRINTa entoncespondremoslastransiciones: δ(q ,a)(q i1,a ,S), aB Si la instrucción I es RIGHT entonces pondremos las transiciones: δ(q ,a)(q i1,a,D), aB Si la instrucción I es LEFT entonces pondremos las transiciones: δ(q ,a)(q i1,a,I), aB SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 42 ---
+Programa Post Turing - MT (2) transiciones: δ(q )(q ,S) y δ(q ,a)(q i1,a,S), si a6a Si la instrucción I es HALT ponemos las transiciones: δ(q ,a)(q ,a,S), aB SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 43 ---
+MT - Programa con variables (1) B {a ,...,a } incluyendo el blanco. (más otras auxiliares que aparezcan como expansión de macros) Inicialmente X tendrá la palabra de entrada. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 44 ---
+MT - Programa con variables (2) Necesitamos una serie de macros: La macro V -V (eliminar el primer símbolo de V si la variable no es vacía) se expande como (U es una nueva variable auxiliar específica para la macro): Uε [A] IFVENDSai GOTOBi (i1,...,n) [Bi] VV- UaiU i1,...,n GOTOA [C] IFUENDSai GOTODi (i1,...,n) [Di] UU- IFU6εGOTOFi [Fi] C i1,...,n instrucción excepto el último símbolo (que iría al principio de V) SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 45 ---
+MT - Programa con variables (3) La macro V Va (añade a ) al final de V tiene la expansión: Uε UaiU [A] IFVENDSai GOTOBi (i1,...,n) [Bi] VV- UaiU i1,...,n GOTOA [C] IFUENDSai GOTODi (i1,...,n) [Di] UU- VaiV i1,...,n GOTOC [E] es la instrucción después de la macro. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 46 ---
+MT - Programa con variables (4) La IF V STARS a GOTO L (Si V comienza con a seguir por la instruccion [L] tiene la expansión: Uε [A] IFVENDSaj GOTOBj (j1,...,n) [Bj] VV- UajU V6 εGOTOA j1,...,n GOTOE (sii6j) ( j) instrucción SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 47 ---
+MT - Programa con variables (5) Inicialmente se ejecutarán las instrucciones: Yε Zε ZZ [A] IFXENDSai GOTOBi (i1,...,n) [Bi] XX- Zε 6 i1,...,n [D i] está SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 48 ---
+MT - Programa con variables (6) Asociaremosacadaestadoqi unaetiquetaAi yacadapar(qi,aj)otraetiqueta Bij dondesesimularálatransiciónδ(qi,aj).Todaslastransicionesnodefinidas EnlasetiquetasAi haylassiguientesinstruccionesparalosestadosnofinales: instruccionesqueponentodalacintaenY: IFZENDSai GOTOCi (i1,...,n) [Ci] YaiY i1,...,n GOTOB (cid:27) [B] IFXENDSai GOTODi (i1,...,n) [Di] YaiY XX- i1,...,n GOTOB AntesdepararhabríaquequitarlosblancosaladerechayalaizquierdadeY. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 49 ---
+MT - Programa con Variables (7) Sitenemoslatransiciónδ(qi,aj)(qm,ak ,D),entoncesponemoselgrupode instrucciones: [Bij] XXak Zε IFYSTARSal GOTOCml (l1,...,n) ZZ [Cml] Y-Y ZalZ l1,...,n GOTOAm Sitenemoslatransiciónδ(qi,aj)(qm,ak ,I),entoncesponemoselgrupode [Bij] YakY Zε IFXENDSal GOTODml (l1,...,n) ZZ instrucciones: [Dml] XX- ZalZ l1,...,n GOTOAm Elprimerbloquedeinstruccionescorrespondientesalastransicionesseránlasdela SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 50 ---
+palabras, pero ¿es posible considerar modelos que trabajan con números? cualquier alfabeto A y el conjunto de los números naturales N que habíamos llamado N (el número asociado a una palabra), siendo su inversa C (la palabra asociada a un número). numérica f(n) definida sobre los números naturales podemos considerar que se calcula con un modelo de palabras en el que: Ponemos como entrada uC(n), la palabra que codifica el f(n)N(w) (el número representado por w). SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 51 ---
+Si queremos calcular f(n) n2, representamos cada número n en un alfabeto, p.e. {a,b} como la palabra C(n) y hacemos un progra- ma (MT, programa Post-Turing, etc.) que calcule la palabra w que calculable de números: cuando exista una codificación en un calculable y total (está definida en los números naturales). recursivo o recursivamente enumerable: cuando el conjunto de SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 52 ---
+Ejemplo: Sumar Vamos a suponer que A{a ,...,a } y que vamos a calcular la función f(n)n1, donde se supone que el número n se codifica como C(n) en dicho alfabeto. [B] IFXENDSai GOTOAi (i1,...,n) Ya1Y [Ai] XX- Yai1Y i1,...,n- GOTOC [An] XX- Ya1Y [C] IFXENDSai GOTODi (i1,...,n) [Di] XX- YaiY i1,...,n GOTOC SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 53 ---
+SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 54 ---
+Un programa con variables numéricas tiene los siguientes elementos: siguiente forma: A A1, Añade 1 al valor entero almacenado en A. A A-1, Resta 1 del valor almacenado en A (si es 0 sigue siendo 0). IF A 6 0 GOTO L, Si el valor de A no es 0, seguir por la Se supone que empieza con X n donde uN son los valores de HALT con f(n ,...,n ) almacenado en Y cuando f está definida y SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 55 ---
+Programa que tiene como entrada X n y calcula Y n, excepto para X 0 que Y 1. Es decir, calcula la función f(n)n si n60 y f(0)1. [A] XX- YY IFX60GOTOA SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 56 ---
+La macro V 0 con expansión: [A] VV- IFV60GOTOA La macro GOTO L con expansión: [A] ZZ IFZ60GOTOL SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 57 ---
+La macro V U tiene la expansión: V Z [A] IFU60GOTOB IFZ60GOTOC [B] VV ZZ UU- [C] UU ZZ- IFZ60GOTOC SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 58 ---
+Una función f :AN es parcialmente calculable por un programa Se pueden definir conceptos de subconjunto AN r.e. y recursivo (calculable), por ejemplo considerando que un número n es aceptado cuando para X n el programa termina en HALT con Y 1. SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+
+--- Página 59 ---
+Toda función efectivamente calculable (calculable mediante un proceso mecánico bien definido) puede ser calculada por una Máquina de Turing. realizados por una MT (aunque quizá en menos tiempo que una MT). SerafínMoral Tema2: OtrosModelosdeCálculo: TesisdeChurch-Turing
+

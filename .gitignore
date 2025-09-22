@@ -1,8 +1,138 @@
+# =======================
+# Python Backend
+# =======================
 *.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+chatbot/
+Python-3.12.9/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# =======================
+# Node.js Frontend
+# =======================
+# Dependencies
+frontend/node_modules/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/lerna-debug.log*
+
+# Build outputs
+frontend/dist/
+frontend/dist-ssr/
+frontend/build/
+frontend/.vite/
+
+# Environment files
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Editor directories and files
+frontend/.vscode/*
+!frontend/.vscode/extensions.json
+frontend/.idea/
+frontend/.DS_Store
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sw?
+
+# =======================
+# Data and Models
+# =======================
+models/
+chroma/
+app/chroma/
+app/rag/chroma/
+app/rag/data/
+backup/
+*/data
+# =======================
+# Logs and Databases
+# =======================
+logs/
+*.log
+*.sqlite
+*.db
+app/storage/checkpoints.sqlite
+
+# =======================
+# Docker and Container Files
+# =======================
+.dockerignore
+
+# =======================
+# System Files
+# =======================
 .DS_Store
-backup
-chroma
-Python-3.12.9
-__pycache__
-env
-chatbot
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# =======================
+# IDE and Editor
+# =======================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =======================
+# Testing
+# =======================
+.coverage
+.pytest_cache/
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# =======================
+# Temporary Files
+# =======================
+*.tmp
+*.bak
+*.backup

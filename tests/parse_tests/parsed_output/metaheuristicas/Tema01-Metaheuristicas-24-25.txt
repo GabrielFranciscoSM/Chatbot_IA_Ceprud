@@ -1,0 +1,147 @@
+--- Página 1 ---
+Tema 2. Modelos de Búsqueda: Entornos y Tema 4: Algoritmos Meméticos
+
+--- Página 2 ---
+
+
+--- Página 3 ---
+Tipos de algoritmos aproximados: Heurísticas: Dependientes del problema Metaheurísticas: Algoritmos aproximados más generales Resuelven problemas de forma más rápida Resuelven problemas más complejos Obtienen algoritmos más robustos
+
+--- Página 4 ---
+Metaheurísticas: Optimización/búsqueda Intersección de campos: para resolver problemas: Procesos físicos: enfriamiento de partículas, Sociedades de insectos: Colonias de hormigas, abejas, Comportamiento de especies,
+
+--- Página 5 ---
+3. Metaheurísticas: definición y clasificación 4. Metaheurísticas: Paralelización
+
+--- Página 6 ---
+Ejemplo: El problema del viajante de comercio Representación como secuencia de ciudades (1 a n), n! soluciones  ¿Necesitamos una solución exacta o una Buena solución para el problema?
+
+--- Página 7 ---
+Complejidad algorítmica: Algoritmos en tiempo polinomial y no polinomial n5 n10 n100 n1000 n! 120 3.6 x 106 9.33 x 10157 4.02 x 102567 ¡Necesitamos buenos algoritmos y eficientes!
+
+--- Página 8 ---
+Existen problemas reales (de optimización o búsqueda) de difícil solución que requieren de tareas tales como encontrar:
+
+--- Página 9 ---
+Estos problemas se caracterizan porque: presentan una gran complejidad computacional (son NP- duros) los algoritmos exactos (Programación Dinámica, Backtracking, Branch and Bound, ...) son ineficientes o (no necesariamente la óptima) al problema en un
+
+--- Página 10 ---
+Max (Min) una función con variables de decisión Subject to (s.t.) igualdad () restricciones desigualdad (,, , ) restricciones
+
+--- Página 11 ---
+Ejemplo: El problema del viajante de comercio (impresión de los buses de distancia o el costo de ir del nodo i al nodo j. estaño) Ejercicio: Analizar el espacio de búsqueda ¿Cómo representar una solución al problema?
+
+--- Página 12 ---
+Ejemplo: El problema del viajante de comercio Ejemplo: Viajante de Comercio
+
+--- Página 13 ---
+Ejemplo: El problema del viajante de comercio X (x , ....., x ) x {1, ..., N} Aplicaciones: Viajante de Comercio (TSP), Coloreo (asignación cuadrática), ....
+
+--- Página 14 ---
+Ejemplo: El problema del viajante de comercio Ejemplo: Viajante de Comercio Representación de una solución: Camino (1 2 4 3 8 5 7 6)
+
+--- Página 15 ---
+Ejemplo: El problema del viajante de comercio 1. Esquema de representación: Permutación de {1, ..., n}. 2. Función objetivo: n Min C(S) ( D S i ,S i 1 ) D S n ,S 1 i
+
+--- Página 16 ---
+Representación del espacio de búsqueda
+
+--- Página 17 ---
+3. Metaheurísticas: definición y clasificación 4. Metaheurísticas: Paralelización Optimization: Principles, Methodsand RecentTrends. International Journal of ComputationalIntelligentSystems(IJCIS), 8, 2015, 606-636.
+
+--- Página 18 ---
+3. Metaheurísticas: Definición cercanas a la óptima en problemas complejos (NP- duros) en un tiempo razonable (ineficiente)
+
+--- Página 19 ---
+3. Metaheurísticas: Definición Ventajas: Inconvenientes: Son no determinísticos (probabilísticos)
+
+--- Página 20 ---
+3. Metaheurísticas: Taxonomía Una posible taxonomía:
+
+--- Página 21 ---
+3. Metaheurísticas: Taxonomía Una posible taxonomía: Basadas en métodos constructivos: (mecanismos para construir soluciones) GRASP, Optimización Basada en
+
+--- Página 22 ---
+3. Metaheurísticas: Taxonomía Una posible taxonomía: Basadas en métodos constructivos: GRASP, Basadas en trayectorias (la heurística subordinada es en el espacio de búsqueda): Búsqueda Local, Enfriamiento N(σ ) N ( σ ) ( σ ) N ( σ ) N ( σ ) Óptimo local/global
+
+--- Página 23 ---
+3. Metaheurísticas: Taxonomía Una posible taxonomía: Basadas en métodos constructivos: GRASP, Basadas en trayectorias (la heurística subordinada es en el espacio de búsqueda): Búsqueda Local, Enfriamiento Basadas en poblaciones (el proceso considera múltiples puntos de búsqueda en el espacio): Algoritmos Genéticos,
+
+--- Página 24 ---
+3. Metaheurísticas: Definición
+
+--- Página 25 ---
+3. Metaheurísticas: Taxonomía
+
+--- Página 26 ---
+3. Metaheurísticas: Clasificación My high is better! Height is ...
+
+--- Página 27 ---
+3. Metaheurísticas: Clasificación
+
+--- Página 28 ---
+
+
+--- Página 29 ---
+3. Metaheurísticas: definición y clasificación 4. Metaheurísticas: Paralelización
+
+--- Página 30 ---
+4. Metaheurísticas: Paralelización
+
+--- Página 31 ---
+3. Metaheurísticas: definición y clasificación 4. Metaheurísticas: Paralelización Optimization: Principles, Methods and Recent Trends. International Journal of Computational Intelligent Systems (IJCIS), 8, 2015, 606-636.
+
+--- Página 32 ---
+5. Metaheurísticas: Aplicaciones
+
+--- Página 33 ---
+Ejemplo Real: Diseño de antenas
+
+--- Página 34 ---
+Ejemplo Real: Organización de equipos médicos
+
+--- Página 35 ---
+Ejemplo Real: Registrado de imágenes.
+
+--- Página 36 ---
+Ejemplo Real: Registrado de imágenes. (Algoritmo Evolutivo) f f Evaluación f Rotación {60,(0,1,0)} Traslación {2, 0, 1} f
+
+--- Página 37 ---
+Ejemplo Real: Registrado de imágenes.
+
+--- Página 38 ---
+Ejemplo Real: Registrado de imágenes. aprovechan la potencia del Soft Computing:
+
+--- Página 39 ---
+Ejemplo Real: Registrado de imágenes.
+
+--- Página 40 ---
+3. Metaheurísticas: definición y clasificación 4. Metaheurísticas: Paralelización
+
+--- Página 41 ---
+3. Metaheurísticas: Ej. (Alg. Basado en Poblaciones) Ejemplo: El problema del viajante de comercio Ejemplo: 17 ciudades (3 5 1 13 6 15 8 2 17 11 14 4 7 9 10 12 16)
+
+--- Página 42 ---
+Ejemplo: El problema del viajante de comercio 17! (3.5568734e14) Solución óptima: Coste226.
+
+--- Página 43 ---
+Iteración: 25 Costo: 303. Iteración: 0 Costo: 403. Solución óptima: 226.
+
+--- Página 44 ---
+Iteración: 25 Costo: 303. Iteración: 50 Costo: 293. Solución óptima: 226.
+
+--- Página 45 ---
+Iteración: 50 Costo: 293.6 Iteración: 100 Costo: 256. Solución óptima: 226.
+
+--- Página 46 ---
+Iteración: 100 Costo: 256.55 Iteración: 200 Costo: 231. Solución óptima: 226.
+
+--- Página 47 ---
+Iteración: 250 Solución Iteración: 200 Costo: 231. óptima: 226.
+
+--- Página 48 ---
+Ejemplo: El problema del viajante de comercio 532! soluciones posibles Coste solución óptima
+
+--- Página 49 ---
+Tema 2. Modelos de Búsqueda: Entornos y Tema 4: Algoritmos Meméticos
+
