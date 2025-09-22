@@ -1,7 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
 from app import app
-from rag.get_embedding_function import get_embedding_function
 import os
 import docker
 
@@ -24,11 +23,6 @@ def docker_services(docker_compose_file):
     docker_client = docker.from_env()
     yield docker_client
     # Cleanup will happen automatically
-
-@pytest.fixture(scope="session")
-def embedding_function():
-    """Get the embedding function for testing"""
-    return get_embedding_function()
 
 @pytest.fixture(scope="session")
 def test_data():

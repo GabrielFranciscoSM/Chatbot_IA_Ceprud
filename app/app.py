@@ -35,10 +35,10 @@ app.add_middleware(
 # Include the Shared API Router
 app.include_router(api_router)
 
-# Static files for legacy support and analytics
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-app.mount("/graphs", StaticFiles(directory=GRAPHS_DIR), name="graphs")
-templates = Jinja2Templates(directory=TEMPLATES_DIR)
+# # Static files for legacy support and analytics
+# app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+# app.mount("/graphs", StaticFiles(directory=GRAPHS_DIR), name="graphs")
+# templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
 @app.get("/", response_class=JSONResponse)
 async def root():
@@ -50,10 +50,10 @@ async def root():
         "docs": "/docs"
     }
 
-@app.get("/legacy", response_class=HTMLResponse)
-async def legacy_frontend(request: Request):
-    """Serves the legacy HTML page for backwards compatibility."""
-    return templates.TemplateResponse('index.html', {"request": request})
+# @app.get("/legacy", response_class=HTMLResponse)
+# async def legacy_frontend(request: Request):
+#     """Serves the legacy HTML page for backwards compatibility."""
+#     return templates.TemplateResponse('index.html', {"request": request})
 
 
 @app.get("/health")

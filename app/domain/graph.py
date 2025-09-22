@@ -8,16 +8,13 @@ from langchain_core.messages import HumanMessage, SystemMessage, ToolMessage, AI
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_chroma import Chroma
 from langgraph.graph import StateGraph, END, MessagesState
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.checkpoint.sqlite import SqliteSaver
 from typing_extensions import TypedDict
 
-# Asumo que get_embedding_function es una función que tienes en otro archivo
-from rag.get_embedding_function import get_embedding_function
+from services.rag_client import rag_client
 from langchain_core.runnables import RunnableConfig
-import sqlite3
 
 # --- CONFIGURACIÓN ---
 load_dotenv()
@@ -25,7 +22,6 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 VLLM_URL = os.getenv("VLLM_URL", "http://localhost:8000") + "/v1"
 VLLM_MODEL_NAME = os.getenv("MODEL_DIR", "/models/Sreenington--Phi-3-mini-4k-instruct-AWQ")
-BASE_CHROMA_PATH = "../RAG" + os.getenv("BASE_CHROMA_PATH", "chroma")
 
 LOCAL_INFERENCE=False
 
@@ -63,252 +59,99 @@ def consultar_guia_docente(seccion: str, config: RunnableConfig) -> Tuple[str, L
     try:
         subject = config["configurable"]["subject"]
 
-        # Rutas posibles para el archivo de guía docente
-        possible_paths = [
-            os.path.join("app", "rag", "data", subject, "guía_docente.json"),
-            os.path.join("app", "rag", "data", subject, "guia_docente.json"),
-            os.path.join("rag", "data", subject, "guía_docente.json"),
-            os.path.join("rag", "data", subject, "guia_docente.json")
-        ]
+        # Usar el RAG client para obtener la guía docente
+        guia_data = rag_client.get_guia_docente(subject, seccion)
         
-        # Obtener directorio actual
-        current_dir = os.getcwd()
-        
-        # Buscar el archivo
-        path = None
-        for test_path in possible_paths:
-            abs_path = os.path.abspath(test_path)
-            if os.path.exists(abs_path):
-                path = abs_path
-                break
-        
-        if not path:
-            error_msg = f"No se encontró archivo de guía docente para '{subject}'"
+        if not guia_data:
+            error_msg = f"No se encontró información de guía docente para '{subject}'"
             return error_msg, []
-            
-        # Cargar el JSON
-        with open(path, 'r', encoding='utf-8') as f:
-            guia = json.load(f)
         
-        # Mapeo de secciones
-        seccion_mapping = {
-            "profesorado": "profesorado_y_tutorias",
-            "profesores": "profesorado_y_tutorias", 
-            "tutorias": "profesorado_y_tutorias",
-            "evaluacion": "evaluación",
-            "evaluación": "evaluación",
-            "examen": "evaluación",
-            "examenes": "evaluación",
-            "temario": "programa_de_contenidos_teóricos_y_prácticos",
-            "programa": "programa_de_contenidos_teóricos_y_prácticos",
-            "contenidos": "programa_de_contenidos_teóricos_y_prácticos",
-            "temas": "programa_de_contenidos_teóricos_y_prácticos",
-            "metodologia": "metodología_docente",
-            "metodología": "metodología_docente",
-            "bibliografia": "bibliografía",
-            "bibliografía": "bibliografía",
-            "libros": "bibliografía",
-            "prerrequisitos": "prerrequisitos_o_recomendaciones",
-            "recomendaciones": "prerrequisitos_o_recomendaciones",
-            "competencias": "resultados_del_proceso_de_formación_y_de_aprendizaje",
-            "resultados": "resultados_de_aprendizaje",
-            "enlaces": "enlaces_recomendados",
-            "recursos": "enlaces_recomendados",
-            "informacion_adicional": "información_adicional",
-            "información_adicional": "información_adicional"
-        }
+        # La guía_data ya viene filtrada por sección desde el RAG service
+        # Convertir a formato legible
+        if isinstance(guia_data, dict):
+            if len(guia_data) == 1:
+                # Solo una sección
+                key, value = next(iter(guia_data.items()))
+                content = f"=== {key.replace('_', ' ').title()} ===\n\n"
+                if isinstance(value, dict):
+                    for subkey, subvalue in value.items():
+                        content += f"**{subkey}**: {subvalue}\n\n"
+                else:
+                    content += str(value)
+            else:
+                # Múltiples secciones
+                content = ""
+                for key, value in guia_data.items():
+                    content += f"=== {key.replace('_', ' ').title()} ===\n\n"
+                    if isinstance(value, dict):
+                        for subkey, subvalue in value.items():
+                            content += f"**{subkey}**: {subvalue}\n\n"
+                    else:
+                        content += str(value) + "\n\n"
+        else:
+            content = str(guia_data)
         
-        seccion_limpia = seccion.lower().strip()
+        # Crear documento con la información
+        doc = Document(
+            page_content=content,
+            metadata={
+                "source": f"guia_docente_{subject}",
+                "section": seccion,
+                "type": "guia_docente"
+            }
+        )
         
-        # Buscar mapeo exacto
-        target_key = seccion_mapping.get(seccion_limpia)
-        
-        if target_key and target_key in guia:
-            resultado = {target_key: guia[target_key]}
-            result_json = json.dumps(resultado, ensure_ascii=False, indent=2)
-            return result_json, []
-        
-        # Búsqueda parcial
-        for key in guia.keys():
-            if seccion_limpia in key.lower():
-                resultado = {key: guia[key]}
-                return json.dumps(resultado, ensure_ascii=False, indent=2), []
-        
-        # No encontrado
-        secciones_disponibles = list(guia.keys())
-        error_msg = f"Error: La sección '{seccion}' no se encontró.\n\nSecciones disponibles:\n" + \
-                   "\n".join([f"- {s}" for s in secciones_disponibles])
-        return error_msg, []
+        return content, [doc]
         
     except Exception as e:
-        error_msg = f"Error en consultar_guia_docente: {str(e)}"
+        error_msg = f"Error al consultar guía docente: {str(e)}"
+        print(error_msg)
         return error_msg, []
 
 
 @tool
 def chroma_retriever(pregunta: str, config: RunnableConfig) -> Tuple[str, List[Document]]:
     """
-    Busca en los apuntes de la asignatura usando ChromaDB.
+    Busca en los apuntes de la asignatura usando el RAG Service.
     Esta herramienta es para preguntas conceptuales, sobre el material de estudio, etc.
     El 'subject' se inyectará desde la configuración del agente, no lo provee el LLM.
     """
     try:
         subject = config["configurable"]["subject"]
-
-        # Get current working directory and script directory
-        current_dir = os.getcwd()
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-
-        # List possible paths to search for ChromaDB
-        possible_paths = [
-            # Absolute paths (container environments)
-            f"/chatbot/app/rag/chroma/{subject}",
-            f"/app/rag/chroma/{subject}",
-            
-            # Relative paths from current directory
-            os.path.join("app", "rag", "chroma", subject),
-            os.path.join("rag", "chroma", subject),
-            os.path.join(".", "app", "rag", "chroma", subject),
-            os.path.join(".", "rag", "chroma", subject),
-            
-            # Paths relative to script directory
-            os.path.join(script_dir, "..", "..", "rag", "chroma", subject),
-            os.path.join(script_dir, "..", "rag", "chroma", subject),
-            
-            # Using BASE_CHROMA_PATH
-            os.path.join(BASE_CHROMA_PATH, subject),
-            os.path.abspath(os.path.join(BASE_CHROMA_PATH, subject)),
-        ]
         
-        chroma_path = None
-        for i, test_path in enumerate(possible_paths):
-            abs_path = os.path.abspath(test_path)
-            
-            if os.path.exists(abs_path):
-                if os.path.isdir(abs_path):
-                    chroma_path = abs_path
-                    break
-
-        if not chroma_path:
-            error_msg = f"No se encontró la base de datos ChromaDB para la asignatura '{subject}'"
+        # Usar el cliente RAG Service
+        documents, sources = rag_client.search_documents(
+            query=pregunta,
+            subject=subject,
+            k=6
+        )
+        
+        if not documents:
+            error_msg = f"No se encontraron documentos para la asignatura '{subject}' en el RAG Service"
             return error_msg, []
-
-        vector_store = Chroma(persist_directory=chroma_path, embedding_function=get_embedding_function())
-
-        # 3. Query expansion - Simple synonym addition
-        expanded_queries = [pregunta]
-        # Add simple expansions for common technical terms
-        expansions = {
-            "algoritmo": ["método", "técnica", "procedimiento"],
-            "metaheurística": ["metaheurísticas", "heurística", "optimización"],
-            "evaluación": ["evaluacion", "examen", "prueba"],
-            "implementación": ["implementacion", "código", "programación"],
-            "ejemplo": ["ejemplos", "caso", "aplicación"]
-        }
         
-        pregunta_lower = pregunta.lower()
-        for term, synonyms in expansions.items():
-            if term in pregunta_lower:
-                for synonym in synonyms:
-                    expanded_queries.append(pregunta.replace(term, synonym))
-
-        # Get results from all expanded queries
-        all_docs = []
-        for query in expanded_queries[:3]:  # Limit to avoid too many calls
-            docs = vector_store.similarity_search_with_score(query, k=6)
-            all_docs.extend(docs)
-
-        if not all_docs:
-            return "No se encontraron documentos relevantes en los apuntes.", []
-
-        # 1. Adaptive threshold tuning
-        scores = [score for _, score in all_docs]
-        if scores:
-            avg_score = sum(scores) / len(scores)
-            std_score = (sum((s - avg_score) ** 2 for s in scores) / len(scores)) ** 0.5
-            # Use mean - 0.5*std as threshold to keep better half
-            adaptive_threshold = max(avg_score - 0.5 * std_score, 0.5)
-        else:
-            adaptive_threshold = 0.7
-
-        # Filter by adaptive threshold
-        filtered_docs = [(doc, score) for doc, score in all_docs if score < adaptive_threshold]
-
-        # 4. Simple metadata filtering (if available)
-        # Priority to docs with certain metadata patterns
-        priority_docs = []
-        regular_docs = []
+        # Formatear resultados
+        formatted_results = []
+        formatted_results.append(f"Encontrados {len(documents)} documentos relevantes:\n")
         
-        for doc, score in filtered_docs:
-            metadata = doc.metadata
-            # Prioritize docs with specific metadata
-            if any(key in metadata for key in ['chapter', 'section', 'title', 'topic']):
-                priority_docs.append((doc, score))
-            else:
-                regular_docs.append((doc, score))
-
-        # Combine prioritized and regular docs
-        sorted_docs = priority_docs + regular_docs
-
-        # Remove duplicates based on content similarity
-        unique_docs = []
-        seen_content = set()
-        
-        for doc, score in sorted_docs:
-            # Simple deduplication based on first 100 chars
-            content_signature = doc.page_content[:100].strip()
-            if content_signature not in seen_content:
-                seen_content.add(content_signature)
-                unique_docs.append((doc, score))
-
-        # 2. Simple reranking based on keyword overlap and content quality
-        pregunta_words = set(pregunta.lower().split())
-        reranked_docs = []
-        
-        for doc, original_score in unique_docs:
-            content_lower = doc.page_content.lower()
+        for i, doc in enumerate(documents, 1):
+            source = doc.metadata.get("source", "Fuente desconocida")
+            page = doc.metadata.get("page", "N/A")
             
-            # Keyword overlap score
-            doc_words = set(content_lower.split())
-            keyword_overlap = len(pregunta_words.intersection(doc_words))
-            
-            # Content quality score
-            content_length = len(doc.page_content)
-            length_score = 1.0 if 100 <= content_length <= 1500 else 0.5
-            
-            # Has structured content (headings, lists, etc.)
-            structure_score = 1.2 if any(marker in content_lower for marker in [':', '•', '-', '1.', '2.']) else 1.0
-            
-            # Combined reranking score (lower is better)
-            rerank_score = original_score - (keyword_overlap * 0.1) - (length_score * 0.05) - (structure_score * 0.02)
-            
-            reranked_docs.append((doc, rerank_score, original_score))
-
-        # Sort by reranked score and take top results
-        reranked_docs.sort(key=lambda x: x[1])
-        final_docs = [doc for doc, _, _ in reranked_docs[:4]]
-
-        # Enhanced formatting with metadata
-        context_parts = []
-        for i, doc in enumerate(final_docs):
-            # Extract useful metadata for context
-            source_info = ""
-            if 'source' in doc.metadata:
-                source_info = f" (Fuente: {doc.metadata['source']})"
-            elif 'filename' in doc.metadata:
-                source_info = f" (Archivo: {doc.metadata['filename']})"
-            elif 'chapter' in doc.metadata:
-                source_info = f" (Capítulo: {doc.metadata['chapter']})"
-                
-            context_parts.append(f"[Documento {i+1}]{source_info}:\n{doc.page_content}")
+            formatted_results.append(f"--- Resultado {i} ---")
+            formatted_results.append(f"Fuente: {source}")
+            if page != "N/A":
+                formatted_results.append(f"Página: {page}")
+            formatted_results.append(f"Contenido: {doc.page_content}")
+            formatted_results.append("")
         
-        context_string = "\n\n---\n\n".join(context_parts)
-        result_message = f"Información encontrada en los apuntes:\n\n{context_string}"
+        return "\n".join(formatted_results), documents
         
-        return result_message, final_docs
-
+    except KeyError as e:
+        error_msg = f"Error: Falta configuración requerida: {str(e)}"
+        return error_msg, []
     except Exception as e:
-        error_msg = f"Error en chroma_retriever: {str(e)}"
+        error_msg = f"Error en búsqueda RAG: {str(e)}"
         return error_msg, []
 
 # --- LÓGICA DEL GRAFO ---
@@ -326,12 +169,6 @@ def call_agent(state: AgentState):
     llm_with_tools = llm.bind_tools(tools)
 
     response = llm_with_tools.invoke(state["messages"])
-
-    # for message in state["messages"]:
-    #     message.pretty_print()
-        
-    # response.pretty_print()
-    # print("\n\n")
 
     return {"messages": [response]}
 
