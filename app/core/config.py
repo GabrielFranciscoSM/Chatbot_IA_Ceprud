@@ -37,7 +37,7 @@ def setup_logging():
     os.makedirs(BASE_LOG_DIR, exist_ok=True)
     
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.DEBUG,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         handlers=[
             logging.FileHandler(os.path.join(BASE_LOG_DIR, 'api.log')),

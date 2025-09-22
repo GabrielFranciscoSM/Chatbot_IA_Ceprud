@@ -16,11 +16,11 @@ from .session_service import (
     active_sessions
 )
 
-from .analytics_service import (
-    log_session_event,
+from .logging_service import (
+    log_session_event_sync as log_session_event,
     log_request_info,
-    log_user_message,
-    log_learning_event,
+    log_user_message_sync as log_user_message,
+    log_learning_event_sync as log_learning_event,
     classify_query_type,
     estimate_query_complexity
 )

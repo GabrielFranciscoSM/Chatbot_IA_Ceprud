@@ -20,10 +20,10 @@ from domain.query_logic import (
 )
 from services import (
     get_or_create_session, update_session_activity, cleanup_old_sessions,
-    log_session_event, log_request_info, log_user_message, log_learning_event,
-    classify_query_type, estimate_query_complexity, anonymize_user_id,
+    log_request_info, classify_query_type, estimate_query_complexity, anonymize_user_id,
     active_sessions
 )
+from services.logging_service import log_user_message, log_session_event, log_learning_event, log_conversation_message
 import logging
 
 # Get logger (configuration is handled by config module)
@@ -118,7 +118,31 @@ async def chat_endpoint(
         query_type = classify_query_type(user_message)
         complexity = estimate_query_complexity(user_message)
         
-        log_user_message(
+        # Log conversation messages (both user and bot)
+        conversation_timestamp = time.time()
+        
+        # Log user message
+        await log_conversation_message(
+            session_id=session_id,
+            user_id=user_identifier,
+            subject=selected_subject,
+            message_type="user",
+            message_content=user_message,
+            timestamp=conversation_timestamp
+        )
+        
+        # Log bot response
+        await log_conversation_message(
+            session_id=session_id,
+            user_id=user_identifier,
+            subject=selected_subject,
+            message_type="bot",
+            message_content=response_text,
+            timestamp=conversation_timestamp + 0.001  # Slightly later timestamp
+        )
+        
+        # Keep existing analytics logging
+        await log_user_message(
             email=email, 
             message=user_message, 
             subject=selected_subject, 
@@ -129,6 +153,22 @@ async def chat_endpoint(
             complexity=complexity,
             model_used=model_used
         )
+
+        # Log learning events for educational analytics
+        if query_type == "question" and complexity in ["medium", "complex"]:
+            await log_learning_event(
+                session_id=session_id,
+                event_type="complex_question_asked",
+                topic=selected_subject,
+                confidence_level="medium" if len(sources) > 0 else "low"
+            )
+        elif query_type == "concept" or "concepto" in user_message.lower():
+            await log_learning_event(
+                session_id=session_id,
+                event_type="concept_inquiry",
+                topic=selected_subject,
+                confidence_level="high" if len(sources) > 2 else "medium"
+            )
 
         response_size = len(response_text.encode('utf-8')) + sum(len(src.encode('utf-8')) for src in sources)
         log_request_info(request, start_time, 200, response_size)
@@ -260,7 +300,7 @@ async def clear_session_endpoint(
             session_id = get_or_create_session(email, subject)
             
             # Log the session clear event
-            log_session_event(
+            await log_session_event(
                 session_id=session_id,
                 user_id=user_identifier,  # Use anonymized user ID
                 subject=subject,

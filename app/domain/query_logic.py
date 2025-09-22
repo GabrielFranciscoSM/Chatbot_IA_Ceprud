@@ -8,6 +8,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import HumanMessage, SystemMessage
 
 from domain.graph import build_graph, AgentState # Importa AgentState también
+from langchain_core.prompts import PromptTemplate
 
 load_dotenv()
 
@@ -26,8 +27,7 @@ os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 #Poner como función para iniciar en la api_router
 rag_graph = build_graph()
 
-system_prompt = SystemMessage(
-        content="""Eres un asistente académico especializado en educación universitaria, diseñado para proporcionar respuestas detalladas, pedagógicamente estructuradas y académicamente rigurosas sobre asignaturas universitarias.
+System_prompt_template = PromptTemplate.from_template("""Eres un asistente académico especializado en educación universitaria, específicamente en {subject}, que es la asignatura que impartes. Estas diseñado para proporcionar respuestas detalladas, pedagógicamente estructuradas y académicamente rigurosas sobre asignaturas universitarias.
 
 ## OBJETIVO PRINCIPAL
 Actuar como un tutor virtual que proporciona explicaciones completas, contextualizadas y educativamente valiosas, adaptando el nivel de detalle y complejidad a las necesidades del estudiante universitario.
@@ -124,8 +124,9 @@ Estructura tu respuesta siguiendo estos principios pedagógicos:
 - **Pedagógicamente orientado**: Facilita el aprendizaje progresivo
 - **Constructivo y motivador**: Fomenta la curiosidad intelectual y el aprendizaje autónomo
 - **Riguroso y preciso**: Mantén exactitud en la información técnica y académica
-"""
-    )
+""")
+
+
 
 
 def query_rag(query_text: str,
@@ -136,7 +137,13 @@ def query_rag(query_text: str,
     """
     Realiza búsqueda RAG y genera una respuesta.
     """
+    
 
+
+    system_prompt = SystemMessage(
+        content=System_prompt_template.invoke({"subject": subject}).text
+        )
+    
     model_desc = None
 
     if use_finetuned and subject: 
@@ -215,9 +222,14 @@ def clear_session(subject: str, email: str) -> bool:
         if existing_state and existing_state.values.get("messages"):
             print(f"--- INFO: Limpiando sesión con ID: {conversation_id} ---")
             
+            # Create system prompt for clean state
+            clean_system_prompt = SystemMessage(
+                content=System_prompt_template.invoke({"subject": subject}).text
+            )
+            
             # Crear estado inicial limpio (solo con system prompt)
             clean_state = {
-                "messages": [system_prompt],  # Solo system prompt, sin historia
+                "messages": [clean_system_prompt],  # Solo system prompt, sin historia
                 "subject": subject,
                 "retrieved_docs": []
             }

@@ -45,8 +45,7 @@ services:
             - "./models:/models"
         environment:
             HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
-        ports:
-            - 8001:8001
+        network_mode: host
         ipc: host
         image: docker.io/vllm/vllm-openai:latest
         command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 16 --gpu-memory-utilization 0.4 --max_model_len=3000
@@ -57,11 +56,10 @@ services:
         build:
             context: ./rag-service
             dockerfile: Dockerfile
-        ports:
-            - 8082:8082
+        network_mode: host
         environment:
             BASE_CHROMA_PATH: /app/data/chroma
-            VLLM_EMBEDDING_URL: http://vllm-openai-embeddings:8001
+            VLLM_EMBEDDING_URL: http://localhost:8001
             EMBEDDING_MODEL_DIR: /models/Qwen--Qwen3-Embedding-0.6B
         volumes:
             - ./rag-service/data:/app/data/  # Guías docentes y archivos de asignaturas
@@ -70,14 +68,26 @@ services:
         depends_on:
             - vllm-openai-embeddings
 
+    # Logging Service
+    logging-service:
+        container_name: chatbot-logging-service
+        build:
+            context: ./logging-service
+            dockerfile: Dockerfile
+        network_mode: host
+        environment:
+            BASE_LOG_DIR: /app/logs
+        volumes:
+            - ./logs:/app/logs  # Mount logs directory
+        restart: unless-stopped
+
     # Backend Service
     backend:
         container_name: chatbot-backend
         build:
             context: .
             dockerfile: Containerfile
-        ports:
-            - 8080:8080
+        network_mode: host
         deploy:
             resources:
                 reservations:
@@ -91,7 +101,8 @@ services:
         environment:
             HF_HUB_DISABLE_SYMLINKS_WARNING: 1
             PYTHONPATH: /chatbot/app
-            RAG_SERVICE_URL: http://rag-service:8082
+            RAG_SERVICE_URL: http://localhost:8082
+            LOGGING_SERVICE_URL: http://localhost:8002
         command: ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8080"]
         volumes:
             - ./unitTests:/chatbot/app/unitTests
@@ -109,18 +120,13 @@ services:
         build:
             context: ./frontend
             dockerfile: Dockerfile
-        ports:
-            - 3000:80
+        network_mode: host
         environment:
             - NGINX_HOST=localhost
             - NGINX_PORT=80
         depends_on:
             - backend
         restart: unless-stopped
-
-networks:
-    default:
-        name: chatbot-network
 
 volumes:
     rag_data:
