@@ -15,7 +15,7 @@ from .models import (
 
 from .config import (
     BASE_LOG_DIR, BASE_CHROMA_PATH, API_VERSION,
-    get_config, setup_logging, ensure_directories
+    get_config, ensure_directories
 )
 
 from .rate_limiter import (
@@ -31,7 +31,7 @@ __all__ = [
     
     # Config
     'BASE_LOG_DIR', 'BASE_CHROMA_PATH', 'API_VERSION',
-    'get_config', 'setup_logging', 'ensure_directories',
+    'get_config', 'ensure_directories',
     
     # Rate Limiter
     'check_rate_limit', 'get_rate_limit_info',

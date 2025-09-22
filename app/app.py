@@ -19,10 +19,12 @@ app = FastAPI()
 
 # CORS Configuration
 origins = [
-    "http://localhost:3000",  # React frontend in development
-    "http://frontend:80",     # Frontend service in Docker
-    "http://localhost:80",    # Frontend served via nginx
-    "*"  # Allow all for development - configure appropriately for production
+    "http://localhost:3000",  # React frontend in development (Vite dev server)
+    "http://localhost:8090",  # Frontend served via nginx (production - actual port)
+    "http://127.0.0.1:3000",  # Alternative localhost address for dev
+    "http://127.0.0.1:8090",  # Alternative localhost address for production
+    "http://0.0.0.0:3000",    # Frontend container host binding (dev)
+    "http://0.0.0.0:8090",    # Frontend nginx host binding (production)
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -35,11 +37,6 @@ app.add_middleware(
 # Include the Shared API Router
 app.include_router(api_router)
 
-# # Static files for legacy support and analytics
-# app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-# app.mount("/graphs", StaticFiles(directory=GRAPHS_DIR), name="graphs")
-# templates = Jinja2Templates(directory=TEMPLATES_DIR)
-
 @app.get("/", response_class=JSONResponse)
 async def root():
     """API root endpoint - frontend is served separately."""
@@ -49,12 +46,6 @@ async def root():
         "frontend_url": "http://localhost:3000",
         "docs": "/docs"
     }
-
-# @app.get("/legacy", response_class=HTMLResponse)
-# async def legacy_frontend(request: Request):
-#     """Serves the legacy HTML page for backwards compatibility."""
-#     return templates.TemplateResponse('index.html', {"request": request})
-
 
 @app.get("/health")
 async def health_check():

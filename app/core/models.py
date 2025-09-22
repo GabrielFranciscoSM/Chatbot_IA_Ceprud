@@ -9,7 +9,7 @@ This module contains all data models used by the API endpoints for:
 """
 
 from typing import Dict, List, Optional
-from pydantic import BaseModel, Field, EmailStr, validator
+from pydantic import BaseModel, Field, EmailStr, field_validator
 
 
 class ChatRequest(BaseModel):
@@ -19,14 +19,14 @@ class ChatRequest(BaseModel):
     email: str = Field(default="anonimo", max_length=100, description="User email (anonymized)")
     mode: str = Field(default="rag", description="Chat mode (rag, base, rag_lora)")
     
-    @validator('mode')
+    @field_validator('mode')
     def validate_mode(cls, v):
         allowed_modes = ['rag', 'base', 'rag_lora']
         if v.lower() not in allowed_modes:
             raise ValueError(f'Mode must be one of: {allowed_modes}')
         return v.lower()
     
-    @validator('message')
+    @field_validator('message')
     def validate_message(cls, v):
         if not v.strip():
             raise ValueError('Message cannot be empty')

@@ -28,7 +28,7 @@ LOCAL_INFERENCE=False
 # Estado del agente, incluyendo los documentos recuperados y la asignatura
 class AgentState(MessagesState):
     retrieved_docs: List[Document]
-    subject: str # El campo para saber qué base de datos Chroma usar
+    subject: str 
 
 # --- HERRAMIENTAS ---
 
