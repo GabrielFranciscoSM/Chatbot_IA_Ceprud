@@ -152,7 +152,7 @@ def log_request_info(request: Request, start_time: float, status_code: int, resp
 
 
 # Import helper functions from analytics_service for backward compatibility
-from services.analytics_service import classify_query_type, estimate_query_complexity
+from .analytics_service import classify_query_type, estimate_query_complexity
 
 
 async def log_conversation_message(session_id: str, user_id: str, subject: str, 

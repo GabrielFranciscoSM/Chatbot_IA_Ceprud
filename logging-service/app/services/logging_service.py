@@ -64,3 +64,19 @@ class LoggingService:
              now.strftime("%Y-%m-%d"), now.strftime("%H:%M:%S"), now.timestamp()]
         )
         logger.info(f"Learning event logged: {session_id} - {event_type}")
+
+    async def log_conversation_message(
+        self, session_id: str, user_id: str, subject: str, 
+        message_type: str, message_content: str, timestamp: float
+    ):
+        """Log individual conversation messages"""
+        conv_datetime = datetime.fromtimestamp(timestamp)
+        # Escape quotes and commas in message content for CSV
+        escaped_content = message_content.replace('"', '""').replace('\n', '\\n').replace('\r', '\\r')
+        await self._write_csv_row(
+            "conversations.csv",
+            ["session_id", "user_id", "subject", "message_type", "message_content", "date", "time", "timestamp"],
+            [session_id, user_id, subject, message_type, f'"{escaped_content}"',
+             conv_datetime.strftime("%Y-%m-%d"), conv_datetime.strftime("%H:%M:%S"), timestamp]
+        )
+        logger.info(f"Conversation message logged: {session_id} - {message_type}")
