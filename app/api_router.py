@@ -26,14 +26,11 @@ from services import (
 from services.logging_service import log_user_message, log_session_event, log_learning_event, log_conversation_message
 import logging
 
-# Get logger (configuration is handled by config module)
+# Get logger 
 logger = logging.getLogger(__name__)
 
 # Create a router object instead of a FastAPI app
 router = APIRouter()
-
-# This dictionary will store user session data (legacy - will be refactored)
-user_data: Dict[str, Dict[str, object]] = {}
 
 # --- API Endpoints ---
 @router.post("/chat", response_model=ChatResponse, responses={
@@ -92,33 +89,16 @@ async def chat_endpoint(
     logger.info(f"Chat request received - Session: {session_id}, Subject: {selected_subject}, Mode: {selected_mode}, Email: {email}")
 
     try:
-        query_start_time = time.time()
         
-        if selected_mode == 'base':
-            result = query_rag(user_message, subject=selected_subject, use_finetuned=False, email=email)
-        elif selected_mode in ['rag', 'rag_lora']:
-            result = query_rag(
-                user_message,
-                subject=selected_subject,
-                use_finetuned=(selected_mode == 'rag_lora'),
-                email=email
-                )
-        else:
-            log_request_info(request, start_time, 400)
-            raise HTTPException(status_code=400, detail=f"❌ Modo no válido: '{selected_mode}'")
-
-        query_end_time = time.time()
-        response_time_ms = int((query_end_time - query_start_time) * 1000)
+        result = query_rag(user_message, subject=selected_subject, use_finetuned=False, email=email)
 
         response_text = result.get('response', '')
         sources = result.get('sources', [])
         model_used = result.get('model_used', '')
 
-        # Enhanced logging with learning analytics
         query_type = classify_query_type(user_message)
         complexity = estimate_query_complexity(user_message)
         
-        # Log conversation messages (both user and bot)
         conversation_timestamp = time.time()
         
         # Log user message
@@ -141,7 +121,6 @@ async def chat_endpoint(
             timestamp=conversation_timestamp + 0.001  # Slightly later timestamp
         )
         
-        # Keep existing analytics logging
         await log_user_message(
             email=email, 
             message=user_message, 
@@ -176,7 +155,6 @@ async def chat_endpoint(
         # Get rate limit info for response headers
         rate_info = get_rate_limit_info(user_identifier)
 
-        # Create response with rate limit headers
         response_data = ChatResponse(
             response=f"🤖: {response_text}",
             sources=sources,
@@ -187,7 +165,7 @@ async def chat_endpoint(
         
         # Return JSON response with rate limit headers
         response = JSONResponse(
-            content=response_data.dict(),
+            content=response_data.model_dump(),
             headers={
                 "X-RateLimit-Limit": str(RATE_LIMIT_REQUESTS),
                 "X-RateLimit-Remaining": str(rate_info['requests_remaining']),
@@ -220,14 +198,12 @@ async def get_rate_limit_status(email: str):
     """
     user_identifier = anonymize_user_id(email)
     rate_info = get_rate_limit_info(user_identifier)
-    current_time = int(time.time())
-    retry_after = max(0, rate_info['reset_time'] - current_time)
     
     return RateLimitStatus(
         requests_made=rate_info['requests_made'],
         requests_remaining=rate_info['requests_remaining'],
         reset_time=rate_info['reset_time'],
-        user_identifier=user_identifier[:8] + "..."  # Show only first 8 chars for privacy
+        user_identifier=user_identifier
     )
 
 @router.get("/rate-limit-info", response_model=RateLimitStatus)
@@ -238,14 +214,12 @@ async def get_rate_limit_info_endpoint(email: str):
     """
     user_identifier = anonymize_user_id(email)
     rate_info = get_rate_limit_info(user_identifier)
-    current_time = int(time.time())
-    retry_after = max(0, rate_info['reset_time'] - current_time)
     
     return RateLimitStatus(
         requests_made=rate_info['requests_made'],
         requests_remaining=rate_info['requests_remaining'],
         reset_time=rate_info['reset_time'],
-        user_identifier=user_identifier[:8] + "..."  # Show only first 8 chars for privacy
+        user_identifier=user_identifier
     )
 
 @router.post("/clear-session", response_model=ClearSessionResponse, responses={

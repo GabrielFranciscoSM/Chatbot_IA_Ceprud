@@ -137,8 +137,6 @@ def query_rag(query_text: str,
     """
     Realiza búsqueda RAG y genera una respuesta.
     """
-    
-
 
     system_prompt = SystemMessage(
         content=System_prompt_template.invoke({"subject": subject}).text
@@ -182,7 +180,6 @@ def query_rag(query_text: str,
     for event in rag_graph.stream(input_data, config=config, stream_mode="values"):
         # "values" nos da el estado completo después de cada paso
         final_result = event
-
 
     final_response_message = final_result["messages"][-1]
     final_response = final_response_message.content if final_response_message else "No se pudo generar respuesta."

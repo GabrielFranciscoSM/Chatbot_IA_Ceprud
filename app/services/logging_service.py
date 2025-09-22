@@ -151,8 +151,8 @@ def log_request_info(request: Request, start_time: float, status_code: int, resp
     )
 
 
-# Import helper functions from analytics_service for backward compatibility
-from .analytics_service import classify_query_type, estimate_query_complexity
+# Import helper functions from utils_service
+from .utils_service import classify_query_type, estimate_query_complexity, anonymize_user_id
 
 
 async def log_conversation_message(session_id: str, user_id: str, subject: str, 
@@ -197,8 +197,6 @@ async def log_conversation_message(session_id: str, user_id: str, subject: str,
         logger.error(f"Unexpected error logging conversation message: {e}")
 
 
-# Legacy sync wrappers for backward compatibility
-# These will be deprecated once all callers are updated to async
 def log_session_event_sync(session_id: str, user_id: str, subject: str, event_type: str):
     """Legacy sync wrapper - use async version instead."""
     import asyncio

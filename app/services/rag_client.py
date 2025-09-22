@@ -142,5 +142,57 @@ class RAGServiceClient:
             print(f"Error inesperado obteniendo guía docente: {str(e)}")
             return None
 
+    def populate_subject(self, subject: str, file_paths: List[str], reset: bool = False) -> Dict[str, Any]:
+        """
+        Populate a subject with documents via the RAG Service
+        
+        Args:
+            subject: Subject name
+            file_paths: List of file paths to process
+            reset: Whether to clear existing documents for the subject
+            
+        Returns:
+            Dict with operation result
+        """
+        try:
+            # Prepare files for upload (in a real implementation, this would handle file uploads)
+            # For now, we'll simulate the API call
+            data = {
+                "subject": subject,
+                "documents_path": ",".join(file_paths),  # Simplified for API
+                "clear_existing": reset
+            }
+            
+            response = requests.post(
+                f"{self.base_url}/populate",
+                data=data,
+                timeout=30
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                return {
+                    "status": "success",
+                    "subject": subject,
+                    "documents_added": result.get("documents_processed", 0),
+                    "message": result.get("message", "Documents populated successfully")
+                }
+            else:
+                return {
+                    "status": "error",
+                    "message": f"Error populating subject: {response.status_code} - {response.text}"
+                }
+                
+        except requests.exceptions.RequestException as e:
+            return {
+                "status": "error",
+                "message": f"Error connecting to RAG Service: {str(e)}"
+            }
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": f"Unexpected error: {str(e)}"
+            }
+
 # Instancia global del cliente
 rag_client = RAGServiceClient()

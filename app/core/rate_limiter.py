@@ -56,7 +56,7 @@ def check_rate_limit(user_identifier: str) -> bool:
     for user_id in users_to_remove:
         del rate_limit_storage[user_id]
     
-    # Check current user's rate limit
+    # Check current user's rate limitvalidator
     if user_identifier not in rate_limit_storage:
         rate_limit_storage[user_identifier] = {'requests': []}
     
