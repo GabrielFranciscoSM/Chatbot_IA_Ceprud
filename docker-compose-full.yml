@@ -47,6 +47,49 @@ services:
     #     image: docker.io/vllm/vllm-openai:latest
     #     command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 16 --gpu-memory-utilization 0.4 --max_model_len=3000
 
+    # MongoDB Database
+    mongodb:
+        container_name: chatbot-mongodb
+        image: docker.io/mongo:8.0
+        ports:
+            - "27017:27017"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: admin
+            MONGO_INITDB_ROOT_PASSWORD: password123
+            MONGO_INITDB_DATABASE: chatbot_users
+        volumes:
+            - mongodb_data:/data/db
+        restart: unless-stopped
+
+    # User Data Service (MongoDB)
+    user-service:
+        container_name: chatbot-user-service
+        build:
+            context: ./mongo-service
+            dockerfile: Dockerfile
+        ports:
+            - "8083:8083"
+        environment:
+            MONGODB_URL: mongodb://admin:password123@mongodb:27017
+            MONGODB_DATABASE: chatbot_users
+        depends_on:
+            - mongodb
+        restart: unless-stopped
+    mongo-express:
+        container_name: chatbot-mongo-express
+        image: docker.io/mongo-express
+        restart: always
+        ports:
+            - "8081:8081"
+        environment:
+            ME_CONFIG_MONGODB_URL: mongodb://admin:password123@mongodb:27017
+            ME_CONFIG_BASICAUTH_ENABLED: true
+            ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
+            ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
+            MONGO_INITDB_DATABASE: chatbot_users
+        depends_on:
+            - mongodb
+
     # RAG Service
     rag-service:
         container_name: chatbot-rag-service
@@ -95,6 +138,7 @@ services:
             PYTHONPATH: /chatbot/app
             RAG_SERVICE_URL: http://rag-service:8082
             LOGGING_SERVICE_URL: http://logging-service:8002
+            USER_SERVICE_URL: http://user-service:8083
         command: ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8080"]
         volumes:
             - ./unitTests:/chatbot/app/unitTests:z
@@ -120,6 +164,8 @@ services:
 
 volumes:
     rag_data:
+        driver: local
+    mongodb_data:
         driver: local
 networks:
     default:

@@ -5,6 +5,7 @@ This package contains all business service modules:
 - session_service: User session management
 - logging_service: Microservice-based logging
 - utils_service: Utility functions and query analysis helpers
+- user_service: User data management via MongoDB service
 """
 
 from .session_service import (
@@ -32,6 +33,11 @@ from .utils_service import (
     truncate_text
 )
 
+from .user_service import (
+    user_service,
+    UserServiceClient
+)
+
 __all__ = [
     # Session service
     'get_or_create_session',
@@ -53,5 +59,9 @@ __all__ = [
     'anonymize_user_id',
     'sanitize_input',
     'format_sources_list',
-    'truncate_text'
+    'truncate_text',
+    
+    # User service (MongoDB-based user management)
+    'user_service',
+    'UserServiceClient'
 ]
