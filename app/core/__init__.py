@@ -12,7 +12,8 @@ from .models import (
     RateLimitResponse, HealthResponse, RateLimitStatus,
     ClearSessionRequest, ClearSessionResponse,
     UserCreateRequest, UserCreateResponse, UserLoginRequest, UserLoginResponse,
-    UserLogoutResponse, UserProfileResponse, UserProfileUpdateRequest, UserProfileUpdateResponse
+    UserLogoutResponse, UserProfileResponse, UserProfileUpdateRequest, UserProfileUpdateResponse,
+    AddSubjectRequest, RemoveSubjectRequest, UserSubjectsResponse
 )
 
 from .config import (
@@ -34,6 +35,8 @@ __all__ = [
     # User Models
     'UserCreateRequest', 'UserCreateResponse', 'UserLoginRequest', 'UserLoginResponse',
     'UserLogoutResponse', 'UserProfileResponse', 'UserProfileUpdateRequest', 'UserProfileUpdateResponse',
+    # Subject Models
+    'AddSubjectRequest', 'RemoveSubjectRequest', 'UserSubjectsResponse',
     
     # Config
     'BASE_LOG_DIR', 'BASE_CHROMA_PATH', 'API_VERSION',

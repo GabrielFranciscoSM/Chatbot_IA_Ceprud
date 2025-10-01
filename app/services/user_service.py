@@ -142,6 +142,71 @@ class UserServiceClient:
         except Exception as e:
             logger.error(f"User service health check failed: {e}")
             return False
+    
+    # --- Subject Management Methods ---
+    
+    async def get_user_subjects(self, email: str) -> Optional[Dict[str, Any]]:
+        """Get all subjects for a user by email"""
+        try:
+            async with httpx.AsyncClient(timeout=self.timeout) as client:
+                response = await client.get(f"{self.base_url}/users/email/{email}/subjects")
+                if response.status_code == 404:
+                    return None
+                response.raise_for_status()
+                return response.json()
+        except httpx.HTTPError as e:
+            if e.response.status_code == 404:
+                return None
+            logger.error(f"HTTP error getting user subjects: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"Error getting user subjects: {e}")
+            return None
+    
+    async def add_subject_to_user(self, email: str, subject_id: str) -> Optional[Dict[str, Any]]:
+        """Add a subject to a user by email"""
+        try:
+            async with httpx.AsyncClient(timeout=self.timeout) as client:
+                response = await client.post(
+                    f"{self.base_url}/users/email/{email}/subjects",
+                    json={"subject_id": subject_id}
+                )
+                if response.status_code == 404:
+                    return None
+                response.raise_for_status()
+                return response.json()
+        except httpx.HTTPError as e:
+            if e.response.status_code == 404:
+                return None
+            if e.response.status_code == 400:
+                # Subject already exists
+                logger.warning(f"Subject {subject_id} already added to user {email}")
+                return None
+            logger.error(f"HTTP error adding subject to user: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"Error adding subject to user: {e}")
+            return None
+    
+    async def remove_subject_from_user(self, email: str, subject_id: str) -> Optional[Dict[str, Any]]:
+        """Remove a subject from a user by email"""
+        try:
+            async with httpx.AsyncClient(timeout=self.timeout) as client:
+                response = await client.delete(
+                    f"{self.base_url}/users/email/{email}/subjects/{subject_id}"
+                )
+                if response.status_code == 404:
+                    return None
+                response.raise_for_status()
+                return response.json()
+        except httpx.HTTPError as e:
+            if e.response.status_code == 404:
+                return None
+            logger.error(f"HTTP error removing subject from user: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"Error removing subject from user: {e}")
+            return None
 
 
 # Global client instance

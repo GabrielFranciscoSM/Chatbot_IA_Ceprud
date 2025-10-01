@@ -60,6 +60,7 @@ Each user has the following fields:
     "name": "string",         # Full name
     "role": "string",         # User role (student/teacher/admin)
     "active": boolean,        # Account status
+    "subjects": ["string"],   # List of subject IDs associated with user
     "created_at": "datetime", # Creation timestamp
     "updated_at": "datetime"  # Last update timestamp
 }
@@ -76,12 +77,25 @@ Each user has the following fields:
 - `PUT /users/{user_id}` - Update user
 - `DELETE /users/{user_id}` - Delete user
 
+**Subject Management (User Service):**
+- `GET /users/{user_id}/subjects` - Get user subjects by ID
+- `GET /users/email/{email}/subjects` - Get user subjects by email
+- `POST /users/{user_id}/subjects` - Add subject to user by ID
+- `POST /users/email/{email}/subjects` - Add subject to user by email
+- `DELETE /users/{user_id}/subjects/{subject_id}` - Remove subject by ID
+- `DELETE /users/email/{email}/subjects/{subject_id}` - Remove subject by email
+
 ### Main Application API (Port 8080)
 - `POST /user/create` - Create new user account
 - `POST /user/login` - Simple email-based login
 - `POST /user/logout` - Logout endpoint
 - `GET /user/profile?email={email}` - Get user profile
 - `PUT /user/profile?email={email}` - Update user profile
+
+**Subject Management (Main API):**
+- `GET /user/subjects?email={email}` - Get user's subjects
+- `POST /user/subjects` - Add subject to user
+- `DELETE /user/subjects/{subject_id}?email={email}` - Remove subject from user
 
 ## How to Use
 
@@ -121,6 +135,79 @@ user = await user_service.get_user_by_email("user@email.com")
 
 # Update user
 updated = await user_service.update_user(user_id, name="New Name")
+
+# Subject management
+subjects = await user_service.get_user_subjects("user@email.com")
+await user_service.add_subject_to_user("user@email.com", "ingenieria_de_servidores")
+await user_service.remove_subject_from_user("user@email.com", "metaheuristicas")
+```
+
+## Subject Management Feature
+
+### Overview
+Each user can have an associated list of subjects (courses). This allows personalized subject selection and access control.
+
+### How It Works
+
+1. **Frontend Search & Add**
+   - User searches for available subjects using a search bar
+   - Clicks on a subject to add it to their list
+   - Subject appears in their sidebar
+
+2. **Backend Processing**
+   - Frontend calls `/user/subjects` endpoint
+   - Backend proxies to User Service
+   - MongoDB updates user's subjects array
+
+3. **Subject Display**
+   - Only user's subjects are shown in the sidebar
+   - Empty state shown if no subjects added
+   - Hover to see remove button (×)
+
+### API Examples
+
+**Add a subject:**
+```bash
+curl -X POST http://localhost:8080/user/subjects \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@correo.ugr.es",
+    "subject_id": "ingenieria_de_servidores"
+  }'
+```
+
+**Remove a subject:**
+```bash
+curl -X DELETE "http://localhost:8080/user/subjects/ingenieria_de_servidores?email=user@correo.ugr.es"
+```
+
+**Get user subjects:**
+```bash
+curl "http://localhost:8080/user/subjects?email=user@correo.ugr.es"
+```
+
+### Database Operations
+
+The subjects are stored as an array in the user document:
+
+```javascript
+// MongoDB update to add subject
+db.users.updateOne(
+  { email: "user@correo.ugr.es" },
+  { 
+    $push: { subjects: "ingenieria_de_servidores" },
+    $set: { updated_at: new Date() }
+  }
+)
+
+// MongoDB update to remove subject
+db.users.updateOne(
+  { email: "user@correo.ugr.es" },
+  { 
+    $pull: { subjects: "ingenieria_de_servidores" },
+    $set: { updated_at: new Date() }
+  }
+)
 ```
 
 ## Environment Variables

@@ -13,6 +13,7 @@ from core import (
     ClearSessionRequest, ClearSessionResponse,
     UserCreateRequest, UserCreateResponse, UserLoginRequest, UserLoginResponse,
     UserLogoutResponse, UserProfileResponse, UserProfileUpdateRequest, UserProfileUpdateResponse,
+    AddSubjectRequest, RemoveSubjectRequest, UserSubjectsResponse,
     check_rate_limit, get_rate_limit_info, 
     RATE_LIMIT_REQUESTS, RATE_LIMIT_WINDOW,
     BASE_LOG_DIR, API_VERSION
@@ -497,7 +498,8 @@ async def get_user_profile_endpoint(
             name=user["name"],
             role=user["role"],
             active=user["active"],
-            created_at=user["created_at"]
+            created_at=user["created_at"],
+            subjects=user.get("subjects", [])
         )
             
     except HTTPException:
@@ -564,7 +566,8 @@ async def update_user_profile_endpoint(
                 name=updated_user["name"],
                 role=updated_user["role"],
                 active=updated_user["active"],
-                created_at=updated_user["created_at"]
+                created_at=updated_user["created_at"],
+                subjects=updated_user.get("subjects", [])
             )
             
             return UserProfileUpdateResponse(
@@ -581,6 +584,176 @@ async def update_user_profile_endpoint(
             
     except Exception as e:
         error_msg = f"Error updating user profile: {str(e)}"
+        logger.error(error_msg)
+        log_request_info(request, start_time, 500)
+        
+        raise HTTPException(
+            status_code=500,
+            detail=error_msg
+        )
+
+
+# --- Subject Management Endpoints ---
+
+@router.get("/user/subjects", response_model=UserSubjectsResponse, responses={
+    404: {"model": ErrorResponse},
+    500: {"model": ErrorResponse}
+})
+async def get_user_subjects_endpoint(
+    request: Request,
+    email: str
+):
+    """
+    Get all subjects for a user by email
+    """
+    start_time = time.time()
+    
+    try:
+        # Check if user service is available
+        if not await user_service.health_check():
+            log_request_info(request, start_time, 503)
+            raise HTTPException(
+                status_code=503,
+                detail="User service is not available"
+            )
+        
+        # Get user subjects
+        subjects_data = await user_service.get_user_subjects(email)
+        
+        if subjects_data is None:
+            log_request_info(request, start_time, 404)
+            raise HTTPException(
+                status_code=404,
+                detail="User not found"
+            )
+        
+        log_request_info(request, start_time, 200)
+        return UserSubjectsResponse(
+            success=True,
+            subjects=subjects_data.get("subjects", []),
+            message="Subjects retrieved successfully"
+        )
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        error_msg = f"Error getting user subjects: {str(e)}"
+        logger.error(error_msg)
+        log_request_info(request, start_time, 500)
+        
+        raise HTTPException(
+            status_code=500,
+            detail=error_msg
+        )
+
+
+@router.post("/user/subjects", response_model=UserSubjectsResponse, responses={
+    400: {"model": ErrorResponse},
+    404: {"model": ErrorResponse},
+    500: {"model": ErrorResponse}
+})
+async def add_subject_to_user_endpoint(
+    request: Request,
+    subject_request: AddSubjectRequest
+):
+    """
+    Add a subject to a user's list of subjects
+    """
+    start_time = time.time()
+    
+    try:
+        # Check if user service is available
+        if not await user_service.health_check():
+            log_request_info(request, start_time, 503)
+            raise HTTPException(
+                status_code=503,
+                detail="User service is not available"
+            )
+        
+        # Add subject to user
+        result = await user_service.add_subject_to_user(
+            email=subject_request.email,
+            subject_id=subject_request.subject_id
+        )
+        
+        if result is None:
+            log_request_info(request, start_time, 404)
+            raise HTTPException(
+                status_code=404,
+                detail="User not found"
+            )
+        
+        log_request_info(request, start_time, 200)
+        logger.info(f"Added subject {subject_request.subject_id} to user {subject_request.email}")
+        
+        return UserSubjectsResponse(
+            success=True,
+            subjects=result.get("subjects", []),
+            message=f"Subject {subject_request.subject_id} added successfully"
+        )
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        error_msg = f"Error adding subject to user: {str(e)}"
+        logger.error(error_msg)
+        log_request_info(request, start_time, 500)
+        
+        raise HTTPException(
+            status_code=500,
+            detail=error_msg
+        )
+
+
+@router.delete("/user/subjects/{subject_id}", response_model=UserSubjectsResponse, responses={
+    404: {"model": ErrorResponse},
+    500: {"model": ErrorResponse}
+})
+async def remove_subject_from_user_endpoint(
+    request: Request,
+    subject_id: str,
+    email: str
+):
+    """
+    Remove a subject from a user's list of subjects
+    """
+    start_time = time.time()
+    
+    try:
+        # Check if user service is available
+        if not await user_service.health_check():
+            log_request_info(request, start_time, 503)
+            raise HTTPException(
+                status_code=503,
+                detail="User service is not available"
+            )
+        
+        # Remove subject from user
+        result = await user_service.remove_subject_from_user(
+            email=email,
+            subject_id=subject_id
+        )
+        
+        if result is None:
+            log_request_info(request, start_time, 404)
+            raise HTTPException(
+                status_code=404,
+                detail="User or subject not found"
+            )
+        
+        log_request_info(request, start_time, 200)
+        logger.info(f"Removed subject {subject_id} from user {email}")
+        
+        return UserSubjectsResponse(
+            success=True,
+            subjects=result.get("subjects", []),
+            message=f"Subject {subject_id} removed successfully"
+        )
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        error_msg = f"Error removing subject from user: {str(e)}"
         logger.error(error_msg)
         log_request_info(request, start_time, 500)
         

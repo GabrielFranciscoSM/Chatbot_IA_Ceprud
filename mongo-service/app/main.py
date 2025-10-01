@@ -4,7 +4,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from contextlib import asynccontextmanager
 import os
 from typing import List, Optional
-from .models import User, UserCreate, UserUpdate
+from .models import User, UserCreate, UserUpdate, AddSubjectRequest, RemoveSubjectRequest, SubjectsResponse
 from .database import get_database
 import logging
 
@@ -228,4 +228,203 @@ async def delete_user(user_id: str):
         raise
     except Exception as e:
         logger.error(f"Error deleting user {user_id}: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+# --- Subject Management Endpoints ---
+
+@app.get("/users/{user_id}/subjects", response_model=SubjectsResponse)
+async def get_user_subjects(user_id: str):
+    """Get all subjects for a user"""
+    try:
+        from bson import ObjectId
+        db = get_database(mongodb_client)
+        collection = db.users
+        
+        user = await collection.find_one({"_id": ObjectId(user_id)})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        subjects = user.get("subjects", [])
+        return SubjectsResponse(subjects=subjects)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting subjects for user {user_id}: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@app.get("/users/email/{email}/subjects", response_model=SubjectsResponse)
+async def get_user_subjects_by_email(email: str):
+    """Get all subjects for a user by email"""
+    try:
+        db = get_database(mongodb_client)
+        collection = db.users
+        
+        user = await collection.find_one({"email": email})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        subjects = user.get("subjects", [])
+        return SubjectsResponse(subjects=subjects)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting subjects for user {email}: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@app.post("/users/{user_id}/subjects", response_model=SubjectsResponse)
+async def add_subject_to_user(user_id: str, request: AddSubjectRequest):
+    """Add a subject to a user"""
+    try:
+        from bson import ObjectId
+        from datetime import datetime
+        db = get_database(mongodb_client)
+        collection = db.users
+        
+        user = await collection.find_one({"_id": ObjectId(user_id)})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Get current subjects
+        current_subjects = user.get("subjects", [])
+        
+        # Check if subject already exists
+        if request.subject_id in current_subjects:
+            raise HTTPException(status_code=400, detail="Subject already added to user")
+        
+        # Add subject
+        current_subjects.append(request.subject_id)
+        
+        # Update user
+        await collection.update_one(
+            {"_id": ObjectId(user_id)},
+            {"$set": {"subjects": current_subjects, "updated_at": datetime.utcnow()}}
+        )
+        
+        logger.info(f"Added subject {request.subject_id} to user {user_id}")
+        return SubjectsResponse(subjects=current_subjects)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error adding subject to user {user_id}: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@app.post("/users/email/{email}/subjects", response_model=SubjectsResponse)
+async def add_subject_to_user_by_email(email: str, request: AddSubjectRequest):
+    """Add a subject to a user by email"""
+    try:
+        from datetime import datetime
+        db = get_database(mongodb_client)
+        collection = db.users
+        
+        user = await collection.find_one({"email": email})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Get current subjects
+        current_subjects = user.get("subjects", [])
+        
+        # Check if subject already exists
+        if request.subject_id in current_subjects:
+            raise HTTPException(status_code=400, detail="Subject already added to user")
+        
+        # Add subject
+        current_subjects.append(request.subject_id)
+        
+        # Update user
+        await collection.update_one(
+            {"email": email},
+            {"$set": {"subjects": current_subjects, "updated_at": datetime.utcnow()}}
+        )
+        
+        logger.info(f"Added subject {request.subject_id} to user {email}")
+        return SubjectsResponse(subjects=current_subjects)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error adding subject to user {email}: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@app.delete("/users/{user_id}/subjects/{subject_id}", response_model=SubjectsResponse)
+async def remove_subject_from_user(user_id: str, subject_id: str):
+    """Remove a subject from a user"""
+    try:
+        from bson import ObjectId
+        from datetime import datetime
+        db = get_database(mongodb_client)
+        collection = db.users
+        
+        user = await collection.find_one({"_id": ObjectId(user_id)})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Get current subjects
+        current_subjects = user.get("subjects", [])
+        
+        # Check if subject exists
+        if subject_id not in current_subjects:
+            raise HTTPException(status_code=404, detail="Subject not found for user")
+        
+        # Remove subject
+        current_subjects.remove(subject_id)
+        
+        # Update user
+        await collection.update_one(
+            {"_id": ObjectId(user_id)},
+            {"$set": {"subjects": current_subjects, "updated_at": datetime.utcnow()}}
+        )
+        
+        logger.info(f"Removed subject {subject_id} from user {user_id}")
+        return SubjectsResponse(subjects=current_subjects)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error removing subject from user {user_id}: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@app.delete("/users/email/{email}/subjects/{subject_id}", response_model=SubjectsResponse)
+async def remove_subject_from_user_by_email(email: str, subject_id: str):
+    """Remove a subject from a user by email"""
+    try:
+        from datetime import datetime
+        db = get_database(mongodb_client)
+        collection = db.users
+        
+        user = await collection.find_one({"email": email})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Get current subjects
+        current_subjects = user.get("subjects", [])
+        
+        # Check if subject exists
+        if subject_id not in current_subjects:
+            raise HTTPException(status_code=404, detail="Subject not found for user")
+        
+        # Remove subject
+        current_subjects.remove(subject_id)
+        
+        # Update user
+        await collection.update_one(
+            {"email": email},
+            {"$set": {"subjects": current_subjects, "updated_at": datetime.utcnow()}}
+        )
+        
+        logger.info(f"Removed subject {subject_id} from user {email}")
+        return SubjectsResponse(subjects=current_subjects)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error removing subject from user {email}: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")

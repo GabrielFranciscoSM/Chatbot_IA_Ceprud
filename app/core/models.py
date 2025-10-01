@@ -91,6 +91,7 @@ class UserProfileResponse(BaseModel):
     role: str = Field(..., description="User role")
     active: bool = Field(..., description="Whether user is active")
     created_at: str = Field(..., description="User creation timestamp")
+    subjects: List[str] = Field(default_factory=list, description="List of subject IDs")
 
 
 class UserProfileUpdateRequest(BaseModel):
@@ -141,3 +142,23 @@ class ClearSessionResponse(BaseModel):
     success: bool = Field(..., description="Whether the session was cleared successfully")
     message: str = Field(..., description="Confirmation message")
     session_id: str = Field(..., description="ID of the cleared session")
+
+
+# Subject management models
+class AddSubjectRequest(BaseModel):
+    """Request model for adding a subject to a user"""
+    subject_id: str = Field(..., min_length=1, description="Subject ID to add")
+    email: str = Field(..., description="User email")
+
+
+class RemoveSubjectRequest(BaseModel):
+    """Request model for removing a subject from a user"""
+    subject_id: str = Field(..., min_length=1, description="Subject ID to remove")
+    email: str = Field(..., description="User email")
+
+
+class UserSubjectsResponse(BaseModel):
+    """Response model for user subjects"""
+    success: bool = Field(..., description="Whether the operation was successful")
+    subjects: List[str] = Field(..., description="List of subject IDs")
+    message: Optional[str] = Field(None, description="Status message")
