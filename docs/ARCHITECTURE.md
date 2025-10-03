@@ -56,11 +56,16 @@ graph TB
         ALERT["Alertmanager\nPort: 9093"]
     end
     
+    subgraph Data ["Data Services"]
+        USER["User Service\nMongoDB API\nPort: 8083"]
+    end
+    
     subgraph Storage ["Storage"]
         CHROMA[("ChromaDB\nVector Store")]
         FILES[("File System\nDocuments")]
         LOGS_DB[("Log Files\nCSV/JSON")]
         SQLITE[("SQLite\nSessions")]
+        MONGO[("MongoDB\nUser Data\nPort: 27017")]
     end
     
     %% Frontend connections
@@ -71,6 +76,7 @@ graph TB
     BE --> RAG
     BE --> LOG
     BE --> LLM
+    BE --> USER
     
     %% Service connections
     RAG --> EMB
@@ -78,6 +84,7 @@ graph TB
     RAG --> FILES
     LOG --> LOGS_DB
     BE --> SQLITE
+    USER --> MONGO
     
     %% Monitoring connections
     BE --> PROM
@@ -92,12 +99,14 @@ graph TB
     classDef ai fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
     classDef storage fill:#fff3e0,stroke:#e65100,stroke-width:2px
     classDef monitoring fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    classDef data fill:#fff9c4,stroke:#f57f17,stroke-width:2px
     
     class FE,NGINX frontend
     class BE,RAG,LOG backend
     class LLM,EMB ai
-    class CHROMA,FILES,LOGS_DB,SQLITE storage
+    class CHROMA,FILES,LOGS_DB,SQLITE,MONGO storage
     class PROM,GRAF,ALERT monitoring
+    class USER data
 ```
 
 ## 🔧 Servicios y Responsabilidades
@@ -116,6 +125,11 @@ graph TB
 - `POST /chat` - Procesamiento de mensajes del chat
 - `GET /subjects` - Lista de asignaturas disponibles
 - `POST /sessions` - Gestión de sesiones
+- `POST /user/create` - Creación de usuarios
+- `GET /user/profile` - Perfil de usuario
+- `GET /user/subjects` - Asignaturas del usuario
+- `POST /user/subjects` - Añadir asignatura
+- `DELETE /user/subjects/{id}` - Eliminar asignatura
 - `GET /health` - Health check
 
 ### 2. **RAG Service** (Puerto 8082)
@@ -147,22 +161,46 @@ graph TB
 - `GET /analytics` - Datos analíticos
 - `GET /metrics` - Métricas del sistema
 
-### 4. **Frontend Service** (Puerto 8090)
+### 4. **User Service** (Puerto 8083)
+**Tecnologías**: FastAPI, Motor (MongoDB async driver)
+**Responsabilidades**:
+- Gestión de usuarios (CRUD)
+- Autenticación basada en email
+- Gestión de asignaturas por usuario
+- Persistencia en MongoDB
+- Validación de datos con Pydantic
+
+**Endpoints Principales**:
+- `POST /users` - Crear usuario
+- `GET /users/email/{email}` - Obtener usuario
+- `PUT /users/{id}` - Actualizar usuario
+- `GET /users/{id}/subjects` - Obtener asignaturas del usuario
+- `POST /users/email/{email}/subjects` - Añadir asignatura
+- `DELETE /users/email/{email}/subjects/{id}` - Eliminar asignatura
+
+**Base de Datos**:
+- MongoDB con colección `users`
+- Índice único en campo `email`
+- Volumen persistente para datos
+
+### 5. **Frontend Service** (Puerto 8090)
 **Tecnologías**: React, TypeScript, Vite, Nginx
 **Responsabilidades**:
 - Interfaz de usuario moderna y responsiva
 - Gestión de estado del chat
 - Comunicación con backend via API REST
 - Experiencia de usuario optimizada
+- Búsqueda y gestión de asignaturas
 
 **Características**:
 - Chat en tiempo real
-- Selección de asignaturas
+- Búsqueda de asignaturas disponibles
+- Gestión personalizada de asignaturas por usuario
 - Historial de conversaciones
 - Responsive design
 - PWA capabilities
 
-### 5. **LLM Services** (Puertos 8000-8001)
+### 6. **LLM Services** (Puertos 8000-8001)
 **Tecnologías**: vLLM, CUDA, Transformers
 **Responsabilidades**:
 - Servicio de modelos de lenguaje (LLM)
@@ -177,8 +215,11 @@ Chatbot_IA_Ceprud/
 ├── 🌐 frontend/                    # Frontend React + TypeScript
 │   ├── src/
 │   │   ├── components/             # Componentes React reutilizables
+│   │   │   ├── SubjectSearch.tsx  # Búsqueda de asignaturas
+│   │   │   ├── SubjectSidebar.tsx # Lista de asignaturas del usuario
+│   │   │   └── ...                # Otros componentes
 │   │   ├── types.ts               # Definiciones TypeScript
-│   │   ├── api.ts                 # Cliente API
+│   │   ├── api.ts                 # Cliente API (incluye subject mgmt)
 │   │   └── utils.ts               # Utilidades frontend
 │   ├── Dockerfile                 # Container frontend
 │   └── nginx.conf                 # Configuración Nginx
@@ -196,6 +237,7 @@ Chatbot_IA_Ceprud/
 │   │   ├── session_service.py     # Gestión de sesiones
 │   │   ├── logging_service.py     # Cliente logging
 │   │   ├── rag_client.py          # Cliente RAG
+│   │   ├── user_service.py        # Cliente User Service (MongoDB)
 │   │   └── utils_service.py       # Utilidades comunes
 │   │
 │   ├── 🧠 domain/                 # Lógica de dominio
@@ -220,6 +262,14 @@ Chatbot_IA_Ceprud/
 │   │   ├── routers/             # Rutas logging
 │   │   └── core/                # Configuración logging
 │   └── logs/                    # Archivos de log
+│
+├── 👤 mongo-service/             # User Service (MongoDB)
+│   ├── app/
+│   │   ├── main.py              # API User Service
+│   │   ├── models.py            # Modelos usuario (con subjects)
+│   │   └── database.py          # Conexión MongoDB
+│   ├── Dockerfile               # Container user service
+│   └── requirements.txt         # Dependencias Python
 │
 ├── 🧪 tests/                     # Tests de integración
 │   ├── e2e/                     # Tests end-to-end
@@ -253,14 +303,27 @@ Usuario → Frontend → Backend → RAG Service → ChromaDB
                Log Files ← Response → Usuario
 ```
 
-### 2. **Flujo de Población de Datos**
+### 2. **Flujo de Gestión de Asignaturas**
+```
+Usuario busca → Frontend (SubjectSearch) → Backend API
+                                              ↓
+                                         User Service
+                                              ↓
+Usuario selecciona → Add Subject → MongoDB (update subjects array)
+                                              ↓
+                                         Return subjects
+                                              ↓
+Frontend actualiza lista ← Backend ← User Service
+```
+
+### 3. **Flujo de Población de Datos**
 ```
 Documentos → RAG Service → Document Processor → Embeddings Service
                 ↓                                      ↓
            ChromaDB ← Vector Embeddings ←――――――――――――――┘
 ```
 
-### 3. **Flujo de Monitoreo**
+### 4. **Flujo de Monitoreo**
 ```
 Servicios → Prometheus → Grafana → Dashboard
      ↓
@@ -281,8 +344,10 @@ Servicios → Prometheus → Grafana → Dashboard
 - **FastAPI**: Framework API
 - **Pydantic**: Validación de datos
 - **Asyncio**: Programación asíncrona
-- **SQLite**: Almacenamiento local
+- **SQLite**: Almacenamiento local sesiones
+- **MongoDB**: Base de datos usuarios (Motor driver)
 - **Prometheus Client**: Métricas
+- **httpx**: Cliente HTTP asíncrono
 
 ### **RAG & AI**
 - **ChromaDB**: Base de datos vectorial

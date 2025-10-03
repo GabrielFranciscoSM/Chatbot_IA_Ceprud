@@ -141,6 +141,151 @@ Información detallada de una asignatura específica.
 }
 ```
 
+### **Gestión de Usuarios**
+
+#### `POST /user/create`
+Crea un nuevo usuario en el sistema.
+
+**Request Body:**
+```json
+{
+  "email": "usuario@correo.ugr.es",
+  "name": "Juan Pérez",
+  "role": "student"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "user_id": "507f1f77bcf86cd799439011",
+  "message": "User created successfully"
+}
+```
+
+#### `POST /user/login`
+Login simple basado en email.
+
+**Request Body:**
+```json
+{
+  "email": "usuario@correo.ugr.es"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "user_id": "507f1f77bcf86cd799439011",
+  "name": "Juan Pérez",
+  "role": "student",
+  "message": "Login successful"
+}
+```
+
+#### `GET /user/profile?email={email}`
+Obtiene el perfil completo del usuario.
+
+**Response:**
+```json
+{
+  "user_id": "507f1f77bcf86cd799439011",
+  "email": "usuario@correo.ugr.es",
+  "name": "Juan Pérez",
+  "role": "student",
+  "active": true,
+  "created_at": "2025-10-01T10:30:00Z",
+  "subjects": ["ingenieria_de_servidores", "metaheuristicas"]
+}
+```
+
+#### `PUT /user/profile?email={email}`
+Actualiza el perfil del usuario.
+
+**Request Body:**
+```json
+{
+  "name": "Juan Pérez García",
+  "role": "teacher"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Profile updated successfully",
+  "user": {
+    "user_id": "507f1f77bcf86cd799439011",
+    "email": "usuario@correo.ugr.es",
+    "name": "Juan Pérez García",
+    "role": "teacher",
+    "active": true,
+    "created_at": "2025-10-01T10:30:00Z",
+    "subjects": ["ingenieria_de_servidores", "metaheuristicas"]
+  }
+}
+```
+
+### **Gestión de Asignaturas del Usuario**
+
+#### `GET /user/subjects?email={email}`
+Obtiene las asignaturas asociadas al usuario.
+
+**Response:**
+```json
+{
+  "success": true,
+  "subjects": [
+    "ingenieria_de_servidores",
+    "metaheuristicas",
+    "modelos_avanzados_computacion"
+  ],
+  "message": "Subjects retrieved successfully"
+}
+```
+
+#### `POST /user/subjects`
+Añade una asignatura al usuario.
+
+**Request Body:**
+```json
+{
+  "email": "usuario@correo.ugr.es",
+  "subject_id": "estadistica"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "subjects": [
+    "ingenieria_de_servidores",
+    "metaheuristicas",
+    "estadistica"
+  ],
+  "message": "Subject estadistica added successfully"
+}
+```
+
+#### `DELETE /user/subjects/{subject_id}?email={email}`
+Elimina una asignatura del usuario.
+
+**Response:**
+```json
+{
+  "success": true,
+  "subjects": [
+    "ingenieria_de_servidores",
+    "metaheuristicas"
+  ],
+  "message": "Subject estadistica removed successfully"
+}
+```
+
 ### **Sesiones**
 
 #### `POST /sessions`
@@ -538,6 +683,28 @@ interface Session {
   last_activity: string;   // Última actividad
   message_count: number;   // Número de mensajes
   status: 'active' | 'ended';  // Estado de la sesión
+}
+```
+
+### **User**
+```typescript
+interface User {
+  user_id: string;         // ID único del usuario (MongoDB ObjectId)
+  email: string;           // Email del usuario
+  name: string;            // Nombre completo
+  role: string;            // Rol (student, teacher, admin)
+  active: boolean;         // Estado de la cuenta
+  created_at: string;      // Timestamp de creación
+  subjects: string[];      // IDs de asignaturas asociadas
+}
+```
+
+### **UserSubjectsResponse**
+```typescript
+interface UserSubjectsResponse {
+  success: boolean;        // Estado de la operación
+  subjects: string[];      // Array de IDs de asignaturas
+  message?: string;        // Mensaje de estado opcional
 }
 ```
 

@@ -6,8 +6,10 @@ Un chatbot educativo avanzado basado en Inteligencia Artificial diseñado para C
 
 Este proyecto ahora incluye una **interfaz frontend moderna** desarrollada con React TypeScript, que ofrece:
 
-- 🎓 **Selección de Asignaturas**: Interfaz intuitiva para cambiar entre diferentes materias
+- 🎓 **Gestión Personalizada de Asignaturas**: Búsqueda y selección de asignaturas por usuario
+- 🔍 **Búsqueda de Asignaturas**: Barra de búsqueda para encontrar y añadir asignaturas
 - 💬 **Chat en Tiempo Real**: Experiencia de chat moderna con historial de mensajes
+- 👤 **Perfiles de Usuario**: Gestión de usuarios con MongoDB
 - 📱 **Diseño Responsivo**: Funciona perfectamente en desktop y móvil
 - 🔄 **Gestión de Sesiones**: Historial persistente por asignatura usando localStorage
 - ⚡ **Control de Límites**: Información en tiempo real sobre límites de API
@@ -22,8 +24,10 @@ Este proyecto ahora incluye una **interfaz frontend moderna** desarrollada con R
 ├── 🌐 frontend/              # Frontend React TypeScript
 │   ├── src/
 │   │   ├── components/       # Componentes React
+│   │   │   ├── SubjectSearch.tsx    # Búsqueda de asignaturas
+│   │   │   └── SubjectSidebar.tsx   # Gestión de asignaturas
 │   │   ├── types.ts         # Definiciones TypeScript  
-│   │   ├── api.ts           # Cliente API
+│   │   ├── api.ts           # Cliente API (con subject mgmt)
 │   │   └── utils.ts         # Utilidades
 │   ├── Dockerfile           # Contenedor frontend
 │   └── nginx.conf           # Configuración Nginx
@@ -42,6 +46,7 @@ app/
 │   ├── session_service.py     # Gestión de sesiones de usuario
 │   ├── logging_service.py     # Cliente del servicio de logging
 │   ├── rag_client.py          # Cliente del servicio RAG
+│   ├── user_service.py        # Cliente del servicio de usuarios (MongoDB)
 │   └── utils_service.py       # Utilidades comunes
 │
 ├── 🧠 Domain - Lógica del Dominio
@@ -65,6 +70,9 @@ app/
 │
 ├── 🌐 Logging Service - Servicio de Logging (Microservicio)
 │   └── logging-service/app/  # Microservicio independiente de logging
+│
+├── 👤 User Service - Servicio de Usuarios (Microservicio)
+│   └── mongo-service/app/    # Gestión de usuarios con MongoDB
 │
 ├── 📊 Analytics - Monitoreo
 │   ├── script_graphs.py      # Visualización de datos
@@ -178,8 +186,15 @@ docker-compose -f docker-compose-full.yml up --build
 ### **Interfaz Web (Recomendado)**
 1. Navega a `http://localhost:3000`
 2. Configura tu email UGR en el panel lateral
-3. Selecciona una asignatura
-4. ¡Comienza a chatear!
+3. **Busca y añade asignaturas**: Usa la barra de búsqueda para encontrar asignaturas disponibles
+4. Selecciona una asignatura de tu lista personalizada
+5. ¡Comienza a chatear!
+
+### **Gestión de Asignaturas** (NUEVO)
+- **Buscar**: Escribe en la barra de búsqueda para filtrar asignaturas disponibles
+- **Añadir**: Click en una asignatura de los resultados para añadirla a tu lista
+- **Eliminar**: Hover sobre una asignatura y click en el botón "×" para eliminarla
+- **Personalización**: Cada usuario tiene su propia lista de asignaturas
 
 ### **API REST**
 - **Endpoint principal**: `POST /chat`

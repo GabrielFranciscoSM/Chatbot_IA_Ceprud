@@ -57,4 +57,21 @@ export type ChatMode = 'base' | 'rag' | 'rag_lora';
 
 export interface UserSettings {
   email: string;
+  subjects?: string[];
+}
+
+export interface User {
+  user_id: string;
+  email: string;
+  name: string;
+  role: string;
+  active: boolean;
+  created_at: string;
+  subjects: string[];
+}
+
+export interface UserSubjectsResponse {
+  success: boolean;
+  subjects: string[];
+  message?: string;
 }

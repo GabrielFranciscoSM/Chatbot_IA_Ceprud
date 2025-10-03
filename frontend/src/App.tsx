@@ -38,6 +38,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>('');
   const [rateLimitInfo, setRateLimitInfo] = useState<any>(null);
+  const [userSubjects, setUserSubjects] = useState<string[]>([]);
 
   // Load initial data
   useEffect(() => {
@@ -48,12 +49,31 @@ function App() {
     setSessions(cleanOldSessions(savedSessions));
     setUserSettings(savedSettings);
     
+    // Load user subjects if email exists
+    if (savedSettings.email && validateEmail(savedSettings.email)) {
+      loadUserSubjects(savedSettings.email);
+    }
+    
     if (savedSubject && SUBJECTS.find(s => s.id === savedSubject)) {
       setSelectedSubject(savedSubject);
-    } else if (SUBJECTS.length > 0) {
-      setSelectedSubject(SUBJECTS[0].id);
     }
   }, []);
+
+  // Load user subjects from API
+  const loadUserSubjects = async (email: string) => {
+    try {
+      const response = await chatApi.getUserSubjects(email);
+      if (response.success) {
+        setUserSubjects(response.subjects);
+        // If user has subjects and no subject is selected, select the first one
+        if (response.subjects.length > 0 && !selectedSubject) {
+          setSelectedSubject(response.subjects[0]);
+        }
+      }
+    } catch (error) {
+      console.error('Error loading user subjects:', error);
+    }
+  };
 
   // Update current session when subject or email changes
   useEffect(() => {
@@ -90,6 +110,59 @@ function App() {
     setSelectedSubject(subjectId);
     setError('');
     setRateLimitInfo(null);
+  };
+
+  const handleAddSubject = async (subjectId: string) => {
+    if (!validateEmail(userSettings.email)) {
+      setError('Por favor, introduce un email válido para añadir asignaturas.');
+      return;
+    }
+
+    try {
+      const response = await chatApi.addSubjectToUser(userSettings.email, subjectId);
+      if (response.success) {
+        setUserSubjects(response.subjects);
+        // If this is the first subject, select it automatically
+        if (response.subjects.length === 1) {
+          setSelectedSubject(subjectId);
+        }
+      }
+    } catch (error: any) {
+      console.error('Error adding subject:', error);
+      setError('Error al añadir la asignatura. Por favor, inténtalo de nuevo.');
+    }
+  };
+
+  const handleRemoveSubject = async (subjectId: string) => {
+    if (!validateEmail(userSettings.email)) {
+      return;
+    }
+
+    try {
+      const response = await chatApi.removeSubjectFromUser(userSettings.email, subjectId);
+      if (response.success) {
+        setUserSubjects(response.subjects);
+        // If the removed subject was selected, select another one
+        if (selectedSubject === subjectId) {
+          if (response.subjects.length > 0) {
+            setSelectedSubject(response.subjects[0]);
+          } else {
+            setSelectedSubject('');
+          }
+        }
+      }
+    } catch (error: any) {
+      console.error('Error removing subject:', error);
+      setError('Error al eliminar la asignatura. Por favor, inténtalo de nuevo.');
+    }
+  };
+
+  const handleSettingsChange = (settings: UserSettings) => {
+    setUserSettings(settings);
+    // Load subjects when email changes and is valid
+    if (validateEmail(settings.email) && settings.email !== userSettings.email) {
+      loadUserSubjects(settings.email);
+    }
   };
 
   const handleSendMessage = async (messageContent: string) => {
@@ -204,11 +277,14 @@ function App() {
         <SubjectSidebar
           selectedSubject={selectedSubject}
           onSubjectChange={handleSubjectChange}
+          userSubjects={userSubjects}
+          onAddSubject={handleAddSubject}
+          onRemoveSubject={handleRemoveSubject}
         />
         
         <SettingsPanel
           userSettings={userSettings}
-          onSettingsChange={setUserSettings}
+          onSettingsChange={handleSettingsChange}
         />
       </div>
 

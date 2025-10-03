@@ -10,7 +10,10 @@ This package contains essential application infrastructure:
 from .models import (
     ChatRequest, ChatResponse, ErrorResponse,
     RateLimitResponse, HealthResponse, RateLimitStatus,
-    ClearSessionRequest, ClearSessionResponse
+    ClearSessionRequest, ClearSessionResponse,
+    UserCreateRequest, UserCreateResponse, UserLoginRequest, UserLoginResponse,
+    UserLogoutResponse, UserProfileResponse, UserProfileUpdateRequest, UserProfileUpdateResponse,
+    AddSubjectRequest, RemoveSubjectRequest, UserSubjectsResponse
 )
 
 from .config import (
@@ -28,6 +31,12 @@ __all__ = [
     # Models
     'ChatRequest', 'ChatResponse', 'ErrorResponse',
     'RateLimitResponse', 'HealthResponse', 'RateLimitStatus',
+    'ClearSessionRequest', 'ClearSessionResponse',
+    # User Models
+    'UserCreateRequest', 'UserCreateResponse', 'UserLoginRequest', 'UserLoginResponse',
+    'UserLogoutResponse', 'UserProfileResponse', 'UserProfileUpdateRequest', 'UserProfileUpdateResponse',
+    # Subject Models
+    'AddSubjectRequest', 'RemoveSubjectRequest', 'UserSubjectsResponse',
     
     # Config
     'BASE_LOG_DIR', 'BASE_CHROMA_PATH', 'API_VERSION',
