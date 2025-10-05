@@ -137,3 +137,5 @@ coverage.xml
 *.tmp
 *.bak
 *.backup
+
+lti_config

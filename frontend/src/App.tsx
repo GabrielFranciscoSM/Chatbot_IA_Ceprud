@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 // import { Trash2 } from 'lucide-react'; // Temporarily disabled
 import './App.css';
+import { useSession } from './hooks/useSession';
 
 // Components
 import SubjectSidebar from './components/SubjectSidebar';
@@ -28,6 +29,9 @@ import {
 } from './utils';
 
 function App() {
+  // Session context for LTI integration
+  const session = useSession();
+  
   // State
   const [sessions, setSessions] = useState<Session[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string>('');
@@ -49,15 +53,28 @@ function App() {
     setSessions(cleanOldSessions(savedSessions));
     setUserSettings(savedSettings);
     
-    // Load user subjects if email exists
-    if (savedSettings.email && validateEmail(savedSettings.email)) {
-      loadUserSubjects(savedSettings.email);
+    // If LTI mode, use session user data
+    if (session.isLTI && session.validated && session.user) {
+      console.log('App: LTI mode detected, using session user', session.user);
+      setUserSettings({
+        email: session.user.email,
+      });
+      
+      // Set subject from LTI session if available
+      if (session.subject) {
+        setSelectedSubject(session.subject);
+      }
+    } else {
+      // Standard mode - load user subjects if email exists
+      if (savedSettings.email && validateEmail(savedSettings.email)) {
+        loadUserSubjects(savedSettings.email);
+      }
+      
+      if (savedSubject && SUBJECTS.find(s => s.id === savedSubject)) {
+        setSelectedSubject(savedSubject);
+      }
     }
-    
-    if (savedSubject && SUBJECTS.find(s => s.id === savedSubject)) {
-      setSelectedSubject(savedSubject);
-    }
-  }, []);
+  }, [session.isLTI, session.validated, session.user, session.subject]);
 
   // Load user subjects from API
   const loadUserSubjects = async (email: string) => {
@@ -265,31 +282,64 @@ function App() {
 
   const selectedSubjectInfo = SUBJECTS.find(s => s.id === selectedSubject);
 
-  return (
-    <div className="app">
-      {/* Sidebar */}
-      <div className="sidebar">
-        <div className="sidebar-header">
-          <h1 className="sidebar-title">Chatbot UGR</h1>
-          <p className="sidebar-subtitle">CEPRUD - Centro de Estudios de Postgrado</p>
-        </div>
-        
-        <SubjectSidebar
-          selectedSubject={selectedSubject}
-          onSubjectChange={handleSubjectChange}
-          userSubjects={userSubjects}
-          onAddSubject={handleAddSubject}
-          onRemoveSubject={handleRemoveSubject}
-        />
-        
-        <SettingsPanel
-          userSettings={userSettings}
-          onSettingsChange={handleSettingsChange}
-        />
+  // Show loading state while validating LTI session
+  if (session.isLTI && session.loading) {
+    return (
+      <div className="lti-loading">
+        <div className="lti-loading-spinner"></div>
+        <div className="lti-loading-text">Loading session...</div>
       </div>
+    );
+  }
+
+  // Show error state if LTI validation failed
+  if (session.isLTI && session.error) {
+    return (
+      <div className="lti-error">
+        <div className="lti-error-icon">⚠️</div>
+        <h2 className="lti-error-title">Session Error</h2>
+        <p className="lti-error-message">{session.error}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className={session.isLTI ? "app lti-mode" : "app"}>
+      {/* Sidebar - Hidden in LTI mode */}
+      {!session.isLTI && (
+        <div className="sidebar">
+          <div className="sidebar-header">
+            <h1 className="sidebar-title">Chatbot UGR</h1>
+            <p className="sidebar-subtitle">CEPRUD - Centro de Estudios de Postgrado</p>
+          </div>
+          
+          <SubjectSidebar
+            selectedSubject={selectedSubject}
+            onSubjectChange={handleSubjectChange}
+            userSubjects={userSubjects}
+            onAddSubject={handleAddSubject}
+            onRemoveSubject={handleRemoveSubject}
+          />
+          
+          <SettingsPanel
+            userSettings={userSettings}
+            onSettingsChange={handleSettingsChange}
+          />
+        </div>
+      )}
 
       {/* Main Content */}
       <div className="main-content">
+        {/* Context Banner for LTI mode */}
+        {session.isLTI && session.contextLabel && (
+          <div className="context-banner">
+            <span className="context-banner-icon">📚</span>
+            <div className="context-banner-text">
+              <div className="context-banner-label">Moodle Course</div>
+              <div className="context-banner-course">{session.contextLabel}</div>
+            </div>
+          </div>
+        )}
         {/* Header */}
         <div className="chat-header">
           <div>

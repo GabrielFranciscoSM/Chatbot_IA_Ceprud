@@ -11,10 +11,18 @@ const api = axios.create({
   },
 });
 
-// Request interceptor for logging
+// Request interceptor for logging and session token
 api.interceptors.request.use(
   (config) => {
     console.log(`Making ${config.method?.toUpperCase()} request to ${config.url}`);
+    
+    // Add session token if available (for LTI mode)
+    const sessionToken = localStorage.getItem('session_token');
+    if (sessionToken) {
+      config.headers['X-Session-Token'] = sessionToken;
+      console.log('Added X-Session-Token header to request');
+    }
+    
     return config;
   },
   (error) => {
@@ -90,6 +98,16 @@ export const chatApi = {
 
   removeSubjectFromUser: async (email: string, subjectId: string): Promise<UserSubjectsResponse> => {
     const response = await api.delete(`/user/subjects/${subjectId}?email=${encodeURIComponent(email)}`);
+    return response.data;
+  },
+
+  // LTI Session validation
+  validateSession: async (sessionToken: string): Promise<any> => {
+    const response = await api.get('/session/validate', {
+      headers: {
+        'X-Session-Token': sessionToken,
+      },
+    });
     return response.data;
   },
 };

@@ -7,6 +7,7 @@ from fastapi.templating import Jinja2Templates
 
 # Import the shared router
 from api_router import router as api_router
+from lti.routes import router as lti_router
 
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -32,10 +33,12 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
     allow_credentials=True,
+    expose_headers=["X-RateLimit-Limit", "X-RateLimit-Remaining", "X-RateLimit-Reset"],
 )
 
 # Include the Shared API Router
 app.include_router(api_router)
+app.include_router(lti_router)
 
 @app.get("/", response_class=JSONResponse)
 async def root():
