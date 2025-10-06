@@ -5,8 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-# Import the shared router
-from api_router import router as api_router
+# Import the routers
+from routes import router as api_router
 from lti.routes import router as lti_router
 
 
@@ -49,11 +49,6 @@ async def root():
         "frontend_url": "http://localhost:3000",
         "docs": "/docs"
     }
-
-@app.get("/health")
-async def health_check():
-    """Health check endpoint for service readiness verification."""
-    return {"status": "healthy", "service": "chatbot"}
 
 
 @app.get("/graphs-list", response_class=JSONResponse)
