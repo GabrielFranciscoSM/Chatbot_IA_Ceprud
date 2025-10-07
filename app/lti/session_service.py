@@ -53,11 +53,19 @@ class LTISessionService:
         
         if existing_session:
             logger.info(f"Found existing session for user {user_id} in context {context_id}")
-            # Update last activity
+            # Update last activity AND subject (in case mapping changed)
             await self.sessions_collection.update_one(
                 {"_id": existing_session["_id"]},
-                {"$set": {"last_activity": datetime.utcnow()}}
+                {"$set": {
+                    "last_activity": datetime.utcnow(),
+                    "subject": subject,  # Update subject in case mapping changed
+                    "context_label": context_label  # Also update context_label
+                }}
             )
+            # Update the returned session object with new values
+            existing_session["subject"] = subject
+            existing_session["context_label"] = context_label
+            existing_session["last_activity"] = datetime.utcnow()
             return existing_session
         
         # Create new session

@@ -18,6 +18,7 @@ from datetime import datetime
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)  # Enable debug logging
 
 # Load config
 config_dir = os.getenv("LTI_CONFIG_DIR", "./lti_config")
@@ -33,11 +34,14 @@ user_service = LTIUserService()
 session_service = LTISessionService()
 
 # Course to subject mapping (can be moved to a config/database later)
+# Maps Moodle course labels to frontend subject IDs
 COURSE_SUBJECT_MAPPING = {
-    # Example: "course_label": "subject_id"
-    "ASIG001": "Matematicas",
-    "ASIG002": "Fisica",
-    # Add more mappings as needed
+    # Moodle course label -> Frontend subject ID
+    "IS": "ingenieria_de_servidores",
+    "MAC": "modelos_avanzados_computacion",
+    "META": "metaheuristicas",
+    "IE1": "inferencia_estadistica_1",
+    "EST": "estadistica",
 }
 
 @router.get("/lti/jwks", response_class=JSONResponse)
@@ -47,30 +51,75 @@ def jwks():
     return jwks
 
 @router.get("/lti/login")
-def lti_login(request: Request):
-    """OIDC login initiation endpoint (redirects to Moodle)"""
-    # Extract client_id, login_hint, and target_link_uri from query params or config
-    client_id = os.getenv("MOODLE_CLIENT_ID", "GBx1F4LefiUr7bZ")
-    auth_login_url = os.getenv("MOODLE_AUTH_LOGIN_URL", "https://moodle.ugr.es/mod/lti/auth.php")
-    target_link_uri = f"{os.getenv('CHATBOT_BASE_URL', 'http://localhost:8080')}/lti/launch"
-    # Generate random state and nonce (for demo, use static)
-    state = "demo-state-123"
-    nonce = "demo-nonce-456"
-    # Build OIDC login URL
-    params = {
-        "client_id": client_id,
-        "login_hint": "user-login-hint",  # Should be unique per user/session
-        "lti_message_hint": "message-hint",  # Optional
-        "target_link_uri": target_link_uri,
-        "response_type": "id_token",
+@router.post("/lti/login")
+async def lti_login(request: Request):
+    """OIDC login initiation endpoint (redirects to Moodle) - Accepts both GET and POST"""
+    # Extract parameters from either query params (GET) or form data (POST)
+    if request.method == "POST":
+        form_data = await request.form()
+        params_dict = dict(form_data)
+    else:
+        params_dict = dict(request.query_params)
+    
+    logger.info(f"LTI Login - Received parameters: {params_dict}")
+    
+    # Extract required parameters from Moodle
+    iss = params_dict.get("iss")  # Platform issuer
+    login_hint = params_dict.get("login_hint")
+    target_link_uri = params_dict.get("target_link_uri")
+    lti_message_hint = params_dict.get("lti_message_hint", "")
+    client_id = params_dict.get("client_id") or os.getenv("MOODLE_CLIENT_ID", "GBx1F4LefiUr7bZ")
+    
+    # Validate required parameters (temporarily disabled for debugging)
+    if not login_hint:
+        logger.warning(f"Missing login_hint parameter. Received params: {params_dict}")
+        # Use a dummy value for now to see the full flow
+        login_hint = "debug-user"
+    
+    # Get the authentication URL - usually iss + /mod/lti/auth.php for Moodle
+    if iss:
+        auth_login_url = f"{iss}/mod/lti/auth.php"
+    else:
+        auth_login_url = os.getenv("MOODLE_AUTH_LOGIN_URL", "https://testchatbot.moodlecloud.com/mod/lti/auth.php")
+    
+    # If target_link_uri not provided, use our launch endpoint
+    if not target_link_uri:
+        base_url = os.getenv('CHATBOT_BASE_URL', 'http://localhost:8080')
+        target_link_uri = f"{base_url}/api/lti/launch"
+    
+    # Generate random state and nonce
+    import secrets
+    state = secrets.token_urlsafe(16)
+    nonce = secrets.token_urlsafe(16)
+    
+    # Build OIDC authentication request
+    oidc_params = {
         "scope": "openid",
+        "response_type": "id_token",
+        "response_mode": "form_post",  # Tell Moodle to POST the id_token back
+        "client_id": client_id,
+        "redirect_uri": target_link_uri,
+        "login_hint": login_hint,
         "state": state,
         "nonce": nonce,
         "prompt": "none"
     }
-    oidc_url = f"{auth_login_url}?{urlencode(params)}"
-    logger.info(f"Redirecting to OIDC: {oidc_url}")
-    return RedirectResponse(oidc_url)
+    
+    if lti_message_hint:
+        oidc_params["lti_message_hint"] = lti_message_hint
+    
+    oidc_url = f"{auth_login_url}?{urlencode(oidc_params)}"
+    logger.info(f"LTI Login - Redirecting to: {oidc_url}")
+    print(f"\n{'='*80}")
+    print(f"LTI LOGIN DEBUG")
+    print(f"{'='*80}")
+    print(f"Received params: {params_dict}")
+    print(f"Auth URL: {auth_login_url}")
+    print(f"Redirect URI: {target_link_uri}")
+    print(f"Full OIDC URL: {oidc_url}")
+    print(f"{'='*80}\n")
+    
+    return RedirectResponse(oidc_url, status_code=302)
 
 @router.post("/lti/launch")
 async def lti_launch(request: Request):
@@ -87,6 +136,15 @@ async def lti_launch(request: Request):
     try:
         # Parse form data (id_token, state)
         form = await request.form()
+        form_dict = dict(form)
+        
+        print(f"\n{'='*80}")
+        print(f"LTI LAUNCH DEBUG")
+        print(f"{'='*80}")
+        print(f"Received form data: {list(form_dict.keys())}")
+        print(f"Form data values (truncated): {dict((k, v[:100] if len(v) > 100 else v) for k, v in form_dict.items())}")
+        print(f"{'='*80}\n")
+        
         id_token = form.get("id_token")
         state = form.get("state")
         
@@ -97,7 +155,7 @@ async def lti_launch(request: Request):
         # Step 1: Validate JWT
         logger.info("Validating JWT token...")
         try:
-            decoded = jwt_validator.validate_token(id_token)
+            decoded = jwt_validator.validate_jwt(id_token)
         except Exception as e:
             logger.error(f"JWT validation failed: {e}")
             raise HTTPException(status_code=401, detail=f"JWT validation failed: {e}")
@@ -108,6 +166,17 @@ async def lti_launch(request: Request):
         name = decoded.get("name", "LTI User")
         given_name = decoded.get("given_name", "")
         family_name = decoded.get("family_name", "")
+        
+        print(f"\n{'='*80}")
+        print(f"JWT DECODED CLAIMS")
+        print(f"{'='*80}")
+        print(f"LTI User ID (sub): {lti_user_id}")
+        print(f"Email: {email}")
+        print(f"Name: {name}")
+        print(f"Given Name: {given_name}")
+        print(f"Family Name: {family_name}")
+        print(f"All claims: {list(decoded.keys())}")
+        print(f"{'='*80}\n")
         
         # Extract context (course) information
         context_claim = decoded.get("https://purl.imsglobal.org/spec/lti/claim/context", {})
@@ -131,15 +200,43 @@ async def lti_launch(request: Request):
             family_name=family_name
         )
         
-        logger.info(f"User created/updated: {user.get('username')} (ID: {user.get('_id')})")
+        print(f"\n{'='*80}")
+        print(f"USER SERVICE RESPONSE")
+        print(f"{'='*80}")
+        print(f"User object: {user}")
+        print(f"User type: {type(user)}")
+        print(f"User _id: {user.get('_id') if user else 'USER IS NONE'}")
+        print(f"User id: {user.get('id') if user else 'USER IS NONE'}")
+        print(f"{'='*80}\n")
+        
+        # Handle both '_id' (MongoDB) and 'id' (user-service API response)
+        user_id = user.get('_id') or user.get('id') if user else None
+        
+        if not user or not user_id:
+            logger.error(f"Failed to create/retrieve user for LTI user {lti_user_id}")
+            raise HTTPException(
+                status_code=500, 
+                detail="Failed to create user account. Please contact support."
+            )
+        
+        logger.info(f"User created/updated: {user.get('name')} (ID: {user_id})")
         
         # Step 4: Map course to subject
-        subject = COURSE_SUBJECT_MAPPING.get(context_label, context_title)
+        subject = COURSE_SUBJECT_MAPPING.get(context_label, context_label.lower().replace(" ", "_"))
+        
+        print(f"\n{'='*80}")
+        print(f"SUBJECT MAPPING")
+        print(f"{'='*80}")
+        print(f"Context Label: {context_label}")
+        print(f"Context Title: {context_title}")
+        print(f"Mapped Subject ID: {subject}")
+        print(f"{'='*80}\n")
+        
         logger.info(f"Mapped course '{context_label}' to subject: {subject}")
         
         # Step 5: Create or retrieve session
         session = await session_service.create_or_get_session(
-            user_id=str(user.get("_id")),
+            user_id=str(user_id),  # Use the extracted user_id (works with both 'id' and '_id')
             lti_user_id=lti_user_id,
             context_id=context_id,
             context_label=context_label,
@@ -154,6 +251,16 @@ async def lti_launch(request: Request):
         
         # Option 1: Redirect with query params (for iframe embedding)
         redirect_url = f"{frontend_url}/?session_token={session_token}&lti=true&subject={subject}"
+        
+        print(f"\n{'='*80}")
+        print(f"LTI LAUNCH - Final Redirect")
+        print(f"{'='*80}")
+        print(f"Frontend URL: {frontend_url}")
+        print(f"Session Token: {session_token}")
+        print(f"Subject: {subject}")
+        print(f"Context Label: {context_label}")
+        print(f"Full Redirect URL: {redirect_url}")
+        print(f"{'='*80}\n")
         
         logger.info(f"Redirecting to chat UI: {redirect_url}")
         

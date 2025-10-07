@@ -87,10 +87,13 @@ async def validate_lti_session(
         log_request_info(request, start_time, 200)
         logger.info(f"Session validated successfully: {x_session_token[:20]}... for user {user.get('email')}")
         
+        # Handle both '_id' (MongoDB) and 'id' (user-service API response)
+        user_id = user.get("_id") or user.get("id")
+        
         return JSONResponse(
             content={
                 "user": {
-                    "id": str(user.get("_id")),
+                    "id": str(user_id) if user_id else None,
                     "name": user.get("name"),
                     "email": user.get("email"),
                     "role": user.get("role", "student")

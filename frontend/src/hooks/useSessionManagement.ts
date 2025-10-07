@@ -35,6 +35,7 @@ export function useSessionManagement({ sessionContext, loadUserSubjects }: UseSe
 
   // Use ref to track if initial load has happened
   const initialLoadDone = useRef(false);
+  const ltiSessionApplied = useRef(false);
 
   // Load initial data - only runs once
   useEffect(() => {
@@ -57,7 +58,9 @@ export function useSessionManagement({ sessionContext, loadUserSubjects }: UseSe
       
       // Set subject from LTI session if available
       if (sessionContext.subject) {
+        console.log('App: Setting subject from LTI session:', sessionContext.subject);
         setSelectedSubject(sessionContext.subject);
+        ltiSessionApplied.current = true;
       }
     } else {
       // Standard mode - load user subjects if email exists
@@ -72,6 +75,23 @@ export function useSessionManagement({ sessionContext, loadUserSubjects }: UseSe
     // Only run once on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Apply LTI session data when it becomes available (handles async validation)
+  useEffect(() => {
+    if (sessionContext.isLTI && sessionContext.validated && sessionContext.user && !ltiSessionApplied.current) {
+      console.log('App: Applying LTI session data after validation', sessionContext);
+      
+      setUserSettings({
+        email: sessionContext.user.email,
+      });
+      
+      if (sessionContext.subject) {
+        console.log('App: Setting subject from validated LTI session:', sessionContext.subject);
+        setSelectedSubject(sessionContext.subject);
+        ltiSessionApplied.current = true;
+      }
+    }
+  }, [sessionContext.isLTI, sessionContext.validated, sessionContext.user, sessionContext.subject]);
 
   // Update current session when subject or email changes
   useEffect(() => {

@@ -12,6 +12,7 @@ Esta carpeta contiene toda la documentación técnica del proyecto Chatbot IA CE
 - [DEVELOPMENT.md](DEVELOPMENT.md) - Guía completa de desarrollo
 - [API.md](API.md) - Documentación completa de la API REST
 - [TESTING.md](TESTING.md) - Estrategias y guías de testing
+- [LTI_INTEGRATION.md](LTI_INTEGRATION.md) - Guía de integración LTI 1.3 con Moodle (NUEVO)
 
 ### 📚 Para Administradores de Sistema
 - [INSTALLATION.md](INSTALLATION.md) - Guía detallada de instalación y despliegue
@@ -38,6 +39,7 @@ Esta carpeta contiene toda la documentación técnica del proyecto Chatbot IA CE
 1. Estudia [INSTALLATION.md](INSTALLATION.md) para requisitos
 2. Revisa [ARCHITECTURE.md](ARCHITECTURE.md) para entender las dependencias
 3. Consulta [API.md](API.md) para configurar reverse proxies
+4. Si integras con Moodle, lee [LTI_INTEGRATION.md](LTI_INTEGRATION.md)
 
 ## 📁 Estructura de Documentos
 
@@ -50,6 +52,9 @@ docs/
 ├── API.md                       # 🔌 Documentación de API
 ├── TESTING.md                   # 🧪 Estrategias de testing
 ├── PROJECT_OVERVIEW.md          # 📊 Visión general del proyecto
+├── LTI_INTEGRATION.md           # 🎓 Integración LTI 1.3 con Moodle (NUEVO)
+├── MONGODB_INTEGRATION.md       # 💾 Integración con MongoDB
+├── MONITORING.md                # 📈 Monitoreo y métricas
 ├── diagrams/                    # 📊 Diagramas técnicos
 │   ├── architecture.mermaid
 │   ├── architecture_simple.mermaid  # Versión compatible

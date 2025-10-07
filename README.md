@@ -2,9 +2,19 @@
 
 Un chatbot educativo avanzado basado en Inteligencia Artificial diseñado para CEPRUD (Centro de Producción de Recursos para la Universidad Digital). Utiliza arquitectura de microservicios, técnicas RAG (Retrieval-Augmented Generation) y modelos finos para responder preguntas especializadas sobre las asignaturas de la carrera de Ingeniería Informática.
 
-## 🆕 Nueva Interfaz Frontend
+## 🆕 Nuevas Características
 
-Este proyecto ahora incluye una **interfaz frontend moderna** desarrollada con React TypeScript, que ofrece:
+### 🎓 **Integración LTI 1.3 con Moodle** (NUEVO)
+- **Autenticación OIDC**: Inicio de sesión seguro desde Moodle
+- **Lanzamiento desde cursos**: Integración nativa en actividades Moodle
+- **Sesiones persistentes**: Mantiene el contexto del curso y usuario
+- **Mapeo automático de asignaturas**: Asocia cursos Moodle con contenido del chatbot
+- **Soporte iframe**: Visualización integrada dentro de Moodle
+- **JWT validation**: Seguridad robusta con validación de tokens
+- **HTTPS ready**: Compatible con Moodle Cloud y despliegues seguros
+
+### 💬 **Interfaz Frontend Moderna**
+Este proyecto incluye una **interfaz frontend moderna** desarrollada con React TypeScript, que ofrece:
 
 - 🎓 **Gestión Personalizada de Asignaturas**: Búsqueda y selección de asignaturas por usuario
 - 🔍 **Búsqueda de Asignaturas**: Barra de búsqueda para encontrar y añadir asignaturas
@@ -14,6 +24,7 @@ Este proyecto ahora incluye una **interfaz frontend moderna** desarrollada con R
 - 🔄 **Gestión de Sesiones**: Historial persistente por asignatura usando localStorage
 - ⚡ **Control de Límites**: Información en tiempo real sobre límites de API
 - 🎨 **UI Académica**: Diseño limpio y profesional adaptado al entorno universitario
+- 🎯 **Modo LTI**: Interfaz simplificada para lanzamientos desde Moodle
 
 ---
 
@@ -25,16 +36,19 @@ Este proyecto ahora incluye una **interfaz frontend moderna** desarrollada con R
 │   ├── src/
 │   │   ├── components/       # Componentes React
 │   │   │   ├── SubjectSearch.tsx    # Búsqueda de asignaturas
-│   │   │   └── SubjectSidebar.tsx   # Gestión de asignaturas
+│   │   │   ├── SubjectSidebar.tsx   # Gestión de asignaturas
+│   │   │   └── ContextBanner.tsx    # Banner de contexto LTI
+│   │   ├── contexts/         # Contextos React
+│   │   │   └── SessionContext.tsx   # Contexto de sesión LTI
 │   │   ├── types.ts         # Definiciones TypeScript  
-│   │   ├── api.ts           # Cliente API (con subject mgmt)
+│   │   ├── api.ts           # Cliente API
 │   │   └── utils.ts         # Utilidades
 │   ├── Dockerfile           # Contenedor frontend
-│   └── nginx.conf           # Configuración Nginx
+│   └── nginx.conf           # Configuración Nginx con soporte iframe
 │
 app/
 ├── 🚀 Puntos de Entrada
-│   ├── api_router.py          # Rutas API principales (refactorizado)
+│   ├── api_router.py          # Rutas API principales
 │   └── app.py                 # Aplicación web completa
 │
 ├── 🔧 Core - Infraestructura Esencial
@@ -42,12 +56,24 @@ app/
 │   ├── config.py              # Gestión de configuración centralizada
 │   └── rate_limiter.py        # Control de velocidad y límites
 │
-├── 🎯 Services - Lógica de Negocio
+├── � LTI - Integración Moodle (NUEVO)
+│   ├── routes.py              # Endpoints LTI 1.3 (login, launch, jwks)
+│   ├── config.py              # Configuración LTI
+│   ├── jwt_validator.py       # Validación de tokens JWT
+│   ├── user_service.py        # Gestión de usuarios LTI
+│   ├── session_service.py     # Gestión de sesiones LTI
+│   └── database.py            # Conexión MongoDB para sesiones
+│
+├── �🎯 Services - Lógica de Negocio
 │   ├── session_service.py     # Gestión de sesiones de usuario
 │   ├── logging_service.py     # Cliente del servicio de logging
 │   ├── rag_client.py          # Cliente del servicio RAG
 │   ├── user_service.py        # Cliente del servicio de usuarios (MongoDB)
 │   └── utils_service.py       # Utilidades comunes
+│
+├── 🔀 Routes - Endpoints API
+│   ├── sessions.py            # Validación de sesiones LTI
+│   └── chat.py                # Endpoints de chat
 │
 ├── 🧠 Domain - Lógica del Dominio
 │   ├── query_logic.py         # Procesamiento de consultas
@@ -87,12 +113,23 @@ app/
 
 ## 🎯 Características Avanzadas
 
-### 🚀 **Arquitectura Refactorizada** (NUEVO)
+### 🎓 **Integración LTI 1.3 / Moodle** (NUEVO)
+- **Autenticación OIDC segura**: Flujo OAuth 2.0 con validación JWT
+- **Lanzamiento contextual**: Acceso directo desde cursos de Moodle
+- **Gestión automática de usuarios**: Creación y sincronización de usuarios desde Moodle
+- **Sesiones persistentes**: MongoDB para almacenamiento de sesiones LTI
+- **Mapeo de asignaturas**: Asociación automática entre cursos Moodle y contenido RAG
+- **Validación JWKS**: Verificación criptográfica de tokens
+- **Soporte para iframe**: Headers de seguridad configurados para embedder en Moodle
+- **HTTPS ready**: Compatible con Cloudflare Tunnel y despliegues en producción
+
+### 🚀 **Arquitectura de Microservicios**
 - **Separación de responsabilidades**: Código modular y mantenible
-- **Servicios de negocio**: Lógica encapsulada en servicios reutilizables  
-- **Configuración centralizada**: Gestión uniforme de configuración
+- **Servicios independientes**: Backend, RAG, User Service, Logging Service
+- **Comunicación HTTP**: APIs REST entre servicios
+- **Configuración centralizada**: Gestión uniforme vía variables de entorno
 - **Rate limiting inteligente**: Control de velocidad por usuario
-- **Logging avanzado**: Analíticas de aprendizaje detalladas
+- **Logging distribuido**: Analíticas de aprendizaje en servicio dedicado
 
 ### 🔍 **Sistema RAG Mejorado**
 - **Embeddings optimizados**: Recuperación de documentos más precisa
@@ -139,8 +176,23 @@ Las dependencias están organizadas en `requirements.txt`
 ```bash
 # Copiar configuración de ejemplo
 cp .env.example .env
-# Editar con tu token de Hugging Face
+# Editar con tus tokens y configuración
 nano .env
+```
+
+**Variables de entorno importantes:**
+```bash
+# Modelos y APIs
+HF_TOKEN="tu_token_de_huggingface"
+GEMINI_API_KEY="tu_api_key_opcional"
+
+# LTI / Moodle (opcional - solo para integración con Moodle)
+MOODLE_ISSUER="https://tu-moodle.example.com"
+MOODLE_AUTH_LOGIN_URL="https://tu-moodle.example.com/mod/lti/auth.php"
+MOODLE_JWKS_URL="https://tu-moodle.example.com/mod/lti/certs.php"
+MOODLE_CLIENT_ID="tu_client_id"
+CHATBOT_BASE_URL="https://tu-dominio.example.com"
+FRONTEND_URL="https://tu-dominio.example.com"
 ```
 
 #### 2. **Descargar Modelos**
@@ -167,28 +219,104 @@ docker-compose -f docker-compose-full.yml up --build
 ## 🌐 Acceso a los Servicios
 
 ### **Frontend Moderno**
-- **URL**: `http://localhost:3000`
+- **URL Standalone**: `http://localhost:8090` (puerto configurado en docker-compose)
+- **URL vía LTI**: Acceso desde Moodle (requiere configuración LTI)
 - **Descripción**: Interfaz React con chat en tiempo real y gestión de sesiones
 
 ### **Backend API**
 - **URL**: `http://localhost:8080`
 - **Documentación**: `http://localhost:8080/docs`
 - **Health check**: `GET /health`
+- **Endpoints LTI**: 
+  - `POST /api/lti/login` - OIDC login initiation
+  - `POST /api/lti/launch` - LTI launch endpoint
+  - `GET /api/lti/jwks` - Public keys for JWT validation
+  - `GET /api/session/validate` - Session validation
 
 ### **Servicios Internos**
 - **LLM API**: `http://localhost:8000` (vLLM OpenAI compatible)
 - **Embeddings**: `http://localhost:8001` (Servicio de embeddings)
+- **User Service**: `http://localhost:8083` (MongoDB user management)
+- **RAG Service**: `http://localhost:8082` (Document retrieval)
 
 ---
 
 ## 🚀 Uso del Sistema
 
 ### **Interfaz Web (Recomendado)**
-1. Navega a `http://localhost:3000`
+1. Navega a `http://localhost:8090`
 2. Configura tu email UGR en el panel lateral
 3. **Busca y añade asignaturas**: Usa la barra de búsqueda para encontrar asignaturas disponibles
 4. Selecciona una asignatura de tu lista personalizada
 5. ¡Comienza a chatear!
+
+### **Integración con Moodle (LTI 1.3)** (NUEVO)
+
+#### **Configuración del External Tool en Moodle**
+
+1. **Registrar el Tool** (como administrador):
+   - Ve a: `Site administration > Plugins > Activity modules > External tool > Manage tools`
+   - Click en "Configure a tool manually"
+   - Completa:
+     - **Tool name**: Chatbot CEPRUD
+     - **Tool URL**: `https://tu-dominio.example.com/api/lti/launch`
+     - **LTI version**: LTI 1.3
+     - **Public keyset URL**: `https://tu-dominio.example.com/api/lti/jwks`
+     - **Initiate login URL**: `https://tu-dominio.example.com/api/lti/login`
+     - **Redirection URI(s)**: `https://tu-dominio.example.com/api/lti/launch`
+   - Guarda y copia el **Client ID** generado
+
+2. **Configurar variables de entorno**:
+   ```bash
+   MOODLE_ISSUER="https://tu-moodle.example.com"
+   MOODLE_CLIENT_ID="el_client_id_de_moodle"
+   CHATBOT_BASE_URL="https://tu-dominio.example.com"
+   FRONTEND_URL="https://tu-dominio.example.com"
+   ```
+
+3. **Añadir actividad en un curso**:
+   - En tu curso, activa edición
+   - "Add an activity or resource" > "External tool"
+   - Selecciona "Chatbot CEPRUD" (preconfigured tool)
+   - Dale un nombre y guarda
+
+4. **Usar el chatbot**:
+   - Los estudiantes hacen click en la actividad
+   - Se autentican automáticamente via OIDC
+   - El chatbot se carga con el contexto del curso
+   - Las asignaturas se mapean automáticamente según la configuración
+
+#### **Mapeo de Cursos a Asignaturas**
+
+El mapeo se configura en `app/lti/routes.py`:
+
+```python
+COURSE_SUBJECT_MAPPING = {
+    "IS": "ingenieria_de_servidores",
+    "MAC": "modelos_avanzados_computacion",
+    "META": "metaheuristicas",
+    # Añade más mapeos según tus cursos
+}
+```
+
+La clave es el **course label** de Moodle, el valor es el **subject ID** del chatbot.
+
+#### **HTTPS para Producción**
+
+Moodle requiere HTTPS. Opciones:
+
+1. **Cloudflare Tunnel** (recomendado para desarrollo):
+   ```bash
+   # Instalar cloudflared
+   # Iniciar tunnel
+   cloudflared tunnel --url http://localhost:8090
+   ```
+
+2. **Nginx con Let's Encrypt** (producción):
+   - Configurar certificados SSL
+   - Proxy reverso a los contenedores
+
+3. **Servicio de hosting con SSL** (p.ej. Railway, Render, etc.)
 
 ### **Gestión de Asignaturas** (NUEVO)
 - **Buscar**: Escribe en la barra de búsqueda para filtrar asignaturas disponibles
@@ -387,5 +515,5 @@ Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
 
 ---
 
-*Última actualización: Septiembre 2025 - Versión 2.1 (Microservicios)*
+*Última actualización: Octubre 2025 - Versión 3.0 (LTI 1.3 Integration)*
 
