@@ -110,14 +110,6 @@ async def lti_login(request: Request):
     
     oidc_url = f"{auth_login_url}?{urlencode(oidc_params)}"
     logger.info(f"LTI Login - Redirecting to: {oidc_url}")
-    print(f"\n{'='*80}")
-    print(f"LTI LOGIN DEBUG")
-    print(f"{'='*80}")
-    print(f"Received params: {params_dict}")
-    print(f"Auth URL: {auth_login_url}")
-    print(f"Redirect URI: {target_link_uri}")
-    print(f"Full OIDC URL: {oidc_url}")
-    print(f"{'='*80}\n")
     
     return RedirectResponse(oidc_url, status_code=302)
 
@@ -136,17 +128,8 @@ async def lti_launch(request: Request):
     try:
         # Parse form data (id_token, state)
         form = await request.form()
-        form_dict = dict(form)
-        
-        print(f"\n{'='*80}")
-        print(f"LTI LAUNCH DEBUG")
-        print(f"{'='*80}")
-        print(f"Received form data: {list(form_dict.keys())}")
-        print(f"Form data values (truncated): {dict((k, v[:100] if len(v) > 100 else v) for k, v in form_dict.items())}")
-        print(f"{'='*80}\n")
         
         id_token = form.get("id_token")
-        state = form.get("state")
         
         if not id_token:
             logger.error("Missing id_token in LTI launch")
@@ -167,16 +150,6 @@ async def lti_launch(request: Request):
         given_name = decoded.get("given_name", "")
         family_name = decoded.get("family_name", "")
         
-        print(f"\n{'='*80}")
-        print(f"JWT DECODED CLAIMS")
-        print(f"{'='*80}")
-        print(f"LTI User ID (sub): {lti_user_id}")
-        print(f"Email: {email}")
-        print(f"Name: {name}")
-        print(f"Given Name: {given_name}")
-        print(f"Family Name: {family_name}")
-        print(f"All claims: {list(decoded.keys())}")
-        print(f"{'='*80}\n")
         
         # Extract context (course) information
         context_claim = decoded.get("https://purl.imsglobal.org/spec/lti/claim/context", {})
@@ -184,11 +157,7 @@ async def lti_launch(request: Request):
         context_label = context_claim.get("label", "")
         context_title = context_claim.get("title", "Unknown Course")
         
-        # Extract resource link (activity) information
-        resource_link_claim = decoded.get("https://purl.imsglobal.org/spec/lti/claim/resource_link", {})
-        resource_link_id = resource_link_claim.get("id", "")
-        resource_link_title = resource_link_claim.get("title", "")
-        
+        # Extract resource link (activity) information        
         logger.info(f"LTI Launch - User: {lti_user_id}, Course: {context_label} ({context_title})")
         
         # Step 3: Create or update user in MongoDB
@@ -199,15 +168,6 @@ async def lti_launch(request: Request):
             given_name=given_name,
             family_name=family_name
         )
-        
-        print(f"\n{'='*80}")
-        print(f"USER SERVICE RESPONSE")
-        print(f"{'='*80}")
-        print(f"User object: {user}")
-        print(f"User type: {type(user)}")
-        print(f"User _id: {user.get('_id') if user else 'USER IS NONE'}")
-        print(f"User id: {user.get('id') if user else 'USER IS NONE'}")
-        print(f"{'='*80}\n")
         
         # Handle both '_id' (MongoDB) and 'id' (user-service API response)
         user_id = user.get('_id') or user.get('id') if user else None
@@ -223,14 +183,6 @@ async def lti_launch(request: Request):
         
         # Step 4: Map course to subject
         subject = COURSE_SUBJECT_MAPPING.get(context_label, context_label.lower().replace(" ", "_"))
-        
-        print(f"\n{'='*80}")
-        print(f"SUBJECT MAPPING")
-        print(f"{'='*80}")
-        print(f"Context Label: {context_label}")
-        print(f"Context Title: {context_title}")
-        print(f"Mapped Subject ID: {subject}")
-        print(f"{'='*80}\n")
         
         logger.info(f"Mapped course '{context_label}' to subject: {subject}")
         
@@ -251,16 +203,6 @@ async def lti_launch(request: Request):
         
         # Option 1: Redirect with query params (for iframe embedding)
         redirect_url = f"{frontend_url}/?session_token={session_token}&lti=true&subject={subject}"
-        
-        print(f"\n{'='*80}")
-        print(f"LTI LAUNCH - Final Redirect")
-        print(f"{'='*80}")
-        print(f"Frontend URL: {frontend_url}")
-        print(f"Session Token: {session_token}")
-        print(f"Subject: {subject}")
-        print(f"Context Label: {context_label}")
-        print(f"Full Redirect URL: {redirect_url}")
-        print(f"{'='*80}\n")
         
         logger.info(f"Redirecting to chat UI: {redirect_url}")
         
