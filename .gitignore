@@ -84,6 +84,7 @@ app/rag/chroma/
 app/rag/data/
 backup/
 */data
+app/storage
 # =======================
 # Logs and Databases
 # =======================

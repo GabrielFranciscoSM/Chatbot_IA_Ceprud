@@ -6,8 +6,10 @@ Un chatbot educativo avanzado basado en Inteligencia Artificial diseñado para C
 
 Este proyecto ahora incluye una **interfaz frontend moderna** desarrollada con React TypeScript, que ofrece:
 
-- 🎓 **Selección de Asignaturas**: Interfaz intuitiva para cambiar entre diferentes materias
+- 🎓 **Gestión Personalizada de Asignaturas**: Búsqueda y selección de asignaturas por usuario
+- 🔍 **Búsqueda de Asignaturas**: Barra de búsqueda para encontrar y añadir asignaturas
 - 💬 **Chat en Tiempo Real**: Experiencia de chat moderna con historial de mensajes
+- 👤 **Perfiles de Usuario**: Gestión de usuarios con MongoDB
 - 📱 **Diseño Responsivo**: Funciona perfectamente en desktop y móvil
 - 🔄 **Gestión de Sesiones**: Historial persistente por asignatura usando localStorage
 - ⚡ **Control de Límites**: Información en tiempo real sobre límites de API
@@ -22,8 +24,10 @@ Este proyecto ahora incluye una **interfaz frontend moderna** desarrollada con R
 ├── 🌐 frontend/              # Frontend React TypeScript
 │   ├── src/
 │   │   ├── components/       # Componentes React
+│   │   │   ├── SubjectSearch.tsx    # Búsqueda de asignaturas
+│   │   │   └── SubjectSidebar.tsx   # Gestión de asignaturas
 │   │   ├── types.ts         # Definiciones TypeScript  
-│   │   ├── api.ts           # Cliente API
+│   │   ├── api.ts           # Cliente API (con subject mgmt)
 │   │   └── utils.ts         # Utilidades
 │   ├── Dockerfile           # Contenedor frontend
 │   └── nginx.conf           # Configuración Nginx
@@ -31,8 +35,7 @@ Este proyecto ahora incluye una **interfaz frontend moderna** desarrollada con R
 app/
 ├── 🚀 Puntos de Entrada
 │   ├── api_router.py          # Rutas API principales (refactorizado)
-│   ├── app.py                 # Aplicación web completa
-│   └── api.py                 # API pura para microservicios
+│   └── app.py                 # Aplicación web completa
 │
 ├── 🔧 Core - Infraestructura Esencial
 │   ├── models.py              # Modelos Pydantic para validación
@@ -41,21 +44,23 @@ app/
 │
 ├── 🎯 Services - Lógica de Negocio
 │   ├── session_service.py     # Gestión de sesiones de usuario
-│   ├── analytics_service.py   # Analíticas de aprendizaje avanzadas
+│   ├── logging_service.py     # Cliente del servicio de logging
+│   ├── rag_client.py          # Cliente del servicio RAG
+│   ├── user_service.py        # Cliente del servicio de usuarios (MongoDB)
 │   └── utils_service.py       # Utilidades comunes
 │
 ├── 🧠 Domain - Lógica del Dominio
 │   ├── query_logic.py         # Procesamiento de consultas
-│   ├── graph.py               # Operaciones con grafos
-│   └── test_conversation.py   # Manejo de conversaciones
+│   └── graph.py               # Operaciones con grafos
 │
-├── 🔍 RAG - Sistema de Recuperación
-│   ├── get_embedding_function.py  # Funciones de embedding
-│   ├── populate_database.py       # Población de base vectorial
-│   ├── add_subject.py             # Gestión de asignaturas
-│   ├── guia_docente_scrapper.py   # Extracción de guías docentes
-│   ├── data/                      # Documentos y datos
-│   └── chroma/                    # Base de datos vectorial
+├── 🔍 RAG Service - Sistema de Recuperación (Microservicio)
+│   ├── rag-service/app/
+│   │   ├── populate_database.py       # Población de base vectorial
+│   │   ├── guia_docente_scrapper.py   # Extracción de guías docentes
+│   │   ├── embeddings.py             # Funciones de embedding
+│   │   ├── rag_manager.py            # Gestión RAG principal
+│   │   └── document_processor.py     # Procesamiento de documentos
+│   └── data/                         # Documentos y datos
 │
 ├── 🤖 ML - Machine Learning
 │   ├── models/                # Modelos AI descargados
@@ -63,17 +68,18 @@ app/
 │       ├── finetuning_qlora.py
 │       └── generate_data.py
 │
-├── 🌐 Web - Interfaz de Usuario
-│   ├── static/               # CSS, JS, imágenes
-│   └── templates/            # Plantillas HTML
+├── 🌐 Logging Service - Servicio de Logging (Microservicio)
+│   └── logging-service/app/  # Microservicio independiente de logging
+│
+├── 👤 User Service - Servicio de Usuarios (Microservicio)
+│   └── mongo-service/app/    # Gestión de usuarios con MongoDB
 │
 ├── 📊 Analytics - Monitoreo
 │   ├── script_graphs.py      # Visualización de datos
 │   └── graphs/               # Gráficos generados
 │
 └── 💾 Storage - Almacenamiento
-    ├── logs/                 # Logs de aplicación
-    └── checkpoints.sqlite*   # Puntos de control
+    └── checkpoints.sqlite    # Puntos de control
 
 ```
 
@@ -121,23 +127,13 @@ app/
 - **CUDA** (opcional, para aceleración GPU)
 - **8GB RAM** mínimo (16GB recomendado)
 
-Las dependencias están organizadas en `config/requirements.txt`
+Las dependencias están organizadas en `requirements.txt`
 
 ---
 
 ## 📦 Instalación Rápida
 
-### 🚀 Opción 1: Setup Automático (Recomendado)
-```bash
-# Clonar el repositorio
-git clone https://github.com/javitrucas/Chatbot_IA_Ceprud.git
-cd Chatbot_IA_Ceprud
-
-# Ejecutar setup automático
-./setup.sh
-```
-
-### ⚙️ Opción 2: Setup Manual
+### ⚙️ Setup Manual
 
 #### 1. **Configurar Entorno**
 ```bash
@@ -164,9 +160,6 @@ cd ..
 ```bash
 # Todos los servicios (Frontend + Backend + LLM)
 docker-compose -f docker-compose-full.yml up --build
-
-# Solo backend y LLM (sin frontend)
-docker-compose -f docker-compose-vllm.yml up --build
 ```
 
 ---
@@ -193,8 +186,15 @@ docker-compose -f docker-compose-vllm.yml up --build
 ### **Interfaz Web (Recomendado)**
 1. Navega a `http://localhost:3000`
 2. Configura tu email UGR en el panel lateral
-3. Selecciona una asignatura
-4. ¡Comienza a chatear!
+3. **Busca y añade asignaturas**: Usa la barra de búsqueda para encontrar asignaturas disponibles
+4. Selecciona una asignatura de tu lista personalizada
+5. ¡Comienza a chatear!
+
+### **Gestión de Asignaturas** (NUEVO)
+- **Buscar**: Escribe en la barra de búsqueda para filtrar asignaturas disponibles
+- **Añadir**: Click en una asignatura de los resultados para añadirla a tu lista
+- **Eliminar**: Hover sobre una asignatura y click en el botón "×" para eliminarla
+- **Personalización**: Cada usuario tiene su propia lista de asignaturas
 
 ### **API REST**
 - **Endpoint principal**: `POST /chat`
@@ -218,8 +218,8 @@ curl -X POST "http://localhost:8080/chat" \
 
 ### **Añadir Nueva Asignatura**
 ```bash
-cd app/rag
-python add_subject.py
+cd rag-service/app
+python populate_database.py --subject "nombre_asignatura"
 ```
 
 ### **Fine-tuning con QLoRA**
@@ -237,9 +237,19 @@ python finetuning_qlora.py \
 
 ### **Población de Base Vectorial**
 ```bash
-cd app/rag
-python populate_database.py --subject "nombre_asignatura"
-```
+# Poblar base de datos inicial
+podman-compose -f docker-compose-full.yml up rag-service -d
+sleep 30
+
+# Ejecutar población inicial (ejemplo)
+curl -X POST "http://localhost:8082/populate" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "subject": "nombre_asignatura",
+       "documents_path": "/app/data/documents",
+       "clear_existing": false
+     }'
+``````
 
 ---
 
@@ -261,9 +271,11 @@ docker-compose -f prometheus/docker-compose-prometheus-graphana.yml up -d
 3. **Visualizar**: Métricas en tiempo real del chatbot
 
 ### **Logs Estructurados**
-- **Sesiones**: `app/storage/logs/learning_sessions.csv`
-- **Interacciones**: `app/storage/logs/chat_interactions_enhanced.csv`
-- **Eventos**: `app/storage/logs/learning_events.csv`
+- **Logs de aplicación**: `logs/api.log`
+- **Sesiones**: `logs/learning_sessions.csv`
+- **Interacciones**: `logs/chat_interactions_enhanced.csv`
+- **Eventos**: `logs/learning_events.csv`
+- **Conversaciones**: `logs/conversations.csv`
 
 ---
 
@@ -328,12 +340,24 @@ pytest tests/infrastructure/
 
 ---
 
-## 📚 Documentación Adicional
+## 📚 Documentación Completa
 
-- [`REFACTOR_STEP1_COMPLETE.md`](REFACTOR_STEP1_COMPLETE.md) - Extracción de modelos Pydantic
-- [`REFACTOR_STEP2_COMPLETE.md`](REFACTOR_STEP2_COMPLETE.md) - Rate limiting y configuración
-- [`REFACTOR_STEP3_COMPLETE.md`](REFACTOR_STEP3_COMPLETE.md) - Capa de servicios
-- [`STRUCTURE_IMPROVEMENT_COMPLETE.md`](STRUCTURE_IMPROVEMENT_COMPLETE.md) - Reestructuración completa
+El proyecto cuenta con documentación técnica exhaustiva organizada por audiencia y nivel de detalle:
+
+### 🎯 **Documentación Principal**
+- [`docs/PROJECT_OVERVIEW.md`](docs/PROJECT_OVERVIEW.md) - Visión general y contexto del proyecto
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) - Arquitectura del sistema y diseño técnico
+- [`docs/INSTALLATION.md`](docs/INSTALLATION.md) - Guía completa de instalación y despliegue
+- [`docs/API.md`](docs/API.md) - Documentación detallada de la API REST
+- [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) - Guía para desarrolladores
+- [`docs/TESTING.md`](docs/TESTING.md) - Estrategias y guías de testing
+- [`docs/MONITORING.md`](docs/MONITORING.md) - Configuración de monitoreo y métricas
+
+### 🚀 **Para Empezar Rápido**
+1. **Nuevos usuarios**: Lee [`docs/PROJECT_OVERVIEW.md`](docs/PROJECT_OVERVIEW.md)
+2. **Instalación**: Sigue [`docs/INSTALLATION.md`](docs/INSTALLATION.md)
+3. **Desarrollo**: Consulta [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md)
+4. **API**: Revisa [`docs/API.md`](docs/API.md)
 
 ---
 
@@ -363,5 +387,5 @@ Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
 
 ---
 
-*Última actualización: Septiembre 2025 - Versión 2.0 (Refactorizada)*
+*Última actualización: Septiembre 2025 - Versión 2.1 (Microservicios)*
 

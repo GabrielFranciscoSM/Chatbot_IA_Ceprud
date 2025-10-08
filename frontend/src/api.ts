@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ChatRequest, ChatResponse, RateLimitInfo } from './types';
+import { ChatRequest, ChatResponse, RateLimitInfo, UserSubjectsResponse } from './types';
 
 const API_BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || '/api';
 
@@ -74,6 +74,22 @@ export const chatApi = {
 
   getAnalytics: async (): Promise<any> => {
     const response = await api.get('/graphs');
+    return response.data;
+  },
+
+  // Subject management
+  getUserSubjects: async (email: string): Promise<UserSubjectsResponse> => {
+    const response = await api.get(`/user/subjects?email=${encodeURIComponent(email)}`);
+    return response.data;
+  },
+
+  addSubjectToUser: async (email: string, subjectId: string): Promise<UserSubjectsResponse> => {
+    const response = await api.post('/user/subjects', { email, subject_id: subjectId });
+    return response.data;
+  },
+
+  removeSubjectFromUser: async (email: string, subjectId: string): Promise<UserSubjectsResponse> => {
+    const response = await api.delete(`/user/subjects/${subjectId}?email=${encodeURIComponent(email)}`);
     return response.data;
   },
 };

@@ -16,7 +16,6 @@ services:
     #         HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
     #     ports:
     #         - 8000:8000
-    #     ipc: host
     #     image: docker.io/vllm/vllm-openai:latest
     #     command: [
     #         "--model", "/models/Sreenington--Phi-3-mini-4k-instruct-AWQ",
@@ -30,25 +29,66 @@ services:
     #         "--chat-template", "{{ bos_token }}{% for message in messages %}{% if (message['role'] in ['user', 'system']) %}{{'<|user|>' + '\n' + message['content'] + '<|end|>' + '\n' + '<|assistant|>' + '\n'}}{% elif message['role'] == 'assistant' %}{{message['content'] + '<|end|>' + '\n'}}{% endif %}{% endfor %}",
     #     ]
         
-    # Embeddings Service
-    vllm-openai-embeddings:
-        container_name: my-embedding-service
-        deploy:
-            resources:
-                reservations:
-                    devices:
-                        - driver: nvidia
-                          device_ids: ['0']
-                          capabilities:
-                              - gpu
-        volumes:
-            - "./models:/models"
+    #Embeddings Service
+    # vllm-openai-embeddings:
+    #     container_name: my-embedding-service
+    #     deploy:
+    #         resources:
+    #             reservations:
+    #                 devices:
+    #                     - driver: nvidia
+    #                       device_ids: ['0']
+    #                       capabilities:
+    #                           - gpu
+    #     volumes:
+    #         - "./models:/models"
+    #     environment:
+    #         HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
+    #     image: docker.io/vllm/vllm-openai:latest
+    #     command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 16 --gpu-memory-utilization 0.4 --max_model_len=3000
+
+    # MongoDB Database
+    mongodb:
+        container_name: chatbot-mongodb
+        image: docker.io/mongo:8.0
+        ports:
+            - "27017:27017"
         environment:
-            HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
-        network_mode: host
-        ipc: host
-        image: docker.io/vllm/vllm-openai:latest
-        command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 16 --gpu-memory-utilization 0.4 --max_model_len=3000
+            MONGO_INITDB_ROOT_USERNAME: admin
+            MONGO_INITDB_ROOT_PASSWORD: password123
+            MONGO_INITDB_DATABASE: chatbot_users
+        volumes:
+            - mongodb_data:/data/db
+        restart: unless-stopped
+
+    # User Data Service (MongoDB)
+    user-service:
+        container_name: chatbot-user-service
+        build:
+            context: ./mongo-service
+            dockerfile: Dockerfile
+        ports:
+            - "8083:8083"
+        environment:
+            MONGODB_URL: mongodb://admin:password123@mongodb:27017
+            MONGODB_DATABASE: chatbot_users
+        depends_on:
+            - mongodb
+        restart: unless-stopped
+    mongo-express:
+        container_name: chatbot-mongo-express
+        image: docker.io/mongo-express
+        restart: always
+        ports:
+            - "8081:8081"
+        environment:
+            ME_CONFIG_MONGODB_URL: mongodb://admin:password123@mongodb:27017
+            ME_CONFIG_BASICAUTH_ENABLED: true
+            ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
+            ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
+            MONGO_INITDB_DATABASE: chatbot_users
+        depends_on:
+            - mongodb
 
     # RAG Service
     rag-service:
@@ -56,17 +96,18 @@ services:
         build:
             context: ./rag-service
             dockerfile: Dockerfile
-        network_mode: host
+        ports:
+            - "8082:8082"
         environment:
             BASE_CHROMA_PATH: /app/data/chroma
-            VLLM_EMBEDDING_URL: http://localhost:8001
+            VLLM_EMBEDDING_URL: http://vllm-openai-embeddings:8001
             EMBEDDING_MODEL_DIR: /models/Qwen--Qwen3-Embedding-0.6B
         volumes:
-            - ./rag-service/data:/app/data/  # Guías docentes y archivos de asignaturas
-            - rag_data:/app/data/chroma  # Volumen persistente para ChromaDB
+            - ./rag-service/data:/app/data/:z  # Guías docentes y archivos de asignaturas
+            - rag_data:/app/data/chroma:z  # Volumen persistente para ChromaDB
         restart: unless-stopped
-        depends_on:
-            - vllm-openai-embeddings
+        # depends_on:
+        #     - vllm-openai-embeddings
 
     # Logging Service
     logging-service:
@@ -74,11 +115,12 @@ services:
         build:
             context: ./logging-service
             dockerfile: Dockerfile
-        network_mode: host
+        ports:
+            - "8002:8002"
         environment:
             BASE_LOG_DIR: /app/logs
         volumes:
-            - ./logs:/app/logs  # Mount logs directory
+            - ./logs:/app/logs:z  # Mount logs directory
         restart: unless-stopped
 
     # Backend Service
@@ -87,31 +129,22 @@ services:
         build:
             context: .
             dockerfile: Containerfile
-        network_mode: host
-        deploy:
-            resources:
-                reservations:
-                    devices:
-                        - driver: nvidia
-                          device_ids: ['0']
-                          capabilities:
-                              - gpu
+        ports:
+            - "8080:8080"
         env_file:
             - .env
         environment:
             HF_HUB_DISABLE_SYMLINKS_WARNING: 1
             PYTHONPATH: /chatbot/app
-            RAG_SERVICE_URL: http://localhost:8082
-            LOGGING_SERVICE_URL: http://localhost:8002
+            RAG_SERVICE_URL: http://rag-service:8082
+            LOGGING_SERVICE_URL: http://logging-service:8002
+            USER_SERVICE_URL: http://user-service:8083
         command: ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8080"]
         volumes:
-            - ./unitTests:/chatbot/app/unitTests
-            - ./pytest.ini:/chatbot/app/pytest.ini
-            - ./logs:/chatbot/app/logs
-            - ./app/storage:/chatbot/app/storage
+            - ./unitTests:/chatbot/app/unitTests:z
         restart: unless-stopped
         depends_on:
-            - vllm-openai-embeddings
+            # - vllm-openai-embeddings
             - rag-service
 
     # Frontend Service
@@ -120,10 +153,11 @@ services:
         build:
             context: ./frontend
             dockerfile: Dockerfile
-        network_mode: host
+        ports:
+            - "8090:8090"
         environment:
             - NGINX_HOST=localhost
-            - NGINX_PORT=80
+            - NGINX_PORT=8090
         depends_on:
             - backend
         restart: unless-stopped
@@ -131,3 +165,9 @@ services:
 volumes:
     rag_data:
         driver: local
+    mongodb_data:
+        driver: local
+networks:
+    default:
+        name: chatbot-network
+

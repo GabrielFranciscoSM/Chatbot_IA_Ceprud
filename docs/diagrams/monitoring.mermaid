@@ -1,0 +1,86 @@
+graph LR
+    subgraph "Monitoring Architecture"
+        
+        subgraph "Services Layer"
+            BACKEND[Backend Service<br/>:8080<br/>📊 /metrics]
+            RAG[RAG Service<br/>:8082<br/>📊 /metrics]
+            LOGGING[Logging Service<br/>:8002<br/>📊 /metrics]
+            FRONTEND[Frontend<br/>:8090<br/>📊 /health]
+        end
+        
+        subgraph "Collection Layer"
+            PROM[Prometheus<br/>:9090<br/>📈 Metrics DB]
+            NODE[Node Exporter<br/>:9100<br/>🖥️ System Metrics]
+            CADVISOR[cAdvisor<br/>:8080<br/>🐳 Container Metrics]
+        end
+        
+        subgraph "Processing Layer"
+            ALERT[Alertmanager<br/>:9093<br/>🚨 Alert Processing]
+            RULES[Alert Rules<br/>📋 Conditions]
+        end
+        
+        subgraph "Visualization Layer"
+            GRAF[Grafana<br/>:3000<br/>📊 Dashboards]
+            DASH1[Overview Dashboard<br/>🎯 Business KPIs]
+            DASH2[Infrastructure Dashboard<br/>🏗️ System Health]
+            DASH3[AI Performance Dashboard<br/>🤖 ML Metrics]
+        end
+        
+        subgraph "Notification Layer"
+            EMAIL[📧 Email Alerts]
+            SLACK[💬 Slack Integration]
+            WEBHOOK[🔗 Webhook Alerts]
+            SMS[📱 SMS Alerts]
+        end
+        
+        subgraph "Storage Layer"
+            LOGS[📝 Structured Logs<br/>JSON Format]
+            METRICS_DB[⏱️ Time Series DB<br/>Prometheus TSDB]
+            BACKUPS[💾 Backup Storage]
+        end
+    end
+    
+    %% Data Flow
+    BACKEND --> PROM
+    RAG --> PROM
+    LOGGING --> PROM
+    FRONTEND --> PROM
+    
+    NODE --> PROM
+    CADVISOR --> PROM
+    
+    PROM --> ALERT
+    RULES --> ALERT
+    PROM --> GRAF
+    
+    GRAF --> DASH1
+    GRAF --> DASH2
+    GRAF --> DASH3
+    
+    ALERT --> EMAIL
+    ALERT --> SLACK
+    ALERT --> WEBHOOK
+    ALERT --> SMS
+    
+    BACKEND --> LOGS
+    RAG --> LOGS
+    LOGGING --> LOGS
+    
+    PROM --> METRICS_DB
+    GRAF --> BACKUPS
+    PROM --> BACKUPS
+    
+    %% Styling
+    classDef service fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef collection fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef processing fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef visualization fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef notification fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    classDef storage fill:#f1f8e9,stroke:#33691e,stroke-width:2px
+    
+    class BACKEND,RAG,LOGGING,FRONTEND service
+    class PROM,NODE,CADVISOR collection
+    class ALERT,RULES processing
+    class GRAF,DASH1,DASH2,DASH3 visualization
+    class EMAIL,SLACK,WEBHOOK,SMS notification
+    class LOGS,METRICS_DB,BACKUPS storage

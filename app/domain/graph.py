@@ -1,6 +1,7 @@
 import json
 import os
 import sqlite3
+import subprocess
 from dotenv import load_dotenv
 from typing import Literal, List, Dict, Any, Tuple
 from langchain_core.documents import Document
@@ -247,7 +248,31 @@ def build_graph():
     os.makedirs(storage_dir, exist_ok=True)
     
     checkpoint_path = os.path.join(storage_dir, "checkpoints.sqlite")
-    conn = sqlite3.connect(checkpoint_path, check_same_thread=False)
+        
+    try:
+        conn = sqlite3.connect(checkpoint_path, check_same_thread=False)
+    except sqlite3.OperationalError as e:
+        print(f"Error connecting to database at {checkpoint_path}: {e}")
+        print("Attempting to create database and directory structure...")
+        
+        # Ensure the directory exists and has proper permissions
+        os.makedirs(storage_dir, mode=0o755, exist_ok=True)
+        
+        # Try to create an empty database file
+        try:
+            with open(checkpoint_path, 'w') as f:
+                pass  # Create empty file
+            # Set file permissions
+            os.chmod(checkpoint_path, 0o644)
+            print(f"Created database file at {checkpoint_path}")
+            
+            # Now try to connect again
+            conn = sqlite3.connect(checkpoint_path, check_same_thread=False)
+            print("Successfully connected to newly created database")
+        except Exception as create_error:
+            print(f"Failed to create database: {create_error}")
+            raise
+    
     memory = SqliteSaver(conn)
 
     return graph_builder.compile(checkpointer=memory)

@@ -48,6 +48,65 @@ class ErrorResponse(BaseModel):
     detail: Optional[str] = Field(None, description="Detailed error information")
 
 
+# User management models
+class UserCreateRequest(BaseModel):
+    """Request model for creating a new user"""
+    email: EmailStr = Field(..., description="User email address")
+    name: str = Field(..., min_length=1, max_length=100, description="User full name")
+    role: str = Field(default="student", description="User role (student, teacher, admin)")
+
+
+class UserCreateResponse(BaseModel):
+    """Response model for user creation"""
+    success: bool = Field(..., description="Whether user was created successfully")
+    user_id: Optional[str] = Field(None, description="Created user ID")
+    message: str = Field(..., description="Status message")
+
+
+class UserLoginRequest(BaseModel):
+    """Request model for user login"""
+    email: EmailStr = Field(..., description="User email address")
+
+
+class UserLoginResponse(BaseModel):
+    """Response model for user login"""
+    success: bool = Field(..., description="Whether login was successful")
+    user_id: Optional[str] = Field(None, description="User ID")
+    name: Optional[str] = Field(None, description="User name")
+    role: Optional[str] = Field(None, description="User role")
+    message: str = Field(..., description="Status message")
+
+
+class UserLogoutResponse(BaseModel):
+    """Response model for user logout"""
+    success: bool = Field(..., description="Whether logout was successful")
+    message: str = Field(..., description="Status message")
+
+
+class UserProfileResponse(BaseModel):
+    """Response model for user profile"""
+    user_id: str = Field(..., description="User ID")
+    email: str = Field(..., description="User email")
+    name: str = Field(..., description="User name")
+    role: str = Field(..., description="User role")
+    active: bool = Field(..., description="Whether user is active")
+    created_at: str = Field(..., description="User creation timestamp")
+    subjects: List[str] = Field(default_factory=list, description="List of subject IDs")
+
+
+class UserProfileUpdateRequest(BaseModel):
+    """Request model for updating user profile"""
+    name: Optional[str] = Field(None, min_length=1, max_length=100, description="Updated name")
+    role: Optional[str] = Field(None, description="Updated role")
+
+
+class UserProfileUpdateResponse(BaseModel):
+    """Response model for user profile update"""
+    success: bool = Field(..., description="Whether update was successful")
+    message: str = Field(..., description="Status message")
+    user: Optional[UserProfileResponse] = Field(None, description="Updated user data")
+
+
 class RateLimitResponse(BaseModel):
     """Rate limit exceeded response"""
     error: str = Field(..., description="Rate limit error message")
@@ -83,3 +142,23 @@ class ClearSessionResponse(BaseModel):
     success: bool = Field(..., description="Whether the session was cleared successfully")
     message: str = Field(..., description="Confirmation message")
     session_id: str = Field(..., description="ID of the cleared session")
+
+
+# Subject management models
+class AddSubjectRequest(BaseModel):
+    """Request model for adding a subject to a user"""
+    subject_id: str = Field(..., min_length=1, description="Subject ID to add")
+    email: str = Field(..., description="User email")
+
+
+class RemoveSubjectRequest(BaseModel):
+    """Request model for removing a subject from a user"""
+    subject_id: str = Field(..., min_length=1, description="Subject ID to remove")
+    email: str = Field(..., description="User email")
+
+
+class UserSubjectsResponse(BaseModel):
+    """Response model for user subjects"""
+    success: bool = Field(..., description="Whether the operation was successful")
+    subjects: List[str] = Field(..., description="List of subject IDs")
+    message: Optional[str] = Field(None, description="Status message")

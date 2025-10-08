@@ -2,7 +2,6 @@ import pytest
 from fastapi.testclient import TestClient
 from app import app
 import os
-import docker
 
 @pytest.fixture(scope="session")
 def test_client():
@@ -16,13 +15,6 @@ def docker_compose_file(pytestconfig):
         str(pytestconfig.rootdir),
         "docker-compose-full.yml"
     )
-
-@pytest.fixture(scope="session")
-def docker_services(docker_compose_file):
-    """Start up Docker Compose services"""
-    docker_client = docker.from_env()
-    yield docker_client
-    # Cleanup will happen automatically
 
 @pytest.fixture(scope="session")
 def test_data():
