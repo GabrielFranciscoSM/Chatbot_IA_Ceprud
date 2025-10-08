@@ -20,7 +20,7 @@ DEFAULT_EMAIL = "anonimo"
 BASE_CHROMA_PATH = os.getenv("BASE_CHROMA_PATH", "rag/chroma")
 
 # --- Logging Service Configuration ---
-LOGGING_SERVICE_URL = os.getenv("LOGGING_SERVICE_URL", "http://localhost:8083")
+LOGGING_SERVICE_URL = os.getenv("LOGGING_SERVICE_URL", "http://localhost:8002")
 LOGGING_TIMEOUT = float(os.getenv("LOGGING_TIMEOUT", "5.0"))
 
 # --- Deprecated/Legacy ---

@@ -14,7 +14,7 @@ from fastapi import Request
 logger = logging.getLogger(__name__)
 
 # Get logging service URL from environment
-LOGGING_SERVICE_URL = os.getenv("LOGGING_SERVICE_URL", "http://localhost:8083")
+LOGGING_SERVICE_URL = os.getenv("LOGGING_SERVICE_URL", "http://localhost:8002")
 LOGGING_API_BASE = f"{LOGGING_SERVICE_URL}/api/v1/logs"
 
 # Timeout configuration for logging requests
