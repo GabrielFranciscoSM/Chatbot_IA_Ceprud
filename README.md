@@ -6,10 +6,6 @@ Este es el branch de **GitHub Pages** para el proyecto Chatbot IA CEPRUD. Contie
 
 
 
-> **🔗 Para el código fuente del proyecto**, visita el [branch development](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/tree/development)## 🌐 Sitio Web
-
-
-
 ## 🌐 Sitio Web**URL**: [https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/](https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/)
 
 
