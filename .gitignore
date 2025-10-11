@@ -85,6 +85,11 @@ app/rag/data/
 backup/
 */data
 app/storage
+
+# =======================
+# Documentation (development branch only)
+# =======================
+docs/
 # =======================
 # Logs and Databases
 # =======================
