@@ -1,666 +1,786 @@
-# Chatbot IA CEPRUD - GitHub Pages 📖# Chatbot IA CEPRUD - GitHub Pages
-
-
-
-Este es el branch de **GitHub Pages** para el proyecto Chatbot IA CEPRUD. Contiene la documentación y sitio web del proyecto construido con Jekyll.Este es el branch de **GitHub Pages** para el proyecto Chatbot IA CEPRUD. Contiene la documentación y sitio web del proyecto construido con Jekyll.
-
-
-
-> **🔗 Para el código fuente del proyecto**, visita el [branch development](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/tree/development)## 🌐 Sitio Web
-
-
-
-## 🌐 Sitio Web**URL**: [https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/](https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/)
-
-
-
-**URL**: [https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/](https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/)## 📚 Contenido
-
-
-
-## 📚 Contenido del SitioEste sitio incluye:
-
-- **Landing page**: Información general del proyecto
-
-Este sitio web incluye:- **Guía de usuario**: Cómo usar el chatbot
-
-- **Documentación técnica completa**: 
-
-- ✨ **Landing Page**: Información general, características y inicio rápido  - Arquitectura del sistema
-
-- 👤 **Guía de Usuario**: Tutorial completo para usar el chatbot  - Guía de instalación
-
-- 📖 **Documentación Técnica Completa**:   - API Reference
-
-  - 🎯 Visión general del proyecto  - Integración LTI con Moodle
-
-  - 🏗️ Arquitectura del sistema  - Guía de desarrollo
-
-  - 📦 Guía de instalación  - Testing y monitoreo
-
-  - 🔌 API Reference
-
-  - 🎓 Integración LTI con Moodle## � Tema Jekyll
-
-  - 💻 Guía de desarrollo
-
-  - 🧪 Testing y calidadUtiliza el tema **[Just the Docs](https://just-the-docs.github.io/just-the-docs/)** - un tema Jekyll moderno y profesional optimizado para documentación técnica.
-
-  - 📊 Monitoreo y métricas
-
-### Características del Tema
-
-## 🎨 Tema Jekyll- � **Búsqueda potente** integrada
-
-- 📱 **Diseño responsivo** y accesible
-
-El sitio utiliza el tema **[Just the Docs](https://just-the-docs.github.io/just-the-docs/)**, un tema moderno y profesional optimizado para documentación técnica.- 🎨 **Esquema de colores oscuro** por defecto
-
-- 📖 **Tabla de contenidos** automática
-
-### Características del Tema- 💻 **Syntax highlighting** para código
-
-- 🔗 **Navegación jerárquica** clara
-
-- 🔍 **Búsqueda potente** con índice completo del sitio
-
-- 📱 **Diseño responsivo** que funciona en móviles y desktop## 🚀 Desarrollo Local
-
-- 🎨 **Esquema de colores oscuro** (configurable)
-
-- 📖 **Tabla de contenidos** automática en cada páginaPara ejecutar el sitio localmente:
-
-- 💻 **Syntax highlighting** para bloques de código
-
-- 🗂️ **Navegación jerárquica** clara y organizada```bash
-
-- ⚡ **Rendimiento optimizado** con carga rápida# 1. Instalar dependencias
-
-bundle install
-
-## 🚀 Desarrollo Local
-
-# 2. Servir el sitio
-
-Si quieres ejecutar el sitio localmente para ver los cambios antes de publicar:bundle exec jekyll serve
-
-
-
-### Requisitos Previos# 3. Visitar
-
-# http://localhost:4000/Chatbot_IA_Ceprud/
-
-- Ruby >= 2.7```
-
-- Bundler├── 🌐 frontend/              # Frontend React TypeScript
-
-- Jekyll│   ├── src/
-
-│   │   ├── components/       # Componentes React
-
-### Pasos│   │   ├── types.ts         # Definiciones TypeScript  
-
-│   │   ├── api.ts           # Cliente API
-
-```bash│   │   └── utils.ts         # Utilidades
-
-# 1. Instalar dependencias Ruby│   ├── Dockerfile           # Contenedor frontend
-
-bundle install│   └── nginx.conf           # Configuración Nginx
-
-│
-
-# 2. Servir el sitio localmenteapp/
-
-bundle exec jekyll serve├── 🚀 Puntos de Entrada
-
-│   ├── api_router.py          # Rutas API principales (refactorizado)
-
-# 3. Visitar en tu navegador│   ├── app.py                 # Aplicación web completa
-
-# http://localhost:4000/Chatbot_IA_Ceprud/│   └── api.py                 # API pura para microservicios
-
-```│
-
-├── 🔧 Core - Infraestructura Esencial
-
-El sitio se recargará automáticamente cuando hagas cambios en los archivos.│   ├── models.py              # Modelos Pydantic para validación
-
-│   ├── config.py              # Gestión de configuración centralizada
-
-## 📁 Estructura del Sitio│   └── rate_limiter.py        # Control de velocidad y límites
-
-│
-
-```├── 🎯 Services - Lógica de Negocio
-
-.│   ├── session_service.py     # Gestión de sesiones de usuario
-
-├── _config.yml           # Configuración de Jekyll│   ├── analytics_service.py   # Analíticas de aprendizaje avanzadas
-
-├── Gemfile              # Dependencias Ruby/Jekyll│   └── utils_service.py       # Utilidades comunes
-
-├── index.md             # Página principal (landing page)│
-
-├── user-guide.md        # Guía completa de usuario├── 🧠 Domain - Lógica del Dominio
-
-├── README.md            # Este archivo│   ├── query_logic.py         # Procesamiento de consultas
-
-└── docs/                # Documentación técnica│   ├── graph.py               # Operaciones con grafos
-
-    ├── index.md                        # Índice de documentación│   └── test_conversation.py   # Manejo de conversaciones
-
-    ├── PROJECT_OVERVIEW.md             # Visión general│
-
-    ├── ARCHITECTURE.md                 # Arquitectura├── 🔍 RAG - Sistema de Recuperación
-
-    ├── INSTALLATION.md                 # Instalación│   ├── get_embedding_function.py  # Funciones de embedding
-
-    ├── API.md                          # API Reference│   ├── populate_database.py       # Población de base vectorial
-
-    ├── LTI_INTEGRATION.md              # Integración LTI/Moodle│   ├── add_subject.py             # Gestión de asignaturas
-
-    ├── DEVELOPMENT.md                  # Guía de desarrollo│   ├── guia_docente_scrapper.py   # Extracción de guías docentes
-
-    ├── TESTING.md                      # Testing│   ├── data/                      # Documentos y datos
-
-    ├── MONITORING.md                   # Monitoreo│   └── chroma/                    # Base de datos vectorial
-
-    ├── AUTHENTICATION_IMPLEMENTATION.md # Autenticación│
-
-    ├── MONGODB_INTEGRATION.md          # MongoDB├── 🤖 ML - Machine Learning
-
-    ├── AUTH_QUICK_REFERENCE.md         # Referencia rápida│   ├── models/                # Modelos AI descargados
-
-    └── diagrams/                       # Diagramas de arquitectura│   └── finetuning/           # Scripts de fine-tuning
-
-```│       ├── finetuning_qlora.py
-
-│       └── generate_data.py
-
-## 🔄 Actualizar Documentación│
-
-├── 🌐 Web - Interfaz de Usuario
-
-Para sincronizar la documentación desde el branch `development`:│   ├── static/               # CSS, JS, imágenes
-
-│   └── templates/            # Plantillas HTML
-
-```bash│
-
-# 1. Asegurarse de estar en main├── 📊 Analytics - Monitoreo
-
-git checkout main│   ├── script_graphs.py      # Visualización de datos
-
-│   └── graphs/               # Gráficos generados
-
-# 2. Copiar documentación desde development│
-
-git checkout development -- docs/└── 💾 Storage - Almacenamiento
-
-    ├── logs/                 # Logs de aplicación
-
-# 3. Commit y push (GitHub Actions construirá el sitio automáticamente)    └── checkpoints.sqlite*   # Puntos de control
-
-git add docs/
-
-git commit -m "docs: Update from development branch"```
-
-git push origin main
-
-```---
-
-
-
-{: .note }## 🎯 Características Avanzadas
-
-> La documentación en `docs/` ya tiene el front matter YAML necesario para Jekyll.
-
-### 🚀 **Arquitectura Refactorizada** (NUEVO)
-
-## 📝 Añadir Nueva Página- **Separación de responsabilidades**: Código modular y mantenible
-
-- **Servicios de negocio**: Lógica encapsulada en servicios reutilizables  
-
-Para añadir un nuevo documento al sitio:- **Configuración centralizada**: Gestión uniforme de configuración
-
-- **Rate limiting inteligente**: Control de velocidad por usuario
-
-1. **Crear archivo** `.md` en la ubicación apropiada- **Logging avanzado**: Analíticas de aprendizaje detalladas
-
-
-
-2. **Añadir front matter** YAML al inicio del archivo:### 🔍 **Sistema RAG Mejorado**
-
-- **Embeddings optimizados**: Recuperación de documentos más precisa
-
-   ```yaml- **Base vectorial Chroma**: Almacenamiento eficiente de conocimiento
-
-   ---- **Multiples fuentes**: Soporte para diversas asignaturas
-
-   layout: default- **Scraping inteligente**: Extracción automática de guías docentes
-
-   title: Título de la Página
-
-   nav_order: X### 🤖 **IA y Machine Learning**
-
-   parent: Documentación  # Si es una subpágina- **Fine-tuning con QLoRA**: Personalización del modelo base
-
-   permalink: /ruta/de/la/pagina- **Modelos múltiples**: Soporte para diferentes LLMs
-
-   ---- **Inferencia optimizada**: Usando vLLM para mejor rendimiento
-
-   ```- **Métricas de calidad**: Evaluación continua de respuestas
-
-
-
-3. **Escribir contenido** en Markdown### 📊 **Analíticas y Monitoreo**
-
-- **Learning Analytics**: Seguimiento del progreso de aprendizaje
-
-4. **Commit y push** - GitHub Actions publicará automáticamente- **Métricas en tiempo real**: Dashboard con Prometheus + Grafana
-
-- **Logs estructurados**: Análisis detallado de interacciones
-
-### Ejemplo de Front Matter- **Visualizaciones**: Gráficos automáticos de uso y rendimiento
-
-
-
-```yaml### 🌐 **API REST Avanzada**
-
----- **Validación robusta**: Modelos Pydantic para entrada/salida
-
-layout: default- **Documentación automática**: OpenAPI/Swagger integrado
-
-title: Mi Nueva Guía- **Control de errores**: Manejo elegante de excepciones
-
-nav_order: 12- **CORS configurado**: Listo para integración frontend
-
-parent: Documentación
-
-permalink: /docs/mi-nueva-guia---
+# Chatbot IA CEPRUD 🤖
+
+<div align="center">
+
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.116+-green.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6.svg)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![LTI](https://img.shields.io/badge/LTI-1.3-orange.svg)](https://www.imsglobal.org/spec/lti/v1p3/)
+
+**Sistema de chatbot educativo avanzado basado en Inteligencia Artificial para CEPRUD**  
+*(Centro de Producción de Recursos para la Universidad Digital)*
+
+[🚀 Inicio Rápido](#-inicio-rápido) •
+[📚 Documentación](#-documentación) •
+[🏗️ Arquitectura](#️-arquitectura) •
+[🎓 Características](#-características-principales) •
+[🤝 Contribuir](#-contribuir)
+
+</div>
 
 ---
 
-## 🧰 Requisitos
+## 📋 Tabla de Contenidos
 
-# Mi Nueva Guía
-
-{: .no_toc }- **Python** ≥ 3.10  
-
-- **Docker** y Docker Compose
-
-## Tabla de Contenidos- **CUDA** (opcional, para aceleración GPU)
-
-{: .no_toc .text-delta }- **8GB RAM** mínimo (16GB recomendado)
-
-
-
-1. TOCLas dependencias están organizadas en `config/requirements.txt`
-
-{:toc}
+- [Acerca del Proyecto](#-acerca-del-proyecto)
+- [Características Principales](#-características-principales)
+- [Arquitectura](#️-arquitectura)
+- [Tecnologías](#-tecnologías)
+- [Requisitos](#-requisitos)
+- [Inicio Rápido](#-inicio-rápido)
+- [Documentación](#-documentación)
+- [Casos de Uso](#-casos-de-uso)
+- [Capturas de Pantalla](#-capturas-de-pantalla)
+- [Desarrollo](#-desarrollo)
+- [Testing](#-testing)
+- [Despliegue](#-despliegue)
+- [Roadmap](#-roadmap)
+- [Contribuir](#-contribuir)
+- [Licencia](#-licencia)
+- [Contacto](#-contacto)
+- [Agradecimientos](#-agradecimientos)
 
 ---
 
+## 🎓 Acerca del Proyecto
+
+**Chatbot IA CEPRUD** es una solución educativa de vanguardia que utiliza técnicas avanzadas de Inteligencia Artificial para proporcionar asistencia personalizada a estudiantes de Ingeniería Informática de la Universidad de Granada.
+
+### ¿Qué hace este proyecto?
+
+El sistema implementa un chatbot inteligente que:
+- 💬 **Responde preguntas** sobre asignaturas usando información oficial de guías docentes
+- 🔍 **Utiliza RAG** (Retrieval-Augmented Generation) para respuestas precisas y contextualizadas
+- 🎓 **Se integra con Moodle** mediante el estándar LTI 1.3 para acceso transparente
+- 👤 **Personaliza la experiencia** permitiendo a cada usuario gestionar sus asignaturas
+- 📊 **Genera analíticas** sobre patrones de aprendizaje y uso del sistema
+
+### ¿Por qué es importante?
+
+- **Acceso 24/7**: Los estudiantes obtienen ayuda en cualquier momento sin depender de horarios de atención
+- **Escalabilidad**: Puede atender a múltiples usuarios simultáneamente sin degradación del servicio
+- **Precisión**: Las respuestas están basadas en documentación oficial verificada
+- **Trazabilidad**: Todas las respuestas incluyen referencias a sus fuentes
+- **Innovación Educativa**: Demuestra cómo la IA puede mejorar el proceso de aprendizaje
+
 ---
 
-## 📦 Instalación Rápida
+## 🎯 Características Principales
 
-## Sección 1
+### 🎓 Integración LTI 1.3 con Moodle
 
-### 🚀 Opción 1: Setup Automático (Recomendado)
+Integración completa y segura con plataformas de aprendizaje Moodle:
 
-Contenido aquí...```bash
+- ✅ **Autenticación OIDC** con validación JWT criptográfica
+- ✅ **Lanzamiento contextual** desde actividades del curso
+- ✅ **Sesiones persistentes** respaldadas por MongoDB
+- ✅ **Mapeo automático** de cursos a asignaturas del chatbot
+- ✅ **Soporte iframe** con headers de seguridad apropiados
+- ✅ **Sincronización de usuarios** automática desde Moodle
 
-```# Clonar el repositorio
+### 💬 Interface Frontend Moderna
 
-git clone https://github.com/javitrucas/Chatbot_IA_Ceprud.git
+Aplicación web React TypeScript con experiencia de usuario excepcional:
 
-## ⚙️ Configuracióncd Chatbot_IA_Ceprud
+- 🎨 **Diseño intuitivo y responsivo** para desktop y móviles
+- 🔍 **Búsqueda inteligente** de asignaturas disponibles
+- 👤 **Gestión personalizada** de asignaturas por usuario
+- 💬 **Chat en tiempo real** con historial persistente
+- ⚡ **Indicadores visuales** de límites de uso (rate limiting)
+- 📱 **PWA-ready** para instalación como aplicación
 
+### 🏗️ Arquitectura de Microservicios
 
+Sistema modular, escalable y mantenible:
 
-### Modificar Configuración del Sitio# Ejecutar setup automático
+| Servicio | Puerto | Descripción |
+|----------|--------|-------------|
+| **Backend API** | 8080 | Orquestación y lógica de negocio principal |
+| **RAG Service** | 8082 | Recuperación de información y embeddings |
+| **User Service** | 8083 | Gestión de usuarios con MongoDB |
+| **Logging Service** | 8002 | Analíticas y eventos de aprendizaje |
+| **Frontend** | 8090 | Aplicación web React |
+| **MongoDB** | 27017 | Base de datos de usuarios |
 
-./setup.sh
+### 🔍 Sistema RAG Avanzado
 
-Edita `_config.yml` para personalizar:```
+Tecnología de Retrieval-Augmented Generation de última generación:
 
+- 🧠 **ChromaDB** como base de datos vectorial optimizada
+- 📊 **Embeddings semánticos** con modelos state-of-the-art (Qwen3-Embedding)
+- 📚 **Procesamiento automático** de guías docentes
+- 🎯 **Búsqueda contextual** precisa y relevante
+- 🔗 **Referencias verificables** a documentos fuente
 
+### 🤖 Machine Learning Optimizado
 
-- **Información básica**: título, descripción, URL### ⚙️ Opción 2: Setup Manual
+Modelos de lenguaje grandes adaptados al dominio educativo:
 
-- **Tema**: colores, fuentes, layout
+- 🚀 **vLLM** para inferencia optimizada con GPU
+- 💡 **Phi-3-mini-4k-instruct-AWQ** cuantizado para eficiencia
+- 🎓 **Fine-tuning con QLoRA** para personalización al dominio
+- 📈 **Evaluación continua** de calidad de respuestas
 
-- **Búsqueda**: configuración de búsqueda#### 1. **Configurar Entorno**
+### 📊 Monitoreo y Observabilidad
 
-- **Navegación**: enlaces auxiliares, footer```bash
+Sistema completo de métricas y analíticas:
 
-- **Plugins**: habilitar/deshabilitar funcionalidades# Copiar configuración de ejemplo
+- 📈 **Prometheus** para recolección de métricas
+- 📊 **Grafana** con dashboards interactivos
+- 📝 **Logging estructurado** en JSON
+- 🔍 **Trazabilidad completa** de requests
+- 🚨 **Alertas configurables** para problemas
 
+---
+
+## 🏗️ Arquitectura
+
+### Vista General del Sistema
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                       FRONTEND LAYER                            │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │  React 18 + TypeScript + Vite                            │   │
+│  │  • Chat Interface  • Subject Management  • Session Auth  │   │
+│  └──────────────────────────────────────────────────────────┘   │
+└───────────────────────────┬─────────────────────────────────────┘
+                            │ HTTPS/REST API
+┌───────────────────────────▼─────────────────────────────────────┐
+│                    BACKEND API GATEWAY                          │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │  FastAPI + Python 3.10                                   │   │
+│  │  • LTI 1.3 Integration  • Rate Limiting  • Sessions      │   │
+│  │  • Request Orchestration  • Business Logic               │   │
+│  └──────────────────────────────────────────────────────────┘   │
+└─┬────────────┬────────────┬────────────┬────────────┬───────────┘
+  │            │            │            │            │
+  ▼            ▼            ▼            ▼            ▼
+┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
+│   RAG    │ │   User   │ │ Logging  │ │   LLM    │ │Embedding │
+│ Service  │ │ Service  │ │ Service  │ │ (vLLM)   │ │ Service  │
+│          │ │          │ │          │ │          │ │          │
+│ Port     │ │ Port     │ │ Port     │ │ Port     │ │ Port     │
+│ 8082     │ │ 8083     │ │ 8002     │ │ 8000     │ │ 8001     │
+└────┬─────┘ └────┬─────┘ └────┬─────┘ └──────────┘ └──────────┘
+     │            │            │
+     ▼            ▼            ▼
+┌─────────┐  ┌─────────┐  ┌─────────┐
+│ChromaDB │  │ MongoDB │  │  Logs   │
+│Vectores │  │ Usuarios│  │ CSV/JSON│
+└─────────┘  └─────────┘  └─────────┘
+```
+
+### Flujo de Datos Principal
+
+```mermaid
+sequenceDiagram
+    participant U as Usuario
+    participant F as Frontend
+    participant B as Backend
+    participant R as RAG Service
+    participant L as LLM Service
+    participant D as ChromaDB
+
+    U->>F: Envía pregunta sobre asignatura
+    F->>B: POST /chat (pregunta, asignatura, email)
+    B->>B: Validar rate limit
+    B->>R: POST /search (pregunta, asignatura)
+    R->>D: Búsqueda vectorial
+    D-->>R: Documentos relevantes
+    R-->>B: Contexto + referencias
+    B->>L: POST /chat/completions (contexto + pregunta)
+    L-->>B: Respuesta generada
+    B->>B: Log de interacción
+    B-->>F: Respuesta + fuentes
+    F-->>U: Muestra respuesta formateada
+```
+
+### Componentes Principales
+
+#### 🔧 Backend Service (FastAPI)
+**Responsabilidades:**
+- Orquestación de requests entre servicios
+- Validación de entrada y rate limiting
+- Gestión de sesiones (SQLite y MongoDB)
+- Integración LTI 1.3 con Moodle
+- Lógica de negocio del chatbot
+
+#### 🔍 RAG Service
+**Responsabilidades:**
+- Gestión de ChromaDB (base de datos vectorial)
+- Búsqueda semántica de documentos
+- Procesamiento de guías docentes
+- Generación de embeddings
+- Extracción de contexto relevante
+
+#### 👤 User Service (MongoDB)
+**Responsabilidades:**
+- CRUD de usuarios
+- Gestión de asignaturas por usuario
+- Autenticación basada en email
+- Sincronización con datos LTI
+
+#### 📊 Logging Service
+**Responsabilidades:**
+- Recolección de eventos de aprendizaje
+- Generación de métricas de uso
+- Almacenamiento de analíticas
+- Exportación de datos
+
+---
+
+## 🛠️ Tecnologías
+
+### Backend
+- ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white) **Python 3.10+** - Lenguaje principal
+- ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white) **FastAPI** - Framework web moderno
+- ![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=flat&logo=pydantic&logoColor=white) **Pydantic** - Validación de datos
+
+### Frontend
+- ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black) **React 18** - Framework UI
+- ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white) **TypeScript** - Superset de JavaScript
+- ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white) **Vite** - Build tool moderno
+
+### AI/ML
+- ![HuggingFace](https://img.shields.io/badge/🤗_Hugging_Face-FFD21E?style=flat) **Transformers** - Modelos pre-entrenados
+- **vLLM** - Optimización de inferencia LLM
+- **ChromaDB** - Base de datos vectorial
+- **Sentence Transformers** - Embeddings semánticos
+
+### Bases de Datos
+- ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white) **MongoDB** - Base de datos de usuarios
+- **ChromaDB** - Base de datos vectorial para RAG
+- **SQLite** - Sesiones locales
+
+### Infraestructura
+- ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) **Podman** - Containerización
+- ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat&logo=prometheus&logoColor=white) **Prometheus** - Métricas
+- ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=flat&logo=grafana&logoColor=white) **Grafana** - Visualización
+
+### Integración
+- **LTI 1.3** - Integración con Moodle
+- **OIDC/OAuth 2.0** - Autenticación
+- **JWT** - Validación de tokens
+
+---
+
+## 📦 Requisitos
+
+### Requisitos Mínimos
+
+| Componente | Especificación |
+|------------|----------------|
+| **OS** | Linux (Ubuntu 20.04+, CentOS 8+) |
+| **RAM** | 8 GB |
+| **CPU** | 4 cores |
+| **Almacenamiento** | 20 GB libres |
+| **Docker** | 20.10+ |
+| **Docker Compose** | 2.0+ |
+
+### Requisitos Recomendados
+
+| Componente | Especificación |
+|------------|----------------|
+| **RAM** | 16+ GB |
+| **CPU** | 8+ cores |
+| **GPU** | NVIDIA 8+ GB VRAM (RTX 3060, RTX 4060) |
+| **CUDA** | 11.8+ o 12.0+ |
+| **Almacenamiento** | 50+ GB SSD |
+
+### Software Necesario
+
+```bash
+# Verificar versiones instaladas
+podman --version          # >= 20.10
+podman-compose --version  # >= 2.0
+python --version          # >= 3.10
+nvidia-smi               # Para GPU (opcional)
+```
+
+---
+
+## 🚀 Inicio Rápido
+
+### 1️⃣ Clonar el Repositorio
+
+```bash
+git clone https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud.git
+cd Chatbot_IA_Ceprud
+```
+
+### 2️⃣ Configurar Variables de Entorno
+
+```bash
+# Crear archivo de configuración
 cp .env.example .env
 
-### Cambiar Esquema de Colores# Editar con tu token de Hugging Face
-
+# Editar con tus credenciales
 nano .env
-
-En `_config.yml`:```
-
-
-
-```yaml#### 2. **Descargar Modelos**
-
-color_scheme: dark  # Opciones: light, dark, o personalizado```bash
-
-```python3 download_llm.py
-
 ```
 
-### Personalizar Callouts
+**Configuración mínima requerida:**
 
-#### 3. **Frontend (Desarrollo)**
+```bash
+# Token de Hugging Face (obtener en https://huggingface.co/settings/tokens)
+HF_TOKEN=your_huggingface_token_here
 
-El tema soporta callouts (cajas destacadas):```bash
+# URLs de servicios (usar valores por defecto para desarrollo local)
+RAG_SERVICE_URL=http://localhost:8082
+LOGGING_SERVICE_URL=http://localhost:8002
+USER_SERVICE_URL=http://localhost:8083
+VLLM_LLM_URL=http://localhost:8000
+VLLM_EMBEDDING_URL=http://localhost:8001
 
+# Configuración LTI (si usas integración con Moodle)
+MOODLE_ISSUER=https://your-moodle-instance.com
+MOODLE_CLIENT_ID=your_client_id
+CHATBOT_BASE_URL=https://your-chatbot-domain.com
+```
+
+### 3️⃣ Descargar Modelos de IA
+
+```bash
+# Instalar dependencias para descarga
+pip install huggingface_hub
+
+# Descargar modelos (Phi-3-mini y Qwen-Embeddings)
+python download_llm.py
+```
+
+**Modelos descargados:**
+- 🤖 **LLM**: `Sreenington/Phi-3-mini-4k-instruct-AWQ` (~2GB)
+- 📊 **Embeddings**: `Qwen/Qwen3-Embedding-0.6B` (~1.2GB)
+
+### 4️⃣ Levantar los Servicios
+
+```bash
+# Construir y levantar todos los servicios
+podman-compose -f docker-compose-full.yml up --build -d
+
+# Verificar que todos los servicios estén corriendo
+podman-compose -f docker-compose-full.yml ps
+```
+
+### 5️⃣ Verificar la Instalación
+
+```bash
+# Health checks de servicios
+curl http://localhost:8080/health  # Backend
+curl http://localhost:8082/health  # RAG Service
+curl http://localhost:8083/health  # User Service
+```
+
+### 6️⃣ Acceder a la Aplicación
+
+| Servicio | URL | Credenciales |
+|----------|-----|--------------|
+| **Frontend** | http://localhost:8090 | - |
+| **API Docs** | http://localhost:8080/docs | - |
+| **Mongo Express** | http://localhost:8081 | user: `mongoexpressuser`<br>pass: `mongoexpresspass` |
+| **Grafana** | http://localhost:3000 | admin / admin |
+
+---
+
+## 📚 Documentación
+
+### 📖 Documentación Completa
+
+Toda la documentación está disponible en el directorio [`docs/`](docs/):
+
+| Documento | Descripción |
+|-----------|-------------|
+| [📋 Índice de Documentación](docs/README.md) | Navegación completa de toda la documentación |
+| [🎯 Visión General del Proyecto](docs/PROJECT_OVERVIEW.md) | Objetivos, decisiones técnicas y contexto |
+| [🏗️ Arquitectura del Sistema](docs/ARCHITECTURE.md) | Diseño técnico detallado y diagramas |
+| [📦 Guía de Instalación](docs/INSTALLATION.md) | Instalación paso a paso y configuración |
+| [👨‍💻 Guía de Desarrollo](docs/DEVELOPMENT.md) | Setup del entorno de desarrollo |
+| [🔌 Documentación de API](docs/API.md) | Referencia completa de endpoints REST |
+| [🎓 Integración LTI 1.3](docs/LTI_INTEGRATION.md) | Configuración con Moodle |
+| [💾 Integración MongoDB](docs/MONGODB_INTEGRATION.md) | Gestión de usuarios y datos |
+| [🧪 Guía de Testing](docs/TESTING.md) | Estrategias y ejecución de tests |
+| [📈 Configuración de Monitoreo](docs/MONITORING.md) | Prometheus, Grafana y métricas |
+| [🔐 Autenticación](docs/AUTHENTICATION_IMPLEMENTATION.md) | Implementación de autenticación |
+
+### 🎥 Guías Rápidas
+
+#### Para Usuarios Finales
+- [📘 Guía de Usuario](user-guide.md) - Cómo usar el chatbot efectivamente
+
+#### Para Desarrolladores
+1. Lee [ARCHITECTURE.md](docs/ARCHITECTURE.md) para entender el diseño
+2. Sigue [DEVELOPMENT.md](docs/DEVELOPMENT.md) para configurar tu entorno
+3. Consulta [API.md](docs/API.md) para entender los endpoints
+4. Revisa [TESTING.md](docs/TESTING.md) para escribir tests
+
+#### Para Administradores
+1. Estudia [INSTALLATION.md](docs/INSTALLATION.md) para requisitos
+2. Revisa [ARCHITECTURE.md](docs/ARCHITECTURE.md) para dependencias
+3. Configura [MONITORING.md](docs/MONITORING.md) para observabilidad
+4. Si integras con Moodle, lee [LTI_INTEGRATION.md](docs/LTI_INTEGRATION.md)
+
+### 📊 Diagramas
+
+Todos los diagramas técnicos están en [`docs/diagrams/`](docs/diagrams/):
+- Arquitectura del sistema
+- Flujos de datos
+- Deployment
+- Monitoreo
+
+---
+
+## 💼 Casos de Uso
+
+### 👨‍🎓 Para Estudiantes
+
+- ✅ **Consultas 24/7** sobre contenido de asignaturas
+- ✅ **Aclaración de conceptos** difíciles del temario
+- ✅ **Información rápida** sobre evaluación y requisitos
+- ✅ **Estudio autodirigido** con asistencia IA personalizada
+- ✅ **Acceso desde Moodle** sin autenticación adicional
+
+### 👨‍🏫 Para Profesores
+
+- ✅ **Reducción de consultas repetitivas** básicas
+- ✅ **Insights sobre temas problemáticos** más consultados
+- ✅ **Estandarización de información** proporcionada
+- ✅ **Liberación de tiempo** para consultas más complejas
+- ✅ **Analytics de aprendizaje** de los estudiantes
+
+### 🏛️ Para Instituciones
+
+- ✅ **Mejora en satisfacción estudiantil**
+- ✅ **Innovación tecnológica** visible
+- ✅ **Datos valiosos** sobre patrones de aprendizaje
+- ✅ **Escalabilidad** del soporte educativo
+- ✅ **Reducción de carga** en servicios de atención
+
+---
+
+## 📸 Capturas de Pantalla
+
+### Interface Principal
+*(Aquí irían capturas de pantalla de la aplicación)*
+
+### Dashboard de Analíticas
+*(Dashboard de Grafana con métricas del sistema)*
+
+### Integración con Moodle
+*(Vista del chatbot dentro de Moodle)*
+
+---
+
+## 💻 Desarrollo
+
+### Configurar Entorno de Desarrollo
+
+```bash
+# Clonar repositorio
+git clone https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud.git
+cd Chatbot_IA_Ceprud
+
+# Crear entorno virtual Python
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate  # Windows
+
+# Instalar dependencias backend
+pip install -r requirements.txt
+
+# Instalar dependencias frontend
 cd frontend
+npm install
+cd ..
 
-```markdownnpm install
-
-{: .note }npm run dev  # Para desarrollo local
-
-> Esto es una nota importantecd ..
-
+# Configurar pre-commit hooks
+pip install pre-commit
+pre-commit install
 ```
 
-{: .warning }
+### Ejecutar en Modo Desarrollo
 
-> Esto es una advertencia#### 4. **Levantar Servicios Completos**
-
+**Backend:**
 ```bash
-
-{: .important }# Todos los servicios (Frontend + Backend + LLM)
-
-> Esto es muy importantedocker-compose -f docker-compose-full.yml up --build
-
+# Desde el directorio raíz
+uvicorn app.app:app --reload --port 8080
 ```
 
-# Solo backend y LLM (sin frontend)
-
-## 🚀 Desplieguedocker-compose -f docker-compose-vllm.yml up --build
-
+**Frontend:**
+```bash
+cd frontend
+npm run dev
 ```
 
-El sitio se despliega automáticamente mediante **GitHub Actions** cuando haces push a `main`.
-
----
-
-### Workflow de Deployment
-
-## 🌐 Acceso a los Servicios
-
-1. Push a `main`
-
-2. GitHub Actions ejecuta Jekyll build### **Frontend Moderno**
-
-3. El sitio generado se publica en GitHub Pages- **URL**: `http://localhost:3000`
-
-4. Disponible en: `https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/`- **Descripción**: Interfaz React con chat en tiempo real y gestión de sesiones
-
-
-
-### Verificar Deployment### **Backend API**
-
-- **URL**: `http://localhost:8080`
-
-- Ve a `Actions` en GitHub para ver el estado del build- **Documentación**: `http://localhost:8080/docs`
-
-- Los builds típicamente tardan 1-2 minutos- **Health check**: `GET /health`
-
-
-
-## 🎯 Guía de Estilo### **Servicios Internos**
-
-- **LLM API**: `http://localhost:8000` (vLLM OpenAI compatible)
-
-### Markdown- **Embeddings**: `http://localhost:8001` (Servicio de embeddings)
-
-
-
-- Usa encabezados jerárquicos (`#`, `##`, `###`)---
-
-- Añade tabla de contenidos a páginas largas
-
-- Usa bloques de código con syntax highlighting## 🚀 Uso del Sistema
-
-- Añade callouts para información importante
-
-- Usa listas para mejorar legibilidad### **Interfaz Web (Recomendado)**
-
-1. Navega a `http://localhost:3000`
-
-### Front Matter2. Configura tu email UGR en el panel lateral
-
-3. Selecciona una asignatura
-
-Siempre incluye:4. ¡Comienza a chatear!
-
-- `title`: Título visible en navegación
-
-- `nav_order`: Orden en el menú (número)### **API REST**
-
-- `parent`: Para páginas anidadas- **Endpoint principal**: `POST /chat`
-
-- `permalink`: URL limpia- **Rate limit status**: `GET /rate-limit-info`
-
-
-
-## 📖 Referencias#### Ejemplo de uso de la API:
-
+**Servicios auxiliares:**
 ```bash
-
-- [Documentación de Jekyll](https://jekyllrb.com/docs/)curl -X POST "http://localhost:8080/chat" \
-
-- [Guía de Just the Docs](https://just-the-docs.github.io/just-the-docs/)     -H "Content-Type: application/json" \
-
-- [GitHub Pages Docs](https://docs.github.com/en/pages)     -d '{
-
-- [Markdown Guide](https://www.markdownguide.org/)       "message": "¿Qué son las metaheurísticas?",
-
-       "subject": "metaheuristicas",
-
-## 🔗 Enlaces Útiles       "email": "student@example.com",
-
-       "mode": "rag"
-
-- **Código fuente**: [Branch development](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/tree/development)     }'
-
-- **Issues**: [GitHub Issues](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/issues)```
-
-- **Discussions**: [GitHub Discussions](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/discussions)
-
-- **Sitio web**: [GitHub Pages](https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/)---
-
-
-
-## 📄 Licencia## 🔬 Configuración Avanzada
-
-
-
-MIT License - Ver LICENSE en el repositorio principal### **Añadir Nueva Asignatura**
-
-```bash
-
----cd app/rag
-
-python add_subject.py
-
-**Última actualización**: Octubre 2025 - Versión 3.0 (con integración LTI 1.3)```
-
-
-### **Fine-tuning con QLoRA**
-```bash
-# 1. Generar datos de entrenamiento
-cd app/ml/finetuning
-python generate_data.py --subject "nombre_asignatura"
-
-# 2. Entrenar modelo
-python finetuning_qlora.py \
-  --base_model "ibm-granite/granite-3.3-2b-instruct" \
-  --data "data/dataset.json" \
-  --output_dir "../models/fine_tuned"
+# Solo servicios de infraestructura (MongoDB, RAG)
+podman-compose -f docker-compose-full.yml up -d mongodb user-service rag-service
 ```
 
-### **Población de Base Vectorial**
-```bash
-# Poblar base de datos inicial
-podman-compose -f docker-compose-full.yml up rag-service -d
-sleep 30
+### Estructura del Código
 
-# Ejecutar población inicial (ejemplo)
-curl -X POST "http://localhost:8082/populate" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "subject": "nombre_asignatura",
-       "documents_path": "/app/data/documents",
-       "clear_existing": false
-     }'
-``````
-
----
-
-## 📊 Monitoreo y Métricas
-
-### **Dashboard de Analíticas**
-```bash
-# 1. Levantar stack de monitoreo
-docker-compose -f prometheus/docker-compose-prometheus-graphana.yml up -d
-
-# 2. Acceder a Grafana
-# URL: http://localhost:3000/
-# Usuario: admin / Password: admin
 ```
-
-### **Configurar Grafana**
-1. **DataSource**: Añadir Prometheus en `http://prometheus:9090`
-2. **Dashboard**: Importar desde `prometheus/grafana.json`
-3. **Visualizar**: Métricas en tiempo real del chatbot
-
-### **Logs Estructurados**
-- **Logs de aplicación**: `logs/api.log`
-- **Sesiones**: `logs/learning_sessions.csv`
-- **Interacciones**: `logs/chat_interactions_enhanced.csv`
-- **Eventos**: `logs/learning_events.csv`
-- **Conversaciones**: `logs/conversations.csv`
+Chatbot_IA_Ceprud/
+├── app/                      # Backend FastAPI
+│   ├── core/                 # Configuración y modelos base
+│   ├── domain/               # Lógica de dominio
+│   ├── routes/               # Endpoints REST
+│   ├── services/             # Servicios de negocio
+│   └── lti/                  # Integración LTI 1.3
+├── frontend/                 # Frontend React
+│   └── src/
+│       ├── components/       # Componentes React
+│       ├── contexts/         # Context providers
+│       └── types.ts          # Definiciones TypeScript
+├── rag-service/              # Servicio RAG
+│   └── app/
+│       ├── main.py          # API RAG
+│       └── rag_manager.py   # Gestión ChromaDB
+├── mongo-service/            # Servicio de usuarios
+│   └── app/
+│       ├── main.py          # API MongoDB
+│       └── models.py        # Modelos de usuario
+├── logging-service/          # Servicio de logging
+├── tests/                    # Tests de integración
+├── unitTests/                # Tests unitarios
+└── docs/                     # Documentación
+```
 
 ---
 
 ## 🧪 Testing
 
+### Ejecutar Tests
+
 ```bash
 # Tests unitarios
-pytest unitTests/
+pytest unitTests/ -v
 
-# Tests de integración  
-pytest tests/integration/
+# Tests de integración
+pytest tests/integration/ -v
 
 # Tests end-to-end
-pytest tests/e2e/
+pytest tests/e2e/ -v
 
-# Test específico de infraestructura
-pytest tests/infrastructure/
+# Tests con coverage
+pytest --cov=app --cov-report=html
 ```
 
----
+### Tests Disponibles
 
-## 🔧 Desarrollo
+- ✅ **Unitarios**: Lógica de negocio, embeddings, RAG
+- ✅ **Integración**: Comunicación entre servicios
+- ✅ **E2E**: Flujos completos de usuario
+- ✅ **Infraestructura**: Health checks, conectividad
 
-### **Estructura del Código**
-- **Core**: Infraestructura y configuración base
-- **Services**: Lógica de negocio reutilizable
-- **Domain**: Reglas de negocio puras
-- **RAG**: Sistema de recuperación de información
-- **ML**: Componentes de machine learning
-
-### **Principios de Arquitectura**
-- ✅ **Separación de responsabilidades**
-- ✅ **Inversión de dependencias**
-- ✅ **Código limpio y testeable**
-- ✅ **Configuración externa**
-- ✅ **Logging estructurado**
-
-### **Contribuir**
-1. Fork del repositorio
-2. Crear rama feature (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit cambios (`git commit -am 'Añadir nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Crear Pull Request
+Ver [TESTING.md](docs/TESTING.md) para más detalles.
 
 ---
 
-## 📈 Rendimiento
+## 🚢 Despliegue
 
-- **Concurrencia**: Manejo asíncrono con FastAPI
-- **Rate Limiting**: 20 requests/minuto por usuario (configurable)
-- **Caching**: Embeddings y respuestas cacheadas
-- **Optimización GPU**: Aceleración CUDA cuando disponible
+### Despliegue con Docker Compose
 
----
+**Producción completa:**
+```bash
+podman-compose -f docker-compose-full.yml up -d
+```
 
-## 🔒 Seguridad
+**Solo servicios específicos:**
+```bash
+podman-compose -f docker-compose-full.yml up -d backend frontend rag-service user-service
+```
 
-- **Validación de entrada**: Sanitización automática
-- **Rate limiting**: Protección contra abuso
-- **Logs anonymizados**: Privacidad de usuarios
-- **CORS configurado**: Acceso controlado
+### Despliegue con GPU
 
----
+Habilitar vLLM para aceleración GPU:
 
-## 📚 Documentación Completa
+1. Descomentar servicios vLLM en `docker-compose-full.yml`
+2. Configurar `LOCAL_INFERENCE=false` en variables de entorno
+3. Levantar servicios:
 
-El proyecto cuenta con documentación técnica exhaustiva organizada por audiencia y nivel de detalle:
+```bash
+podman-compose -f docker-compose-full.yml up -d vllm-openai vllm-openai-embeddings
+```
 
-### 🎯 **Documentación Principal**
-- [`docs/PROJECT_OVERVIEW.md`](docs/PROJECT_OVERVIEW.md) - Visión general y contexto del proyecto
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) - Arquitectura del sistema y diseño técnico
-- [`docs/INSTALLATION.md`](docs/INSTALLATION.md) - Guía completa de instalación y despliegue
-- [`docs/API.md`](docs/API.md) - Documentación detallada de la API REST
-- [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) - Guía para desarrolladores
-- [`docs/TESTING.md`](docs/TESTING.md) - Estrategias y guías de testing
-- [`docs/MONITORING.md`](docs/MONITORING.md) - Configuración de monitoreo y métricas
+### Despliegue en Producción
 
-### 🚀 **Para Empezar Rápido**
-1. **Nuevos usuarios**: Lee [`docs/PROJECT_OVERVIEW.md`](docs/PROJECT_OVERVIEW.md)
-2. **Instalación**: Sigue [`docs/INSTALLATION.md`](docs/INSTALLATION.md)
-3. **Desarrollo**: Consulta [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md)
-4. **API**: Revisa [`docs/API.md`](docs/API.md)
+Ver [INSTALLATION.md](docs/INSTALLATION.md) para guías detalladas de:
+- Configuración de HTTPS con Nginx
+- SSL/TLS con Let's Encrypt
+- Cloudflare Tunnel para desarrollo
+- Configuración de reverse proxy
 
 ---
 
-## 📫 Contacto
+## 🗺️ Roadmap
 
-**Desarrolladores**:
-- **Javier Trujillo Castro** - Desarrollo inicial y arquitectura base
-- **Gabriel Sánchez Muñoz** - Visualización de métricas, vLLM y refactorización
+### ✅ Versión 1.0 (Completado)
+- [x] Sistema RAG básico
+- [x] Backend API con FastAPI
+- [x] Frontend React básico
+- [x] Integración con ChromaDB
+- [x] Documentación inicial
 
-Para dudas o sugerencias, contactar vía GitHub Issues.
+### ✅ Versión 2.0 (Completado)
+- [x] Integración LTI 1.3 con Moodle
+- [x] Gestión de usuarios con MongoDB
+- [x] Sistema de sesiones persistentes
+- [x] Frontend mejorado con TypeScript
+- [x] Búsqueda de asignaturas
+
+### ✅ Versión 3.0 (Actual)
+- [x] Fine-tuning con QLoRA
+- [x] Optimización vLLM
+- [x] Monitoreo con Prometheus/Grafana
+- [x] Mejoras en RAG
+- [x] Documentación completa
+
+---
+
+## 🤝 Contribuir
+
+¡Las contribuciones son bienvenidas! Este proyecto mejora gracias a la comunidad.
+
+### Cómo Contribuir
+
+1. **Fork** el proyecto
+2. **Crea una rama** para tu feature (`git checkout -b feature/AmazingFeature`)
+3. **Commit** tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** a la rama (`git push origin feature/AmazingFeature`)
+5. **Abre un Pull Request**
+
+### Guías de Contribución
+
+- Lee [DEVELOPMENT.md](docs/DEVELOPMENT.md) para configurar tu entorno
+- Sigue las convenciones de código del proyecto
+- Añade tests para nuevas funcionalidades
+- Actualiza documentación cuando sea necesario
+- Asegúrate que los tests pasen antes de hacer PR
+
+### Reportar Bugs
+
+Usa [GitHub Issues](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/issues) con:
+- Descripción clara del problema
+- Pasos para reproducir
+- Comportamiento esperado vs actual
+- Screenshots (si aplica)
+- Logs relevantes
+
+### Solicitar Features
+
+Abre un [GitHub Issue](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/issues) describiendo:
+- El problema que resuelve
+- Solución propuesta
+- Alternativas consideradas
+- Contexto adicional
 
 ---
 
 ## 📄 Licencia
 
-Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
+Este proyecto está bajo la licencia **MIT**. Ver [LICENSE](LICENSE) para más detalles.
+
+```
+MIT License
+
+Copyright (c) 2025 Chatbot IA CEPRUD Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+---
+
+## 📧 Contacto
+
+### Desarrolladores Principales
+
+**Javier Trujillo Castro**
+- 🎓 Desarrollo inicial y arquitectura base
+- 📧 Email: [contacto en GitHub]
+- 💼 LinkedIn: [perfil]
+
+**Gabriel Sánchez Muñoz**
+- 🎓 Visualización de métricas, vLLM y refactorización
+- 📧 Email: [contacto en GitHub]
+- 💼 LinkedIn: [perfil]
+- 🐙 GitHub: [@GabrielFranciscoSM](https://github.com/GabrielFranciscoSM)
+
+### Institución
+
+**CEPRUD - Universidad de Granada**
+- 🏛️ Centro de Producción de Recursos para la Universidad Digital
+- 🌐 Web: [UGR](https://www.ugr.es)
+
+### Soporte
+
+- 📧 **Email**: Crea un [issue en GitHub](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/issues)
+- 💬 **Discusiones**: [GitHub Discussions](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/discussions)
+- 📚 **Documentación**: [docs/](docs/)
+- 🐛 **Bugs**: [GitHub Issues](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/issues)
 
 ---
 
 ## 🙏 Agradecimientos
 
-- **CEPRUD** - Por el apoyo institucional
-- **Hugging Face** - Por los modelos pre-entrenados
-- **Chroma** - Por la base de datos vectorial
-- **FastAPI** - Por el framework web
-- **vLLM** - Por la optimización de inferencia
+Este proyecto no sería posible sin:
+
+- **CEPRUD & Universidad de Granada** - Por el apoyo institucional y recursos
+- **Hugging Face** - Por los modelos pre-entrenados y la plataforma
+- **FastAPI Team** - Por el excelente framework web
+- **React Team** - Por la librería UI moderna
+- **vLLM Project** - Por la optimización de inferencia LLM
+- **ChromaDB Team** - Por la base de datos vectorial
+- **MongoDB Team** - Por la base de datos robusta
+- **Prometheus & Grafana** - Por las herramientas de observabilidad
+- **IMS Global** - Por el estándar LTI 1.3
+- **Comunidad Open Source** - Por todas las librerías y herramientas utilizadas
+
+### Tecnologías Open Source Utilizadas
+
+- Python, FastAPI, Pydantic, Uvicorn
+- React, TypeScript, Vite, Axios
+- PyTorch, Transformers, Sentence Transformers
+- ChromaDB, MongoDB, SQLite
+- Docker, Prometheus, Grafana, Nginx
+- Y muchas más... 🙏
 
 ---
 
-*Última actualización: Octubre 2025 - Versión 3.0 (LTI 1.3 Integration)*
+## 📊 Estadísticas del Proyecto
 
+![GitHub stars](https://img.shields.io/github/stars/GabrielFranciscoSM/Chatbot_IA_Ceprud?style=social)
+![GitHub forks](https://img.shields.io/github/forks/GabrielFranciscoSM/Chatbot_IA_Ceprud?style=social)
+![GitHub issues](https://img.shields.io/github/issues/GabrielFranciscoSM/Chatbot_IA_Ceprud)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/GabrielFranciscoSM/Chatbot_IA_Ceprud)
+![GitHub last commit](https://img.shields.io/github/last-commit/GabrielFranciscoSM/Chatbot_IA_Ceprud)
+
+---
+
+<div align="center">
+
+### ⭐ Si este proyecto te resultó útil, considera darle una estrella ⭐
+
+**Hecho con ❤️ por el equipo de CEPRUD**
+
+[🚀 Volver arriba](#chatbot-ia-ceprud-)
+
+</div>
