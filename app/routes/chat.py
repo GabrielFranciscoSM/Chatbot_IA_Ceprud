@@ -1,38 +1,57 @@
-import os
-import csv
+"""
+Chat endpoints for the CEPRUD chatbot.
+
+This module handles:
+- Main chat conversations with RAG-enhanced responses
+- Session management and conversation memory clearing
+- Rate limiting and usage tracking
+- Conversation logging and analytics
+"""
+
 import time
-import uuid
-import hashlib
-from datetime import datetime
-from fastapi import APIRouter, Form, HTTPException, Depends, Request
+from typing import Dict
+from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
-from typing import Dict, List, Optional
+
 from core import (
-    ChatRequest, ChatResponse, ErrorResponse, 
-    RateLimitResponse, HealthResponse, RateLimitStatus,
-    ClearSessionRequest, ClearSessionResponse,
-    check_rate_limit, get_rate_limit_info, 
-    RATE_LIMIT_REQUESTS, RATE_LIMIT_WINDOW,
-    BASE_LOG_DIR, API_VERSION
+    ChatRequest,
+    ChatResponse,
+    ClearSessionRequest,
+    ClearSessionResponse,
+    RateLimitResponse,
+    ErrorResponse,
+    check_rate_limit,
+    get_rate_limit_info,
+    RATE_LIMIT_REQUESTS
 )
 from domain.query_logic import (
-    query_rag, clear_session
+    query_rag,
+    clear_session
 )
 from services import (
-    get_or_create_session, update_session_activity, cleanup_old_sessions,
-    log_request_info, classify_query_type, estimate_query_complexity, anonymize_user_id,
+    get_or_create_session,
+    cleanup_old_sessions,
+    log_request_info,
+    anonymize_user_id,
+    classify_query_type,
+    estimate_query_complexity,
     active_sessions
 )
-from services.logging_service import log_user_message, log_session_event, log_learning_event, log_conversation_message
-import logging
+from services.logging_service import (
+    log_conversation_message,
+    log_user_message,
+    log_learning_event,
+    log_session_event
+)
 
-# Get logger 
+# Setup logging
+import logging
 logger = logging.getLogger(__name__)
 
-# Create a router object instead of a FastAPI app
-router = APIRouter()
+# Create router
+router = APIRouter(tags=["chat"])
 
-# --- API Endpoints ---
+
 @router.post("/chat", response_model=ChatResponse, responses={
     400: {"model": ErrorResponse}, 
     429: {"model": RateLimitResponse}, 
@@ -43,20 +62,26 @@ async def chat_endpoint(
     chat_request: ChatRequest
 ):
     """
-    Main chatbot endpoint with Pydantic validation and rate limiting. 
-    Handles queries and returns responses using RAG, base model, or fine-tuned models.
+    Process a chat message and return an AI-generated response.
     
-    Rate limit: 20 requests per minute per user.
+    This endpoint:
+    1. Validates and rate-limits the request
+    2. Queries the RAG system for context-aware answers
+    3. Logs conversation data for analytics
+    4. Returns the response with metadata
+    
+    Rate limiting is applied per anonymized user to prevent abuse.
+    Sessions are automatically created/retrieved for conversation continuity.
     """
     start_time = time.time()
     
     # Extract validated data from Pydantic model
     user_message = chat_request.message
     selected_subject = chat_request.subject.lower()
-    selected_mode = chat_request.mode.lower()
     email = chat_request.email
-
-    # Create user identifier for rate limiting (use anonymized user ID)
+    mode = chat_request.mode
+    
+    # Create anonymized user identifier for rate limiting
     user_identifier = anonymize_user_id(email)
     
     # Check rate limit before processing
@@ -67,31 +92,30 @@ async def chat_endpoint(
         
         log_request_info(request, start_time, 429)
         
-        # Return rate limit error with helpful information
         raise HTTPException(
             status_code=429,
             detail={
                 "error": "Rate limit exceeded",
-                "requests_made": rate_info['requests_made'],
+                "requests_made": rate_info['requests_made'], 
                 "requests_remaining": rate_info['requests_remaining'],
                 "reset_time": rate_info['reset_time'],
                 "retry_after": retry_after
             }
         )
-
-    # Get or create session for this user-subject combination
-    session_id = get_or_create_session(email, selected_subject)
     
-    # Periodic cleanup of old sessions (every request, but lightweight)
-    if len(active_sessions) > 10:  # Only cleanup when we have many sessions
-        cleanup_old_sessions()
-
-    logger.info(f"Chat request received - Session: {session_id}, Subject: {selected_subject}, Mode: {selected_mode}, Email: {email}")
-
+    logger.info(f"Chat request - Subject: {selected_subject}, Email: {email}, Question: {user_message[:100]}...")
+    
     try:
+        # Get or create session for this user-subject combination
+        session_id = get_or_create_session(email, selected_subject)
         
+        # Periodic cleanup of old sessions (every request, but lightweight)
+        if len(active_sessions) > 10:  # Only cleanup when we have many sessions
+            cleanup_old_sessions()
+        
+        # Query the RAG system
         result = query_rag(user_message, subject=selected_subject, use_finetuned=False, email=email)
-
+        
         response_text = result.get('response', '')
         sources = result.get('sources', [])
         model_used = result.get('model_used', '')
@@ -173,54 +197,17 @@ async def chat_endpoint(
             }
         )
         return response
-
+        
     except Exception as e:
-        logger.error(f"Error processing request: {str(e)}", exc_info=True)
+        error_msg = f"Error processing chat request: {str(e)}"
+        logger.error(error_msg, exc_info=True)
         log_request_info(request, start_time, 500)
-        raise HTTPException(status_code=500, detail="❌ An error occurred while processing your request.")
+        
+        raise HTTPException(
+            status_code=500,
+            detail="❌ An error occurred while processing your request."
+        )
 
-@router.get("/health", response_model=HealthResponse)
-async def health_check():
-    """
-    Simple health check endpoint to verify API is running and Pydantic models work.
-    """
-    return HealthResponse(
-        status="healthy",
-        timestamp=datetime.now().isoformat(),
-        version=API_VERSION
-    )
-
-@router.get("/rate-limit/{email}", response_model=RateLimitStatus)
-async def get_rate_limit_status(email: str):
-    """
-    Check rate limit status for a specific user email.
-    Useful for frontend applications to show remaining requests.
-    """
-    user_identifier = anonymize_user_id(email)
-    rate_info = get_rate_limit_info(user_identifier)
-    
-    return RateLimitStatus(
-        requests_made=rate_info['requests_made'],
-        requests_remaining=rate_info['requests_remaining'],
-        reset_time=rate_info['reset_time'],
-        user_identifier=user_identifier
-    )
-
-@router.get("/rate-limit-info", response_model=RateLimitStatus)
-async def get_rate_limit_info_endpoint(email: str):
-    """
-    Check rate limit status for a specific user email (frontend compatible endpoint).
-    Query parameter version of the rate limit check.
-    """
-    user_identifier = anonymize_user_id(email)
-    rate_info = get_rate_limit_info(user_identifier)
-    
-    return RateLimitStatus(
-        requests_made=rate_info['requests_made'],
-        requests_remaining=rate_info['requests_remaining'],
-        reset_time=rate_info['reset_time'],
-        user_identifier=user_identifier
-    )
 
 @router.post("/clear-session", response_model=ClearSessionResponse, responses={
     400: {"model": ErrorResponse}, 
@@ -233,7 +220,11 @@ async def clear_session_endpoint(
 ):
     """
     Clear the conversation memory for a specific user-subject combination.
+    
     This removes all chat history and resets the context for the specified session.
+    Useful when users want to start a fresh conversation or switch topics.
+    
+    Rate limiting is applied (lighter than chat endpoint) to prevent abuse.
     """
     start_time = time.time()
     
@@ -304,4 +295,3 @@ async def clear_session_endpoint(
             status_code=500,
             detail=error_msg
         )
-

@@ -7,9 +7,9 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"     # allow a direct connection from container to the local machine
     ports:
-      - "9090:9090"   # the default port used by Prometheus
+      - "9091:9090"   # the default port used by Prometheus
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml # mount Prometheus config file
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:z # mount Prometheus config file
 
   grafana:
     image: docker.io/grafana/grafana:latest

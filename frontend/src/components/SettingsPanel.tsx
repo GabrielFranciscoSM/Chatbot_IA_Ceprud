@@ -1,47 +1,47 @@
 import React from 'react';
-import { UserSettings } from '../types';
-import { validateEmail, formatUGREmail } from '../utils';
+import { AuthUser } from '../types';
 
 interface SettingsPanelProps {
-  userSettings: UserSettings;
-  onSettingsChange: (settings: UserSettings) => void;
+  user: AuthUser;
+  onLogout: () => void;
 }
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({
-  userSettings,
-  onSettingsChange,
+  user,
+  onLogout,
 }: SettingsPanelProps) => {
-  const handleEmailChange = (email: string) => {
-    const formattedEmail = formatUGREmail(email);
-    onSettingsChange({
-      ...userSettings,
-      email: formattedEmail,
-    });
+  const getRoleLabel = (role: string): string => {
+    const roleMap: Record<string, string> = {
+      student: 'Estudiante',
+      teacher: 'Profesor',
+      admin: 'Administrador',
+    };
+    return roleMap[role] || role;
   };
-
-  const isValidEmail = validateEmail(userSettings.email);
 
   return (
     <div className="settings-section">
-      <h3 className="settings-title">Configuración</h3>
-      <div className="settings-form">
-        <div className="form-group">
-          <label className="form-label">Email UGR</label>
-          <input
-            type="email"
-            className="form-input"
-            value={userSettings.email}
-            onChange={(e) => handleEmailChange(e.target.value)}
-            placeholder="tu.email@correo.ugr.es"
-          />
-          {userSettings.email && !isValidEmail && (
-            <span className="error-text">Email inválido</span>
-          )}
-          <small className="form-help">
-            Tu email se usa para gestionar las sesiones de chat por asignatura.
-          </small>
+      <h3 className="settings-title">Mi Cuenta</h3>
+      <div className="user-info">
+        <div className="user-info-item">
+          <label className="user-info-label">Nombre</label>
+          <p className="user-info-value">{user.name}</p>
+        </div>
+        <div className="user-info-item">
+          <label className="user-info-label">Email</label>
+          <p className="user-info-value">{user.email}</p>
+        </div>
+        <div className="user-info-item">
+          <label className="user-info-label">Rol</label>
+          <p className="user-info-value">{getRoleLabel(user.role)}</p>
         </div>
       </div>
+      <button 
+        className="logout-button"
+        onClick={onLogout}
+      >
+        Cerrar Sesión
+      </button>
     </div>
   );
 };

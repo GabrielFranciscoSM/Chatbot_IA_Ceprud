@@ -512,9 +512,19 @@ python finetuning_qlora.py \
 
 ### **Población de Base Vectorial**
 ```bash
-cd app/rag
-python populate_database.py --subject "nombre_asignatura"
-```
+# Poblar base de datos inicial
+podman-compose -f docker-compose-full.yml up rag-service -d
+sleep 30
+
+# Ejecutar población inicial (ejemplo)
+curl -X POST "http://localhost:8082/populate" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "subject": "nombre_asignatura",
+       "documents_path": "/app/data/documents",
+       "clear_existing": false
+     }'
+``````
 
 ---
 
@@ -536,9 +546,11 @@ docker-compose -f prometheus/docker-compose-prometheus-graphana.yml up -d
 3. **Visualizar**: Métricas en tiempo real del chatbot
 
 ### **Logs Estructurados**
-- **Sesiones**: `app/storage/logs/learning_sessions.csv`
-- **Interacciones**: `app/storage/logs/chat_interactions_enhanced.csv`
-- **Eventos**: `app/storage/logs/learning_events.csv`
+- **Logs de aplicación**: `logs/api.log`
+- **Sesiones**: `logs/learning_sessions.csv`
+- **Interacciones**: `logs/chat_interactions_enhanced.csv`
+- **Eventos**: `logs/learning_events.csv`
+- **Conversaciones**: `logs/conversations.csv`
 
 ---
 
@@ -603,12 +615,24 @@ pytest tests/infrastructure/
 
 ---
 
-## 📚 Documentación Adicional
+## 📚 Documentación Completa
 
-- [`REFACTOR_STEP1_COMPLETE.md`](REFACTOR_STEP1_COMPLETE.md) - Extracción de modelos Pydantic
-- [`REFACTOR_STEP2_COMPLETE.md`](REFACTOR_STEP2_COMPLETE.md) - Rate limiting y configuración
-- [`REFACTOR_STEP3_COMPLETE.md`](REFACTOR_STEP3_COMPLETE.md) - Capa de servicios
-- [`STRUCTURE_IMPROVEMENT_COMPLETE.md`](STRUCTURE_IMPROVEMENT_COMPLETE.md) - Reestructuración completa
+El proyecto cuenta con documentación técnica exhaustiva organizada por audiencia y nivel de detalle:
+
+### 🎯 **Documentación Principal**
+- [`docs/PROJECT_OVERVIEW.md`](docs/PROJECT_OVERVIEW.md) - Visión general y contexto del proyecto
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) - Arquitectura del sistema y diseño técnico
+- [`docs/INSTALLATION.md`](docs/INSTALLATION.md) - Guía completa de instalación y despliegue
+- [`docs/API.md`](docs/API.md) - Documentación detallada de la API REST
+- [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) - Guía para desarrolladores
+- [`docs/TESTING.md`](docs/TESTING.md) - Estrategias y guías de testing
+- [`docs/MONITORING.md`](docs/MONITORING.md) - Configuración de monitoreo y métricas
+
+### 🚀 **Para Empezar Rápido**
+1. **Nuevos usuarios**: Lee [`docs/PROJECT_OVERVIEW.md`](docs/PROJECT_OVERVIEW.md)
+2. **Instalación**: Sigue [`docs/INSTALLATION.md`](docs/INSTALLATION.md)
+3. **Desarrollo**: Consulta [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md)
+4. **API**: Revisa [`docs/API.md`](docs/API.md)
 
 ---
 
@@ -638,5 +662,5 @@ Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
 
 ---
 
-*Última actualización: Septiembre 2025 - Versión 2.0 (Refactorizada)*
+*Última actualización: Octubre 2025 - Versión 3.0 (LTI 1.3 Integration)*
 
