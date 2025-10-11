@@ -1,10 +1,13 @@
-import './App.css';
+import './styles/App.css';
+import { useState } from 'react';
+import { useAuth } from './contexts/AuthContext';
 import { useSession } from './hooks/useSession';
 import { useSessionManagement } from './hooks/useSessionManagement';
 import { useSubjectManagement } from './hooks/useSubjectManagement';
 import { useChatHandling } from './hooks/useChatHandling';
 
 // Components
+import LoginRegister from './components/LoginRegister';
 import SubjectSidebar from './components/SubjectSidebar';
 import SettingsPanel from './components/SettingsPanel';
 import MessageList from './components/MessageList';
@@ -17,9 +20,11 @@ import ContextBanner from './components/ContextBanner';
 
 // Types and Utils
 import { SUBJECTS } from './constants';
-import { validateEmail } from './utils';
 
 function App() {
+  const { user, login, logout, isAuthenticated } = useAuth();
+  const [authError, setAuthError] = useState('');
+  
   // Session context for LTI integration
   const session = useSession();
   
@@ -35,7 +40,8 @@ function App() {
     setUserSettings
   } = useSessionManagement({ 
     sessionContext: session,
-    loadUserSubjects: async () => {} // Will be replaced below
+    loadUserSubjects: async () => {}, // Will be replaced below
+    userEmail: user?.email
   });
 
   // Chat handling hook (messages + API)
@@ -49,7 +55,7 @@ function App() {
   } = useChatHandling({
     currentSession,
     selectedSubject,
-    userEmail: userSettings.email,
+    userEmail: user?.email || userSettings.email,
     sessions,
     setSessions,
     setCurrentSession
@@ -57,7 +63,7 @@ function App() {
 
   // Subject management hook
   const subjectManagement = useSubjectManagement({
-    userEmail: userSettings.email,
+    userEmail: user?.email || userSettings.email,
     selectedSubject,
     setSelectedSubject,
     setError
@@ -69,8 +75,18 @@ function App() {
     setRateLimitInfo(null);
   };
 
-  const handleSettingsChange = (settings: typeof userSettings) => {
-    setUserSettings(settings);
+  const handleLogout = () => {
+    logout();
+    setSelectedSubject('');
+    setSessions([]);
+    setCurrentSession(null);
+  };
+
+  const handleLogin = (email: string, name: string, userId: string, role: string) => {
+    login(email, name, userId, role);
+    setAuthError('');
+    // Update user settings with authenticated email
+    setUserSettings({ email });
   };
 
   const selectedSubjectInfo = SUBJECTS.find(s => s.id === selectedSubject);
@@ -80,10 +96,29 @@ function App() {
     return <LTIStateDisplay loading={session.loading} error={session.error} />;
   }
 
+  // Show login/register screen if not authenticated and not in LTI mode
+  if (!isAuthenticated && !session.isLTI) {
+    return (
+      <>
+        <LoginRegister 
+          onLogin={handleLogin}
+          onError={setAuthError}
+        />
+        {authError && (
+          <div className="auth-error-overlay">
+            <div className="auth-error-message">
+              {authError}
+            </div>
+          </div>
+        )}
+      </>
+    );
+  }
+
   return (
     <div className={session.isLTI ? "app lti-mode" : "app"}>
       {/* Sidebar - Hidden in LTI mode */}
-      {!session.isLTI && (
+      {!session.isLTI && user && (
         <div className="sidebar">
           <div className="sidebar-header">
             <h1 className="sidebar-title">Chatbot UGR</h1>
@@ -99,8 +134,8 @@ function App() {
           />
           
           <SettingsPanel
-            userSettings={userSettings}
-            onSettingsChange={handleSettingsChange}
+            user={user}
+            onLogout={handleLogout}
           />
         </div>
       )}
@@ -134,11 +169,9 @@ function App() {
         {selectedSubject && currentSession && (
           <ChatInput
             onSendMessage={handleSendMessage}
-            disabled={isLoading || !validateEmail(userSettings.email)}
+            disabled={isLoading}
             placeholder={
-              !validateEmail(userSettings.email)
-                ? "Introduce tu email UGR para comenzar..."
-                : "Escribe tu pregunta sobre " + (selectedSubjectInfo?.name || "la asignatura") + "..."
+              "Escribe tu pregunta sobre " + (selectedSubjectInfo?.name || "la asignatura") + "..."
             }
           />
         )}

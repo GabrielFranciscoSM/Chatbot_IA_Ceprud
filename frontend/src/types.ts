@@ -70,6 +70,14 @@ export interface User {
   subjects: string[];
 }
 
+export interface AuthUser {
+  userId: string;
+  email: string;
+  name: string;
+  role: string;
+  isAuthenticated: boolean;
+}
+
 export interface UserSubjectsResponse {
   success: boolean;
   subjects: string[];

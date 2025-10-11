@@ -85,6 +85,22 @@ export const chatApi = {
     return response.data;
   },
 
+  // User authentication
+  login: async (email: string): Promise<any> => {
+    const response = await api.post('/user/login', { email });
+    return response.data;
+  },
+
+  register: async (email: string, name: string, role: string): Promise<any> => {
+    const response = await api.post('/user/create', { email, name, role });
+    return response.data;
+  },
+
+  logout: async (): Promise<any> => {
+    const response = await api.post('/user/logout');
+    return response.data;
+  },
+
   // Subject management
   getUserSubjects: async (email: string): Promise<UserSubjectsResponse> => {
     const response = await api.get(`/user/subjects?email=${encodeURIComponent(email)}`);
