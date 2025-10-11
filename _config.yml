@@ -4,7 +4,7 @@ baseurl: "/Chatbot_IA_Ceprud"
 url: "https://gabrielfranciscosm.github.io"
 
 # Theme configuration
-theme: just-the-docs
+remote_theme: just-the-docs/just-the-docs@v0.8.2
 
 # Logo and branding
 logo: "/assets/images/logo.png"
@@ -112,6 +112,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-github-metadata
   - jekyll-include-cache
+  - jekyll-remote-theme
 
 # GitHub metadata
 repository: GabrielFranciscoSM/Chatbot_IA_Ceprud
