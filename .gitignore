@@ -87,10 +87,6 @@ backup/
 app/storage
 
 # =======================
-# Documentation (development branch only)
-# =======================
-docs/
-# =======================
 # Logs and Databases
 # =======================
 logs/
