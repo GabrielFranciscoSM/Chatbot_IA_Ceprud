@@ -11,31 +11,36 @@ import { SUBJECTS } from '../constants';
 import {
   loadSessionsFromStorage,
   saveSessionsToStorage,
-  loadUserSettings,
-  saveUserSettings,
   loadSelectedSubject,
   saveSelectedSubject,
   findOrCreateSession,
   cleanOldSessions,
-  validateEmail
 } from '../utils';
 
 interface UseSessionManagementProps {
   sessionContext: any; // LTI session context
   loadUserSubjects: (email: string) => Promise<void>;
+  userEmail?: string; // Authenticated user email
 }
 
-export function useSessionManagement({ sessionContext, loadUserSubjects }: UseSessionManagementProps) {
+export function useSessionManagement({ sessionContext, loadUserSubjects, userEmail }: UseSessionManagementProps) {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string>('');
   const [currentSession, setCurrentSession] = useState<Session | null>(null);
   const [userSettings, setUserSettings] = useState<UserSettings>({
-    email: ''
+    email: userEmail || ''
   });
 
   // Use ref to track if initial load has happened
   const initialLoadDone = useRef(false);
   const ltiSessionApplied = useRef(false);
+
+  // Update userSettings when userEmail prop changes
+  useEffect(() => {
+    if (userEmail) {
+      setUserSettings({ email: userEmail });
+    }
+  }, [userEmail]);
 
   // Load initial data - only runs once
   useEffect(() => {
@@ -43,11 +48,9 @@ export function useSessionManagement({ sessionContext, loadUserSubjects }: UseSe
     initialLoadDone.current = true;
 
     const savedSessions = loadSessionsFromStorage();
-    const savedSettings = loadUserSettings();
     const savedSubject = loadSelectedSubject();
 
     setSessions(cleanOldSessions(savedSessions));
-    setUserSettings(savedSettings);
     
     // If LTI mode, use session user data
     if (sessionContext.isLTI && sessionContext.validated && sessionContext.user) {
@@ -62,11 +65,9 @@ export function useSessionManagement({ sessionContext, loadUserSubjects }: UseSe
         setSelectedSubject(sessionContext.subject);
         ltiSessionApplied.current = true;
       }
-    } else {
+    } else if (userEmail) {
       // Standard mode - load user subjects if email exists
-      if (savedSettings.email && validateEmail(savedSettings.email)) {
-        loadUserSubjects(savedSettings.email);
-      }
+      loadUserSubjects(userEmail);
       
       if (savedSubject && SUBJECTS.find(s => s.id === savedSubject)) {
         setSelectedSubject(savedSubject);
@@ -122,13 +123,6 @@ export function useSessionManagement({ sessionContext, loadUserSubjects }: UseSe
       saveSessionsToStorage(sessions);
     }
   }, [sessions]);
-
-  // Save user settings when they change
-  useEffect(() => {
-    if (initialLoadDone.current) {
-      saveUserSettings(userSettings);
-    }
-  }, [userSettings]);
 
   return {
     sessions,
