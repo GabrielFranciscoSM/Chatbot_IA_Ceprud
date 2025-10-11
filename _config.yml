@@ -1,0 +1,132 @@
+title: Chatbot IA CEPRUD
+description: Sistema de chatbot educativo con IA para la Universidad de Granada
+baseurl: "/Chatbot_IA_Ceprud"
+url: "https://gabrielfranciscosm.github.io"
+
+# Theme configuration
+theme: just-the-docs
+
+# Logo and branding
+logo: "/assets/images/logo.png"
+
+# Search
+search_enabled: true
+search:
+  heading_level: 2
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+  tokenizer_separator: /[\s/]+/
+  rel_url: true
+  button: false
+
+# Aux links (top right navigation)
+aux_links:
+  "Ver en GitHub":
+    - "https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud"
+  "Documentación":
+    - "/Chatbot_IA_Ceprud/docs/"
+
+aux_links_new_tab: true
+
+# Footer
+footer_content: "Copyright &copy; 2025 CEPRUD - Universidad de Granada. Distribuido bajo licencia MIT."
+
+# Color scheme
+color_scheme: dark
+
+# Enable copy button on code blocks
+enable_copy_code_button: true
+
+# Callouts
+callouts_level: quiet
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Importante
+    color: blue
+  new:
+    title: Nuevo
+    color: green
+  note:
+    title: Nota
+    color: purple
+  warning:
+    title: Advertencia
+    color: red
+
+# Back to top link
+back_to_top: true
+back_to_top_text: "Volver arriba"
+
+# Collections for docs
+collections:
+  docs:
+    permalink: "/:collection/:path/"
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Exclude from processing
+exclude:
+  - node_modules/
+  - vendor/
+  - .venv/
+  - .git/
+  - .gitignore
+  - app/
+  - frontend/
+  - logging-service/
+  - rag-service/
+  - mongo-service/
+  - models/
+  - logs/
+  - tests/
+  - unitTests/
+  - prometheus/
+  - .env
+  - .env.example
+  - "*.py"
+  - "*.sh"
+  - "*.yml"
+  - "*.yaml"
+  - Containerfile
+  - Dockerfile
+  - requirements.txt
+  - pytest.ini
+  - package.json
+  - tsconfig.json
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+  - jekyll-include-cache
+
+# GitHub metadata
+repository: GabrielFranciscoSM/Chatbot_IA_Ceprud
+
+# kramdown settings
+kramdown:
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# Compress HTML
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  startings: []
+  blanklines: false
+  profile: false

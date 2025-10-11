@@ -1,0 +1,119 @@
+graph TB
+    subgraph "Development Environment"
+        DEV_FE[Frontend Dev<br/>npm run dev<br/>:3000]
+        DEV_BE[Backend Dev<br/>uvicorn --reload<br/>:8080]
+        DEV_RAG[RAG Dev<br/>uvicorn --reload<br/>:8082]
+        DEV_LOG[Logging Dev<br/>uvicorn --reload<br/>:8002]
+    end
+    
+    subgraph "Docker Development"
+        DOCKER_COMPOSE[docker-compose<br/>-f docker-compose.dev.yml]
+        DOCKER_FE[Frontend Container<br/>Hot Reload]
+        DOCKER_BE[Backend Container<br/>Volume Mounted]
+        DOCKER_RAG[RAG Container<br/>ChromaDB Persistent]
+        DOCKER_LOG[Logging Container<br/>Log Volume]
+    end
+    
+    subgraph "Staging Environment"
+        STAGE_LB[Load Balancer<br/>Nginx]
+        STAGE_FE[Frontend Staging<br/>:8090]
+        STAGE_BE[Backend Staging<br/>:8080]
+        STAGE_RAG[RAG Staging<br/>:8082]
+        STAGE_LOG[Logging Staging<br/>:8002]
+        STAGE_MON[Monitoring Stack<br/>Prometheus + Grafana]
+    end
+    
+    subgraph "Production Environment"
+        PROD_LB[Production LB<br/>SSL Termination<br/>CloudFlare/Nginx]
+        
+        subgraph "Frontend Tier"
+            PROD_FE1[Frontend Instance 1<br/>:8090]
+            PROD_FE2[Frontend Instance 2<br/>:8090]
+        end
+        
+        subgraph "Backend Tier"
+            PROD_BE1[Backend Instance 1<br/>:8080]
+            PROD_BE2[Backend Instance 2<br/>:8080]
+        end
+        
+        subgraph "Service Tier"
+            PROD_RAG[RAG Service<br/>:8082<br/>GPU Optimized]
+            PROD_LOG[Logging Service<br/>:8002]
+            PROD_LLM[vLLM Service<br/>:8000<br/>GPU Cluster]
+        end
+        
+        subgraph "Storage Tier"
+            PROD_CHROMA[(ChromaDB Cluster)]
+            PROD_FILES[(Distributed Storage)]
+            PROD_LOGS[(Log Aggregation)]
+        end
+        
+        subgraph "Monitoring Tier"
+            PROD_PROM[Prometheus HA]
+            PROD_GRAF[Grafana HA]
+            PROD_ALERT[Alertmanager]
+        end
+    end
+    
+    subgraph "CI/CD Pipeline"
+        GIT[Git Repository<br/>GitHub/GitLab]
+        CI[CI/CD Pipeline<br/>GitHub Actions/Jenkins]
+        REGISTRY[Container Registry<br/>Docker Hub/ECR]
+        
+        GIT --> CI
+        CI --> REGISTRY
+        CI --> STAGE_LB
+        CI --> PROD_LB
+    end
+    
+    %% Development Flow
+    DEV_FE -.-> DOCKER_FE
+    DEV_BE -.-> DOCKER_BE
+    DEV_RAG -.-> DOCKER_RAG
+    DEV_LOG -.-> DOCKER_LOG
+    
+    %% Docker Development Flow
+    DOCKER_COMPOSE --> DOCKER_FE
+    DOCKER_COMPOSE --> DOCKER_BE
+    DOCKER_COMPOSE --> DOCKER_RAG
+    DOCKER_COMPOSE --> DOCKER_LOG
+    
+    %% Staging Flow
+    STAGE_LB --> STAGE_FE
+    STAGE_LB --> STAGE_BE
+    STAGE_BE --> STAGE_RAG
+    STAGE_BE --> STAGE_LOG
+    
+    %% Production Flow
+    PROD_LB --> PROD_FE1
+    PROD_LB --> PROD_FE2
+    PROD_FE1 --> PROD_BE1
+    PROD_FE2 --> PROD_BE2
+    PROD_BE1 --> PROD_RAG
+    PROD_BE2 --> PROD_RAG
+    PROD_BE1 --> PROD_LOG
+    PROD_BE2 --> PROD_LOG
+    PROD_RAG --> PROD_LLM
+    PROD_RAG --> PROD_CHROMA
+    PROD_LOG --> PROD_LOGS
+    
+    %% Monitoring Connections
+    PROD_BE1 --> PROD_PROM
+    PROD_BE2 --> PROD_PROM
+    PROD_RAG --> PROD_PROM
+    PROD_LOG --> PROD_PROM
+    PROD_PROM --> PROD_GRAF
+    PROD_PROM --> PROD_ALERT
+    
+    %% Styling
+    classDef dev fill:#e3f2fd,stroke:#0277bd,stroke-width:2px
+    classDef docker fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef staging fill:#f1f8e9,stroke:#558b2f,stroke-width:2px
+    classDef prod fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef cicd fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    
+    class DEV_FE,DEV_BE,DEV_RAG,DEV_LOG dev
+    class DOCKER_COMPOSE,DOCKER_FE,DOCKER_BE,DOCKER_RAG,DOCKER_LOG docker
+    class STAGE_LB,STAGE_FE,STAGE_BE,STAGE_RAG,STAGE_LOG,STAGE_MON staging
+    class PROD_LB,PROD_FE1,PROD_FE2,PROD_BE1,PROD_BE2,PROD_RAG,PROD_LOG,PROD_LLM,PROD_CHROMA,PROD_FILES,PROD_LOGS,PROD_PROM,PROD_GRAF,PROD_ALERT prod
+    class GIT,CI,REGISTRY cicd

@@ -1,226 +1,501 @@
-# Chatbot_IA_Ceprud 🤖
+# Chatbot IA CEPRUD - GitHub Pages 📖# Chatbot IA CEPRUD - GitHub Pages
 
-Un chatbot educativo avanzado basado en Inteligencia Artificial diseñado para CEPRUD (Centro de Producción de Recursos para la Universidad Digital). Utiliza arquitectura de microservicios, técnicas RAG (Retrieval-Augmented Generation) y modelos finos para responder preguntas especializadas sobre las asignaturas de la carrera de Ingeniería Informática.
 
-## 🆕 Nueva Interfaz Frontend
 
-Este proyecto ahora incluye una **interfaz frontend moderna** desarrollada con React TypeScript, que ofrece:
+Este es el branch de **GitHub Pages** para el proyecto Chatbot IA CEPRUD. Contiene la documentación y sitio web del proyecto construido con Jekyll.Este es el branch de **GitHub Pages** para el proyecto Chatbot IA CEPRUD. Contiene la documentación y sitio web del proyecto construido con Jekyll.
 
-- 🎓 **Selección de Asignaturas**: Interfaz intuitiva para cambiar entre diferentes materias
-- 💬 **Chat en Tiempo Real**: Experiencia de chat moderna con historial de mensajes
-- 📱 **Diseño Responsivo**: Funciona perfectamente en desktop y móvil
-- 🔄 **Gestión de Sesiones**: Historial persistente por asignatura usando localStorage
-- ⚡ **Control de Límites**: Información en tiempo real sobre límites de API
-- 🎨 **UI Académica**: Diseño limpio y profesional adaptado al entorno universitario
 
----
 
-## 🏗️ Arquitectura del Proyecto
+> **🔗 Para el código fuente del proyecto**, visita el [branch development](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/tree/development)## 🌐 Sitio Web
 
-### Estructura Modular Profesional
-```
-├── 🌐 frontend/              # Frontend React TypeScript
-│   ├── src/
+
+
+## 🌐 Sitio Web**URL**: [https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/](https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/)
+
+
+
+**URL**: [https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/](https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/)## 📚 Contenido
+
+
+
+## 📚 Contenido del SitioEste sitio incluye:
+
+- **Landing page**: Información general del proyecto
+
+Este sitio web incluye:- **Guía de usuario**: Cómo usar el chatbot
+
+- **Documentación técnica completa**: 
+
+- ✨ **Landing Page**: Información general, características y inicio rápido  - Arquitectura del sistema
+
+- 👤 **Guía de Usuario**: Tutorial completo para usar el chatbot  - Guía de instalación
+
+- 📖 **Documentación Técnica Completa**:   - API Reference
+
+  - 🎯 Visión general del proyecto  - Integración LTI con Moodle
+
+  - 🏗️ Arquitectura del sistema  - Guía de desarrollo
+
+  - 📦 Guía de instalación  - Testing y monitoreo
+
+  - 🔌 API Reference
+
+  - 🎓 Integración LTI con Moodle## � Tema Jekyll
+
+  - 💻 Guía de desarrollo
+
+  - 🧪 Testing y calidadUtiliza el tema **[Just the Docs](https://just-the-docs.github.io/just-the-docs/)** - un tema Jekyll moderno y profesional optimizado para documentación técnica.
+
+  - 📊 Monitoreo y métricas
+
+### Características del Tema
+
+## 🎨 Tema Jekyll- � **Búsqueda potente** integrada
+
+- 📱 **Diseño responsivo** y accesible
+
+El sitio utiliza el tema **[Just the Docs](https://just-the-docs.github.io/just-the-docs/)**, un tema moderno y profesional optimizado para documentación técnica.- 🎨 **Esquema de colores oscuro** por defecto
+
+- 📖 **Tabla de contenidos** automática
+
+### Características del Tema- 💻 **Syntax highlighting** para código
+
+- 🔗 **Navegación jerárquica** clara
+
+- 🔍 **Búsqueda potente** con índice completo del sitio
+
+- 📱 **Diseño responsivo** que funciona en móviles y desktop## 🚀 Desarrollo Local
+
+- 🎨 **Esquema de colores oscuro** (configurable)
+
+- 📖 **Tabla de contenidos** automática en cada páginaPara ejecutar el sitio localmente:
+
+- 💻 **Syntax highlighting** para bloques de código
+
+- 🗂️ **Navegación jerárquica** clara y organizada```bash
+
+- ⚡ **Rendimiento optimizado** con carga rápida# 1. Instalar dependencias
+
+bundle install
+
+## 🚀 Desarrollo Local
+
+# 2. Servir el sitio
+
+Si quieres ejecutar el sitio localmente para ver los cambios antes de publicar:bundle exec jekyll serve
+
+
+
+### Requisitos Previos# 3. Visitar
+
+# http://localhost:4000/Chatbot_IA_Ceprud/
+
+- Ruby >= 2.7```
+
+- Bundler├── 🌐 frontend/              # Frontend React TypeScript
+
+- Jekyll│   ├── src/
+
 │   │   ├── components/       # Componentes React
-│   │   ├── types.ts         # Definiciones TypeScript  
+
+### Pasos│   │   ├── types.ts         # Definiciones TypeScript  
+
 │   │   ├── api.ts           # Cliente API
-│   │   └── utils.ts         # Utilidades
-│   ├── Dockerfile           # Contenedor frontend
-│   └── nginx.conf           # Configuración Nginx
+
+```bash│   │   └── utils.ts         # Utilidades
+
+# 1. Instalar dependencias Ruby│   ├── Dockerfile           # Contenedor frontend
+
+bundle install│   └── nginx.conf           # Configuración Nginx
+
 │
-app/
-├── 🚀 Puntos de Entrada
+
+# 2. Servir el sitio localmenteapp/
+
+bundle exec jekyll serve├── 🚀 Puntos de Entrada
+
 │   ├── api_router.py          # Rutas API principales (refactorizado)
-│   ├── app.py                 # Aplicación web completa
-│   └── api.py                 # API pura para microservicios
-│
+
+# 3. Visitar en tu navegador│   ├── app.py                 # Aplicación web completa
+
+# http://localhost:4000/Chatbot_IA_Ceprud/│   └── api.py                 # API pura para microservicios
+
+```│
+
 ├── 🔧 Core - Infraestructura Esencial
-│   ├── models.py              # Modelos Pydantic para validación
+
+El sitio se recargará automáticamente cuando hagas cambios en los archivos.│   ├── models.py              # Modelos Pydantic para validación
+
 │   ├── config.py              # Gestión de configuración centralizada
-│   └── rate_limiter.py        # Control de velocidad y límites
+
+## 📁 Estructura del Sitio│   └── rate_limiter.py        # Control de velocidad y límites
+
 │
-├── 🎯 Services - Lógica de Negocio
-│   ├── session_service.py     # Gestión de sesiones de usuario
-│   ├── analytics_service.py   # Analíticas de aprendizaje avanzadas
-│   └── utils_service.py       # Utilidades comunes
-│
-├── 🧠 Domain - Lógica del Dominio
-│   ├── query_logic.py         # Procesamiento de consultas
-│   ├── graph.py               # Operaciones con grafos
-│   └── test_conversation.py   # Manejo de conversaciones
-│
-├── 🔍 RAG - Sistema de Recuperación
-│   ├── get_embedding_function.py  # Funciones de embedding
-│   ├── populate_database.py       # Población de base vectorial
-│   ├── add_subject.py             # Gestión de asignaturas
-│   ├── guia_docente_scrapper.py   # Extracción de guías docentes
-│   ├── data/                      # Documentos y datos
-│   └── chroma/                    # Base de datos vectorial
-│
-├── 🤖 ML - Machine Learning
-│   ├── models/                # Modelos AI descargados
-│   └── finetuning/           # Scripts de fine-tuning
-│       ├── finetuning_qlora.py
+
+```├── 🎯 Services - Lógica de Negocio
+
+.│   ├── session_service.py     # Gestión de sesiones de usuario
+
+├── _config.yml           # Configuración de Jekyll│   ├── analytics_service.py   # Analíticas de aprendizaje avanzadas
+
+├── Gemfile              # Dependencias Ruby/Jekyll│   └── utils_service.py       # Utilidades comunes
+
+├── index.md             # Página principal (landing page)│
+
+├── user-guide.md        # Guía completa de usuario├── 🧠 Domain - Lógica del Dominio
+
+├── README.md            # Este archivo│   ├── query_logic.py         # Procesamiento de consultas
+
+└── docs/                # Documentación técnica│   ├── graph.py               # Operaciones con grafos
+
+    ├── index.md                        # Índice de documentación│   └── test_conversation.py   # Manejo de conversaciones
+
+    ├── PROJECT_OVERVIEW.md             # Visión general│
+
+    ├── ARCHITECTURE.md                 # Arquitectura├── 🔍 RAG - Sistema de Recuperación
+
+    ├── INSTALLATION.md                 # Instalación│   ├── get_embedding_function.py  # Funciones de embedding
+
+    ├── API.md                          # API Reference│   ├── populate_database.py       # Población de base vectorial
+
+    ├── LTI_INTEGRATION.md              # Integración LTI/Moodle│   ├── add_subject.py             # Gestión de asignaturas
+
+    ├── DEVELOPMENT.md                  # Guía de desarrollo│   ├── guia_docente_scrapper.py   # Extracción de guías docentes
+
+    ├── TESTING.md                      # Testing│   ├── data/                      # Documentos y datos
+
+    ├── MONITORING.md                   # Monitoreo│   └── chroma/                    # Base de datos vectorial
+
+    ├── AUTHENTICATION_IMPLEMENTATION.md # Autenticación│
+
+    ├── MONGODB_INTEGRATION.md          # MongoDB├── 🤖 ML - Machine Learning
+
+    ├── AUTH_QUICK_REFERENCE.md         # Referencia rápida│   ├── models/                # Modelos AI descargados
+
+    └── diagrams/                       # Diagramas de arquitectura│   └── finetuning/           # Scripts de fine-tuning
+
+```│       ├── finetuning_qlora.py
+
 │       └── generate_data.py
-│
+
+## 🔄 Actualizar Documentación│
+
 ├── 🌐 Web - Interfaz de Usuario
-│   ├── static/               # CSS, JS, imágenes
+
+Para sincronizar la documentación desde el branch `development`:│   ├── static/               # CSS, JS, imágenes
+
 │   └── templates/            # Plantillas HTML
-│
-├── 📊 Analytics - Monitoreo
-│   ├── script_graphs.py      # Visualización de datos
+
+```bash│
+
+# 1. Asegurarse de estar en main├── 📊 Analytics - Monitoreo
+
+git checkout main│   ├── script_graphs.py      # Visualización de datos
+
 │   └── graphs/               # Gráficos generados
-│
-└── 💾 Storage - Almacenamiento
+
+# 2. Copiar documentación desde development│
+
+git checkout development -- docs/└── 💾 Storage - Almacenamiento
+
     ├── logs/                 # Logs de aplicación
-    └── checkpoints.sqlite*   # Puntos de control
 
-```
+# 3. Commit y push (GitHub Actions construirá el sitio automáticamente)    └── checkpoints.sqlite*   # Puntos de control
 
----
+git add docs/
 
-## 🎯 Características Avanzadas
+git commit -m "docs: Update from development branch"```
+
+git push origin main
+
+```---
+
+
+
+{: .note }## 🎯 Características Avanzadas
+
+> La documentación en `docs/` ya tiene el front matter YAML necesario para Jekyll.
 
 ### 🚀 **Arquitectura Refactorizada** (NUEVO)
-- **Separación de responsabilidades**: Código modular y mantenible
+
+## 📝 Añadir Nueva Página- **Separación de responsabilidades**: Código modular y mantenible
+
 - **Servicios de negocio**: Lógica encapsulada en servicios reutilizables  
-- **Configuración centralizada**: Gestión uniforme de configuración
+
+Para añadir un nuevo documento al sitio:- **Configuración centralizada**: Gestión uniforme de configuración
+
 - **Rate limiting inteligente**: Control de velocidad por usuario
-- **Logging avanzado**: Analíticas de aprendizaje detalladas
 
-### 🔍 **Sistema RAG Mejorado**
+1. **Crear archivo** `.md` en la ubicación apropiada- **Logging avanzado**: Analíticas de aprendizaje detalladas
+
+
+
+2. **Añadir front matter** YAML al inicio del archivo:### 🔍 **Sistema RAG Mejorado**
+
 - **Embeddings optimizados**: Recuperación de documentos más precisa
-- **Base vectorial Chroma**: Almacenamiento eficiente de conocimiento
-- **Multiples fuentes**: Soporte para diversas asignaturas
-- **Scraping inteligente**: Extracción automática de guías docentes
 
-### 🤖 **IA y Machine Learning**
-- **Fine-tuning con QLoRA**: Personalización del modelo base
-- **Modelos múltiples**: Soporte para diferentes LLMs
-- **Inferencia optimizada**: Usando vLLM para mejor rendimiento
-- **Métricas de calidad**: Evaluación continua de respuestas
+   ```yaml- **Base vectorial Chroma**: Almacenamiento eficiente de conocimiento
 
-### 📊 **Analíticas y Monitoreo**
+   ---- **Multiples fuentes**: Soporte para diversas asignaturas
+
+   layout: default- **Scraping inteligente**: Extracción automática de guías docentes
+
+   title: Título de la Página
+
+   nav_order: X### 🤖 **IA y Machine Learning**
+
+   parent: Documentación  # Si es una subpágina- **Fine-tuning con QLoRA**: Personalización del modelo base
+
+   permalink: /ruta/de/la/pagina- **Modelos múltiples**: Soporte para diferentes LLMs
+
+   ---- **Inferencia optimizada**: Usando vLLM para mejor rendimiento
+
+   ```- **Métricas de calidad**: Evaluación continua de respuestas
+
+
+
+3. **Escribir contenido** en Markdown### 📊 **Analíticas y Monitoreo**
+
 - **Learning Analytics**: Seguimiento del progreso de aprendizaje
-- **Métricas en tiempo real**: Dashboard con Prometheus + Grafana
-- **Logs estructurados**: Análisis detallado de interacciones
-- **Visualizaciones**: Gráficos automáticos de uso y rendimiento
 
-### 🌐 **API REST Avanzada**
-- **Validación robusta**: Modelos Pydantic para entrada/salida
-- **Documentación automática**: OpenAPI/Swagger integrado
-- **Control de errores**: Manejo elegante de excepciones
-- **CORS configurado**: Listo para integración frontend
+4. **Commit y push** - GitHub Actions publicará automáticamente- **Métricas en tiempo real**: Dashboard con Prometheus + Grafana
+
+- **Logs estructurados**: Análisis detallado de interacciones
+
+### Ejemplo de Front Matter- **Visualizaciones**: Gráficos automáticos de uso y rendimiento
+
+
+
+```yaml### 🌐 **API REST Avanzada**
+
+---- **Validación robusta**: Modelos Pydantic para entrada/salida
+
+layout: default- **Documentación automática**: OpenAPI/Swagger integrado
+
+title: Mi Nueva Guía- **Control de errores**: Manejo elegante de excepciones
+
+nav_order: 12- **CORS configurado**: Listo para integración frontend
+
+parent: Documentación
+
+permalink: /docs/mi-nueva-guia---
 
 ---
 
 ## 🧰 Requisitos
 
-- **Python** ≥ 3.10  
-- **Docker** y Docker Compose
-- **CUDA** (opcional, para aceleración GPU)
-- **8GB RAM** mínimo (16GB recomendado)
+# Mi Nueva Guía
 
-Las dependencias están organizadas en `config/requirements.txt`
+{: .no_toc }- **Python** ≥ 3.10  
+
+- **Docker** y Docker Compose
+
+## Tabla de Contenidos- **CUDA** (opcional, para aceleración GPU)
+
+{: .no_toc .text-delta }- **8GB RAM** mínimo (16GB recomendado)
+
+
+
+1. TOCLas dependencias están organizadas en `config/requirements.txt`
+
+{:toc}
+
+---
 
 ---
 
 ## 📦 Instalación Rápida
 
+## Sección 1
+
 ### 🚀 Opción 1: Setup Automático (Recomendado)
-```bash
-# Clonar el repositorio
+
+Contenido aquí...```bash
+
+```# Clonar el repositorio
+
 git clone https://github.com/javitrucas/Chatbot_IA_Ceprud.git
-cd Chatbot_IA_Ceprud
 
-# Ejecutar setup automático
+## ⚙️ Configuracióncd Chatbot_IA_Ceprud
+
+
+
+### Modificar Configuración del Sitio# Ejecutar setup automático
+
 ./setup.sh
-```
 
-### ⚙️ Opción 2: Setup Manual
+Edita `_config.yml` para personalizar:```
 
-#### 1. **Configurar Entorno**
-```bash
-# Copiar configuración de ejemplo
+
+
+- **Información básica**: título, descripción, URL### ⚙️ Opción 2: Setup Manual
+
+- **Tema**: colores, fuentes, layout
+
+- **Búsqueda**: configuración de búsqueda#### 1. **Configurar Entorno**
+
+- **Navegación**: enlaces auxiliares, footer```bash
+
+- **Plugins**: habilitar/deshabilitar funcionalidades# Copiar configuración de ejemplo
+
 cp .env.example .env
-# Editar con tu token de Hugging Face
+
+### Cambiar Esquema de Colores# Editar con tu token de Hugging Face
+
 nano .env
+
+En `_config.yml`:```
+
+
+
+```yaml#### 2. **Descargar Modelos**
+
+color_scheme: dark  # Opciones: light, dark, o personalizado```bash
+
+```python3 download_llm.py
+
 ```
 
-#### 2. **Descargar Modelos**
-```bash
-python3 download_llm.py
-```
+### Personalizar Callouts
 
 #### 3. **Frontend (Desarrollo)**
-```bash
+
+El tema soporta callouts (cajas destacadas):```bash
+
 cd frontend
-npm install
-npm run dev  # Para desarrollo local
-cd ..
+
+```markdownnpm install
+
+{: .note }npm run dev  # Para desarrollo local
+
+> Esto es una nota importantecd ..
+
 ```
 
-#### 4. **Levantar Servicios Completos**
+{: .warning }
+
+> Esto es una advertencia#### 4. **Levantar Servicios Completos**
+
 ```bash
-# Todos los servicios (Frontend + Backend + LLM)
-docker-compose -f docker-compose-full.yml up --build
+
+{: .important }# Todos los servicios (Frontend + Backend + LLM)
+
+> Esto es muy importantedocker-compose -f docker-compose-full.yml up --build
+
+```
 
 # Solo backend y LLM (sin frontend)
-docker-compose -f docker-compose-vllm.yml up --build
+
+## 🚀 Desplieguedocker-compose -f docker-compose-vllm.yml up --build
+
 ```
 
+El sitio se despliega automáticamente mediante **GitHub Actions** cuando haces push a `main`.
+
 ---
+
+### Workflow de Deployment
 
 ## 🌐 Acceso a los Servicios
 
-### **Frontend Moderno**
-- **URL**: `http://localhost:3000`
-- **Descripción**: Interfaz React con chat en tiempo real y gestión de sesiones
+1. Push a `main`
 
-### **Backend API**
+2. GitHub Actions ejecuta Jekyll build### **Frontend Moderno**
+
+3. El sitio generado se publica en GitHub Pages- **URL**: `http://localhost:3000`
+
+4. Disponible en: `https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/`- **Descripción**: Interfaz React con chat en tiempo real y gestión de sesiones
+
+
+
+### Verificar Deployment### **Backend API**
+
 - **URL**: `http://localhost:8080`
-- **Documentación**: `http://localhost:8080/docs`
-- **Health check**: `GET /health`
 
-### **Servicios Internos**
+- Ve a `Actions` en GitHub para ver el estado del build- **Documentación**: `http://localhost:8080/docs`
+
+- Los builds típicamente tardan 1-2 minutos- **Health check**: `GET /health`
+
+
+
+## 🎯 Guía de Estilo### **Servicios Internos**
+
 - **LLM API**: `http://localhost:8000` (vLLM OpenAI compatible)
-- **Embeddings**: `http://localhost:8001` (Servicio de embeddings)
 
----
+### Markdown- **Embeddings**: `http://localhost:8001` (Servicio de embeddings)
 
-## 🚀 Uso del Sistema
 
-### **Interfaz Web (Recomendado)**
+
+- Usa encabezados jerárquicos (`#`, `##`, `###`)---
+
+- Añade tabla de contenidos a páginas largas
+
+- Usa bloques de código con syntax highlighting## 🚀 Uso del Sistema
+
+- Añade callouts para información importante
+
+- Usa listas para mejorar legibilidad### **Interfaz Web (Recomendado)**
+
 1. Navega a `http://localhost:3000`
-2. Configura tu email UGR en el panel lateral
+
+### Front Matter2. Configura tu email UGR en el panel lateral
+
 3. Selecciona una asignatura
-4. ¡Comienza a chatear!
 
-### **API REST**
-- **Endpoint principal**: `POST /chat`
-- **Rate limit status**: `GET /rate-limit-info`
+Siempre incluye:4. ¡Comienza a chatear!
 
-#### Ejemplo de uso de la API:
+- `title`: Título visible en navegación
+
+- `nav_order`: Orden en el menú (número)### **API REST**
+
+- `parent`: Para páginas anidadas- **Endpoint principal**: `POST /chat`
+
+- `permalink`: URL limpia- **Rate limit status**: `GET /rate-limit-info`
+
+
+
+## 📖 Referencias#### Ejemplo de uso de la API:
+
 ```bash
-curl -X POST "http://localhost:8080/chat" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "message": "¿Qué son las metaheurísticas?",
+
+- [Documentación de Jekyll](https://jekyllrb.com/docs/)curl -X POST "http://localhost:8080/chat" \
+
+- [Guía de Just the Docs](https://just-the-docs.github.io/just-the-docs/)     -H "Content-Type: application/json" \
+
+- [GitHub Pages Docs](https://docs.github.com/en/pages)     -d '{
+
+- [Markdown Guide](https://www.markdownguide.org/)       "message": "¿Qué son las metaheurísticas?",
+
        "subject": "metaheuristicas",
-       "email": "student@example.com",
+
+## 🔗 Enlaces Útiles       "email": "student@example.com",
+
        "mode": "rag"
-     }'
-```
 
----
+- **Código fuente**: [Branch development](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/tree/development)     }'
 
-## 🔬 Configuración Avanzada
+- **Issues**: [GitHub Issues](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/issues)```
 
-### **Añadir Nueva Asignatura**
+- **Discussions**: [GitHub Discussions](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/discussions)
+
+- **Sitio web**: [GitHub Pages](https://gabrielfranciscosm.github.io/Chatbot_IA_Ceprud/)---
+
+
+
+## 📄 Licencia## 🔬 Configuración Avanzada
+
+
+
+MIT License - Ver LICENSE en el repositorio principal### **Añadir Nueva Asignatura**
+
 ```bash
-cd app/rag
+
+---cd app/rag
+
 python add_subject.py
-```
+
+**Última actualización**: Octubre 2025 - Versión 3.0 (con integración LTI 1.3)```
+
 
 ### **Fine-tuning con QLoRA**
 ```bash
