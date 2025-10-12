@@ -1,5 +1,5 @@
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, Field
+from typing import Optional, List, Dict, Any
 from datetime import datetime
 
 class SessionEventLog(BaseModel):
@@ -42,3 +42,55 @@ class LogResponse(BaseModel):
     success: bool
     message: str
     timestamp: datetime
+
+
+# MongoDB Document Models
+
+class ConversationMessage(BaseModel):
+    """Individual message in a conversation"""
+    message_type: str  # 'user' or 'bot'
+    content: str
+    timestamp: datetime
+    metadata: Optional[Dict[str, Any]] = None
+
+class ConversationDocument(BaseModel):
+    """MongoDB document for storing complete conversations per session"""
+    session_id: str = Field(..., description="Unique session identifier")
+    user_id: str = Field(..., description="User identifier")
+    subject: str = Field(..., description="Subject/course name")
+    messages: List[ConversationMessage] = Field(default_factory=list, description="List of messages in conversation")
+    created_at: datetime = Field(default_factory=datetime.utcnow, description="Conversation start time")
+    updated_at: datetime = Field(default_factory=datetime.utcnow, description="Last message time")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Additional metadata")
+
+class SessionEventDocument(BaseModel):
+    """MongoDB document for session events"""
+    session_id: str
+    user_id: str
+    subject: str
+    event_type: str
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    metadata: Optional[Dict[str, Any]] = None
+
+class InteractionAnalyticsDocument(BaseModel):
+    """MongoDB document for interaction analytics"""
+    session_id: str
+    user_id_partial: str
+    subject: str
+    message_length: int
+    query_type: str
+    complexity: str
+    response_length: int
+    source_count: int
+    llm_model_used: str
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    metadata: Optional[Dict[str, Any]] = None
+
+class LearningEventDocument(BaseModel):
+    """MongoDB document for learning events"""
+    session_id: str
+    event_type: str
+    topic: str
+    confidence_level: str = "N/A"
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    metadata: Optional[Dict[str, Any]] = None
