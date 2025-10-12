@@ -119,8 +119,12 @@ services:
             - "8002:8002"
         environment:
             BASE_LOG_DIR: /app/logs
+            MONGODB_URL: mongodb://admin:password123@mongodb:27017
+            MONGODB_DATABASE: chatbot_logs
         volumes:
-            - ./logs:/app/logs:z  # Mount logs directory
+            - ./logs:/app/logs:z  # Mount logs directory (fallback CSV)
+        depends_on:
+            - mongodb
         restart: unless-stopped
 
     # Backend Service
