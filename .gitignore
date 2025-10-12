@@ -138,5 +138,5 @@ coverage.xml
 *.bak
 *.backup
 
-lti_config
+lti_config/
 .venv
