@@ -9,7 +9,7 @@ from typing import List, Dict, Any, Union
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
-from docling.document_converter import DocumentConverter
+from langchain_community.document_loaders import PyMuPDFLoader  # <<< CAMBIO: Importado PyMuPDFLoader
 from fastapi import UploadFile
 
 from .embeddings import get_embedding_function
@@ -20,13 +20,13 @@ BASE_CHROMA_PATH = os.getenv("BASE_CHROMA_PATH", "/app/data/chroma")
 
 class DocumentProcessor:
     """Clase para procesar documentos y poblar la base de datos RAG"""
-    
+
     def __init__(self):
         self.embedding_function = get_embedding_function()
-        
+
     def clean_text(self, text: str) -> str:
         """
-        Limpieza robusta para textos académicos y técnicos, evitando eliminar contenido relevante 
+        Limpieza robusta para textos académicos y técnicos, evitando eliminar contenido relevante
         y conservando saltos de línea dobles como separación de párrafos.
         """
         # 1. Eliminar líneas que sean solo números de página (1-3 dígitos)
@@ -69,22 +69,26 @@ class DocumentProcessor:
         file_content = await file.read()
         filename = file.filename or "unknown"
         
-        if filename.endswith(".pdf"):
-            # Crear archivo temporal para el PDF
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
-                temp_file.write(file_content)
-                temp_file_path = temp_file.name
+        # # --- INICIO DE BLOQUE MODIFICADO ---
+        # if filename.endswith(".pdf"):
+        #     # Crear archivo temporal para el PDF
+        #     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+        #         temp_file.write(file_content)
+        #         temp_file_path = temp_file.name
             
-            try:
-                converter = DocumentConverter()
-                result = converter.convert(temp_file_path)
-                text = result.document.export_to_markdown()
-                cleaned_text = self.clean_text(text)
-            finally:
-                # Limpiar archivo temporal
-                os.unlink(temp_file_path)
+        #     try:
+        #         # Usar PyMuPDFLoader para cargar el documento
+        #         loader = PyMuPDFLoader(temp_file_path)
+        #         pages = loader.load()
+        #         # Unir el contenido de todas las páginas en un solo texto
+        #         text = "\n\n".join(page.page_content for page in pages)
+        #         cleaned_text = self.clean_text(text)
+        #     finally:
+        #         # Limpiar archivo temporal
+        #         os.unlink(temp_file_path)
+        # # --- FIN DE BLOQUE MODIFICADO ---
                 
-        elif filename.endswith(".txt"):
+        if filename.endswith(".txt"):
             text = file_content.decode('utf-8')
             cleaned_text = self.clean_text(text)
         else:
@@ -102,8 +106,8 @@ class DocumentProcessor:
     def split_documents(self, documents: List[Document]) -> List[Document]:
         """Dividir texto en fragmentos con parámetros optimizados."""
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=200,          # Tamaño reducido para mayor precisión
-            chunk_overlap=50,        # Overlap para mantener coherencia
+            chunk_size=800,          # Tamaño aumentado para reducir cantidad de chunks
+            chunk_overlap=150,       # Overlap proporcionado para mantener coherencia
             separators=["\n\n", "\n", ". ", " ", ""],  # Jerarquía de separadores
             length_function=len
         )
@@ -143,17 +147,21 @@ class DocumentProcessor:
 
         if not new_chunks:
             return {
-                "message": "No hay nuevos documentos para añadir", 
+                "message": "No hay nuevos documentos para añadir",
                 "chunks_added": 0,
                 "existing_chunks": len(existing_ids)
             }
 
         # Procesar en lotes para no sobrecargar el servidor de embeddings
-        batch_size = 128
+        # Aumentado significativamente para mayor velocidad
+        batch_size = 512
         total_new_chunks = len(new_chunks)
         
         print(f"👉 Insertando {total_new_chunks} nuevos chunks en lotes de {batch_size}...")
 
+        import time
+        start_time = time.time()
+        
         for i in range(0, total_new_chunks, batch_size):
             # Obtener el lote actual de chunks
             batch = new_chunks[i:i + batch_size]
@@ -164,10 +172,19 @@ class DocumentProcessor:
             current_batch_num = (i // batch_size) + 1
             total_batches = (total_new_chunks + batch_size - 1) // batch_size
             
-            print(f"  - Procesando lote {current_batch_num}/{total_batches}...")
+            batch_start = time.time()
             
             # Añadir el lote a la base de datos
             db.add_documents(documents=batch, ids=batch_ids)
+            
+            batch_time = time.time() - batch_start
+            elapsed = time.time() - start_time
+            avg_time_per_batch = elapsed / current_batch_num
+            eta_seconds = avg_time_per_batch * (total_batches - current_batch_num)
+            
+            print(f"  - Lote {current_batch_num}/{total_batches} ({batch_time:.1f}s) | "
+                  f"ETA: {eta_seconds/60:.1f}m | "
+                  f"Progreso: {(current_batch_num/total_batches)*100:.1f}%")
 
         return {
             "message": f"Se añadieron {total_new_chunks} chunks exitosamente",
@@ -186,9 +203,9 @@ class DocumentProcessor:
         return {"message": f"No existe base de datos para {subject}"}
 
     async def populate_subject_from_files(
-        self, 
-        files: List[UploadFile], 
-        subject: str, 
+        self,
+        files: List[UploadFile],
+        subject: str,
         reset: bool = False
     ) -> Dict[str, Any]:
         """

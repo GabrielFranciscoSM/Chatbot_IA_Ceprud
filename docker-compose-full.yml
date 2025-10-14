@@ -47,6 +47,20 @@ services:
     #     image: docker.io/vllm/vllm-openai:latest
     #     command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 16 --gpu-memory-utilization 0.4 --max_model_len=3000
 
+    # Ollama Service (CPU-based alternative for embeddings)
+    ollama:
+        container_name: chatbot-ollama
+        image: docker.io/ollama/ollama:latest
+        ports:
+            - "11434:11434"
+        volumes:
+            - ollama_data:/root/.ollama
+        environment:
+            # Optimización: Permitir más paralelismo
+            OLLAMA_NUM_PARALLEL: "4"  # Procesar 4 requests en paralelo
+            OLLAMA_MAX_LOADED_MODELS: "2"
+        restart: unless-stopped
+
     # MongoDB Database
     mongodb:
         container_name: chatbot-mongodb
@@ -102,10 +116,16 @@ services:
             BASE_CHROMA_PATH: /app/data/chroma
             VLLM_EMBEDDING_URL: http://vllm-openai-embeddings:8001
             EMBEDDING_MODEL_DIR: /models/Qwen--Qwen3-Embedding-0.6B
+            # Ollama configuration (set USE_OLLAMA=true to use CPU-based embeddings)
+            USE_OLLAMA: "true"
+            OLLAMA_URL: http://ollama:11434
+            OLLAMA_MODEL_NAME: nomic-embed-text
         volumes:
             - ./rag-service/data:/app/data/:z  # Guías docentes y archivos de asignaturas
             - rag_data:/app/data/chroma:z  # Volumen persistente para ChromaDB
         restart: unless-stopped
+        depends_on:
+            - ollama
         # depends_on:
         #     - vllm-openai-embeddings
 
@@ -172,6 +192,8 @@ volumes:
     rag_data:
         driver: local
     mongodb_data:
+        driver: local
+    ollama_data:
         driver: local
 networks:
     default:
