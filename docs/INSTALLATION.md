@@ -91,7 +91,7 @@ BASE_LOG_DIR=./logs
 pip install huggingface_hub
 
 # Ejecutar script de descarga
-python download_llm.py
+python scripts/download_llm.py
 ```
 
 **Modelos que se descargarán:**

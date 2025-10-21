@@ -73,6 +73,7 @@ langgraph-checkpoint-sqlite==2.0.11
 langgraph-prebuilt==0.5.2
 langgraph-sdk==0.1.74
 langsmith==0.4.8
+langfuse==3.4.0
 latex2mathml==3.78.0
 lazy-loader==0.4
 lxml==5.4.0

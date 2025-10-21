@@ -22,8 +22,8 @@ docker-compose -f docker-compose-full.yml up -d
 After the Ollama container is running, pull the embedding model:
 
 ```bash
-chmod +x setup_ollama_embeddings.sh
-./setup_ollama_embeddings.sh
+chmod +x scripts/setup_ollama_embeddings.sh
+./scripts/setup_ollama_embeddings.sh
 ```
 
 Or manually:

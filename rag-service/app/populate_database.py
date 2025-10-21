@@ -15,7 +15,8 @@ DEFAULT_RAG_SERVICE_URL = "http://localhost:8082"
 
 script_dir = Path(__file__).parent.absolute()
 
-DEFAULT_DATA_PATH = Path.joinpath(script_dir,"data")  # Para uso dentro del contenedor
+# La carpeta data está en rag-service/data, no en rag-service/app/data
+DEFAULT_DATA_PATH = Path.joinpath(script_dir.parent, "data")  # Para uso dentro del contenedor
 
 class RAGDatabasePopulator:
     """Clase para poblar la base de datos RAG masivamente"""

@@ -347,7 +347,7 @@ CHATBOT_BASE_URL=https://your-chatbot-domain.com
 pip install huggingface_hub
 
 # Descargar modelos (Phi-3-mini y Qwen-Embeddings)
-python download_llm.py
+python scripts/download_llm.py
 ```
 
 **Modelos descargados:**

@@ -42,6 +42,8 @@ COURSE_SUBJECT_MAPPING = {
     "META": "metaheuristicas",
     "IE1": "inferencia_estadistica_1",
     "EST": "estadistica",
+    "DBA": "DBA",
+    "DAI": "DBA",  # Alias para Diseño y Administración de Bases de Datos
 }
 
 @router.get("/lti/jwks", response_class=JSONResponse)
