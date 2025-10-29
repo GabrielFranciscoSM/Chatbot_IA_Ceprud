@@ -63,7 +63,7 @@ Si vas a desplegar y mantener el sistema:
 - [**Testing**](testing) - Estrategias de pruebas y calidad
 
 ### Operaciones
-- [**Monitoreo y Métricas**](monitoring) - Prometheus, Grafana y observabilidad
+- [**Monitoreo y Métricas**](monitoring) - Langfuse y observabilidad
 - [**Guía Rápida de Autenticación**](auth-quick-reference) - Referencia rápida
 
 ## 🔗 Enlaces Rápidos

@@ -47,9 +47,6 @@ Esta guía está diseñada para desarrolladores que quieren contribuir al proyec
 ### **DevOps**
 - **Docker**: Containerización
 - **Docker Compose**: Orquestación de servicios
-- **Prometheus**: Métricas
-- **Grafana**: Visualización
-- **Nginx**: Reverse proxy
 
 ## 🏗️ Configuración del Entorno de Desarrollo
 

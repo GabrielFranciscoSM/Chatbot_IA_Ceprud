@@ -24,10 +24,9 @@ El sistema de monitoreo del Chatbot IA CEPRUD está diseñado para proporcionar 
 ## 📊 Stack de Observabilidad
 
 ### **Componentes Principales**
-- **Prometheus**: Recolección y almacenamiento de métricas
-- **Grafana**: Visualización de métricas y dashboards
-- **Logs estructurados**: Logging centralizado con formato JSON
-- **Health checks**: Monitoreo de salud de servicios
+- **Langfuse**: Trazas y auditoría de agentes/LLMs, registros de prompts/respuestas, pasos de agentes y metadatos de RAG.
+- **Logs estructurados**: Logging centralizado con formato JSON para eventos que no requieren tracing completo.
+- **Health checks**: Monitoreo de salud de servicios (endpoints /health, readiness/liveness).
 
 ### **Arquitectura de Monitoreo**
 
@@ -40,146 +39,97 @@ graph TB
         FRONTEND[Frontend<br/>:8090]
     end
     
-    subgraph "Recolección"
-        PROM[Prometheus<br/>:9090]
+    subgraph "Trazas y Recolección"
+        LF[Langfuse (web & worker)<br/>:3000 / 3030]
         LOGS[Log Files<br/>JSON/CSV]
     end
     
-    subgraph "Visualización"
-        GRAF[Grafana<br/>:3000]
-        ALERTS[Alertmanager<br/>:9093]
+    subgraph "Almacenamiento/Media"
+        MINIO[MinIO<br/>:9090]
+        CLICKHOUSE[ClickHouse<br/>:8123]
     end
     
-    subgraph "Notificaciones"
-        EMAIL[Email]
-        SLACK[Slack]
-        WEBHOOK[Webhook]
-    end
-    
-    BACKEND --> PROM
-    RAG --> PROM
-    LOG --> PROM
-    FRONTEND --> PROM
-    
+    BACKEND --> LF
+    RAG --> LF
+    LOG --> LF
+    FRONTEND --> LF
+
     BACKEND --> LOGS
     RAG --> LOGS
     LOG --> LOGS
-    
-    PROM --> GRAF
-    PROM --> ALERTS
-    
-    ALERTS --> EMAIL
-    ALERTS --> SLACK
-    ALERTS --> WEBHOOK
+
+    LF --> MINIO
+    LF --> CLICKHOUSE
 ```
 
 ## 🚀 Configuración Rápida
 
-### **Levantar Stack de Monitoreo**
+### **Levantar Langfuse y dependencias**
+
+En este repositorio se incluye un `langfuse-compose.yml` para levantar Langfuse (web + worker) y sus dependencias (ClickHouse, MinIO, Redis, Postgres). Puedes levantar el stack localmente con:
 
 ```bash
-# Levantar servicios de monitoreo
-docker-compose -f prometheus/docker-compose-prometheus-graphana.yml up -d
+# Levantar Langfuse y dependencias (usa el archivo en la raíz del repositorio)
+docker-compose -f langfuse-compose.yml up -d
 
 # Verificar servicios
-docker-compose -f prometheus/docker-compose-prometheus-graphana.yml ps
+docker-compose -f langfuse-compose.yml ps
 
-# Ver logs
-docker-compose -f prometheus/docker-compose-prometheus-graphana.yml logs -f
+# Seguir logs (ejemplo: web)
+docker-compose -f langfuse-compose.yml logs -f langfuse-web
 ```
 
-### **URLs de Acceso**
-- **Grafana**: http://localhost:3000 (admin/admin)
-- **Prometheus**: http://localhost:9090
-- **Alertmanager**: http://localhost:9093
+### **URLs de Acceso (local)**
+- **Langfuse Web UI**: http://localhost:3000  (ver `langfuse-compose.yml` si tu entorno cambia puertos)
+- **Langfuse Worker (ingest / API interna)**: http://localhost:3030 (worker)
+- **MinIO (S3 compatible)**: http://localhost:9091 (consola)
+- **ClickHouse (HTTP)**: http://localhost:8123
 
-## 📈 Métricas del Sistema
+Nota: los puertos anteriores coinciden con la configuración incluida en `langfuse-compose.yml` del repositorio.
 
-### **Métricas de Aplicación TODO**
+## 📈 Trazas y eventos (Langfuse)
 
-#### **Métricas de Chat**
+Ahora centralizamos trazas de agentes, pasos de LLM y eventos de RAG en Langfuse en lugar de Prometheus/Grafana. Langfuse permite inspeccionar todas las ejecuciones de agentes (prompts, respuestas, embeddings, pasos, metadata) y realizar búsquedas y análisis por conversación, usuario, proyecto, o experimento.
+
+Qué enviar a Langfuse (recomendado):
+- Identificadores: org_id, project_id, user_id, session_id, conversation_id
+- Metadata del modelo: model name, model config, temperature
+- Prompt / input: tokens, embeddings (si aplica), raw text
+- Respuesta / output: text, tokens, score, latency
+- Pasos de agentes: llamadas a herramientas, RAG retrievals (docs ids, scores), chain of thought
+- Metrías y tiempos: latencia total, pasos individuales, memoria/CPU si te interesa
+- Artefactos/Media: archivos/audio/images (subir a MinIO y referenciar desde Langfuse)
+
+Ejemplo conceptual (Python) — usa el SDK oficial de Langfuse si está disponible; si no, envía eventos al worker/ingest:
+
 ```python
-# Métricas implementadas en el backend
-chatbot_requests_total = Counter(
-    'chatbot_requests_total',
-    'Total number of chat requests',
-    ['subject', 'status', 'user_type']
-)
+# Ejemplo conceptual de evento para Langfuse
+event = {
+    "type": "agent_execution",
+    "project_id": "my_project",
+    "user_id": "user123",
+    "session_id": "sess-456",
+    "model": "gpt-4-mini",
+    "input": "¿Cuál es la capital de Francia?",
+    "output": "París",
+    "latency_ms": 120,
+    "rag_results": [
+        {"doc_id": "doc-1", "score": 0.92},
+    ],
+    "timestamp": "2025-10-29T12:34:56Z",
+}
 
-chatbot_response_time_seconds = Histogram(
-    'chatbot_response_time_seconds',
-    'Time spent processing chat requests',
-    ['subject', 'endpoint']
-)
-
-chatbot_active_sessions = Gauge(
-    'chatbot_active_sessions',
-    'Number of active chat sessions',
-    ['subject']
-)
-
-chatbot_rag_search_time = Histogram(
-    'chatbot_rag_search_time_seconds',
-    'Time spent on RAG searches',
-    ['subject']
-)
+# En producción, usa el SDK oficial de Langfuse. Alternativamente, envía el evento al worker/ingest (worker habitualmente escucha en el puerto 3030).
+# requests.post("http://localhost:3030/<ingest-endpoint>", json=event, headers={...})
 ```
 
-#### **Métricas de RAG Service**
-```python
-rag_documents_indexed = Gauge(
-    'rag_documents_indexed_total',
-    'Total number of documents indexed',
-    ['subject', 'document_type']
-)
+Recomendaciones prácticas:
+- Instrumenta los puntos clave: entrada de chat, respuesta final, fallbacks, y resultado de búsquedas RAG.
+- Adjunta identificadores de usuario y sesión para poder agrupar conversaciones.
+- Subir artefactos grandes (archivos, audio, imágenes) a MinIO y referenciarlos en el evento.
+- Usa sampling para llamadas de alta frecuencia si necesitas ahorrar almacenamiento.
 
-rag_search_accuracy = Histogram(
-    'rag_search_accuracy_score',
-    'Accuracy score of RAG searches',
-    ['subject']
-)
-
-rag_embedding_time = Histogram(
-    'rag_embedding_time_seconds',
-    'Time to generate embeddings',
-    ['model']
-)
-```
-
-#### **Métricas de Sistema**
-```python
-# Métricas automáticas de FastAPI
-http_requests_total = Counter(
-    'http_requests_total',
-    'Total HTTP requests',
-    ['method', 'endpoint', 'status_code']
-)
-
-http_request_duration_seconds = Histogram(
-    'http_request_duration_seconds',
-    'HTTP request duration',
-    ['method', 'endpoint']
-)
-
-# Métricas de recursos
-process_cpu_usage = Gauge('process_cpu_usage_percent', 'CPU usage percentage')
-process_memory_usage = Gauge('process_memory_usage_bytes', 'Memory usage in bytes')
-```
-
-### **Configuración de Prometheus**
-
-```yaml
-# prometheus.yaml
-global:
-  scrape_interval: 5s
-  evaluation_interval: 30s
-
-scrape_configs:
-  - job_name: vllm
-    static_configs:
-      - targets:
-          - 'host.docker.internal:8001'
-```
+Si quieres métricas de sistema (CPU/mem), sigue exportándolas a tu solución de métricas preferida o añade sencillos Gauges en tus servicios y guárdalos junto a las trazas en Langfuse como eventos periódicos.
 
 ---
 

@@ -39,6 +39,11 @@ Python-3.12.9/
 .env.test.local
 .env.production.local
 
+# Cloudflared artifacts
+cloudflared
+cloudflare-tunnel.log
+tunnel.pid
+
 # =======================
 # Node.js Frontend
 # =======================

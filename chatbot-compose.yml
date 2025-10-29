@@ -1,0 +1,188 @@
+services:
+  # LLM Service (optional)
+  # vllm-openai:
+  #    container_name: my-vllm-service
+  #    image: docker.io/vllm/vllm-openai:latest
+  #    ports:
+  #      - "8000:8000"
+  #    volumes:
+  #      - "./models:/models"
+  #    environment:
+  #      HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
+
+  # Embeddings service (optional)
+  # vllm-openai-embeddings:
+  #    container_name: my-embedding-service
+  #    image: docker.io/vllm/vllm-openai:latest
+  #    command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 16
+  #    ports:
+  #      - "8001:8001"
+
+  ollama:
+    container_name: chatbot-ollama
+    image: docker.io/ollama/ollama:latest
+    ports:
+      - "11435:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      OLLAMA_NUM_PARALLEL: "4"
+      OLLAMA_MAX_LOADED_MODELS: "2"
+    networks:
+      - default
+    restart: unless-stopped
+
+  mongodb:
+    container_name: chatbot-mongodb
+    image: docker.io/mongo:8.0
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: chatbot_users
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - default
+    restart: unless-stopped
+
+  user-service:
+    container_name: chatbot-user-service
+    build:
+      context: ./mongo-service
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      MONGODB_URL: mongodb://admin:password123@mongodb:27017
+      MONGODB_DATABASE: chatbot_users
+    depends_on:
+      - mongodb
+    networks:
+      - default
+    restart: unless-stopped
+
+  mongo-express:
+    container_name: chatbot-mongo-express
+    image: docker.io/mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://admin:password123@mongodb:27017
+      ME_CONFIG_BASICAUTH_ENABLED: true
+      ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
+      ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
+      MONGO_INITDB_DATABASE: chatbot_users
+    depends_on:
+      - mongodb
+    networks:
+      - default
+
+  rag-service:
+    container_name: chatbot-rag-service
+    build:
+      context: ./rag-service
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      BASE_CHROMA_PATH: /app/data/chroma
+      VLLM_EMBEDDING_URL: http://vllm-openai-embeddings:8001
+      EMBEDDING_MODEL_DIR: /models/Qwen--Qwen3-Embedding-0.6B
+      USE_OLLAMA: "true"
+      OLLAMA_URL: http://ollama:11434
+      OLLAMA_MODEL_NAME: nomic-embed-text
+    volumes:
+      - ./rag-service/data:/app/data/:z
+      - rag_data:/app/data/chroma:z
+    depends_on:
+      - ollama
+    networks:
+      - default
+    restart: unless-stopped
+
+  logging-service:
+    container_name: chatbot-logging-service
+    build:
+      context: ./logging-service
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    environment:
+      BASE_LOG_DIR: /app/logs
+      MONGODB_URL: mongodb://admin:password123@mongodb:27017
+      MONGODB_DATABASE: chatbot_logs
+    volumes:
+      - ./logs:/app/logs:z
+    depends_on:
+      - mongodb
+    networks:
+      - default
+    restart: unless-stopped
+
+  backend:
+    container_name: chatbot-backend
+    build:
+      context: ./app
+      dockerfile: Containerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      HF_HUB_DISABLE_SYMLINKS_WARNING: 1
+      PYTHONPATH: /chatbot/app
+      RAG_SERVICE_URL: http://rag-service:8082
+      LOGGING_SERVICE_URL: http://logging-service:8002
+      USER_SERVICE_URL: http://user-service:8083
+      MONGO_URI: mongodb://admin:password123@mongodb:27017
+      MONGODB_DATABASE: chatbot_users
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      GOOGLE_API_KEY: ${GEMINI_API_KEY}
+    command: ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8080"]
+    volumes:
+      - ./app/unitTests:/chatbot/app/unitTests:z
+    depends_on:
+      - rag-service
+    networks:
+      - default
+    restart: unless-stopped
+
+  frontend:
+    container_name: chatbot-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=8090
+    depends_on:
+      - backend
+    networks:
+      - default
+    restart: unless-stopped
+
+  cloudflared:
+      container_name: chatbot-cloudflared
+      image: docker.io/cloudflare/cloudflared:latest
+      restart: unless-stopped
+      command: tunnel --url http://frontend:8090
+      depends_on:
+          - frontend
+
+volumes:
+  rag_data:
+    driver: local
+  mongodb_data:
+    driver: local
+  ollama_data:
+    driver: local
+
+networks:
+  default:
+    name: chatbot-network
+    external: true

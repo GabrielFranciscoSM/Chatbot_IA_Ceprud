@@ -564,8 +564,8 @@ class GuiaDocenteScraper:
         else:
             text_parts.append(str(content))
     
-    def populate_rag_from_guia(self, url: str, subject_name: str, reset: bool = False) -> bool:
-        """Extraer guía docente y poblar RAG Service"""
+    def populate_rag_from_guia(self, url: str, subject_name: str, reset: bool = False, save_only: bool = False, output_dir: str = ".") -> bool:
+        """Extraer guía docente y poblar RAG Service o solo guardar localmente"""
         try:
             # Extraer datos de la guía
             guia_data = self.scrape_guia_docente(url)
@@ -579,7 +579,28 @@ class GuiaDocenteScraper:
                 print(f"❌ No se pudo generar contenido de texto para {subject_name}")
                 return False
             
-            # Crear archivo temporal
+            # Guardar archivos localmente
+            output_path = Path(output_dir)
+            output_path.mkdir(parents=True, exist_ok=True)
+            
+            # Guardar JSON
+            json_path = output_path / f"guia_docente.json"
+            with open(json_path, 'w', encoding='utf-8') as f:
+                json.dump(guia_data, f, indent=2, ensure_ascii=False)
+            print(f"💾 JSON guardado en: {json_path}")
+            
+            # Guardar TXT
+            txt_path = output_path / f"guia_docente.txt"
+            with open(txt_path, 'w', encoding='utf-8') as f:
+                f.write(text_content)
+            print(f"💾 TXT guardado en: {txt_path}")
+            
+            # Si es solo guardar, terminar aquí
+            if save_only:
+                print(f"✅ Guía docente guardada localmente en: {output_path}")
+                return True
+            
+            # Crear archivo temporal para enviar al RAG
             with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as temp_file:
                 temp_file.write(text_content)
                 temp_file_path = temp_file.name
@@ -605,13 +626,6 @@ class GuiaDocenteScraper:
                     result = response.json()
                     chunks_added = result.get('chunks_added', 0)
                     print(f"✅ Guía docente de {subject_name} poblada exitosamente ({chunks_added} chunks)")
-                    
-                    # Guardar JSON local también
-                    json_path = Path(f"guia_docente_{subject_name}.json")
-                    with open(json_path, 'w', encoding='utf-8') as f:
-                        json.dump(guia_data, f, indent=2, ensure_ascii=False)
-                    print(f"💾 Datos guardados en: {json_path}")
-                    
                     return True
                 else:
                     print(f"❌ Error poblando RAG Service: HTTP {response.status_code}")
@@ -644,6 +658,9 @@ Ejemplos de uso:
   
   # Usar RAG Service remoto
   python guia_docente_scrapper.py --url "https://..." --subject "algoritmos" --rag-url "http://remote:8082"
+  
+  # Solo descargar sin poblar RAG (no requiere RAG Service activo)
+  python guia_docente_scrapper.py --url "https://..." --subject "DBA" --save-only --output-dir "rag-service/data/DBA"
         """
     )
     
@@ -667,30 +684,49 @@ Ejemplos de uso:
         action="store_true",
         help="Resetear base de datos de la asignatura antes de poblar"
     )
+    parser.add_argument(
+        "--save-only", 
+        action="store_true",
+        help="Solo guardar archivos localmente sin poblar RAG Service"
+    )
+    parser.add_argument(
+        "--output-dir", 
+        default=".",
+        help="Directorio donde guardar los archivos (por defecto: directorio actual)"
+    )
     
     args = parser.parse_args()
     
     print("🌐 Guía Docente Scraper para RAG Service")
     print(f"🔗 URL: {args.url}")
     print(f"📚 Asignatura: {args.subject}")
-    print(f"🔄 Reset: {'Sí' if args.reset else 'No'}")
-    print(f"🌐 RAG Service: {args.rag_url}")
+    
+    if args.save_only:
+        print(f"💾 Modo: Solo guardar localmente")
+        print(f"� Directorio de salida: {args.output_dir}")
+    else:
+        print(f"�🔄 Reset: {'Sí' if args.reset else 'No'}")
+        print(f"🌐 RAG Service: {args.rag_url}")
+    
     print("=" * 70)
     
     # Crear scraper
     scraper = GuiaDocenteScraper(args.rag_url)
     
-    # Verificar RAG Service
-    if not scraper.check_rag_service():
-        print("❌ RAG Service no está disponible")
-        sys.exit(1)
-    print("✅ RAG Service disponible")
+    # Verificar RAG Service solo si NO es save-only
+    if not args.save_only:
+        if not scraper.check_rag_service():
+            print("❌ RAG Service no está disponible")
+            sys.exit(1)
+        print("✅ RAG Service disponible")
     
-    # Extraer y poblar
+    # Extraer y poblar o solo guardar
     success = scraper.populate_rag_from_guia(
         url=args.url,
         subject_name=args.subject,
-        reset=args.reset
+        reset=args.reset,
+        save_only=args.save_only,
+        output_dir=args.output_dir
     )
     
     if success:

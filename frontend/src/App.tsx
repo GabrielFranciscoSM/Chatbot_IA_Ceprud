@@ -5,6 +5,7 @@ import { useSession } from './hooks/useSession';
 import { useSessionManagement } from './hooks/useSessionManagement';
 import { useSubjectManagement } from './hooks/useSubjectManagement';
 import { useChatHandling } from './hooks/useChatHandling';
+import { Menu, X } from 'lucide-react';
 
 // Components
 import LoginRegister from './components/LoginRegister';
@@ -24,6 +25,7 @@ import { SUBJECTS } from './constants';
 function App() {
   const { user, login, logout, isAuthenticated } = useAuth();
   const [authError, setAuthError] = useState('');
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   
   // Session context for LTI integration
   const session = useSession();
@@ -73,6 +75,7 @@ function App() {
     setSelectedSubject(subjectId);
     setError('');
     setRateLimitInfo(null);
+    setIsMobileSidebarOpen(false); // Close mobile sidebar on selection
   };
 
   const handleLogout = () => {
@@ -117,10 +120,38 @@ function App() {
 
   return (
     <div className={session.isLTI ? "app lti-mode" : "app"}>
+      {/* Mobile Menu Button - Hidden in LTI mode */}
+      {!session.isLTI && user && (
+        <>
+          <button 
+            className="mobile-menu-button"
+            onClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+            aria-label={isMobileSidebarOpen ? "Cerrar menú" : "Abrir menú"}
+          >
+            {isMobileSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+          
+          {/* Mobile Overlay */}
+          {isMobileSidebarOpen && (
+            <div 
+              className="mobile-overlay active"
+              onClick={() => setIsMobileSidebarOpen(false)}
+            />
+          )}
+        </>
+      )}
+
       {/* Sidebar - Hidden in LTI mode */}
       {!session.isLTI && user && (
-        <div className="sidebar">
+        <div className={`sidebar ${isMobileSidebarOpen ? 'mobile-open' : ''}`}>
           <div className="sidebar-header">
+            <button 
+              className="sidebar-close-button"
+              onClick={() => setIsMobileSidebarOpen(false)}
+              aria-label="Cerrar menú"
+            >
+              <X size={20} />
+            </button>
             <h1 className="sidebar-title">Chatbot UGR</h1>
             <p className="sidebar-subtitle">CEPRUD - Centro de Estudios de Postgrado</p>
           </div>

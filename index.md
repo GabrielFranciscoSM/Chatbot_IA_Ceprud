@@ -107,8 +107,6 @@ podman-compose -f docker-compose-full.yml up -d
 | **Frontend** | `http://localhost:8090` | Interfaz web principal |
 | **Backend API** | `http://localhost:8080` | API REST |
 | **Documentación API** | `http://localhost:8080/docs` | Swagger UI interactivo |
-| **Prometheus** | `http://localhost:9090` | Métricas del sistema |
-| **Grafana** | `http://localhost:3000` | Dashboards de analíticas |
 
 ---
 
@@ -182,7 +180,7 @@ podman-compose -f docker-compose-full.yml up -d
 - Hugging Face Transformers, vLLM, ChromaDB, Sentence Transformers
 
 **Infraestructura**
-- Podman, Prometheus, Grafana, MongoDB
+- Podman, MongoDB
 
 **Integración**
 - LTI 1.3, OIDC, JWT, OAuth 2.0

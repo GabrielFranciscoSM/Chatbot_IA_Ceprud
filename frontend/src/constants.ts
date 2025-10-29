@@ -30,6 +30,18 @@ export const SUBJECTS: Subject[] = [
     name: 'Estadistica (Ingeniería Informática)',
     icon: '📄',
     description: ''
+  },
+  {
+    id: 'DBA',
+    name: 'Desarrollo basada en agentes',
+    icon: '🗄️',
+    description: 'Desarrollo basada en agentes'
+  },
+  {
+    id: 'IV',
+    name: 'Infrastructuras Virtuales',
+    icon: '🗄️',
+    description: 'Infrastructuras Virtuales'
   }
 ];
 

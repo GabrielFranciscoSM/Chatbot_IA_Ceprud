@@ -186,10 +186,10 @@ cloudflared tunnel --url http://localhost:8090
 **Helper Scripts:**
 ```bash
 # Start tunnel
-./start-tunnel.sh
+./scripts/start-tunnel.sh
 
 # Stop tunnel
-./stop-tunnel.sh
+./scripts/stop-tunnel.sh
 ```
 
 #### Option B: Nginx + Let's Encrypt (Production)

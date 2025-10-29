@@ -70,10 +70,8 @@ Desarrollar un sistema de chatbot inteligente que utilice técnicas de RAG (Retr
 #### **Infraestructura**
 - **Podman**: Containerización para consistency across environments
 - **Podman Compose**: Orquestación de servicios para desarrollo y testing
-- **Prometheus**: Recolección de métricas para observabilidad
-- **Grafana**: Visualización de métricas y dashboards
 
-**Justificación**: Podman garantiza que "funciona en mi máquina" no sea un problema, Prometheus/Grafana es el stack estándar para observabilidad en sistemas distribuidos.
+**Justificación**: Podman garantiza que "funciona en mi máquina" no sea un problema.
 
 ## 🏗️ Decisiones de Arquitectura
 

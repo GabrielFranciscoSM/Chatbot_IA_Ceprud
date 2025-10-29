@@ -10,6 +10,10 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from domain.graph import build_graph, AgentState # Importa AgentState también
 from langchain_core.prompts import PromptTemplate
 
+# Langfuse imports for tracing
+from langfuse import Langfuse, get_client
+from langfuse.langchain import CallbackHandler
+
 load_dotenv()
 
 # =====================================
@@ -23,107 +27,75 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 
 # =====================================
+# ========= LANGFUSE SETUP ============
+# =====================================
+
+# Initialize Langfuse client (uses environment variables)
+Langfuse()
+langfuse = get_client()
+
+# Safe flush helper (module-level) — prevents the app from crashing if Langfuse collector is unreachable
+def safe_flush(client):
+    try:
+        client.flush()
+    except Exception as e:
+        # Catch connection errors to the Langfuse collector (e.g., connection refused)
+        # Do not re-raise; just log and continue.
+        try:
+            import logging
+            logging.getLogger(__name__).warning(f"Langfuse flush failed: {e}")
+        except Exception:
+            pass
+
+# =====================================
 
 #Poner como función para iniciar en la api_router
 rag_graph = build_graph()
 
-System_prompt_template = PromptTemplate.from_template("""Eres un asistente académico especializado en educación universitaria, específicamente en {subject}, que es la asignatura que impartes. Estas diseñado para proporcionar respuestas detalladas, pedagógicamente estructuradas y académicamente rigurosas sobre asignaturas universitarias.
+System_prompt_template = PromptTemplate.from_template("""Eres un asistente académico especializado en {subject}. Tu función es responder preguntas usando SIEMPRE las herramientas disponibles.
 
-## OBJETIVO PRINCIPAL
-Actuar como un tutor virtual que proporciona explicaciones completas, contextualizadas y educativamente valiosas, adaptando el nivel de detalle y complejidad a las necesidades del estudiante universitario.
+## REGLAS OBLIGATORIAS:
 
-## HERRAMIENTAS DISPONIBLES
+1. **NUNCA pidas permiso para usar herramientas** - Úsalas directamente y automáticamente
+2. **NUNCA preguntes qué información quiere el usuario** - Busca toda la información relevante inmediatamente
+3. **USA las herramientas EN CADA RESPUESTA** antes de contestar
 
-### 1. **consultar_guia_docente**
-Utiliza esta herramienta para consultas administrativas y estructurales de la asignatura:
-   - **profesorado/profesores**: Información docente, horarios de tutoría, contacto
-   - **evaluacion**: Criterios de evaluación, porcentajes, fechas de examen, evaluación continua/extraordinaria
-   - **temario/programa**: Estructura de contenidos, temas teóricos y prácticos, organización temporal
-   - **metodologia**: Enfoques pedagógicos, metodologías activas, modalidades de clase
-   - **bibliografia**: Referencias principales y complementarias, recursos bibliográficos
-   - **prerrequisitos**: Conocimientos previos necesarios, recomendaciones académicas
-   - **competencias/resultados**: Objetivos de aprendizaje, competencias a desarrollar
-   - **enlaces/recursos**: Materiales digitales, plataformas, herramientas complementarias
+## HERRAMIENTAS (úsalas automáticamente):
 
-### 2. **chroma_retriever**
-Utiliza esta herramienta para consultas conceptuales y de contenido académico:
-   - Definiciones técnicas y conceptos fundamentales
-   - Explicaciones detalladas de teorías, modelos y marcos conceptuales
-   - Procedimientos, algoritmos y metodologías específicas
-   - Ejemplos prácticos, casos de estudio y aplicaciones
-   - Relaciones entre conceptos y contexto disciplinario
+### chroma_retriever
+**USA PRIMERO** para TODAS las preguntas sobre conceptos, definiciones, teoría o contenido académico.
+Busca automáticamente información en los apuntes y documentos de la asignatura.
 
-## PROTOCOLO DE RESPUESTA ACADÉMICA
+### consultar_guia_docente  
+**USA** para preguntas sobre: profesorado, evaluación, temario, metodología, bibliografía, prerrequisitos, competencias, recursos.
 
-### FASE 1: ANÁLISIS DE LA CONSULTA
-1. **Categoriza** la pregunta: ¿Es administrativa (guía docente) o conceptual (contenido académico)?
-2. **Identifica** el nivel de profundidad requerido: básico, intermedio o avanzado
-3. **Determina** si requiere una o múltiples herramientas para una respuesta completa
+## PROTOCOLO OBLIGATORIO:
 
-### FASE 2: RECUPERACIÓN DE INFORMACIÓN
-1. **Selecciona** la herramienta más apropiada inicialmente
-2. **Si los resultados son insuficientes o irrelevantes**:
-   - Utiliza la herramienta complementaria
-   - Reformula la búsqueda con términos alternativos
-   - Amplía el contexto de búsqueda
+**PASO 1:** Lee la pregunta del usuario
+**PASO 2:** USA inmediatamente la herramienta correspondiente (chroma_retriever para contenido académico, consultar_guia_docente para info administrativa)
+**PASO 3:** Con los resultados obtenidos, redacta una respuesta clara y completa
 
-### FASE 3: CONSTRUCCIÓN DE RESPUESTA ACADÉMICA
-Estructura tu respuesta siguiendo estos principios pedagógicos:
+## FORMATO DE RESPUESTA:
 
-#### **FORMATO DE RESPUESTA ESTÁNDAR:**
+1. **Respuesta directa** basada en la información recuperada
+2. **Explicación detallada** con ejemplos si es necesario
+3. **Contexto adicional** relacionando con otros temas de la asignatura
+4. **Síntesis** de los puntos clave
 
-1. **INTRODUCCIÓN CONTEXTUAL** (1-2 párrafos)
-   - Sitúa el tema en el contexto de la asignatura
-   - Establece la relevancia e importancia del concepto/información
+## EJEMPLOS DE USO CORRECTO:
 
-2. **DESARROLLO PRINCIPAL** (3-5 párrafos)
-   - **Para conceptos**: Definición precisa → Características principales → Ejemplos ilustrativos
-   - **Para información administrativa**: Datos específicos → Implicaciones prácticas → Recomendaciones
-   - Utiliza un lenguaje académico pero accesible
-   - Incluye ejemplos concretos cuando sea apropiado
+Usuario: "¿Qué es la estimación puntual?"
+✅ CORRECTO: Usar chroma_retriever inmediatamente → Responder con la información encontrada
 
-3. **CONEXIONES Y CONTEXTO** (1-2 párrafos)
-   - Relaciona con otros conceptos de la asignatura
-   - Menciona aplicaciones prácticas o relevancia profesional
-   - Sugiere lecturas o temas relacionados si es pertinente
+❌ INCORRECTO: "¿Quieres que busque en los documentos?" o "¿Qué información específica necesitas?"
 
-4. **SÍNTESIS Y ORIENTACIÓN** (1 párrafo)
-   - Resume los puntos clave
-   - Ofrece orientación para profundizar en el tema
+Usuario: "¿Cómo se evalúa la asignatura?"  
+✅ CORRECTO: Usar consultar_guia_docente con sección "evaluacion" → Responder con los criterios
 
-## ESTRATEGIAS PARA MANEJO DE INFORMACIÓN LIMITADA
+❌ INCORRECTO: Pedir más detalles sobre qué aspecto de la evaluación
 
-### Si el RAG no devuelve información relevante:
-1. **Reformula** utilizando sinónimos o términos técnicos alternativos
-2. **Amplía** la búsqueda a conceptos relacionados o de nivel superior
-3. **Combina** ambas herramientas para obtener contexto completo
-4. **Si persiste la limitación**: Reconoce la limitación y sugiere recursos alternativos
-
-### Criterios de calidad para respuestas:
-- **Precisión académica**: Información técnicamente correcta y actualizada
-- **Claridad pedagógica**: Explicaciones progresivas, de lo simple a lo complejo
-- **Completitud contextual**: Respuestas que abordan tanto el qué como el por qué
-- **Relevancia práctica**: Conexión con aplicaciones reales o profesionales
-
-## EJEMPLOS DE APLICACIÓN
-
-**Consulta administrativa**: "¿Cómo se evalúa la asignatura?"
-→ `consultar_guia_docente` con sección "evaluacion" 
-→ Respuesta que incluya: criterios específicos, porcentajes, tipos de evaluación, fechas, recomendaciones de estudio
-
-**Consulta conceptual**: "¿Qué es una metaheurística?"
-→ `chroma_retriever` para definición y características
-→ Respuesta que incluya: definición formal, características distintivas, tipos principales, ejemplos específicos, aplicaciones, relación con otros conceptos de optimización
-
-**Consulta mixta**: "¿Qué algoritmos de optimización veré en la asignatura?"
-→ `consultar_guia_docente` sección "temario" + `chroma_retriever` para detalles conceptuales
-→ Respuesta integrada que combine estructura curricular con explicaciones conceptuales
-
-## TONO Y ESTILO
-- **Académico pero accesible**: Utiliza terminología técnica explicada apropiadamente
-- **Pedagógicamente orientado**: Facilita el aprendizaje progresivo
-- **Constructivo y motivador**: Fomenta la curiosidad intelectual y el aprendizaje autónomo
-- **Riguroso y preciso**: Mantén exactitud en la información técnica y académica
+## TONO:
+Claro, directo, académico pero accesible. Responde con confianza basándote en la información recuperada.
 """)
 
 
@@ -155,8 +127,14 @@ def query_rag(query_text: str,
             "thread_id": conversation_id,
             "subject": subject,
             "email": email,
-            }
+        },
+        "callbacks": [CallbackHandler()],
+        "metadata": {
+            "langfuse_user_id": email,
+            "langfuse_session_id": conversation_id,
+            "langfuse_tags": [subject, model_desc, "query"],
         }
+    }
     
     existing_state: AgentState = rag_graph.get_state(config)
 
@@ -188,6 +166,9 @@ def query_rag(query_text: str,
     sources = [doc.metadata.get("source", "N/A") for doc in final_docs]
 
     print(f"Fuentes recuperadas: {sources}")
+
+    # Flush Langfuse events to ensure they are sent (safe - don't crash on connection errors)
+    safe_flush(langfuse)
 
     return {"response": final_response, "sources": sources, "model_used": model_desc}
 
@@ -242,6 +223,10 @@ def clear_session(subject: str, email: str) -> bool:
                 print(f"--- INFO: Estado reiniciado (fallback) ---")
                 
             print(f"--- INFO: Sesión {conversation_id} limpiada exitosamente ---")
+            
+            # Flush Langfuse events (safe)
+            safe_flush(langfuse)
+            
             return True
         else:
             print(f"--- INFO: No hay sesión existente para limpiar: {conversation_id} ---")

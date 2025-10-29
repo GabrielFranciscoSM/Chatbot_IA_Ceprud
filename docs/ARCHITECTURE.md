@@ -35,9 +35,8 @@ El proyecto Chatbot IA CEPRUD está diseñado como un sistema de microservicios 
 
 ### 3. **Observabilidad**
 - Logging estructurado en todos los servicios
-- Métricas con Prometheus
-- Visualización con Grafana
 - Trazabilidad de requests entre servicios
+- Trazabilidad del agente mediante langfuse
 
 ### 4. **Tolerancia a Fallos**
 - Health checks en todos los servicios
@@ -65,12 +64,6 @@ graph TB
     subgraph AI ["AI/ML Layer"]
         LLM["vLLM Service\nLanguage Model\nPort: 8000"]
         EMB["Embedding Service\nVector Embeddings\nPort: 8001"]
-    end
-    
-    subgraph Monitor ["Monitoring"]
-        PROM["Prometheus\nMetrics\nPort: 9090"]
-        GRAF["Grafana\nDashboards\nPort: 3000"]
-        ALERT["Alertmanager\nPort: 9093"]
     end
     
     subgraph Data ["Data Services"]
@@ -260,7 +253,9 @@ Chatbot_IA_Ceprud/
 │   ├── 🧠 domain/                 # Lógica de dominio
 │   │   ├── query_logic.py         # Procesamiento consultas
 │   │   └── graph.py               # Operaciones con grafos
-│   │
+│   │   
+    ├──  Containerfile
+
 │   └── 💾 storage/                # Almacenamiento local
 │       └── checkpoints.sqlite
 │
@@ -298,14 +293,8 @@ Chatbot_IA_Ceprud/
 │   ├── test_embeddings.py       # Tests embeddings
 │   └── test_graph.py            # Tests grafos
 │
-├── 📈 prometheus/                # Monitoreo
-│   ├── prometheus.yml           # Configuración Prometheus
-│   ├── grafana.json            # Dashboard Grafana
-│   └── docker-compose-prometheus-graphana.yml
-│
 └── 🐳 Containerización
     ├── docker-compose-full.yml  # Stack completo
-    ├── Containerfile           # Backend container
     └── .env                    # Variables entorno
 ```
 
@@ -342,7 +331,7 @@ Documentos → RAG Service → Document Processor → Embeddings Service
 
 ### 4. **Flujo de Monitoreo**
 ```
-Servicios → Prometheus → Grafana → Dashboard
+Servicios → Langfuse 
      ↓
   Log Files → Logging Service → Analytics
 ```
@@ -363,7 +352,6 @@ Servicios → Prometheus → Grafana → Dashboard
 - **Asyncio**: Programación asíncrona
 - **SQLite**: Almacenamiento local sesiones
 - **MongoDB**: Base de datos usuarios (Motor driver)
-- **Prometheus Client**: Métricas
 - **httpx**: Cliente HTTP asíncrono
 
 ### **RAG & AI**
@@ -374,10 +362,9 @@ Servicios → Prometheus → Grafana → Dashboard
 - **PyTorch**: Framework ML
 
 ### **Observabilidad**
-- **Prometheus**: Recolección métricas
-- **Grafana**: Visualización
 - **Structured Logging**: Logs JSON
 - **CSV Analytics**: Análisis datos
+- **Agent monitoring**: Langfuse
 
 ### **Infraestructura**
 - **Docker**: Containerización

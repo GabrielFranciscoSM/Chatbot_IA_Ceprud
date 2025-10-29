@@ -41,6 +41,9 @@ const ChatInput: React.FC<ChatInputProps> = ({
             placeholder={placeholder}
             disabled={disabled}
             rows={1}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="sentences"
           />
         </div>
         <div className="chat-input-actions">
@@ -49,6 +52,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
             className="send-button"
             disabled={disabled || !message.trim()}
             title="Enviar mensaje"
+            aria-label="Enviar mensaje"
           >
             <Send size={20} />
           </button>

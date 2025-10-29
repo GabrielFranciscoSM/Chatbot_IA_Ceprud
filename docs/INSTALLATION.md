@@ -91,7 +91,7 @@ BASE_LOG_DIR=./logs
 pip install huggingface_hub
 
 # Ejecutar script de descarga
-python download_llm.py
+python scripts/download_llm.py
 ```
 
 **Modelos que se descargarán:**
@@ -112,54 +112,25 @@ podman images | grep chatbot
 
 ```bash
 # Crear directorio de datos
-mkdir -p rag-service/data/chroma
-mkdir -p rag-service/data/documents
+mkdir -p rag-service/data/chorma
+mkdir -p rag-service/data/ExampleSubject
 
 # Poblar base de datos inicial
 podman-compose -f docker-compose-full.yml up rag-service -d
 sleep 30
 
 # Ejecutar población inicial (ejemplo)
-curl -X POST "http://localhost:8082/populate" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "subject": "nombre_asignatura",
-       "documents_path": "/app/data/documents",
-       "clear_existing": false
-     }'
+$ ./scripts/repopulate_optimized.sh
 ```
 
 ## 🐳 Despliegue con Podman
 
 ### **Despliegue Completo**
-
-```bash
-# Levantar todos los servicios
-podman-compose -f docker-compose-full.yml up -d
-
-# Verificar estado de servicios
-podman-compose -f docker-compose-full.yml ps
-
-# Ver logs en tiempo real
-podman-compose -f docker-compose-full.yml logs -f
-```
-
-### **Despliegue por Servicios**
-
-```bash
-# Solo backend y dependencias mínimas
-podman-compose -f docker-compose-full.yml up -d rag-service logging-service backend
-
-# Solo frontend
-podman-compose -f docker-compose-full.yml up -d frontend
-
-# Servicios de IA (requiere GPU)
-podman-compose -f docker-compose-full.yml up -d vllm-openai vllm-openai-embeddings
-```
+``` bash
+$ ./scripts/manage_podman_compose.sh
+``` 
 
 ### **Configuración con GPU**
-
-
 
 Para habilitar aceleración GPU, descomenta las secciones de vLLM en `docker-compose-full.yml`:
 
@@ -179,36 +150,6 @@ vllm-openai:
 ```
 
 ***IMPORTANTE:*** Cambiar la variable de entorno LOCAL_INFERENCE a false en el script graph.py
-
-## 📊 Configuración de Monitoreo
-
-### **Prometheus + Grafana**
-
-```bash
-# Levantar stack de monitoreo
-podman-compose -f prometheus/docker-compose-prometheus-graphana.yml up -d
-
-# Acceder a servicios
-# Prometheus: http://localhost:9090
-# Grafana: http://localhost:3000 (admin/admin)
-```
-
-### **Configurar Grafana**
-
-1. **Añadir DataSource Prometheus**:
-   - URL: `http://prometheus:9090`
-   - Access: Server (default)
-
-2. **Importar Dashboard**:
-   - Ir a "Import Dashboard"
-   - Subir archivo `prometheus/grafana.json`
-   - Configurar datasource
-
-3. **Verificar Métricas**:
-   - Panel de requests por segundo
-   - Latencia de respuestas
-   - Uso de recursos
-   - Errores por servicio
 
 ## 🧪 Configuración de Testing
 
@@ -301,8 +242,6 @@ curl http://localhost:8090/        # Frontend
 - [ ] Base de datos RAG poblada con documentos
 - [ ] Modelos de IA descargados correctamente
 - [ ] Logs generándose en `./logs/`
-- [ ] Prometheus recolectando métricas
-- [ ] Grafana dashboard funcionando
 - [ ] Tests pasando correctamente
 
 ## 🆘 Soporte

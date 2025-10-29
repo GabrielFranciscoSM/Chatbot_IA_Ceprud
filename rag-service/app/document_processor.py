@@ -69,26 +69,26 @@ class DocumentProcessor:
         file_content = await file.read()
         filename = file.filename or "unknown"
         
-        # # --- INICIO DE BLOQUE MODIFICADO ---
-        # if filename.endswith(".pdf"):
-        #     # Crear archivo temporal para el PDF
-        #     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
-        #         temp_file.write(file_content)
-        #         temp_file_path = temp_file.name
+        # Normalizar el nombre del archivo a minúsculas para la comparación
+        filename_lower = filename.lower()
+        
+        if filename_lower.endswith(".pdf"):
+            # Crear archivo temporal para el PDF
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+                temp_file.write(file_content)
+                temp_file_path = temp_file.name
             
-        #     try:
-        #         # Usar PyMuPDFLoader para cargar el documento
-        #         loader = PyMuPDFLoader(temp_file_path)
-        #         pages = loader.load()
-        #         # Unir el contenido de todas las páginas en un solo texto
-        #         text = "\n\n".join(page.page_content for page in pages)
-        #         cleaned_text = self.clean_text(text)
-        #     finally:
-        #         # Limpiar archivo temporal
-        #         os.unlink(temp_file_path)
-        # # --- FIN DE BLOQUE MODIFICADO ---
-                
-        if filename.endswith(".txt"):
+            try:
+                # Usar PyMuPDFLoader para cargar el documento
+                loader = PyMuPDFLoader(temp_file_path)
+                pages = loader.load()
+                # Unir el contenido de todas las páginas en un solo texto
+                text = "\n\n".join(page.page_content for page in pages)
+                cleaned_text = self.clean_text(text)
+            finally:
+                # Limpiar archivo temporal
+                os.unlink(temp_file_path)
+        elif filename_lower.endswith(".txt"):
             text = file_content.decode('utf-8')
             cleaned_text = self.clean_text(text)
         else:
