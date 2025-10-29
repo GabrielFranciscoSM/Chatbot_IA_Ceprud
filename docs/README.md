@@ -173,7 +173,6 @@ comando --parametro valor
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [React Documentation](https://react.dev/)
 - [Docker Documentation](https://docs.docker.com/)
-- [Prometheus Documentation](https://prometheus.io/docs/)
 
 ### **Recursos del Proyecto**
 - [Repositorio GitHub](https://github.com/your-org/Chatbot_IA_Ceprud)
@@ -183,8 +182,6 @@ comando --parametro valor
 
 ### **Herramientas de Desarrollo**
 - [Swagger UI](http://localhost:8080/docs) - Documentación interactiva de API
-- [Grafana Dashboard](http://localhost:3000) - Métricas del sistema
-- [Prometheus](http://localhost:9090) - Recolección de métricas
 
 ## 🆘 Obtener Ayuda
 

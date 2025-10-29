@@ -1,326 +1,180 @@
-
 services:
-      # LLM Service (optional)
-      # vllm-openai:
-      #    container_name: my-vllm-service
-      #    image: docker.io/vllm/vllm-openai:latest
-      #    ports:
-      #      - "8000:8000"
-      #    volumes:
-      #      - "./models:/models"
-      #    environment:
-      #      HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
-
-      # Embeddings service (optional)
-      # vllm-openai-embeddings:
-      #    container_name: my-embedding-service
-      #    image: docker.io/vllm/vllm-openai:latest
-      #    command: --model /models/Qwen--Qwen3-Embedding-0.6B --port 8001 --max-num-seqs 16
-      #    ports:
-      #      - "8001:8001"
-
-      ollama:
-        container_name: chatbot-ollama
-        image: docker.io/ollama/ollama:latest
-        ports:
-          - "11435:11434"
-        volumes:
-          - ollama_data:/root/.ollama
-        environment:
-          OLLAMA_NUM_PARALLEL: "4"
-          OLLAMA_MAX_LOADED_MODELS: "2"
-        restart: unless-stopped
-
-      mongodb:
-        container_name: chatbot-mongodb
-        image: docker.io/mongo:8.0
-        ports:
-          - "27017:27017"
-        environment:
-          MONGO_INITDB_ROOT_USERNAME: admin
-          MONGO_INITDB_ROOT_PASSWORD: password123
-          MONGO_INITDB_DATABASE: chatbot_users
-        volumes:
-          - mongodb_data:/data/db
-        restart: unless-stopped
-
-      user-service:
-        container_name: chatbot-user-service
-        build:
-          context: ./mongo-service
-          dockerfile: Dockerfile
-        ports:
-          - "8083:8083"
-        environment:
-          MONGODB_URL: mongodb://admin:password123@mongodb:27017
-          MONGODB_DATABASE: chatbot_users
-        depends_on:
-          - mongodb
-        restart: unless-stopped
-
-      mongo-express:
-        container_name: chatbot-mongo-express
-        image: docker.io/mongo-express
-        restart: always
-        ports:
-          - "8081:8081"
-        environment:
-          ME_CONFIG_MONGODB_URL: mongodb://admin:password123@mongodb:27017
-          ME_CONFIG_BASICAUTH_ENABLED: true
-          ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
-          ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
-          MONGO_INITDB_DATABASE: chatbot_users
-        depends_on:
-          - mongodb
-
-      rag-service:
-        container_name: chatbot-rag-service
-        build:
-          context: ./rag-service
-          dockerfile: Dockerfile
-        ports:
-          - "8082:8082"
-        environment:
-          BASE_CHROMA_PATH: /app/data/chroma
-          VLLM_EMBEDDING_URL: http://vllm-openai-embeddings:8001
-          EMBEDDING_MODEL_DIR: /models/Qwen--Qwen3-Embedding-0.6B
-          USE_OLLAMA: "true"
-          OLLAMA_URL: http://ollama:11434
-          OLLAMA_MODEL_NAME: nomic-embed-text
-        volumes:
-          - ./rag-service/data:/app/data/:z
-          - rag_data:/app/data/chroma:z
-        depends_on:
-          - ollama
-        restart: unless-stopped
-
-      logging-service:
-        container_name: chatbot-logging-service
-        build:
-          context: ./logging-service
-          dockerfile: Dockerfile
-        ports:
-          - "8002:8002"
-        environment:
-          BASE_LOG_DIR: /app/logs
-          MONGODB_URL: mongodb://admin:password123@mongodb:27017
-          MONGODB_DATABASE: chatbot_logs
-        volumes:
-          - ./logs:/app/logs:z
-        depends_on:
-          - mongodb
-        restart: unless-stopped
-
-      backend:
-        container_name: chatbot-backend
-        build:
-          context: .
-          dockerfile: Containerfile
-        ports:
-          - "8080:8080"
-        env_file:
-          - .env
-        environment:
-          HF_HUB_DISABLE_SYMLINKS_WARNING: 1
-          PYTHONPATH: /chatbot/app
-          RAG_SERVICE_URL: http://rag-service:8082
-          LOGGING_SERVICE_URL: http://logging-service:8002
-          USER_SERVICE_URL: http://user-service:8083
-          MONGO_URI: mongodb://admin:password123@mongodb:27017
-          MONGODB_DATABASE: chatbot_users
-          GEMINI_API_KEY: ${GEMINI_API_KEY}
-          GOOGLE_API_KEY: ${GEMINI_API_KEY}
-        command: ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8080"]
-        volumes:
-          - ./unitTests:/chatbot/app/unitTests:z
-        depends_on:
-          - rag-service
-        restart: unless-stopped
-
-      frontend:
-        container_name: chatbot-frontend
-        build:
-          context: ./frontend
-          dockerfile: Dockerfile
-        ports:
-          - "8090:8090"
-        environment:
-          - NGINX_HOST=localhost
-          - NGINX_PORT=8090
-        depends_on:
-          - backend
-        restart: unless-stopped
-
-      # ------------------------- Optional Langfuse components (ignored by default) ------------------
-      langfuse-worker:
-        image: docker.io/langfuse/langfuse-worker:3
-        restart: always
-        depends_on: &langfuse-depends-on
-          postgres:
-            condition: service_healthy
-          minio:
-            condition: service_healthy
-          redis:
-            condition: service_healthy
-          clickhouse:
-            condition: service_healthy
-        ports:
-          - "127.0.0.1:3030:3030"
-        environment: &langfuse-worker-env
-          NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
-          DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:eFH7q97MDlh53SPYpFdy5tZDNhNS2A1W@postgres:5432/postgres}
-          SALT: ${SALT:-0dac2dacffd9fbb7bf4a519dbe283196}
-          ENCRYPTION_KEY: ${ENCRYPTION_KEY:-0ce5923a0f7ebaa968bf39d40ca44a477203ccb9295e71b21c79b3c06ce859d3}
-          TELEMETRY_ENABLED: ${TELEMETRY_ENABLED:-true}
-          LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: ${LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES:-true}
-          CLICKHOUSE_MIGRATION_URL: ${CLICKHOUSE_MIGRATION_URL:-clickhouse://clickhouse:9000}
-          CLICKHOUSE_URL: ${CLICKHOUSE_URL:-http://clickhouse:8123}
-          CLICKHOUSE_USER: ${CLICKHOUSE_USER:-clickhouse}
-          CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-vYhPFtO2Qf4Cd/JAvMA5q2LtghACDCQq}
-          CLICKHOUSE_CLUSTER_ENABLED: ${CLICKHOUSE_CLUSTER_ENABLED:-false}
-          LANGFUSE_USE_AZURE_BLOB: ${LANGFUSE_USE_AZURE_BLOB:-false}
-          LANGFUSE_S3_EVENT_UPLOAD_BUCKET: ${LANGFUSE_S3_EVENT_UPLOAD_BUCKET:-langfuse}
-          LANGFUSE_S3_EVENT_UPLOAD_REGION: ${LANGFUSE_S3_EVENT_UPLOAD_REGION:-auto}
-          LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID:-minio}
-          LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY:-oUCObi2vqycSoRpcM8bzaDpMh6getlOj}
-          LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: ${LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT:-http://minio:9000}
-          LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: ${LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE:-true}
-          LANGFUSE_S3_EVENT_UPLOAD_PREFIX: ${LANGFUSE_S3_EVENT_UPLOAD_PREFIX:-events/}
-          LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: ${LANGFUSE_S3_MEDIA_UPLOAD_BUCKET:-langfuse}
-          LANGFUSE_S3_MEDIA_UPLOAD_REGION: ${LANGFUSE_S3_MEDIA_UPLOAD_REGION:-auto}
-          LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID:-minio}
-          LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY:-oUCObi2vqycSoRpcM8bzaDpMh6getlOj}
-          LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: ${LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT:-http://localhost:9090}
-          LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: ${LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE:-true}
-          LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: ${LANGFUSE_S3_MEDIA_UPLOAD_PREFIX:-media/}
-          LANGFUSE_S3_BATCH_EXPORT_ENABLED: ${LANGFUSE_S3_BATCH_EXPORT_ENABLED:-false}
-          LANGFUSE_S3_BATCH_EXPORT_BUCKET: ${LANGFUSE_S3_BATCH_EXPORT_BUCKET:-langfuse}
-          LANGFUSE_S3_BATCH_EXPORT_PREFIX: ${LANGFUSE_S3_BATCH_EXPORT_PREFIX:-exports/}
-          LANGFUSE_S3_BATCH_EXPORT_REGION: ${LANGFUSE_S3_BATCH_EXPORT_REGION:-auto}
-          LANGFUSE_S3_BATCH_EXPORT_ENDPOINT: ${LANGFUSE_S3_BATCH_EXPORT_ENDPOINT:-http://minio:9000}
-          LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT: ${LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT:-http://localhost:9090}
-          LANGFUSE_S3_BATCH_EXPORT_ACCESS_KEY_ID: ${LANGFUSE_S3_BATCH_EXPORT_ACCESS_KEY_ID:-minio}
-          LANGFUSE_S3_BATCH_EXPORT_SECRET_ACCESS_KEY: ${LANGFUSE_S3_BATCH_EXPORT_SECRET_ACCESS_KEY:-oUCObi2vqycSoRpcM8bzaDpMh6getlOj}
-          LANGFUSE_S3_BATCH_EXPORT_FORCE_PATH_STYLE: ${LANGFUSE_S3_BATCH_EXPORT_FORCE_PATH_STYLE:-true}
-          LANGFUSE_INGESTION_QUEUE_DELAY_MS: ${LANGFUSE_INGESTION_QUEUE_DELAY_MS:-}
-          LANGFUSE_INGESTION_CLICKHOUSE_WRITE_INTERVAL_MS: ${LANGFUSE_INGESTION_CLICKHOUSE_WRITE_INTERVAL_MS:-}
-          REDIS_HOST: ${REDIS_HOST:-redis}
-          REDIS_PORT: ${REDIS_PORT:-6379}
-          REDIS_AUTH: ${REDIS_AUTH:-hq+2Og2h2S4+JoglFJEf724lTdUdezD6}
-          REDIS_TLS_ENABLED: ${REDIS_TLS_ENABLED:-false}
-          REDIS_TLS_CA: ${REDIS_TLS_CA:-/certs/ca.crt}
-          REDIS_TLS_CERT: ${REDIS_TLS_CERT:-/certs/redis.crt}
-          REDIS_TLS_KEY: ${REDIS_TLS_KEY:-/certs/redis.key}
-          EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS:-}
-          SMTP_CONNECTION_URL: ${SMTP_CONNECTION_URL:-}
-
-      langfuse-web:
-        image: docker.io/langfuse/langfuse:3
-        restart: always
-        depends_on: *langfuse-depends-on
-        ports:
-          - "3000:3000"
-        environment:
-          <<: *langfuse-worker-env
-          NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-PQu+C+zT40DOW2ZzaV2BYMQKzFEAWCLt}
-          LANGFUSE_INIT_ORG_ID: ${LANGFUSE_INIT_ORG_ID:-}
-          LANGFUSE_INIT_ORG_NAME: ${LANGFUSE_INIT_ORG_NAME:-}
-          LANGFUSE_INIT_PROJECT_ID: ${LANGFUSE_INIT_PROJECT_ID:-}
-          LANGFUSE_INIT_PROJECT_NAME: ${LANGFUSE_INIT_PROJECT_NAME:-}
-          LANGFUSE_INIT_PROJECT_PUBLIC_KEY: ${LANGFUSE_INIT_PROJECT_PUBLIC_KEY:-}
-          LANGFUSE_INIT_PROJECT_SECRET_KEY: ${LANGFUSE_INIT_PROJECT_SECRET_KEY:-}
-          LANGFUSE_INIT_USER_EMAIL: ${LANGFUSE_INIT_USER_EMAIL:-}
-          LANGFUSE_INIT_USER_NAME: ${LANGFUSE_INIT_USER_NAME:-}
-          LANGFUSE_INIT_USER_PASSWORD: ${LANGFUSE_INIT_USER_PASSWORD:-}
-
-      clickhouse:
-        image: docker.io/clickhouse/clickhouse-server
-        restart: always
-        user: "101:101"
-        environment:
-          CLICKHOUSE_DB: default
-          CLICKHOUSE_USER: ${CLICKHOUSE_USER:-clickhouse}
-          CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-vYhPFtO2Qf4Cd/JAvMA5q2LtghACDCQq}
-        volumes:
-          - langfuse_clickhouse_data:/var/lib/clickhouse
-          - langfuse_clickhouse_logs:/var/log/clickhouse-server
-        ports:
-          - "127.0.0.1:8123:8123"
-          - "127.0.0.1:9000:9000"
-        healthcheck:
-          test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8123/ping"]
-          interval: 5s
-          timeout: 5s
-          retries: 10
-          start_period: 1s
-
-      minio:
-        image: docker.io/minio/minio
-        restart: always
-        entrypoint: sh
-        command: -c 'mkdir -p /data/langfuse && minio server --address ":9000" --console-address ":9001" /data'
-        environment:
-          MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minio}
-          MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-oUCObi2vqycSoRpcM8bzaDpMh6getlOj}
-        ports:
-          - "9090:9000"
-          - "127.0.0.1:9091:9001"
-        volumes:
-          - langfuse_minio_data:/data
-        healthcheck:
-          test: ["CMD", "mc", "ready", "local"]
-          interval: 1s
-          timeout: 5s
-          retries: 5
-          start_period: 1s
-
-      redis:
-        image: docker.io/redis:7
-        restart: always
-        command: --requirepass ${REDIS_AUTH:-hq+2Og2h2S4+JoglFJEf724lTdUdezD6}
-        ports:
-          - "127.0.0.1:6379:6379"
-        healthcheck:
-          test: ["CMD", "redis-cli", "ping"]
-          interval: 3s
-          timeout: 10s
-          retries: 10
-
+  langfuse-worker:
+    image: docker.io/langfuse/langfuse-worker:3
+    restart: always
+    depends_on: &langfuse-depends-on
       postgres:
-        image: docker.io/postgres:${POSTGRES_VERSION:-17}
-        restart: always
-        healthcheck:
-          test: ["CMD-SHELL", "pg_isready -U postgres"]
-          interval: 3s
-          timeout: 3s
-          retries: 10
-        environment:
-          POSTGRES_USER: ${POSTGRES_USER:-postgres}
-          POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-eFH7q97MDlh53SPYpFdy5tZDNhNS2A1W}
-          POSTGRES_DB: ${POSTGRES_DB:-postgres}
-          TZ: UTC
-          PGTZ: UTC
-        ports:
-          - "127.0.0.1:5432:5432"
-        volumes:
-          - langfuse_postgres_data:/var/lib/postgresql/data
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:3030:3030"
+    environment: &langfuse-worker-env
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:eFH7q97MDlh53SPYpFdy5tZDNhNS2A1W@postgres:5432/postgres}
+      SALT: ${SALT:-0dac2dacffd9fbb7bf4a519dbe283196}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:-0ce5923a0f7ebaa968bf39d40ca44a477203ccb9295e71b21c79b3c06ce859d3}
+      TELEMETRY_ENABLED: ${TELEMETRY_ENABLED:-true}
+      LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: ${LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES:-true}
+      CLICKHOUSE_MIGRATION_URL: ${CLICKHOUSE_MIGRATION_URL:-clickhouse://clickhouse:9000}
+      CLICKHOUSE_URL: ${CLICKHOUSE_URL:-http://clickhouse:8123}
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER:-clickhouse}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-vYhPFtO2Qf4Cd/JAvMA5q2LtghACDCQq}
+      CLICKHOUSE_CLUSTER_ENABLED: ${CLICKHOUSE_CLUSTER_ENABLED:-false}
+      LANGFUSE_USE_AZURE_BLOB: ${LANGFUSE_USE_AZURE_BLOB:-false}
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: ${LANGFUSE_S3_EVENT_UPLOAD_BUCKET:-langfuse}
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: ${LANGFUSE_S3_EVENT_UPLOAD_REGION:-auto}
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID:-minio}
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY:-oUCObi2vqycSoRpcM8bzaDpMh6getlOj}
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: ${LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT:-http://minio:9000}
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: ${LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE:-true}
+      LANGFUSE_S3_EVENT_UPLOAD_PREFIX: ${LANGFUSE_S3_EVENT_UPLOAD_PREFIX:-events/}
+      LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: ${LANGFUSE_S3_MEDIA_UPLOAD_BUCKET:-langfuse}
+      LANGFUSE_S3_MEDIA_UPLOAD_REGION: ${LANGFUSE_S3_MEDIA_UPLOAD_REGION:-auto}
+      LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID:-minio}
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY:-oUCObi2vqycSoRpcM8bzaDpMh6getlOj}
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: ${LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT:-http://localhost:9090}
+      LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: ${LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE:-true}
+      LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: ${LANGFUSE_S3_MEDIA_UPLOAD_PREFIX:-media/}
+      LANGFUSE_S3_BATCH_EXPORT_ENABLED: ${LANGFUSE_S3_BATCH_EXPORT_ENABLED:-false}
+      LANGFUSE_S3_BATCH_EXPORT_BUCKET: ${LANGFUSE_S3_BATCH_EXPORT_BUCKET:-langfuse}
+      LANGFUSE_S3_BATCH_EXPORT_PREFIX: ${LANGFUSE_S3_BATCH_EXPORT_PREFIX:-exports/}
+      LANGFUSE_S3_BATCH_EXPORT_REGION: ${LANGFUSE_S3_BATCH_EXPORT_REGION:-auto}
+      LANGFUSE_S3_BATCH_EXPORT_ENDPOINT: ${LANGFUSE_S3_BATCH_EXPORT_ENDPOINT:-http://minio:9000}
+      LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT: ${LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT:-http://localhost:9090}
+      LANGFUSE_S3_BATCH_EXPORT_ACCESS_KEY_ID: ${LANGFUSE_S3_BATCH_EXPORT_ACCESS_KEY_ID:-minio}
+      LANGFUSE_S3_BATCH_EXPORT_SECRET_ACCESS_KEY: ${LANGFUSE_S3_BATCH_EXPORT_SECRET_ACCESS_KEY:-oUCObi2vqycSoRpcM8bzaDpMh6getlOj}
+      LANGFUSE_S3_BATCH_EXPORT_FORCE_PATH_STYLE: ${LANGFUSE_S3_BATCH_EXPORT_FORCE_PATH_STYLE:-true}
+      LANGFUSE_INGESTION_QUEUE_DELAY_MS: ${LANGFUSE_INGESTION_QUEUE_DELAY_MS:-}
+      LANGFUSE_INGESTION_CLICKHOUSE_WRITE_INTERVAL_MS: ${LANGFUSE_INGESTION_CLICKHOUSE_WRITE_INTERVAL_MS:-}
+      REDIS_HOST: ${REDIS_HOST:-redis}
+      REDIS_PORT: ${REDIS_PORT:-6379}
+      REDIS_AUTH: ${REDIS_AUTH:-hq+2Og2h2S4+JoglFJEf724lTdUdezD6}
+      REDIS_TLS_ENABLED: ${REDIS_TLS_ENABLED:-false}
+      REDIS_TLS_CA: ${REDIS_TLS_CA:-/certs/ca.crt}
+      REDIS_TLS_CERT: ${REDIS_TLS_CERT:-/certs/redis.crt}
+      REDIS_TLS_KEY: ${REDIS_TLS_KEY:-/certs/redis.key}
+      EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS:-}
+      SMTP_CONNECTION_URL: ${SMTP_CONNECTION_URL:-}
+    networks:
+      - default
+
+  langfuse-web:
+    image: docker.io/langfuse/langfuse:3
+    restart: always
+    depends_on: *langfuse-depends-on
+    ports:
+      - "3000:3000"
+    environment:
+      <<: *langfuse-worker-env
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-PQu+C+zT40DOW2ZzaV2BYMQKzFEAWCLt}
+      LANGFUSE_INIT_ORG_ID: ${LANGFUSE_INIT_ORG_ID:-}
+      LANGFUSE_INIT_ORG_NAME: ${LANGFUSE_INIT_ORG_NAME:-}
+      LANGFUSE_INIT_PROJECT_ID: ${LANGFUSE_INIT_PROJECT_ID:-}
+      LANGFUSE_INIT_PROJECT_NAME: ${LANGFUSE_INIT_PROJECT_NAME:-}
+      LANGFUSE_INIT_PROJECT_PUBLIC_KEY: ${LANGFUSE_INIT_PROJECT_PUBLIC_KEY:-}
+      LANGFUSE_INIT_PROJECT_SECRET_KEY: ${LANGFUSE_INIT_PROJECT_SECRET_KEY:-}
+      LANGFUSE_INIT_USER_EMAIL: ${LANGFUSE_INIT_USER_EMAIL:-}
+      LANGFUSE_INIT_USER_NAME: ${LANGFUSE_INIT_USER_NAME:-}
+      LANGFUSE_INIT_USER_PASSWORD: ${LANGFUSE_INIT_USER_PASSWORD:-}
+    networks:
+      - default
+
+  clickhouse:
+    image: docker.io/clickhouse/clickhouse-server
+    restart: always
+    user: "101:101"
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER:-clickhouse}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-vYhPFtO2Qf4Cd/JAvMA5q2LtghACDCQq}
+    volumes:
+      - langfuse_clickhouse_data:/var/lib/clickhouse
+      - langfuse_clickhouse_logs:/var/log/clickhouse-server
+    ports:
+      - "127.0.0.1:8123:8123"
+      - "127.0.0.1:9000:9000"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8123/ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 1s
+    networks:
+      - default
+
+  minio:
+    image: docker.io/minio/minio
+    restart: always
+    entrypoint: sh
+    command: -c 'mkdir -p /data/langfuse && minio server --address ":9000" --console-address ":9001" /data'
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minio}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-oUCObi2vqycSoRpcM8bzaDpMh6getlOj}
+    ports:
+      - "9090:9000"
+      - "127.0.0.1:9091:9001"
+    volumes:
+      - langfuse_minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+      start_period: 1s
+    networks:
+      - default
+
+  redis:
+    image: docker.io/redis:7
+    restart: always
+    command: --requirepass ${REDIS_AUTH:-hq+2Og2h2S4+JoglFJEf724lTdUdezD6}
+    ports:
+      - "127.0.0.1:6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 10s
+      retries: 10
+    networks:
+      - default
+
+  postgres:
+    image: docker.io/postgres:${POSTGRES_VERSION:-17}
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-eFH7q97MDlh53SPYpFdy5tZDNhNS2A1W}
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      TZ: UTC
+      PGTZ: UTC
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - langfuse_postgres_data:/var/lib/postgresql/data
+    networks:
+      - default
 
 volumes:
-      rag_data:
-        driver: local
-      mongodb_data:
-        driver: local
-      ollama_data:
-        driver: local
-      langfuse_postgres_data:
-        driver: local
-      langfuse_clickhouse_data:
-        driver: local
-      langfuse_clickhouse_logs:
-        driver: local
-      langfuse_minio_data:
-        driver: local
+  langfuse_postgres_data:
+    driver: local
+  langfuse_clickhouse_data:
+    driver: local
+  langfuse_clickhouse_logs:
+    driver: local
+  langfuse_minio_data:
+    driver: local
 
 networks:
-      default:
-        name: chatbot-network
+  default:
+    name: chatbot-network
+    external: true

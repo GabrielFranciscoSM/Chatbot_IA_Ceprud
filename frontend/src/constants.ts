@@ -36,6 +36,12 @@ export const SUBJECTS: Subject[] = [
     name: 'Desarrollo basada en agentes',
     icon: '🗄️',
     description: 'Desarrollo basada en agentes'
+  },
+  {
+    id: 'IV',
+    name: 'Infrastructuras Virtuales',
+    icon: '🗄️',
+    description: 'Infrastructuras Virtuales'
   }
 ];
 

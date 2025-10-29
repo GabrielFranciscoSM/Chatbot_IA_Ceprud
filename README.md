@@ -44,6 +44,32 @@
 
 ---
 
+## ⚡ Quick setup
+
+Sigue estos pasos mínimos para arrancar el proyecto en modo desarrollo de forma rápida.
+
+1. Clonar el repositorio
+
+```bash
+git clone https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud.git
+cd Chatbot_IA_Ceprud
+```
+
+2. Desplegar contenedores
+
+```bash
+podman network create chatbot-network
+```
+
+```bash
+podman-compose -f chatbot-compose.yml up -d
+```
+
+Accede posteriormente a:
+
+- Frontend: http://localhost:8090
+- API docs: http://localhost:8080/docs
+
 ## 🎓 Acerca del Proyecto
 
 **Chatbot IA CEPRUD** es una solución educativa de vanguardia que utiliza técnicas avanzadas de Inteligencia Artificial para proporcionar asistencia personalizada a estudiantes de Ingeniería Informática de la Universidad de Granada.
@@ -127,11 +153,9 @@ Modelos de lenguaje grandes adaptados al dominio educativo:
 
 Sistema completo de métricas y analíticas:
 
-- 📈 **Prometheus** para recolección de métricas
-- 📊 **Grafana** con dashboards interactivos
 - 📝 **Logging estructurado** en JSON
 - 🔍 **Trazabilidad completa** de requests
-- 🚨 **Alertas configurables** para problemas
+- **Langfuse** para monitorización del agente
 
 ---
 
@@ -257,8 +281,6 @@ sequenceDiagram
 
 ### Infraestructura
 - ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) **Podman** - Containerización
-- ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat&logo=prometheus&logoColor=white) **Prometheus** - Métricas
-- ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=flat&logo=grafana&logoColor=white) **Grafana** - Visualización
 
 ### Integración
 - **LTI 1.3** - Integración con Moodle
@@ -380,7 +402,6 @@ curl http://localhost:8083/health  # User Service
 | **Frontend** | http://localhost:8090 | - |
 | **API Docs** | http://localhost:8080/docs | - |
 | **Mongo Express** | http://localhost:8081 | user: `mongoexpressuser`<br>pass: `mongoexpresspass` |
-| **Grafana** | http://localhost:3000 | admin / admin |
 
 ---
 
@@ -401,7 +422,7 @@ Toda la documentación está disponible en el directorio [`docs/`](docs/):
 | [🎓 Integración LTI 1.3](docs/LTI_INTEGRATION.md) | Configuración con Moodle |
 | [💾 Integración MongoDB](docs/MONGODB_INTEGRATION.md) | Gestión de usuarios y datos |
 | [🧪 Guía de Testing](docs/TESTING.md) | Estrategias y ejecución de tests |
-| [📈 Configuración de Monitoreo](docs/MONITORING.md) | Prometheus, Grafana y métricas |
+| [📈 Configuración de Monitoreo](docs/MONITORING.md) | langfuse y métricas |
 | [🔐 Autenticación](docs/AUTHENTICATION_IMPLEMENTATION.md) | Implementación de autenticación |
 
 ### 🎥 Guías Rápidas
@@ -456,19 +477,6 @@ Todos los diagramas técnicos están en [`docs/diagrams/`](docs/diagrams/):
 - ✅ **Datos valiosos** sobre patrones de aprendizaje
 - ✅ **Escalabilidad** del soporte educativo
 - ✅ **Reducción de carga** en servicios de atención
-
----
-
-## 📸 Capturas de Pantalla
-
-### Interface Principal
-*(Aquí irían capturas de pantalla de la aplicación)*
-
-### Dashboard de Analíticas
-*(Dashboard de Grafana con métricas del sistema)*
-
-### Integración con Moodle
-*(Vista del chatbot dentro de Moodle)*
 
 ---
 
@@ -632,10 +640,8 @@ Ver [INSTALLATION.md](docs/INSTALLATION.md) para guías detalladas de:
 - [x] Búsqueda de asignaturas
 
 ### ✅ Versión 3.0 (Actual)
-- [x] Fine-tuning con QLoRA
 - [x] Optimización vLLM
-- [x] Monitoreo con Prometheus/Grafana
-- [x] Mejoras en RAG
+- [x] Monitoreo con langfuse
 - [x] Documentación completa
 
 ---
@@ -683,30 +689,6 @@ Abre un [GitHub Issue](https://github.com/GabrielFranciscoSM/Chatbot_IA_Ceprud/i
 
 Este proyecto está bajo la licencia **MIT**. Ver [LICENSE](LICENSE) para más detalles.
 
-```
-MIT License
-
-Copyright (c) 2025 Chatbot IA CEPRUD Contributors
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
 ---
 
 ## 📧 Contacto
@@ -714,14 +696,12 @@ SOFTWARE.
 ### Desarrolladores Principales
 
 **Javier Trujillo Castro**
-- 🎓 Desarrollo inicial y arquitectura base
+- 🎓 Desarrollo inicial
 - 📧 Email: [contacto en GitHub]
 - 💼 LinkedIn: [perfil]
 
 **Gabriel Sánchez Muñoz**
 - 🎓 Visualización de métricas, vLLM y refactorización
-- 📧 Email: [contacto en GitHub]
-- 💼 LinkedIn: [perfil]
 - 🐙 GitHub: [@GabrielFranciscoSM](https://github.com/GabrielFranciscoSM)
 
 ### Institución
@@ -750,7 +730,6 @@ Este proyecto no sería posible sin:
 - **vLLM Project** - Por la optimización de inferencia LLM
 - **ChromaDB Team** - Por la base de datos vectorial
 - **MongoDB Team** - Por la base de datos robusta
-- **Prometheus & Grafana** - Por las herramientas de observabilidad
 - **IMS Global** - Por el estándar LTI 1.3
 - **Comunidad Open Source** - Por todas las librerías y herramientas utilizadas
 
@@ -760,7 +739,7 @@ Este proyecto no sería posible sin:
 - React, TypeScript, Vite, Axios
 - PyTorch, Transformers, Sentence Transformers
 - ChromaDB, MongoDB, SQLite
-- Docker, Prometheus, Grafana, Nginx
+- Docker, Nginx
 - Y muchas más... 🙏
 
 ---
